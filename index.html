@@ -13,10 +13,92 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: #0B0B0F; /* Тот самый премиальный глубокий черный */
+            background-color: #0B0B0F; /* Премиальный глубокий черный */
             color: #ffffff;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+        }
+
+        /* ЭКРАН БЛОКИРОВКИ ДЛЯ РАЗРАБОТЧИКОВ */
+        #lockScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #0B0B0F;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lock-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .lock-card h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .lock-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 25px;
+        }
+
+        .lock-input {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 14px 20px;
+            color: #ffffff;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .lock-input:focus {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .lock-btn {
+            width: 100%;
+            background-color: #ffffff;
+            color: #0B0B0F;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .lock-btn:hover {
+            opacity: 0.9;
+        }
+
+        .error-msg {
+            color: #ff4a4a;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
         }
 
         /* Шапка сайта в стиле Apple */
@@ -58,12 +140,11 @@
             color: #ffffff;
         }
 
-        /* Кнопка ЛК — Яркий белый маяк со скруглением Apple и иконкой */
         .btn-lk {
             background-color: #ffffff;
             color: #0B0B0F;
             padding: 10px 22px;
-            border-radius: 20px; /* Скругление суперэллипс */
+            border-radius: 20px;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
@@ -96,7 +177,6 @@
             opacity: 1;
         }
 
-        /* Главный контейнер сайта */
         main {
             max-width: 1200px;
             margin: 0 auto;
@@ -104,14 +184,14 @@
             position: relative;
         }
 
-        /* Царь-плашка (70% экрана) — Наш главный фокус */
+        /* Царь-плашка (70% экрана) */
         .hero-card {
             background-color: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px; /* Скругление Apple */
+            border-radius: 24px;
             padding: 60px 40px;
             margin: 80px auto;
-            max-width: 900px; /* Приблизительно 70% от ширины контента */
+            max-width: 900px;
             text-align: center;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
@@ -134,7 +214,6 @@
             text-align: center;
         }
 
-        /* Заголовок для Bento-сетки */
         .section-title {
             font-size: 32px;
             font-weight: 800;
@@ -152,7 +231,6 @@
             position: relative;
         }
 
-        /* Индивидуальное распределение размеров для асимметрии */
         .bento-box:nth-child(1) { grid-column: span 1; background: linear-gradient(135deg, rgba(26, 36, 73, 0.4) 0%, rgba(11, 11, 15, 0.9) 100%); --glow: rgba(43, 76, 219, 0.3); }
         .bento-box:nth-child(2) { grid-column: span 2; background: linear-gradient(135deg, rgba(20, 52, 70, 0.4) 0%, rgba(11, 11, 15, 0.9) 100%); --glow: rgba(31, 126, 177, 0.3); }
         .bento-box:nth-child(3) { grid-column: span 2; background: linear-gradient(135deg, rgba(58, 38, 77, 0.4) 0%, rgba(11, 11, 15, 0.9) 100%); --glow: rgba(121, 64, 185, 0.3); }
@@ -160,7 +238,6 @@
         .bento-box:nth-child(5) { grid-column: span 1; background: linear-gradient(135deg, rgba(73, 56, 30, 0.4) 0%, rgba(11, 11, 15, 0.9) 100%); --glow: rgba(185, 132, 47, 0.3); }
         .bento-box:nth-child(6) { grid-column: span 2; background: linear-gradient(135deg, rgba(46, 50, 56, 0.4) 0%, rgba(11, 11, 15, 0.9) 100%); --glow: rgba(100, 110, 120, 0.3); }
 
-        /* Базовая плашка со скруглением Apple/Samsung */
         .bento-box {
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 24px;
@@ -171,9 +248,7 @@
             position: relative;
             cursor: pointer;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        border-color 0.4s ease, 
-                        box-shadow 0.4s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .bento-box h3 {
@@ -181,17 +256,14 @@
             font-weight: 700;
             margin-bottom: 12px;
             color: #ffffff;
-            transition: font-size 0.4s ease;
         }
 
         .bento-box p {
             color: rgba(255, 255, 255, 0.5);
             font-size: 15px;
             line-height: 1.5;
-            transition: opacity 0.3s ease, color 0.4s ease;
         }
 
-        /* Скрытый глубокий текст, проявляющийся при раскрытии */
         .bento-box .deep-text {
             display: none;
             opacity: 0;
@@ -202,13 +274,13 @@
             transition: opacity 0.4s ease 0.2s;
         }
 
-        /* ЭФФЕКТ ЖИВОГО БЕНТО: Раскрытие ровно на 60% экрана по центру */
+        /* ЭФФЕКТ ЖИВОГО БЕНТО */
         .bento-box.active {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1) !important;
-            width: 60vw; /* Ровно 60% экрана */
+            width: 60vw;
             height: auto;
             max-height: 80vh;
             grid-column: auto !important;
@@ -216,92 +288,25 @@
             z-index: 1000;
             background: #111116 !important;
             border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 50px var(--glow); /* Неоновое космическое свечение */
+            box-shadow: 0 20px 50px var(--glow);
             justify-content: center;
             cursor: default;
         }
 
-        .bento-box.active h3 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
+        .bento-box.active h3 { font-size: 32px; margin-bottom: 15px; }
+        .bento-box.active p { display: none; }
+        .bento-box.active .deep-text { display: block; opacity: 1; }
 
-        .bento-box.active p {
-            display: none; /* Прячем короткое превью */
-        }
-
-        .bento-box.active .deep-text {
-            display: block;
-            opacity: 1;
-        }
-
-        /* Ховер-эффект легкого приподнимания для неактивных плашек */
         body:not(.has-active-box) .bento-box:hover {
             transform: translateY(-4px);
             border-color: rgba(255, 255, 255, 0.15);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
-        /* Секция Финала (Самый низ) */
-        .final-section {
-            text-align: center;
-            margin-bottom: 120px;
-        }
-
+        .final-section { text-align: center; margin-bottom: 120px; }
         .btn-main {
-            background-color: #ffffff;
-            color: #0B0B0F;
-            padding: 18px 45px;
-            border-radius: 30px; /* Плавное скругление Apple */
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 700;
-            display: inline-block;
-            transition: opacity 0.2s ease;
+            background-color: #ffffff; color: #0B0B0F; padding: 18px 45px;
+            border-radius: 30px; text-decoration: none; font-size: 16px; font-weight: 700; display: inline-block;
         }
 
-        .btn-main:hover {
-            opacity: 0.95;
-        }
-
-        /* Строгий юридический подвал */
-        footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 40px 0;
-            margin-top: 60px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .footer-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 25px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .footer-links a:hover {
-            color: #ffffff;
-        }
-
-        /* Мобильная адаптация: перевод в одну чистую вертикальную ленту */
-        @media (max-width: 900px) {
-            header { padding: 15px 20px; }
-            nav { display: none; }
-            h1 { font-size: 32px; }
-            .subtitle { font-size: 16px; }
-            .hero-card { padding: 40px 20px; margin: 40px auto; }
-            .bento-grid {
+        footer { border-top: 1px solid rgba(255, 255, 255, 0.06); padding: 40px 0; margin-top: 60px; font-size: 14px; color: rgba(255, 255, 255, 0.4); }
