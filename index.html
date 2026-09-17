@@ -45,8 +45,10 @@
         .lk-btn:hover { transform: scale(1.05); }
         .menu-toggle { display: none; background: none; border: none; color: #FFF; font-size: 28px; cursor: pointer; z-index: 1001; line-height: 1; }
 
-        /* ВИТРИНА ЛЕНДИНГА */
+        /* ЭКРАНЫ */
         #landing-page { display: block; }
+        #lk-content { display: none; padding-top: 40px; }
+
         .hero { text-align: center; padding: 80px 0 60px 0; max-width: 850px; margin: 0 auto; }
         .hero h1 { font-size: 54px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 24px; }
         .hero h1 span { background: linear-gradient(135deg, #00F2FE, #4FACFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -71,7 +73,7 @@
         .screaming-text { color: #FF4A4A; font-weight: bold; font-size: 28px; animation: shake 0.1s infinite; text-align: center; }
         .formulas-bg { font-size: 11px; color: rgba(255,74,74,0.3); font-family: monospace; text-align: center; margin-top: 5px; }
 
-        /* ЖИВОЕ БЕНТО-ОКНО */
+        /* БЕНТО-ОКНО */
         .bento-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(11, 11, 15, 0.9); backdrop-filter: blur(15px);
@@ -84,7 +86,7 @@
         .expanded-content h4 { color: #FFF; margin: 24px 0 12px 0; font-size: 18px; }
         .expanded-content p { color: #8A8A93; font-size: 15px; line-height: 1.6; }
         
-        /* ИКОНОК GOOGLE WORKSPACE */
+        /* ИКОНКИ GOOGLE WORKSPACE */
         .export-cascade { display: flex; gap: 15px; margin-top: 20px; animation: fadeInUp 0.4s ease forwards; }
         .export-icon {
             padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
@@ -96,7 +98,7 @@
         .export-icon.pdf:hover { border-color: #f40f02; color: #f40f02; box-shadow: 0 0 15px rgba(244,15,2,0.3); }
         .expanded-cta-btn { display: inline-block; margin-top: 32px; background: #FFFFFF; color: #0B0B0F; padding: 16px 32px; border-radius: 12px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; }
 
-        /* ВСПЫШКА ПЕРЕД ОПЛАТОЙ */
+        /* ВСПЫШКА ОПЛАТЫ */
         .zaprodlo-flash {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;
             z-index: 10; display: none; align-items: center; justify-content: center; border-radius: 30px;
@@ -106,8 +108,7 @@
         .tech-grid { display: flex; justify-content: center; gap: 48px; color: #8A8A93; font-size: 14px; margin-top: 24px; }
         footer { padding: 40px 0; text-align: center; color: #323247; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); }
 
-        /* ИНТЕРФЕЙС ЛИЧНОГО КАБИНЕТА */
-        #lk-content { display: none; padding-top: 40px; }
+        /* ЛИЧНЫЙ КАБИНЕТ */
         .lk-dashboard { display: grid; grid-template-columns: 280px 1fr; gap: 32px; margin-bottom: 60px; }
         .lk-sidebar { background: rgba(18, 18, 26, 0.6); border: 1px solid #232330; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
         .sidebar-item { padding: 14px 20px; border-radius: 12px; color: #8A8A93; font-size: 15px; cursor: pointer; transition: all 0.2s; }
@@ -149,3 +150,5 @@
                 <a href="#tech" onclick="toggleMenu()">Наши технологии</a>
                 <a href="#bento" onclick="toggleMenu()">Ваши возможности</a>
                 <a href="#" onclick="openBento(3); toggleMenu(); return false;">📊 Калькулятор НМЦК</a>
+                <div class="lk-btn" id="lk-toggle-btn" onclick="toggleLK()">[👤 Личный кабинет]</div>
+            </nav>
