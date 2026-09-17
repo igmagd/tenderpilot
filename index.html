@@ -45,7 +45,7 @@
         .lk-btn:hover { transform: scale(1.05); }
         .menu-toggle { display: none; background: none; border: none; color: #FFF; font-size: 28px; cursor: pointer; z-index: 1001; line-height: 1; }
 
-        /* ЭКРАНЫ */
+        /* НАСТРОЙКА ОТОБРАЖЕНИЯ ЭКРАНОВ */
         #landing-page { display: block; }
         #lk-content { display: none; padding-top: 40px; }
 
@@ -73,7 +73,7 @@
         .screaming-text { color: #FF4A4A; font-weight: bold; font-size: 28px; animation: shake 0.1s infinite; text-align: center; }
         .formulas-bg { font-size: 11px; color: rgba(255,74,74,0.3); font-family: monospace; text-align: center; margin-top: 5px; }
 
-        /* БЕНТО-ОКНО */
+        /* ЖИВОЕ БЕНТО-ОКНО */
         .bento-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(11, 11, 15, 0.9); backdrop-filter: blur(15px);
@@ -143,6 +143,7 @@
 <body>
 
     <div class="container">
+        <!-- ОБЩАЯ ШАПКА ДЛЯ ВСЕХ ЭКРАНОВ -->
         <header>
             <div class="logo" onclick="goToLanding()">Tender<span>Pilot</span></div>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -150,5 +151,3 @@
                 <a href="#tech" onclick="toggleMenu()">Наши технологии</a>
                 <a href="#bento" onclick="toggleMenu()">Ваши возможности</a>
                 <a href="#" onclick="openBento(3); toggleMenu(); return false;">📊 Калькулятор НМЦК</a>
-                <div class="lk-btn" id="lk-toggle-btn" onclick="toggleLK()">[👤 Личный кабинет]</div>
-            </nav>
