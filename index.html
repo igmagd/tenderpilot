@@ -7,7 +7,6 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* ПРЕДРАССВЕТНОЕ НЕБО С ПЕРЕХОДОМ В КИБЕРПАНК */
         body { 
             background: linear-gradient(180deg, #1A0B12 0%, #0C0C14 25%, #0B0B0F 60%, #0B0B0F 100%);
             background-attachment: fixed;
@@ -18,7 +17,6 @@
             position: relative;
         }
 
-        /* МЕРЦАЮЩИЕ ЗВЕЗДЫ */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -32,40 +30,11 @@
             opacity: 0.4; z-index: 0; pointer-events: none;
         }
 
-        /* МГНОВЕННАЯ ЗАГЛУШКА АВТОРИЗАЦИИ */
-        #auth-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #0B0B0F; display: flex; justify-content: center; align-items: center;
-            z-index: 10000;
-        }
-        .auth-card {
-            background: #12121A; border: 1px solid #232330; padding: 40px;
-            border-radius: 24px; text-align: center; max-width: 420px; width: 90%;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.08); z-index: 10001;
-        }
-        .auth-card h2 { font-size: 26px; margin-bottom: 8px; color: #00F2FE; letter-spacing: -0.5px; }
-        .auth-card p { color: #8A8A93; margin-bottom: 24px; font-size: 14px; }
-        .auth-input {
-            width: 100%; padding: 16px; background: #0B0B0F; border: 1px solid #323247;
-            border-radius: 12px; color: #FFF; font-size: 16px; text-align: center;
-            margin-bottom: 20px; outline: none; transition: border-color 0.3s;
-        }
-        .auth-input:focus { border-color: #00F2FE; }
-        .auth-btn {
-            width: 100%; padding: 16px; background: #FFFFFF; color: #0B0B0F;
-            border: none; border-radius: 12px; font-weight: 600; font-size: 16px;
-            cursor: pointer; transition: all 0.2s;
-        }
-        .auth-btn:hover { background: #00F2FE; }
-        .error-msg { color: #FF4A4A; font-size: 14px; margin-top: 12px; display: none; }
-
-        /* ВИТРИНА TENDERPILOT (СКРЫТА ЧЕРЕЗ DISPLAY БЕЗ СБОЕВ) */
         #app-content { 
-            display: none; position: relative; z-index: 1;
+            position: relative; z-index: 1;
             max-width: 1200px; margin: 0 auto; padding: 0 24px;
         }
 
-        /* МЕНЮ APPLE/SAMSUNG */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -80,13 +49,11 @@
             border-radius: 50px; font-weight: 600; box-shadow: 0 0 15px rgba(255,255,255,0.3);
         }
 
-        /* ЦАРЬ-ПЛАШКА */
         .hero { text-align: center; padding: 80px 0 60px 0; max-width: 850px; margin: 0 auto; }
         .hero h1 { font-size: 56px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 24px; }
         .hero h1 span { background: linear-gradient(135deg, #00F2FE, #4FACFE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero h2 { font-size: 20px; color: #8A8A93; font-weight: 400; line-height: 1.5; }
 
-        /* БЕНТО-СЕТКА */
         .bento-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 100px;
         }
@@ -102,7 +69,6 @@
         .bento-item h3 { font-size: 19px; margin-bottom: 12px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
         .bento-item p { color: #8A8A93; font-size: 14px; line-height: 1.5; }
 
-        /* ЖИВОЕ БЕНТО-ОКНО */
         .bento-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(11, 11, 15, 0.9); backdrop-filter: blur(15px);
@@ -122,7 +88,6 @@
         .expanded-content h4 { color: #FFF; margin: 24px 0 12px 0; font-size: 18px; }
         .expanded-content p { color: #8A8A93; font-size: 15px; line-height: 1.6; }
         
-        /* КАСКАД ИКОНОК ЭКСПОРТА */
         .export-cascade { display: flex; gap: 15px; margin-top: 20px; }
         .export-icon {
             padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 600;
@@ -149,18 +114,6 @@
 </head>
 <body>
 
-    <!-- Железная b2b-заглушка -->
-    <div id="auth-overlay">
-        <div class="auth-card">
-            <h2>TenderPilot V2.3</h2>
-            <p>Вход по приглашениям. Введите b2b-пароль.</p>
-            <input type="password" id="password-field" class="auth-input" placeholder="Пароль доступа" autofocus>
-            <button onclick="bypassAuth()" class="auth-btn">Войти в систему</button>
-            <div id="error-text" class="error-msg">Неверный b2b-пароль доступа</div>
-        </div>
-    </div>
-
-    <!-- Основной сайт -->
     <div id="app-content">
         <header>
             <div class="logo">Tender<span>Pilot</span></div>
@@ -177,7 +130,6 @@
             <h2>Автоматизируйте госзакупки 24/7 без налогов, отпускных и больничных. Нейросеть берет под контроль 44-ФЗ и 223-ФЗ от парсинга ЕИС до авто-конструктора Формы 2.</h2>
         </section>
 
-        <!-- ОБНОВЛЕННАЯ БЕНТО-СЕТКА С НОВЫМИ ПЛАШКАМИ КОНТРОЛЯ И ЮРИСТОВ -->
         <main class="bento-grid" id="bento">
             <div class="bento-item" onclick="openBento(1)">
                 <h3>🔍 1. ИИ-Анализатор ГОСТов</h3>
@@ -190,3 +142,49 @@
             <div class="bento-item" onclick="openBento(3)" style="border-color: #00F2FE;">
                 <h3>📊 3. Калькулятор НМЦК и КП</h3>
                 <p>Умный расчет начальной цены по Приказу № 567. Авто-парсинг коммерческих предложений (OCR) и проверка аффилированности поставщиков.</p>
+            </div>
+            <div class="bento-item" onclick="openBento(4)">
+                <h3>📝 4. Авто-конструктор заявок</h3>
+                <p>Безошибочное заполнение Формы 2 и документов на участие. Автоматический чек-лист на соответствие требованиям.</p>
+            </div>
+            <div class="bento-item" onclick="openBento(5)">
+                <h3>📈 5. ИИ-контроль и KPI-отчеты</h3>
+                <p>Прозрачный контроль департамента для директора в 2 клика. Автоматические отчеты без рутины и Excel-таблиц.</p>
+            </div>
+            <div class="bento-item" onclick="openBento(6)">
+                <h3>⚖️ 6. Юридический маркетплейс</h3>
+                <p>Защита интересов в ФАС и судах. Быстрая передача сложных кейсов зубастым тендерным адвокатам в 1 клик.</p>
+            </div>
+        </main>
+
+        <section class="tech-section" id="tech">
+            <h2>Технологический суверенитет</h2>
+            <div class="tech-grid">
+                <div class="tech-item"><span>Сервера</span>Суверенный дата-центр РФ</div>
+                <div class="tech-item"><span>Юридическая база</span>Роспатент / Счет-оферта</div>
+                <div class="tech-item"><span>Документооборот</span>Чистый ЭДО (Без Яндекса)</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 TenderPilot. Все права защищены. Заглушка под Политику ФЗ-152.</p>
+        </footer>
+    </div>
+
+    <div id="bento-overlay" class="bento-overlay" onclick="closeBento()">
+        <div class="expanded-card" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeBento()">×</button>
+            <div id="bento-expanded-content" class="expanded-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const bentoData = {
+            1: {
+                title: "🔍 ИИ-Анализатор ГОСТов (Помощь в разборе ТЗ)",
+                pain: "Снятие боли ручного вычитывания сотен страниц документации и риска пропустить 'скрытую ловушку' закупщика.",
+                features: "Мгновенный автоматический парсинг файлов ТЗ. Выявление завуалированных требований, неликвидных ГОСТов и жестких сроков выполнения, ведущих в реестр недобросовестных поставщиков (РНП).",
+                hasExport: false,
+                cta: "Проверить ТЗ бесплатно"
+            },
+            2: {
