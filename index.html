@@ -54,7 +54,7 @@
 
         /* ЛИЧНЫЙ КАБИНЕТ */
         .lk-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-        .lk-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        .lk-grid { display: grid; grid-template-columns: 1fr; gap: 16px; width: 100%; }
         @media (min-width: 1024px) { .lk-grid { grid-template-columns: 7fr 5fr; } .lk-span-12 { grid-column: span 2; } }
         
         .mobile-tabs { display: flex; gap: 8px; margin-bottom: 16px; background-color: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid #334155; }
@@ -75,10 +75,6 @@
         table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
         th { background-color: #1e293b; color: #94a3b8; padding: 8px; border-b: 1px solid #334155; }
         td { padding: 8px; border-b: 1px solid #334155; }
-        .indicator-box { padding: 10px; border-radius: 6px; border: 1px solid #334155; background-color: #0f172a; display: flex; justify-content: space-between; align-items: center; }
-        .suggest-box { position: absolute; z-index: 50; width: 100%; background-color: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 6px; margin-top: 2px; cursor: pointer; color: #38bdf8; display: none; }
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background-color: rgba(15, 23, 42, 0.8); align-items: center; justify-content: center; }
-        .modal-content { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; max-width: 340px; width: 100%; padding: 20px; text-align: center; position: relative; }
     </style>
 </head>
 <body>
@@ -90,8 +86,8 @@
             <button id="toggle-view-btn" onclick="toggleMainMode()" class="action-header-btn btn-to-lk">Войти в Личный Кабинет ➔</button>
         </header>
 
-        <!-- КОНТУР А: РАБОЧИЙ ЛЕНДИНГ (БЕЗ СКРЫТИЯ ПЛАШЕК) -->
-        <main id="landing-section">
+        <!-- КОНТУР А: РАБОЧИЙ ЛЕНДИНГ -->
+        <main id="landing-section" style="display: block;">
             <div class="promo-banner">
                 <h2>Умный Помощник в Сфере Госзакупок</h2>
                 <p>Избавьтесь от рутинных расчетов, автоматизируйте проверки и минимизируйте риски штрафов ФАС.</p>
@@ -100,7 +96,7 @@
             <div class="bento-landing-grid">
                 <div class="bento-card bento-big">
                     <h3>📈 1. ИИ-Контроль для Директоров</h3>
-                    <p>Прозрачный сквозной контроль департамента закупок в реальном времени. Интеллектуальный дашборд руководителя, автоматическое отслеживание KPI сотрудников, аудит предотвращенных рисков и аналитика сбереженных бюджетных средств организации на одном экране.</p>
+                    <p>Прозрачный сквозной контроль департамента закупок в реальном времени. Интеллектуальный дашборд руководителя, автоматическое отслеживание KPI сотрудников, audit предотвращенных рисков и аналитика сбереженных бюджетных средств организации на одном экране.</p>
                 </div>
                 <div class="bento-card bento-small-1 accent-blue">
                     <h3>📊 2. Калькулятор НМЦК</h3>
@@ -125,8 +121,14 @@
             </div>
         </main>
 
-        <!-- КОНТУР Б: РАБОЧИЙ ЛИЧНЫЙ КАБИНЕТ (СКРЫТ ПО УМОЛЧАНИЮ) -->
+        <!-- КОНТУР Б: РАБОЧИЙ ЛИЧНЫЙ КАБИНЕТ -->
         <main id="lk-section" style="display: none;">
             <div class="lk-card">
-                <div class="flex-row-custom">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
                     <h2 style="font-size: 14px; font-weight: bold; color: white;">⚙️ Конвейер Управления</h2>
+                    <div style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
+                        <div class="toggle-container" style="flex: 1; min-width: 120px;">
+                            <button id="global-44" onclick="setGlobalFz('44')" class="toggle-btn toggle-active-44">44-ФЗ</button>
+                            <button id="global-223" onclick="setGlobalFz('223')" class="toggle-btn">223-ФЗ</button>
+                        </div>
+                        <select id="globalMethod" onchange="syncAll()" class="input-field" style="margin-top:0; flex: 1; background-color:#0f172a;"><option value="auction">Аукцион</option><option value="quotation">Котировки</option></select>
