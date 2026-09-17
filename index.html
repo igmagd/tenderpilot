@@ -4,135 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TenderPilot V2.4 — Личный Кабинет</title>
-    <!-- Подключаем надежные стили -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        body { background-color: #0f172a; color: #f1f5f9; }
-        .dark-card { background-color: #1e293b; border-color: #334155; }
-        .input-field { background-color: #0f172a; border-color: #334155; color: #f1f5f9; width: 100%; }
+        /* Полностью автономные стили: работаем без внешнего интернета и VPN */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #0f172a; color: #f1f5f9; min-height: screen; padding: 16px; line-height: 1.5; }
+        .container { w-full; max-width: 1200px; margin: 0 auto; }
+        .dark-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; p-6: 20px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); margin-bottom: 20px; }
+        .grid-main { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 1024px) { .grid-main { grid-template-columns: 7fr 5fr; } .lg-col-12 { grid-column: span 2; } }
+        .flex-row-custom { display: flex; flex-direction: column; gap: 12px; }
+        @media (min-width: 768px) { .flex-row-custom { flex-direction: row; align-items: center; justify-content: space-between; } }
+        .input-field { background-color: #0f172a; border: 1px solid #334155; color: #f1f5f9; width: 100%; padding: 8px 12px; border-radius: 6px; font-size: 13px; margin-top: 4px; }
         .input-field:focus { border-color: #3b82f6; outline: none; }
-        .animate-fade-in { animation: fadeIn 0.2s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .btn { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; text-align: center; }
+        .btn-blue { background-color: #2563eb; color: white; }
+        .btn-amber { background-color: #d97706; color: white; }
+        .btn-green { background-color: #059669; color: white; }
+        .btn-red { background-color: #dc2626; color: white; }
+        .btn-muted { background-color: transparent; color: #94a3b8; }
+        .toggle-container { display: flex; background-color: #0f172a; border: 1px solid #334155; padding: 4px; border-radius: 8px; }
+        .toggle-btn { flex: 1; text-align: center; padding: 6px 12px; font-size: 12px; border-radius: 6px; cursor: pointer; border: none; background: none; color: #94a3b8; }
+        .toggle-active-44 { background-color: #2563eb; color: white; }
+        .toggle-active-223 { background-color: #d97706; color: white; }
+        .label-title { font-size: 11px; text-transform: uppercase; font-weight: 600; color: #94a3b8; letter-spacing: 0.05em; }
+        .badge { font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 600; }
+        .badge-blue { background-color: rgba(37, 99, 235, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-green { background-color: rgba(5, 150, 105, 0.2); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+        .block-title { font-size: 15px; font-bold: 700; color: white; border-b: 1px solid #334155; padding-bottom: 8px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .table-container { overflow-x: auto; background-color: #0f172a; border-radius: 6px; border: 1px solid #334155; margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+        th { background-color: #1e293b; color: #94a3b8; padding: 10px; font-size: 11px; text-transform: uppercase; border-b: 1px solid #334155; }
+        td { padding: 10px; border-b: 1px solid #334155; }
+        .indicator-box { padding: 12px; border-radius: 8px; border: 1px solid #334155; background-color: #0f172a; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+        .bg-variation-alert { background-color: rgba(146, 64, 14, 0.3); border-color: #b45309; color: #fcd34d; }
+        .bg-limit-alert { background-color: rgba(153, 27, 27, 0.3); border-color: #b91c1c; color: #fca5a5; }
+        .suggest-box { position: absolute; z-index: 50; width: 100%; background-color: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 8px; margin-top: 4px; cursor: pointer; color: #38bdf8; font-size: 12px; display: none; }
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background-color: rgba(15, 23, 42, 0.8); align-items: center; justify-content: center; padding: 16px; }
+        .modal-content { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; max-width: 360px; width: 100%; padding: 24px; text-align: center; position: relative; }
     </style>
 </head>
-<body class="min-h-screen p-3 sm:p-6 font-sans antialiased text-gray-200">
+<body>
 
-    <!-- ГЛАВНАЯ УПРАВЛЯЮЩАЯ ПАНЕЛЬ -->
-    <div class="w-full max-w-7xl mx-auto dark-card rounded-xl shadow-2xl p-4 sm:p-6 border mb-6">
-        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-4 border-b border-gray-700 mb-4 gap-4">
-            <div>
-                <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                    🛸 TenderPilot <span class="text-xs bg-blue-600 bg-opacity-20 text-blue-400 border border-blue-500 border-opacity-30 px-2 py-0.5 rounded-full font-mono">v2.4 Конвейер</span>
-                </h1>
-                <div class="text-[11px] text-gray-400 mt-1">Панель сквозного проектирования интерфейса</div>
-            </div>
-            
-            <!-- ТУМБЛЕРЫ ЮР. РЕЛЬСОВ -->
-            <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 w-full lg:w-auto">
-                <div class="flex bg-gray-900 p-1 rounded-lg border border-gray-700 w-full sm:w-auto">
-                    <button id="global-44" onclick="setGlobalFz('44')" class="flex-1 sm:flex-none px-4 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow transition-all">44-ФЗ</button>
-                    <button id="global-223" onclick="setGlobalFz('223')" class="flex-1 sm:flex-none px-4 py-1.5 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200 transition-all">223-ФЗ</button>
+    <div class="container">
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+        <div class="dark-card">
+            <div class="flex-row-custom" style="border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 12px;">
+                <div>
+                    <h1 style="font-size: 20px; font-weight: 700; color: white; display: flex; align-items: center; gap: 8px;">
+                        🛸 TenderPilot <span class="badge badge-blue">v2.4 Автономный</span>
+                    </h1>
+                    <p style="font-size: 11px; color: #94a3b8; margin-top: 4px;">Защищенный контур. Работает без внешних библиотек и VPN</p>
                 </div>
                 
-                <select id="globalMethod" onchange="syncAll()" class="input-field border rounded-lg px-3 py-1.5 text-xs bg-gray-900">
-                    <option value="auction">Электронный аукцион</option>
-                    <option value="contest">Электронный конкурс</option>
-                    <option value="quotation">Электронный запрос котировок</option>
-                    <option value="single">Закупка у единственного поставщика</option>
-                </select>
-
-                <select id="globalType" onchange="syncType(this.value)" class="input-field border rounded-lg px-3 py-1.5 text-xs bg-gray-900">
-                    <option value="market">📦 Стандартный (Анализ рынка)</option>
-                    <option value="stroy">🏗️ Строительство (Сметный)</option>
-                </select>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; width: 100%; max-width: 600px;">
+                    <div class="toggle-container" style="flex: 1;">
+                        <button id="global-44" onclick="setGlobalFz('44')" class="toggle-btn toggle-active-44">44-ФЗ</button>
+                        <button id="global-223" onclick="setGlobalFz('223')" class="toggle-btn">223-ФЗ</button>
+                    </div>
+                    <select id="globalMethod" onchange="syncAll()" class="input-field" style="margin-top:0; flex: 1; background-color:#0f172a;">
+                        <option value="auction">Электронный аукцион</option>
+                        <option value="contest">Электронный конкурс</option>
+                        <option value="quotation">Электронный запрос котировок</option>
+                        <option value="single">Закупка у единственного поставщика</option>
+                    </select>
+                    <select id="globalType" onchange="syncType(this.value)" class="input-field" style="margin-top:0; flex: 1; background-color:#0f172a;">
+                        <option value="market">📦 Стандартный (Анализ рынка)</option>
+                        <option value="stroy">🏗️ Строительство (Сметный)</option>
+                    </select>
+                </div>
             </div>
+            <p style="font-size: 11px; color: #94a3b8; font-style: italic;">💡 Все переключатели сверху синхронизированы. Bento-сетка ниже сама перестраивает математику.</p>
         </div>
-    </div>
 
-    <!-- СЕТКА BENTO ДЛЯ ЕДИННОГО ЭКРАНА (Адаптирована под ПК и Мобилки) -->
-    <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- ПЛАШКА 1: КАЛЬКУЛЯТОР НМЦК -->
-        <div class="lg:col-span-7 dark-card rounded-xl p-4 sm:p-6 border shadow-xl flex flex-col justify-between">
-            <div>
-                <div class="text-sm font-bold text-white mb-4 border-b border-gray-700 pb-2 flex items-center justify-between">
-                    <span>📊 Калькулятор НМЦК</span>
-                    <span class="text-xs text-gray-400 font-normal">Контур ст. 22 ФЗ</span>
-                </div>
+        <!-- BENTO СЕТКА -->
+        <div class="grid-main">
+            
+            <!-- ЛЕВАЯ ПЛАШКА: КАЛЬКУЛЯТОР -->
+            <div class="dark-card" style="display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0;">
+                <div>
+                    <div class="block-title">
+                        <span>📊 Калькулятор НМЦК</span>
+                        <span style="font-size: 12px; color: #94a3b8; font-weight: 400;">Контур ст. 22 ФЗ</span>
+                    </div>
 
-                <!-- ВВОД ПОСТАВЩИКОВ С ОТСТУПАМИ -->
-                <div id="providers-block" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
-                    <div class="relative">
-                        <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Поставщик 1*</label>
-                        <input type="text" id="p-name-0" placeholder="ИНН или Название" class="input-field border rounded p-2 text-xs" oninput="checkInn(this.value, 0)"/>
-                        <div id="sug-0" onclick="applySug(0)" class="hidden absolute z-20 w-full bg-gray-800 border border-gray-600 text-[11px] rounded shadow-2xl p-2 mt-1 cursor-pointer text-blue-400 font-medium">✨ ФНС: АО "Прод-Торг"</div>
-                    </div>
-                    <div class="relative">
-                        <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Поставщик 2*</label>
-                        <input type="text" id="p-name-1" placeholder="ИНН или Название" class="input-field border rounded p-2 text-xs" oninput="checkInn(this.value, 1)"/>
-                        <div id="sug-1" onclick="applySug(1)" class="hidden absolute z-20 w-full bg-gray-800 border border-gray-600 text-[11px] rounded shadow-2xl p-2 mt-1 cursor-pointer text-blue-400 font-medium">✨ ФНС: ООО "СахарОпт"</div>
-                    </div>
-                    <div class="relative">
-                        <label class="block text-[10px] uppercase font-semibold text-gray-400 mb-1">Поставщик 3*</label>
-                        <input type="text" id="p-name-2" placeholder="ИНН или Название" class="input-field border rounded p-2 text-xs" oninput="checkInn(this.value, 2)"/>
-                        <div id="sug-2" onclick="applySug(2)" class="hidden absolute z-20 w-full bg-gray-800 border border-gray-600 text-[11px] rounded shadow-2xl p-2 mt-1 cursor-pointer text-blue-400 font-medium">✨ ФНС: ИП Иванов А.В.</div>
-                    </div>
-                </div>
-
-                <!-- ДАННЫЕ О ТОВАРЕ -->
-                <div class="p-4 bg-gray-900 rounded-lg border border-gray-700 mb-5 space-y-4">
-                    <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Параметры закупаемой позиции</div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div class="sm:col-span-2">
-                            <label class="block text-[10px] text-gray-400 mb-1">Наименование ТРУ (По ГОСТ/ТЗ)</label>
-                            <input type="text" id="t-name" placeholder="Сахар белый кристаллический ГОСТ 33222-2015" class="input-field border rounded p-2 text-xs" oninput="syncCargoName(); validateAll();" />
+                    <!-- ПОСТАВЩИКИ -->
+                    <div id="providers-block" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px;">
+                        <div style="position: relative;">
+                            <label class="label-title">Поставщик 1*</label>
+                            <input type="text" id="p-name-0" placeholder="Название или ИНН" class="input-field" oninput="checkInn(this.value, 0)" />
+                            <div id="sug-0" onclick="applySug(0)" class="suggest-box">✨ ФНС: АО "Прод-Торг"</div>
                         </div>
-                        <div>
-                            <label class="block text-[10px] text-gray-400 mb-1">Количество</label>
-                            <input type="number" id="t-qty" value="100" class="input-field border rounded p-2 text-xs text-center font-bold" oninput="syncWeightAndCalc();" />
+                        <div style="position: relative;">
+                            <label class="label-title">Поставщик 2*</label>
+                            <input type="text" id="p-name-1" placeholder="Название или ИНН" class="input-field" oninput="checkInn(this.value, 1)" />
+                            <div id="sug-1" onclick="applySug(1)" class="suggest-box">✨ ФНС: ООО "СахарОпт"</div>
+                        </div>
+                        <div style="position: relative;">
+                            <label class="label-title">Поставщик 3*</label>
+                            <input type="text" id="p-name-2" placeholder="Название или ИНН" class="input-field" oninput="checkInn(this.value, 2)" />
+                            <div id="sug-2" onclick="applySug(2)" class="suggest-box">✨ ФНС: ИП Иванов А.В.</div>
                         </div>
                     </div>
 
-                    <!-- ЦЕНОВЫЕ ПОЛЯ (ВЕРТИКАЛЬНО ДЛЯ МОБИЛОК, С ОТСТУПАМИ) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2" id="prices-inputs-group">
-                        <div id="c-d1">
-                            <label id="lbl-p1" class="block text-[10px] text-gray-400 mb-1">Цена 1 (₽)</label>
-                            <input type="number" id="t-p1" value="0" class="input-field border rounded p-2 text-xs font-mono" oninput="syncAll();" />
+                    <!-- ТАБЛИЦА -->
+                    <div style="padding: 12px; background-color: #0f172a; border-radius: 8px; border: 1px solid #334155; margin-bottom: 16px;">
+                        <div style="margin-bottom: 12px;">
+                            <label class="label-title">Наименование объекта закупки (ГОСТ / ТЗ)</label>
+                            <input type="text" id="t-name" placeholder="Например: Сахар белый кристаллический ГОСТ 33222-2015" class="input-field" oninput="syncCargoName(); validateAll();" />
                         </div>
-                        <div id="c-d2">
-                            <label class="block text-[10px] text-gray-400 mb-1">Цена 2 (₽)</label>
-                            <input type="number" id="t-p2" value="0" class="input-field border rounded p-2 text-xs font-mono" oninput="syncAll();" />
-                        </div>
-                        <div id="c-d3">
-                            <label class="block text-[10px] text-gray-400 mb-1">Цена 3 (₽)</label>
-                            <input type="number" id="t-p3" value="0" class="input-field border rounded p-2 text-xs font-mono" oninput="syncAll();" />
-                        </div>
-                    </div>
-
-                    <!-- СУММАРНЫЙ ИТОГ ПЛАШКИ -->
-                    <div class="flex justify-between items-center pt-2 border-t border-gray-800">
-                        <span class="text-xs text-gray-400 font-medium">Расчитанная сумма контракта:</span>
-                        <span class="font-mono font-bold text-base text-blue-400" id="t-total">0,00 ₽</span>
-                    </div>
-                </div>
-
-                <!-- ВАЛИДАЦИЯ ЗАКОНА -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5 text-[11px]">
-                    <div id="v-cv" class="p-3 rounded-lg border bg-gray-900 border-gray-700 flex justify-between items-center">
-                        <span class="text-gray-400">Вариация цен (лимит 33%):</span>
-                        <span class="font-bold font-mono text-xs" id="v-cv-val">0%</span>
-                    </div>
-                    <div id="v-lim" class="p-3 rounded-lg border bg-gray-900 border-gray-700 text-green-400 flex justify-between items-center">
-                        <span class="text-gray-400">Лимиты процедуры:</span>
-                        <span class="font-bold text-xs" id="v-lim-val">🟢 Нарушений нет</span>
-                    </div>
-                </div>
-
-                <!-- ПОДПИСАНТ -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-gray-900 rounded-lg border border-gray-700 mb-4 text-[11px]">
-                    <div>
-                        <label class="block text-gray-400 mb-1">Организация-заказчик</label>
-                        <input type="text" id="s-org" value="ООО 'Ромашка'" class="input-field border rounded p-2 text-xs bg-gray-950" />
-                    </div>
-                    <div>
-                        <label class="block text-gray-400 mb-1">ФИО исполнителя отчета*</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                            <div>
+                                <label class="label-title">Количество</label>
+                                <input type="number" id="t-qty" value="100" class="input-field" style="font-weight: bold; text-align: center;" oninput="syncWeightAndCalc();" />
+                            </div>
+                            <div id="c-d1">
+                                <label id="lbl-p1" class="label-title">Цена 1 (₽)</label>
