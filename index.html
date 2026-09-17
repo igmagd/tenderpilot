@@ -14,6 +14,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
         body::before {
@@ -61,7 +62,7 @@
         .bento-item h3 { font-size: 19px; margin-bottom: 12px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
         .bento-item p { color: #8A8A93; font-size: 14px; line-height: 1.5; }
 
-        /* ЭФФЕКТ ПАСХАЛКИ ПРИ НАВЕДЕНИИ НА КАЛЬКУЛЯТОР */
+        /* ПАСХАЛКА НА КАЛЬКУЛЯТОРЕ */
         .screaming-klerk-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: #0B0B0F; border-radius: 22px; display: none;
@@ -83,7 +84,7 @@
         .expanded-content h4 { color: #FFF; margin: 24px 0 12px 0; font-size: 18px; }
         .expanded-content p { color: #8A8A93; font-size: 15px; line-height: 1.6; }
         
-        /* КАСКАД ИКОНОК GOOGLE WORKSPACE */
+        /* ИКОНОК GOOGLE WORKSPACE */
         .export-cascade { display: flex; gap: 15px; margin-top: 20px; animation: fadeInUp 0.4s ease forwards; }
         .export-icon {
             padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
@@ -148,4 +149,3 @@
                 <a href="#tech" onclick="toggleMenu()">Наши технологии</a>
                 <a href="#bento" onclick="toggleMenu()">Ваши возможности</a>
                 <a href="#" onclick="openBento(3); toggleMenu(); return false;">📊 Калькулятор НМЦК</a>
-                <div class="lk-btn" id="lk-toggle-btn" onclick="toggleLK()">[👤 Личный кабинет]</div>
