@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TenderPilot V2.4</title>
+    <title>TenderPilot V2.4 — Личный Кабинет</title>
     <!-- Подключаем надежные стили -->
     <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
@@ -17,120 +17,120 @@
 </head>
 <body class="min-h-screen p-4 sm:p-8 font-sans">
 
-    <div class="w-full max-w-6xl mx-auto dark-card rounded-xl shadow-2xl p-6 border">
-        
-        <!-- ЗАГОЛОВОК СИСТЕМЫ -->
-        <div class="mb-6 pb-4 border-b border-gray-700 flex justify-between items-center">
+    <!-- ГЛАВНАЯ УПРАВЛЯЮЩАЯ ПАНЕЛЬ (ВЕРХНИЙ ИНЖЕКТОР) -->
+    <div class="w-full max-w-7xl mx-auto dark-card rounded-xl shadow-2xl p-6 border mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-center pb-4 border-b border-gray-700 mb-6 gap-4">
             <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                🛸 TenderPilot <span class="text-xs bg-blue-600 bg-opacity-20 text-blue-400 border border-blue-500 border-opacity-30 px-2 py-0.5 rounded-full font-mono">v2.4 Production</span>
+                🛸 TenderPilot <span class="text-xs bg-blue-600 bg-opacity-20 text-blue-400 border border-blue-500 border-opacity-30 px-2 py-0.5 rounded-full font-mono">v2.4 Конвейер</span>
             </h1>
-            <div class="text-xs text-gray-400">Личный кабинет закупщика</div>
-        </div>
-
-        <!-- РЯД 1: УПРАВЛЕНИЕ И ЮР. ТОНКОСТИ -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 pb-6 border-b border-gray-700">
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Регулирующий закон</label>
-                <div class="flex bg-gray-900 p-1 rounded-lg border border-gray-700">
-                    <button id="btn-44" onclick="setFz('44')" class="flex-1 py-1.5 text-xs font-medium rounded-md bg-blue-600 text-white shadow transition-all">44-ФЗ</button>
-                    <button id="btn-223" onclick="setFz('223')" class="flex-1 py-1.5 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200 transition-all">223-ФЗ</button>
+            
+            <!-- ТУМБЛЕРЫ ЮР. РЕЛЬСОВ -->
+            <div class="flex flex-wrap items-center gap-4">
+                <div class="flex bg-slate-950 p-1 rounded-lg border border-gray-700 bg-gray-900">
+                    <button id="global-44" onclick="setGlobalFz('44')" class="px-4 py-1 text-xs font-medium rounded-md bg-blue-600 text-white shadow transition-all">44-ФЗ</button>
+                    <button id="global-223" onclick="setGlobalFz('223')" class="px-4 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-200 transition-all">223-ФЗ</button>
                 </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Способ определения поставщика</label>
-                <select id="purchaseMethod" onchange="calculate()" class="w-full input-field border rounded-lg px-3 py-1.5 text-xs">
+                
+                <select id="globalMethod" onchange="syncAll()" class="input-field border rounded-lg px-3 py-1 text-xs">
                     <option value="auction">Электронный аукцион</option>
                     <option value="contest">Электронный конкурс</option>
                     <option value="quotation">Электронный запрос котировок</option>
                     <option value="single">Закупка у единственного поставщика</option>
                 </select>
-            </div>
 
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Предмет закупки (Метод расчета)</label>
-                <select id="purchaseType" onchange="switchType(this.value)" class="w-full input-field border rounded-lg px-3 py-1.5 text-xs">
+                <select id="globalType" onchange="syncType(this.value)" class="input-field border rounded-lg px-3 py-1 text-xs">
                     <option value="market">📦 Стандартный (Анализ рынка)</option>
-                    <option value="stroy">🏗️ Строительство и капремонт (Сметный)</option>
-                    <option value="med">💊 Лекарственные препараты</option>
-                    <option value="tariff">⚡ Тарифный / Нормативный</option>
+                    <option value="stroy">🏗️ Строительство (Сметный)</option>
                 </select>
             </div>
         </div>
+        
+        <div class="text-xs text-gray-400 italic">💡 Управляйте кнопками сверху — вся Bento-сетка ниже мгновенно перестраивает алгоритмы и законы под капотом.</div>
+    </div>
 
-        <!-- РЯД 2: ОБЯЗАТЕЛЬНЫЙ РУЧНОЙ ВВОД ПОСТАВЩИКОВ -->
-        <div id="providers-row" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div class="relative">
-                <label class="block text-xs font-semibold text-gray-400 mb-1">Поставщик 1 (Название / ИНН)*</label>
-                <input type="text" id="prov-0" placeholder="Впишите вручную или введите ИНН..." class="w-full input-field border rounded-lg px-3 py-2 text-xs" oninput="handleInn(this.value, 0)"/>
-                <div id="suggest-0" onclick="selectSuggest(0)" class="hidden absolute z-10 w-full bg-gray-800 border border-gray-700 text-xs rounded-b-lg shadow-xl p-2 mt-1 cursor-pointer text-blue-400 hover:bg-gray-700 transition-colors">✨ Найдено в ФНС: <span id="suggest-txt-0" class="text-gray-200 font-medium"></span></div>
-            </div>
-            <div class="relative">
-                <label class="block text-xs font-semibold text-gray-400 mb-1">Поставщик 2 (Название / ИНН)*</label>
-                <input type="text" id="prov-1" placeholder="Впишите вручную или введите ИНН..." class="w-full input-field border rounded-lg px-3 py-2 text-xs" oninput="handleInn(this.value, 1)"/>
-                <div id="suggest-1" onclick="selectSuggest(1)" class="hidden absolute z-10 w-full bg-gray-800 border border-gray-700 text-xs rounded-b-lg shadow-xl p-2 mt-1 cursor-pointer text-blue-400 hover:bg-gray-700 transition-colors">✨ Найдено в ФНС: <span id="suggest-txt-1" class="text-gray-200 font-medium"></span></div>
-            </div>
-            <div class="relative">
-                <label class="block text-xs font-semibold text-gray-400 mb-1">Поставщик 3 (Название / ИНН)*</label>
-                <input type="text" id="prov-2" placeholder="Впишите вручную или введите ИНН..." class="w-full input-field border rounded-lg px-3 py-2 text-xs" oninput="handleInn(this.value, 2)"/>
-                <div id="suggest-2" onclick="selectSuggest(2)" class="hidden absolute z-10 w-full bg-gray-800 border border-gray-700 text-xs rounded-b-lg shadow-xl p-2 mt-1 cursor-pointer text-blue-400 hover:bg-gray-700 transition-colors">✨ Найдено в ФНС: <span id="suggest-txt-2" class="text-gray-200 font-medium"></span></div>
-            </div>
-        </div>
-
-        <!-- ТАБЛИЦА РАСЧЕТА -->
-        <div class="overflow-x-auto bg-gray-900 rounded-lg border border-gray-700 mb-6">
-            <table class="w-full text-left border-collapse text-xs">
-                <thead>
-                    <tr class="border-b border-gray-700 bg-gray-800 text-gray-400 uppercase tracking-wider font-medium">
-                        <th class="p-3">Наименование ТРУ (По ГОСТ/ТЗ)</th>
-                        <th class="p-3 w-24 text-center">Кол-во</th>
-                        <th id="th-p1" class="p-3">Цена 1 (₽)</th>
-                        <th id="th-p2" class="p-3">Цена 2 (₽)</th>
-                        <th id="th-p3" class="p-3">Цена 3 (₽)</th>
-                        <th class="p-3 text-right">Итого НМЦК (₽)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b border-gray-700 hover:bg-gray-800 transition-colors">
-                        <td class="p-3">
-                            <input type="text" id="row-name" placeholder="Например: Сахар белый кристаллический ГОСТ 33222-2015" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-white py-1" oninput="validateForm()" />
-                        </td>
-                        <td class="p-3">
-                            <input type="number" id="row-qty" value="1" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-white text-center py-1" oninput="calculate()" />
-                        </td>
-                        <td class="p-3" id="td-p1"><input type="number" id="row-p1" value="0" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-white py-1" oninput="calculate()" /></td>
-                        <td class="p-3" id="td-p2"><input type="number" id="row-p2" value="0" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-white py-1" oninput="calculate()" /></td>
-                        <td class="p-3" id="td-p3"><input type="number" id="row-p3" value="0" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-white py-1" oninput="calculate()" /></td>
-                        <td class="p-3 text-right font-mono font-bold text-white text-sm" id="total-nmck">0,00 ₽</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- ЮРИДИЧЕСКИЕ ИНДИКАТОРЫ -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div id="variation-card" class="p-3 rounded-lg border flex items-center justify-between text-xs bg-gray-900 border-gray-700 text-gray-300">
-                <div>
-                    <span class="font-medium block">Коэффициент вариации цен:</span>
-                    <span id="variation-sub" class="text-xs text-gray-400">Лимит по Приказу Минэкономразвития № 567 — 33%</span>
-                </div>
-                <div class="text-right font-mono font-bold text-sm" id="variation-value">0%</div>
-            </div>
-
-            <div id="limit-card" class="p-3 rounded-lg border flex items-center justify-between text-xs bg-gray-900 border-gray-700 text-gray-300">
-                <div>
-                    <span class="font-medium block">Проверка лимитов процедуры:</span>
-                    <span class="text-xs text-gray-400">Автоматический контроль ст. 22 и ст. 93 44-ФЗ</span>
-                </div>
-                <div class="text-right font-medium text-xs text-green-400" id="limit-value">🟢 Нарушений ограничений нет</div>
-            </div>
-        </div>
-
-        <!-- БЛОК ПОДПИСАНИЯ -->
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 p-4 bg-gray-900 rounded-lg border border-gray-700 mb-6 text-xs">
+    <!-- СЕТКА BENTO ДЛЯ ЕДИННОГО ЭКРАНА -->
+    <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- ПЛАШКА 1: КАЛЬКУЛЯТОР НМЦК (ЛЕВАЯ СТОРОНА) -->
+        <div class="lg:col-span-7 dark-card rounded-xl p-6 border shadow-xl flex flex-col justify-between">
             <div>
-                <label class="block text-gray-400 mb-1">Дата составления</label>
-                <input type="date" id="sign-date" class="w-full input-field border rounded px-2 py-1" />
+                <div class="text-sm font-bold text-white mb-4 border-b border-gray-700 pb-2 flex items-center justify-between">
+                    <span>📊 Калькулятор НМЦК</span>
+                    <span class="text-xs text-gray-400 font-normal">Строго по ст. 22 ФЗ</span>
+                </div>
+
+                <!-- ВВОД ПОСТАВЩИКОВ -->
+                <div id="providers-block" class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                    <div class="relative">
+                        <label class="block text-[10px] uppercase text-gray-400 mb-1">Поставщик 1*</label>
+                        <input type="text" id="p-name-0" placeholder="ИНН или Название" class="w-full input-field border rounded p-1.5 text-xs" oninput="checkInn(this.value, 0)"/>
+                        <div id="sug-0" onclick="applySug(0)" class="hidden absolute z-20 w-full bg-gray-800 border border-gray-700 text-[10px] rounded p-1.5 mt-0.5 cursor-pointer text-blue-400">✨ ФНС: АО "Прод-Торг"</div>
+                    </div>
+                    <div class="relative">
+                        <label class="block text-[10px] uppercase text-gray-400 mb-1">Поставщик 2*</label>
+                        <input type="text" id="p-name-1" placeholder="ИНН или Название" class="w-full input-field border rounded p-1.5 text-xs" oninput="checkInn(this.value, 1)"/>
+                        <div id="sug-1" onclick="applySug(1)" class="hidden absolute z-20 w-full bg-gray-800 border border-gray-700 text-[10px] rounded p-1.5 mt-0.5 cursor-pointer text-blue-400">✨ ФНС: ООО "СахарОпт"</div>
+                    </div>
+                    <div class="relative">
+                        <label class="block text-[10px] uppercase text-gray-400 mb-1">Поставщик 3*</label>
+                        <input type="text" id="p-name-2" placeholder="ИНН или Название" class="w-full input-field border rounded p-1.5 text-xs" oninput="checkInn(this.value, 2)"/>
+                        <div id="sug-2" onclick="applySug(2)" class="hidden absolute z-20 w-full bg-gray-800 border border-gray-700 text-[10px] rounded p-1.5 mt-0.5 cursor-pointer text-blue-400">✨ ФНС: ИП Иванов</div>
+                    </div>
+                </div>
+
+                <!-- РАСЧЕТНАЯ ТАБЛИЦА -->
+                <div class="overflow-x-auto bg-gray-900 rounded border border-gray-700 mb-4">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="bg-gray-800 text-gray-400 uppercase text-[10px] border-b border-gray-700">
+                                <th class="p-2">Товар (ГОСТ/ТЗ)</th>
+                                <th class="p-2 w-16 text-center">Кол-во</th>
+                                <th id="c-h1" class="p-2">Цена 1 (₽)</th>
+                                <th id="c-h2" class="p-2">Цена 2 (₽)</th>
+                                <th id="c-h3" class="p-2">Цена 3 (₽)</th>
+                                <th class="p-2 text-right">Итого (₽)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-2"><input type="text" id="t-name" placeholder="Сахар ГОСТ 33222-2015" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none" oninput="syncCargoName(); validateAll();" /></td>
+                                <td class="p-2"><input type="number" id="t-qty" value="100" class="w-full bg-transparent border-b border-gray-700 text-white text-center focus:outline-none" oninput="syncWeightAndCalc();" /></td>
+                                <td class="p-2" id="c-d1"><input type="number" id="t-p1" value="0" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none" oninput="syncAll();" /></td>
+                                <td class="p-2" id="c-d2"><input type="number" id="t-p2" value="0" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none" oninput="syncAll();" /></td>
+                                <td class="p-2" id="c-d3"><input type="number" id="t-p3" value="0" class="w-full bg-transparent border-b border-gray-700 text-white focus:outline-none" oninput="syncAll();" /></td>
+                                <td class="p-2 text-right font-mono font-bold text-sm text-blue-400" id="t-total">0,00 ₽</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ВАЛИДАЦИЯ ЗАКОНА -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 text-[11px]">
+                    <div id="v-cv" class="p-2 rounded border bg-gray-900 border-gray-700">
+                        <span class="block text-gray-400">Коэффициент вариации:</span>
+                        <span class="font-bold font-mono text-xs" id="v-cv-val">0%</span>
+                    </div>
+                    <div id="v-lim" class="p-2 rounded border bg-gray-900 border-gray-700 text-green-400">
+                        <span class="block text-gray-400">Лимиты процедуры:</span>
+                        <span class="font-bold text-xs" id="v-lim-val">🟢 Нарушений нет</span>
+                    </div>
+                </div>
+
+                <!-- ПОДПИСАНТ -->
+                <div class="grid grid-cols-2 gap-3 p-3 bg-gray-900 rounded border border-gray-700 mb-4 text-[11px]">
+                    <div>
+                        <label class="block text-gray-400 mb-0.5">Организация-заказчик</label>
+                        <input type="text" id="s-org" value="ООО 'Ромашка'" class="w-full input-field border rounded p-1" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-400 mb-0.5">ФИО исполнителя*</label>
+                        <input type="text" id="s-fio" placeholder="Иванов И.И." class="w-full input-field border rounded p-1" oninput="validateAll()" />
+                    </div>
+                </div>
             </div>
-            <div>
-                <label class="block text-gray-400 mb-1">Организация-заказчик</label>
+
+            <!-- ЗОНА ЭКСПОРТА И ТУМБЛЕР СБП -->
+            <div class="border-t border-gray-700 pt-3 mt-2 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <button id="sbp-toggle" onclick="toggleSbp()" class="text-[10px] font-mono px-2 py-0.5 rounded bg-yellow-950 text-yellow-400 border border-yellow-700">🟡 Гость сайта (Оплата 100₽)</button>
+                <div class="flex gap-1.5">
+                    <button onclick="runExport('Excel')" id="ex-excel" disabled class="opacity-30 cursor-not-allowed px-3 py-1.5 bg-emerald-700 rounded text-xs font-medium text-white">📊 Excel</button>
