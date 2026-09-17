@@ -5,41 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TenderPilot V2.4 — Премиальная Экосистема</title>
     <style>
-        /* ========================================================================= */
-        /* БАЗОВЫЕ И АВТОНОМНЫЕ СТИЛИ (НЕ ТРЕБУЮТ ИНТЕРНЕТА И VPN)                   */
-        /* ========================================================================= */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        body { background-color: #0B0B0F; color: #f1f5f9; min-height: 100vh; overflow-x: hidden; position: relative; }
+        body { background-color: #0B0B0F; color: #f1f5f9; min-height: 100vh; overflow-x: hidden; position: relative; padding: 12px; }
         
-        /* ПАРАЛЛАКС ЗВЕЗД НА ФОНЕ */
+        /* ЗВЕЗДНЫЙ ФОН */
         body::before {
             content: ""; position: fixed; inset: 0; z-index: -1;
             background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
                               radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
-            background-size: 550px 550px, 350px 350px; background-position: 0 0, 40px 60px; opacity: 0.4;
+            background-size: 550px 550px, 350px 350px; background-position: 0 0, 40px 60px; opacity: 0.3;
         }
 
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 16px; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; }
         
-        /* ШАПКА САЙТА С КНОПКОЙ ВХОДА */
+        /* ШАПКА */
         .site-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-b: 1px solid rgba(255,255,255,0.05); margin-bottom: 24px; }
-        .logo { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.025em; text-shadow: 0 0 10px rgba(168,85,247,0.3); }
+        .logo { font-size: 20px; font-weight: 800; color: #fff; }
         .logo span { color: #a855f7; font-size: 11px; vertical-align: super; font-family: monospace; margin-left: 4px; }
         
         .action-header-btn { padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer; border: none; transition: all 0.2s; }
         .btn-to-lk { background-color: #059669; color: white; box-shadow: 0 4px 12px rgba(5,150,105,0.3); }
-        .btn-to-lk:hover { background-color: #047857; }
         .btn-to-landing { background-color: #1e3a8a; color: white; box-shadow: 0 4px 12px rgba(30,58,138,0.3); }
-        .btn-to-landing:hover { background-color: #1d4ed8; }
 
-        /* ========================================================================= */
-        /* СТИЛИ КОНТУРА А: ПРЕМИАЛЬНЫЙ РАССВЕТНЫЙ КИБЕРПАНК ЛЕНДИНГ                  */
-        /* ========================================================================= */
-        .promo-banner { text-align: center; padding: 40px 16px; margin-bottom: 32px; position: relative; }
-        .promo-banner h2 { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.2; background: linear-gradient(to right, #fff, #a855f7, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .promo-banner p { color: #94a3b8; max-width: 650px; margin: 0 auto; font-size: 14px; }
+        /* ЛЕНДИНГ И БЕНТО-СЕТКА */
+        .promo-banner { text-align: center; padding: 30px 16px; margin-bottom: 24px; }
+        .promo-banner h2 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 12px; background: linear-gradient(to right, #fff, #a855f7, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .promo-banner p { color: #94a3b8; max-width: 600px; margin: 0 auto; font-size: 13px; }
         
-        /* СЕТКА BENTO НА ЛЕНДИНГЕ (1 БОЛЬШАЯ + 5 МЕНЬШЕ) */
         .bento-landing-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
         @media (min-width: 768px) {
             .bento-landing-grid { grid-template-columns: repeat(6, 1fr); }
@@ -51,80 +43,90 @@
             .bento-small-5 { grid-column: span 6; }
         }
         
-        .bento-card { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 24px; transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .bento-card:hover { border-color: rgba(168,85,247,0.4); transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(168,85,247,0.2); }
-        .bento-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #a855f7, transparent); opacity: 0.7; }
-        .bento-card h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .bento-card p { font-size: 12px; color: #94a3b8; line-height: 1.6; }
+        .bento-card { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px; position: relative; overflow: hidden; }
+        .bento-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #a855f7, transparent); }
+        .bento-card h3 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .bento-card p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
         
-        /* ЦВЕТОВЫЕ АКЦЕНТЫ ПЛАШЕК НА ЛЕНДИНГЕ */
-        .accent-purple::before { background: linear-gradient(to bottom, #a855f7, transparent); }
         .accent-blue::before { background: linear-gradient(to bottom, #3b82f6, transparent); }
         .accent-amber::before { background: linear-gradient(to bottom, #f59e0b, transparent); }
         .accent-emerald::before { background: linear-gradient(to bottom, #10b981, transparent); }
 
-        /* ========================================================================= */
-        /* СТИЛИ КОНТУРА Б: СТРОГИЙ СЕРО-ГОЛУБОЙ РАБОЧИЙ ЛИЧНЫЙ КАБИНЕТ              */
-        /* ========================================================================= */
-        .lk-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); margin-bottom: 16px; }
+        /* ЛИЧНЫЙ КАБИНЕТ */
+        .lk-card { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
         .lk-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-        @media (min-width: 1024px) { 
-            .lk-grid { grid-template-columns: 7fr 5fr; } 
-            #calc-panel, #log-panel { display: flex !important; flex-direction: column; justify-content: space-between; }
-            .lk-span-12 { grid-column: span 2; } 
-        }
+        @media (min-width: 1024px) { .lk-grid { grid-template-columns: 7fr 5fr; } .lk-span-12 { grid-column: span 2; } }
         
-        /* Мобильные вкладки внутри ЛК */
         .mobile-tabs { display: flex; gap: 8px; margin-bottom: 16px; background-color: #0f172a; padding: 4px; border-radius: 8px; border: 1px solid #334155; }
         @media (min-width: 1024px) { .mobile-tabs { display: none; } }
         .tab-btn { flex: 1; text-align: center; padding: 8px; font-size: 12px; border-radius: 6px; cursor: pointer; border: none; background: none; color: #94a3b8; font-weight: 600; }
-        .tab-active { background-color: #334155; color: white; border: 1px solid #475569; }
+        .tab-active { background-color: #334155; color: white; }
 
-        /* Формы и поля ввода ЛК */
         .input-field { background-color: #0f172a; border: 1px solid #334155; color: #f1f5f9; width: 100%; padding: 8px 10px; border-radius: 6px; font-size: 13px; margin-top: 4px; }
-        .input-field:focus { border-color: #3b82f6; outline: none; }
+        .btn { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; text-align: center; }
+        .btn-green { background-color: #059669; color: white; }
         .toggle-container { display: flex; background-color: #0f172a; border: 1px solid #334155; padding: 4px; border-radius: 8px; }
         .toggle-btn { flex: 1; text-align: center; padding: 6px 12px; font-size: 11px; border-radius: 6px; cursor: pointer; border: none; background: none; color: #94a3b8; font-weight: bold; }
         .toggle-active-44 { background-color: #2563eb; color: white; }
         .toggle-active-223 { background-color: #d97706; color: white; }
-        
+        .label-title { font-size: 10px; text-transform: uppercase; font-weight: 600; color: #94a3b8; }
         .lk-title { font-size: 14px; font-weight: 700; color: white; border-b: 1px solid #334155; padding-bottom: 6px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
         .table-container { overflow-x: auto; background-color: #0f172a; border-radius: 6px; border: 1px solid #334155; margin-bottom: 12px; }
         table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
-        th { background-color: #1e293b; color: #94a3b8; padding: 8px; font-size: 10px; text-transform: uppercase; border-b: 1px solid #334155; }
+        th { background-color: #1e293b; color: #94a3b8; padding: 8px; border-b: 1px solid #334155; }
         td { padding: 8px; border-b: 1px solid #334155; }
-        
-        .indicator-box { padding: 10px; border-radius: 6px; border: 1px solid #334155; background-color: #0f172a; display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
-        .bg-variation-alert { background-color: rgba(146, 64, 14, 0.2); border-color: #b45309; color: #fcd34d; }
-        .bg-limit-alert { background-color: rgba(153, 27, 27, 0.2); border-color: #b91c1c; color: #fca5a5; }
-        .suggest-box { position: absolute; z-index: 50; width: 100%; background-color: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 6px; margin-top: 2px; cursor: pointer; color: #38bdf8; font-size: 11px; display: none; }
-        
-        /* Модалка оплаты */
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background-color: rgba(15, 23, 42, 0.8); align-items: center; justify-content: center; padding: 16px; }
+        .indicator-box { padding: 10px; border-radius: 6px; border: 1px solid #334155; background-color: #0f172a; display: flex; justify-content: space-between; align-items: center; }
+        .suggest-box { position: absolute; z-index: 50; width: 100%; background-color: #1e293b; border: 1px solid #475569; border-radius: 6px; padding: 6px; margin-top: 2px; cursor: pointer; color: #38bdf8; display: none; }
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background-color: rgba(15, 23, 42, 0.8); align-items: center; justify-content: center; }
         .modal-content { background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; max-width: 340px; width: 100%; padding: 20px; text-align: center; position: relative; }
-        .animate-fade-in { animation: fadeIn 0.2s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div class="container">
-        
-        <!-- ШАПКА САЙТА (ЕДИНЫЙ ПУЛЬТ) -->
+        <!-- ШАПКА -->
         <header class="site-header">
             <div class="logo">🛸 TenderPilot <span>v2.4</span></div>
             <button id="toggle-view-btn" onclick="toggleMainMode()" class="action-header-btn btn-to-lk">Войти в Личный Кабинет ➔</button>
         </header>
 
-        <!-- ========================================================================= -->
-        <!-- МАРКЕР-ЯКОРЬ: КОНТУР А — ПРЕМИАЛЬНЫЙ КИБЕРПАНК ЛЕНДИНГ                    -->
-        <!-- ========================================================================= -->
+        <!-- КОНТУР А: РАБОЧИЙ ЛЕНДИНГ (БЕЗ СКРЫТИЯ ПЛАШЕК) -->
         <main id="landing-section">
             <div class="promo-banner">
                 <h2>Умный Помощник в Сфере Госзакупок</h2>
-                <p>Избавьтесь от рутинных расчетов, автоматизируйте проверки и минимизируйте риски штрафов ФАС с помощью интеллектуальных конвейеров данных.</p>
+                <p>Избавьтесь от рутинных расчетов, автоматизируйте проверки и минимизируйте риски штрафов ФАС.</p>
             </div>
 
-            <!-- СЕТКА BENTO С НАШИМИ СОГЛАСОВАННЫМИ ОПИСАНИЯМИ -->
             <div class="bento-landing-grid">
-                <div class="bento-card bento-big accent-purple">
+                <div class="bento-card bento-big">
+                    <h3>📈 1. ИИ-Контроль для Директоров</h3>
+                    <p>Прозрачный сквозной контроль департамента закупок в реальном времени. Интеллектуальный дашборд руководителя, автоматическое отслеживание KPI сотрудников, аудит предотвращенных рисков и аналитика сбереженных бюджетных средств организации на одном экране.</p>
+                </div>
+                <div class="bento-card bento-small-1 accent-blue">
+                    <h3>📊 2. Калькулятор НМЦК</h3>
+                    <p>Мгновенный расчет начальной цены по 44-ФЗ и 223-ФЗ. Автоматический контроль лимитов процедур и проверка коэффициента вариации до законных 33% для полной защиты от проверок ФАС.</p>
+                </div>
+                <div class="bento-card bento-small-2 accent-amber">
+                    <h3>🚚 3. Цифровая Логистика</h3>
+                    <p>Автоматический расчет оптимального плеча доставки от 40+ крупнейших транспортных компаний по API со встроенным страхованием груза и подбором класса кузова.</p>
+                </div>
+                <div class="bento-card bento-small-3 accent-emerald">
+                    <h3>⚖️ 4. Юридический Маркетплейс</h3>
+                    <p>Умный подбор и генерация шаблонов контрактов, протоколов разногласий и жалоб в ФАС, автоматически адаптирующихся под актуальные изменения законодательства.</p>
+                </div>
+                <div class="bento-card bento-small-4">
+                    <h3>🔍 5. Проверка по ИНН</h3>
+                    <p>Экспресс-аудит аффилированности физических и юридических лиц, выявление скрытых бенефициаров и проверка надежности контрагентов по реестрам ФНС в один клик.</p>
+                </div>
+                <div class="bento-card bento-small-5 accent-blue">
+                    <h3>🛒 6. Тарифы и Баланс</h3>
+                    <p>Гибкая система оплаты корпоративных безлимитных лицензий или мгновенная выгрузка готовых юридических расчетов по разовому тарифу 100 рублей через СБП.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- КОНТУР Б: РАБОЧИЙ ЛИЧНЫЙ КАБИНЕТ (СКРЫТ ПО УМОЛЧАНИЮ) -->
+        <main id="lk-section" style="display: none;">
+            <div class="lk-card">
+                <div class="flex-row-custom">
+                    <h2 style="font-size: 14px; font-weight: bold; color: white;">⚙️ Конвейер Управления</h2>
