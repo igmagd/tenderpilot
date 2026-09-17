@@ -4,40 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TenderPilot V2.4</title>
-    <!-- Подключаем стили Tailwind для красивого серо-голубого дизайна -->
-    <script src="https://jsdelivr.net"></script>
-    <!-- Подключаем Vue 3 для работы кнопок и расчетов -->
-    <script src="https://unpkg.com"></script>
+    <!-- Подключаем стабильную версию стилей Tailwind -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- Подключаем стабильный Vue 3 -->
+    <script src="https://cloudflare.com"></script>
     <style>
+        body { background-color: #0f172a; color: #f1f5f9; }
+        .dark-card { background-color: #1e293b; border-color: #334155; }
+        .input-field { background-color: #0f172a; border-color: #334155; color: #f1f5f9; }
+        .input-field:focus { border-color: #3b82f6; outline: none; }
         .animate-fade-in { animation: fadeIn 0.2s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen p-4 sm:p-8 font-sans">
+<body class="min-h-screen p-4 sm:p-8 font-sans">
 
-    <div id="app" class="w-full max-w-6xl mx-auto bg-slate-900 rounded-xl shadow-2xl p-6 border border-slate-800">
+    <div id="app" class="w-full max-w-6xl mx-auto dark-card rounded-xl shadow-2xl p-6 border">
         
         <!-- ЗАГОЛОВОК СИСТЕМЫ -->
-        <div class="mb-6 pb-4 border-b border-slate-800 flex justify-between items-center">
+        <div class="mb-6 pb-4 border-b border-gray-700 flex justify-between items-center">
             <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-                🛸 TenderPilot <span class="text-xs bg-blue-600/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 rounded-full font-mono">v2.4 Production</span>
+                🛸 TenderPilot <span class="text-xs bg-blue-600 bg-opacity-20 text-blue-400 border border-blue-500 border-opacity-30 px-2 py-0.5 rounded-full font-mono">v2.4 Production</span>
             </h1>
-            <div class="text-xs text-slate-400">Личный кабинет закупщика</div>
+            <div class="text-xs text-gray-400">Личный кабинет закупщика</div>
         </div>
 
         <!-- РЯД 1: УПРАВЛЕНИЕ И ЮР. ТОНКОСТИ -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 pb-6 border-b border-slate-800">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 pb-6 border-b border-gray-700">
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Регулирующий закон</label>
-                <div class="flex bg-slate-950 p-1 rounded-lg border border-slate-800">
-                    <button @click="fz = '44'; triggerRecalc()" :class="fz === '44' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'" class="flex-1 py-1.5 text-xs font-medium rounded-md transition-all">44-ФЗ</button>
-                    <button @click="fz = '223'; triggerRecalc()" :class="fz === '223' ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'" class="flex-1 py-1.5 text-xs font-medium rounded-md transition-all">223-ФЗ</button>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Регулирующий закон</label>
+                <div class="flex bg-gray-900 p-1 rounded-lg border border-gray-700">
+                    <button @click="fz = '44'; triggerRecalc()" :class="fz === '44' ? 'bg-blue-600 text-white shadow' : 'text-gray-400 hover:text-gray-200'" class="flex-1 py-1.5 text-xs font-medium rounded-md transition-all">44-ФЗ</button>
+                    <button @click="fz = '223'; triggerRecalc()" :class="fz === '223' ? 'bg-amber-600 text-white shadow' : 'text-gray-400 hover:text-gray-200'" class="flex-1 py-1.5 text-xs font-medium rounded-md transition-all">223-ФЗ</button>
                 </div>
             </div>
 
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Способ определения поставщика</label>
-                <select v-model="purchaseMethod" @change="triggerRecalc()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Способ определения поставщика</label>
+                <select v-model="purchaseMethod" @change="triggerRecalc()" class="w-full input-field border rounded-lg px-3 py-1.5 text-xs">
                     <option value="auction">Электронный аукцион</option>
                     <option value="contest">Электронный конкурс</option>
                     <option value="quotation">Электронный запрос котировок</option>
@@ -46,8 +50,8 @@
             </div>
 
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Предмет закупки (Метод расчета)</label>
-                <select v-model="purchaseType" @change="triggerRecalc()" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Предмет закупки (Метод расчета)</label>
+                <select v-model="purchaseType" @change="triggerRecalc()" class="w-full input-field border rounded-lg px-3 py-1.5 text-xs">
                     <option value="market">📦 Стандартный (Анализ рынка)</option>
                     <option value="stroy">🏗️ Строительство и капремонт (Сметный)</option>
                     <option value="med">💊 Лекарственные препараты</option>
@@ -58,26 +62,28 @@
 
         <!-- РЯД 2: ОБЯЗАТЕЛЬНЫЙ РУЧНОЙ ВВОД ПОСТАВЩИКОВ -->
         <div v-if="purchaseType !== 'stroy'" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div v-for="i in 3" :key="i" class="relative">
-                <label class="block text-xs font-semibold text-slate-400 mb-1">Поставщик {{ i }} (Название / ИНН)*</label>
-                <input 
-                    type="text" 
-                    v-model="providers[i-1]" 
-                    placeholder="Впишите вручную или введите ИНН..." 
-                    class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500"
-                    @input="handleInnInput($event.target.value, i-1)"
-                />
-                <div v-if="suggestions[i-1]" @click="selectSuggestion(i-1)" class="absolute z-10 w-full bg-slate-950 border border-slate-700 text-xs rounded-b-lg shadow-xl p-2 mt-1 cursor-pointer text-blue-400 hover:bg-slate-800 transition-colors">
-                    ✨ Найдено в ФНС: <span class="text-slate-200 font-medium">{{ suggestions[i-1] }}</span>
-                </div>
+            <div class="relative">
+                <label class="block text-xs font-semibold text-gray-400 mb-1">Поставщик 1 (Название / ИНН)*</label>
+                <input type="text" v-model="providers[0]" placeholder="Впишите вручную или введите ИНН..." class="w-full input-field border rounded-lg px-3 py-2 text-xs" @input="handleInnInput($event.target.value, 0)"/>
+                <div v-if="suggestions[0]" @click="selectSuggestion(0)" class="absolute z-10 w-full bg-gray-850 border border-gray-700 text-xs rounded-b-lg shadow-xl p-2 mt-1 cursor-pointer text-blue-400 hover:bg-gray-800 transition-colors">✨ Найдено в ФНС: <span class="text-gray-200 font-medium">{{ suggestions[0] }}</span></div>
+            </div>
+            <div class="relative">
+                <label class="block text-xs font-semibold text-gray-400 mb-1">Поставщик 2 (Название / ИНН)*</label>
+                <input type="text" v-model="providers[1]" placeholder="Впишите вручную или введите ИНН..." class="w-full input-field border rounded-lg px-3 py-2 text-xs" @input="handleInnInput($event.target.value, 1)"/>
+                <div v-if="suggestions[1]" @click="selectSuggestion(1)" class="absolute z-10 w-full bg-gray-850 border border-gray-700 text-xs rounded-b-lg shadow-xl p-2 mt-1 cursor-pointer text-blue-400 hover:bg-gray-800 transition-colors">✨ Найдено в ФНС: <span class="text-gray-200 font-medium">{{ suggestions[1] }}</span></div>
+            </div>
+            <div class="relative">
+                <label class="block text-xs font-semibold text-gray-400 mb-1">Поставщик 3 (Название / ИНН)*</label>
+                <input type="text" v-model="providers[2]" placeholder="Впишите вручную или введите ИНН..." class="w-full input-field border rounded-lg px-3 py-2 text-xs" @input="handleInnInput($event.target.value, 2)"/>
+                <div v-if="suggestions[2]" @click="selectSuggestion(2)" class="absolute z-10 w-full bg-gray-850 border border-gray-700 text-xs rounded-b-lg shadow-xl p-2 mt-1 cursor-pointer text-blue-400 hover:bg-gray-800 transition-colors">✨ Найдено в ФНС: <span class="text-gray-200 font-medium">{{ suggestions[2] }}</span></div>
             </div>
         </div>
 
         <!-- ТАБЛИЦА РАСЧЕТА -->
-        <div class="overflow-x-auto bg-slate-950 rounded-lg border border-slate-800 mb-6">
+        <div class="overflow-x-auto bg-gray-900 rounded-lg border border-gray-700 mb-6">
             <table class="w-full text-left border-collapse text-xs">
                 <thead>
-                    <tr class="border-b border-slate-800 bg-slate-900/50 text-slate-400 uppercase tracking-wider font-medium">
+                    <tr class="border-b border-gray-700 bg-gray-800 text-gray-400 uppercase tracking-wider font-medium">
                         <th class="p-3">Наименование ТРУ (По ГОСТ/ТЗ)</th>
                         <th class="p-3 w-24 text-center">Кол-во</th>
                         <th class="p-3" v-if="purchaseType !== 'stroy'">Цена 1 (₽)</th>
@@ -88,17 +94,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b border-slate-800 hover:bg-slate-900/30 transition-colors">
+                    <tr class="border-b border-gray-700 hover:bg-gray-800 transition-colors">
                         <td class="p-3">
-                            <input type="text" v-model="row.name" placeholder="Например: Сахар белый кристаллический ГОСТ 33222-2015" class="w-full bg-transparent border-b border-slate-800 focus:border-blue-500 focus:outline-none text-slate-200 py-1" />
+                            <input type="text" v-model="row.name" placeholder="Например: Сахар белый кристаллический ГОСТ 33222-2015" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-slate-200 py-1" />
                         </td>
                         <td class="p-3">
-                            <input type="number" v-model.number="row.quantity" class="w-full bg-transparent border-b border-slate-800 focus:border-blue-500 focus:outline-none text-slate-200 text-center py-1" />
+                            <input type="number" v-model.number="row.quantity" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-slate-200 text-center py-1" />
                         </td>
-                        <td class="p-3" v-if="purchaseType !== 'stroy'"><input type="number" v-model.number="row.p1" class="w-full bg-transparent border-b border-slate-800 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
-                        <td class="p-3" v-if="purchaseType !== 'stroy'"><input type="number" v-model.number="row.p2" class="w-full bg-transparent border-b border-slate-800 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
-                        <td class="p-3" v-if="purchaseType !== 'stroy'"><input type="number" v-model.number="row.p3" class="w-full bg-transparent border-b border-slate-800 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
-                        <td class="p-3" v-else><input type="number" v-model.number="row.smetaPrice" class="w-full bg-transparent border-b border-slate-800 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
+                        <td class="p-3" v-if="purchaseType !== 'stroy'"><input type="number" v-model.number="row.p1" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
+                        <td class="p-3" v-if="purchaseType !== 'stroy'"><input type="number" v-model.number="row.p2" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
+                        <td class="p-3" v-if="purchaseType !== 'stroy'"><input type="number" v-model.number="row.p3" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
+                        <td class="p-3" v-else><input type="number" v-model.number="row.smetaPrice" class="w-full bg-transparent border-b border-gray-700 focus:border-blue-500 focus:outline-none text-slate-200 py-1" /></td>
                         <td class="p-3 text-right font-mono font-bold text-slate-200 text-sm">{{ formatCurrency(totalNMCK) }}</td>
                     </tr>
                 </tbody>
@@ -107,33 +113,14 @@
 
         <!-- ЮРИДИЧЕСКИЕ ИНДИКАТОРЫ -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div class="p-3 rounded-lg border flex items-center justify-between text-xs" :class="variationError ? 'bg-amber-950/40 border-amber-800 text-amber-300' : 'bg-slate-950 border-slate-800 text-slate-300'">
+            <div class="p-3 rounded-lg border flex items-center justify-between text-xs" :class="variationError ? 'bg-yellow-900 border-yellow-700 text-yellow-300' : 'bg-gray-900 border-gray-700 text-gray-300'">
                 <div>
                     <span class="font-medium block">Коэффициент вариации цен:</span>
-                    <span class="text-[10px] text-slate-400" v-if="purchaseType !== 'stroy'">Лимит по Приказу Минэкономразвития № 567 — 33%</span>
-                    <span class="text-[10px] text-slate-400" v-else>Для сметного метода коэффициент не требуется</span>
+                    <span class="text-xs text-gray-400" v-if="purchaseType !== 'stroy'">Лимит по Приказу Минэкономразвития № 567 — 33%</span>
+                    <span class="text-xs text-gray-400" v-else>Для сметного метода коэффициент не требуется</span>
                 </div>
                 <div class="text-right font-mono font-bold text-sm">
                     {{ purchaseType === 'stroy' ? '—' : variationCoefficient + '%' }}
                 </div>
             </div>
 
-            <div class="p-3 rounded-lg border flex items-center justify-between text-xs" :class="limitError ? 'bg-red-950/40 border-red-900 text-red-300' : 'bg-slate-950 border-slate-800 text-slate-300'">
-                <div>
-                    <span class="font-medium block">Проверка лимитов процедуры:</span>
-                    <span class="text-[10px] text-slate-400">Автоматический контроль ст. 22 и ст. 93 44-ФЗ</span>
-                </div>
-                <div class="text-right font-medium text-xs">
-                    {{ limitStatus }}
-                </div>
-            </div>
-        </div>
-
-        <!-- БЛОК ПОДПИСАНИЯ ОТЧЕТА -->
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 p-4 bg-slate-950/60 rounded-lg border border-slate-800 mb-6 text-xs">
-            <div>
-                <label class="block text-slate-400 mb-1">Дата составления</label>
-                <input type="date" v-model="signBlock.date" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1 text-slate-200 focus:outline-none" />
-            </div>
-            <div>
-                <label class="block text-slate-400 mb-1">Организация-заказчик</label>
