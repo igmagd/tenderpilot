@@ -23,8 +23,15 @@
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background:
-                radial-gradient(circle at 50% 0%, rgba(80, 20, 60, 0.45), transparent 35%),
-                linear-gradient(180deg, #1a0b12 0%, #0c0c14 30%, #0b0b0f 100%);
+    linear-gradient(
+        to top,
+        #000000 0%,
+        #020814 38%,
+        #071a32 68%,
+        #173b62 86%,
+        #315b80 100%
+    );
+;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -34,7 +41,10 @@
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.2;
+            opacity: 0.55;
+            -webkit-mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
+mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
+            
             background-image:
                 radial-gradient(1px 1px at 10px 30px, #ffffff, transparent),
                 radial-gradient(1px 1px at 50px 100px, #ffffff, transparent),
