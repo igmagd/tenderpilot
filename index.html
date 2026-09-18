@@ -28,14 +28,12 @@
             background-size: 350px 350px; opacity: 0.25; z-index: 0; pointer-events: none;
         }
 
-        /* ИСПРАВЛЕНО: Безопасный контейнер без принудительного flex для всех дочерних элементов */
         .container { 
             max-width: 1200px; 
             margin: 0 auto; 
             width: 100%; 
         }
 
-        /* ИСПРАВЛЕННАЯ ПРЕМИАЛЬНАЯ ШАПКА */
         header { 
             display: flex; 
             justify-content: space-between; 
@@ -49,7 +47,6 @@
         .logo { font-size: 22px; font-weight: 700; color: #FFF; letter-spacing: -0.5px; cursor: pointer; text-decoration: none; }
         .logo span { color: #00F2FE; }
         
-        /* Меню для ПК версии */
         nav { display: flex; gap: 28px; align-items: center; }
         nav a { color: #8A8A93; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
         nav a:hover { color: #FFF; }
@@ -57,11 +54,10 @@
         .lk-btn {
             background: #FFFFFF; color: #0B0B0F; padding: 12px 24px; border-radius: 50px; 
             font-weight: 600; box-shadow: 0 0 15px rgba(255,255,255,0.3); cursor: pointer; border: none; outline: none;
-            transition: transform 0.2s; text-decoration: none; display: inline-block;
+            transition: transform 0.2s, background 0.2s, color 0.2s; text-decoration: none; display: inline-block;
         }
         .lk-btn:hover { transform: scale(1.05); }
 
-        /* НАСТОЯЩАЯ КНОПКА БУТЕРБРОДА */
         .menu-toggle { 
             display: none; 
             background: rgba(255, 255, 255, 0.03); 
@@ -77,7 +73,6 @@
             justify-content: center;
         }
 
-        /* АБСОЛЮТНОЕ РАЗДЕЛЕНИЕ ЭКРАНОВ */
         #landing-page { display: block; width: 100%; }
         #lk-content { display: none; padding-top: 40px; width: 100%; }
 
@@ -114,21 +109,15 @@
         .export-icon.word:hover { border-color: #2b579a; color: #2b579a; box-shadow: 0 0 15px rgba(43,87,154,0.3); }
         .export-icon.pdf:hover { border-color: #f40f02; color: #f40f02; box-shadow: 0 0 15px rgba(244,15,2,0.3); }
         
-        .expanded-cta-btn { display: inline-block; margin-top: 32px; background: #FFFFFF; color: #0B0B0F; padding: 16px 32px; border-radius: 12px; font-weight: 600; border: none; cursor: pointer; }
-
-        .zaprodlo-flash {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;
-            z-index: 10; display: none; align-items: center; justify-content: center; border-radius: 30px;
-        }
-        .screaming-text { color: #FF4A4A; font-weight: bold; font-size: 32px; text-align: center; }
+        .expanded-cta-btn { display: inline-block; margin-top: 32px; background: #FFFFFF; color: #0B0B0F; padding: 16px 32px; border-radius: 12px; font-weight: 600; border: none; cursor: pointer; transition: transform 0.2s; }
+        .expanded-cta-btn:hover { transform: scale(1.03); }
 
         .tech-section { text-align: center; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; }
         .tech-grid { display: flex; justify-content: center; gap: 48px; color: #8A8A93; font-size: 14px; margin-top: 24px; flex-wrap: wrap; }
         footer { padding: 40px 0; text-align: center; color: #323247; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; }
 
-        /* ЛИЧНЫЙ КАБИНЕТ */
         .lk-dashboard { display: grid; grid-template-columns: 280px 1fr; gap: 32px; margin-bottom: 60px; width: 100%; }
-        .lk-sidebar { background: rgba(18, 18, 26, 0.6); border: 1px solid #232330; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+        .lk-sidebar { background: rgba(18, 18, 26, 0.6); border: 1px solid #232330; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px; height: max-content; }
         .sidebar-item { padding: 14px 20px; border-radius: 12px; color: #8A8A93; font-size: 15px; cursor: pointer; transition: all 0.2s; }
         .sidebar-item:hover, .sidebar-item.active { background: #232330; color: #FFF; font-weight: 600; }
         .sidebar-item.active { border-left: 3px solid #00F2FE; }
@@ -139,73 +128,52 @@
         .stat-card h5 { color: #8A8A93; font-size: 13px; font-weight: 500; margin-bottom: 8px; }
         .stat-card div { font-size: 24px; font-weight: 700; color: #00F2FE; }
 
-        /* ИСПРАВЛЕННЫЙ И НАДЕЖНЫЙ МОБИЛЬНЫЙ АДАПТИВ */
-        @media (max-width: 968px) {
+        .table-container { width: 100%; overflow-x: auto; border: 1px solid #232330; border-radius: 16px; background: #12121A; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        th, td { padding: 16px 20px; border-bottom: 1px solid #232330; }
+        th { color: #8A8A93; font-weight: 500; background: rgba(255,255,255,0.02); }
+        td { color: #FFF; }
+        tr:last-child td { border-bottom: none; }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 600; }
+        .status-badge.success { background: rgba(33, 115, 70, 0.2); color: #217346; }
+        .status-badge.process { background: rgba(0, 242, 254, 0.1); color: #00F2FE; }
+
+        .lk-pane { display: none; }
+        .lk-pane.active { display: block; }
+
+        .drop-zone {
+            border: 2px dashed #232330; padding: 40px; border-radius: 16px; text-align: center;
+            background: rgba(255,255,255,0.01); cursor: pointer; transition: border-color 0.2s; margin-bottom: 24px;
+        }
+        .drop-zone:hover { border-color: #00F2FE; }
+        .drop-zone p { color: #8A8A93; font-size: 14px; margin-top: 8px; }
+
+        @media (max-width: 992px) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .lk-dashboard { grid-template-columns: 1fr; }
+            .stat-row { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
             header { padding: 16px 0; }
             .menu-toggle { display: flex; }
-            
-            nav {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: #0C0C14;
-                border: 1px solid #232330;
-                border-radius: 16px;
-                padding: 24px;
-                gap: 16px;
-                z-index: 1000;
+            nav { 
+                display: none; position: absolute; top: 80px; left: 0; width: 100%; 
+                flex-direction: column; background: #0C0C14; border: 1px solid #232330; 
+                padding: 24px; border-radius: 16px; gap: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             }
-            
-            /* Класс для открытия меню по кнопке бутерброда */
-            nav.mobile-open {
-                display: flex;
-            }
-
-            nav a {
-                width: 100%;
-                padding: 10px 0;
-                font-size: 16px;
-            }
-
-            .lk-btn {
-                width: 100%;
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            .hero h1 { font-size: 30px; }
+            nav.open { display: flex; }
+            .lk-btn { width: 100%; text-align: center; }
+            .hero h1 { font-size: 32px; }
             .hero h2 { font-size: 15px; }
-
-            .bento-grid { 
-                grid-template-columns: 1fr; 
-                gap: 16px; 
-            }
-
-            .lk-dashboard {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .expanded-card {
-                padding: 24px;
-            }
+            .bento-grid { grid-template-columns: 1fr; }
+            .stat-row { grid-template-columns: 1fr; }
+            .expanded-card { padding: 24px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Шапка сайта -->
         <header>
-            <a href="#" class="logo" id="logo-link">TenderPilot<span>.</span></a>
-            
-            <!-- Кнопка бутерброда для мобилок -->
-            <button class="menu-toggle" id="menu-btn">☰</button>
-
             
