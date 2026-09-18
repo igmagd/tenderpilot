@@ -28,7 +28,12 @@
             background-size: 350px 350px; opacity: 0.25; z-index: 0; pointer-events: none;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; }
+        /* ИСПРАВЛЕНО: Безопасный контейнер без принудительного flex для всех дочерних элементов */
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            width: 100%; 
+        }
 
         /* ИСПРАВЛЕННАЯ ПРЕМИАЛЬНАЯ ШАПКА */
         header { 
@@ -41,7 +46,7 @@
             position: relative; 
             z-index: 1005; 
         }
-        .logo { font-size: 22px; font-weight: 700; color: #FFF; letter-spacing: -0.5px; cursor: pointer; }
+        .logo { font-size: 22px; font-weight: 700; color: #FFF; letter-spacing: -0.5px; cursor: pointer; text-decoration: none; }
         .logo span { color: #00F2FE; }
         
         /* Меню для ПК версии */
@@ -52,7 +57,7 @@
         .lk-btn {
             background: #FFFFFF; color: #0B0B0F; padding: 12px 24px; border-radius: 50px; 
             font-weight: 600; box-shadow: 0 0 15px rgba(255,255,255,0.3); cursor: pointer; border: none; outline: none;
-            transition: transform 0.2s;
+            transition: transform 0.2s; text-decoration: none; display: inline-block;
         }
         .lk-btn:hover { transform: scale(1.05); }
 
@@ -99,11 +104,11 @@
         .expanded-card { background: #12121A; border: 2px solid #00F2FE; width: 100%; max-width: 750px; max-height: 85vh; border-radius: 32px; padding: 48px; position: relative; overflow-y: auto; box-shadow: 0 0 50px rgba(0, 242, 254, 0.15); }
         .close-btn { position: absolute; top: 24px; right: 24px; background: none; border: none; color: #8A8A93; font-size: 28px; cursor: pointer; }
         
-        .export-cascade { display: flex; gap: 15px; margin-top: 15px; }
+        .export-cascade { display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
         .export-icon {
             padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
             cursor: pointer; transition: all 0.3s; background: #0B0B0F; border: 1px solid #232330;
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: 8px; color: #FFF;
         }
         .export-icon.excel:hover { border-color: #217346; color: #217346; box-shadow: 0 0 15px rgba(33,115,70,0.3); }
         .export-icon.word:hover { border-color: #2b579a; color: #2b579a; box-shadow: 0 0 15px rgba(43,87,154,0.3); }
@@ -118,7 +123,7 @@
         .screaming-text { color: #FF4A4A; font-weight: bold; font-size: 32px; text-align: center; }
 
         .tech-section { text-align: center; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; }
-        .tech-grid { display: flex; justify-content: center; gap: 48px; color: #8A8A93; font-size: 14px; margin-top: 24px; }
+        .tech-grid { display: flex; justify-content: center; gap: 48px; color: #8A8A93; font-size: 14px; margin-top: 24px; flex-wrap: wrap; }
         footer { padding: 40px 0; text-align: center; color: #323247; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; }
 
         /* ЛИЧНЫЙ КАБИНЕТ */
@@ -134,53 +139,73 @@
         .stat-card h5 { color: #8A8A93; font-size: 13px; font-weight: 500; margin-bottom: 8px; }
         .stat-card div { font-size: 24px; font-weight: 700; color: #00F2FE; }
 
-        /* ЖЕСТКИЙ АДАПТИВ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ */
+        /* ИСПРАВЛЕННЫЙ И НАДЕЖНЫЙ МОБИЛЬНЫЙ АДАПТИВ */
         @media (max-width: 968px) {
             header { padding: 16px 0; }
             .menu-toggle { display: flex; }
             
             nav {
                 display: none; 
-                flex-direction: column; 
-                position: absolute; 
-                top: 80px; 
-                left: 0; 
-                width: 100%; 
-                background: #12121A; 
-                border: 1px solid #232330; 
-                padding: 32px; 
-                border-radius: 24px; 
-                gap: 24px; 
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #0C0C14;
+                border: 1px solid #232330;
+                border-radius: 16px;
+                padding: 24px;
+                gap: 16px;
                 z-index: 1000;
-                box-shadow: 0 15px 30px rgba(0,0,0,0.6);
             }
-            nav.mobile-open { display: flex; }
-            nav a { font-size: 16px; width: 100%; text-align: center; padding: 8px 0; }
-            .lk-btn { width: 100%; text-align: center; }
-
-            .hero { padding: 40px 0 20px 0; }
-            .hero h1 { font-size: 32px; line-height: 1.25; margin-bottom: 16px; }
-            .hero h2 { font-size: 15px; line-height: 1.5; }
             
-            .bento-grid { grid-template-columns: 1fr; gap: 20px; margin-top: 20px; }
-            .lk-dashboard, .stat-row, .export-cascade { grid-template-columns: 1fr; }
-            .expanded-card { padding: 24px; width: 95%; }
-            .tech-grid { flex-direction: column; gap: 16px; }
-            .lk-main { padding: 24px; }
+            /* Класс для открытия меню по кнопке бутерброда */
+            nav.mobile-open {
+                display: flex;
+            }
+
+            nav a {
+                width: 100%;
+                padding: 10px 0;
+                font-size: 16px;
+            }
+
+            .lk-btn {
+                width: 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .hero h1 { font-size: 30px; }
+            .hero h2 { font-size: 15px; }
+
+            .bento-grid { 
+                grid-template-columns: 1fr; 
+                gap: 16px; 
+            }
+
+            .lk-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .expanded-card {
+                padding: 24px;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Шапка сайта -->
         <header>
-            <div class="logo" onclick="goToLanding()">Tender<span>Pilot</span></div>
-            <!-- Настоящая b2b кнопка меню справа -->
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-            <nav id="nav-menu">
-                <a href="#tech" onclick="closeMenu()">Наши технологии</a>
-                <a href="#bento" onclick="closeMenu()">Ваши возможности</a>
-                <button class="lk-btn" id="lk-toggle-btn" onclick="toggleLK()">[👤 Личный кабинет]</button>
-            </nav>
-        </header>
+            <a href="#" class="logo" id="logo-link">TenderPilot<span>.</span></a>
+            
+            <!-- Кнопка бутерброда для мобилок -->
+            <button class="menu-toggle" id="menu-btn">☰</button>
 
+            
