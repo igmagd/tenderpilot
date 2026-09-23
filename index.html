@@ -301,21 +301,24 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
     margin-left: 0;
   }
 .lk-btn {
-  order: 3;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  font-size: 13px;
-  border-radius: 12px;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid #343442;
-  box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
+order: 3;
+margin-left: auto;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+width: 44px;
+height: 44px;
+padding: 0;
+font-size: 13px;
+border-radius: 12px;
+color: #ffffff;
+background: linear-gradient(135deg, #00f2fe, #4facfe);
+border: 1px solid #00f2fe;
+box-shadow:
+  0 0 8px rgba(0, 242, 254, 0.9),
+  0 0 20px rgba(0, 242, 254, 0.6);
+text-decoration: none;
 }
             
   }
@@ -392,14 +395,18 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
 }
 
 
-  @media (max-width: 768px) {
-    .lk-btn {
-      padding: 8px 10px;
-    }
-    .lk-btn-text {
-      display: none;
-    }
-  }
+@media (max-width: 768px) {
+.lk-btn {
+width: 44px;
+height: 44px;
+padding: 0;
+}
+
+.lk-btn-text {
+display: none;
+}
+}
+
 
             .hero {
                 padding: 65px 0 55px;
