@@ -263,47 +263,64 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
         }
 
         @media (max-width: 768px) {
-            .container {
-                width: min(100% - 28px, 1200px);
-            }
-
-            header {
-                min-height: 70px;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            nav {
-                position: absolute;
-                top: 80px;
-                left: 0;
-                right: 0;
-                display: none;
-                flex-direction: column;
-                align-items: stretch;
-                gap: 16px;
-                padding: 22px;
-                border: 1px solid #292936;
-                border-radius: 16px;
-                background: #0c0c14;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            }
-
-            nav.open {
-                display: flex;
-            }
-
-            nav a {
-                padding: 5px 0;
-                text-align: center;
-            }
-
-            nav .lk-btn {
-                width: 100%;
-                text-align: center;
-            }
+            .  .container {
+    width: min(100% - 28px, 1200px);
+  }
+  header {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  .menu-toggle {
+    display: flex;
+    order: 1;
+  }
+  .logo {
+    order: 2;
+    margin-left: 4px;
+  }
+  .lk-btn {
+    order: 3;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+  nav {
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid #292936;
+    border-radius: 16px;
+    background: #0c0c14;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  }
+  nav.open {
+    display: flex;
+  }
+  nav a {
+    padding: 8px 0;
+    text-align: center;
+    font-size: 15px;
+  }
+  @media (max-width: 400px) {
+    .lk-btn {
+      padding: 8px 10px;
+    }
+    .lk-btn-text {
+      display: none;
+    }
+  }
 
             .hero {
                 padding: 65px 0 55px;
