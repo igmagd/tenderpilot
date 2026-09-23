@@ -478,13 +478,10 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
                     </p>
                 </article>
 
-                <article class="bento-item">
-                    <span class="icon">🔒</span>
-                    <h3>Простой интерфейс</h3>
-                    <p>
-                        Понятная навигация на компьютере, планшете
-                        и мобильном телефоне.
-                    </p>
+                menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+});
+
                 </article>
             </section>
 
