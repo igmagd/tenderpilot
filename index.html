@@ -263,15 +263,15 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
         }
 
         @media (max-width: 768px) {
-            .  .container {
-    width: min(100% - 28px, 1200px);
+          .container {
+    width: min(100% - 32px, 1200px);
   }
   header {
     min-height: 70px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 16px;
   }
   .menu-toggle {
     display: flex;
@@ -279,7 +279,7 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
   }
   .logo {
     order: 2;
-    margin-left: 4px;
+    margin-left: 0;
   }
   .lk-btn {
     order: 3;
@@ -290,37 +290,47 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
     padding: 8px 14px;
     font-size: 13px;
     border-radius: 8px;
-  }  nav {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  nav {
     position: absolute;
-    top: 75px;
-    left: 14px;
-    max-width: 280px;
+    top: 70px;
+    left: 0;
     right: 0;
+    width: 100vw;
     display: none;
     flex-direction: column;
-    gap: 8px;
-    padding: 14px 20px;
-    border: 1px solid #292936;
-    border-radius: 16px;
-    background: #0c0c14;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    padding: 16px 24px 32px 24px;
+    background: #09090b;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
   }
-
   nav.open {
     display: flex;
   }
-    nav a {
-    padding: 6px 0;
+  nav a {
+    padding: 14px 0;
     text-align: left;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #e4e4e7;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: color 0.2s;
   }
-
+  nav a:last-child {
+    border-bottom: none;
+  }
   @media (max-width: 400px) {
     .lk-btn {
       padding: 8px 10px;
     }
     .lk-btn-text {
       display: none;
+    }
+  }
+
     }
   }
 
