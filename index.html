@@ -105,37 +105,46 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             color: #ffffff;
         }
 
-        .lk-btn {
-            display: inline-block;
-            padding: 12px 24px;
-            border: 0;
-            border-radius: 50px;
-            color: #0b0b0f;
-            background: #ffffff;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .lk-btn:hover {
-            transform: scale(1.04);
-        }
-.menu-toggle {
-    display: none;
-    width: 44px;
-    height: 44px;
+        ..lk-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #343442;
+
+    width: 44px;
+    height: 44px;
+    padding: 0;
+
+    border: 1px solid rgba(0, 242, 254, 0.45);
     border-radius: 12px;
+
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-    font-size: 28px;
-    line-height: 1;
+    background: #101923;
+    text-decoration: none;
     cursor: pointer;
+
+    font-size: 0;
+
+    box-shadow:
+        0 0 8px rgba(0, 242, 254, 0.65),
+        inset 0 0 8px rgba(0, 242, 254, 0.15);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.lk-btn::before {
+    content: "♙";
+    color: #ffffff;
+    font-size: 21px;
+    line-height: 1;
+}
+
+.lk-btn:hover {
+    transform: scale(1.04);
+
+    box-shadow:
+        0 0 12px rgba(0, 242, 254, 0.9),
+        inset 0 0 10px rgba(0, 242, 254, 0.2);
+}
 
         .hero {
             max-width: 850px;
