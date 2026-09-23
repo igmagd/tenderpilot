@@ -293,39 +293,76 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  nav {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    width: 100vw;
+    nav#main-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
     display: none;
+    width: 100%;
+    height: 100dvh;
+
     flex-direction: column;
-    padding: 8px 24px 20px 24px;
-    background: #09090b;
-    border-bottom: 1px solid rgba(0, 149, 255, 0.3);
-    box-shadow: 0 0 15px rgba(0, 149, 255, 0.15);
-    z-index: 9999;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    padding: 110px 32px 40px;
+    gap: 0;
+
+    overflow-y: auto;
+
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(0, 242, 254, 0.14),
+        transparent 32%
+      ),
+      linear-gradient(
+        135deg,
+        #111827 0%,
+        #09090b 48%,
+        #020617 100%
+      );
+
+    box-shadow:
+      inset 0 0 80px rgba(0, 149, 255, 0.12),
+      0 0 40px rgba(0, 149, 255, 0.35);
   }
-  nav.open {
+
+  nav#main-nav.open {
     display: flex;
   }
-  nav a {
-    padding: 12px 0 !important;
-    text-align: left !important;
-    font-size: 15px !important;
+
+  nav#main-nav a {
+    display: block;
+    width: 100%;
+    padding: 18px 0 !important;
+
+    color: #f4f4f5 !important;
+    font-size: 19px !important;
     font-weight: 500 !important;
-    color: #e4e4e7 !important;
-    border: none !important;
-    border-bottom: 1px solid rgba(0, 149, 255, 0.2) !important;
-    box-shadow: 0 1px 0 rgba(0, 149, 255, 0.1);
-    text-shadow: 0 0 10px rgba(0, 149, 255, 0.2);
-    transition: all 0.2s;
-  }
-    nav a:last-child {
-    border-bottom: none !important;
+    line-height: 1.3;
+    text-align: left !important;
+    text-decoration: none;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important;
     box-shadow: none !important;
+    text-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+
+    transition:
+      color 0.2s ease,
+      padding-left 0.2s ease,
+      text-shadow 0.2s ease;
   }
+
+  nav#main-nav a:hover,
+  nav#main-nav a:active {
+    padding-left: 10px !important;
+    color: #00f2fe !important;
+    text-shadow: 0 0 18px rgba(0, 242, 254, 0.8);
+  }
+
 }
 
 
