@@ -278,6 +278,23 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
     display: flex;
     order: 1;
   }
+            
+
+.menu-toggle.is-open {
+    position: fixed;
+    top: 13px;
+    right: 16px;
+    z-index: 10002;
+    display: flex;
+    color: #ffffff;
+    background: rgba(9, 9, 11, 0.9);
+    border-color: rgba(0, 242, 254, 0.45);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
+}
+
+.logo {
+    order: 2;
+    
   .logo {
     order: 2;
     margin-left: 0;
@@ -609,13 +626,17 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             );
 
             menuToggle.textContent = isOpen ? "×" : "☰";
+            menuToggle.classList.toggle("is-open", isOpen);
+            
         });
 
         document.querySelectorAll("#main-nav a").forEach(function (link) {
             link.addEventListener("click", function () {
                 mainNav.classList.remove("open");
                 menuToggle.setAttribute("aria-expanded", "false");
-                menuToggle.textContent = "☰";
+                menuToggle.classList.remove("is-open");
+menuToggle.textContent = "☰";
+                
             });
         });
     </script>
