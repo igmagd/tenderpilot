@@ -263,7 +263,7 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
         }
 
         @media (max-width: 768px) {
-          .container {
+  .container {
     width: min(100% - 32px, 1200px);
   }
   header {
@@ -301,27 +301,33 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
     width: 100vw;
     display: none;
     flex-direction: column;
-    padding: 16px 24px 32px 24px;
+    padding: 8px 24px 20px 24px;
     background: #09090b;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 149, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 149, 255, 0.15);
     z-index: 9999;
   }
   nav.open {
     display: flex;
   }
   nav a {
-    padding: 14px 0;
-    text-align: left;
-    font-size: 16px;
-    font-weight: 500;
-    color: #e4e4e7;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    transition: color 0.2s;
+    padding: 12px 0 !important;
+    text-align: left !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #e4e4e7 !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(0, 149, 255, 0.2) !important;
+    box-shadow: 0 1px 0 rgba(0, 149, 255, 0.1);
+    text-shadow: 0 0 10px rgba(0, 149, 255, 0.2);
+    transition: all 0.2s;
   }
   nav a:last-child {
-    border-bottom: none;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
   }
+
   @media (max-width: 400px) {
     .lk-btn {
       padding: 8px 10px;
