@@ -267,7 +267,7 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
 
     @media (max-width: 768px) {
         .container {
-            width: min(100% - 32px, 120px);
+            width: min(100% - 32px, 1200px);
         }
         
         header {
@@ -278,7 +278,6 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             gap: 12px;
         }
 
-    
         header .right-block {
             width: auto;
             margin: 0;
@@ -286,7 +285,6 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             align-items: center;
         }
 
-    
         header .right-block .lk-btn {
             display: flex;
             align-items: center;
@@ -295,14 +293,14 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             height: 44px;
             padding: 0;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(0, 242, 254, 0.45);
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
-            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08) !important;
+            background-image: none !important;
+            border: 1px solid rgba(0, 242, 254, 0.45) !important;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3) !important;
+            color: #ffffff !important;
             text-decoration: none;
         }
 
-    
         .menu-toggle {
             display: flex;
             width: 44px;
@@ -312,7 +310,6 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             border: 1px solid #343442;
         }
 
-    
         .logo {
             margin-right: auto;
         }
@@ -329,40 +326,8 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             border-color: rgba(0, 242, 254, 0.45);
             box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
         }
-    position: fixed;
-    inset: 0;
-    z-index: 10000;
-
-    display: none;
-    width: 100%;
-    height: 100dvh;
-
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-
-    padding: 110px 32px 40px;
-    gap: 0;
-
-    overflow-y: auto;
-
-    background:
-      radial-gradient(
-        circle at 20% 20%,
-        rgba(0, 242, 254, 0.14),
-        transparent 32%
-      ),
-      linear-gradient(
-        135deg,
-        #111827 0%,
-        #09090b 48%,
-        #020617 100%
-      );
-
-    box-shadow:
-      inset 0 0 80px rgba(0, 149, 255, 0.12),
-      0 0 40px rgba(0, 149, 255, 0.35);
-  }
+            }
+        
 
   nav#main-nav.open {
     display: flex;
