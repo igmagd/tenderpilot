@@ -308,10 +308,20 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
     header .right-block .lk-btn span {
         display: none !important;
     }
-
-    .menu-toggle {
-        display: flex;
-    }
+        .menu-toggle {
+            display: flex !important;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid #343442;
+            order: 1 !important;
+            align-items: center;
+            justify-content: center;
+            z-index: 10002;
+        }
+        
+ 
 }
 
 @media (min-width: 769px) {
