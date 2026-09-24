@@ -329,36 +329,29 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
         text-decoration: none;
     }
 
-    header .right-block .lk-btn span {
-        display: none !important;
-    }
+        header .right-block .lk-btn span {
+            display: none !important;
+        }
 
-    .menu-toggle {
-        display: flex;
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid #343442;
-        order: 1; /* Кнопка меню встает самой первой слева */
-        z-index: 10002; /* Чтобы кнопка-крестик была видна поверх открытого меню */
-    }
+        nav#main-nav {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(9, 9, 11, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 10001;
+            gap: 24px;
+        }
 
-    .logo {
-        order: 2; /* Логотип встает по центру между меню и ЛК */
-        margin-right: auto;
-        margin-left: 12px;
-    }
+        nav#main-nav.open {
+            display: flex !important;
+        }
 
-    .menu-toggle.is-open {
-        position: fixed;
-        top: 13px;
-        left: 16px;
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 242, 254, 0.45);
-        box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-    }
-}
 
 
     @media (min-width: 769px) {
