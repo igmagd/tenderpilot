@@ -278,31 +278,8 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
         gap: 12px;
     }
 
-    /* Стили для мобильного полноэкранного меню при клике */
     header nav {
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(9, 9, 11, 0.98);
-        backdrop-filter: blur(20px);
-        z-index: 10001;
-        gap: 40px;
-    }
-
-    /* Когда меню открыто, показываем его со всеми ссылками */
-    header nav.open {
-        display: flex !important;
-    }
-
-    header nav a {
-        font-size: 24px !important;
-        color: #ffffff;
-        font-weight: 600;
+        display: none !important;
     }
 
     header .right-block {
@@ -310,7 +287,7 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
         margin: 0;
         display: flex;
         align-items: center;
-        order: 3; /* ЛК жестко улетает в самый правый угол */
+        order: 3;
     }
 
     header .right-block .lk-btn {
@@ -329,40 +306,73 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
         text-decoration: none;
     }
 
-        header .right-block .lk-btn span {
-            display: none !important;
-        }
+    header .right-block .lk-btn span {
+        display: none !important;
+    }
 
-        nav#main-nav {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(9, 9, 11, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 10001;
-            gap: 24px;
-        }
+    .menu-toggle {
+        display: flex !important;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid #343442;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        line-height: 1;
+        cursor: pointer;
+        color: #ffffff;
+        order: 1;
+    }
 
-        nav#main-nav.open {
-            display: flex !important;
-        }
-        .menu-toggle {
-            display: flex !important;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid #343442;
-            order: 1 !important;
-        }
-    
+    .logo {
+        order: 2;
+        margin-right: auto;
+        margin-left: 12px;
+    }
 
+    nav#main-nav {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(9, 9, 11, 0.98);
+        backdrop-filter: blur(20px);
+        z-index: 10001;
+        gap: 24px;
+    }
 
+    nav#main-nav.open {
+        display: flex !important;
+    }
+
+    nav#main-nav a {
+        display: block;
+        width: 100%;
+        padding: 18px 0 !important;
+        color: #f4f4f5 !important;
+        font-size: 19px !important;
+        font-weight: 500 !important;
+        line-height: 1.3;
+        text-align: center !important;
+        text-decoration: none;
+    }
+
+    .menu-toggle.is-open {
+        position: fixed;
+        top: 13px;
+        left: 16px;
+        z-index: 10002;
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(0, 242, 254, 0.45);
+        box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    }
+}
     @media (min-width: 769px) {
         .menu-toggle {
             display: none !important;
