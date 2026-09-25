@@ -444,34 +444,35 @@ display: none;
         }
         /* Кнопка личного кабинета */
 .lk-btn {
-    width: 44px !important;
-    height: 44px !important;
-    padding: 0 !important;
-
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    border-radius: 12px !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+
     border: 1px solid #343442 !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+
     color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
 
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.65) !important;
     font-size: 0 !important;
-}
+    text-decoration: none;
+    cursor: pointer;
 
-.lk-btn::before {
-    content: "👤";
-    display: block;
-    font-size: 20px;
-    line-height: 1;
+    box-shadow: none !important;
+    transition: transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
 }
 
 .lk-btn:hover {
-    transform: scale(1.04);
+    transform: none;
     background: rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 0 14px rgba(0, 242, 254, 0.9) !important;
+    border-color: #343442 !important;
+    box-shadow: none !important;
 }
         
     </style>
@@ -495,9 +496,11 @@ display: none;
 
             </nav>
 <a class="lk-btn" href="#login">
-  <svg class="lk-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-  </svg>
+<svg class="lk-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+    <path d="M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67z"/>
+    <path d="M19 3h-6v2h6v14h-6v2h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+</svg>
+
  <span class="lk-btn-text">Личный кабинет</span>
     
 </a>
