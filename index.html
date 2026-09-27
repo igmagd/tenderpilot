@@ -203,10 +203,30 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             border-color: #00f2fe;
             transform: translateY(-5px);
         }
-        .placeholder-section {
-    margin-bottom: 32px;
+.placeholder-section {
+    margin-bottom: 40px;
     text-align: left;
+    position: relative;
+    
+    /* Эффект матового стекла */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    
+    /* Убираем стандартную рамку и делаем асимметричную подсветку: верх и лево прозрачные */
+    border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.03) !important;
+    
+    /* Подсвечиваем только правую грань и низ бирюзовым неоном */
+    border-right: 1px solid #00f2fe !important;
+    border-bottom: 1px solid #4facfe !important;
+    
+    /* Объёмная тень со свечением вниз и вправо */
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        5px 5px 20px rgba(0, 242, 254, 0.08) !important;
 }
+
 .placeholder-section h2 {
     margin-bottom: 12px;
     font-size: 24px;
@@ -556,7 +576,7 @@ display: none;
             </section>
                         <!-- НАШИ ТЕХНОЛОГИИ -->
             <section class="bento-item placeholder-section" id="technologies">
-                <span class="icon">🚀</span>
+    
                 <h2>Наши технологии</h2>
                 <p>Здесь будет описание нейросетевых моделей, алгоритмов парсинга и ИИ-движка TenderPilot.</p>
             </section>
