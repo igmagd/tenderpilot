@@ -17,40 +17,32 @@
             scroll-behavior: smooth;
         }
 
-        body {
-            min-height: 100vh;
-            overflow-x: hidden;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background:
-    linear-gradient(
-        to top,
-        #000000 0%,
-        #01030a 42%,
-        #0a0a19 68%,
-        #191b34 86%,
-        #2b405c 100%
-    );
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #020208;
+    -webkit-font-smoothing: antialiased;
+}
 
-            -webkit-font-smoothing: antialiased;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
+    mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
+    
+    background-image:
+        radial-gradient(1px 1px at 10px 30px, #ffffff, transparent),
+        radial-gradient(1px 1px at 50px 100px, #ffffff, transparent),
+        radial-gradient(1.5px 1.5px at 120px 40px, #00f2fe, transparent),
+        radial-gradient(1px 1px at 200px 150px, #ffffff, transparent),
+        radial-gradient(2px 2px at 300px 80px, #ffffff, transparent),
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.55;
-            -webkit-mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
-mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
-            
-            background-image:
-                radial-gradient(1px 1px at 10px 30px, #ffffff, transparent),
-                radial-gradient(1px 1px at 50px 100px, #ffffff, transparent),
-                radial-gradient(1.5px 1.5px at 120px 40px, #00f2fe, transparent),
-                radial-gradient(1px 1px at 200px 150px, #ffffff, transparent),
-                radial-gradient(2px 2px at 300px 80px, #ffffff, transparent),
                 /* Большие объемные засветы на фоне */
                 radial-gradient(600px circle at 80% 20%, rgba(0, 242, 254, 0.08), transparent 60%),
                 radial-gradient(800px circle at 10% 70%, rgba(79, 172, 254, 0.06), transparent 70%);
@@ -214,18 +206,18 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
     position: relative;
     overflow: hidden;
     
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    /* Облегченный глубокий фон — тормоза полностью исчезнут */
+    background: rgba(15, 15, 24, 0.85) !important;
     
     border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
     border-left: 1px solid rgba(255, 255, 255, 0.05) !important;
     border-right: 1px solid rgba(0, 242, 254, 0.4) !important;
     border-bottom: 1px solid rgba(0, 242, 254, 0.4) !important;
     
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 
 .bento-grid {
     margin-bottom: 24px !important;
