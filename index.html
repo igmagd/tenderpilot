@@ -209,27 +209,26 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             transform: translateY(-5px);
         }
 .placeholder-section, .bento-item {
-    margin-bottom: 40px;
+    margin-bottom: 24px !important;
     text-align: left;
     position: relative;
     overflow: hidden;
     
-    /* Эффект матового стекла премиум-уровня */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     
-    /* Верхняя и левая грани — спокойные, едва заметные */
     border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
     border-left: 1px solid rgba(255, 255, 255, 0.05) !important;
-    
-    /* Единая бирюзовая подсветка для правой и нижней грани */
     border-right: 1px solid rgba(0, 242, 254, 0.4) !important;
     border-bottom: 1px solid rgba(0, 242, 254, 0.4) !important;
     
-    /* Мягкая тень, приподнимающая плашку */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-grid {
+    margin-bottom: 24px !important;
 }
 
 /* При наведении грани будут вспыхивать чуть ярче */
