@@ -50,7 +50,11 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
                 radial-gradient(1px 1px at 50px 100px, #ffffff, transparent),
                 radial-gradient(1.5px 1.5px at 120px 40px, #00f2fe, transparent),
                 radial-gradient(1px 1px at 200px 150px, #ffffff, transparent),
-                radial-gradient(2px 2px at 300px 80px, #ffffff, transparent);
+                radial-gradient(2px 2px at 300px 80px, #ffffff, transparent),
+                /* Большие объемные засветы на фоне */
+                radial-gradient(600px circle at 80% 20%, rgba(0, 242, 254, 0.08), transparent 60%),
+                radial-gradient(800px circle at 10% 70%, rgba(79, 172, 254, 0.06), transparent 70%);
+
             background-size: 350px 350px;
         }
 
@@ -203,28 +207,35 @@ mask-image: linear-gradient(to top, #000 0%, #000 45%, transparent 100%);
             border-color: #00f2fe;
             transform: translateY(-5px);
         }
-.placeholder-section {
+.placeholder-section, .bento-item {
     margin-bottom: 40px;
     text-align: left;
     position: relative;
+    overflow: hidden;
     
-    /* Эффект матового стекла */
+    /* Эффект матового стекла премиум-уровня */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     
-    /* Убираем стандартную рамку и делаем асимметричную подсветку: верх и лево прозрачные */
-    border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.03) !important;
+    /* Верхняя и левая грани — спокойные, едва заметные */
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.05) !important;
     
-    /* Подсвечиваем только правую грань и низ бирюзовым неоном */
-    border-right: 1px solid #00f2fe !important;
-    border-bottom: 1px solid #4facfe !important;
+    /* Единая бирюзовая подсветка для правой и нижней грани */
+    border-right: 1px solid rgba(0, 242, 254, 0.4) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.4) !important;
     
-    /* Объёмная тень со свечением вниз и вправо */
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        5px 5px 20px rgba(0, 242, 254, 0.08) !important;
+    /* Мягкая тень, приподнимающая плашку */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* При наведении грани будут вспыхивать чуть ярче */
+.placeholder-section:hover, .bento-item:hover {
+    border-right: 1px solid rgba(0, 242, 254, 0.9) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.9) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.15) !important;
 }
 
 .placeholder-section h2 {
