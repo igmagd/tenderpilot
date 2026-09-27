@@ -661,35 +661,43 @@ display: none;
         </main>
 
        <style>
-  .site-footer {
-    background-color: #1a1d20;
+.site-footer {
+    width: 100%;
+    background-color: rgba(18, 18, 26, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #8a9099;
-    padding: 24px 16px;
-    font-family: sans-serif;
+    padding: 30px 0;
     font-size: 14px;
-    border-top: 1px solid #2d3135;
-  }
-  .footer-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-container {
     max-width: 1200px;
+    width: calc(100% - 40px);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 16px;
-  }
-  .footer-links {
+}
+
+.footer-links {
     display: flex;
     gap: 24px;
-  }
-  .footer-link {
+}
+
+.footer-link {
     color: #8a9099;
     text-decoration: none;
     transition: color 0.2s ease;
-  }
-  .footer-link:hover {
-    color: #ffffff;
-  }
+}
+
+.footer-link:hover {
+    color: #00f2fe; /* Наш фирменный бирюзовый неон */
+}
+
   @media (max-width: 768px) {
     .footer-container {
       flex-direction: column;
@@ -712,17 +720,7 @@ display: none;
            
        </style>
         
-        <footer id="contacts" class="site-footer">
-  <div class="footer-container">
-    <div class="footer-copyright">
-      © <span id="copyright-year">2026</span> TenderPilot.
-    </div>
-    <div class="footer-links">
-      <a href="/privacy-policy.pdf" target="_blank" class="footer-link">Политика конфиденциальности</a>
-      <a href="#" id="cookie-settings-trigger" class="footer-link">Настройки Cookie</a>
-    </div>
-  </div>
-</footer>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const startYear = 2026;
@@ -738,6 +736,17 @@ display: none;
         
 
     </div>
+            <footer id="contacts" class="site-footer">
+  <div class="footer-container">
+    <div class="footer-copyright">
+      © <span id="copyright-year">2026</span> TenderPilot.
+    </div>
+    <div class="footer-links">
+      <a href="/privacy-policy.pdf" target="_blank" class="footer-link">Политика конфиденциальности</a>
+      <a href="#" id="cookie-settings-trigger" class="footer-link">Настройки Cookie</a>
+    </div>
+            </footer>
+    
 
     <script>
         const menuToggle = document.getElementById("menu-toggle");
