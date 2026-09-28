@@ -189,39 +189,34 @@ body::before {
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .bento-item:hover {
-            border-color: #00f2fe;
-            transform: translateY(-5px);
-        }
 .placeholder-section, .bento-item {
     margin-bottom: 24px !important;
     text-align: left;
     position: relative;
     overflow: hidden;
-    
-    /* Облегченный глубокий фон — тормоза полностью исчезнут */
-    background: rgba(15, 15, 24, 0.85) !important;
-    
-    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-right: 1px solid rgba(0, 242, 254, 0.4) !important;
-    border-bottom: 1px solid rgba(0, 242, 254, 0.4) !important;
-    
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(13, 13, 22, 0.45) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-right: 1px solid rgba(0, 242, 254, 0.25) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.25) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
 
+.placeholder-section:hover, .bento-item:hover {
+    background: rgba(13, 13, 22, 0.6) !important;
+    transform: translateY(-5px);
+    border-right: 1px solid rgba(0, 242, 254, 0.7) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.7) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 242, 254, 0.1) !important;
+                                 }
 
 .bento-grid {
     margin-bottom: 24px !important;
 }
 
-/* При наведении грани будут вспыхивать чуть ярче */
-.placeholder-section:hover, .bento-item:hover {
-    border-right: 1px solid rgba(0, 242, 254, 0.9) !important;
-    border-bottom: 1px solid rgba(0, 242, 254, 0.9) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.15) !important;
-}
 
 .placeholder-section h2 {
     margin-bottom: 12px;
