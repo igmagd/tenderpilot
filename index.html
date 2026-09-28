@@ -692,13 +692,11 @@ display: none;
                     </p>
                 </article>
 
-                 <div class="bento-item" onclick="openCalcModal()" style="display: block; text-decoration: none; cursor: pointer;">
+                <div class="bento-item" onclick="openCalcModal()" style="cursor: pointer;">
                     <h3>Калькулятор НМЦК</h3>
-                    <p>
-                        Расчёт начальной максимальной цены контракта
-                        и сравнение предложений поставщиков.
-                    </p>
+                    <p>Расчёт начальной максимальной цены контракта и сравнение предложений поставщиков.</p>
                 </div>
+
 
                 <article class="bento-item">
     
@@ -735,23 +733,35 @@ display: none;
 
             </section>
             
-            <!-- РАСЧЕТ НМЦК (ПРОМО-ВИДЖЕТ) -->
-            <section class="bento-item placeholder-section" id="calc" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(14, 14, 22, 0.75)) !important; border-right: 1px solid rgba(16, 185, 129, 0.65) !important; border-bottom: 1px solid rgba(16, 185, 129, 0.65) !important;">
-                <h2>Интеллектуальный расчёт НМЦК</h2>
-                <p style="margin-bottom: 20px; color: #8a8a93; font-size: 14px; line-height: 1.5;">Обоснование начальной максимальной цены контракта по 44-ФЗ (ст. 22) с автоматическим поиском идентичных закупок в ЕИС.</p>
+                        <!-- ПОЛНОЭКРАННЫЙ КАЛЬКУЛЯТОР НМЦК -->
+            <div id="calc-modal">
+                <button class="modal-close-btn" onclick="closeCalcModal()" type="button" aria-label="Закрыть калькулятор">✕</button>
                 
-                <!-- Имитация строки ИИ-ввода -->
-                <div style="background: rgba(9, 9, 11, 0.6); border: 1px solid rgba(255,255,255,0.05); padding: 14px; border-radius: 12px; margin-bottom: 20px;">
-                    <label style="display: block; font-size: 11px; color: #10b981; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Пример поискового ИИ-запроса:</label>
-                    <div style="color: #f4f4f5; font-size: 14px; font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ОКПД2 26.20.11.110 — Поставка персональных ЭВМ для нужд ведомства</div>
+                <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; border: none !important; font-weight: 700;">Интеллектуальный расчёт НМЦК</h2>
+                <p style="color: #8a8a93; font-size: 14px; line-height: 1.5; margin-bottom: 16px;">Обоснование начальной максимальной цены контракта по 44-ФЗ (ст. 22) с автоматическим поиском идентичных закупок в ЕИС.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;">
+                    <label style="font-size: 12px; color: #10b981; font-weight: 600; text-transform: uppercase;">Объект закупки или код ОКПД2:</label>
+                    <input type="text" placeholder="Например: Поставка персональных ЭВМ или 26.20.11" style="width: 100%; padding: 14px; background: rgba(9, 9, 11, 0.6); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; color: #ffffff; font-size: 15px; outline: none;">
                 </div>
 
-                <!-- Кнопка-телепорт в ЛК -->
-                <a class="primary-btn" href="https://tenderpilot.ru" style="background: #10b981; color: #ffffff; display: inline-flex; align-items: center; gap: 8px; border: none; font-size: 14px; padding: 12px 20px;">
-                    <span>Запустить ИИ-расчёт</span>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px;">
+                    <label style="font-size: 12px; color: #10b981; font-weight: 600; text-transform: uppercase;">Регион поиска (Субъект РФ):</label>
+                    <input type="text" placeholder="Все регионы России" style="width: 100%; padding: 14px; background: rgba(9, 9, 11, 0.6); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; color: #ffffff; font-size: 15px; outline: none;">
+                </div>
+
+                <div style="border: 2px dashed rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.02); padding: 24px 16px; border-radius: 12px; text-align: center; margin-bottom: 16px;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                    <div style="font-size: 14px; color: #ffffff; margin-bottom: 4px; font-weight: 500;">Загрузить спецификацию или ТЗ</div>
+                    <div style="font-size: 11px; color: #666675;">Поддерживаются файлы PDF, Excel, Word (до 25 Мб)</div>
+                </div>
+
+                <button type="button" style="background: #10b981; color: #ffffff; width: 100%; padding: 16px; border-radius: 12px; font-weight: 600; border: none; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                    <span>Оплатить и запустить ИИ-расчёт</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-            </section>
+                </button>
+            </div>
+
             
             <!-- ПОДБОР ТК -->
             <section class="bento-item placeholder-section" id="tk-match">
