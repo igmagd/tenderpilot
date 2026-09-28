@@ -914,7 +914,32 @@ display: none;
             link.addEventListener("click", closeMenu);
         });
 
+        // Функции управления полноэкранным окном калькулятора НМЦК
+        const calcModal = document.getElementById("calc-modal");
 
+        window.openCalcModal = function() {
+            if (calcModal) {
+                calcModal.classList.add("open");
+                document.body.style.overflow = "hidden"; // Запрещаем скролл сайта под окном
+            }
+        };
+
+        window.closeCalcModal = function() {
+            if (calcModal) {
+                calcModal.classList.remove("open");
+                document.body.style.overflow = ""; // Возвращаем скролл основному сайту
+            }
+        };
+
+        // Перехватываем клик по ссылке "Расчет НМЦК" в навигации мобильного меню
+        const calcMenuLink = document.querySelector('nav#main-nav a[href="#calc"]');
+        if (calcMenuLink) {
+            calcMenuLink.addEventListener("click", function(e) {
+                e.preventDefault(); // Отменяем стандартный улет страницы вниз
+                openCalcModal(); // Вместо этого плавно открываем окно
+            });
+        }
+        
         document.querySelectorAll("#main-nav a").forEach(function (link) {
             link.addEventListener("click", function () {
                 mainNav.classList.remove("open");
