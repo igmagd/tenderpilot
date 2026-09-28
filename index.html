@@ -189,43 +189,82 @@ body::before {
     text-align: left;
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(15, 15, 26, 0.75) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5) !important;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
-#technologies, .bento-grid article:nth-child(1) {
-    background: linear-gradient(135deg, rgba(0, 242, 254, 0.12), rgba(15, 15, 26, 0.5)) !important;
-    border-left: 3px solid #00f2fe !important;
+#technologies, .bento-grid article:nth-child(3) {
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(0, 242, 254, 0.4) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.4) !important;
 }
-.bento-grid article:nth-child(2) {
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.12), rgba(15, 15, 26, 0.5)) !important;
-    border-left: 3px solid #4facfe !important;
+#technologies:hover, .bento-grid article:nth-child(3):hover {
+    border-right: 1px solid rgba(0, 242, 254, 0.9) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.9) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.15) !important;
 }
-.bento-grid article:nth-child(3) {
-    background: linear-gradient(135deg, rgba(147, 51, 234, 0.12), rgba(15, 15, 26, 0.5)) !important;
-    border-left: 3px solid #9333ea !important;
+
+.bento-grid article:nth-child(1), #tk-match {
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(79, 172, 254, 0.4) !important;
+    border-bottom: 1px solid rgba(79, 172, 254, 0.4) !important;
 }
-.bento-grid article:nth-child(4) {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(15, 15, 26, 0.5)) !important;
-    border-left: 3px solid #10b981 !important;
+.bento-grid article:nth-child(1):hover, #tk-match:hover {
+    border-right: 1px solid rgba(79, 172, 254, 0.9) !important;
+    border-bottom: 1px solid rgba(79, 172, 254, 0.9) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 172, 254, 0.15) !important;
 }
-.bento-grid article:nth-child(5) {
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(15, 15, 26, 0.5)) !important;
-    border-left: 3px solid #f59e0b !important;
+
+.bento-grid article:nth-child(2), .bento-grid article:nth-child(4) {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(16, 185, 129, 0.4) !important;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.4) !important;
 }
-.bento-grid article:nth-child(6), #tk-match, #pricing, #guarantees, #faq {
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.10), rgba(15, 15, 26, 0.5)) !important;
-    border-left: 3px solid #ec4899 !important;
+.bento-grid article:nth-child(2):hover, .bento-grid article:nth-child(4):hover {
+    border-right: 1px solid rgba(16, 185, 129, 0.9) !important;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.9) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15) !important;
+}
+
+.bento-grid article:nth-child(5), #pricing {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(147, 51, 234, 0.4) !important;
+    border-bottom: 1px solid rgba(147, 51, 234, 0.4) !important;
+}
+.bento-grid article:nth-child(5):hover, #pricing:hover {
+    border-right: 1px solid rgba(147, 51, 234, 0.9) !important;
+    border-bottom: 1px solid rgba(147, 51, 234, 0.9) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(147, 51, 234, 0.15) !important;
+}
+
+.bento-grid article:nth-child(6), #guarantees {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.06), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(245, 158, 11, 0.4) !important;
+    border-bottom: 1px solid rgba(245, 158, 11, 0.4) !important;
+}
+.bento-grid article:nth-child(6):hover, #guarantees:hover {
+    border-right: 1px solid rgba(245, 158, 11, 0.9) !important;
+    border-bottom: 1px solid rgba(245, 158, 11, 0.9) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.15) !important;
+}
+
+#faq {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(236, 72, 153, 0.4) !important;
+    border-bottom: 1px solid rgba(236, 72, 153, 0.4) !important;
+}
+#faq:hover {
+    border-right: 1px solid rgba(236, 72, 153, 0.9) !important;
+    border-bottom: 1px solid rgba(236, 72, 153, 0.9) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(236, 72, 153, 0.15) !important;
 }
 
 .placeholder-section:hover, .bento-item:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
-    filter: brightness(1.18);
+    transform: translateY(-3px);
+    background: rgba(22, 22, 36, 0.85) !important;
 }
 
 
