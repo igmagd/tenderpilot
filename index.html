@@ -330,7 +330,52 @@ body::before {
     text-align: center;
 }
 
+  /* Полноэкранное окно калькулятора НМЦК по канонам мобильного меню */
+  div#calc-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: none;
+    width: 100%;
+    height: 100dvh;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 100px 24px 40px;
+    gap: 20px;
+    overflow-y: auto;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.14), transparent 35%),
+      linear-gradient(135deg, #061510 0%, #09090b 48%, #020614 100%);
+    box-shadow:
+      inset 0 0 80px rgba(16, 185, 129, 0.08),
+      0 0 40px rgba(16, 185, 129, 0.25);
+  }
 
+  div#calc-modal.open {
+    display: flex;
+  }
+
+  /* Стили для кнопки закрытия окна */
+  .modal-close-btn {
+    position: fixed;
+    top: 13px;
+    right: 16px;
+    z-index: 10002;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 12px;
+    color: #ffffff;
+    background: rgba(9, 9, 11, 0.9);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+    }
+        
         @media (max-width: 768px) {
   .container {
     width: min(100% - 32px, 1200px);
