@@ -428,11 +428,29 @@ div#calc-modal.open {
     border-color: rgba(79, 172, 254, 0.85) !important;
     box-shadow: 0 0 25px rgba(79, 172, 254, 0.45) !important;
 }
-/* ==========================================================================
+  /* Адаптивные исправления для жесткой фиксации ширины модальных окон */
+  @media (max-width: 480px) {
+    .transport-tabs {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 6px !important;
+    }
+    .guarantee-tab {
+      flex-direction: column !important;
+      text-align: center !important;
+      padding: 10px 8px !important;
+    }
+    .guarantee-tab span {
+      font-size: 11px !important;
+    }
+    div#tk-modal, div#guarantee-modal {
+      padding: 90px 16px 30px !important;
+    }
+  }
+
+  /* ==========================================================================
      БАНКОВСКИЕ ГАРАНТИИ — ПРЕМИАЛЬНОЕ ЗОЛОТО И ФИНТЕХ СТРУКТУРА
      ========================================================================== */
 
-  /* Полноэкранное окно гарантий в цвете Благородного Золота */
   div#guarantee-modal {
     position: fixed;
     inset: 0;
