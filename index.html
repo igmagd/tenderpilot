@@ -209,16 +209,28 @@ body::before {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.15) !important;
 }
 
-/* 2. Яркий Синий неон (ИИ-анализ документов и Подбор ТК) */
-.bento-grid article:nth-child(1), #tk-match {
+/* 2. Яркий Синий неон (ИИ-анализ документов) */
+.bento-grid article:nth-child(1) {
     background: linear-gradient(135deg, rgba(79, 172, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
     border-right: 1px solid rgba(79, 172, 254, 0.65) !important;
     border-bottom: 1px solid rgba(79, 172, 254, 0.65) !important;
 }
-.bento-grid article:nth-child(1):hover, #tk-match:hover {
+.bento-grid article:nth-child(1):hover {
     border-right: 1px solid rgba(79, 172, 254, 0.95) !important;
     border-bottom: 1px solid rgba(79, 172, 254, 0.95) !important;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 172, 254, 0.15) !important;
+}
+
+/* 2.5. Благородный Индиго / Ультрамарин (Подбор транспортной компании) */
+#tk-match-card {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(99, 102, 241, 0.65) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.65) !important;
+}
+#tk-match-card:hover {
+    border-right: 1px solid rgba(99, 102, 241, 0.95) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.95) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.15) !important;
 }
 
 /* 3. Строгий Изумрудный / Зеленый (только 44/223-ФЗ) */
@@ -813,16 +825,17 @@ display: none;
             <a class="logo" href="#">Tender<span>Pilot</span></a>
 
             <nav id="main-nav">
-                      <a href="#technologies">Наши технологии</a>
-      <a href="#features">Ваши возможности</a>
-      <a href="#calc">Расчет НМЦК</a>
-      <a href="#tk-match">Подбор ТК</a>
-      <a href="#pricing">Тарифы</a>
-      <a href="#guarantees">Банковские гарантии</a>
-      <a href="#contacts">Контакты</a>
-      <a href="#faq">FAQ</a>
-
+                <a href="#technologies">Наши технологии</a>
+                <a href="#features">Ваши возможности</a>
+                <a href="#calc" onclick="event.preventDefault(); openCalcModal();">Расчет НМЦК</a>
+                <!-- Текст изменен на полное солидное название и привязана логика открытия окна логистики -->
+                <a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор транспортной компании</a>
+                <a href="#pricing">Тарифы</a>
+                <a href="#guarantees">Банковские гарантии</a>
+                <a href="#contacts">Контакты</a>
+                <a href="#faq">FAQ</a>
             </nav>
+
 <a class="lk-btn" href="#login">
 <svg
     class="lk-icon"
@@ -897,10 +910,10 @@ display: none;
                     <h3>Калькулятор НМЦК</h3>
                     <p>Расчёт начальной максимальной цены контракта и сравнение предложений поставщиков.</p>
                 </div>
-                <article class="bento-item" onclick="openTkModal()" style="cursor: pointer;">
-                    <h3>Подбор транспортной компании</h3>
-                    <p>Онлайн-калькулятор стоимости грузоперевозки по России. Сравнение тарифов транспортных компаний для бизнеса и госконтрактов.</p>
-                </article>
+                <article class="bento-item" id="tk-match-card" onclick="openTkModal()" style="cursor: pointer;">
+    <h3>Подбор транспортной компании</h3>
+    <p>Онлайн-калькулятор стоимости грузоперевозки по России. Сравнение тарифов транспортных компаний для бизнеса и госконтрактов.</p>
+</article>
 
                 <article class="bento-item">
     
