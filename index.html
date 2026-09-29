@@ -451,7 +451,7 @@ div#calc-modal.open {
      БАНКОВСКИЕ ГАРАНТИИ — ПРЕМИАЛЬНОЕ ЗОЛОТО И ФИНТЕХ СТРУКТУРА
      ========================================================================== */
 
-  div#guarantee-modal {
+div#guarantee-modal {
     position: fixed;
     inset: 0;
     z-index: 10001;
@@ -465,19 +465,19 @@ div#calc-modal.open {
     gap: 20px;
     overflow-y: auto;
     background-image:
-      radial-gradient(circle at 20% 20%, rgba(217, 119, 6, 0.12), transparent 32%),
-      linear-gradient(135deg, #110d06 0%, #09090b 48%, #020204 100%);
+        radial-gradient(circle at 20% 20%, rgba(223, 206, 159, 0.12), transparent 35%),
+        linear-gradient(135deg, #0a0a08 0%, #09090b 48%, #020203 100%);
     box-shadow:
-      inset 0 0 80px rgba(217, 119, 6, 0.08),
-      0 0 40px rgba(217, 119, 6, 0.25);
-  }
+        inset 0 0 80px rgba(223, 206, 159, 0.05),
+        0 0 40px rgba(223, 206, 159, 0.2);
+}
 
-  div#guarantee-modal.open {
+div#guarantee-modal.open {
     display: flex;
-  }
+}
 
-  /* Золотой крестик закрытия окна гарантий — точная копия меню */
-  .modal-guarantee-close {
+/* Золотисто-платиновый крестик закрытия окна гарантий */
+.modal-guarantee-close {
     position: fixed;
     top: 13px;
     left: 16px;
@@ -488,23 +488,23 @@ div#calc-modal.open {
     height: 44px;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(217, 119, 6, 0.45);
+    border: 1px solid rgba(223, 206, 159, 0.4);
     border-radius: 12px;
     color: #ffffff;
     background: rgba(9, 9, 11, 0.9);
     font-size: 28px;
     line-height: 1;
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(217, 119, 6, 0.25);
+    box-shadow: 0 0 20px rgba(223, 206, 159, 0.15);
     transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
-  }
+}
 
-  .modal-guarantee-close:hover {
+.modal-guarantee-close:hover {
     background: rgba(9, 9, 11, 0.95);
-    border-color: rgba(217, 119, 6, 0.85);
-    color: #f59e0b;
-    box-shadow: 0 0 25px rgba(217, 119, 6, 0.45);
-  }
+    border-color: rgba(223, 206, 159, 0.85);
+    color: #dfce9f;
+    box-shadow: 0 0 25px rgba(223, 206, 159, 0.35);
+}
 
   /* Контейнер для финтех-табов обеспечения */
   .guarantee-tabs {
@@ -542,51 +542,50 @@ div#calc-modal.open {
     font-weight: 500;
   }
 
-  /* Состояния ховера и активного золотого таба */
-  .guarantee-tab:hover {
+/* Состояния ховера и активного золотисто-платинового таба */
+.guarantee-tab:hover {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(217, 119, 6, 0.4);
-  }
-
-  .guarantee-tab.active {
+    border-color: rgba(223, 206, 159, 0.4);
+}
+.guarantee-tab.active {
     color: #ffffff;
-    background: rgba(217, 119, 6, 0.06);
-    border-color: rgba(217, 119, 6, 0.85);
-    box-shadow: 0 0 15px rgba(217, 119, 6, 0.15);
-  }
+    background: rgba(223, 206, 159, 0.06);
+    border-color: rgba(223, 206, 159, 0.85);
+    box-shadow: 0 0 15px rgba(223, 223, 159, 0.15);
+}
 
   /* Цвет неона плашки БГ на главной странице */
-  #guarantee-card {
-    background: linear-gradient(135deg, rgba(217, 119, 6, 0.06), rgba(14, 14, 22, 0.75)) !important;
-    border-right: 1px solid rgba(217, 119, 6, 0.65) !important;
-    border-bottom: 1px solid rgba(217, 119, 6, 0.65) !important;
-  }
+#guarantee-card {
+    background: linear-gradient(135deg, rgba(223, 206, 159, 0.05), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(223, 206, 159, 0.4) !important;
+    border-bottom: 1px solid rgba(223, 206, 159, 0.4) !important;
+}
 
-  #guarantee-card:hover {
-    border-right: 1px solid rgba(217, 119, 6, 0.95) !important;
-    border-bottom: 1px solid rgba(217, 119, 6, 0.95) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(217, 119, 6, 0.15) !important;
-  }
+#guarantee-card:hover {
+    border-right: 1px solid rgba(223, 206, 159, 0.85) !important;
+    border-bottom: 1px solid rgba(223, 206, 159, 0.85) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(223, 206, 159, 0.12) !important;
+}
 
-  /* Инпуты и кнопка с индивидуальным финтех-маркером золота */
-  #guarantee-modal .modal-input:focus {
-    border-color: rgba(217, 119, 6, 0.85) !important;
-    box-shadow: 0 0 15px rgba(217, 119, 6, 0.3) !important;
-  }
+/* Инпуты и кнопка с индивидуальным финтех-стилем */
+#guarantee-modal .modal-input:focus {
+    border-color: rgba(223, 206, 159, 0.85) !important;
+    box-shadow: 0 0 15px rgba(223, 206, 159, 0.2) !important;
+}
 
-  #guarantee-modal .modal-action-btn {
-    background: rgba(28, 22, 14, 0.9) !important;
-    border-color: rgba(217, 119, 6, 0.45) !important;
-    box-shadow: 0 0 20px rgba(217, 119, 6, 0.25) !important;
-  }
+#guarantee-modal .modal-action-btn {
+    background: rgba(35, 32, 26, 0.9) !important;
+    border-color: rgba(223, 206, 159, 0.45) !important;
+    box-shadow: 0 0 20px rgba(223, 206, 159, 0.1) !important;
+}
 
-  #guarantee-modal .modal-action-btn:hover {
-    background: rgba(38, 30, 18, 0.95) !important;
-    border-color: rgba(217, 119, 6, 0.85) !important;
-    box-shadow: 0 0 25px rgba(217, 119, 6, 0.45) !important;
-  }
-        
+#guarantee-modal .modal-action-btn:hover {
+    background: rgba(45, 41, 33, 0.95) !important;
+    border-color: rgba(223, 206, 159, 0.85) !important;
+    box-shadow: 0 0 25px rgba(223, 206, 159, 0.25) !important;
+}
+
 .modal-action-btn:active {
     transform: scale(0.98);
 }
