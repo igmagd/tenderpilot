@@ -1141,44 +1141,38 @@ display: none;
                 <p>Здесь будет описание нейросетевых моделей, алгоритмов парсинга и ИИ-движка TenderPilot.</p>
             </section>
 
-            <!-- ПОЛНОЭКРАННОЕ ОКНО: БАНКОВСКИЕ ГАРАНТИИ (ЗОЛОТОЙ НЕОН) -->
-            <div id="guarantee-modal">
-                <!-- Премиальный крестик в стиле меню и золотом цвете -->
-                <button class="modal-guarantee-close" onclick="closeGuaranteeModal()" type="button" aria-label="Закрыть гарантии">×</button>
-                
-                <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; border: none !important; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 0 12px rgba(217, 119, 6, 0.25);">Умный экспресс-запрос банковских гарантий</h2>
-                <p style="color: #8a8a93; font-size: 14px; line-height: 1.5; margin-bottom: 24px;">Автоматический скоринг компании и рассылка заявок в 30+ банков-партнеров. Получите минимальную комиссию без бумажной рутины за 15 минут.</p>
-                
-                <!-- Номер закупки и ИНН организации (Два инпута в один ряд на ПК) -->
-                <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
-                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 200px;">
-                        <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Номер извещения закупки (ЕИС):</label>
-                        <input type="text" class="modal-input" placeholder="Например: 0373200000326000001">
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 200px;">
-                        <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">ИНН организации (Принципала):</label>
-                        <input type="text" class="modal-input" placeholder="10-значный или 12-значный ИНН">
-                    </div>
-                </div>
+                <!-- БАНКОВСКИЕ ГАРАНТИИ (МОДАЛЬНОЕ ОКНО) — ИЗОЛИРОВАННАЯ ВЕРСТКА -->
+    <div id="guarantee-modal" class="modal-fullscreen">
+        <button class="modal-guarantee-close" onclick="closeGuaranteeModal()">&times;</button>
+        
+        <div class="modal-header">
+            <h2 class="modal-title">Банковские гарантии</h2>
+            <p class="modal-subtitle">Оформление обеспечения для участников госзакупок по 44-ФЗ, 223-ФЗ и 185-ФЗ</p>
+        </div>
 
-                <!-- Финтех-табы выбора этапа обеспечения -->
-                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;">
-                    <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Этап обеспечения закупки:</label>
-                    <div class="guarantee-tabs">
-                        <div class="guarantee-tab active">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <span>Обеспечение заявки (Для участия в тендере)</span>
-                        </div>
-                        <div class="guarantee-tab">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
-                            <span>Обеспечение исполнения контракта (Для победителей)</span>
-                        </div>
-                        <div class="guarantee-tab">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <span>Обеспечение гарантийных обязательств (Пост-контроль качества)</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Финтех-табы обеспечения закупки (Убрали класс .tab, чтобы полностью уничтожить бирюзовый баг) -->
+        <div class="guarantee-tabs">
+            <div class="guarantee-tab active" data-guarantee="application">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <span>Обеспечение заявки</span>
+            </div>
+            <div class="guarantee-tab" data-guarantee="execution">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0V11m0 5H9m5-5h2m-2 4h2m-2 4h2m-8-4h2.5M9 7h1.5M11 7h.5M11 11h.5"/></svg>
+                <span>Исполнение контракта</span>
+            </div>
+            <div class="guarantee-tab" data-guarantee="warranty">
+                <svg xmlns="http://w3.org" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z"/></svg>
+                <span>Гарантийные обязательства</span>
+            </div>
+        </div>
+
+        <!-- Уникальные ID полей ввода для защиты от конфликтов с другими окнами -->
+        <div class="modal-form">
+            <input type="text" id="guarantee-registry-input" class="modal-input" placeholder="Номер закупки или ссылка на тендер">
+            <input type="text" id="guarantee-price-input" class="modal-input" placeholder="НМЦК закупки (₽)">
+            <button class="modal-action-btn" onclick="sendGuaranteeRequest()">Рассчитать условия</button>
+        </div>
+    </div>
 
                 <!-- Сумма гарантии -->
                 <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;">
@@ -1529,7 +1523,7 @@ display: none;
       }
   }
 
-// Скрипт переключения финтех-табов обеспечения закупки (Изолированный под хром)
+// Скрипт переключения финтех-табов обеспечения закупки (Изолированная логика)
 document.addEventListener("DOMContentLoaded", () => {
     const gTabs = document.querySelectorAll('#guarantee-modal .guarantee-tab');
     gTabs.forEach(tab => {
@@ -1539,6 +1533,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
       
         // Функция для закрытия меню
         function closeMenu() {
