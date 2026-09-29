@@ -552,19 +552,25 @@ div#guarantee-modal.open {
 }
 
 /* Полное подавление бирюзы: активный таб горит глубоким, сочным зеркальным титаном */
-/* ==========================================================================
-   ТОТАЛЬНЫЙ СИСТЕМНЫЙ ФИКС БИРЮЗЫ ВО ВСЕХ МОДАЛЬНЫХ ОКНАХ
-   ========================================================================== */
-
-/* 1. БАНКОВСКИЕ ГАРАНТИИ -> Исключительно чистый хромированный белый неон */
-#guarantee-modal .guarantee-tab.active,
-#guarantee-modal [class*="tab"].active,
-#guarantee-modal [class*="tab"][class*="active"] {
+#guarantee-modal .guarantee-tab.active-chrome {
     color: #ffffff !important;
     background: rgba(255, 255, 255, 0.08) !important;
     border-color: rgba(228, 228, 231, 0.95) !important;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05), 0 0 20px rgba(228, 228, 231, 0.4) !important;
+    box-shadow: 
+        inset 0 0 10px rgba(255, 255, 255, 0.05),
+        0 0 20px rgba(228, 228, 231, 0.4) !important;
 }
+
+#guarantee-modal .guarantee-tab.active-chrome svg {
+    stroke: #ffffff !important;
+    fill: none !important;
+    transform: scale(1.05);
+}
+
+#guarantee-modal .guarantee-tab.active-chrome span {
+    color: #ffffff !important;
+}
+
 #guarantee-modal .guarantee-tab.active svg, 
 #guarantee-modal [class*="tab"].active svg {
     stroke: #ffffff !important;
@@ -1523,19 +1529,17 @@ display: none;
       }
   }
 
-// Скрипт переключения финтех-табов обеспечения закупки
+// Скрипт переключения финтех-табов обеспечения закупки (Изолированный под хром)
 document.addEventListener("DOMContentLoaded", () => {
-    const gTabs = document.querySelectorAll('.guarantee-tab');
+    const gTabs = document.querySelectorAll('#guarantee-modal .guarantee-tab');
     gTabs.forEach(tab => {
         tab.addEventListener("click", function() {
-            gTabs.forEach(t => t.classList.remove("active"));
-            this.classList.add("active");
+            gTabs.forEach(t => t.classList.remove("active-chrome"));
+            this.classList.add("active-chrome");
         });
     });
 });
-
-
-        
+      
         // Функция для закрытия меню
         function closeMenu() {
             mainNav.classList.remove("open");
