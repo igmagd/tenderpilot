@@ -233,7 +233,7 @@ body::before {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.15) !important;
 }
 
-/* 3. Строгий Изумрудный / Зеленый (только 44/223-ФЗ) */
+/* 3. Строгий Изумрудный / Зеленый (44/223-ФЗ) */
 .bento-grid article:nth-child(4) {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(14, 14, 22, 0.75)) !important;
     border-right: 1px solid rgba(16, 185, 129, 0.65) !important;
@@ -831,7 +831,8 @@ display: none;
                 <!-- Текст изменен на полное солидное название и привязана логика открытия окна логистики -->
                 <a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор транспортной компании</a>
                 <a href="#pricing">Тарифы</a>
-                <a href="#guarantees">Банковские гарантии</a>
+                <!-- Привязали логику открытия для будущего окна банковских гарантий -->
+                <a href="#guarantees" onclick="event.preventDefault(); openGuaranteeModal();">Банковские гарантии</a>
                 <a href="#contacts">Контакты</a>
                 <a href="#faq">FAQ</a>
             </nav>
