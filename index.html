@@ -577,14 +577,17 @@ div#guarantee-modal.open {
 /* Цвет неона плашки БГ на главной странице */
 #guarantee-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(10, 10, 14, 0.75)) !important;
-    border-right: 1px solid rgba(228, 228, 231, 0.3) !important;
-    border-bottom: 1px solid rgba(228, 228, 231, 0.3) !important;
+    border-right: 1px solid rgba(228, 228, 231, 0.35) !important;
+    border-bottom: 1px solid rgba(228, 228, 231, 0.35) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(228, 228, 231, 0.12) !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 #guarantee-card:hover {
-    border-right: 1px solid rgba(228, 228, 231, 0.85) !important;
-    border-bottom: 1px solid rgba(228, 228, 231, 0.85) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(228, 228, 231, 0.2) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.85) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.85) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(228, 228, 231, 0.4) !important;
+    transform: translateY(-2px);
 }
 
 /* Супер-техно стиль для полей ввода (инпутов) и кнопки действия */
