@@ -1523,17 +1523,17 @@ display: none;
       }
   }
 
-    // Директорское решение: автоматический и изолированный скрипт для табов во всех текущих и будущих окнах
-    const allModals = document.querySelectorAll('[id$="-modal"]');
-    allModals.forEach(modal => {
-        const tabs = modal.querySelectorAll('[class*="-tab"], .tab');
-        tabs.forEach(tab => {
-            tab.addEventListener("click", function() {
-                tabs.forEach(t => t.classList.remove("active"));
-                this.classList.add("active");
-            });
+// Скрипт переключения финтех-табов обеспечения закупки
+document.addEventListener("DOMContentLoaded", () => {
+    const gTabs = document.querySelectorAll('.guarantee-tab');
+    gTabs.forEach(tab => {
+        tab.addEventListener("click", function() {
+            gTabs.forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
         });
     });
+});
+
 
         
         // Функция для закрытия меню
