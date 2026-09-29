@@ -552,7 +552,8 @@ div#guarantee-modal.open {
 }
 
 /* Полное подавление бирюзы: активный таб горит глубоким, сочным зеркальным титаном */
-#guarantee-modal .guarantee-tab.active {
+#guarantee-modal .guarantee-tab.active,
+#guarantee-modal .guarantee-tab[class*="active"] {
     color: #ffffff !important;
     background: rgba(255, 255, 255, 0.08) !important;
     border-color: rgba(228, 228, 231, 0.95) !important;
@@ -561,13 +562,15 @@ div#guarantee-modal.open {
         0 0 20px rgba(228, 228, 231, 0.4) !important;
 }
 
-#guarantee-modal .guarantee-tab.active svg {
+#guarantee-modal .guarantee-tab.active svg,
+#guarantee-modal .guarantee-tab[class*="active"] svg {
     stroke: #ffffff !important;
     fill: none !important;
     transform: scale(1.05);
 }
 
-#guarantee-modal .guarantee-tab.active span {
+#guarantee-modal .guarantee-tab.active span,
+#guarantee-modal .guarantee-tab[class*="active"] span {
     color: #ffffff !important;
 }
 
