@@ -552,27 +552,70 @@ div#guarantee-modal.open {
 }
 
 /* Полное подавление бирюзы: активный таб горит глубоким, сочным зеркальным титаном */
+/* ==========================================================================
+   ТОТАЛЬНЫЙ СИСТЕМНЫЙ ФИКС БИРЮЗЫ ВО ВСЕХ МОДАЛЬНЫХ ОКНАХ
+   ========================================================================== */
+
+/* 1. БАНКОВСКИЕ ГАРАНТИИ -> Исключительно чистый хромированный белый неон */
 #guarantee-modal .guarantee-tab.active,
-#guarantee-modal .guarantee-tab[class*="active"] {
+#guarantee-modal [class*="tab"].active,
+#guarantee-modal [class*="tab"][class*="active"] {
     color: #ffffff !important;
     background: rgba(255, 255, 255, 0.08) !important;
     border-color: rgba(228, 228, 231, 0.95) !important;
-    box-shadow: 
-        inset 0 0 10px rgba(255, 255, 255, 0.05),
-        0 0 20px rgba(228, 228, 231, 0.4) !important;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05), 0 0 20px rgba(228, 228, 231, 0.4) !important;
 }
-
-#guarantee-modal .guarantee-tab.active svg,
-#guarantee-modal .guarantee-tab[class*="active"] svg {
+#guarantee-modal .guarantee-tab.active svg, 
+#guarantee-modal [class*="tab"].active svg {
     stroke: #ffffff !important;
     fill: none !important;
     transform: scale(1.05);
 }
-
-#guarantee-modal .guarantee-tab.active span,
-#guarantee-modal .guarantee-tab[class*="active"] span {
+#guarantee-modal .guarantee-tab.active span, 
+#guarantee-modal [class*="tab"].active span {
     color: #ffffff !important;
 }
+
+/* 2. ПОДБОР ТРАНСПОРТНОЙ КОМПАНИИ -> Строго глубокий индиго/ультрамарин */
+#tk-modal .tk-tab.active,
+#tk-modal [class*="tab"].active,
+#tk-modal [class*="tab"][class*="active"] {
+    color: #ffffff !important;
+    background: rgba(99, 102, 241, 0.08) !important;
+    border-color: rgba(99, 102, 241, 0.95) !important;
+    box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.05), 0 0 20px rgba(99, 102, 241, 0.4) !important;
+}
+#tk-modal .tk-tab.active svg, 
+#tk-modal [class*="tab"].active svg {
+    stroke: rgba(99, 102, 241, 1) !important;
+    fill: none !important;
+    transform: scale(1.05);
+}
+#tk-modal .tk-tab.active span, 
+#tk-modal [class*="tab"].active span {
+    color: #ffffff !important;
+}
+
+/* 3. РАСЧЕТ НМЦК -> Строго строгий аналитический синий */
+#calc-modal .calc-tab.active,
+#calc-modal [class*="tab"].active,
+#calc-modal [class*="tab"][class*="active"] {
+    color: #ffffff !important;
+    background: rgba(79, 172, 254, 0.08) !important;
+    border-color: rgba(79, 172, 254, 0.95) !important;
+    box-shadow: inset 0 0 10px rgba(79, 172, 254, 0.05), 0 0 20px rgba(79, 172, 254, 0.4) !important;
+}
+#calc-modal .calc-tab.active svg, 
+#calc-modal [class*="tab"].active svg {
+    stroke: rgba(79, 172, 254, 1) !important;
+    fill: none !important;
+    transform: scale(1.05);
+}
+#calc-modal .calc-tab.active span, 
+#calc-modal [class*="tab"].active span {
+    color: #ffffff !important;
+}
+
 
 /* Цвет неона плашки БГ на главной странице */
 #guarantee-card {
