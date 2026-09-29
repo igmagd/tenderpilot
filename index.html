@@ -420,8 +420,134 @@ div#calc-modal.open {
 .modal-action-btn:active {
     transform: scale(0.98);
 }
+  /* ==========================================================================
+     ПОДБОР ТРАНСПОРТНОЙ КОМПАНИИ — ЦВЕТ ИНДИГО И ХАЙ-ТЕК СТРУКТУРА
+     ========================================================================== */
 
-/* Исправленная кнопка-крестик закрытия окна (точная копия меню в синем неоне) */
+  /* Полноэкранное окно логистики в фирменных тонах Индиго */
+  div#tk-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: none;
+    width: 100%;
+    height: 100dvh;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 110px 24px 40px;
+    gap: 20px;
+    overflow-y: auto;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.14), transparent 32%),
+      linear-gradient(135deg, #090b11 0%, #09090b 48%, #020208 100%);
+    box-shadow:
+      inset 0 0 80px rgba(99, 102, 241, 0.1),
+      0 0 40px rgba(99, 102, 241, 0.25);
+  }
+
+  div#tk-modal.open {
+    display: flex;
+  }
+
+  /* Крестик закрытия окна ТК — точная копия меню в цвете индиго */
+  .modal-tk-close {
+    position: fixed;
+    top: 13px;
+    left: 16px;
+    right: auto;
+    z-index: 10002;
+    display: flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(99, 102, 241, 0.45);
+    border-radius: 12px;
+    color: #ffffff;
+    background: rgba(9, 9, 11, 0.9);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
+  }
+
+  .modal-tk-close:hover {
+    background: rgba(9, 9, 11, 0.95);
+    border-color: rgba(99, 102, 241, 0.85);
+    color: #6366f1;
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.45);
+  }
+
+  /* Контейнер для дорогих контурных табов транспорта */
+  .transport-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* Интерактивный премиальный таб */
+  .transport-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    color: #8a8a93;
+    transition: all 0.2s ease;
+  }
+
+  .transport-tab svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    transition: stroke 0.2s ease;
+  }
+
+  .transport-tab span {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Состояние ховера и активного выбранного таба */
+  .transport-tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(99, 102, 241, 0.4);
+  }
+
+  .transport-tab.active {
+    color: #ffffff;
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.85);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+  }
+
+  /* Инпуты и кнопка с индивидуальным маркером индиго */
+  #tk-modal .modal-input:focus {
+    border-color: rgba(99, 102, 241, 0.85) !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3) !important;
+  }
+
+  #tk-modal .modal-action-btn {
+    background: rgba(18, 22, 43, 0.9) !important;
+    border-color: rgba(99, 102, 241, 0.45) !important;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.25) !important;
+  }
+
+  #tk-modal .modal-action-btn:hover {
+    background: rgba(24, 31, 61, 0.95) !important;
+    border-color: rgba(99, 102, 241, 0.85) !important;
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.45) !important;
+  }
+
 .modal-calc-close {
     position: fixed;
     top: 13px;
@@ -771,7 +897,10 @@ display: none;
                     <h3>Калькулятор НМЦК</h3>
                     <p>Расчёт начальной максимальной цены контракта и сравнение предложений поставщиков.</p>
                 </div>
-
+                <article class="bento-item" onclick="openTkModal()" style="cursor: pointer;">
+                    <h3>Подбор транспортной компании</h3>
+                    <p>Онлайн-калькулятор стоимости грузоперевозки по России. Сравнение тарифов транспортных компаний для бизнеса и госконтрактов.</p>
+                </article>
 
                 <article class="bento-item">
     
@@ -807,7 +936,81 @@ display: none;
                 </article>
 
             </section>            
-                                                <!-- ПОЛНОЭКРАННЫЙ КАЛЬКУЛЯТОР НМЦК (ФИНАЛЬНЫЙ UI) -->
+             <!-- ПОЛНОЭКРАННОЕ ОКНО: ПОДБОР ТРАНСПОРТНОЙ КОМПАНИИ (ИНДИГО НЕОН) -->
+            <div id="tk-modal">
+                <!-- Премиальный крестик в стиле меню и цвете индиго -->
+                <button class="modal-tk-close" onclick="closeTkModal()" type="button" aria-label="Закрыть подбор ТК">×</button>
+                
+                <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; border: none !important; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 0 12px rgba(99, 102, 241, 0.25);">Расчёт доставки грузов и подбор ТК</h2>
+                <p style="color: #8a8a93; font-size: 14px; line-height: 1.5; margin-bottom: 24px;">Интеллектуальный калькулятор стоимости грузоперевозки по России. Сравнение цен, объемов и сроков логистики для коммерческих отправлений и госконтрактов.</p>
+                
+                <!-- Блок А: Маршрут (Два инпута в один ряд на ПК) -->
+                <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 200px;">
+                        <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Пункт отправления:</label>
+                        <input type="text" class="modal-input" placeholder="Город или регион отправки">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 200px;">
+                        <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Пункт назначения:</label>
+                        <input type="text" class="modal-input" placeholder="Адрес или город доставки">
+                    </div>
+                </div>
+
+                <!-- Блок Б: Вид транспорта (Дорогие минималистичные SVG-табы) -->
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;">
+                    <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Вид транспортировки:</label>
+                    <div class="transport-tabs">
+                        <div class="transport-tab active">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            <span>Авто</span>
+                        </div>
+                        <div class="transport-tab">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="12" rx="2"></rect><path d="M7 20h10"></path><path d="M12 16v4"></path></svg>
+                            <span>ЖД</span>
+                        </div>
+                        <div class="transport-tab">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            <span>Авиа</span>
+                        </div>
+                        <div class="transport-tab">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h20"></path><path d="M19.3 14.8C21.1 13.5 22 11.7 22 10c0-3.9-3.1-7-7-7s-7 3.1-7 7c0 1.7.9 3.5 2.7 4.8L2 19h20l-2.7-4.2z"></path></svg>
+                            <span>Море</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Блок В: Габариты груза (Три поля в один ряд) -->
+                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+                        <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Вес, кг:</label>
+                        <input type="number" class="modal-input" placeholder="Масса">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+                        <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Объем, м³:</label>
+                        <input type="text" class="modal-input" placeholder="Куб. метры">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1;">
+                        <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Мест:</label>
+                        <input type="number" class="modal-input" value="1">
+                    </div>
+                </div>
+
+                <!-- Блок Г: Email для автоматической отправки счета юрлицам -->
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px;">
+                    <label style="font-size: 11px; color: #ffffff; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Email для получения расчёта и счёта:</label>
+                    <input type="email" class="modal-input" placeholder="company@mail.ru">
+                </div>
+
+                <!-- Кнопка действия и сноска в строгом B2B стиле -->
+                <button type="button" class="modal-action-btn">
+                    <span>Рассчитать стоимость грузоперевозки</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <div style="font-size: 11px; color: #666675; text-align: center; margin-top: 10px; letter-spacing: 0.3px;">
+                    * Счёт для юридических лиц будет автоматически сформирован и отправлен на указанный email.
+                </div>
+            </div>
+                                               <!-- ПОЛНОЭКРАННЫЙ КАЛЬКУЛЯТОР НМЦК (ФИНАЛЬНЫЙ UI) -->
 <div id="calc-modal">
     <!-- Изящный крестик в едином стиле с меню -->
     <button class="modal-calc-close" onclick="closeCalcModal()" type="button" aria-label="Закрыть калькулятор">×</button>
@@ -948,10 +1151,38 @@ display: none;
     } else {
       yearElement.textContent = startYear;
     }
+});
+
+  // Функции модального окна Подбора транспортной компании (Индиго неон)
+  const tkModal = document.getElementById("tk-modal");
+
+  function openTkModal() {
+      if (tkModal) {
+          tkModal.classList.add("open");
+          document.body.style.overflow = "hidden"; // Блокируем скролл основного сайта
+      }
+  }
+
+  function closeTkModal() {
+      if (tkModal) {
+          tkModal.classList.remove("open");
+          document.body.style.overflow = ""; // Возвращаем скролл основного сайта
+      }
+  }
+
+  // Логика хай-тек табов переключения транспорта (Индиго неон)
+  document.addEventListener("DOMContentLoaded", function() {
+      const tabs = document.querySelectorAll(".transport-tab");
+      tabs.forEach(tab => {
+          tab.addEventListener("click", function() {
+              tabs.forEach(t => t.classList.remove("active"));
+              this.classList.add("active");
+          });
+      });
   });
 </script>
         
-
+        
     </div>
             <footer id="contacts" class="site-footer">
   <div class="footer-container">
