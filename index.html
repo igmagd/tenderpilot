@@ -464,18 +464,18 @@ div#guarantee-modal {
     padding: 110px 24px 40px;
     gap: 20px;
     overflow-y: auto;
-    /* Точная копия мобильного меню по структуре + холодная металлическая засветка */
+    /* Точная копия структуры мобильного меню + сочный неоновый градиент цвета линий */
     background: rgba(4, 4, 6, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 45%);
+    background-image: radial-gradient(circle at 20% 20%, rgba(228, 228, 231, 0.25), transparent 45%);
 }
 
 div#guarantee-modal.open {
     display: flex;
 }
 
-/* Зеркальный хромированный крестик — один в один как в моб меню, со сквозным фоном */
+/* Кнопка закрытия — один в один как в мобильном меню: квадратная, со сквозным фоном и сочной подсветкой */
 .modal-guarantee-close {
     position: fixed;
     top: 13px;
@@ -487,12 +487,25 @@ div#guarantee-modal.open {
     height: 44px;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(228, 228, 231, 0.25);
-    border-radius: 50%;
-    color: rgba(228, 228, 231, 0.7);
-    background: rgba(255, 255, 255, 0.03);
-    font-size: 22px;
+    /* Рамка и скругление углов один в один как в меню */
+    border: 1px solid rgba(228, 228, 231, 0.4);
+    border-radius: 12px;
+    color: #ffffff;
+    background: rgba(9, 9, 11, 0.9);
+    font-size: 28px;
+    line-height: 1;
     cursor: pointer;
+    /* Сочный неоновый ореол вокруг кнопки цвета линий */
+    box-shadow: 0 0 20px rgba(228, 228, 231, 0.35);
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.modal-guarantee-close:hover {
+    background: rgba(9, 9, 11, 0.95);
+    border-color: #ffffff;
+    box-shadow: 0 0 25px rgba(228, 228, 231, 0.6);
+}
+
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
     transition: all 0.2s ease;
 }
