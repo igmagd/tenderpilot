@@ -1132,7 +1132,7 @@ display: none;
             </section>
 
                 <!-- БАНКОВСКИЕ ГАРАНТИИ (МОДАЛЬНОЕ ОКНО) — ИЗОЛИРОВАННАЯ ВЕРСТКА -->
-    <div id="guarantee-modal" class="modal-fullscreen">
+<div id="guarantee-modal" class="modal-fullscreen" style="display: none;">
         <button class="modal-guarantee-close" onclick="closeGuaranteeModal()">&times;</button>
         
         <div class="modal-header">
@@ -1251,7 +1251,7 @@ display: none;
             </section>
 
             <!-- ПОЛНОЭКРАННОЕ ОКНО: ПОДБОР ТРАНСПОРТНОЙ КОМПАНИИ (ИЗОЛИРОВАНО) -->
-            <div id="tk-modal">
+     <div id="tk-modal" style="display: none;">
                 <button class="modal-tk-close" onclick="closeTkModal()" type="button" aria-label="Закрыть подбор ТК">×</button>
                 <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 0 12px rgba(99, 102, 241, 0.25);">Расчёт доставки грузов и подбор ТК</h2>
                 <p style="color: #8a8a93; font-size: 14px; line-height: 1.5; margin-bottom: 24px;">Интеллектуальный калькулятор стоимости грузоперевозки по России. Сравнение цен, объемов и сроков логистики.</p>
@@ -1294,7 +1294,7 @@ display: none;
             </div>
 
             <!-- ПОЛНОЭКРАННЫЙ КАЛЬКУЛЯТОР НМЦК (ИЗОЛИРОВАН) -->
-            <div id="calc-modal">
+<div id="calc-modal" style="display: none;">
                 <button class="modal-calc-close" onclick="closeCalcModal()" type="button" aria-label="Закрыть калькулятор">×</button>
                 <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; font-weight: 700; letter-spacing: -0.5px; text-shadow: 0 0 12px rgba(79, 172, 254, 0.25);">Интеллектуальный расчёт НМЦК</h2>
                 <p style="color: #8a8a93; font-size: 14px; line-height: 1.5; margin-bottom: 28px;">Обоснование цены контракта по 44-ФЗ с поиском закупок в ЕИС.</p>
@@ -1316,73 +1316,12 @@ display: none;
 
 
             <section class="about" id="about">
+            <section class="about" id="about" style="padding: 70px 20px;">
                 <h2>Автоматизируйте работу с тендерами</h2>
-                <p>
-                    Сократите время на изучение документов, быстро находите
-                    ключевую информацию и контролируйте каждый этап закупки.
-                </p>
+                <p>Сократите время на изучение документов, быстро находите ключевую информацию и контролируйте каждый этап закупки.</p>
             </section>
         </main>
 
-       <style>
-.site-footer {
-    width: 100%;
-    background-color: rgba(18, 18, 26, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: #8a9099;
-    padding: 30px 0;
-    font-size: 14px;
-    border-top: 1px solid rgba(0, 242, 254, 0.18);
-}
-
-.footer-container {
-    max-width: 1200px;
-    width: calc(100% - 40px);
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.footer-links {
-    display: flex;
-    gap: 24px;
-}
-
-.footer-link {
-    color: #8a9099;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.footer-link:hover {
-    color: #00f2fe; /* Наш фирменный бирюзовый неон */
-}
-
-  @media (max-width: 768px) {
-    .footer-container {
-      flex-direction: column;
-      text-align: center;
-    }
-    .footer-links {
-      flex-direction: column;
-      gap: 12px;
-    }
-      
-  }
-           @media (max-width: 768px) {
-    .about {
-        padding: 55px 20px !important;
-    }
-    .site-footer {
-        padding: 32px 16px !important;
-    }
-      }
-           
-       </style>
         
 <script>
   document.addEventListener("DOMContentLoaded", function() {
