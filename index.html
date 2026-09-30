@@ -835,6 +835,14 @@ div#guarantee-modal.open {
     box-shadow: 0 0 25px rgba(79, 172, 254, 0.45);
 }
      
+div#calc-modal, div#tk-modal, div#guarantee-modal {
+    display: none !important;
+}
+
+div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open {
+    display: flex !important;
+}
+
         @media (max-width: 768px) {
   .container {
     width: min(100% - 32px, 1200px);
