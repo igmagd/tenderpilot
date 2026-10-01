@@ -73,23 +73,22 @@ body::before {
             color: #00f2fe;
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
 
-        nav a {
-            color: #8a8a93;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s ease;
-        }
+.nav-links a {
+    color: #8a8a93;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
 
-        nav a:hover {
-            color: #ffffff;
-        }
-
+.nav-links a:hover {
+    color: #ffffff;
+}
 
 .menu-toggle {
     display: none;
@@ -300,19 +299,15 @@ body::before {
     background: rgba(22, 22, 36, 0.85) !important;
 }
 
-
-
 .bento-grid {
     margin-bottom: 24px !important;
 }
-
 
 .placeholder-section h2 {
     margin-bottom: 12px;
     font-size: 24px;
 }
         
-
         .icon {
             display: block;
             margin-bottom: 18px;
@@ -843,23 +838,28 @@ div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open {
     display: flex !important;
 }
 
-        @media (max-width: 768px) {
-  .container {
-    width: min(100% - 32px, 1200px);
-  }
-  header {
-    min-height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 16px;
-  }
+@media (max-width: 768px) {
+    .container {
+        width: min(100% - 32px, 1200px);
+    }
+    
+    .nav-links {
+        display: none !important; /* Намертво скрываем обычное ПК-меню на смартфонах */
+    }
+    
+    header {
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+    }
+
   .menu-toggle {
     display: flex;
     order: 1;
   }
             
-
 .menu-toggle.is-open {
     position: fixed;
     top: 13px;
@@ -873,7 +873,6 @@ div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open {
     box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
 }
 
-@media (max-width: 768px) {
     .logo {
         order: 2;
         margin-left: 0;
@@ -894,11 +893,11 @@ div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open {
         color: #ffffff;
         background: linear-gradient(135deg, #00f2fe, #4facfe);
         border: 1px solid #00f2fe;
-        box-shadow: 0 0 8px rgba(0, 242, 254, 0.9), 0 0 20px rgba(0, 242, 254, 0.6);
+        box-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
         text-decoration: none;
     }
 
-    nav#main-nav {
+    nav {
 
         position: fixed;
         inset: 0;
@@ -917,8 +916,7 @@ div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open {
         box-shadow: inset 0 0 80px rgba(0, 149, 255, 0.12), 0 0 40px rgba(0, 149, 255, 0.35);
     }
 
-  nav#main-nav.open {
-    nav#main-nav.open {
+    nav.open {
         display: flex;
     }
 
@@ -939,32 +937,15 @@ div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open {
         transition: color 0.2s ease, padding-left 0.2s ease, text-shadow 0.2s ease;
     }
 
-    nav#main-nav a:hover,
-    nav#main-nav a:active {
+    nav a:hover,
+    nav a:active {
         padding-left: 10px !important;
         color: #00f2fe !important;
         text-shadow: 0 0 18px rgba(0, 242, 254, 0.8);
     }
-} /* <-- ЭТА СКОБКА СТРОГО И НАДЕЖНО ЗАКРЫВАЕТ МОБИЛЬНЫЙ МЕДИАЗАПРОС */
+}
 
 @media (max-width: 768px) {
-.lk-btn {
-width: 44px;
-height: 44px;
-padding: 0;
-}
-
-.lk-btn-text {
-display: none;
-}
-    .hero {
-        padding: 65px 0 55px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
     .bento-grid {
         display: flex !important;
         flex-direction: column !important;
@@ -972,7 +953,6 @@ display: none;
         padding: 0 20px !important;
         box-sizing: border-box !important;
     }
-} /* <-- ЭТА СКОБКА ТЕПЕРЬ СТОИТ ЗДЕСЬ И ИЗОЛИРУЕТ ВСЕ МОБИЛЬНЫЕ СТИЛИ СЕТКИ */
 
     .bento-grid > *,
     .bento-grid .bento-item,
@@ -988,17 +968,16 @@ display: none;
         transform: none !important;
         box-sizing: border-box !important;
     }
+}
 
-    .bento-item {
-        min-height: auto;
-        padding: 25px;
-    }
+.bento-item {
+    min-height: auto;
+    padding: 25px;
+}
 
-    .about {
-        padding: 55px 0;
-    }
-} /* <-- ЭТА СКОБКА АКРЫВАЕТ МЕДИАЗАПРОС ДЛЯ ВСЕЙ СЕТКИ */
-
+.about {
+    padding: 55px 0;
+}
         @media (max-width: 380px) {
             .hero h1 {
                 font-size: 30px;
@@ -1034,28 +1013,7 @@ display: none;
                 background 0.2s ease,
                 border-color 0.2s ease;
 }
-
-.lk-btn:hover {
-    transform: none;
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: #343442 !important;
-    box-shadow: none !important;
-}
-
-/* Тонкое свечение кнопки личного кабинета */
-.lk-btn:focus,
-.lk-btn:active {
-    border-color: rgba(0, 242, 254, 0.45) !important;
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.25) !important;
-}
- .lk-btn .lk-icon {
-    display: block;
-    width: 28px;
-    height: 28px;
-    margin: 0;
-    flex: 0 0 28px;
-    }
-        
+       
     </style>
 </head>
 
