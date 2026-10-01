@@ -933,40 +933,44 @@ nav a {
     transition: all 0.2s ease;
 }
 
-        transition: color 0.2s ease, padding-left 0.2s ease, text-shadow 0.2s ease;
-    }
 
-    nav a:hover,
-    nav a:active {
-        padding-left: 10px !important;
-        color: #00f2fe !important;
-        text-shadow: 0 0 18px rgba(0, 242, 254, 0.8);
-    }
+nav a:hover,
+nav a:active {
+    padding-left: 10px !important;
+    color: #00f2fe !important;
+    text-shadow: 0 0 18px rgba(0, 242, 254, 0.8);
 }
 
-@media (max-width: 768px) {
-    .bento-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-        padding: 0 20px !important;
-        box-sizing: border-box !important;
-    }
+/* Красивая подсветка кнопки при открытом меню */
+.menu-toggle.is-open {
+    color: #00f2fe !important;
+    border-color: rgba(0, 242, 254, 0.4) !important;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3) !important;
+}
 
-    .bento-grid > *,
-    .bento-grid .bento-item,
-    .bento-grid .placeholder-section {
-        display: block !important;
-        width: 100% !important;
-        max-width: none !important;
-        min-width: 0 !important;
-        flex: 0 0 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        margin-bottom: 0 !important;
-        transform: none !important;
-        box-sizing: border-box !important;
-    }
+/* ИСПРАВЛЕНИЕ СЕТКИ: плашки строго в один вертикальный столбец на смартфонах */
+.bento-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 0 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.bento-grid > *,
+.bento-grid .bento-item,
+.bento-grid .placeholder-section {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    margin: 0 0 8px 0 !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+}
+
 }
 
 .bento-item {
