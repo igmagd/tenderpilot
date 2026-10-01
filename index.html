@@ -1065,7 +1065,7 @@ display: none;
         <header>
             <a class="logo" href="#">Tender<span>Pilot</span></a>
 
-            <nav id="main-nav">
+            <nav>
                 <a href="#technologies">Наши технологии</a>
                 <a href="#features">Ваши возможности</a>
                 <a href="#calc" onclick="event.preventDefault(); openCalcModal();">Расчет НМЦК</a>
@@ -1328,146 +1328,72 @@ display: none;
             </section>
         </main>
 
-        
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. ЛОГИКА ТЕКУЩЕГО ГОДА
     const startYear = 2026;
     const currentYear = new Date().getFullYear();
-    const yearElement = document.getElementById("copyright-year");
+    const yearElement = document.getElementById("year");
     if (yearElement) {
-      if (currentYear > startYear) {
-        yearElement.textContent = startYear + "–" + currentYear;
-      } else {
-        yearElement.textContent = startYear;
-      }
+        yearElement.textContent = currentYear > startYear ? `${startYear}-${currentYear}` : startYear;
     }
-  });
 
-  // Функции модального окна Подбора транспортной компании (Индиго неон)
-  window.openTkModal = function() {
-      const tkModal = document.getElementById("tk-modal");
-      if (tkModal) {
-          tkModal.classList.add("open");
-          document.body.style.overflow = "hidden";
-      }
-  };
+    // 2. МОБИЛЬНОЕ МЕНЮ (ИСПРАВЛЕНО)
+    const menuToggle = document.getElementById("menu-toggle");
+    const nav = document.querySelector("header nav");
 
-  window.closeTkModal = function() {
-      const tkModal = document.getElementById("tk-modal");
-      if (tkModal) {
-          tkModal.classList.remove("open");
-          document.body.style.overflow = "";
-      }
-  };
+    if (menuToggle && nav) {
+        menuToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle("is-open");
+            nav.classList.toggle("open");
+            document.body.style.overflow = nav.classList.contains("open") ? "hidden" : "";
+        });
 
-  // Логика хай-тек табов переключения транспорта
-  document.addEventListener("DOMContentLoaded", function() {
-      const tabs = document.querySelectorAll(".transport-tab");
-      tabs.forEach(tab => {
-          tab.addEventListener("click", function() {
-              tabs.forEach(t => t.classList.remove("active"));
-              this.classList.add("active");
-          });
-      });
-  });
-</script>
-        
-<footer id="contacts" class="site-footer">
-  <div class="footer-container">
-    <div class="footer-copyright">
-      © <span id="copyright-year">2026</span> TenderPilot.
-    </div>
-    <div class="footer-links">
-      <a href="/privacy-policy.pdf" target="_blank" class="footer-link">Политика конфиденциальности</a>
-      <a href="#" id="cookie-settings-trigger" class="footer-link">Настройки Cookie</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-    // Функции модального окна Банковских гарантий (Золотой неон)
-    window.openGuaranteeModal = function() {
-        const guaranteeModal = document.getElementById("guarantee-modal") || document.getElementById("guarantee-card");
-        if (guaranteeModal) {
-            guaranteeModal.classList.add("open");
-            document.body.style.overflow = "hidden";
-        }
-    };
-
-    window.closeGuaranteeModal = function() {
-        const guaranteeModal = document.getElementById("guarantee-modal") || document.getElementById("guarantee-card");
-        if (guaranteeModal) {
-            guaranteeModal.classList.remove("open");
-            document.body.style.overflow = "";
-        }
-    };
-
-    // Скрипт переключения финтех-табов обеспечения закупки
-    document.addEventListener("DOMContentLoaded", () => {
-        const gTabs = document.querySelectorAll('#guarantee-modal .guarantee-tab');
-        gTabs.forEach(tab => {
-            tab.addEventListener("click", function() {
-                gTabs.forEach(t => t.classList.remove("active-chrome"));
-                this.classList.add("active-chrome");
+        // Закрываем меню при клике на любую ссылку
+        nav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                menuToggle.classList.remove("is-open");
+                nav.classList.remove("open");
+                document.body.style.overflow = "";
             });
         });
-    });
+    }
 
-    // Управление мобильным меню
-    document.addEventListener("DOMContentLoaded", () => {
-        const menuToggle = document.getElementById("menu-toggle");
-        const mainNav = document.getElementById("main-nav");
-
-        if (menuToggle && mainNav) {
-            function closeMenu() {
-                mainNav.classList.remove("open");
-                menuToggle.setAttribute("aria-expanded", "false");
-                menuToggle.textContent = "☰";
-                menuToggle.classList.remove("is-open");
-            }
-
-            menuToggle.addEventListener("click", function () {
-                const isOpen = mainNav.classList.toggle("open");
-                menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-                menuToggle.textContent = isOpen ? "×" : "☰";
-                menuToggle.classList.toggle("is-open", isOpen);
-            });
-
-            const menuLinks = mainNav.querySelectorAll("a");
-            menuLinks.forEach(link => {
-                link.addEventListener("click", closeMenu);
-            });
-        }
-    });
-
-    // Функции управления полноэкранным окном калькулятора НМЦК
-    window.openCalcModal = function() {
-        // Защита: ищем оба возможных ID окна, чтобы исключить конфликты именования
-        const calcModal = document.getElementById("calc-modal") || document.getElementById("nmck-modal");
-        if (calcModal) {
-            calcModal.classList.add("open");
+    // 3. УНИВЕРСАЛЬНАЯ ЛОГИКА ДЛЯ МОДАЛЬНЫХ ОКОН (ПЛАШЕК)
+    // Функция открытия окон (вызывается из ваших onclick в HTML)
+    window.openModal = function(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "flex"; // Перебиваем display: none
+            setTimeout(() => modal.classList.add("open"), 10);
             document.body.style.overflow = "hidden";
         }
     };
 
-    window.closeCalcModal = function() {
-        const calcModal = document.getElementById("calc-modal") || document.getElementById("nmck-modal");
-        if (calcModal) {
-            calcModal.classList.remove("open");
+    // Функция закрытия окон
+    window.closeModal = function(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove("open");
+            setTimeout(() => modal.style.display = "none", 300);
             document.body.style.overflow = "";
         }
     };
 
-    // Перехватываем клик по ссылке "Расчет НМЦК" в навигации
-    document.addEventListener("DOMContentLoaded", () => {
-        const calcMenuLink = document.querySelector('nav#main-nav a[href="#calc"]');
-        if (calcMenuLink) {
-            calcMenuLink.addEventListener("click", function(e) {
-                e.preventDefault();
-                openCalcModal();
-            });
+    // Глобальные обработчики для закрытия
+    document.querySelectorAll(".modal, [id\$='-modal']").forEach(modal => {
+        // Закрытие по клику на крестик
+        const closeBtn = modal.querySelector(".close-btn, .close");
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => closeModal(modal.id));
         }
+        // Закрытие по клику на область вокруг окна
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal(modal.id);
+        });
     });
+});
 </script>
 </body>
-</html>
+            </html>
