@@ -1016,7 +1016,52 @@ nav a:active {
                 background 0.2s ease,
                 border-color 0.2s ease;
 }
-       
+     /* --- Стили для переключателя режимов Поставщик/Заказчик --- */
+.audience-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px auto 20px auto;
+    padding: 0 20px;
+}
+.toggle-btn {
+    background: rgba(18, 18, 26, 0.5); /* В тон вашего основного фона карточек */
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid #292936; /* Как в строке 181 */
+    padding: 14px 28px;
+    border-radius: 24px; /* В тон скругления карточек */
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+/* Активное состояние кнопки с вашей фирменной бирюзовой неоновой подсветкой */
+.toggle-btn.active {
+    background: rgba(0, 242, 254, 0.1); 
+    color: #00f2fe;
+    border-color: #00f2fe;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+}
+
+/* --- Идеальное выравнивание под ширину блока "Наши технологии" на смартфонах --- */
+@media (max-width: 768px) {
+    .bento-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        max-width: 800px; /* Ширина вашей секции технологий */
+        padding: 0 20px !important;
+        gap: 0px !important; /* Убираем грид-отступы, будем регулировать через margin */
+    }
+    
+    .bento-item {
+        width: 100% !important;
+        max-width: 100% !important; /* Растягиваем плашку ровно по границам блока технологий */
+        box-sizing: border-box !important;
+        margin-bottom: 20px !important; /* Ровный отступ между карточками в ленте */
+    }
+    }
+        
     </style>
 </head>
 
