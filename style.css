@@ -414,93 +414,16 @@ div#tk-modal {
     }
 
     nav {
-        position: fixed;
-        inset: 0;
-        z-index: 999999 !important; /* Поднимаем меню на самый высокий слой над футером и плашками */
-        display: none;
-        width: 100vw !important;
-        height: 100dvh !important;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        padding: 120px 24px 40px !important;
-        gap: 0;
-        overflow: hidden !important; /* Полностью убираем баг случайной прокрутки самого меню */
-        
-        /* ВОЗВРАЩЕН ВАШ ФИРМЕННЫЙ КРАСИВЫЙ СТИЛЬ С ПРОСВЕТАМИ */
-        background: radial-gradient(circle at 50% 30%, rgba(0, 242, 254, 0.18), transparent 50%),
-                    linear-gradient(135deg, #09090b 0%, #020617 100%) !important;
-        box-shadow: inset 0 0 60px rgba(0, 242, 254, 0.15);
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
+        position: fixed; inset: 0; z-index: 10000; display: none; width: 100vw; height: 100dvh;
+        flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 120px 24px 40px !important; gap: 0; overflow-y: auto;
+        background: radial-gradient(circle at 50% 30%, rgba(0, 242, 254, 0.18), transparent 50%), linear-gradient(135deg, #09090b 0%, #020617 100%) !important;
+        box-shadow: inset 0 0 60px rgba(0, 242, 254, 0.15); backdrop-filter: blur(20px);
     }
-
     nav.open { display: flex !important; }
-    
-    nav a { 
-        display: block; 
-        width: 100%; 
-        padding: 20px 0 !important; 
-        color: #f4f4f5 !important; 
-        font-size: 20px !important; 
-        font-weight: 500 !important; 
-        text-decoration: none; 
-        border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; 
-        text-shadow: 0 0 10px rgba(0, 242, 254, 0.2); 
-        transition: all 0.2s ease; 
-    }
-    
-    nav a:hover, nav a:active { 
-        padding-left: 10px !important; 
-        color: #00f2fe !important; 
-        text-shadow: 0 0 18px rgba(0, 242, 254, 0.8); 
-    }
-
-    /* Красивая подсветка кнопки при открытом меню */
-    .menu-toggle.is-open { 
-        color: #ffffff !important; 
-        border-color: rgba(0, 242, 254, 0.5) !important; 
-        box-shadow: 0 0 15px rgba(0, 242, 254, 0.3) !important; 
-    }
+    nav a { display: block; width: 100%; padding: 20px 0 !important; color: #f4f4f5 !important; font-size: 20px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; text-shadow: 0 0 10px rgba(0, 242, 254, 0.2); transition: all 0.2s ease; }
+    nav a:hover, nav a:active { padding-left: 10px !important; color: #00f2fe !important; text-shadow: 0 0 18px rgba(0, 242, 254, 0.8); }
 
     /* Профессиональное выравнивание бенто-сетки по ширине блока технологий */
     .bento-grid, #supplier-grid, #customer-grid {
-        display: flex !important; 
-        flex-direction: column !important; 
-        align-items: center !important;
-        width: 100% !important; 
-        max-width: 800px !important; 
-        margin: 0 auto 30px auto !important; 
-        padding: 0 20px !important; 
-        gap: 0px !important;
-    }
-    
-    .bento-item, .placeholder-section, .bento-grid > div, .bento-grid > article {
-        width: 100% !important; 
-        max-width: 100% !important; 
-        min-width: 100% !important; 
-        box-sizing: border-box !important;
-        margin: 0 0 20px 0 !important; 
-        min-height: auto !important; 
-        transform: none !important;
-    }
-    
-    footer { 
-        display: block !important; 
-        clear: both !important; 
-        width: 100% !important; 
-        position: relative !important; 
-        z-index: 5 !important; 
-        margin-top: 50px !important; 
-    }
-    
-    .transport-tabs { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
-    .guarantee-tab { flex-direction: column !important; text-align: center !important; padding: 10px 8px !important; }
-    .guarantee-tab span { font-size: 11px !important; }
-    div#tk-modal, div#guarantee-modal { padding: 90px 16px 30px !important; }
-}
-
-@media (max-width: 380px) {
-    .hero h1 { font-size: 30px; }
-    .hero-actions a { width: 100%; text-align: center; }
-}
+        display: flex !important; flex-direction: column !important; align-items: center !important;
+   
