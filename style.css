@@ -424,7 +424,9 @@ nav.nav-links {
     justify-content: center;
     padding: 120px 24px 40px !important;
     gap: 24px;
-    background: #05050a !important;
+background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%), linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%) !important;
+overflow: hidden !important;
+                 
 }
 
 nav.nav-links.open {
