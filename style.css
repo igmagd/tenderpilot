@@ -429,10 +429,11 @@ div#tk-modal {
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
     }
-
+   
     nav.open { display: flex !important; }
-    nav a { display: block; width: 100%; padding: 20px 0 !important; color: #f4f4f5 !important; font-size: 20px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; text-shadow: 0 0 10px rgba(0, 242, 254, 0.2); transition: all 0.2s ease; }
-    nav a:hover, nav a:active { padding-left: 10px !important; color: #00f2fe !important; text-shadow: 0 0 18px rgba(0, 242, 254, 0.8); }
+    nav a { display: block; width: 100%; padding: 10px 0 !important; color: #f4f4f5 !important; font-size: 18px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; transition: border-color 0.2s ease; }
+    nav a:active { border-bottom-color: rgba(0, 242, 254, 0.8) !important; }
+
 
     /* Профессиональное выравнивание бенто-сетки по ширине блока технологий */
     .bento-grid, #supplier-grid, #customer-grid {
