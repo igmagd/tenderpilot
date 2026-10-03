@@ -404,15 +404,12 @@ div#tk-modal {
     .nav-links { display: none !important; }
     header { min-height: 70px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; }
     .menu-toggle { display: flex; order: 1; }
-    .menu-toggle.is-open { position: fixed; top: 13px; left: 16px; z-index: 10002; display: flex; color: #ffffff; background: rgba(9, 9, 11, 0.9); border-color: rgba(0, 242, 254, 0.45); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); }
+    .menu-toggle.is-open { position: relative; z-index: 100001; display: flex; color: #ffffff; background: rgba(9, 9, 11, 0.9); border-color: rgba(0, 242, 254, 0.45); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); }
     .logo { order: 2; margin-left: 0; }
     
-    .lk-btn {
-        order: 3; margin-left: auto; display: flex; align-items: center; justify-content: center;
-        width: 44px; height: 44px; padding: 0 !important; border-radius: 12px; color: #ffffff;
-        background: linear-gradient(135deg, #00f2fe, #4facfe); border: 1px solid #00f2fe; box-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
-    }
-
+        .lk-btn { order: 3; margin-left: auto; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0 !important; border-radius: 12px; color: #ffffff; background: rgba(255, 255, 255, 0.08); border: 1px solid #343442; transition: all 0.2s ease; }
+        .lk-icon { width: 22px; height: 22px; stroke-width: 2.8; }
+ 
     nav {
         position: fixed;
         inset: 0;
