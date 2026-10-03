@@ -42,7 +42,6 @@ a {
 .container {
     position: relative;
     z-index: 1;
-       isolation: isolate;
     width: min(1200px, calc(100% - 40px));
     margin: 0 auto;
 }
@@ -402,41 +401,52 @@ div#tk-modal {
 /* --- 9. АБСОЛЮТНО ЧИСТАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
 @media (max-width: 768px) {
     .container { width: min(100% - 32px, 1200px); }
-    .nav-links { display: none !important; }
-    header { min-height: 70px; display: flex; align-items: center; justify-content: flex-start; gap: 16px; position: relative; z-index: 999999 !important; }
-    .menu-toggle { display: flex; order: 1; }
-    .menu-toggle.is-open { position: relative; z-index: 100001; display: flex; color: #ffffff; background: rgba(9, 9, 11, 0.9); border-color: rgba(0, 242, 254, 0.45); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); }
-    .logo { order: 2; margin-left: 0; }
+    header {
+        position: relative;
+        z-index: 100;
+    }
 
+    header nav.nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 40px;
+        background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%), 
+                    radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%), 
+                    linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%);
+        z-index: 90;
+    }
+
+    header nav.nav-links.open {
+        display: flex !important;
+    }
+
+    header nav.nav-links a {
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff !important;
+        text-decoration: none;
+        padding: 12px;
+        width: auto;
+        text-align: center;
+        transition: color 0.2s ease;
+    }
     
-        .lk-btn { order: 3; margin-left: auto; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #343442; border-radius: 12px; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); transition: all 0.2s ease; }
-        .lk-icon { display: none; }
+    header nav.nav-links a:hover {
+        color: #00f2fe;
+    }
 
-nav.nav-links {
-    position: fixed;
-    inset: 0;
-    z-index: 100000 !important;
-    display: none;
-    width: 100vw !important;
-    height: 100dvh !important;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 24px 40px !important;
-    gap: 24px;
-background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%), linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%) !important;
-overflow: hidden !important;
-                 
-}
-
-nav.nav-links.open {
-    display: flex !important;
-}
-
-  
-  nav.nav-links a { display: block; width: 100%; padding: 12px 0 !important; color: #f4f4f5 !important; font-size: 18px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; transition: border-color 0.2s ease; -webkit-tap-highlight-color: transparent !important; }
-  nav.nav-links a:active { border-bottom-color: rgba(0, 242, 254, 0.8) !important; background: transparent !important; }
-
+    .menu-toggle {
+        display: flex !important;
+        position: relative;
+        z-index: 101;
+    }
 
     /* Профессиональное выравнивание бенто-сетки по ширине блока технологий */
     .bento-grid, #supplier-grid, #customer-grid {
