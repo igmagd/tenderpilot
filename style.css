@@ -429,9 +429,9 @@ div#tk-modal {
     background: radial-gradient(circle at 50% 30%, rgba(0, 242, 254, 0.18), transparent 50%), #05050a !important;
     }
    
-    nav.nav-links.open { display: flex !important; }
-    nav.nav-links a { display: block; width: 100%; padding: 8px 0 !important; color: #f4f4f5 !important; font-size: 18px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; transition: border-color 0.2s ease; -webkit-tap-highlight-color: rgba(0,0,0,0) !important; -webkit-tap-highlight-color: transparent !important; outline: none !important; }
+   nav.nav-links a { display: block; width: 100%; padding: 12px 0 !important; color: #f4f4f5 !important; font-size: 18px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; transition: border-color 0.2s ease; -webkit-tap-highlight-color: transparent !important; }
     nav.nav-links a:active { border-bottom-color: rgba(0, 242, 254, 0.8) !important; background: transparent !important; }
+    body:has(nav.open) main, body:has(nav.open) footer { visibility: hidden !important; }
 
     /* Профессиональное выравнивание бенто-сетки по ширине блока технологий */
     .bento-grid, #supplier-grid, #customer-grid {
