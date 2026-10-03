@@ -407,9 +407,9 @@ div#tk-modal {
     .menu-toggle.is-open { position: relative; z-index: 100001; display: flex; color: #ffffff; background: rgba(9, 9, 11, 0.9); border-color: rgba(0, 242, 254, 0.45); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); }
     .logo { order: 2; margin-left: 0; }
     
-        .lk-btn { order: 3; margin-left: auto; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 11px !important; border-radius: 12px; color: #ffffff; background: rgba(255, 255, 255, 0.08); border: 1px solid #343442; transition: all 0.2s ease; }
-        .lk-icon { width: 100%; height: 100%; stroke-width: 2.8; }
- 
+        .lk-btn { order: 3; margin-left: auto; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 12.5px !important; border-radius: 12px; color: #ffffff; background: rgba(255, 255, 255, 0.08); border: 1px solid #343442; box-shadow: 0 0 15px rgba(0, 242, 254, 0.06); transition: all 0.2s ease; }
+        .lk-icon { width: 100%; height: 100%; stroke-width: 2.3; color: #f4f4f5; }
+
     nav {
         position: fixed;
         inset: 0;
