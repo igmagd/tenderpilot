@@ -412,7 +412,7 @@ div#tk-modal {
         .lk-btn { order: 3; margin-left: auto; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #343442; border-radius: 12px; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 20px rgba(0, 242, 254, 0.25); transition: all 0.2s ease; }
         .lk-icon { display: none; }
 
-    nav {
+        nav.nav-links {                                                        
         position: fixed;
         inset: 0;
         z-index: 100000 !important;
@@ -429,8 +429,9 @@ div#tk-modal {
     background: radial-gradient(circle at 50% 30%, rgba(0, 242, 254, 0.18), transparent 50%), #05050a !important;
     }
    
-        nav a { display: block; width: 100%; padding: 8px 0 !important; color: #f4f4f5 !important; font-size: 18px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; transition: border-color 0.2s ease; -webkit-tap-highlight-color: rgba(0,0,0,0) !important; -webkit-tap-highlight-color: transparent !important; outline: none !important; }
-    nav a:active { border-bottom-color: rgba(0, 242, 254, 0.8) !important; background-color: transparent !important; background: transparent !important; }
+  nav.nav-links a { display: block; width: 100%; padding: 8px 0 !important; color: #f4f4f5 !important; font-size: 18px !important; font-weight: 500 !important; text-decoration: none; border-bottom: 1px solid rgba(0, 242, 254, 0.18) !important; transition: border-color 0.2s ease; -webkit-tap-highlight-color: rgba(0,0,0,0) !important; -webkit-tap-highlight-color: transparent !important; outline: none !important; }
+  nav.nav-links a:active { border-bottom-color: rgba(0, 242, 254, 0.8) !important; background-color: transparent !important; background: transparent !important; }
+
 
 
     /* Профессиональное выравнивание бенто-сетки по ширине блока технологий */
