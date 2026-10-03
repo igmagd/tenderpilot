@@ -404,23 +404,50 @@ div#tk-modal {
     header {
         position: relative;
         z-index: 100;
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 16px;
+        gap: 12px;
+    }
+
+    .menu-toggle {
+        display: flex !important;
+        position: relative;
+        z-index: 101;
+        order: 1;
+    }
+
+    .logo {
+        order: 2;
+        margin-left: 0;
+    }
+
+    .lk-btn {
+        order: 3;
+        margin-left: auto;
+        display: block !important;
+    }
+
+    .lk-icon {
+        display: block !important;
     }
 
     header nav.nav-links {
         display: none;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 24px;
+        align-items: flex-start;
+        justify-content: flex-start;
         position: fixed;
         inset: 0;
         width: 100vw;
         height: 100vh;
-        padding: 40px;
+        padding: 100px 32px 40px;
         background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%), 
                     radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%), 
                     linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%);
         z-index: 90;
+        box-sizing: border-box;
     }
 
     header nav.nav-links.open {
@@ -428,25 +455,25 @@ div#tk-modal {
     }
 
     header nav.nav-links a {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
-        color: #ffffff !important;
+        color: rgba(255, 255, 255, 0.75) !important;
         text-decoration: none;
-        padding: 12px;
-        width: auto;
-        text-align: center;
-        transition: color 0.2s ease;
+        padding: 16px 0;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+        box-shadow: 0 1px 0px rgba(0, 242, 254, 0.05);
+        transition: all 0.2s ease;
     }
     
-    header nav.nav-links a:hover {
-        color: #00f2fe;
+    header nav.nav-links a:hover,
+    header nav.nav-links a:active {
+        color: #ffffff !important;
+        border-bottom-color: rgba(0, 242, 254, 0.65);
+        box-shadow: 0 2px 8px rgba(0, 242, 254, 0.2);
     }
 
-    .menu-toggle {
-        display: flex !important;
-        position: relative;
-        z-index: 101;
-    }
 
     /* Профессиональное выравнивание бенто-сетки по ширине блока технологий */
     .bento-grid, #supplier-grid, #customer-grid {
