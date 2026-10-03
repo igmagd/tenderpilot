@@ -407,7 +407,7 @@ div#tk-modal {
         display: flex !important;
         align-items: center;
         justify-content: flex-start;
-        padding: 0 16px;
+        padding: 0 0px;
         gap: 12px;
     }
 
@@ -416,6 +416,17 @@ div#tk-modal {
         position: relative;
         z-index: 101;
         order: 1;
+        margin-left: 0;
+        border: 1px solid #343442;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 10px rgba(0, 242, 254, 0.02);
+        transition: all 0.2s ease;
+    }
+
+    .menu-toggle:hover, .menu-toggle:active {
+        border-color: rgba(0, 242, 254, 0.4);
+        box-shadow: 0 0 12px rgba(0, 242, 254, 0.15);
     }
 
     .logo {
@@ -424,13 +435,24 @@ div#tk-modal {
     }
 
     .lk-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid #343442;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 10px rgba(0, 242, 254, 0.02);
         order: 3;
         margin-left: auto;
-        display: block !important;
+        text-decoration: none;
+        transition: all 0.2s ease;
     }
 
-    .lk-icon {
-        display: block !important;
+    .lk-btn:hover, .lk-btn:active {
+        border-color: rgba(0, 242, 254, 0.4);
+        box-shadow: 0 0 12px rgba(0, 242, 254, 0.15);
     }
 
     header nav.nav-links {
