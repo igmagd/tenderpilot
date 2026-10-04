@@ -13,7 +13,7 @@
     <a class="logo" href="#">Tender<span>Pilot</span></a>
     <nav class="nav-links">
         <a href="#technologies">Наши технологии</a>
-<a href="#features">Ваши возможности</a><a href="#calc" onclick="event.preventDefault(); openCalcModal();">Расчет НМЦК</a><a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор ТК</a><a href="#pricing">Тарифы</a><a href="#guarantees" onclick="event.preventDefault(); openGuaranteeModal();">Банковские гарантии</a><a href="#legal" onclick="event.preventDefault(); document.getElementById('legal-modal').classList.add('open');">Помощь юриста</a><a href="#contacts">Контакты</a><a href="#faq">FAQ</a></nav>
+<a href="#features">Ваши возможности</a><a href="#calc" onclick="event.preventDefault(); openCalcModal();">Расчет НМЦК</a><a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор ТК</a><a href="#pricing">Тарифы</a><a href="#guarantees" onclick="event.preventDefault(); openGuaranteeModal();">Банковские гарантии</a><a href="#legal" onclick="event.preventDefault(); document.getElementById('legal-modal').style.display='flex';">Помощь юриста</a><a href="#contacts">Контакты</a><a href="#faq">FAQ</a></nav>
 
           <a class="lk-btn" href="#login" aria-label="Личный кабинет">
 <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
@@ -49,8 +49,8 @@
                     <h3>Расчет НМЦК по 44-ФЗ онлайн с поиском в ЕИС</h3>
                     <p>Автоматический поиск аналогичных контрактов и моментальное формирование отчета-обоснования цен.</p>
                 </div>
-                <div class="bento-item neon-pink" onclick="openLegalModal()"><h3>Помощь юриста: претензии и споры</h3><p>Юридическое сопровождение контрактов, ведение споров и защита интересов в УФАС.</p></div>
-            </div>
+<div class="bento-item neon-pink" onclick="document.getElementById('legal-modal').style.display='flex'"><h3>Помощь юриста: претензии и споры</h3><p>Юридическое сопровождение контрактов, ведение споров и защита интересов в УФАС.</p></div>
+
         </main>
 
 <!-- ==========================================================================
