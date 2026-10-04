@@ -18,6 +18,8 @@
                 <a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор ТК</a>
                 <a href="#pricing">Тарифы</a>
                 <a href="#guarantees" onclick="event.preventDefault(); openGuaranteeModal();">Банковские гарантии</a>
+        <a href="#legal" onclick="event.preventDefault(); openLegalModal();">Помощь юриста</a>
+<a href="#faq">FAQ</a>
                 <a href="#contacts">Контакты</a>
                 <a href="#faq">FAQ</a>
             </nav>
@@ -47,12 +49,15 @@
                     <h3>Умный поиск тендеров 44-ФЗ и 223-ФЗ</h3>
                     <p>Нейросетевой мониторинг торгов и моментальный поиск прибыльных лотов под вашу нишу.</p>
                 </div>
+                <div class="bento-item neon-pink" onclick="openLegalModal()"><h3>Помощь юриста: ФАС и РНП</h3><p>Профильная правовая поддержка при оспаривании торгов и защите от включения в РНП.</p></div>
+                
             </div>
             <div id="customer-grid" class="bento-grid" style="display: none;">
                 <div class="bento-item neon-blue" onclick="openCalcModal()">
                     <h3>Расчет НМЦК по 44-ФЗ онлайн с поиском в ЕИС</h3>
                     <p>Автоматический поиск аналогичных контрактов и моментальное формирование отчета-обоснования цен.</p>
                 </div>
+                <div class="bento-item neon-pink" onclick="openLegalModal()"><h3>Помощь юриста: претензии и споры</h3><p>Юридическое сопровождение контрактов, ведение споров и защита интересов в УФАС.</p></div>
             </div>
         </main>
 
@@ -235,9 +240,12 @@ if (cookieBanner && cookieAccept) {
         cookieBanner.style.display = 'none';
     });
 }
+    function openLegalModal(){openModalWindow('legal-modal');}function closeLegalModal(){closeModalWindow('legal-modal');}
     
     </script>  
 </div>
+    <div id="legal-modal" class="modal-window"><button class="modal-close" onclick="closeLegalModal()">&times;</button><h2 style="color:#ffffff;font-size:24px;margin-bottom:8px;font-weight:700;">Помощь юриста</h2><p style="color:#8a8a93;font-size:14px;margin-bottom:20px;">Поиск профильных экспертов по 44-ФЗ и 223-ФЗ в вашем регионе.</p><div style="display:flex;flex-direction:column;gap:12px;"><input type="text" class="modal-input" placeholder="Введите ваш город"><button type="button" class="modal-action-btn" onclick="closeLegalModal()">Найти юриста</button></div></div>
+    
 </body>
 </html>
 
