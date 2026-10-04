@@ -31,14 +31,17 @@
             <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
         </header>
         <main>
+            <div class="audience-toggle-container">
+    <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщику</button>
+    <button class="toggle-btn customer-btn" onclick="switchMode('customer')">Заказчику</button>
+    <button class="toggle-btn transport-btn" onclick="switchMode('transport')">Грузоперевозки</button>
+            </div>
+            
             <section class="hero" id="start">
                 <h1>ИИ-анализ <span class="gradient-text">тендеров</span></h1>
                 <p>TenderPilot помогает анализировать тендерную документацию, рассчитывать НМЦК и автоматизировать работу по 44-ФЗ и 223-ФЗ.</p>
             </section>
-            <div class="audience-toggle-container">
-                <button class="toggle-btn active" onclick="switchMode('supplier')">Поставщику</button>
-                <button class="toggle-btn" onclick="switchMode('customer')">Заказчику</button>
-            </div>
+
             <div id="supplier-grid" class="bento-grid">
                 <div class="bento-item neon-blue" onclick="openModal('ai-supplier')">
                     <h3>Умный поиск тендеров 44-ФЗ и 223-ФЗ</h3>
