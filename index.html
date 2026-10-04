@@ -194,24 +194,8 @@
 
 <!-- --- УПРАВЛЯЮЩИЕ СКРИПТЫ --- -->
 <script>
-    function switchMode(mode) {
-        const supplierGrid = document.getElementById('supplier-grid');
-        const customerGrid = document.getElementById('customer-grid');
-        const buttons = document.querySelectorAll('.toggle-btn');
-        
-        buttons.forEach(btn => btn.classList.remove('active'));
-        
-        if (mode === 'supplier') {
-            document.querySelector("[onclick=\"switchMode('supplier')\"]").classList.add('active');
-            supplierGrid.style.display = window.innerWidth > 768 ? 'grid' : 'flex';
-            customerGrid.style.display = 'none';
-        } else {
-            document.querySelector("[onclick=\"switchMode('customer')\"]").classList.add('active');
-            supplierGrid.style.display = 'none';
-            customerGrid.style.display = window.innerWidth > 768 ? 'grid' : 'flex';
-        }
-    }
-    
+function switchMode(mode){document.querySelectorAll('.toggle-btn').forEach(btn=>btn.classList.remove('active'));if(mode==='supplier'){document.querySelector('.supplier-btn').classList.add('active');if(document.getElementById('supplier-grid'))document.getElementById('supplier-grid').style.display='flex';if(document.getElementById('customer-grid'))document.getElementById('customer-grid').style.display='none';if(document.getElementById('transport-grid'))document.getElementById('transport-grid').style.display='none'}else if(mode==='customer'){document.querySelector('.customer-btn').classList.add('active');if(document.getElementById('supplier-grid'))document.getElementById('supplier-grid').style.display='none';if(document.getElementById('customer-grid'))document.getElementById('customer-grid').style.display='flex';if(document.getElementById('transport-grid'))document.getElementById('transport-grid').style.display='none'}else if(mode==='transport'){document.querySelector('.transport-btn').classList.add('active');if(document.getElementById('supplier-grid'))document.getElementById('supplier-grid').style.display='none';if(document.getElementById('customer-grid'))document.getElementById('customer-grid').style.display='none';if(document.getElementById('transport-grid'))document.getElementById('transport-grid').style.display='flex'}}
+   
 </script>
 
 <div id="cookie-banner" class="cookie-banner">
