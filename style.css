@@ -463,7 +463,10 @@ div#legal-modal.open { display: flex!important; }
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: color 0.3s;
 }
-
+.nav-links a:last-child {
+    border-bottom: none;
+    }
+    
     /* Кнопка Личного Кабинета внутри мобильного меню */
     .lk-btn {
         margin-left: 0 !important;
