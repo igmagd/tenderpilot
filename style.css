@@ -527,3 +527,15 @@ div#legal-modal.open { display: flex!important; }
         margin-bottom: 16px !important;
     }
 }
+@media (max-width: 768px) {
+    header nav.nav-links {
+        display: none;
+        position: fixed !important;
+        inset: 0 !important;
+        padding-top: 110px !important; 
+        z-index: 1000 !important;
+    }
+    .menu-toggle, .lk-btn {
+        z-index: 1002 !important;
+    }
+        }
