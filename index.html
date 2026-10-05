@@ -9,21 +9,31 @@
 </head>
 <body>
     <div class="container">
-        <header>
+<header>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
     <a class="logo" href="#">Tender<span>Pilot</span></a>
-    <nav class="nav-links">
-        <a href="#technologies">Наши технологии</a>
-<a href="#features">Ваши возможности</a><a href="#calc" onclick="event.preventDefault(); openCalcModal();">Расчет НМЦК</a><a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор ТК</a><a href="#pricing">Тарифы</a><a href="#guarantees" onclick="event.preventDefault(); openGuaranteeModal();">Банковские гарантии</a><a href="#legal" onclick="event.preventDefault(); document.getElementById('legal-modal').style.display='flex';">Помощь юриста</a><a href="#contacts">Контакты</a><a href="#faq">FAQ</a></nav>
+    <nav class="nav-links" id="nav-links">
+        <a href="#technologies" class="main-nav-link">Технологии</a>
+        <a href="#pricing" class="main-nav-link">Тарифы</a>
+        <a href="#faq" class="main-nav-link">FAQ</a>
+        <div class="menu-dropdown">
+            <div class="menu-dropdown-title">Сервисы</div>
+            <div class="menu-dropdown-content">
+                <a href="#calc" onclick="event.preventDefault(); openCalcModal();">Расчет НМЦК</a>
+                <a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор ТК</a>
+                <a href="#guarantees" onclick="event.preventDefault(); openGuaranteeModal();">Банковские гарантии</a>
+                <a href="#legal" onclick="event.preventDefault(); openLegalModal();">Помощь юриста</a>
+            </div>
+        </div>
+    </nav>
+    <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+        </svg>              
+    </a>
+</header>
 
-          <a class="lk-btn" href="#login" aria-label="Личный кабинет">
-<svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-    <circle cx="12" cy="7" r="4" />
-</svg>              
-            </a>
-
-            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
-        </header>
         <main>
             <div class="audience-toggle-container">
     <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщику</button>
@@ -214,16 +224,28 @@ function switchMode(mode){document.querySelectorAll('.toggle-btn').forEach(btn=>
     function openModal(service) { alert('Демо-режим для сервиса: ' + service); }
 
     // Умное мобильное меню
-    const menuToggle = document.getElementById("menu-toggle");
-    const nav = document.querySelector("header nav");
-    if (menuToggle && nav) {
-        menuToggle.addEventListener("click", (e) => {
-            e.stopPropagation();
-            menuToggle.classList.toggle("is-open");
-            nav.classList.toggle("open");
-            menuToggle.textContent = nav.classList.contains("open") ? "×" : "☰";
-        });
+const menuToggle = document.getElementById("menu-toggle");
+const nav = document.getElementById("nav-links");
+
+if (menuToggle && nav) {
+    menuToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = nav.classList.toggle("open");
+        menuToggle.classList.toggle("is-open", isOpen);
+        menuToggle.textContent = isOpen ? "×" : "☰";
+        menuToggle.setAttribute("aria-expanded", isOpen);
+    });
+}
+
+function closeAllMobileMenus() {
+    if (nav && menuToggle) {
+        nav.classList.remove('open');
+        menuToggle.classList.remove('is-open');
+        menuToggle.textContent = "☰";
+        menuToggle.setAttribute("aria-expanded", "false");
     }
+}
+
     // Закрытие плашки Cookie по клику на кнопку ОК
 const cookieBanner = document.getElementById('cookie-banner');
 const cookieAccept = document.getElementById('cookie-accept');
