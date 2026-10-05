@@ -394,7 +394,7 @@ div#legal-modal.open { display: flex!important; }
   .nav-links.open a { padding: 5px 0!important; font-size: 14px!important; }
 }
 
-    /* --- 9. ИСПРАВЛЕННАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
+/* --- 9. ИСПРАВЛЕННАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
 @media (max-width: 768px) {
     header {
         position: relative;
@@ -410,130 +410,84 @@ div#legal-modal.open { display: flex!important; }
     .menu-toggle {
         display: flex !important;
         position: relative;
-        z-index: 1001; /* Поднимаем выше шторки меню */
+        z-index: 1001; /* Выше шторки меню */
         order: 1;
         margin-left: 0;
         width: 44px;
         height: 44px;
         align-items: center;
         justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 12px !important;
         color: #fff !important;
         background: transparent !important;
-        box-shadow: none !important;
-        transition: all 0.2s ease;
-        -webkit-tap-highlight-color: transparent !important;
-    }
-
-    .menu-toggle:hover, .menu-toggle:focus, .menu-toggle.is-open {
-        background: transparent !important;
-        color: #fff !important;
-        border-color: rgba(255, 255, 255, 0.25) !important;
-        box-shadow: none !important;
-    }
-
-    .menu-toggle:active {
-        background: transparent !important;
-        color: #fff !important;
-        border-color: #fff !important;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3) !important;
+        cursor: pointer;
     }
 
     .logo {
         order: 2;
-        margin-left: 0;
+        margin-left: 0 !important;
     }
 
-    /* Кнопка Личного Кабинета */
-    .lk-btn {
-        display: flex;
-        position: relative;
-        z-index: 1001; /* Поднимаем на уровень с гамбургером */
-        order: 3;
-        margin-left: auto;
-        width: 44px;
-        height: 44px;
+    /* Сама выезжающая шторка меню */
+    .nav-menu {
+        display: flex !important;
+        position: fixed !important;
+        top: 0;
+        left: -100%; /* Спрятано слева */
+        width: 100% !important;
+        height: 100vh !important;
+        background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important; /* Ваш красивый космический фон */
+        flex-direction: column !important;
         align-items: center;
         justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
-        border-radius: 12px !important;
+        gap: 24px !important;
+        padding: 80px 24px 24px 24px !important;
+        transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
+        z-index: 1000 !important;
+        overflow-y: auto !important;
+    }
+
+    /* Когда меню открыто (класс .open добавляется скриптом) */
+    .nav-menu.open {
+        left: 0 !important; /* Выезжает на весь экран */
+    }
+
+    .nav-menu a {
+        font-size: 20px !important; /* Удобный крупный размер для пальца */
         color: #fff !important;
-        background: transparent !important;
-        box-shadow: none !important;
         text-decoration: none;
-        transition: all 0.2s ease;
-        -webkit-tap-highlight-color: transparent !important;
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: color 0.3s;
     }
 
-    header:has(nav.nav-links.open) .lk-btn {
-        display: none !important; /* Прячем ЛК при открытом меню, как у вас задумывалось */
+    .nav-menu a:last-child {
+        border-bottom: none;
     }
 
-header nav.nav-links {
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start !important;
-    position: fixed;
-    top: 0;
-    inset: 0;
-    width: 100vw;
-    height: auto !important;
-    min-height: 100vh !important;
-    padding: 100px 24px 40px !important;
-    gap: 0 !important;
-    background: radial-gradient(circle at top right, rgba(20, 20, 35, 0.98), rgba(5, 5, 10, 0.99)) !important; /* ВЕРНУЛИ ВАШ ПРЕЖНИЙ ФОН */
-    z-index: 1000;
-    box-sizing: border-box;
-    overflow-y: auto !important;
-}
-
-header nav.nav-links.open {
-    display: flex !important;
-}
-
-.nav-links.open { display: flex !important; }
-    font-size: 19px !important; /* Крупный и солидный шрифт */
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85) !important;
-    text-decoration: none;
-    padding: 14px 0 !important; /* Уменьшенное, аккуратное расстояние между строк */
-    flex-shrink: 0 !important;
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-    transition: all 0.3s ease;
-}
-
-    header nav.nav-links a:hover, header nav.nav-links a:active {
-        color: #00f2fe !important;
-        border-bottom-color: rgba(0, 242, 254, 0.85) !important;
-        box-shadow: none !important;
+    /* Кнопка Личного Кабинета внутри мобильного меню */
+    .lk-btn {
+        margin-left: 0 !important;
+        margin-top: 12px;
+        width: 80% !important;
+        text-align: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
+        box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
     }
 
-    /* Адаптация Bento-сетки */
-    .bento-grid, #customer-grid, #supplier-grid {
-        display: flex !important;
-        flex-direction: column !important;
+    /* Bento Grid перестраивается в 1 колонку на смартфонах */
+    .bento-grid {
+        grid-template-columns: 1fr !important;
         gap: 16px !important;
     }
 
-    .placeholder-section {
-        padding: 30px 16px !important;
-        margin-bottom: 16px !important;
+    .bento-item {
+        grid-column: span 1 !important;
+        min-height: auto !important;
     }
-}
-@media (max-width:768px){
-    header{position:relative;z-index:100;display:flex!important;align-items:center;justify-content:flex-start;padding:0!important;gap:12px}
-    .menu-toggle{display:flex!important;position:relative;z-index:101;order:1;margin-left:0;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}
-    .logo{order:2;margin-left:0}
-    .lk-btn{display:flex;position:relative;z-index:101;order:3;margin-left:auto;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;text-decoration:none;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}
-    header:has(nav.nav-links.open) .lk-btn{display:none!important}
-    header nav.nav-links{display:none;flex-direction:column;align-items:flex-start;justify-content:flex-start;position:fixed;inset:0;width:100vw;height:100vh;padding:100px 32px 40px;background:radial-gradient(circle at 20% 20%,rgba(0,242,254,.15) 0,transparent 50%),radial-gradient(circle at 80% 40%,rgba(0,149,255,.12) 0,transparent 60%),linear-gradient(to top,#020617 0,#09090b 70%,#020208 100%);z-index:90;box-sizing:border-box;overflow:hidden!important}
-    header nav.nav-links.open{display:flex!important}
-    header nav.nav-links a{font-size:18px;font-weight:600;color:rgba(255,255,255,0.75)!important;text-decoration:none;padding:8px 0!important;width:100%;text-align:left;border-bottom:1px solid rgba(0,242,254,.15);box-shadow:none!important;transition:all .2s ease}
-    header nav.nav-links a:hover,header nav.nav-links a:active{color:rgba(255,255,255,0.75)!important;border-bottom-color:rgba(0,242,254,0.85)!important;box-shadow:none!important}
-    .bento-grid,#customer-grid,#supplier-grid{display:flex!important;flex-direction:column!important;gap:16px!important}
-    .placeholder-section{padding:30px 16px!important;margin-bottom:16px!important}
-}
+    }
+    
