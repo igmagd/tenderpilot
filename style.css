@@ -532,7 +532,7 @@ div#legal-modal.open { display: flex!important; }
         display: none;
         position: fixed !important;
         inset: 0 !important;
-        padding-top: 110px !important; 
+        padding-top: 170px !important; 
         z-index: 1000 !important;
     }
     .menu-toggle, .lk-btn {
