@@ -474,16 +474,16 @@ header nav.nav-links {
     display: none;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     position: fixed;
     top: 0;
     inset: 0;
     width: 100vw;
     height: auto !important;
     min-height: 100vh !important;
-    padding: 110px 24px 50px !important;
-    gap: 16px !important;
-    background: radial-gradient(circle at top right, rgba(20,20,35,0.98), rgba(5,5,10,0.99));
+    padding: 100px 24px 40px !important;
+    gap: 0 !important;
+    background: radial-gradient(circle at top right, rgba(20, 20, 35, 0.98), rgba(5, 5, 10, 0.99)) !important; /* ВЕРНУЛИ ВАШ ПРЕЖНИЙ ФОН */
     z-index: 1000;
     box-sizing: border-box;
     overflow-y: auto !important;
@@ -494,15 +494,15 @@ header nav.nav-links.open {
 }
 
 header nav.nav-links a {
-    font-size: 18px !important;
+    font-size: 19px !important; /* Крупный и солидный шрифт */
     font-weight: 600;
     color: rgba(255, 255, 255, 0.85) !important;
     text-decoration: none;
-    padding: 12px 0 !important;
+    padding: 14px 0 !important; /* Уменьшенное, аккуратное расстояние между строк */
     flex-shrink: 0 !important;
     width: 100%;
     text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
     transition: all 0.3s ease;
 }
 
