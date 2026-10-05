@@ -365,35 +365,6 @@ div#tk-modal {
 #calc-modal .calc-tab.active, #calc-modal [class*="tab"].active { color: #ffffff !important; background: rgba(79, 172, 254, 0.08) !important; border-color: rgba(79, 172, 254, 0.95) !important; box-shadow: inset 0 0 10px rgba(79, 172, 254, 0.05), 0 0 20px rgba(79, 172, 254, 0.4) !important; }
 #calc-modal .calc-tab.active svg { stroke: rgba(79, 172, 254, 1) !important; transform: scale(1.05); }
 
-/* --- 9. АБСОЛЮТНО ЧИСТАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
-
-@media (max-width:768px){header{position:relative;z-index:100;display:flex!important;align-items:center;justify-content:flex-start;padding:0!important;gap:12px}.menu-toggle{display:flex!important;position:relative;z-index:101;order:1;margin-left:0;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}.menu-toggle:hover,.menu-toggle:focus,.menu-toggle.is-open{background:transparent!important;color:#fff!important;border-color:rgba(255,255,255,0.25)!important;box-shadow:none!important}.menu-toggle:active{background:transparent!important;color:#fff!important;border-color:#fff!important;box-shadow:0 0 15px rgba(255,255,255,0.3)!important}.logo{order:2;margin-left:0}.lk-btn{display:flex;position:relative;z-index:101;order:3;margin-left:auto;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;text-decoration:none;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}header:has(nav.nav-links.open) .lk-btn{display:none!important}header nav.nav-links{display:none;flex-direction:column;align-items:flex-start;justify-content:flex-start;position:fixed;inset:0;width:100vw;height:100vh;padding:100px 32px 40px;background:radial-gradient(circle at 20% 20%,rgba(0,242,254,.15) 0,transparent 50%),radial-gradient(circle at 80% 40%,rgba(0,149,255,.12) 0,transparent 60%),linear-gradient(to top,#020617 0,#09090b 70%,#020208 100%);z-index:90;box-sizing:border-box;overflow:hidden!important}header nav.nav-links.open{display:flex!important}header nav.nav-links a{font-size:18px;font-weight:600;color:rgba(255,255,255,0.75)!important;text-decoration:none;padding:8px 0!important;width:100%;text-align:left;border-bottom:1px solid rgba(0,242,254,.15);box-shadow:none!important;transition:all .2s ease}header nav.nav-links a:hover,header nav.nav-links a:active{color:rgba(255,255,255,0.75)!important;border-bottom-color:rgba(0,242,254,0.85)!important;box-shadow:none!important}.bento-grid,#customer-grid,#supplier-grid{display:flex!important;flex-direction:column!important;gap:16px!important}.placeholder-section{padding:30px 16px!important;margin-bottom:16px!important}}
-
-footer{padding:25px 0 40px!important}footer p{margin-bottom:12px}.footer-links{display:flex;justify-content:center;gap:6px 20px;flex-wrap:wrap;line-height:1.8}.footer-links a{color:#52525b!important;font-size:12px!important;text-decoration:none!important;font-weight:400!important;transition:none!important}.footer-links a:hover{color:#52525b!important;background:none!important;box-shadow:none!important}
-
-.cookie-banner{position:fixed;bottom:35px;left:50%;transform:translateX(-50%);width:min(calc(100% - 32px),600px);background-image:radial-gradient(circle at 10% 10%,rgba(79,172,254,0.15),transparent 45%),linear-gradient(135deg,#0d111c 0%,#07070c 100%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.25);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;z-index:99999;box-shadow:inset 0 0 30px rgba(79,172,254,0.05),0 15px 35px rgba(0,0,0,0.65)}.cookie-banner p{color:#a1a1aa!important;font-size:13px!important;line-height:1.5!important;margin:0!important;text-align:left}.cookie-link{color:#ffffff!important;text-decoration:none!important;border-bottom:1px solid rgba(255,255,255,0.3);transition:all .2s ease}.cookie-link:hover{border-bottom-color:#ffffff!important}.cookie-banner button{background:transparent!important;color:rgba(255,255,255,0.6)!important;border:1px solid rgba(255,255,255,0.2)!important;padding:8px 18px;border-radius:10px;font-size:13px!important;font-weight:600!important;cursor:pointer;width:fit-content;align-self:flex-end;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}.cookie-banner button:hover{color:#ffffff!important;border-color:rgba(255,255,255,0.4)!important}.cookie-banner button:active{border-color:#ffffff!important;box-shadow:0 0 15px rgba(255,255,255,0.2)!important;transform:scale(0.97)}
-
-.audience-toggle-container{display:flex!important;width:100%!important;max-width:100%!important;margin:16px 0 28px 0!important;background:transparent!important;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;padding:0!important;box-sizing:border-box!important;position:relative!important;z-index:10!important;justify-content:space-between!important;overflow:hidden!important}.toggle-btn{flex:1!important;background:transparent!important;color:rgba(255,255,255,0.6)!important;border:none!important;border-right:1px solid rgba(255,255,255,0.25)!important;padding:14px 4px!important;font-weight:600!important;font-size:13px!important;font-family:inherit!important;cursor:pointer!important;transition:all 0.2s ease!important;text-align:center!important;box-shadow:none!important;border-radius:0!important;outline:none!important;-webkit-tap-highlight-color:transparent!important}.toggle-btn:last-child{border-right:none!important}.toggle-btn.supplier-btn{border-radius:11px 0 0 11px!important}.toggle-btn.transport-btn{border-radius:0 11px 11px 0!important}.toggle-btn.active{color:#ffffff!important;text-shadow:0 0 10px rgba(255,255,255,0.4)!important;background:none!important;background-color:transparent!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4),0 0 8px rgba(255,255,255,0.2)!important;position:relative!important;z-index:2!important}.toggle-btn:active{color:#ffffff!important;z-index:12!important;outline:1px solid #ffffff!important;outline-offset:-1px;box-shadow:0 0 15px rgba(255,255,255,0.4)!important;transition:none!important}.toggle-btn.supplier-btn:active{border-radius:11px 0 0 11px!important}.toggle-btn.transport-btn:active{border-radius:0 11px 11px 0!important}@media (min-width:769px){.audience-toggle-container{width:min(calc(100% - 32px),600px)!important;margin:20px auto!important}.toggle-btn{font-size:14px!important}}
-
-.lk-btn{-webkit-tap-highlight-color:transparent!important}.lk-btn:active{outline:1px solid #ffffff!important;outline-offset:-1px!important;box-shadow:0 0 15px rgba(255,255,255,0.4)!important;border-radius:12px!important;transition:none!important}
-
-div#legal-modal {
-  position: fixed; inset: 0; z-index: 10001; display: none; width: 100%; height: 100dvh;
-  flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 110px 24px 40px; gap: 20px; overflow-y: auto;
-  background-image: radial-gradient(circle at 20% 20%,rgba(236,72,153,0.14),transparent 32%), linear-gradient(135deg,#120b14 0%,#09090b 48%,#020208 100%)!important;
-  box-shadow: inset 0 0 80px rgba(236,72,153,0.1),0 0 40px rgba(236,72,153,0.25)!important;
-}
-div#legal-modal.open { display: flex!important; }
-#legal-modal .modal-close:hover { color: #ec4899!important; }
-#legal-modal .modal-input { border: 1px solid rgba(236,72,153,0.3)!important; background: rgba(9,9,11,0.6)!important; }
-#legal-modal .modal-input:focus { border-color: rgba(236,72,153,0.85)!important; box-shadow: 0 0 15px rgba(236,72,153,0.3)!important; }
-#legal-modal .modal-action-btn { border: 1px solid rgba(236,72,153,0.45)!important; box-shadow: 0 0 20px rgba(236,72,153,0.25)!important; }
-#legal-modal .modal-action-btn:hover { background: rgba(43,14,32,0.95)!important; border-color: rgba(236,72,153,0.85)!important; box-shadow: 0 0 25px rgba(236,72,153,0.45)!important; }
-@media (max-width:768px) {
-  .nav-links.open { gap: 8px!important; padding: 75px 20px 25px 20px!important; }
-  .nav-links.open a { padding: 5px 0!important; font-size: 14px!important; }
-}
-
 /* --- 9. ИСПРАВЛЕННАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
 @media (max-width: 768px) {
     header {
@@ -406,11 +377,11 @@ div#legal-modal.open { display: flex!important; }
         gap: 12px;
     }
 
-    /* Кнопка открытия/закрытия меню */
+    /* Кнопка открытия/закрытия меню (бургер) */
     .menu-toggle {
         display: flex !important;
         position: relative;
-        z-index: 1001; /* Выше шторки меню */
+        z-index: 1001; /* Поверх шторки меню */
         order: 1;
         margin-left: 0;
         width: 44px;
@@ -422,6 +393,7 @@ div#legal-modal.open { display: flex!important; }
         color: #fff !important;
         background: transparent !important;
         cursor: pointer;
+        font-size: 24px;
     }
 
     .logo {
@@ -429,45 +401,52 @@ div#legal-modal.open { display: flex!important; }
         margin-left: 0 !important;
     }
 
-/* Сама выезжающая шторка меню */
-.nav-links {
-    display: flex !important;
-    position: fixed !important;
-    top: 0;
-    left: -100%; /* Спрятано слева */
-    width: 100% !important;
-    height: 100vh !important;
-    background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important; /* Ваш красивый космический фон */
-    flex-direction: column !important;
-    align-items: center;
-    justify-content: center;
-    gap: 24px !important;
-    padding: 80px 24px 24px 24px !important;
-    transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
-    z-index: 1000 !important;
-    overflow-y: auto !important;
-}
-
-/* Когда меню открыто (класс .open добавляется скриптом) */
-.nav-links.open {
-    left: 0 !important; /* Выезжает на весь экран */
-}
-
-.nav-links a {
-    font-size: 20px !important; /* Удобный крупный размер для пальца */
-    color: #fff !important;
-    text-decoration: none;
-    width: 100%;
-    text-align: center;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: color 0.3s;
-}
-.nav-links a:last-child {
-    border-bottom: none;
+    /* Скрываем стандартные ссылки шапки на мобильных */
+    .nav-links {
+        display: none !important;
     }
-    
-    /* Кнопка Личного Кабинета внутри мобильного меню */
+
+    /* Наша идеальная выезжающая шторка меню */
+    .nav-menu {
+        display: flex !important;
+        position: fixed !important;
+        top: 0;
+        left: -100%; /* Изначально намертво спрятана влево за экран */
+        width: 100% !important;
+        height: 100vh !important;
+        background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important; /* Ваш красивый космический фон */
+        flex-direction: column !important;
+        align-items: center;
+        justify-content: center;
+        gap: 20px !important;
+        padding: 80px 24px 24px 24px !important;
+        transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
+        z-index: 1000 !important;
+        overflow-y: auto !important;
+    }
+
+    /* Когда скрипт добавляет класс .open, шторка плавно выезжает на экран */
+    .nav-menu.open {
+        left: 0 !important; 
+    }
+
+    .nav-menu a {
+        font-size: 18px !important; /* Читаемый размер текста под палец */
+        color: #fff !important;
+        text-decoration: none;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: color 0.3s;
+    }
+
+    /* Убираем нижнюю разделительную линию у самого последнего пункта */
+    .nav-menu a:last-child {
+        border-bottom: none !important;
+    }
+
+    /* Кнопка Личного Кабинета внутри мобильной шторки */
     .lk-btn {
         margin-left: 0 !important;
         margin-top: 12px;
@@ -478,7 +457,7 @@ div#legal-modal.open { display: flex!important; }
         box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
     }
 
-    /* Bento Grid перестраивается в 1 колонку на смартфонах */
+    /* Bento Grid красиво перестраивается в 1 колонку на смартфонах */
     .bento-grid {
         grid-template-columns: 1fr !important;
         gap: 16px !important;
@@ -489,4 +468,3 @@ div#legal-modal.open { display: flex!important; }
         min-height: auto !important;
     }
     }
-    
