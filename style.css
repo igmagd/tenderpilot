@@ -527,74 +527,16 @@ div#legal-modal.open { display: flex!important; }
         margin-bottom: 16px !important;
     }
 }
-@media (max-width: 768px) {
-    header nav.nav-links {
-        display: none;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        justify-content: flex-start !important;
-        position: fixed !important;
-        inset: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        padding: 120px 32px 40px !important;
-        gap: 16px !important;
-        background: linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%) !important;
-        z-index: 1000 !important;
-        overflow-y: auto !important;
-    }
-
-    header nav.nav-links.open {
-        display: flex !important;
-    }
-
-    header nav.nav-links a.main-nav-link {
-        font-size: 22px !important;
-        font-weight: 700 !important;
-        color: #ffffff !important;
-        text-decoration: none;
-        padding: 14px 0 !important;
-        border-bottom: 1px solid rgba(0, 242, 254, 0.15) !important;
-        letter-spacing: -0.5px;
-    }
-
-    .menu-toggle, .lk-btn {
-        z-index: 1002 !important;
-    }
-
-    .menu-dropdown {
-        width: 100%;
-        margin-top: 24px;
-    }
-
-    .menu-dropdown-title {
-        font-size: 14px;
-        font-weight: 800;
-        color: #00f2fe;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        padding-bottom: 8px;
-        margin-bottom: 12px;
-        border-bottom: 1px solid rgba(0, 242, 254, 0.3);
-    }
-
-    .menu-dropdown-content {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 6px !important;
-    }
-
-    .menu-dropdown-content a {
-        font-size: 18px !important;
-        font-weight: 600 !important;
-        color: rgba(255, 255, 255, 0.75) !important;
-        padding: 12px 0 !important;
-        text-decoration: none !important;
-        display: block !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    }
-    
-    .menu-dropdown-content a:last-child {
-        border-bottom: none !important;
-    }
+@media (max-width:768px){
+    header{position:relative;z-index:100;display:flex!important;align-items:center;justify-content:flex-start;padding:0!important;gap:12px}
+    .menu-toggle{display:flex!important;position:relative;z-index:101;order:1;margin-left:0;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}
+    .logo{order:2;margin-left:0}
+    .lk-btn{display:flex;position:relative;z-index:101;order:3;margin-left:auto;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;text-decoration:none;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}
+    header:has(nav.nav-links.open) .lk-btn{display:none!important}
+    header nav.nav-links{display:none;flex-direction:column;align-items:flex-start;justify-content:flex-start;position:fixed;inset:0;width:100vw;height:100vh;padding:100px 32px 40px;background:radial-gradient(circle at 20% 20%,rgba(0,242,254,.15) 0,transparent 50%),radial-gradient(circle at 80% 40%,rgba(0,149,255,.12) 0,transparent 60%),linear-gradient(to top,#020617 0,#09090b 70%,#020208 100%);z-index:90;box-sizing:border-box;overflow:hidden!important}
+    header nav.nav-links.open{display:flex!important}
+    header nav.nav-links a{font-size:18px;font-weight:600;color:rgba(255,255,255,0.75)!important;text-decoration:none;padding:8px 0!important;width:100%;text-align:left;border-bottom:1px solid rgba(0,242,254,.15);box-shadow:none!important;transition:all .2s ease}
+    header nav.nav-links a:hover,header nav.nav-links a:active{color:rgba(255,255,255,0.75)!important;border-bottom-color:rgba(0,242,254,0.85)!important;box-shadow:none!important}
+    .bento-grid,#customer-grid,#supplier-grid{display:flex!important;flex-direction:column!important;gap:16px!important}
+    .placeholder-section{padding:30px 16px!important;margin-bottom:16px!important}
 }
