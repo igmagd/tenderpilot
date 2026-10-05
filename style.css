@@ -367,43 +367,56 @@ div#tk-modal {
 
 /* --- 9. ИСПРАВЛЕННАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
 @media (max-width: 768px) {
+    /* Наводим идеальный порядок в шапке */
     header {
-        position: relative;
-        z-index: 100;
+        position: relative !important;
+        z-index: 100 !important;
         display: flex !important;
-        align-items: center;
-        justify-content: flex-start;
+        flex-direction: row !important; /* Строго в одну линию */
+        align-items: center !important;
+        justify-content: space-between !important; /* Логотип слева, бургер справа */
+        padding: 12px 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Прячем длинные десктопные ссылки, чтобы они не создавали бардак */
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
         padding: 0 !important;
-        gap: 12px;
+        margin: 0 !important;
+    }
+
+    .nav-links a.main-nav-link {
+        display: none !important; /* Скрываем текстовые ссылки из шапки */
+    }
+
+    /* Кнопка ЛК в оригинальной шапке на мобильных тоже не нужна (она будет внутри шторки) */
+    header > .lk-btn {
+        display: none !important;
     }
 
     /* Кнопка открытия/закрытия меню (бургер) */
     .menu-toggle {
         display: flex !important;
-        position: relative;
-        z-index: 1001; /* Поверх шторки меню */
-        order: 1;
-        margin-left: 0;
-        width: 44px;
-        height: 44px;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 12px !important;
+        position: relative !important;
+        z-index: 1001 !important; /* Всегда поверх шторки */
+        width: 40px !important;
+        height: 40px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 10px !important;
         color: #fff !important;
         background: transparent !important;
-        cursor: pointer;
-        font-size: 24px;
+        cursor: pointer !important;
+        font-size: 22px !important;
+        margin: 0 !important;
     }
 
     .logo {
-        order: 2;
-        margin-left: 0 !important;
-    }
-
-    /* Скрываем стандартные ссылки шапки на мобильных */
-    .nav-links {
-        display: none !important;
+        margin: 0 !important;
     }
 
     /* Наша идеальная выезжающая шторка меню */
@@ -414,15 +427,16 @@ div#tk-modal {
         left: -100%; /* Изначально намертво спрятана влево за экран */
         width: 100% !important;
         height: 100vh !important;
-        background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important; /* Ваш красивый космический фон */
+        background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important; /* Ваш космический фон */
         flex-direction: column !important;
-        align-items: center;
-        justify-content: center;
+        align-items: center !important;
+        justify-content: center !important;
         gap: 20px !important;
         padding: 80px 24px 24px 24px !important;
         transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
         z-index: 1000 !important;
         overflow-y: auto !important;
+        box-sizing: border-box !important;
     }
 
     /* Когда скрипт добавляет класс .open, шторка плавно выезжает на экран */
@@ -433,12 +447,12 @@ div#tk-modal {
     .nav-menu a {
         font-size: 18px !important; /* Читаемый размер текста под палец */
         color: #fff !important;
-        text-decoration: none;
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        transition: color 0.3s;
+        text-decoration: none !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        transition: color 0.3s !important;
     }
 
     /* Убираем нижнюю разделительную линию у самого последнего пункта */
@@ -447,12 +461,13 @@ div#tk-modal {
     }
 
     /* Кнопка Личного Кабинета внутри мобильной шторки */
-    .lk-btn {
+    .nav-menu .lk-btn {
+        display: flex !important;
         margin-left: 0 !important;
-        margin-top: 12px;
+        margin-top: 12px !important;
         width: 80% !important;
-        text-align: center;
-        justify-content: center;
+        text-align: center !important;
+        justify-content: center !important;
         background: linear-gradient(135deg, #00f2fe, #4facfe) !important;
         box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
     }
@@ -467,4 +482,4 @@ div#tk-modal {
         grid-column: span 1 !important;
         min-height: auto !important;
     }
-    }
+}
