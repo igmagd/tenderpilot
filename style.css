@@ -530,23 +530,71 @@ div#legal-modal.open { display: flex!important; }
 @media (max-width: 768px) {
     header nav.nav-links {
         display: none;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
         position: fixed !important;
         inset: 0 !important;
-        padding-top: 170px !important; 
+        width: 100vw !important;
+        height: 100vh !important;
+        padding: 120px 32px 40px !important;
+        gap: 16px !important;
+        background: linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%) !important;
         z-index: 1000 !important;
+        overflow-y: auto !important;
     }
+
+    header nav.nav-links.open {
+        display: flex !important;
+    }
+
+    header nav.nav-links a.main-nav-link {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        text-decoration: none;
+        padding: 14px 0 !important;
+        border-bottom: 1px solid rgba(0, 242, 254, 0.15) !important;
+        letter-spacing: -0.5px;
+    }
+
     .menu-toggle, .lk-btn {
         z-index: 1002 !important;
     }
+
+    .menu-dropdown {
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .menu-dropdown-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: #00f2fe;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 242, 254, 0.3);
+    }
+
     .menu-dropdown-content {
         display: flex !important;
         flex-direction: column !important;
-        padding-left: 15px !important;
+        gap: 6px !important;
     }
+
     .menu-dropdown-content a {
-        display: block !important;
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        color: rgba(255, 255, 255, 0.75) !important;
         padding: 12px 0 !important;
-        font-size: 15px !important;
+        text-decoration: none !important;
+        display: block !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+    
+    .menu-dropdown-content a:last-child {
+        border-bottom: none !important;
     }
 }
-
