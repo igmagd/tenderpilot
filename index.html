@@ -228,7 +228,7 @@ const nav = document.getElementById("nav-links");
 if (menuToggle && nav) {
     menuToggle.addEventListener("click", (e) => {
         e.stopPropagation();
-        const isOpen = nav.classList.toggle("open");
+        const isOpen = nav.classList.toggle('open');
         menuToggle.classList.toggle("is-open", isOpen);
         menuToggle.textContent = isOpen ? "×" : "☰";
         menuToggle.setAttribute("aria-expanded", isOpen);
