@@ -13,17 +13,20 @@
     <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
     <a class="logo" href="#">Tender<span>Pilot</span></a>
         <nav class="nav-links" id="nav-links">
-            <a href="#tenders" class="main-nav-link">Поиск и анализ тендеров</a>
-            <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
-            <a href="#docs" class="main-nav-link">Подготовка тендерной документации</a>
-            <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
-            <a href="#delivery" class="main-nav-link">Расчет стоимости доставки</a>
-            <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
-            <a href="#legal" class="main-nav-link">Помощь юриста</a>
-            <a href="#education" class="main-nav-link">Обучение</a>
-            <a href="#contact" class="main-nav-link">Контакты</a>
-            <a href="#faq" class="main-nav-link">FAQ</a>
+            <div class="nav-menu">
+                <a href="#tenders" class="main-nav-link">Поиск и анализ тендеров</a>
+                <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
+                <a href="#docs" class="main-nav-link">Подготовка тендерной документации</a>
+                <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
+                <a href="#delivery" class="main-nav-link">Расчет стоимости доставки</a>
+                <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
+                <a href="#legal" class="main-nav-link">Помощь юриста</a>
+                <a href="#education" class="main-nav-link">Обучение</a>
+                <a href="#contact" class="main-nav-link">Контакты</a>
+                <a href="#faq" class="main-nav-link">FAQ</a>
+            </div>
         </nav>
+
     <a class="lk-btn" href="#login" aria-label="Личный кабинет">
         <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -65,50 +68,42 @@
      ПРОДОЛЖЕНИЕ СПИСКА 1: ДЛЯ ПОСТАВЩИКОВ (ВЗРОСЛЫЙ СТИЛЬ БЕЗ ИКОНОК)
      ========================================================================== -->
 <script>
-    // Технический мост: временно подгружаем оставшиеся плашки Поставщика внутрь первого грида
-    document.getElementById('supplier-grid').innerHTML += `
-        <div class="bento-item neon-cyan" onclick="openModal('suppliers-base')">
-            <h3>База производителей и оптовых поставщиков РФ</h3>
-            <p>Быстрый подбор надежных заводов-изготовителей и субподрядчиков под спецификацию лота.</p>
-        </div>
-        <div class="bento-item neon-indigo" onclick="openTkModal()">
-            <h3>Калькулятор стоимости грузоперевозок</h3>
-            <p>Автоматический расчет логистики по России и интеграция с ведущими ТК для госконтрактов.</p>
-        </div>
-        <div class="bento-item neon-emerald" onclick="openModal('docs-supplier')">
-            <h3>Помощь в подготовке тендерной документации</h3>
-            <p>Автоматическая генерация и ИИ-аудит заявок для исключения отклонений со стороны заказчика.</p>
-        </div>
-        <div class="bento-item neon-purple" onclick="openModal('nmck-supplier')">
-            <h3>Оценка рентабельности и расчет прибыли</h3>
-            <p>Анализ ценовых предложений конкурентов и вычисление чистой маржинальности участия в торгах.</p>
-        </div>
-        <div class="bento-item neon-gold" onclick="openGuaranteeModal()">
-            <h3>Оформить обеспечение заявки и контракта</h3>
-            <p>Онлайн-расчёт и экспресс-оформление банковских гарантий. Одобрение от 30+ банков за 15 минут.</p>
-        </div>
-    `;
+// Функции модальных окон и мобильного меню
+function openGuaranteeModal() { document.getElementById('guarantee-modal').style.display = 'flex'; }
+function closeGuaranteeModal() { document.getElementById('guarantee-modal').style.display = 'none'; }
+function openTkModal() { document.getElementById('tk-modal').style.display = 'flex'; }
+function closeTkModal() { document.getElementById('tk-modal').style.display = 'none'; }
+function openCalcModal() { document.getElementById('calc-modal').style.display = 'flex'; }
+function closeCalcModal() { document.getElementById('calc-modal').style.display = 'none'; }
+function openModal(service) { alert('Демо-режим для сервиса: ' + service); }
 
-    // Технический мост: временно подгружаем оставшиеся плашки Заказчика внутрь второго грида
-    document.getElementById('customer-grid').innerHTML += `
-        <div class="bento-item neon-cyan" onclick="openModal('tz')">
-            <h3>Разработка ТЗ по госзакупкам по ОКПД2</h3>
-            <p>Интеллектуальная генерация технических заданий без рисков блокировки со стороны ФАС.</p>
-        </div>
-        <div class="bento-item neon-emerald" onclick="openModal('kp')">
-            <h3>Сбор коммерческих предложений от поставщиков</h3>
-            <p>Автоматизированный подбор официальных компаний и рассылка запросов цен для анализа рынка.</p>
-        </div>
-        <div class="bento-item neon-indigo" onclick="openTkModal()">
-            <h3>Расчет транспортных затрат для сметы контракта</h3>
-            <p>Официальное обоснование и аудит стоимости доставки грузов для защиты проекта в бюджете.</p>
-        </div>
-        <div class="bento-item neon-purple" onclick="openModal('audit')">
-            <h3>Анализ рисков и аудит закупочной документации</h3>
-            <p>Глубокая ИИ-проверка контрактов на соответствие актуальным нормам законодательства.</p>
-    `;
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navMenu.classList.toggle('open');
+        menuToggle.textContent = navMenu.classList.contains('open') ? "×" : "☰";
+    });
+    navMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuToggle.textContent = "☰";
+    }));
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            navMenu.classList.remove('open');
+            menuToggle.textContent = "☰";
+        }
+    });
+}
+
+const cookieBanner = document.getElementById('cookie-banner');
+const cookieAccept = document.getElementById('cookie-accept');
+if (cookieBanner && cookieAccept) {
+    cookieAccept.addEventListener('click', () => cookieBanner.style.display = 'none');
+}
+function openLegalModal(){ openModalWindow('legal-modal'); }
 </script>
-
 
     <!-- СЕКЦИИ КОНТЕНТА -->
     <section class="bento-item placeholder-section neon-cyan" id="technologies">
