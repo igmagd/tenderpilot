@@ -429,44 +429,40 @@ div#legal-modal.open { display: flex!important; }
         margin-left: 0 !important;
     }
 
-    /* Сама выезжающая шторка меню */
-    .nav-menu {
-        display: flex !important;
-        position: fixed !important;
-        top: 0;
-        left: -100%; /* Спрятано слева */
-        width: 100% !important;
-        height: 100vh !important;
-        background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important; /* Ваш красивый космический фон */
-        flex-direction: column !important;
-        align-items: center;
-        justify-content: center;
-        gap: 24px !important;
-        padding: 80px 24px 24px 24px !important;
-        transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
-        z-index: 1000 !important;
-        overflow-y: auto !important;
-    }
+/* Сама выезжающая шторка меню */
+.nav-links {
+    display: flex !important;
+    position: fixed !important;
+    top: 0;
+    left: -100%; /* Спрятано слева */
+    width: 100% !important;
+    height: 100vh !important;
+    background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important; /* Ваш красивый космический фон */
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    gap: 24px !important;
+    padding: 80px 24px 24px 24px !important;
+    transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
+    z-index: 1000 !important;
+    overflow-y: auto !important;
+}
 
-    /* Когда меню открыто (класс .open добавляется скриптом) */
-    .nav-menu.open {
-        left: 0 !important; /* Выезжает на весь экран */
-    }
+/* Когда меню открыто (класс .open добавляется скриптом) */
+.nav-links.open {
+    left: 0 !important; /* Выезжает на весь экран */
+}
 
-    .nav-menu a {
-        font-size: 20px !important; /* Удобный крупный размер для пальца */
-        color: #fff !important;
-        text-decoration: none;
-        width: 100%;
-        text-align: center;
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        transition: color 0.3s;
-    }
-
-    .nav-menu a:last-child {
-        border-bottom: none;
-    }
+.nav-links a {
+    font-size: 20px !important; /* Удобный крупный размер для пальца */
+    color: #fff !important;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: color 0.3s;
+}
 
     /* Кнопка Личного Кабинета внутри мобильного меню */
     .lk-btn {
