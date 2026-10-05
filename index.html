@@ -209,44 +209,29 @@ function switchMode(mode){document.querySelectorAll('.toggle-btn').forEach(btn=>
 </div>
 
 <script>
-// --- ФУНКЦИИ МОДАЛЬНЫХ ОКАН ---
-function openGuaranteeModal() { document.getElementById('guarantee-modal').style.display = 'flex'; }
-function closeGuaranteeModal() { document.getElementById('guarantee-modal').style.display = 'none'; }
-function openTkModal() { document.getElementById('tk-modal').style.display = 'flex'; }
-function closeTkModal() { document.getElementById('tk-modal').style.display = 'none'; }
-function openCalcModal() { document.getElementById('calc-modal').style.display = 'flex'; }
-function closeCalcModal() { document.getElementById('calc-modal').style.display = 'none'; }
 
-// Заглушка для остальных плашек
-function openModal(service) { alert('Демо-режим для сервиса: ' + service); }
+    
+    function openGuaranteeModal() { document.getElementById('guarantee-modal').classList.add('open'); }
+    function closeGuaranteeModal() { document.getElementById('guarantee-modal').classList.remove('open'); }
+    function openTkModal() { document.getElementById('tk-modal').classList.add('open'); }
+    function closeTkModal() { document.getElementById('tk-modal').classList.remove('open'); }
+    function openCalcModal() { document.getElementById('calc-modal').classList.add('open'); }
+    function closeCalcModal() { document.getElementById('calc-modal').classList.remove('open'); }
+    
+    // Заглушка для остальных плашек
+    function openModal(service) { alert('Демо-режим для сервиса: ' + service); }
 
-// --- УМНОЕ МОБИЛЬНОЕ МЕНЮ (ИСПРАВЛЕННОЕ) ---
+    // Умное мобильное меню
 const menuToggle = document.getElementById("menu-toggle");
 const nav = document.getElementById("nav-links");
 
 if (menuToggle && nav) {
     menuToggle.addEventListener("click", (e) => {
         e.stopPropagation();
-        nav.classList.toggle('open');
-        const isOpen = nav.classList.contains('open');
-        menuToggle.classList.toggle('is-open', isOpen);
+        const isOpen = nav.classList.toggle('open');
+        menuToggle.classList.toggle("is-open", isOpen);
         menuToggle.textContent = isOpen ? "×" : "☰";
         menuToggle.setAttribute("aria-expanded", isOpen);
-    });
-
-    // Автоматическое закрытие при клике на ссылки внутри меню
-    const navLinks = nav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            closeAllMobileMenus();
-        });
-    });
-
-    // Закрытие при клике в любое другое место экрана
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-            closeAllMobileMenus();
-        }
     });
 }
 
@@ -259,7 +244,7 @@ function closeAllMobileMenus() {
     }
 }
 
-// --- КУКИ И ЮРИДИЧЕСКИЕ ОКНА ---
+    // Закрытие плашки Cookie по клику на кнопку ОК
 const cookieBanner = document.getElementById('cookie-banner');
 const cookieAccept = document.getElementById('cookie-accept');
 if (cookieBanner && cookieAccept) {
@@ -267,12 +252,12 @@ if (cookieBanner && cookieAccept) {
         cookieBanner.style.display = 'none';
     });
 }
-function openLegalModal(){ openModalWindow('legal-modal'); }
-</script>
+function openLegalModal(){openModalWindow('legal-modal');}function closeLegalModal(){closeModalWindow('legal-modal');}
 
+    </script>  
 </div>
     <div id="legal-modal" class="modal-window"><button class="modal-close" onclick="closeLegalModal()">&times;</button><h2 style="color:#ffffff;font-size:24px;margin-bottom:8px;font-weight:700;">Помощь юриста</h2><p style="color:#8a8a93;font-size:14px;margin-bottom:20px;">Поиск профильных экспертов по 44-ФЗ и 223-ФЗ в вашем регионе.</p><div style="display:flex;flex-direction:column;gap:12px;"><input type="text" class="modal-input" placeholder="Введите ваш город"><button type="button" class="modal-action-btn" onclick="closeLegalModal()">Найти юриста</button></div></div>
     
 </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        </html>
+        
