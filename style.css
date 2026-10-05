@@ -470,43 +470,42 @@ div#legal-modal.open { display: flex!important; }
         display: none !important; /* Прячем ЛК при открытом меню, как у вас задумывалось */
     }
 
-    /* Полноэкранная мобильная шторка навигации */
-    header nav.nav-links {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-    height: auto !important;                     /* Убираем жёсткую высоту, чтобы меню дышало */
-    min-height: 100vh !important;                /* Но заставляем его растягиваться минимум на весь экран */
-    padding: 100px 24px 40px !important;         /* Делаем 100px сверху, чтобы первый пункт ушёл из-под крестика */
-    gap: 6px !important;                         /* Выставляем ваш компактный зазор в 6 пикселей между строк */
-        background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0, transparent 50%),
-                    radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0, transparent 60%),
-                    linear-gradient(to top, #020617 0, #09090b 70%, #020208 100%);
-        z-index: 1000; /* Чуть ниже кнопок управления, но выше всего остального контента */
-        box-sizing: border-box;
-        overflow-y: auto !important; /* Разрешаем скролл, если пунктов много */
-    }
+header nav.nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between !important;
+    position: fixed;
+    top: 0;
+    inset: 0;
+    width: 100vw;
+    height: auto !important;
+    min-height: 100vh !important;
+    padding: 110px 24px 50px !important;
+    gap: 16px !important;
+    background: radial-gradient(circle at top right, rgba(20,20,35,0.98), rgba(5,5,10,0.99));
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow-y: auto !important;
+}
 
-    header nav.nav-links.open {
-        display: flex !important;
-    }
+header nav.nav-links.open {
+    display: flex !important;
+}
 
-    /* Ссылки внутри мобильного меню */
 header nav.nav-links a {
-    font-size: 15px !important; /* Оптимальный размер */
+    font-size: 18px !important;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.75) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
     text-decoration: none;
-    padding: 6px 0 !important;   /* ИЗМЕНИЛИ 10px на 6px */
-    flex-shrink: 0 !important;   /* ДОБАВИЛИ ЭТУ СТРОКУ */
+    padding: 12px 0 !important;
+    flex-shrink: 0 !important;
     width: 100%;
     text-align: left;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-        box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    transition: all 0.3s ease;
+}
+
         transition: all 0.2s ease;
     }
 
