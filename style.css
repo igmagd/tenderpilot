@@ -493,7 +493,7 @@ header nav.nav-links.open {
     display: flex !important;
 }
 
-header nav.nav-links a {
+.nav-links.open { display: flex !important; }
     font-size: 19px !important; /* Крупный и солидный шрифт */
     font-weight: 600;
     color: rgba(255, 255, 255, 0.85) !important;
