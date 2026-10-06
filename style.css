@@ -1,3 +1,7 @@
+/* ==========================================================================
+   TENDERPILOT — PROFESSIONAL ECOSYSTEM STYLESHEET (STYLE.CSS)
+   ========================================================================== */
+
 /* --- 1. КОРНЕВЫЕ НАСТРОЙКИ И ФОН --- */
 * {
     box-sizing: border-box;
@@ -371,4 +375,4 @@ div#tk-modal {
 
 footer{padding:25px 0 40px!important}footer p{margin-bottom:12px}.footer-links{display:flex;justify-content:center;gap:6px 20px;flex-wrap:wrap;line-height:1.8}.footer-links a{color:#52525b!important;font-size:12px!important;text-decoration:none!important;font-weight:400!important;transition:none!important}.footer-links a:hover{color:#52525b!important;background:none!important;box-shadow:none!important}
 
-.cookie-banner{position:fixed;bottom:35px;left:50%;transform:translateX(-50%);width:min(calc(100% - 32px),600px);background-image:radial-gradient(circle at 10% 10%,rgba(79,172,254,0.15),transparent 45%),linear-gradient(135deg,#0d111c 0%,#07070c 100%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.25);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;z-index:99999;box-shadow:inset 0 0 30px rgba(7
+.cookie-banner{position:fixed;bottom:35px;left:50%;transform:translateX(-50%);width:min(calc(100% - 32px),600px);background-image:radial-gradient(circle at 10% 10%,rgba(79,172,254,0.15),transparent 45%),linear-gradient(135deg,#0d111c 0%,#07070c 100%);b
