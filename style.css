@@ -1,12 +1,14 @@
-/* --- 1. КОРНЕВЫЕ СТИЛИ И ГЛУБОКИЙ КОСМИЧЕСКИЙ ФОН --- */
+/* --- 1. КОРНЕВЫЕ НАСТРОЙКИ И ФОН --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 body {
     min-height: 100vh;
     overflow-x: hidden;
@@ -15,19 +17,24 @@ body {
     background: #05050a;
     -webkit-font-smoothing: antialiased;
 }
+
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%), linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%);
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%),
+        linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%);
     background-size: cover;
 }
+
 a {
     color: inherit;
-    text-decoration: none;
 }
+
 .container {
     position: relative;
     z-index: 1;
@@ -35,7 +42,7 @@ a {
     margin: 0 auto;
 }
 
-/* --- 2. ДИЗАЙНЕРСКАЯ ШАПКА, МЕНЮ И ЛИЧНЫЙ КАБИНЕТ --- */
+/* --- 2. ШАПКА САЙТА И МЕНЮ --- */
 header {
     position: relative;
     z-index: 10;
@@ -45,133 +52,299 @@ header {
     min-height: 80px;
     border-bottom: 1px solid rgba(0, 242, 254, 0.18);
 }
+
 .logo {
     color: #ffffff;
+    text-decoration: none;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
-.logo span { 
-    color: #00f2fe; 
-}
+
+.logo span { color: #00f2fe; }
+
 .nav-links {
     display: flex;
     align-items: center;
     gap: 28px;
 }
+
 .nav-links a {
     color: #8a8a93;
+    text-decoration: none;
     font-size: 14px;
     transition: color 0.2s ease;
 }
-.nav-links a:hover { 
-    color: #ffffff; 
-}
 
-/* Уникальный клик на гамбургер с резкой белой вспышкой */
+.nav-links a:hover { color: #ffffff; }
+
 .menu-toggle {
     display: none;
     width: 44px;
     height: 44px;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid #343442;
     border-radius: 12px;
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    font-size: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 28px;
+    line-height: 1;
     cursor: pointer;
-    transition: transform 0.1s ease;
 }
-.menu-toggle:active {
-    background: #ffffff !important;
-    color: #05050a !important;
-    transform: scale(0.95);
-    box-shadow: 0 0 20px #ffffff;
+/* --- 3. ГЛАВНЫЙ ЭКРАН (HERO) --- */
+.hero {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 90px 0 70px;
+    text-align: center;
 }
-.lk-btn {
+
+.hero h1 {
+    margin-bottom: 24px;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+    font-weight: 800;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    color: #a1a1aa;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.hero-actions {
     display: flex;
-    width: 44px;
-    height: 44px;
-    align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    gap: 14px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+}
+
+.primary-btn, .secondary-btn {
+    display: inline-block;
+    padding: 15px 25px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: all 0.2s ease;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
-.lk-btn:hover {
-    border-color: #00f2fe;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+
+.primary-btn { color: #0b0b0f; background: #ffffff; }
+.secondary-btn { border: 1px solid #343442; color: #ffffff; background: rgba(255, 255, 255, 0.04); }
+.primary-btn:hover, .secondary-btn:hover { transform: translateY(-2px); }
+
+/* --- 4. ЧИСТАЯ БЕНТО-СЕТКА И КАРТОЧКИ --- */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 100px;
 }
-.lk-btn:active {
-    background: #ffffff;
-    box-shadow: 0 0 25px #ffffff;
+
+.bento-item, .placeholder-section {
+    min-height: 190px;
+    padding: 30px;
+    margin-bottom: 16px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 24px;
+    background: rgba(15, 15, 26, 0.75);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
-.lk-btn svg {
-    transition: stroke 0.2s;
+
+.placeholder-section:hover, .bento-item:hover {
+    transform: translateY(-3px);
+    background: rgba(22, 22, 36, 0.85);
 }
-.lk-btn:active svg {
-    stroke: #05050a !important;
+
+.bento-item h3 { margin-bottom: 12px; font-size: 19px; }
+.bento-item p { color: #8a8a93; font-size: 14px; line-height: 1.6; }
+.icon { display: block; margin-bottom: 18px; font-size: 30px; }
+/* --- 5. КЛАССЫ НЕОНОВОЙ ПОДСВЕТКИ ДЛЯ СЕО-ПЛАШЕК --- */
+.neon-cyan {
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(0, 242, 254, 0.65) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.65) !important;
 }
-/* --- 3. ГЛАВНЫЙ ЭКРАН И МОНОЛИТНЫЙ ПЕРЕКЛЮЧАТЕЛЬ --- */
-.hero { max-width: 850px; margin: 0 auto; padding: 90px 0 60px; text-align: center; }
-.audience-toggle-container { display: inline-flex; justify-content: center; background: rgba(255, 255, 255, 0.03); padding: 4px; border-radius: 14px; margin: 0 auto 40px auto; }
-.toggle-btn { padding: 12px 24px; background: transparent; border-radius: 10px; cursor: pointer; }
-.toggle-btn:active { transition: 0s !important; background: #ffffff !important; color: #05050a !important; }
+.neon-cyan:hover {
+    border-right: 1px solid rgba(0, 242, 254, 0.95) !important;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.95) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.15) !important;
+}
 
-/* --- 4. СЕЙФОВАЯ БЕНТО-СЕТКА --- */
-.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 100px; }
-.bento-item { min-height: 190px; padding: 30px; border-radius: 24px; background: rgba(15, 15, 26, 0.75); }
-    /* --- 5. ФИРМЕННАЯ НЕОНОВАЯ ПОДСВЕТКА КАРТОЧЕК --- */
-.neon-cyan { background: linear-gradient(135deg, rgba(0, 242, 254, 0.08), rgba(14, 14, 22, 0.75)) !important; border-right: 1px solid rgba(0, 242, 254, 0.65) !important; border-bottom: 1px solid rgba(0, 242, 254, 0.65) !important; }
-.neon-cyan:hover { border-right-color: rgba(0, 242, 254, 0.95) !important; border-bottom-color: rgba(0, 242, 254, 0.95) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.15) !important; }
-.neon-blue { background: linear-gradient(135deg, rgba(79, 172, 254, 0.08), rgba(14, 14, 22, 0.75)) !important; border-right: 1px solid rgba(79, 172, 254, 0.65) !important; border-bottom: 1px solid rgba(79, 172, 254, 0.65) !important; }
-.neon-blue:hover { border-right-color: rgba(79, 172, 254, 0.95) !important; border-bottom-color: rgba(79, 172, 254, 0.95) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 172, 254, 0.15) !important; }
-.neon-indigo { background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(14, 14, 22, 0.75)) !important; border-right: 1px solid rgba(99, 102, 241, 0.65) !important; border-bottom: 1px solid rgba(99, 102, 241, 0.65) !important; }
-.neon-indigo:hover { border-right-color: rgba(99, 102, 241, 0.95) !important; border-bottom-color: rgba(99, 102, 241, 0.95) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.15) !important; }
-.neon-emerald { background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(14, 14, 22, 0.75)) !important; border-right: 1px solid rgba(16, 185, 129, 0.65) !important; border-bottom: 1px solid rgba(16, 185, 129, 0.65) !important; }
-.neon-emerald:hover { border-right-color: rgba(16, 185, 129, 0.95) !important; border-bottom-color: rgba(16, 185, 129, 0.95) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15) !important; }
-.neon-purple { background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), rgba(14, 14, 22, 0.75)) !important; border-right: 1px solid rgba(147, 51, 234, 0.65) !important; border-bottom: 1px solid rgba(147, 51, 234, 0.65) !important; }
-.neon-purple:hover { border-right-color: rgba(147, 51, 234, 0.95) !important; border-bottom-color: rgba(147, 51, 234, 0.95) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(147, 51, 234, 0.15) !important; }
-.neon-pink { background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(14, 14, 22, 0.75)) !important; border-right: 1px solid rgba(236, 72, 153, 0.65) !important; border-bottom: 1px solid rgba(236, 72, 153, 0.65) !important; }
-.neon-pink:hover { border-right-color: rgba(236, 72, 153, 0.95) !important; border-bottom-color: rgba(236, 72, 153, 0.95) !important; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(236, 72, 153, 0.15) !important; }
-.neon-gold { background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(110, 10, 14, 0.85)) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-right-color: rgba(255, 255, 255, 0.45) !important; border-bottom-color: rgba(255, 255, 255, 0.45) !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.18) !important; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important; }
-.neon-gold:hover { border-color: rgba(255, 255, 255, 0.4) !important; border-right-color: #ffffff !important; border-bottom-color: #ffffff !important; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.45) !important; transform: translateY(-2px) !important; }
+.neon-blue {
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(79, 172, 254, 0.65) !important;
+    border-bottom: 1px solid rgba(79, 172, 254, 0.65) !important;
+}
+.neon-blue:hover {
+    border-right: 1px solid rgba(79, 172, 254, 0.95) !important;
+    border-bottom: 1px solid rgba(79, 172, 254, 0.95) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 172, 254, 0.15) !important;
+}
 
-/* --- 6. FUTER И МАТОВЫЕ МОДАЛЬНЫЕ ОКНА --- */
-footer { padding: 40px 0; border-top: 1px solid rgba(0, 242, 254, 0.18); color: #666675; font-size: 13px; text-align: center; }
-.footer-links { display: flex; justify-content: center; gap: 6px 20px; flex-wrap: wrap; }
-.footer-links a { color: #52525b; font-size: 12px; transition: color 0.2s; }
-.footer-links a:hover { color: #ffffff; }
+.neon-indigo {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(99, 102, 241, 0.65) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.65) !important;
+}
+.neon-indigo:hover {
+    border-right: 1px solid rgba(99, 102, 241, 0.95) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.95) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.15) !important;
+}
 
-.modal-window { display: none; position: fixed; inset: 0; z-index: 10001; background: rgba(5, 5, 10, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); justify-content: center; align-items: center; padding: 24px; }
-.modal-content { position: relative; width: min(500px, 100%); background: #0f0f1a; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px 30px 30px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7); }
-.modal-close { position: absolute; top: 16px; left: 16px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; color: #fff; background: transparent; font-size: 24px; cursor: pointer; }
-.modal-input { width: 100%; padding: 14px; background: rgba(5, 5, 10, 0.6); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; color: #fff; font-size: 15px; outline: none; }
-.modal-input:focus { border-color: #00f2fe; box-shadow: 0 0 14px rgba(0, 242, 254, 0.2); }
-.modal-action-btn { width: 100%; padding: 16px; background: #ffffff; color: #05050a; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s; }
-.modal-action-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15); }
-.modal-content h2 { margin-bottom: 20px; text-align: center; font-size: 24px; }
+.neon-emerald {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(16, 185, 129, 0.65) !important;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.65) !important;
+}
+.neon-emerald:hover {
+    border-right: 1px solid rgba(16, 185, 129, 0.95) !important;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.95) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15) !important;
+}
 
-.cookie-banner { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); width: min(calc(100% - 32px), 500px); background: #0f0f1a; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 16px; z-index: 99999; display: flex; justify-content: space-between; align-items: center; gap: 12px; box-shadow: inset 0 0 30px rgba(79, 172, 254, 0.05), 0 15px 30px rgba(0,0,0,0.5); }
-.cookie-banner p { font-size: 12px; color: #8a8a93; }
-#cookie-accept { padding: 8px 16px; background: #fff; color: #05050a; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
-.cookie-link { color: #00f2fe; text-decoration: underline; }
+.neon-purple {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(147, 51, 234, 0.65) !important;
+    border-bottom: 1px solid rgba(147, 51, 234, 0.65) !important;
+}
+.neon-purple:hover {
+    border-right: 1px solid rgba(147, 51, 234, 0.95) !important;
+    border-bottom: 1px solid rgba(147, 51, 234, 0.95) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(147, 51, 234, 0.15) !important;
+}
 
-/* --- 7. ПОЛНАЯ МОБИЛЬНАЯ АДАПТИВНОСТЬ --- */
-@media (max-width: 768px) {
-    header { display: flex !important; align-items: center; justify-content: flex-start; gap: 12px; }
-    .menu-toggle { display: flex !important; background: transparent !important; }
-    .lk-btn { margin-left: auto; }
-    header:has(nav.nav-links.open) .lk-btn { display: none !important; }
-    header nav.nav-links { display: none; flex-direction: column; position: fixed; inset: 0; width: 100vw; height: 100vh; padding: 100px 32px 40px; background: #05050a; z-index: 90; }
-    header nav.nav-links.open { display: flex !important; }
-    header nav.nav-links a { font-size: 18px; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); width: 100%; }
-    .bento-grid { display: flex !important; flex-direction: column !important; gap: 16px; }
+.neon-pink {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(14, 14, 22, 0.75)) !important;
+    border-right: 1px solid rgba(236, 72, 153, 0.65) !important;
+    border-bottom: 1px solid rgba(236, 72, 153, 0.65) !important;
+}
+.neon-pink:hover {
+    border-right: 1px solid rgba(236, 72, 153, 0.95) !important;
+    border-bottom: 1px solid rgba(236, 72, 153, 0.95) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(236, 72, 153, 0.15) !important;
+}
+
+.neon-gold {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(10, 10, 14, 0.85)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-right-color: rgba(255, 255, 255, 0.45) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.45) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.18) !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.neon-gold:hover {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    border-right-color: #ffffff !important;
+    border-bottom-color: #ffffff !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+/* --- 7. BLOKK"KONTENTAP I SEKTSII --- */
+.about {
+    padding: 70px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+.about h2 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+.about p {
+    max-width: 680px;
+    margin: 0 auto;
+    color: #8a8a93;
+    line-height: 1.7;
+}
+
+footer {
+    padding: 25px 0 40px !important;
+    text-align: center;
+    border-top: 1px solid rgba(0, 242, 254, 0.18);
+}
+footer p {
+    margin-bottom: 12px;
+    color: #666675;
+    font-size: 13px;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 6px 20px;
+    flex-wrap: wrap;
+    line-height: 1.8;
+}
+.footer-links a {
+    color: #52525b !important;
+    font-size: 12px !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+    transition: none !important;
+}
+.footer-links a:hover {
+    color: #52525b !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* --- 8. VYCHISHCHENNYE MODALNYE OKNA I KALKULYATORY --- */
+.modal-window, div#Calc-modal, div#tk-modal, div#guarantee-modal, div#legal-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display1: none;
+    width: 100%;
+    height: 100dvh;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 110px 24px 40px;
+    gap: 20px;
+    overflow-y: auto;
+    background: rgba(4, 4, 6, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.modal-window.open, div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open, div#legal-modal.open {
+    display: flex !important;
+}
+
+div#calc-modal {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(79, 172, 254, 0.14), transparent 32%),
+      linear-gradient(135deg, #111827 0%, #09090b 48%, #020617 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: inset 0 0 80px rgba(79, 172, 254, 0.12), 0 0 40px rgba(79, 172, 254, 0.35);
+}
+
+div#guarantee-modal {
+    background-image: radial-gradient(circle at 20% 20%, rgba(228, 228, 231, 0.25), transparent 45%), linear-gradient(135deg, #0f0f1a 0%, #05050a 100%);
+}
+
+div#tk-modal {
+    background-image: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.14), transparent 32%), linear-gradient(135deg, #090"v11 0%, #09090b 48%, #020208 100%);
+    box-shadow: inset 0 0 80px rgba(99, 102, 241, 0.1), 0 0 40px rgba(99, 102, 241, 0.25);
+}
+
+div#legal-modal {
+    backgrounc-image: radial-gradient(circle at 20% 20%, rgba(r36, 72, 153, 0.14), transparent 32%), linear-gradient(135deg, #120b14 0%, #09090b 48%, #020208 100%) !important;
+    box-shadow: inset 0 0 80px rgba(236, 72, 153, 0.1), 0 0 40px rgba(236, 72, 153, 0.25) !important;
     }
-                                                                                                                                           
