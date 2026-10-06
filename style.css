@@ -92,6 +92,7 @@ header {
     line-height: 1;
     cursor: pointer;
 }
+
 /* --- 3. ГЛАВНЫЙ ЭКРАН (HERO) --- */
 .hero {
     max-width: 850px;
@@ -142,7 +143,8 @@ header {
 .secondary-btn { border: 1px solid #343442; color: #ffffff; background: rgba(255, 255, 255, 0.04); }
 .primary-btn:hover, .secondary-btn:hover { transform: translateY(-2px); }
 
-/* --- 4. ЧИСТАЯ БЕНТО-СЕТКА И КАРТОЧКИ --- */
+
+/* --- 5. ЧИСТАЯ БЕНТО-СЕТКА И КАРТОЧКИ --- */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -174,7 +176,8 @@ header {
 .bento-item h3 { margin-bottom: 12px; font-size: 19px; }
 .bento-item p { color: #8a8a93; font-size: 14px; line-height: 1.6; }
 .icon { display: block; margin-bottom: 18px; font-size: 30px; }
-/* --- 5. КЛАССЫ НЕОНОВОЙ ПОДСВЕТКИ ДЛЯ СЕО-ПЛАШЕК --- */
+
+/* --- 6. КЛАССЫ НЕОНОВОЙ ПОДСВЕТКИ ДЛЯ СЕО-ПЛАШЕК --- */
 .neon-cyan {
     background: linear-gradient(135deg, rgba(0, 242, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
     border-right: 1px solid rgba(0, 242, 254, 0.65) !important;
@@ -256,95 +259,116 @@ header {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.45) !important;
     transform: translateY(-2px) !important;
 }
-/* --- 7. BLOKK"KONTENTAP I SEKTSII --- */
-.about {
-    padding: 70px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    text-align: center;
-}
-.about h2 {
-    margin-bottom: 18px;
-    font-size: 30px;
-}
-.about p {
-    max-width: 680px;
-    margin: 0 auto;
-    color: #8a8a93;
-    line-height: 1.7;
-}
+
+/* --- 7. БЛОКИ КОНТЕНТА И СЕКЦИИ --- */
+.about { padding: 70px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); text-align: center; }
+.about h2 { margin-bottom: 18px; font-size: 30px; }
+.about p { max-width: 680px; margin: 0 auto; color: #8a8a93; line-height: 1.7; }
 
 footer {
-    padding: 25px 0 40px !important;
-    text-align: center;
+    padding: 40px 0;
     border-top: 1px solid rgba(0, 242, 254, 0.18);
-}
-footer p {
-    margin-bottom: 12px;
     color: #666675;
     font-size: 13px;
-}
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 6px 20px;
-    flex-wrap: wrap;
-    line-height: 1.8;
-}
-.footer-links a {
-    color: #52525b !important;
-    font-size: 12px !important;
-    text-decoration: none !important;
-    font-weight: 400 !important;
-    transition: none !important;
-}
-.footer-links a:hover {
-    color: #52525b !important;
-    background: none !important;
-    box-shadow: none !important;
+    text-align: center;
 }
 
-/* --- 8. VYCHISHCHENNYE MODALNYE OKNA I KALKULYATORY --- */
-.modal-window, div#Calc-modal, div#tk-modal, div#guarantee-modal, div#legal-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 10001;
-    display1: none;
-    width: 100%;
-    height: 100dvh;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    padding: 110px 24px 40px;
-    gap: 20px;
-    overflow-y: auto;
-    background: rgba(4, 4, 6, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+/* --- 8. ВЫЧИЩЕННЫЕ МОДАЛЬНЫЕ ОКНА И КАЛЬКУЛЯТОРЫ --- */
+div#calc-modal, div#tk-modal, div#guarantee-modal {
+    position: fixed; inset: 0; z-index: 10001; display: none; width: 100%; height: 100dvh;
+    flex-direction: column; align-items: stretch; justify-content: flex-start;
+    padding: 110px 24px 40px; gap: 20px; overflow-y: auto;
 }
+div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open { display: flex !important; }
 
-.modal-window.open, div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open, div#legal-modal.open {
-    display: flex !important;
+/* Калькулятор НМЦК */
+div#calc-modal {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(79, 172, 254, 0.14), transparent 32%),    display: none; width: 100%; height: 100dvh;
+    flex-direction: column; align-items: stretch; justify-content: flex-start;
+    padding: 110px 24px 40px; gap: 20px; overflow-y: auto;
 }
+div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open { display: flex !important; }
 
+/* Калькулятор НМЦК */
 div#calc-modal {
     background-image:
       radial-gradient(circle at 20% 20%, rgba(79, 172, 254, 0.14), transparent 32%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' width='400' height='400' viewBox='0 0 400 400'%3E%3Ctext x='20' y='60' fill='%234facfe' font-family='Courier, monospace' font-size='13' opacity='0.04'%3ENM_CK = (v / n) * %5Csum(c_i * k_i)%3C/text%3E%3Ctext x='40' y='100' fill='%23ffffff' font-family='Courier, monospace' font-size='12' opacity='0.03'%3EV = (%5Csigma / c) * 100%25%3C/text%3E%3Ctext x='15' y='160' fill='%234facfe' font-family='Courier, monospace' font-size='14' opacity='0.04'%3E%5Csigma = %5Csqrt(%5Csum(c_i - c)^2 / (n - 1))%3C/text%3E%3Ctext x='60' y='220' fill='%23ffffff' font-family='Courier, monospace' font-size='12' opacity='0.03'%3EDoc_Comp = EIS.Parsing(OKPD2)%3C/text%3E%3Ctext x='30' y='280' fill='%234facfe' font-family='Courier, monospace' font-size='13' opacity='0.04'%3E%5Csum P_i / n = C_s%3C/text%3E%3C/svg%3E"),
       linear-gradient(135deg, #111827 0%, #09090b 48%, #020617 100%);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: auto, 400px 400px, cover; background-repeat: no-repeat, repeat, no-repeat;
     box-shadow: inset 0 0 80px rgba(79, 172, 254, 0.12), 0 0 40px rgba(79, 172, 254, 0.35);
 }
 
+/* Окно Гарантий */
 div#guarantee-modal {
-    background-image: radial-gradient(circle at 20% 20%, rgba(228, 228, 231, 0.25), transparent 45%), linear-gradient(135deg, #0f0f1a 0%, #05050a 100%);
+    background: rgba(4, 4, 6, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background-image: radial-gradient(circle at 20% 20%, rgba(228, 228, 231, 0.25), transparent 45%);
 }
 
+/* Окно Логистики */
 div#tk-modal {
-    background-image: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.14), transparent 32%), linear-gradient(135deg, #090"v11 0%, #09090b 48%, #020208 100%);
+    background-image: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.14), transparent 32%), linear-gradient(135deg, #090b11 0%, #09090b 48%, #020208 100%);
     box-shadow: inset 0 0 80px rgba(99, 102, 241, 0.1), 0 0 40px rgba(99, 102, 241, 0.25);
 }
 
-div#legal-modal {
-    backgrounc-image: radial-gradient(circle at 20% 20%, rgba(r36, 72, 153, 0.14), transparent 32%), linear-gradient(135deg, #120b14 0%, #09090b 48%, #020208 100%) !important;
-    box-shadow: inset 0 0 80px rgba(236, 72, 153, 0.1), 0 0 40px rgba(236, 72, 153, 0.25) !important;
-    }
+/* Кнопки закрытия, инпуты и табы */
+.modal-calc-close, .modal-guarantee-close, .modal-tk-close {
+    position: fixed; top: 13px; left: 16px; z-index: 10002; display: flex; width: 44px; height: 44px;
+    align-items: center; justify-content: center; border-radius: 12px; color: #ffffff; background: rgba(9, 9, 11, 0.9); font-size: 28px; cursor: pointer; transition: all 0.2s ease;
+}
+.modal-calc-close { border: 1px solid rgba(79, 172, 254, 0.45); box-shadow: 0 0 20px rgba(79, 172, 254, 0.25); }
+.modal-calc-close:hover { color: #4facfe; border-color: rgba(79, 172, 254, 0.85); box-shadow: 0 0 25px rgba(79, 172, 254, 0.45); }
+.modal-guarantee-close { border: 1px solid rgba(228, 228, 231, 0.4); box-shadow: 0 0 20px rgba(228, 228, 231, 0.35); }
+.modal-guarantee-close:hover { border-color: #ffffff; box-shadow: 0 0 25px rgba(228, 228, 231, 0.6); }
+.modal-tk-close { border: 1px solid rgba(99, 102, 241, 0.45); box-shadow: 0 0 20px rgba(99, 102, 241, 0.25); }
+.modal-tk-close:hover { color: #6366f1; border-color: rgba(99, 102, 241, 0.85); box-shadow: 0 0 25px rgba(99, 102, 241, 0.45); }
+
+.modal-input {
+    width: 100%; padding: 14px; background: rgba(9, 9, 11, 0.6) !important; backdrop-filter: blur(8px); border-radius: 12px; color: #ffffff; font-size: 15px; outline: none; transition: all 0.2s;
+    border: 1px solid rgba(79, 172, 254, 0.3) !important;
+}
+#guarantee-modal .modal-input { border: 1px solid rgba(255, 255, 255, 0.08) !important; background: rgba(5, 5, 8, 0.4) !important; }
+.modal-input:focus { border-color: rgba(79, 172, 254, 0.85) !important; background: rgba(9, 9, 11, 0.8) !important; box-shadow: 0 0 15px rgba(79, 172, 254, 0.3) !important; }
+#guarantee-modal .modal-input:focus { border-color: rgba(228, 228, 231, 0.95) !important; background: rgba(9, 9, 11, 0.8) !important; box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.03), 0 0 20px rgba(228, 228, 231, 0.25) !important; }
+
+.modal-action-btn {
+    background: rgba(14, 22, 43, 0.9) !important; color: #ffffff !important; width: 100%; padding: 16px; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s ease;
+    border: 1px solid rgba(79, 172, 254, 0.45) !important; box-shadow: 0 0 20px rgba(79, 172, 254, 0.25) !important;
+}
+#guarantee-modal .modal-action-btn { background: rgba(20, 20, 25, 0.9) !important; border: 1px solid rgba(228, 228, 231, 0.3) !important; box-shadow: 0 0 20px rgba(228, 228, 231, 0.1) !important; }
+.modal-action-btn:hover { background: rgba(18, 30, 61, 0.95) !important; border-color: rgba(79, 172, 254, 0.85) !important; box-shadow: 0 0 25px rgba(79, 172, 254, 0.45) !important; }
+#guarantee-modal .modal-action-btn:hover { background: rgba(30, 30, 38, 0.95) !important; border-color: rgba(228, 228, 231, 0.95) !important; box-shadow: 0 0 25px rgba(228, 228, 231, 0.4) !important; }
+.modal-action-btn:active { transform: scale(0.98); }
+
+.guarantee-tabs, .transport-tabs { display: grid; gap: 8px; margin-bottom: 12px; }
+.guarantee-tabs { grid-template-columns: repeat(3, 1fr); }
+.transport-tabs { grid-template-columns: repeat(4, 1fr); }
+
+.guarantee-tab, .transport-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 14px 6px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; cursor: pointer; color: #a1a1aa; transition: all 0.2s ease; text-align: center; }
+.transport-tab { padding: 12px 6px; background: rgba(255, 255, 255, 0.03); border-color: rgba(255, 255, 255, 0.08); color: #8a8a93; }
+.guarantee-tab svg, .transport-tab svg { width: 20px; height: 20px; stroke: currentColor; fill: none; transition: all 0.2s ease; }
+.guarantee-tab span, .transport-tab span { font-size: 11px; font-weight: 500; line-height: 1.2; }
+.transport-tab span { font-size: 12px; }
+
+.guarantee-tab:hover { color: #ffffff; background: rgba(255, 255, 255, 0.04); border-color: rgba(228, 228, 231, 0.3); }
+.transport-tab:hover { color: #ffffff; background: rgba(255, 255, 255, 0.06); border-color: rgba(99, 102, 241, 0.4); }
+
+#guarantee-modal .guarantee-tab.active-chrome { color: #ffffff !important; background: rgba(255, 255, 255, 0.08) !important; border-color: rgba(228, 228, 231, 0.95) !important; box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05), 0 0 20px rgba(228, 228, 231, 0.4) !important; }
+#guarantee-modal .guarantee-tab.active-chrome svg { stroke: #ffffff !important; transform: scale(1.05); }
+#tk-modal .transport-tab.active { color: #ffffff; background: rgba(99, 102, 241, 0.08); border-color: rgba(99, 102, 241, 0.85); box-shadow: 0 0 15px rgba(99, 102, 241, 0.2); }
+#tk-modal .transport-tab.active svg { stroke: rgba(99, 102, 241, 1); transform: scale(1.05); }
+
+/* Активные табы для калькуляторов */
+#tk-modal [class*="tab"].active, #tk-modal [class*="tab"][class*="active"] { color: #ffffff !important; background: rgba(99, 102, 241, 0.08) !important; border-color: rgba(99, 102, 241, 0.95) !important; box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.05), 0 0 20px rgba(99, 102, 241, 0.4) !important; }
+#tk-modal [class*="tab"].active svg { stroke: rgba(99, 102, 241, 1) !important; transform: scale(1.05); }
+#calc-modal .calc-tab.active, #calc-modal [class*="tab"].active { color: #ffffff !important; background: rgba(79, 172, 254, 0.08) !important; border-color: rgba(79, 172, 254, 0.95) !important; box-shadow: inset 0 0 10px rgba(79, 172, 254, 0.05), 0 0 20px rgba(79, 172, 254, 0.4) !important; }
+#calc-modal .calc-tab.active svg { stroke: rgba(79, 172, 254, 1) !important; transform: scale(1.05); }
+
+/* --- 9. АБСОЛЮТНО ЧИСТАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
+
+@media (max-width:768px){header{position:relative;z-index:100;display:flex!important;align-items:center;justify-content:flex-start;padding:0!important;gap:12px}.menu-toggle{display:flex!important;position:relative;z-index:101;order:1;margin-left:0;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}.menu-toggle:hover,.menu-toggle:focus,.menu-toggle.is-open{background:transparent!important;color:#fff!important;border-color:rgba(255,255,255,0.25)!important;box-shadow:none!important}.menu-toggle:active{background:transparent!important;color:#fff!important;border-color:#fff!important;box-shadow:0 0 15px rgba(255,255,255,0.3)!important}.logo{order:2;margin-left:0}.lk-btn{display:flex;position:relative;z-index:101;order:3;margin-left:auto;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;text-decoration:none;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}header:has(nav.nav-links.open) .lk-btn{display:none!important}header nav.nav-links{display:none;flex-direction:column;align-items:flex-start;justify-content:flex-start;position:fixed;inset:0;width:100vw;height:100vh;padding:100px 32px 40px;background:radial-gradient(circle at 20% 20%,rgba(0,242,254,.15) 0,transparent 50%),radial-gradient(circle at 80% 40%,rgba(0,149,255,.12) 0,transparent 60%),linear-gradient(to top,#020617 0,#09090b 70%,#020208 100%);z-index:90;box-sizing:border-box;overflow:hidden!important}header nav.nav-links.open{display:flex!important}header nav.nav-links a{font-size:18px;font-weight:600;color:rgba(255,255,255,0.75)!important;text-decoration:none;padding:8px 0!important;width:100%;text-align:left;border-bottom:1px solid rgba(0,242,254,.15);box-shadow:none!important;transition:all .2s ease}header nav.nav-links a:hover,header nav.nav-links a:active{color:rgba(255,255,255,0.75)!important;border-bottom-color:rgba(0,242,254,0.85)!important;box-shadow:none!important}.bento-grid,#customer-grid,#supplier-grid{display:flex!important;flex-direction:column!important;gap:16px!important}.placeholder-section{padding:30px 16px!important;margin-bottom:16px!important}}
+
+footer{padding:25px 0 40px!important}footer p{margin-bottom:12px}.footer-links{display:flex;justify-content:center;gap:6px 20px;flex-wrap:wrap;line-height:1.8}.footer-links a{color:#52525b!important;font-size:12px!important;text-decoration:none!important;font-weight:400!important;transition:none!important}.footer-links a:hover{color:#52525b!important;background:none!important;box-shadow:none!important}
+
+.cookie-banner{position:fixed;bottom:35px;left:50%;transform:translateX(-50%);width:min(calc(100% - 32px),600px);background-image:radial-gradient(circle at 10% 10%,rgba(79,172,254,0.15),transparent 45%),linear-gradient(135deg,#0d111c 0%,#07070c 100%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.25);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;z-index:99999;box-shadow:inset 0 0 30px rgba(7
