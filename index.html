@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TenderPilot</title>
+    <meta name="description" content="TenderPilot — ИИ-анализ тендеров и автоматизация госзакупок по 44-ФЗ и 223-ФЗ">
+    <title>TenderPilot — ИИ-анализ тендеров</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
             <a class="logo" href="#">Tender<span>Pilot</span></a>
             <nav class="nav-links" id="nav-links">
-                <a href="#tenders">Поиск тендеров</a>
-                <a href="#suppliers">Поиск поставщиков</a>
-                <a href="#legal">Помощь юриста</a>
+                <a href="#tenders" class="main-nav-link">Поиск и анализ тендеров</a>
+                <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
+                <a href="#docs" class="main-nav-link">Подготовка тендерной документации</a>
+                <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
+                <a href="#delivery" class="main-nav-link">Расчет стоимости доставки</a>
+                <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
+                <a href="#legal" class="main-nav-link">Помощь юриста</a>
+                <a href="#education" class="main-nav-link">Обучение</a>
+                <a href="#contact" class="main-nav-link">Контакты</a>
+                <a href="#faq" class="main-nav-link">FAQ</a>
             </nav>
+            <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </a>
         </header>
+
         <main>
             <div class="audience-toggle-container">
                 <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщику</button>
