@@ -9,29 +9,21 @@
 </head>
 <body>
     <div class="container">
-<header>
-    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+        <header>
     <a class="logo" href="#">Tender<span>Pilot</span></a>
-        <nav class="nav-links" id="nav-links">
-            <a href="#tenders" class="main-nav-link">Поиск и анализ тендеров</a>
-            <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
-            <a href="#docs" class="main-nav-link">Подготовка тендерной документации</a>
-            <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
-            <a href="#delivery" class="main-nav-link">Расчет стоимости доставки</a>
-            <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
-            <a href="#legal" class="main-nav-link">Помощь юриста</a>
-            <a href="#education" class="main-nav-link">Обучение</a>
-            <a href="#contact" class="main-nav-link">Контакты</a>
-            <a href="#faq" class="main-nav-link">FAQ</a>
-        </nav>
-    <a class="lk-btn" href="#login" aria-label="Личный кабинет">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-        </svg>              
-    </a>
-</header>
+    <nav class="nav-links">
+        <a href="#technologies">Наши технологии</a>
+<a href="#features">Ваши возможности</a><a href="#calc" onclick="event.preventDefault(); openCalcModal();">Расчет НМЦК</a><a href="#tk-match" onclick="event.preventDefault(); openTkModal();">Подбор ТК</a><a href="#pricing">Тарифы</a><a href="#guarantees" onclick="event.preventDefault(); openGuaranteeModal();">Банковские гарантии</a><a href="#legal" onclick="event.preventDefault(); document.getElementById('legal-modal').style.display='flex';">Помощь юриста</a><a href="#contacts">Контакты</a><a href="#faq">FAQ</a></nav>
 
+          <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+<svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+</svg>              
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+        </header>
         <main>
             <div class="audience-toggle-container">
     <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщику</button>
@@ -222,28 +214,16 @@ function switchMode(mode){document.querySelectorAll('.toggle-btn').forEach(btn=>
     function openModal(service) { alert('Демо-режим для сервиса: ' + service); }
 
     // Умное мобильное меню
-const menuToggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav-links");
-
-if (menuToggle && nav) {
-    menuToggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isOpen = nav.classList.toggle('open');
-        menuToggle.classList.toggle("is-open", isOpen);
-        menuToggle.textContent = isOpen ? "×" : "☰";
-        menuToggle.setAttribute("aria-expanded", isOpen);
-    });
-}
-
-function closeAllMobileMenus() {
-    if (nav && menuToggle) {
-        nav.classList.remove('open');
-        menuToggle.classList.remove('is-open');
-        menuToggle.textContent = "☰";
-        menuToggle.setAttribute("aria-expanded", "false");
+    const menuToggle = document.getElementById("menu-toggle");
+    const nav = document.querySelector("header nav");
+    if (menuToggle && nav) {
+        menuToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle("is-open");
+            nav.classList.toggle("open");
+            menuToggle.textContent = nav.classList.contains("open") ? "×" : "☰";
+        });
     }
-}
-
     // Закрытие плашки Cookie по клику на кнопку ОК
 const cookieBanner = document.getElementById('cookie-banner');
 const cookieAccept = document.getElementById('cookie-accept');
@@ -259,5 +239,5 @@ function openLegalModal(){openModalWindow('legal-modal');}function closeLegalMod
     <div id="legal-modal" class="modal-window"><button class="modal-close" onclick="closeLegalModal()">&times;</button><h2 style="color:#ffffff;font-size:24px;margin-bottom:8px;font-weight:700;">Помощь юриста</h2><p style="color:#8a8a93;font-size:14px;margin-bottom:20px;">Поиск профильных экспертов по 44-ФЗ и 223-ФЗ в вашем регионе.</p><div style="display:flex;flex-direction:column;gap:12px;"><input type="text" class="modal-input" placeholder="Введите ваш город"><button type="button" class="modal-action-btn" onclick="closeLegalModal()">Найти юриста</button></div></div>
     
 </body>
-    </html>
-    
+            </html>
+                                                                                                                                       
