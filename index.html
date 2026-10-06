@@ -1,170 +1,263 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TenderPilot — ИИ-анализ тендеров и автоматизация госзакупок по 44-ФЗ и 223-ФЗ">
     <title>TenderPilot — ИИ-анализ тендеров</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
-            <a class="logo" href="#">Tender<span>Pilot</span></a>
-            <nav class="nav-links" id="nav-links">
-                <a href="#tenders" class="main-nav-link">Поиск и анализ тендеров</a>
-                <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
-                <a href="#docs" class="main-nav-link">Подготовка тендерной документации</a>
-                <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
-                <a href="#delivery" class="main-nav-link">Расчет стоимости доставки</a>
-                <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
-                <a href="#legal" class="main-nav-link">Помощь юриста</a>
-                <a href="#education" class="main-nav-link">Обучение</a>
-                <a href="#contact" class="main-nav-link">Контакты</a>
-                <a href="#faq" class="main-nav-link">FAQ</a>
-            </nav>
-            <a class="lk-btn" href="#login" aria-label="Личный кабинет">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                </svg>
-            </a>
-        </header>
+<header>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+    <a class="logo" href="#">Tender<span>Pilot</span></a>
+        <nav class="nav-links" id="nav-links">
+            <a href="#tenders" class="main-nav-link">Поиск и анализ тендеров</a>
+            <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
+            <a href="#docs" class="main-nav-link">Подготовка тендерной документации</a>
+            <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
+            <a href="#delivery" class="main-nav-link">Расчет стоимости доставки</a>
+            <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
+            <a href="#legal" class="main-nav-link">Помощь юриста</a>
+            <a href="#education" class="main-nav-link">Обучение</a>
+            <a href="#contact" class="main-nav-link">Контакты</a>
+            <a href="#faq" class="main-nav-link">FAQ</a>
+        </nav>
+    <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+        </svg>              
+    </a>
+</header>
 
         <main>
             <div class="audience-toggle-container">
-                <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщику</button>
-                <button class="toggle-btn customer-btn" onclick="switchMode('customer')">Заказчику</button>
-                <button class="toggle-btn transport-btn" onclick="switchMode('transport')">Грузоперевозки</button>
+    <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщику</button>
+    <button class="toggle-btn customer-btn" onclick="switchMode('customer')">Заказчику</button>
+    <button class="toggle-btn transport-btn" onclick="switchMode('transport')">Грузоперевозки</button>
             </div>
             
+            <section class="hero" id="start">
+                <h1>ИИ-анализ <span class="gradient-text">тендеров</span></h1>
+                <p>TenderPilot помогает анализировать тендерную документацию, рассчитывать НМЦК и автоматизировать работу по 44-ФЗ и 223-ФЗ.</p>
+            </section>
+
             <div id="supplier-grid" class="bento-grid">
                 <div class="bento-item neon-blue" onclick="openModal('ai-supplier')">
                     <h3>Умный поиск тендеров 44-ФЗ и 223-ФЗ</h3>
-                    <p>Мониторинг торгов и поиск прибыльных лотов под вашу нишу.</p>
+                    <p>Нейросетевой мониторинг торгов и моментальный поиск прибыльных лотов под вашу нишу.</p>
                 </div>
-                <div class="bento-item neon-pink" onclick="openLegalModal()">
-                    <h3>Правовая поддержка: ФАС и РНП</h3>
-                    <p>Защита интересов при оспаривании торгов и включении в РНП.</p>
-                </div>
-                <div class="bento-item neon-gold" onclick="openGuaranteeModal()">
-                    <h3>Банковские гарантии</h3>
-                    <p>Экспресс-оформление обеспечения заявки и исполнения контракта.</p>
-                </div>
+                <div class="bento-item neon-pink" onclick="openLegalModal()"><h3>Помощь юриста: ФАС и РНП</h3><p>Профильная правовая поддержка при оспаривании торгов и защите от включения в РНП.</p></div>
+                
             </div>
-                        <div id="customer-grid" class="bento-grid" style="display: none;">
+            <div id="customer-grid" class="bento-grid" style="display: none;">
                 <div class="bento-item neon-blue" onclick="openCalcModal()">
-                    <h3>Расчет НМЦК по 44-ФЗ онлайн</h3>
-                    <p>Автоматический поиск аналогичных контрактов и формирование отчета.</p>
+                    <h3>Расчет НМЦК по 44-ФЗ онлайн с поиском в ЕИС</h3>
+                    <p>Автоматический поиск аналогичных контрактов и моментальное формирование отчета-обоснования цен.</p>
                 </div>
-                <div class="bento-item neon-cyan" onclick="openModal('tz')">
-                    <h3>Разработка ТЗ по ОКПД2</h3>
-                    <p>Интеллектуальная генерация технических заданий без рисков блокировки ФАС.</p>
-                </div>
-                <div class="bento-item neon-emerald" onclick="openModal('kp')">
-                    <h3>Сбор коммерческих предложений</h3>
-                    <p>Автоматизированный подбор официальных компаний и рассылка запросов цен.</p>
-                </div>
-            </div>
+<div class="bento-item neon-pink" onclick="document.getElementById('legal-modal').style.display='flex'"><h3>Помощь юриста: претензии и споры</h3><p>Юридическое сопровождение контрактов, ведение споров и защита интересов в УФАС.</p></div>
 
-            <div id="transport-grid" class="bento-grid" style="display: none;">
-                <div class="bento-item neon-indigo" onclick="openTkModal()">
-                    <h3>Подбор транспортной компании</h3>
-                    <p>Интеллектуальный калькулятор стоимости грузоперевозки по России для госконтрактов.</p>
-                </div>
-            </div>
         </main>
-        
-        <footer>
-            <p>&copy; 2026 TenderPilot. Все права защищены.</p>
-            <div class="footer-links">
-                <a href="policy.html" target="_blank">Политика конфиденциальности</a>
-            </div>
-        </footer>
-    </div>
-        <div id="guarantee-modal" class="modal-window">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeGuaranteeModal()">&times;</button>
-            <h2>Банковские гарантии</h2>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-                <input type="text" class="modal-input" placeholder="Номер закупки или ссылка">
-                <input type="text" class="modal-input" placeholder="Требуемая сумма покрытия">
-                <input type="email" class="modal-input" placeholder="Email для получения счета">
-                <button class="modal-action-btn" onclick="closeGuaranteeModal()">Получить одобрение банков</button>
-            </div>
+
+<!-- ==========================================================================
+     ПРОДОЛЖЕНИЕ СПИСКА 1: ДЛЯ ПОСТАВЩИКОВ (ВЗРОСЛЫЙ СТИЛЬ БЕЗ ИКОНОК)
+     ========================================================================== -->
+<script>
+    // Технический мост: временно подгружаем оставшиеся плашки Поставщика внутрь первого грида
+    document.getElementById('supplier-grid').innerHTML += `
+        <div class="bento-item neon-cyan" onclick="openModal('suppliers-base')">
+            <h3>База производителей и оптовых поставщиков РФ</h3>
+            <p>Быстрый подбор надежных заводов-изготовителей и субподрядчиков под спецификацию лота.</p>
         </div>
-    </div>
-
-    <div id="tk-modal" class="modal-window">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeTkModal()">&times;</button>
-            <h2>Расчет доставки грузов и подбор ТК</h2>
-            <div style="display:flex;gap:12px;margin-bottom:12px;">
-                <input type="text" class="modal-input" placeholder="Город отправки" style="flex:1;">
-                <input type="text" class="modal-input" placeholder="Город доставки" style="flex:1;">
-            </div>
-            <button class="modal-action-btn" onclick="closeTkModal()">Рассчитать стоимость</button>
+        <div class="bento-item neon-indigo" onclick="openTkModal()">
+            <h3>Калькулятор стоимости грузоперевозок</h3>
+            <p>Автоматический расчет логистики по России и интеграция с ведущими ТК для госконтрактов.</p>
         </div>
-    </div>
-
-    <div id="calc-modal" class="modal-window">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeCalcModal()">&times;</button>
-            <h2>Интеллектуальный расчет НМЦК</h2>
-            <input type="text" class="modal-input" placeholder="Например: Поставка персональных ЭВМ" style="margin-bottom:12px;">
-            <button class="modal-action-btn" onclick="closeCalcModal()">Запустить расчет</button>
+        <div class="bento-item neon-emerald" onclick="openModal('docs-supplier')">
+            <h3>Помощь в подготовке тендерной документации</h3>
+            <p>Автоматическая генерация и ИИ-аудит заявок для исключения отклонений со стороны заказчика.</p>
         </div>
-    </div>
-
-    <div id="legal-modal" class="modal-window">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeLegalModal()">&times;</button>
-            <h2>Помощь юриста: ФАС и РНП</h2>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-                <input type="text" class="modal-input" placeholder="Введите ваш город">
-                <button class="modal-action-btn" onclick="closeLegalModal()">Найти профильного юриста</button>
-            </div>
+        <div class="bento-item neon-purple" onclick="openModal('nmck-supplier')">
+            <h3>Оценка рентабельности и расчет прибыли</h3>
+            <p>Анализ ценовых предложений конкурентов и вычисление чистой маржинальности участия в торгах.</p>
         </div>
+        <div class="bento-item neon-gold" onclick="openGuaranteeModal()">
+            <h3>Оформить обеспечение заявки и контракта</h3>
+            <p>Онлайн-расчёт и экспресс-оформление банковских гарантий. Одобрение от 30+ банков за 15 минут.</p>
+        </div>
+    `;
+
+    // Технический мост: временно подгружаем оставшиеся плашки Заказчика внутрь второго грида
+    document.getElementById('customer-grid').innerHTML += `
+        <div class="bento-item neon-cyan" onclick="openModal('tz')">
+            <h3>Разработка ТЗ по госзакупкам по ОКПД2</h3>
+            <p>Интеллектуальная генерация технических заданий без рисков блокировки со стороны ФАС.</p>
+        </div>
+        <div class="bento-item neon-emerald" onclick="openModal('kp')">
+            <h3>Сбор коммерческих предложений от поставщиков</h3>
+            <p>Автоматизированный подбор официальных компаний и рассылка запросов цен для анализа рынка.</p>
+        </div>
+        <div class="bento-item neon-indigo" onclick="openTkModal()">
+            <h3>Расчет транспортных затрат для сметы контракта</h3>
+            <p>Официальное обоснование и аудит стоимости доставки грузов для защиты проекта в бюджете.</p>
+        </div>
+        <div class="bento-item neon-purple" onclick="openModal('audit')">
+            <h3>Анализ рисков и аудит закупочной документации</h3>
+            <p>Глубокая ИИ-проверка контрактов на соответствие актуальным нормам законодательства.</p>
+    `;
+</script>
+
+
+    <!-- СЕКЦИИ КОНТЕНТА -->
+    <section class="bento-item placeholder-section neon-cyan" id="technologies">
+        <h2>Наши технологии</h2>
+        <p>Описание нейросетевых моделей, алгоритмов парсинга и ИИ-движка TenderPilot.</p>
+    </section>
+
+    <section class="bento-item placeholder-section neon-purple" id="pricing">
+        <h2>Тарифные планы</h2>
+        <p>Гибкие решения для индивидуальных предпринимателей и крупных компаний.</p>
+    </section>
+
+    <section class="bento-item placeholder-section neon-pink" id="faq">
+        <h2>Часто задаваемые вопросы</h2>
+        <p>Ответы на популярные вопросы о работе платформы TenderPilot.</p>
+    </section>
+
+    <section class="about" id="about" style="padding: 70px 20px; text-align: center;">
+        <h2>Автоматизируйте работу с тендерами</h2>
+        <p>Сократите время на изучение документов, быстро находите ключевую информацию и контролируйте каждый этап закупки.</p>
+    </section>
+
+    <!-- ИСПРАВЛЕННЫЙ ФУТЕР -->
+    <footer>
+        <p>&copy; <span id="year">2026</span> TenderPilot. Все права защищены.</p>
+        <div class="footer-links">
+            <a href="policy.html" target="_blank">Политика конфиденциальности</a>
+            <a href="consent.html" target="_blank">Обработка персональных данных</a>
+            <a href="cookie.html" target="_blank">Правила Cookie</a>
+        </div>
+    </footer>
+
+<!-- ==========================================================================
+     ИЗОЛИРОВАННЫЙ СЛОЙ МОДАЛЬНЫХ ОКНО (НАХОДИТСЯ В САМОМ НИЗУ)
+     ========================================================================== -->
+
+<!-- 1. Модальное окно: Банковские гарантии -->
+<div id="guarantee-modal" style="display: none;">
+    <button class="modal-guarantee-close" onclick="closeGuaranteeModal()">&times;</button>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="font-size: 24px; color: #fff; margin-bottom: 6px;">Банковские гарантии</h2>
+        <p style="color: #8a8a93; font-size: 14px;">Оформление обеспечения для участников госзакупок по 44-ФЗ, 223-ФЗ и 185-ФЗ</p>
     </div>
-        <script>
-        function switchMode(mode) {
-            document.querySelectorAll(".toggle-btn").forEach(btn => btn.classList.remove("active"));
-            document.getElementById("supplier-grid").style.display = "none";
-            document.getElementById("customer-grid").style.display = "none";
-            document.getElementById("transport-grid").style.display = "none";
-            
-            if (mode === "supplier") {
-                document.querySelector(".supplier-btn").classList.add("active");
-                document.getElementById("supplier-grid").style.display = "flex";
-            } else if (mode === "customer") {
-                document.querySelector(".customer-btn").classList.add("active");
-                document.getElementById("customer-grid").style.display = "flex";
-            } else if (mode === "transport") {
-                document.querySelector(".transport-btn").classList.add("active");
-                document.getElementById("transport-grid").style.display = "flex";
-            }
-        }
+    <div class="guarantee-tabs">
+        <div class="guarantee-tab active-chrome"><span>Обеспечение заявки</span></div>
+        <div class="guarantee-tab"><span>Исполнение контракта</span></div>
+        <div class="guarantee-tab"><span>Гарантийные обязательства</span></div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+        <input type="text" class="modal-input" placeholder="Номер закупки или ссылка на тендер">
+        <input type="text" class="modal-input" placeholder="Требуемая сумма покрытия (₽)">
+        <input type="email" class="modal-input" placeholder="Email для получения решения и счёта">
+        <button class="modal-action-btn" onclick="closeGuaranteeModal()">Получить одобрение банков</button>
+    </div>
+</div>
 
-        function openGuaranteeModal() { document.getElementById("guarantee-modal").style.display = "flex"; }
-        function closeGuaranteeModal() { document.getElementById("guarantee-modal").style.display = "none"; }
-        function openTkModal() { document.getElementById("tk-modal").style.display = "flex"; }
-        function closeTkModal() { document.getElementById("tk-modal").style.display = "none"; }
-        function openCalcModal() { document.getElementById("calc-modal").style.display = "flex"; }
-        function closeCalcModal() { document.getElementById("calc-modal").style.display = "none"; }
-        function openLegalModal() { document.getElementById("legal-modal").style.display = "flex"; }
-        function closeLegalModal() { document.getElementById("legal-modal").style.display = "none"; }
-        function openModal(service) { alert("Демо-режим для сервиса: " + service); }
+<!-- 2. Модальное окно: Подбор ТК -->
+<div id="tk-modal" style="display: none;">
+    <button class="modal-tk-close" onclick="closeTkModal()">&times;</button>
+    <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; font-weight: 700;">Расчёт доставки грузов и подбор ТК</h2>
+    <p style="color: #8a8a93; font-size: 14px; margin-bottom: 20px;">Интеллектуальный калькулятор стоимости грузоперевозки по России.</p>
+    <div style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
+        <input type="text" class="modal-input" placeholder="Город отправки" style="flex: 1;">
+        <input type="text" class="modal-input" placeholder="Город доставки" style="flex: 1;">
+    </div>
+    <div class="transport-tabs">
+        <div class="transport-tab active"><span>Авто</span></div>
+        <div class="transport-tab"><span>ЖД</span></div>
+        <div class="transport-tab"><span>Авиа</span></div>
+        <div class="transport-tab"><span>Море</span></div>
+    </div>
+    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+        <input type="number" class="modal-input" placeholder="Масса (кг)">
+        <input type="text" class="modal-input" placeholder="Объем (м³)">
+    </div>
+    <button type="button" class="modal-action-btn" onclick="closeTkModal()">Рассчитать стоимость</button>
+</div>
 
-        const menuToggle = document.getElementById("menu-toggle");
-        const nav = document.getElementById("nav-links");
-        if (menuToggle && nav) {
-            menuToggle.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const isOpen = nav.classList.toggle("open");
-                menuToggle.textContent = isOpen ? "✕" : "☰";
-            });
-        }
-    </script>
+<!-- 3. Модальное окно: Расчет НМЦК -->
+<div id="calc-modal" style="display: none;">
+    <button class="modal-calc-close" onclick="closeCalcModal()">&times;</button>
+    <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; font-weight: 700;">Интеллектуальный расчёт НМЦК</h2>
+    <p style="color: #8a8a93; font-size: 14px; margin-bottom: 20px;">Обоснование цены контракта по 44-ФЗ с поиском закупок в ЕИС.</p>
+    <input type="text" class="modal-input" placeholder="Например: Поставка персональных ЭВМ" style="margin-bottom: 12px;">
+    <input type="text" class="modal-input" placeholder="Все регионы России" style="margin-bottom: 20px;">
+    <button type="button" class="modal-action-btn" onclick="closeCalcModal()">Запустить ИИ-расчёт</button>
+</div>
+
+<!-- --- УПРАВЛЯЮЩИЕ СКРИПТЫ --- -->
+<script>
+function switchMode(mode){document.querySelectorAll('.toggle-btn').forEach(btn=>btn.classList.remove('active'));if(mode==='supplier'){document.querySelector('.supplier-btn').classList.add('active');if(document.getElementById('supplier-grid'))document.getElementById('supplier-grid').style.display='flex';if(document.getElementById('customer-grid'))document.getElementById('customer-grid').style.display='none';if(document.getElementById('transport-grid'))document.getElementById('transport-grid').style.display='none'}else if(mode==='customer'){document.querySelector('.customer-btn').classList.add('active');if(document.getElementById('supplier-grid'))document.getElementById('supplier-grid').style.display='none';if(document.getElementById('customer-grid'))document.getElementById('customer-grid').style.display='flex';if(document.getElementById('transport-grid'))document.getElementById('transport-grid').style.display='none'}else if(mode==='transport'){document.querySelector('.transport-btn').classList.add('active');if(document.getElementById('supplier-grid'))document.getElementById('supplier-grid').style.display='none';if(document.getElementById('customer-grid'))document.getElementById('customer-grid').style.display='none';if(document.getElementById('transport-grid'))document.getElementById('transport-grid').style.display='flex'}}
+   
+</script>
+
+<div id="cookie-banner" class="cookie-banner">
+    <p>Мы используем файлы cookie и пользовательские данные для работы сервисов и аналитики. Оставаясь на сайте, вы соглашаетесь с <a href="policy.html" target="_blank" class="cookie-link">Политикой конфиденциальности</a>.</p>
+    <button id="cookie-accept" type="button">ОК</button>
+</div>
+
+<script>
+
+    
+    function openGuaranteeModal() { document.getElementById('guarantee-modal').classList.add('open'); }
+    function closeGuaranteeModal() { document.getElementById('guarantee-modal').classList.remove('open'); }
+    function openTkModal() { document.getElementById('tk-modal').classList.add('open'); }
+    function closeTkModal() { document.getElementById('tk-modal').classList.remove('open'); }
+    function openCalcModal() { document.getElementById('calc-modal').classList.add('open'); }
+    function closeCalcModal() { document.getElementById('calc-modal').classList.remove('open'); }
+    
+    // Заглушка для остальных плашек
+    function openModal(service) { alert('Демо-режим для сервиса: ' + service); }
+
+    // Умное мобильное меню
+const menuToggle = document.getElementById("menu-toggle");
+const nav = document.getElementById("nav-links");
+
+if (menuToggle && nav) {
+    menuToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = nav.classList.toggle('open');
+        menuToggle.classList.toggle("is-open", isOpen);
+        menuToggle.textContent = isOpen ? "×" : "☰";
+        menuToggle.setAttribute("aria-expanded", isOpen);
+    });
+}
+
+function closeAllMobileMenus() {
+    if (nav && menuToggle) {
+        nav.classList.remove('open');
+        menuToggle.classList.remove('is-open');
+        menuToggle.textContent = "☰";
+        menuToggle.setAttribute("aria-expanded", "false");
+    }
+}
+
+    // Закрытие плашки Cookie по клику на кнопку ОК
+const cookieBanner = document.getElementById('cookie-banner');
+const cookieAccept = document.getElementById('cookie-accept');
+if (cookieBanner && cookieAccept) {
+    cookieAccept.addEventListener('click', () => {
+        cookieBanner.style.display = 'none';
+    });
+}
+function openLegalModal(){openModalWindow('legal-modal');}function closeLegalModal(){closeModalWindow('legal-modal');}
+
+    </script>  
+</div>
+    <div id="legal-modal" class="modal-window"><button class="modal-close" onclick="closeLegalModal()">&times;</button><h2 style="color:#ffffff;font-size:24px;margin-bottom:8px;font-weight:700;">Помощь юриста</h2><p style="color:#8a8a93;font-size:14px;margin-bottom:20px;">Поиск профильных экспертов по 44-ФЗ и 223-ФЗ в вашем регионе.</p><div style="display:flex;flex-direction:column;gap:12px;"><input type="text" class="modal-input" placeholder="Введите ваш город"><button type="button" class="modal-action-btn" onclick="closeLegalModal()">Найти юриста</button></div></div>
+    
 </body>
-</html>
+    </html>
+    
