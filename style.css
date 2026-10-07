@@ -60,14 +60,14 @@ header {
 }
 
 .logo {
-    color: #00f2fe !important;
+    color: #ffffff;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
 
-.logo span { 
-    color: #00f2fe !important; 
+.logo span {
+    color: #00f2fe;
 }
 
 .nav-links {
@@ -92,10 +92,10 @@ header {
     height: 44px;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: 12px !important;
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
     font-size: 28px;
     line-height: 1;
     cursor: pointer;
@@ -106,10 +106,10 @@ header {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: 12px !important;
-    color: #ffffff !important;
-    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    color: #ffffff;
+    background: transparent;
     padding: 10px 20px;
     font-size: 14px;
     font-weight: 600;
@@ -117,8 +117,8 @@ header {
 }
 
 .lk-btn:hover {
-    border-color: #00f2fe !important;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3) !important;
+    border-color: #00f2fe;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
 }
 
 /* ==========================================================================
@@ -458,51 +458,55 @@ display: none !important;
 8. МОБИЛЬНАЯ АДАПТИВНОСТЬ (СТРОГО ДЛЯ СМАРТФОНОВ)
 ========================================================================== */
 @media (max-width: 768px) {
-header {
-position: relative;
-z-index: 100;
-display: flex !important;
-align-items: center;
-    justify-content: space-between !important;
-padding: 0 !important;
-gap: 12px;
-}
-.menu-toggle {
-display: flex !important;
-position: relative;
-z-index: 101;
-order: 1;
-margin-left: 0;
-width: 44px;
-height: 44px;
-align-items: center;
-justify-content: center;
-border: 1px solid rgba(255, 255, 255, 0.25) !important;
-border-radius: 12px !important;
-color: #ffffff !important;
-background: transparent !important;
-}
-.logo {
-order: 2;
-margin-left: 0;
-}
-.lk-btn {
-display: flex;
-position: relative;
-z-index: 101;
-order: 3;
-margin-left: auto;
-width: 44px;
-height: 44px;
-align-items: center;
-justify-content: center;
-border: 1px solid rgba(255, 255, 255, 0.25) !important;
-border-radius: 12px !important;
-color: #ffffff !important;
-}
-header:has(nav.nav-links.open) .lk-btn {
-display: none !important;
-}
+    body header {
+        position: relative;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0;
+        gap: 12px;
+    }
+    body .menu-toggle {
+        display: flex;
+        position: relative;
+        z-index: 101;
+        order: 1;
+        margin-left: 0;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 12px;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    body .logo {
+        order: 2;
+        margin-left: 12px;
+        color: #ffffff;
+    }
+    body .logo span {
+        color: #00f2fe;
+    }
+
+    body .lk-btn {
+        display: flex;
+        position: relative;
+        z-index: 101;
+        order: 3;
+        margin-left: auto;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 12px;
+        color: #ffffff;
+    }
+   
 header nav.nav-links {
 display: none;
 flex-direction: column;
@@ -518,25 +522,25 @@ z-index: 90;
 box-sizing: border-box;
 overflow: hidden !important;
 }
-header nav.nav-links.open {
-display: flex !important;
-}
-header nav.nav-links a {
-font-size: 18px;
-font-weight: 600;
-color: rgba(255, 255, 255, 0.75) !important;
-text-decoration: none;
-padding: 8px 0 !important;
-width: 100%;
-text-align: left;
-border-bottom: 1px solid rgba(0, 242, 254, .15);
-box-shadow: none !important;
-transition: all .2s ease;
-}
-.bento-grid {
-    display: flex !important; width: 100% !important; margin: 0 auto !important;
-flex-direction: column !important;
-gap: 16px !important;
-}
+    body header nav.nav-links.open {
+        display: flex;
     }
-
+    body header nav.nav-links a {
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        padding: 8px 0;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+        box-shadow: none;
+        transition: all .2s ease;
+    }
+    body .bento-grid {
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+        flex-direction: column;
+        gap: 16px;
+    }
