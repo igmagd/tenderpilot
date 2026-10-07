@@ -45,3 +45,29 @@ if (cookieBanner && cookieAccept) {
     });
           }
 
+function switchMode(mode) {
+    // Находим все три кнопки и убираем у них класс активности
+    document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // Находим все три сетки
+    const supplierGrid = document.getElementById('supplier-grid');
+    const customerGrid = document.getElementById('customer-grid');
+    const transportGrid = document.getElementById('transport-grid');
+
+    // Прячем абсолютно все сетки по умолчанию
+    if (supplierGrid) supplierGrid.classList.add('hidden');
+    if (customerGrid) customerGrid.classList.add('hidden');
+    if (transportGrid) transportGrid.classList.add('hidden');
+
+    // Включаем нужную кнопку и показываем только её сетку
+    if (mode === 'supplier') {
+        document.querySelector('.supplier-btn')?.classList.add('active');
+        supplierGrid?.classList.remove('hidden');
+    } else if (mode === 'customer') {
+        document.querySelector('.customer-btn')?.classList.add('active');
+        customerGrid?.classList.remove('hidden');
+    } else if (mode === 'transport') {
+        document.querySelector('.transport-btn')?.classList.add('active');
+        transportGrid?.classList.remove('hidden');
+    }
+}
