@@ -482,12 +482,12 @@ display: none !important;
         color: #ffffff;
         background: rgba(255, 255, 255, 0.08);
     }
-
     body .logo {
         order: 2;
         margin-left: 12px;
         color: #ffffff;
     }
+
     body .logo span {
         color: #00f2fe;
     }
