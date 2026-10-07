@@ -1,160 +1,167 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TenderPilot — ИИ-анализ тендеров и автоматизация госзакупок по 44-ФЗ и 223-ФЗ">
-    <title>TenderPilot — ИИ-анализ тендеров</title>
+    <title>TenderPilot — Платформа для работы с тендерами</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-<header>
-    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
-    <a class="logo" href="#">Tender<span>Pilot</span></a>
-        <nav class="nav-links" id="nav-links">
-            <a href="#tenders" class="main-nav-link">Поиск и анализ тендеров</a>
-            <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
-            <a href="#docs" class="main-nav-link">Подготовка тендерной документации</a>
-            <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
-            <a href="#delivery" class="main-nav-link">Расчет стоимости доставки</a>
-            <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
-            <a href="#legal" class="main-nav-link">Помощь юриста</a>
-            <a href="#education" class="main-nav-link">Обучение</a>
-            <a href="#contact" class="main-nav-link">Контакты</a>
-            <a href="#faq" class="main-nav-link">FAQ</a>
+
+    <!-- НАВИГАЦИЯ И ШАПКА -->
+    <header class="site-header">
+        <div class="logo">TenderPilot</div>
+        <nav id="nav-links" class="nav-links">
+            <a href="#features">Возможности</a>
+            <a href="#about">О нас</a>
+            <a href="#tariffs">Тарифы</a>
+            <a href="#faq">FAQ</a>
+            <a href="#lk" class="lk-btn">Личный кабинет</a>
         </nav>
-    <a class="lk-btn" href="#login" aria-label="Личный кабинет">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-        </svg>              
-    </a>
-</header>
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false">☰</button>
+    </header>
 
-        <main>
-            <div class="audience-toggle-container">
-    <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщику</button>
-    <button class="toggle-btn customer-btn" onclick="switchMode('customer')">Заказчику</button>
-    <button class="toggle-btn transport-btn" onclick="switchMode('transport')">Грузоперевозки</button>
-            </div>
-            
-            <section class="hero" id="start">
-                <h1>ИИ-анализ <span class="gradient-text">тендеров</span></h1>
-                <p>TenderPilot помогает анализировать тендерную документацию, рассчитывать НМЦК и автоматизировать работу по 44-ФЗ и 223-ФЗ.</p>
-            </section>
+    <!-- ГЛАВНЫЙ ЭКРАН И ТРИ КНОПКИ -->
+    <main class="hero-section">
+        <h1>Управляйте тендерами эффективно</h1>
+        <p>Интеллектуальные инструменты для автоматизации работы с закупками</p>
+        
+        <div class="hero-actions">
+            <button class="toggle-btn supplier-btn active" onclick="switchMode('supplier')">Поставщикам</button>
+            <button class="toggle-btn customer-btn" onclick="switchMode('customer')">Заказчикам</button>
+            <button class="toggle-btn transport-btn" onclick="switchMode('transport')">Грузоперевозки</button>
+        </div>
+    </main>
 
-            <div id="supplier-grid" class="bento-grid">
-                <div class="bento-item neon-blue" onclick="openModal('ai-supplier')">
-                    <h3>Умный поиск тендеров 44-ФЗ и 223-ФЗ</h3>
-                    <p>Нейросетевой мониторинг торгов и моментальный поиск прибыльных лотов под вашу нишу.</p>
-                </div>
-                <div class="bento-item neon-pink" onclick="openLegalModal()"><h3>Помощь юриста: ФАС и РНП</h3><p>Профильная правовая поддержка при оспаривании торгов и защите от включения в РНП.</p></div>
-                
-            </div>
-            <div id="customer-grid" class="bento-grid" style="display: none;">
-                <div class="bento-item neon-blue" onclick="openCalcModal()">
-                    <h3>Расчет НМЦК по 44-ФЗ онлайн с поиском в ЕИС</h3>
-                    <p>Автоматический поиск аналогичных контрактов и моментальное формирование отчета-обоснования цен.</p>
-                </div>
-<div class="bento-item neon-pink" onclick="document.getElementById('legal-modal').style.display='flex'"><h3>Помощь юриста: претензии и споры</h3><p>Юридическое сопровождение контрактов, ведение споров и защита интересов в УФАС.</p></div>
+    <!-- СЕТКА 1: ДЛЯ ПОСТАВЩИКОВ (ОТКРЫТА ПО УМОЛЧАНИЮ) -->
+    <div id="supplier-grid" class="bento-grid">
+        <div class="bento-item neon-cyan" onclick="openModal('search')">
+            <h3>Умный поиск</h3>
+            <p>Поиск тендеров по ключевым словам и кодам ОКПД2 с точностью до 98%.</p>
+        </div>
+        <div class="bento-item neon-blue" onclick="openModal('analytics')">
+            <h3>Аналитика</h3>
+            <p>Анализ конкурентов, вероятности победы и падения цены в один клик.</p>
+        </div>
+        <div class="bento-item neon-cyan">
+            <h3>База производителей и оптовиков</h3>
+            <p>Быстрый подбор надежных заводов-поставщиков под ваш тендер.</p>
+        </div>
+        <div class="bento-item neon-indigo" onclick="openTkModal()">
+            <h3>Калькулятор стоимости грузоперевозок</h3>
+            <p>Автоматический расчет логистики по всей России и СНГ.</p>
+        </div>
+        <div class="bento-item neon-emerald">
+            <h3>Помощь в подготовке тендерной документации</h3>
+            <p>Автоматическая генерация и проверка заявок на ошибки.</p>
+        </div>
+        <div class="bento-item neon-purple">
+            <h3>Оценка рентабельности и расчет рисков</h3>
+            <p>Анализ ценовых предложений и маржинальности контракта.</p>
+        </div>
+        <div class="bento-item neon-gold" onclick="openGuaranteeModal()">
+            <h3>Оформить обеспечение заявки / контракта</h3>
+            <p>Онлайн-расчёт и экспресс-оформление банковских гарантий.</p>
+        </div>
+    </div>
 
-        </main>
+    <!-- СЕТКА 2: ДЛЯ ЗАКАЗЧИКОВ (СКРЫТА КЛАССOM hidden) -->
+    <div id="customer-grid" class="bento-grid hidden">
+        <div class="bento-item neon-cyan">
+            <h3>Разработка ТЗ по госзакупкам (44/223-ФЗ)</h3>
+            <p>Интеллектуальная генерация техзаданий без рисков жалоб в ФАС.</p>
+        </div>
+        <div class="bento-item neon-emerald" onclick="openCalcModal()">
+            <h3>Сбор коммерческих предложений (Обоснование НМЦК)</h3>
+            <p>Автоматизированный подбор ответов поставщиков по ГОСТу.</p>
+        </div>
+        <div class="bento-item neon-indigo">
+            <h3>Расчет транспортных затрат для сметы</h3>
+            <p>Официальное обоснование и анализ логистических расходов.</p>
+        </div>
+        <div class="bento-item neon-purple">
+            <h3>Анализ рисков и аудит закупочной процедуры</h3>
+            <p>Глубокая ИИ-проверка контрагентов и документации на скрытые ловушки.</p>
+        </div>
+    </div>
 
+    <!-- СЕТКА 3: ДЛЯ ГРУЗОПЕРЕВОЗОК (СКРЫТА КЛАССOM hidden) -->
+    <div id="transport-grid" class="bento-grid hidden">
+        <div class="bento-item neon-blue">
+            <h3>Мониторинг тендеров на логистику</h3>
+            <p>Поиск прямых заказов на перевозку от победителей гостендеров.</p>
+        </div>
+        <div class="bento-item neon-indigo">
+            <h3>Расчет оптимальных маршрутов</h3>
+            <p>Калькулятор плеча доставки, весогабаритного контроля и затрат на Платон.</p>
+        </div>
+        <div class="bento-item neon-gold">
+            <h3>Проверка надежности грузовладельцев</h3>
+            <p>Скоринг заказчиков, проверка арбитражных дел и истории выплат.</p>
+        </div>
+    </div>
 
-    <!-- СЕКЦИИ КОНТЕНТА -->
-    <section class="bento-item placeholder-section neon-cyan" id="technologies">
+    <!-- ДОПОЛНИТЕЛЬНЫЕ СЕКЦИИ КОНТЕНТА -->
+    <section class="bento-item placeholder">
         <h2>Наши технологии</h2>
-        <p>Описание нейросетевых моделей, алгоритмов парсинга и ИИ-движка TenderPilot.</p>
+        <p>Описание нейросетевых моделей, используемых для анализа рынков.</p>
     </section>
 
-    <section class="bento-item placeholder-section neon-purple" id="pricing">
+    <section class="bento-item placeholder">
         <h2>Тарифные планы</h2>
         <p>Гибкие решения для индивидуальных предпринимателей и крупных компаний.</p>
     </section>
 
-    <section class="bento-item placeholder-section neon-pink" id="faq">
+    <section class="bento-item placeholder">
         <h2>Часто задаваемые вопросы</h2>
-        <p>Ответы на популярные вопросы о работе платформы TenderPilot.</p>
+        <p>Ответы на популярные вопросы о работе искусственного интеллекта на платформе.</p>
     </section>
 
-    <section class="about" id="about" style="padding: 70px 20px; text-align: center;">
-        <h2>Автоматизируйте работу с тендерами</h2>
-        <p>Сократите время на изучение документов, быстро находите ключевую информацию и контролируйте каждый этап закупки.</p>
+    <section class="about" id="about">
+        <h2>Автоматизируйте работу с тендерами вместе с нами</h2>
+        <p>Сократите время на изучение документации и минимизируйте риски ошибок.</p>
     </section>
 
-    <!-- ИСПРАВЛЕННЫЙ ФУТЕР -->
-    <footer>
-        <p>&copy; <span id="year">2026</span> TenderPilot. Все права защищены.</p>
-        <div class="footer-links">
-            <a href="policy.html" target="_blank">Политика конфиденциальности</a>
-            <a href="consent.html" target="_blank">Обработка персональных данных</a>
-            <a href="cookie.html" target="_blank">Правила Cookie</a>
+    <!-- МОДАЛЬНЫЕ ОКНА И ДИАЛОГИ -->
+    <div id="guarantee-modal" class="modal-window">
+        <div class="modal-content">
+            <h2>Обеспечение и гарантии</h2>
+            <p>Форма оформления банковских гарантий.</p>
+            <button onclick="closeGuaranteeModal()">Закрыть</button>
         </div>
-    </footer>
+    </div>
 
-<!-- ==========================================================================
-     ИЗОЛИРОВАННЫЙ СЛОЙ МОДАЛЬНЫХ ОКНО (НАХОДИТСЯ В САМОМ НИЗУ)
-     ========================================================================== -->
+    <div id="tk-modal" class="modal-window">
+        <div class="modal-content">
+            <h2>Подбор Транспортной Компании</h2>
+            <p>Форма для логистического калькулятора.</p>
+            <button onclick="closeTkModal()">Закрыть</button>
+        </div>
+    </div>
 
-<!-- 1. Модальное окно: Банковские гарантии -->
-<div id="guarantee-modal" style="display: none;">
-    <button class="modal-guarantee-close" onclick="closeGuaranteeModal()">&times;</button>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h2 style="font-size: 24px; color: #fff; margin-bottom: 6px;">Банковские гарантии</h2>
-        <p style="color: #8a8a93; font-size: 14px;">Оформление обеспечения для участников госзакупок по 44-ФЗ, 223-ФЗ и 185-ФЗ</p>
+    <div id="calc-modal" class="modal-window">
+        <div class="modal-content">
+            <h2>Расчет НМЦК</h2>
+            <p>Форма калькулятора расчета начальной максимальной цены контракта.</p>
+            <button onclick="closeCalcModal()">Закрыть</button>
+        </div>
     </div>
-    <div class="guarantee-tabs">
-        <div class="guarantee-tab active-chrome"><span>Обеспечение заявки</span></div>
-        <div class="guarantee-tab"><span>Исполнение контракта</span></div>
-        <div class="guarantee-tab"><span>Гарантийные обязательства</span></div>
-    </div>
-    <div style="display: flex; flex-direction: column; gap: 12px;">
-        <input type="text" class="modal-input" placeholder="Номер закупки или ссылка на тендер">
-        <input type="text" class="modal-input" placeholder="Требуемая сумма покрытия (₽)">
-        <input type="email" class="modal-input" placeholder="Email для получения решения и счёта">
-        <button class="modal-action-btn" onclick="closeGuaranteeModal()">Получить одобрение банков</button>
-    </div>
-</div>
 
-<!-- 2. Модальное окно: Подбор ТК -->
-<div id="tk-modal" style="display: none;">
-    <button class="modal-tk-close" onclick="closeTkModal()">&times;</button>
-    <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; font-weight: 700;">Расчёт доставки грузов и подбор ТК</h2>
-    <p style="color: #8a8a93; font-size: 14px; margin-bottom: 20px;">Интеллектуальный калькулятор стоимости грузоперевозки по России.</p>
-    <div style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
-        <input type="text" class="modal-input" placeholder="Город отправки" style="flex: 1;">
-        <input type="text" class="modal-input" placeholder="Город доставки" style="flex: 1;">
+    <div id="legal-modal" class="modal-window">
+        <div class="modal-content">
+            <h2>Помощь юриста</h2>
+            <p>Связь с юридическим отделом TenderPilot.</p>
+            <button onclick="closeLegalModal()">Закрыть</button>
+        </div>
     </div>
-    <div class="transport-tabs">
-        <div class="transport-tab active"><span>Авто</span></div>
-        <div class="transport-tab"><span>ЖД</span></div>
-        <div class="transport-tab"><span>Авиа</span></div>
-        <div class="transport-tab"><span>Море</span></div>
-    </div>
-    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-        <input type="number" class="modal-input" placeholder="Масса (кг)">
-        <input type="text" class="modal-input" placeholder="Объем (м³)">
-    </div>
-    <button type="button" class="modal-action-btn" onclick="closeTkModal()">Рассчитать стоимость</button>
-</div>
 
-<!-- 3. Модальное окно: Расчет НМЦК -->
-<div id="calc-modal" style="display: none;">
-    <button class="modal-calc-close" onclick="closeCalcModal()">&times;</button>
-    <h2 style="color: #ffffff; font-size: 24px; margin-bottom: 8px; font-weight: 700;">Интеллектуальный расчёт НМЦК</h2>
-    <p style="color: #8a8a93; font-size: 14px; margin-bottom: 20px;">Обоснование цены контракта по 44-ФЗ с поиском закупок в ЕИС.</p>
-    <input type="text" class="modal-input" placeholder="Например: Поставка персональных ЭВМ" style="margin-bottom: 12px;">
-    <input type="text" class="modal-input" placeholder="Все регионы России" style="margin-bottom: 20px;">
-    <button type="button" class="modal-action-btn" onclick="closeCalcModal()">Запустить ИИ-расчёт</button>
-</div>
+    <!-- КУКИ БАННЕР -->
+    <div id="cookie-banner" class="cookie-banner">
+        <p>Мы используем файлы cookie и пользовательское соглашение для улучшения работы сайта.</p>
+        <button id="cookie-accept" type="button">ОК</button>
+    </div>
 
-<div id="cookie-banner" class="cookie-banner">
-    <p>Мы используем файлы cookie и пользовательские данные для работы сервисов и аналитики. Оставаясь на сайте, вы соглашаетесь с <a href="policy.html" target="_blank" class="cookie-link">Политикой конфиденциальности</a>.</p>
-    <button id="cookie-accept" type="button">ОК</button>
-</div>
-</div>
-    <div id="legal-modal" class="modal-window"><button class="modal-close" onclick="closeLegalModal()">&times;</button><h2 style="color:#ffffff;font-size:24px;margin-bottom:8px;font-weight:700;">Помощь юриста</h2><p style="color:#8a8a93;font-size:14px;margin-bottom:20px;">Поиск профильных экспертов по 44-ФЗ и 223-ФЗ в вашем регионе.</p><div style="display:flex;flex-direction:column;gap:12px;"><input type="text" class="modal-input" placeholder="Введите ваш город"><button type="button" class="modal-action-btn" onclick="closeLegalModal()">Найти юриста</button></div></div>
-       <script src="js/main.js"></script>
+    <!-- ИЗОЛИРОВАННЫЙ МОЗГ САЙТА -->
+    <script src="js/main.js"></script>
 </body>
-</html> 
+</html>
