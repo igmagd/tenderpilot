@@ -542,5 +542,6 @@ overflow: hidden !important;
         width: 100%;
         margin: 0 auto;
         flex-direction: column;
-        gap: 16px;
+        gap: 16 px;
     }
+}
