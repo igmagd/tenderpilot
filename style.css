@@ -365,13 +365,208 @@ div#tk-modal {
 #calc-modal .calc-tab.active, #calc-modal [class*="tab"].active { color: #ffffff !important; background: rgba(79, 172, 254, 0.08) !important; border-color: rgba(79, 172, 254, 0.95) !important; box-shadow: inset 0 0 10px rgba(79, 172, 254, 0.05), 0 0 20px rgba(79, 172, 254, 0.4) !important; }
 #calc-modal .calc-tab.active svg { stroke: rgba(79, 172, 254, 1) !important; transform: scale(1.05); }
 
-/* --- 9. АБСОЛЮТНО ЧИСТАЯ АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ --- */
+@media (max-width: 768px) {
+    header {
+        position: relative;
+        z-index: 100;
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 !important;
+        gap: 12px;
+    }
+    .menu-toggle {
+        display: flex !important;
+        position: relative;
+        z-index: 101;
+        order: 1;
+        margin-left: 0;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border-radius: 12px !important;
+        color: #fff !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        transition: all .2s ease;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    .menu-toggle:hover, .menu-toggle:focus, .menu-toggle.is-open {
+        background: transparent !important;
+        color: #fff !important;
+        border-color: rgba(255, 255, 255, 0.25) !important;
+        box-shadow: none !important;
+    }
+    .menu-toggle:active {
+        background: transparent !important;
+        color: #fff !important;
+        border-color: #fff !important;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3) !important;
+    }
+    .logo {
+        order: 2;
+        margin-left: 0;
+    }
+    .lk-btn {
+        display: flex;
+        position: relative;
+        z-index: 101;
+        order: 3;
+        margin-left: auto;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border-radius: 12px !important;
+        color: #fff !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        text-decoration: none;
+        transition: all .2s ease;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    header:has(nav.nav-links.open) .lk-btn {
+        display: none !important;
+    }
+    header nav.nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 100px 32px 40px;
+        background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, .15) 0, transparent 50%), radial-gradient(circle at 80% 40%, rgba(0, 149, 255, .12) 0, transparent 60%), linear-gradient(to top, #020617 0, #09090b 70%, #020208 100%);
+        z-index: 90;
+        box-sizing: border-box;
+        overflow: hidden !important;
+    }
+    header nav.nav-links.open {
+        display: flex !important;
+    }
+    header nav.nav-links a {
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.75) !important;
+        text-decoration: none;
+        padding: 8px 0 !important;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid rgba(0, 242, 254, .15);
+        box-shadow: none !important;
+        transition: all .2s ease;
+    }
+    header nav.nav-links a:hover, header nav.nav-links a:active {
+        color: rgba(255, 255, 255, 0.75) !important;
+        border-bottom-color: rgba(0, 242, 254, 0.85) !important;
+        box-shadow: none !important;
+    }
+    /* ИСПРАВЛЕНО: Убран !important, мешавший скрывать сетки по кнопкам */
+    .bento-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .placeholder-section {
+        padding: 30px 16px !important;
+        margin-bottom: 16px !important;
+    }
+}
 
-@media (max-width:768px){header{position:relative;z-index:100;display:flex!important;align-items:center;justify-content:flex-start;padding:0!important;gap:12px}.menu-toggle{display:flex!important;position:relative;z-index:101;order:1;margin-left:0;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}.menu-toggle:hover,.menu-toggle:focus,.menu-toggle.is-open{background:transparent!important;color:#fff!important;border-color:rgba(255,255,255,0.25)!important;box-shadow:none!important}.menu-toggle:active{background:transparent!important;color:#fff!important;border-color:#fff!important;box-shadow:0 0 15px rgba(255,255,255,0.3)!important}.logo{order:2;margin-left:0}.lk-btn{display:flex;position:relative;z-index:101;order:3;margin-left:auto;width:44px;height:44px;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.25)!important;border-radius:12px!important;color:#fff!important;background:transparent!important;box-shadow:none!important;text-decoration:none;transition:all .2s ease;-webkit-tap-highlight-color:transparent!important}header:has(nav.nav-links.open) .lk-btn{display:none!important}header nav.nav-links{display:none;flex-direction:column;align-items:flex-start;justify-content:flex-start;position:fixed;inset:0;width:100vw;height:100vh;padding:100px 32px 40px;background:radial-gradient(circle at 20% 20%,rgba(0,242,254,.15) 0,transparent 50%),radial-gradient(circle at 80% 40%,rgba(0,149,255,.12) 0,transparent 60%),linear-gradient(to top,#020617 0,#09090b 70%,#020208 100%);z-index:90;box-sizing:border-box;overflow:hidden!important}header nav.nav-links.open{display:flex!important}header nav.nav-links a{font-size:18px;font-weight:600;color:rgba(255,255,255,0.75)!important;text-decoration:none;padding:8px 0!important;width:100%;text-align:left;border-bottom:1px solid rgba(0,242,254,.15);box-shadow:none!important;transition:all .2s ease}header nav.nav-links a:hover,header nav.nav-links a:active{color:rgba(255,255,255,0.75)!important;border-bottom-color:rgba(0,242,254,0.85)!important;box-shadow:none!important}.bento-grid,#customer-grid,#supplier-grid{display:flex!important;flex-direction:column!important;gap:16px!important}.placeholder-section{padding:30px 16px!important;margin-bottom:16px!important}}
+footer {
+    padding: 25px 0 40px !important;
+}
+footer p {
+    margin-bottom: 12px;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 6px 20px;
+    flex-wrap: wrap;
+    line-height: 1.8;
+}
+.footer-links a {
+    color: #52525b !important;
+    font-size: 12px !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
+    transition: none !important;
+}
+.footer-links a:hover {
+    color: #52525b !important;
+    background: none !important;
+    box-shadow: none !important;
+}
 
-footer{padding:25px 0 40px!important}footer p{margin-bottom:12px}.footer-links{display:flex;justify-content:center;gap:6px 20px;flex-wrap:wrap;line-height:1.8}.footer-links a{color:#52525b!important;font-size:12px!important;text-decoration:none!important;font-weight:400!important;transition:none!important}.footer-links a:hover{color:#52525b!important;background:none!important;box-shadow:none!important}
+/* ИСПРАВЛЕНО: Восстановлен оборванный баннер куки */
+.cookie-banner {
+    position: fixed;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100% - 32px), 600px);
+    background-image: radial-gradient(circle at 10% 10%, rgba(79, 172, 254, 0.15), transparent 45%), linear-gradient(135deg, #0d111c 0%, #07070c 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 99999;
+    box-shadow: inset 0 0 30px rgba(79, 172, 254, 0.1);
+}
 
-.cookie-banner{position:fixed;bottom:35px;left:50%;transform:translateX(-50%);width:min(calc(100% - 32px),600px);background-image:radial-gradient(circle at 10% 10%,rgba(79,172,254,0.15),transparent 45%),linear-gradient(135deg,#0d111c 0%,#07070c 100%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.25);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;z-index:99999;box-shadow:inset 0 0 30px rgba(7
+/* СИСТЕМНЫЙ КЛАСС СКРЫТИЯ (ДРУЖИТ С JS) */
+.hidden { 
+    display: none !important; 
+}
 
-    .hidden { display: none !important; }
-             
+/* МОНОЛИТНЫЙ БЛОК 3-Х КНОПОК В СТИЛЕ БУРГЕРА */
+.hero-actions {
+    display: inline-flex;
+    gap: 0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    padding: 4px;
+    background: rgba(15, 15, 26, 0.6);
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.hero-actions:hover, .hero-actions:focus-within {
+    border-color: #00f2fe;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+}
+
+.hero-actions .toggle-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.hero-actions .toggle-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
+}
+
+.hero-actions .toggle-btn:not(.active):hover {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
