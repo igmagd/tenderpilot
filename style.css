@@ -458,90 +458,114 @@ display: none !important;
 8. МОБИЛЬНАЯ АДАПТИВНОСТЬ (СТРОГО ДЛЯ СМАРТФОНОВ)
 ========================================================================== */
 @media (max-width: 768px) {
-    body header {
+    header {
         position: relative;
         z-index: 100;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: flex-start;
-        padding: 0;
+        padding: 0 !important;
         gap: 12px;
     }
+
     body .menu-toggle {
-        display: flex;
+        display: flex !important;
         position: relative;
-        z-index: 101;
+        z-index: 1001;
         order: 1;
         margin-left: 0;
-        width: 44px;
-        height: 44px;
+        width: 44px !important;
+        height: 44px !important;
         align-items: center;
         justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 12px;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.08);
-    }
-    body .logo {
-        order: 2;
-        margin-left: 12px;
-        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 12px !important;
+        color: #fff !important;
+        background: transparent !important;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent !important;
     }
 
-    body .logo span {
-        color: #00f2fe;
+    body .menu-toggle:active {
+        transition: none !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-color: #ffffff !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+    }
+
+    body .logo {
+        order: 2;
+        margin-left: 0 !important;
     }
 
     body .lk-btn {
-        display: flex;
+        display: flex !important;
         position: relative;
         z-index: 101;
         order: 3;
-        margin-left: auto;
-        width: 44px;
-        height: 44px;
+        margin-left: auto !important;
+        margin-top: 0 !important;
+        width: 44px !important;
+        height: 44px !important;
         align-items: center;
         justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 12px;
-        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 12px !important;
+        background: transparent !important;
+        -webkit-tap-highlight-color: transparent !important;
     }
-   
-header nav.nav-links {
-display: none;
-flex-direction: column;
-align-items: flex-start;
-justify-content: flex-start;
-position: fixed;
-inset: 0;
-width: 100vw;
-height: 100vh;
-padding: 100px 32px 40px;
-background: radial-gradient(circle at 20% 20%, rgba(0, 242, 254, .15) 0, transparent 50%), radial-gradient(circle at 80% 40%, rgba(0, 149, 255, .12) 0, transparent 60%), linear-gradient(to top, #020617 0, #09090b 70%, #020208 100%);
-z-index: 90;
-box-sizing: border-box;
-overflow: hidden !important;
-}
-    body header nav.nav-links.open {
-        display: flex;
+
+    body .lk-btn:active {
+        transition: none !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-color: #ffffff !important;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
     }
-    body header nav.nav-links a {
-        font-size: 18px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.75);
+
+    .nav-links {
+        display: flex !important;
+        position: fixed !important;
+        top: 0;
+        left: -100%;
+        width: 100% !important;
+        height: 100vh !important;
+        background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important;
+        flex-direction: column !important;
+        align-items: center;
+        justify-content: center;
+        gap: 24px !important;
+        padding: 80px 24px 24px 24px !important;
+        transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
+        z-index: 1000 !important;
+        overflow-y: auto !important;
+    }
+
+    .nav-links.open {
+        left: 0 !important;
+    }
+
+    .nav-links a {
+        font-size: 20px !important;
+        color: #fff !important;
         text-decoration: none;
-        padding: 8px 0;
         width: 100%;
-        text-align: left;
-        border-bottom: 1px solid rgba(0, 242, 254, 0.15);
-        box-shadow: none;
-        transition: all .2s ease;
+        text-align: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: color 0.3s;
+        -webkit-tap-highlight-color: transparent !important;
     }
+
     body .bento-grid {
         display: flex;
         width: 100%;
         margin: 0 auto;
         flex-direction: column;
-        gap: 16 px;
+        gap: 16px;
+    }
+
+    .bento-item {
+        grid-column: span 1 !important;
+        min-height: auto !important;
     }
 }
