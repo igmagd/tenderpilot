@@ -96,32 +96,37 @@ header {
   height: 42px !important;
   border-radius: 12px !important;
   background: transparent !important;
-  border: 1px solid rgba(0, 242, 254, 0.4) !important;
-  box-shadow: 0 0 8px rgba(0, 242, 254, 0.2);
-  transition: all 0.15s ease-in-out !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s ease, background-color 0.15s ease !important;
   padding: 0 !important;
   cursor: pointer !important;
 }
 
-.lk-btn svg, .menu-toggle {
+.lk-btn svg {
   color: #00f2fe !important;
   stroke: #00f2fe !important;
   font-size: 1.5rem !important;
   line-height: 1 !important;
 }
 
+.menu-toggle {
+  color: #ffffff !important;
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+}
+
 .lk-btn:hover, .menu-toggle:hover {
-  border-color: #00f2fe !important;
-  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: none !important;
 }
 
 .lk-btn:active, .menu-toggle:active {
   border-color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 0 30px #ffffff, inset 0 0 15px #ffffff !important;
   transition: none !important;
 }
-
 
 .hero-section {
   padding: 140px 0 60px 0;
