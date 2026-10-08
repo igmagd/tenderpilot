@@ -126,8 +126,11 @@ header {
   background: transparent !important;
   background-color: transparent !important;
   border-color: #ffffff !important;
-  box-shadow: 0 0 14px rgba(255, 255, 255, 0.6) !important; /* Убрали none и включили микро-вспышку наружу */
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.8) !important;
   transition: none !important;
+  outline: none !important; /* Убивает скрытую системную рамку */
+  outline-offset: 0 !important;
+  -webkit-appearance: none !important; /* Сбрасывает любые мобильные стили кнопок */
 }
 
 .lk-btn:active svg, .menu-toggle:active svg, .menu-toggle:active svg line {
