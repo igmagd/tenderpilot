@@ -98,7 +98,7 @@ header {
   background: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: none !important;
-  transition: border-color 0.1s ease, box-shadow 0.1s ease !important;
+  transition: border-color 0.1s ease !important;
   padding: 0 !important;
   cursor: pointer !important;
   -webkit-tap-highlight-color: transparent !important;
@@ -126,7 +126,7 @@ header {
   background: transparent !important;
   background-color: transparent !important;
   border-color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6) !important;
+  box-shadow: none !important;
   transition: none !important;
 }
 
