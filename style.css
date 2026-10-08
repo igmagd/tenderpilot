@@ -468,7 +468,6 @@ display: none !important;
         gap: 12px;
     }
 
-    /* ХАРАКТЕРИСТИКИ БУРГЕРА: Прозрачный близнец из коммита */
     body .menu-toggle {
         display: flex !important;
         position: relative;
@@ -486,7 +485,6 @@ display: none !important;
         -webkit-tap-highlight-color: transparent !important;
     }
 
-    /* Моментальная тонкая белая вспышка по контуру при тапе */
     body .menu-toggle:active {
         transition: none !important;
         background: rgba(255, 255, 255, 0.15) !important;
@@ -500,7 +498,6 @@ display: none !important;
         color: #ffffff;
     }
 
-    /* ХАРАКТЕРИСТИКИ ЛК: Прозрачный близнец из коммита */
     body .lk-btn {
         display: flex !important;
         position: relative;
@@ -518,7 +515,6 @@ display: none !important;
         -webkit-tap-highlight-color: transparent !important;
     }
 
-    /* Моментальная тонкая белая вспышка по контуру при тапе */
     body .lk-btn:active {
         transition: none !important;
         background: rgba(255, 255, 255, 0.15) !important;
@@ -526,12 +522,14 @@ display: none !important;
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
     }
 
-    /* ВАШЕ ОРИГИНАЛЬНОЕ МЕНЮ (Осталось нетронутым как было) */
     header nav.nav-links {
         display: none;
     }
 
-    /* ВАША БЕНТО СЕТКА (Осталась нетронутой как было) */
+    header nav.nav-links.open {
+        display: block !important;
+    }
+
     body .bento-grid {
         display: flex;
         width: 100%;
@@ -539,5 +537,5 @@ display: none !important;
         flex-direction: column;
         gap: 16px;
     }
-}
+   }
 
