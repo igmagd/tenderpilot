@@ -88,29 +88,40 @@ header {
 /* ==========================================================================
    3. БАЗОВЫЕ СТИЛИ (КНОПКИ, БУРГЕР И ГЛАВНЫЙ ЭКРАН)
    ========================================================================== */
-.lk-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: #21262d;
-  border: 1px solid #30363d;
-  transition: all 0.2s ease;
+.lk-btn, .menu-toggle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  border: 1px solid rgba(0, 242, 254, 0.4) !important;
+  box-shadow: 0 0 8px rgba(0, 242, 254, 0.2);
+  transition: all 0.15s ease-in-out !important;
+  padding: 0 !important;
+  cursor: pointer !important;
 }
 
-.lk-btn:hover {
-  background: #30363d;
-  border-color: #58a6ff;
-  box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
+.lk-btn svg, .menu-toggle {
+  color: #00f2fe !important;
+  stroke: #00f2fe !important;
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
 }
 
-.menu-toggle {
-  font-size: 1.8rem;
-  color: #f0f6fc;
-  cursor: pointer;
+.lk-btn:hover, .menu-toggle:hover {
+  border-color: #00f2fe !important;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6) !important;
 }
+
+.lk-btn:active, .menu-toggle:active {
+  border-color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 0 30px #ffffff, inset 0 0 15px #ffffff !important;
+  transition: none !important;
+}
+
 
 .hero-section {
   padding: 140px 0 60px 0;
@@ -405,15 +416,22 @@ footer {
   .menu-toggle {
     display: block;
   }
-  /* Выравниваем элементы шапки на мобильных строго в одну линию */
   header .header-container, .header-container {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     width: 100% !important;
     padding: 0 15px !important;
   }
-   
+
+  .logo {
+    margin-left: 15px !important;
+  }
+
+  .lk-btn {
+    margin-left: auto !important;
+  }
+  
   /* Превращаем навигацию в скрытую шторку, выезжающую слева */
   .nav-links {
     position: fixed;
