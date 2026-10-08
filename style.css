@@ -111,7 +111,7 @@ header .header-container {
   background: transparent !important;
   background-color: transparent !important;
   border-color: #ffffff !important;
-  box-shadow: 0 0 14px rgba(0, 242, 254, 0.45), 0 0 25px rgba(0, 242, 254, 0.2) !important; /* Та самая идеальная золотая середина */
+  box-shadow: none !important; /* Убираем отсюда тень, на мобильных она блокируется */
   transition: none !important;
   outline: none !important;
   -webkit-appearance: none !important;
@@ -430,4 +430,11 @@ display: none !important;
 .menu-toggle.is-open .icon-close {
 display: block !important;
 }
-   }
+  /* Золотая середина: ультра-деликатное бирюзовое рассеивание наружу на мобильных */
+  .lk-btn:active svg, .menu-toggle:active svg, .menu-toggle:active svg line {
+    stroke: #ffffff !important;
+    fill: none !important;
+    filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.35)) drop-shadow(0 0 12px rgba(0, 242, 254, 0.15)) !important;
+  }
+}
+
