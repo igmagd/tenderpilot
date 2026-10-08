@@ -1,582 +1,468 @@
 /* ==========================================================================
-   1. КОРНЕВЫЕ НАСТРОЙКИ, БАЗОВЫЕ СТИЛИ И ЖИВОЙ ФОН
+   1. БАЗОВЫЕ НАСТРОЙКИ САЙТА И ОБЩИЕ СТИЛИ (ДЛЯ ВСЕХ УСТРОЙСТВ)
    ========================================================================== */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-    background-color: #05050a;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    position: relative;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%),
-        linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%);
-    background-size: cover;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
 }
 
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Ограничивающий контейнер, который держит симметрию по бокам всего сайта */
 .container {
-    position: relative;
-    z-index: 1;
-    width: min(1200px, calc(100% - 40px));
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* ==========================================================================
-   2. ШАПКА САЙТА, НАВИГАЦИЯ И КНОПКИ УПРАВЛЕНИЯ
+   2. БАЗОВЫЕ СТИЛИ КОМПОНЕНТОВ (ШАПКА И МЕНЮ)
    ========================================================================== */
-@media (min-width: 769px) {
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 40px;
-    background-color: var(--bg-dark, #000000);
-    position: relative;
-    z-index: 100;
-    width: 100%;
-    box-sizing: border-box;
-}
-    .logo {
-        color: #ffffff;
-        font-size: 22px;
-        font-weight: 700;
-        letter-spacing: -0.5px;
-        flex-shrink: 0;
-    }
-
-    .logo span {
-        color: #00f2fe;
-    }
-
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-        justify-content: center;
-        margin: 0 3%;
-    }
-
-    .nav-links a {
-        color: #8a8a93;
-        font-size: 13px;
-        font-weight: 400;
-        letter-spacing: -0.1px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        transition: color 0.2s ease;
-        white-space: nowrap;
-    }
-
-    .nav-links a:hover {
-        color: #ffffff;
-    }
+  background-color: rgba(22, 27, 34, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #30363d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
-.menu-toggle {
-    display: none;
-    width: 44px;
-    height: 44px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 12px;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-    font-size: 28px;
-    line-height: 1;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
 }
 
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f0f6fc;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.logo span {
+  color: #58a6ff;
+}
+
+.nav-links a {
+  font-size: 0.95rem;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #58a6ff;
+}
+
+/* ==========================================================================
+   3. БАЗОВЫЕ СТИЛИ (КНОПКИ, БУРГЕР И ГЛАВНЫЙ ЭКРАН)
+   ========================================================================== */
 .lk-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 12px;
-    color: #ffffff;
-    background: transparent;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  transition: all 0.2s ease;
 }
 
 .lk-btn:hover {
-    border-color: #00f2fe;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+  background: #30363d;
+  border-color: #58a6ff;
+  box-shadow: 0 0 15px rgba(88, 166, 255, 0.2);
 }
 
-/* ==========================================================================
-   3. ГЛАВНЫЙ ЭКРАН (HERO) И МОНОЛИТНЫЙ ПЕРЕКЛЮЧАТЕЛЬ 3-Х КНОПОК
-   ========================================================================== */
-.hero {
-    max-width: 850px;
-    margin: 0 auto;
-    padding: 90px 0 70px;
-    text-align: center;
+.menu-toggle {
+  font-size: 1.8rem;
+  color: #f0f6fc;
+  cursor: pointer;
 }
 
-.hero h1 {
-    margin-bottom: 24px;
-    font-size: clamp(32px, 5vw, 52px);
-    line-height: 1.15;
-    font-weight: 800;
+.hero-section {
+  padding: 140px 0 60px 0;
+  text-align: center;
+  background: radial-gradient(circle at top, rgba(56, 139, 253, 0.15), transparent 60%);
 }
 
-.gradient-text {
-    background: linear-gradient(135deg, #00f2fe, #4facfe);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.hero-section h1 {
+  font-size: 2.5rem;
+  color: #f0f6fc;
+  margin-bottom: 15px;
+  font-weight: 800;
 }
 
-.hero p {
-    color: #a1a1aa;
-    font-size: 18px;
-    line-height: 1.6;
+.hero-section p {
+  font-size: 1.2rem;
+  color: #8b949e;
+  margin-bottom: 40px;
 }
 
 .hero-actions {
-    display: inline-flex;
-    gap: 0;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 12px;
-    padding: 4px;
-    background: rgba(15, 15, 26, 0.6);
-    backdrop-filter: blur(10px);
-    margin: 32px auto 0 auto;
-    transition: all 0.2s ease;
-    -webkit-tap-highlight-color: transparent !important;
-}
-
-.hero-actions:hover, .hero-actions:focus-within {
-    border-color: #00f2fe;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-}
-
-.hero-actions .toggle-btn {
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.6);
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-}
-
-.hero-actions .toggle-btn.active {
-    background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
-}
-
-.hero-actions .toggle-btn:not(.active):hover {
-    color: #ffffff;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  display: inline-flex;
+  background-color: #161b22;
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid #30363d;
+  margin-bottom: 40px;
 }
 
 /* ==========================================================================
-   4. BENTO-СЕТКА И БАЗОВЫЕ КАРТОЧКИ
-   ========================================================================== */
+   4. СТИЛИ КНОПОК И ОСНОВА BENTO-ПЛАШЕК
+   ========================================================================= */
+.toggle-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8b949e;
+}
+
+.toggle-btn:hover {
+  color: #f0f6fc;
+}
+
+.toggle-btn.active {
+  background-color: #21262d;
+  color: #58a6ff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 100px;
+  display: grid;
+  gap: 24px;
+  margin-bottom: 60px;
 }
 
-.bento-item, .placeholder-section {
-    min-height: 190px;
-    padding: 30px;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    border-radius: 24px;
-    background: rgba(15, 15, 26, 0.75);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+.bento-item {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 24px;
+  padding: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.placeholder-section:hover, .bento-item:hover {
-    transform: translateY(-3px);
-    background: rgba(22, 22, 36, 0.85);
+.bento-item h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 12px;
 }
 
-.bento-item h3 { 
-    margin-bottom: 12px; 
-    font-size: 19px; 
-    font-weight: 600;
-    color: #ffffff;
-}
-
-.bento-item p { 
-    color: #8a8a93; 
-    font-size: 14px; 
-    line-height: 1.6; 
+.bento-item p {
+  font-size: 14px;
+  color: #8b949e;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
-   5. ФИРМЕННЫЕ КЛАССЫ НЕОНОВОЙ ПОДСВЕТКИ ДЛЯ ПЛАШЕК
+   5. НЕОНОВЫЕ ПОДСВЕТКИ ПЛАШЕК И СТИЛИ ФУТЕРА
    ========================================================================== */
-.neon-cyan {
-    background: linear-gradient(135deg, rgba(0, 242, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
-    border-right: 1px solid rgba(0, 242, 254, 0.65) !important;
-    border-bottom: 1px solid rgba(0, 242, 254, 0.65) !important;
-}
 .neon-cyan:hover {
-    border-right: 1px solid rgba(0, 242, 254, 0.95) !important;
-    border-bottom: 1px solid rgba(0, 242, 254, 0.95) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.15) !important;
+  border-color: #00f2fe;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
 }
 
-.neon-blue {
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.08), rgba(14, 14, 22, 0.75)) !important;
-    border-right: 1px solid rgba(79, 172, 254, 0.65) !important;
-    border-bottom: 1px solid rgba(79, 172, 254, 0.65) !important;
-}
 .neon-blue:hover {
-    border-right: 1px solid rgba(79, 172, 254, 0.95) !important;
-    border-bottom: 1px solid rgba(79, 172, 254, 0.95) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 172, 254, 0.15) !important;
+  border-color: #4facfe;
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
 }
 
-.neon-indigo {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(14, 14, 22, 0.75)) !important;
-    border-right: 1px solid rgba(99, 102, 241, 0.65) !important;
-    border-bottom: 1px solid rgba(99, 102, 241, 0.65) !important;
-}
 .neon-indigo:hover {
-    border-right: 1px solid rgba(99, 102, 241, 0.95) !important;
-    border-bottom: 1px solid rgba(99, 102, 241, 0.95) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.15) !important;
+  border-color: #6366f1;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
 }
 
-.neon-emerald {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), rgba(14, 14, 22, 0.75)) !important;
-    border-right: 1px solid rgba(16, 185, 129, 0.65) !important;
-    border-bottom: 1px solid rgba(16, 185, 129, 0.65) !important;
-}
 .neon-emerald:hover {
-    border-right: 1px solid rgba(16, 185, 129, 0.95) !important;
-    border-bottom: 1px solid rgba(16, 185, 129, 0.95) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15) !important;
+  border-color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
 }
 
-.neon-purple {
-    background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), rgba(14, 14, 22, 0.75)) !important;
-    border-right: 1px solid rgba(147, 51, 234, 0.65) !important;
-    border-bottom: 1px solid rgba(147, 51, 234, 0.65) !important;
-}
 .neon-purple:hover {
-    border-right: 1px solid rgba(147, 51, 234, 0.95) !important;
-    border-bottom: 1px solid rgba(147, 51, 234, 0.95) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(147, 51, 234, 0.15) !important;
+  border-color: #9333ea;
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
 }
 
-.neon-pink {
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.06), rgba(14, 14, 22, 0.75)) !important;
-    border-right: 1px solid rgba(236, 72, 153, 0.65) !important;
-    border-bottom: 1px solid rgba(236, 72, 153, 0.65) !important;
-}
-.neon-pink:hover {
-    border-right: 1px solid rgba(236, 72, 153, 0.95) !important;
-    border-bottom: 1px solid rgba(236, 72, 153, 0.95) !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(236, 72, 153, 0.15) !important;
-}
-
-.neon-gold {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(10, 10, 14, 0.85)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-right-color: rgba(255, 255, 255, 0.45) !important;
-    border-bottom-color: rgba(255, 255, 255, 0.45) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.18) !important;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
-}
 .neon-gold:hover {
-    border-color: rgba(255, 255, 255, 0.4) !important;
-    border-right-color: #ffffff !important;
-    border-bottom-color: #ffffff !important;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.45) !important;
-    transform: translateY(-2px) !important;
+  border-color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
 }
 
-/* ==========================================================================
-   6. KONТЕНТНЫЕ СЕКЦИИ И ПОДВАЛ (ФУТЕР)
-   ========================================================================== */
-.about { 
-    padding: 70px 0; 
-    border-top: 1px solid rgba(255, 255, 255, 0.08); 
-    text-align: center; 
+.placeholder, .about {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 24px;
+  padding: 40px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-.about h2 { 
-    margin-bottom: 18px; 
-    font-size: 30px; 
-}
-
-.about p { 
-max-width: 680px;
-margin: 0 auto;
-color: #8a8a93;
-line-height: 1.7;
-}
 footer {
-padding: 40px 0;
-border-top: 1px solid rgba(0, 242, 254, 0.18);
-color: #666675;
-font-size: 13px;
-text-align: center;
-}
+  padding: 40px 0;
+  border-top: 1px solid #30363d;
+  color: #666675;
+  font-size: 13px;
+  text-align: center;
+   }
+
 /* ==========================================================================
-7. МОДАЛЬНЫЕ ОКНА И КАЛЬКУЛЯТОРЫ (ФОРМУЛА ОЧИЩЕНА)
-========================================================================== */
-div#calc-modal, div#tk-modal, div#guarantee-modal {
-position: fixed;
-inset: 0;
-z-index: 10001;
-display: none;
-width: 100%;
-height: 100dvh;
-flex-direction: column;
-align-items: stretch;
-justify-content: flex-start;
-padding: 110px 24px 40px;
-gap: 20px;
-overflow-y: auto;
+   6. БАЗОВЫЕ СТИЛИ МОДАЛЬНЫХ ОКНОК И КАЛЬКУЛЯТОРОВ
+   ========================================================================== */
+.modal-window {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background: rgba(4, 4, 6, 0.85);
+  backdrop-filter: blur(20px);
+  padding: 40px 20px;
+  overflow-y: auto;
 }
-div#calc-modal.open, div#tk-modal.open, div#guarantee-modal.open {
-display: flex !important;
+
+.modal-window.open {
+  display: flex !important;
+  flex-direction: column;
 }
-div#calc-modal {
-background: linear-gradient(135deg, #111827 0%, #09090b 48%, #020617 100%) !important;
-box-shadow: inset 0 0 80px rgba(79, 172, 254, 0.12), 0 0 40px rgba(79, 172, 254, 0.35) !important;
+
+.modal-content {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
 }
-div#guarantee-modal {
-background: rgba(4, 4, 6, 0.85);
-backdrop-filter: blur(20px);
--webkit-backdrop-filter: blur(20px);
-background-image: radial-gradient(circle at 20% 20%, rgba(228, 228, 231, 0.25), transparent 45%);
+
+.modal-content h2 {
+  font-size: 24px;
+  color: #f0f6fc;
+  margin-bottom: 15px;
 }
-div#tk-modal {
-background-image: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.14), transparent 32%), linear-gradient(135deg, #090b11 0%, #09090b 48%, #020208 100%);
-box-shadow: inset 0 0 80px rgba(99, 102, 241, 0.1), 0 0 40px rgba(99, 102, 241, 0.25);
+
+.modal-content p {
+  color: #8b949e;
+  margin-bottom: 25px;
 }
-.modal-calc-close, .modal-guarantee-close, .modal-tk-close {
-position: fixed;
-top: 18px;
-left: 16px;
-z-index: 10002;
-display: flex;
-width: 44px;
-height: 44px;
-align-items: center;
-justify-content: center;
-border: 1px solid rgba(255, 255, 255, 0.25) !important;
-border-radius: 12px !important;
-color: #ffffff !important;
-background: rgba(255, 255, 255, 0.08) !important;
-font-size: 24px;
-cursor: pointer;
-transition: all 0.2s ease;
-}
-.modal-calc-close:hover { border-color: #00f2fe !important; box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important; }
-.modal-guarantee-close:hover { border-color: #ffffff !important; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3) !important; }
-.modal-tk-close:hover { border-color: #6366f1 !important; box-shadow: 0 0 15px rgba(99, 102, 241, 0.4) !important; }
+
 .modal-input {
-width: 100%;
-padding: 14px;
-background: rgba(9, 9, 11, 0.6) !important;
-backdrop-filter: blur(8px);
-border-radius: 12px;
-color: #ffffff;
-font-size: 15px;
-outline: none;
-transition: all 0.2s;
-border: 1px solid rgba(79, 172, 254, 0.3) !important;
+  width: 100%;
+  padding: 14px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 15px;
+  transition: all 0.2s ease;
 }
+
 .modal-input:focus {
-border-color: rgba(79, 172, 254, 0.85) !important;
-background: rgba(9, 9, 11, 0.8) !important;
-box-shadow: 0 0 15px rgba(79, 172, 254, 0.3) !important;
+  border-color: #58a6ff;
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
 }
-#guarantee-modal .modal-input {
-border: 1px solid rgba(255, 255, 255, 0.08) !important;
-background: rgba(5, 5, 8, 0.4) !important;
+
+/* ==========================================================================
+   7. КНОПКИ ОКНОК, ТАБЫ КАЛЬКУЛЯТОРОВ И КУКИ
+   ========================================================================== */
+.modal-content button {
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
 }
-.modal-action-btn {
-background: rgba(14, 22, 43, 0.9) !important;
-color: #ffffff !important;
-width: 100%;
-padding: 16px;
-border-radius: 12px;
-font-weight: 700;
-font-size: 15px;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-transition: all 0.2s ease;
-border: 1px solid rgba(79, 172, 254, 0.45) !important;
-box-shadow: 0 0 20px rgba(79, 172, 254, 0.25) !important;
+
+.modal-content button:hover {
+  background: #30363d;
+  border-color: #58a6ff;
+  color: #f0f6fc;
 }
-.modal-action-btn:hover { background: rgba(18, 30, 61, 0.95) !important; border-color: rgba(79, 172, 254, 0.85) !important; box-shadow: 0 0 25px rgba(79, 172, 254, 0.45) !important; }
-#guarantee-modal .modal-action-btn { background: rgba(20, 20, 25, 0.9) !important; border: 1px solid rgba(228, 228, 231, 0.3) !important; box-shadow: 0 0 20px rgba(228, 228, 231, 0.1) !important; }
-#guarantee-modal .modal-action-btn:hover { background: rgba(30, 30, 38, 0.95) !important; border-color: rgba(228, 228, 231, 0.95) !important; box-shadow: 0 0 25px rgba(228, 228, 231, 0.4) !important; }
-.modal-action-btn:active { transform: scale(0.98); }
-.guarantee-tabs, .transport-tabs { display: grid; gap: 8px; margin-bottom: 12px; }
+
+.guarantee-tabs, .transport-tabs {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
 .guarantee-tabs { grid-template-columns: repeat(3, 1fr); }
 .transport-tabs { grid-template-columns: repeat(4, 1fr); }
-.guarantee-tab, .transport-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 14px 6px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; cursor: pointer; color: #a1a1aa; transition: all 0.2s ease; text-align: center; }
-.cookie-banner { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%); z-index: 99999; }
-/* System visibility control */
-.hidden {
-display: none !important;
+
+.guarantee-tab, .transport-tab {
+  padding: 12px 6px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  color: #8b949e;
+  text-align: center;
+  font-size: 13px;
 }
+
+.cookie-banner {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #161b22;
+  border: 1px solid #30363d;
+  padding: 15px 25px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 99999;
+}
+
 /* ==========================================================================
-8. МОБИЛЬНАЯ АДАПТИВНОСТЬ (СТРОГО ДЛЯ СМАРТФОНОВ)
-========================================================================== */
+   8. СТИЛИ ИСКЛЮЧИТЕЛЬНО ДЛЯ ПК (ЭКРАНЫ ОТ 769px И ВЫШЕ)
+   ========================================================================== */
+@media (min-width: 769px) {
+  /* Ограничиваем шапку на ПК и центрируем её */
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  /* Скрываем мобильную кнопку-бургер на компьютерах */
+  .menu-toggle {
+    display: none;
+  }
+
+  /* Выстраиваем меню горизонтально по центру, даем ему дышать */
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    margin: 0 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+  /* Bento-сетка на ПК: идеальные 3 колонки */
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Ограничиваем футер и другие текстовые плашки ровно под ширину сетки */
+  .placeholder, .about, footer {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ==========================================================================
+   9. СТИЛИ ИСКЛЮЧИТЕЛЬНО ДЛЯ МОБИЛЬНЫХ (ЭКРАНЫ ДО 768px ВКЛЮЧИТЕЛЬНО)
+   ========================================================================== */
 @media (max-width: 768px) {
-    header {
-        position: relative;
-        z-index: 100;
-        display: flex !important;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 0 !important;
-        gap: 12px;
-    }
+  /* Активируем кнопку бургер-меню */
+  .menu-toggle {
+    display: block;
+  }
 
-    body .menu-toggle {
-        display: flex !important;
-        position: relative;
-        z-index: 1001;
-        order: 1;
-        margin-left: 0;
-        width: 44px !important;
-        height: 44px !important;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 12px !important;
-        color: #fff !important;
-        background: transparent !important;
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent !important;
-    }
+  /* Превращаем навигацию в скрытую шторку, выезжающую слева */
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: #161b22;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    gap: 25px;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    border-top: 1px solid #30363d;
+  }
 
-    body .menu-toggle:active {
-        transition: none !important;
-        background: rgba(255, 255, 255, 0.15) !important;
-        border-color: #ffffff !important;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
-    }
+  /* Класс, который добавляет ваш скрипт при тапе на бургер */
+  .nav-links.open {
+    left: 0;
+  }
 
-    body .logo {
-        order: 2;
-        margin-left: 0 !important;
-    }
+  /* Удобные крупные ссылки для нажатия пальцем */
+  .nav-links a {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
 
-    body .lk-btn {
-        display: flex !important;
-        position: relative;
-        z-index: 101;
-        order: 3;
-        margin-left: auto !important;
-        margin-top: 0 !important;
-        width: 44px !important;
-        height: 44px !important;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        border-radius: 12px !important;
-        background: transparent !important;
-        -webkit-tap-highlight-color: transparent !important;
-    }
+  /* Адаптируем главный экран и тексты под маленькие дисплеи */
+  .hero-section {
+    padding: 110px 0 40px 0;
+  }
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+  .hero-section p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
 
-    body .lk-btn:active {
-        transition: none !important;
-        background: rgba(255, 255, 255, 0.15) !important;
-        border-color: #ffffff !important;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
-    }
+  /* Делаем три кнопки переключателя вертикальными */
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 16px;
+  }
+  .toggle-btn {
+    width: 100%;
+    text-align: center;
+  }
 
-    .nav-links {
-        display: flex !important;
-        position: fixed !important;
-        top: 0;
-        left: -100%;
-        width: 100% !important;
-        height: 100vh !important;
-        background: radial-gradient(circle at top right, #0a0a16, #05050a 80%) !important;
-        flex-direction: column !important;
-        align-items: center;
-        justify-content: center;
-        gap: 24px !important;
-        padding: 80px 24px 24px 24px !important;
-        transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
-        z-index: 1000 !important;
-        overflow-y: auto !important;
-    }
+  /* Перестраиваем Bento-сетку строго в одну колонку */
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .nav-links.open {
-        left: 0 !important;
-    }
-
-    .nav-links a {
-        font-size: 20px !important;
-        color: #fff !important;
-        text-decoration: none;
-        width: 100%;
-        text-align: center;
-        padding: 12px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        transition: color 0.3s;
-        -webkit-tap-highlight-color: transparent !important;
-    }
-
-    body .bento-grid {
-        display: flex;
-        width: 100%;
-        margin: 0 auto;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .bento-item {
-        grid-column: span 1 !important;
-        min-height: auto !important;
-    }
-                }
+  /* Уменьшаем отступы в футере и текстовых блоках */
+  .placeholder, .about {
+    padding: 30px 20px;
+  }
+}
