@@ -162,7 +162,7 @@ header {
   display: flex !important;
   width: 100% !important;
   max-width: 1200px !important;
-  margin: 0 auto 40px auto !important;
+  margin: 0 auto 30px auto !important;
   padding: 0 20px !important;
   height: 42px !important;
   background: transparent !important;
@@ -177,15 +177,19 @@ header {
   justify-content: center !important;
   height: 42px !important;
   background: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.25) !important;
   border-right: none !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 600 !important;
   color: #8b949e !important;
   cursor: pointer !important;
   transition: border-color 0.1s ease, color 0.1s ease !important;
   -webkit-tap-highlight-color: transparent !important;
   outline: none !important;
+  outline-offset: 0 !important;
+  -webkit-appearance: none !important;
   box-sizing: border-box !important;
 }
 
@@ -207,8 +211,9 @@ header {
 
 .toggle-btn.active {
   color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.6) !important;
   background: rgba(255, 255, 255, 0.08) !important;
+  border-top-color: rgba(255, 255, 255, 0.6) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .toggle-btn:active {
@@ -218,30 +223,15 @@ header {
   border-color: #ffffff !important;
   box-shadow: 0 0 14px rgba(255, 255, 255, 0.8) !important;
   transition: none !important;
-  -webkit-appearance: none !important;
 }
 
 /* ==========================================================================
    4. СТИЛИ КНОПОК И ОСНОВА BENTO-ПЛАШЕК
    ========================================================================= */
-.toggle-btn {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #8b949e;
-}
-
 .toggle-btn:hover {
-  color: #f0f6fc;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
 }
-
-.toggle-btn.active {
-  background-color: #21262d;
-  color: #58a6ff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 .bento-grid {
   display: grid;
   gap: 24px;
