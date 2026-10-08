@@ -383,12 +383,18 @@ footer {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Ограничиваем футер и другие текстовые плашки ровно под ширину сетки */
-  .placeholder, .about, footer {
+  /* Центрируем текстовые блоки на ПК */
+  .placeholder, .about {
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 30px auto;
   }
+
+  /* Центрируем футер на ПК отдельно */
+  footer {
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+  }
+
 }
 
 /* ==========================================================================
@@ -461,8 +467,13 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  /* Уменьшаем отступы в футере и текстовых блоках */
-  .placeholder, .about {
-    padding: 30px 20px;
-  }
+/* Уменьшаем отступы в футере и текстовых блоках */
+.placeholder, .about {
+  padding: 30px 20px;
+  margin-bottom: 24px;
+}
+footer {
+  padding: 30px 20px;
+}
+
 }
