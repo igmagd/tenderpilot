@@ -44,7 +44,7 @@ header .header-container {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.25rem !important; /* Уменьшили с 1.5rem до 1.25rem для премиального изящества */
   font-weight: 700;
   color: #f0f6fc;
   letter-spacing: 0.5px;
