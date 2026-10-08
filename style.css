@@ -139,7 +139,7 @@ header {
 }
 
 .hero-section {
-  padding: 140px 0 60px 0;
+  padding: 70px 0 60px 0;
   text-align: center;
   background: radial-gradient(circle at top, rgba(56, 139, 253, 0.15), transparent 60%);
 }
@@ -149,6 +149,7 @@ header {
   color: #f0f6fc;
   margin-bottom: 15px;
   font-weight: 800;
+  margin-top: 40px;
 }
 
 .hero-section p {
@@ -158,12 +159,66 @@ header {
 }
 
 .hero-actions {
-  display: inline-flex;
-  background-color: #161b22;
-  padding: 6px;
-  border-radius: 12px;
-  border: 1px solid #30363d;
-  margin-bottom: 40px;
+  display: flex !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto 40px auto !important;
+  padding: 0 20px !important;
+  height: 42px !important;
+  background: transparent !important;
+  border: none !important;
+  box-sizing: border-box !important;
+}
+
+.toggle-btn {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 42px !important;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-right: none !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #8b949e !important;
+  cursor: pointer !important;
+  transition: border-color 0.1s ease, color 0.1s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+.toggle-btn:first-child {
+  border-top-left-radius: 12px !important;
+  border-bottom-left-radius: 12px !important;
+}
+
+.toggle-btn:last-child {
+  border-top-right-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.toggle-btn:hover {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.toggle-btn.active {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.toggle-btn:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.8) !important;
+  transition: none !important;
+  -webkit-appearance: none !important;
 }
 
 /* ==========================================================================
