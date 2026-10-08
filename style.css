@@ -112,6 +112,8 @@ header {
   font-size: 1.5rem !important;
   line-height: 1 !important;
   background: transparent !important;
+  text-shadow: none !important;
+  filter: none !important;
 }
 
 .lk-btn:hover, .menu-toggle:hover {
