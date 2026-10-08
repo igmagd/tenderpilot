@@ -544,3 +544,19 @@ footer {
 footer {
   padding: 30px 20px;
 }
+  .menu-toggle.is-open svg {
+    transform: scale(0.7) !important;
+    transition: transform 0.2s ease !important;
+  }
+  .menu-toggle.is-open svg line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px) !important;
+    transform-origin: center !important;
+  }
+  .menu-toggle.is-open svg line:nth-child(2) {
+    opacity: 0 !important;
+  }
+  .menu-toggle.is-open svg line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px) !important;
+    transform-origin: center !important;
+  }
+}
