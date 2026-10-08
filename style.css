@@ -126,7 +126,7 @@ header {
   background: transparent !important;
   background-color: transparent !important;
   border-color: #ffffff !important;
-  box-shadow: none !important;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5) !important; /* Наша премиальная микро-подсветка наружу */
   transition: none !important;
 }
 
