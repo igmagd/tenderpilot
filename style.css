@@ -430,11 +430,11 @@ display: none !important;
 .menu-toggle.is-open .icon-close {
 display: block !important;
 }
-  /* Золотая середина: ультра-деликатное бирюзовое рассеивание наружу на мобильных */
+  /* Эксперимент: увеличили радиус рассеивания бирюзового свечения наружу */
   .lk-btn:active svg, .menu-toggle:active svg, .menu-toggle:active svg line {
     stroke: #ffffff !important;
     fill: none !important;
-    filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.35)) drop-shadow(0 0 12px rgba(0, 242, 254, 0.15)) !important;
+    filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.4)) drop-shadow(0 0 24px rgba(0, 242, 254, 0.2)) !important;
   }
 }
 
