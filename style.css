@@ -128,6 +128,13 @@ header {
   transition: none !important;
 }
 
+.lk-btn:active, .menu-toggle:active {
+  border-color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 0 30px #ffffff, inset 0 0 15px #ffffff !important;
+  transition: none !important;
+}
+
 .hero-section {
   padding: 140px 0 60px 0;
   text-align: center;
