@@ -96,16 +96,16 @@ header {
   height: 42px !important;
   border-radius: 12px !important;
   background: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: none !important;
-  transition: border-color 0.15s ease, background-color 0.15s ease !important;
+  transition: border-color 0.15s ease !important;
   padding: 0 !important;
   cursor: pointer !important;
 }
 
 .lk-btn svg {
-  color: #00f2fe !important;
-  stroke: #00f2fe !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
   font-size: 1.5rem !important;
   line-height: 1 !important;
 }
@@ -117,9 +117,17 @@ header {
 }
 
 .lk-btn:hover, .menu-toggle:hover {
-  border-color: rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
   box-shadow: none !important;
 }
+
+.lk-btn:active, .menu-toggle:active {
+  background: transparent !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 35px #ffffff !important;
+  transition: none !important;
+}
+
 
 .lk-btn:active, .menu-toggle:active {
   border-color: #ffffff !important;
