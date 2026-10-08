@@ -111,7 +111,7 @@ header .header-container {
   background: transparent !important;
   background-color: transparent !important;
   border-color: #ffffff !important;
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), 0 0 20px rgba(0, 242, 254, 0.1) !important; /* Ультра-мягкое, едва заметное бирюзовое рассеивание */
+  box-shadow: 0 0 14px rgba(0, 242, 254, 0.45), 0 0 25px rgba(0, 242, 254, 0.2) !important; /* Та самая идеальная золотая середина */
   transition: none !important;
   outline: none !important;
   -webkit-appearance: none !important;
