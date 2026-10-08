@@ -79,8 +79,7 @@ a {
         align-items: center;
         gap: 1.2rem;
         justify-content: center;
-        margin: 0 4rem;
-        flex-grow: 1;
+        margin: 0 3%;
     }
 
     .nav-links a {
