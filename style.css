@@ -54,10 +54,12 @@ a {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.2rem 1.6rem;
+        padding: 1.2rem 0;
         background-color: var(--bg-dark, #000000);
         position: relative;
         z-index: 100;
+        width: min(1200px, calc(100% - 40px));
+        margin: 0 auto;
     }
 
     .logo {
