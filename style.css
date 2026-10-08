@@ -98,14 +98,17 @@ header {
   background: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: none !important;
-  transition: border-color 0.15s ease !important;
+  transition: border-color 0.1s ease !important;
   padding: 0 !important;
   cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
 }
 
 .lk-btn svg {
   color: #ffffff !important;
   stroke: #ffffff !important;
+  fill: none !important;
   font-size: 1.5rem !important;
   line-height: 1 !important;
 }
@@ -114,12 +117,21 @@ header {
   color: #ffffff !important;
   font-size: 1.5rem !important;
   line-height: 1 !important;
+  background: transparent !important;
 }
 
 .lk-btn:hover, .menu-toggle:hover {
   border-color: rgba(255, 255, 255, 0.5) !important;
-  box-shadow: none !important;
   background: transparent !important;
+  box-shadow: none !important;
+}
+
+.lk-btn:active, .menu-toggle:active {
+  border-color: #ffffff !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  transition: none !important;
 }
 
 .lk-btn:active, .menu-toggle:active {
