@@ -98,23 +98,17 @@ header {
   background: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow: none !important;
-  transition: border-color 0.1s ease !important;
+  transition: border-color 0.1s ease, box-shadow 0.1s ease !important;
   padding: 0 !important;
   cursor: pointer !important;
   -webkit-tap-highlight-color: transparent !important;
   outline: none !important;
 }
 
-.lk-btn svg {
+.lk-btn svg, .menu-toggle {
   color: #ffffff !important;
   stroke: #ffffff !important;
   fill: none !important;
-  font-size: 1.5rem !important;
-  line-height: 1 !important;
-}
-
-.menu-toggle {
-  color: #ffffff !important;
   font-size: 1.5rem !important;
   line-height: 1 !important;
   background: transparent !important;
@@ -124,6 +118,14 @@ header {
   border-color: rgba(255, 255, 255, 0.5) !important;
   background: transparent !important;
   box-shadow: none !important;
+}
+
+.lk-btn:active, .menu-toggle:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6) !important;
+  transition: none !important;
 }
 
 .lk-btn:active, .menu-toggle:active {
