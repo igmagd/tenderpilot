@@ -84,7 +84,7 @@ header .header-container {
   height: 42px !important;
   border-radius: 12px !important;
   background: transparent !important;
-  border: 1px solid transparent !important;
+  border: 1px solid transparent !important; /* Намертво убрали рамку в покое */
   box-shadow: none !important;
   transition: border-color 0.1s ease, box-shadow 0.1s ease !important;
   padding: 0 !important;
@@ -103,16 +103,15 @@ header .header-container {
 }
 
 .lk-btn:hover, .menu-toggle:hover {
-  border-color: transparent !important;
+  border-color: transparent !important; /* Убрали рамку при наведении */
   background: transparent !important;
 }
 
-/* ЭФФЕКТ ВСПЫШКИ: Рамка ярко-белая, а ореол рассеивается с благородным голубоватым оттенком */
 .lk-btn:active, .menu-toggle:active {
   background: transparent !important;
   background-color: transparent !important;
-  border-color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(56, 139, 253, 0.8), 0 0 30px rgba(56, 139, 253, 0.4) !important;
+  border-color: #ffffff !important; /* При тапе вспыхивает только сама рамка */
+  box-shadow: 0 0 15px rgba(56, 139, 253, 0.8), 0 0 30px rgba(56, 139, 253, 0.4) !important; /* Тот самый ледяной голубоватый отлив наружу */
   transition: none !important;
   outline: none !important;
   -webkit-appearance: none !important;
