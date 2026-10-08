@@ -1,48 +1,22 @@
 /* ==========================================================================
-   1. БАЗОВЫЕ НАСТРОЙКИ САЙТА И ОБЩИЕ СТИЛИ (ДЛЯ ВСЕХ УСТРОЙСТВ)
+   1. БАЗОВЫЕ НАСТРОЙКИ И СБРОС СТИЛЕЙ
    ========================================================================== */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: #0d1117;
   color: #c9d1d9;
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-x: hidden;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: color 0.3s ease;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
-  transition: all 0.3s ease;
-}
-
-/* Ограничивающий контейнер, который держит симметрию по бокам всего сайта */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
-}
-
-.hidden {
-  display: none !important;
-}
-
 /* ==========================================================================
-   2. БАЗОВЫЕ СТИЛИ КОМПОНЕНТОВ (ШАПКА И МЕНЮ)
+   2. БАЗОВЫЕ СТИЛИ КОМПОНЕНТОВ (ОБЩИЕ)
    ========================================================================== */
 header {
   background-color: rgba(22, 27, 34, 0.95);
@@ -54,13 +28,19 @@ header {
   width: 100%;
   z-index: 1000;
   transition: all 0.3s ease;
+  height: 70px;
+  display: flex;
+  align-items: center;
 }
 
-.header-container {
+header .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .logo {
@@ -69,24 +49,32 @@ header {
   color: #f0f6fc;
   letter-spacing: 0.5px;
   white-space: nowrap;
+  text-decoration: none;
 }
 
 .logo span {
   color: #00f2fe;
 }
 
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
 .nav-links a {
   font-size: 0.95rem;
   color: #8b949e;
   font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: #58a6ff;
+  color: #00f2fe;
 }
 
 /* ==========================================================================
-   3. БАЗОВЫЕ СТИЛИ (КНОПКИ, БУРГЕР И ГЛАВНЫЙ ЭКРАН)
+   3. КНОПКИ-БЛИЗНЕЦЫ ШАПКИ (БИЗНЕС-КЛАСС)
    ========================================================================== */
 .lk-btn, .menu-toggle {
   display: flex !important;
@@ -105,21 +93,18 @@ header {
   outline: none !important;
 }
 
-.lk-btn svg, .menu-toggle {
+.lk-btn svg, .menu-toggle svg {
   color: #ffffff !important;
   stroke: #ffffff !important;
   fill: none !important;
-  font-size: 1.5rem !important;
-  line-height: 1 !important;
+  width: 22px !important;
+  height: 22px !important;
   background: transparent !important;
-  text-shadow: none !important;
-  filter: none !important;
 }
 
 .lk-btn:hover, .menu-toggle:hover {
   border-color: rgba(255, 255, 255, 0.5) !important;
   background: transparent !important;
-  box-shadow: none !important;
 }
 
 .lk-btn:active, .menu-toggle:active {
@@ -128,9 +113,6 @@ header {
   border-color: #ffffff !important;
   box-shadow: 0 0 14px rgba(255, 255, 255, 0.8) !important;
   transition: none !important;
-  outline: none !important; /* Убивает скрытую системную рамку */
-  outline-offset: 0 !important;
-  -webkit-appearance: none !important; /* Сбрасывает любые мобильные стили кнопок */
 }
 
 .lk-btn:active svg, .menu-toggle:active svg, .menu-toggle:active svg line {
@@ -138,8 +120,11 @@ header {
   fill: none !important;
 }
 
+/* ==========================================================================
+   4. ГЛАВНЫЙ ЭКРАН И ДЕКСKТОПНЫЙ ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМОВ
+   ========================================================================== */
 .hero-section {
-  padding: 70px 0 60px 0;
+  padding: 110px 0 40px 0 !important;
   text-align: center;
   background: radial-gradient(circle at top, rgba(56, 139, 253, 0.15), transparent 60%);
 }
@@ -149,7 +134,7 @@ header {
   color: #f0f6fc;
   margin-bottom: 15px;
   font-weight: 800;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .hero-section p {
@@ -226,109 +211,92 @@ header {
 }
 
 /* ==========================================================================
-   4. СТИЛИ КНОПОК И ОСНОВА BENTO-ПЛАШЕК
-   ========================================================================= */
-.toggle-btn:hover {
-  color: #ffffff !important;
-  border-color: rgba(255, 255, 255, 0.5) !important;
-}
+   5. BENTO-СЕТКА И ПЛАШКИ
+   ========================================================================== */
 .bento-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  margin-bottom: 60px;
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+}
+
+.bento-grid.hidden {
+  display: none !important;
 }
 
 .bento-item {
   background: #161b22;
   border: 1px solid #30363d;
-  border-radius: 24px;
+  border-radius: 16px;
   padding: 30px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-item:hover {
+  transform: translateY(-4px);
+  border-color: #388bfd;
+  box-shadow: 0 8px 24px rgba(56, 139, 253, 0.12);
 }
 
 .bento-item h3 {
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 1.3rem;
   color: #f0f6fc;
   margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .bento-item p {
-  font-size: 14px;
+  font-size: 0.95rem;
   color: #8b949e;
-  line-height: 1.6;
 }
 
 /* ==========================================================================
-   5. НЕОНОВЫЕ ПОДСВЕТКИ ПЛАШЕК И СТИЛИ ФУТЕРА
+   6. НЕОНОВЫЕ СТИЛИ ДЛЯ ПЛАШЕК БЕНТО
    ========================================================================== */
-.neon-cyan:hover {
-  border-color: #00f2fe;
-  box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-}
+.neon-cyan:hover { border-color: #00f2fe; box-shadow: 0 8px 24px rgba(0, 242, 254, 0.15); }
+.neon-blue:hover { border-color: #388bfd; box-shadow: 0 8px 24px rgba(56, 139, 253, 0.15); }
+.neon-indigo:hover { border-color: #58a6ff; box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15); }
+.neon-emerald:hover { border-color: #3f6; box-shadow: 0 8px 24px rgba(51, 255, 102, 0.15); }
+.neon-purple:hover { border-color: #bc8cff; box-shadow: 0 8px 24px rgba(188, 140, 255, 0.15); }
+.neon-gold:hover { border-color: #ffd700; box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15); }
 
-.neon-blue:hover {
-  border-color: #4facfe;
-  box-shadow: 0 0 20px rgba(79, 172, 254, 0.2);
-}
-
-.neon-indigo:hover {
-  border-color: #6366f1;
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
-}
-
-.neon-emerald:hover {
-  border-color: #10b981;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-}
-
-.neon-purple:hover {
-  border-color: #9333ea;
-  box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
-}
-
-.neon-gold:hover {
-  border-color: #ffffff;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-}
-
+/* ==========================================================================
+   7. СЕКЦИИ И МОДАЛЬНЫЕ ОКНА
+   ========================================================================== */
 .placeholder, .about {
   background: #161b22;
   border: 1px solid #30363d;
-  border-radius: 24px;
+  border-radius: 16px;
   padding: 40px;
-  margin-bottom: 30px;
-  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
 }
 
-footer {
-  padding: 40px 0;
-  border-top: 1px solid #30363d;
-  color: #666675;
-  font-size: 13px;
-  text-align: center;
-   }
-
-/* ==========================================================================
-   6. БАЗОВЫЕ СТИЛИ МОДАЛЬНЫХ ОКНОК И КАЛЬКУЛЯТОРОВ
-   ========================================================================== */
 .modal-window {
   position: fixed;
-  inset: 0;
-  z-index: 10001;
-  display: none;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh;
-  background: rgba(4, 4, 6, 0.85);
-  backdrop-filter: blur(20px);
-  padding: 40px 20px;
-  overflow-y: auto;
+  height: 100%;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .modal-window.open {
-  display: flex !important;
-  flex-direction: column;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .modal-content {
@@ -336,75 +304,10 @@ footer {
   border: 1px solid #30363d;
   border-radius: 24px;
   padding: 40px;
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-}
-
-.modal-content h2 {
-  font-size: 24px;
-  color: #f0f6fc;
-  margin-bottom: 15px;
-}
-
-.modal-content p {
-  color: #8b949e;
-  margin-bottom: 25px;
-}
-
-.modal-input {
-  width: 100%;
-  padding: 14px;
-  background: #0d1117;
-  border: 1px solid #30363d;
-  border-radius: 12px;
-  color: #ffffff;
-  font-size: 15px;
-  outline: none;
-  margin-bottom: 15px;
-  transition: all 0.2s ease;
-}
-
-.modal-input:focus {
-  border-color: #58a6ff;
-  box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
-}
-
-/* ==========================================================================
-   7. КНОПКИ ОКНОК, ТАБЫ КАЛЬКУЛЯТОРОВ И КУКИ
-   ========================================================================== */
-.modal-content button {
-  background: #21262d;
-  color: #c9d1d9;
-  border: 1px solid #30363d;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-}
-
-.modal-content button:hover {
-  background: #30363d;
-  border-color: #58a6ff;
-  color: #f0f6fc;
-}
-
-.guarantee-tabs, .transport-tabs {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.guarantee-tabs { grid-template-columns: repeat(3, 1fr); }
-.transport-tabs { grid-template-columns: repeat(4, 1fr); }
-
-.guarantee-tab, .transport-tab {
-  padding: 12px 6px;
-  background: #0d1117;
-  border: 1px solid #30363d;
-  border-radius: 12px;
-  color: #8b949e;
-  text-align: center;
-  font-size: 13px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
 .cookie-banner {
@@ -423,60 +326,35 @@ footer {
 }
 
 /* ==========================================================================
-   8. СТИЛИ ИСКЛЮЧИТЕЛЬНО ДЛЯ ПК (ЭКРАНЫ ОТ 769px И ВЫШЕ)
+   8. ДЕСКТОПНАЯ СЕКЦИЯ (ПК ВЕРСИЯ)
    ========================================================================== */
 @media (min-width: 769px) {
-  /* Ограничиваем шапку на ПК и центрируем её */
-  .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    width: 100%;
-  }
-
-  /* Скрываем мобильную кнопку-бургер на компьютерах */
   .menu-toggle {
-    display: none;
+    display: none !important;
   }
-
-  /* Выстраиваем меню горизонтально по центру, даем ему дышать */
-  .nav-links {
-    display: flex;
-    gap: 24px;
-    margin: 0 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-grow: 1;
-  }
-
-  /* Bento-сетка на ПК: идеальные 3 колонки */
-  .bento-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  /* Центрируем текстовые блоки на ПК */
   .placeholder, .about {
     max-width: 1200px;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 24px auto !important;
+    display: block !important;
   }
-
-  /* Центрируем футер на ПК отдельно */
   footer {
     max-width: 1200px;
-    margin: 40px auto 0 auto;
+    margin: 40px auto 0 auto !important;
+    display: block !important;
+    padding: 20px;
+    border-top: 1px solid #30363d;
   }
-
 }
 
 /* ==========================================================================
-   9. СТИЛИ ИСКЛЮЧИТЕЛЬНО ДЛЯ МОБИЛЬНЫХ (ЭКРАНЫ ДО 768px ВКЛЮЧИТЕЛЬНО)
+   9. МОБИЛЬНАЯ СЕКЦИЯ (ТЕЛЕФОНЫ)
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Активируем кнопку бургер-меню */
   .menu-toggle {
-    display: block;
+    display: flex !important;
   }
-  header .header-container, .header-container {
+  
+  header .header-container {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
@@ -491,85 +369,63 @@ footer {
   .lk-btn {
     margin-left: auto !important;
   }
-  
-  /* Превращаем навигацию в скрытую шторку, выезжающую слева */
+
   .nav-links {
     position: fixed;
     top: 70px;
     left: -100%;
     width: 100%;
     height: calc(100vh - 70px);
-    background-color: #161b22;
-    display: flex;
+    background-color: #0d1117;
     flex-direction: column;
-    align-items: center;
-    padding-top: 40px;
+    padding: 40px;
     gap: 25px;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
+    transition: left 0.3s ease;
+    z-index: 999;
     border-top: 1px solid #30363d;
   }
 
-  /* Класс, который добавляет ваш скрипт при тапе на бургер */
   .nav-links.open {
     left: 0;
   }
 
-  /* Удобные крупные ссылки для нажатия пальцем */
-  .nav-links a {
-    font-size: 1.2rem;
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  /* Адаптируем главный экран и тексты под маленькие дисплеи */
   .hero-section {
-    padding: 110px 0 40px 0;
-  }
-  .hero-section h1 {
-    font-size: 1.8rem;
-  }
-  .hero-section p {
-    font-size: 1rem;
-    margin-bottom: 30px;
-  }
-
-  .hero-actions {
-    flex-direction: row !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 15px !important;
-    margin: 0 auto 30px auto !important;
-  }
-
-  .toggle-btn {
-    flex: 1 !important;
-    white-space: nowrap !important;
-    font-size: 12px !important;
-    padding: 0 8px !important;
-  }
-
-  /* Перестраиваем Bento-сетку строго в одну колонку */
-  .bento-grid {
-    grid-template-columns: 1fr;
-  }
-
-/* Уменьшаем отступы в футере и текстовых блоках */
+padding: 85px 0 30px 0 !important;
+}
+.hero-actions {
+flex-direction: row !important;
+width: 100% !important;
+max-width: 100% !important;
+padding: 0 15px !important;
+margin: 0 auto 20px auto !important;
+}
+.toggle-btn {
+flex: 1 !important;
+white-space: nowrap !important;
+font-size: 12px !important;
+padding: 0 6px !important;
+}
+.bento-grid {
+grid-template-columns: 1fr;
+gap: 16px;
+padding: 0 15px;
+}
 .placeholder, .about {
-  padding: 30px 20px;
-  margin-bottom: 24px;
+width: 100% !important;
+margin: 0 0 16px 0 !important;
+padding: 24px 16px !important;
+display: block !important;
 }
 footer {
-  padding: 30px 20px;
+width: 100% !important;
+padding: 30px 16px !important;
+display: block !important;
+border-top: 1px solid #30363d;
 }
-  /* Управление отображением иконок в премиум-кнопке */
-  .menu-toggle.is-open .icon-burger {
-    display: none !important;
-  }
-  .menu-toggle.is-open .icon-close {
-    display: block !important;
-  }
-
+.menu-toggle.is-open .icon-burger {
+display: none !important;
 }
+.menu-toggle.is-open .icon-close {
+display: block !important;
+}
+   }
