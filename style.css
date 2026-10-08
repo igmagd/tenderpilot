@@ -130,40 +130,9 @@ header {
   transition: none !important;
 }
 
-.lk-btn:active, .menu-toggle:active {
-  border-color: #ffffff !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  transition: none !important;
-}
-
-.lk-btn:active, .menu-toggle:active {
-  background: transparent !important;
-  border-color: #ffffff !important;
-  box-shadow: none !important;
-  transition: none !important;
-}
-
-.lk-btn:active, .menu-toggle:active {
-  background: transparent !important;
-  border-color: #ffffff !important;
-  box-shadow: 0 0 35px #ffffff !important;
-  transition: none !important;
-}
-
-.lk-btn:active, .menu-toggle:active {
-  border-color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 0 30px #ffffff, inset 0 0 15px #ffffff !important;
-  transition: none !important;
-}
-
-.lk-btn:active, .menu-toggle:active {
-  border-color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 0 30px #ffffff, inset 0 0 15px #ffffff !important;
-  transition: none !important;
+.lk-btn:active svg, .menu-toggle:active svg, .menu-toggle:active svg line {
+  stroke: #ffffff !important;
+  fill: none !important;
 }
 
 .hero-section {
@@ -544,19 +513,12 @@ footer {
 footer {
   padding: 30px 20px;
 }
-  .menu-toggle.is-open svg {
-    transform: scale(0.7) !important;
-    transition: transform 0.2s ease !important;
+  /* Управление отображением иконок в премиум-кнопке */
+  .menu-toggle.is-open .icon-burger {
+    display: none !important;
   }
-  .menu-toggle.is-open svg line:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px) !important;
-    transform-origin: center !important;
+  .menu-toggle.is-open .icon-close {
+    display: block !important;
   }
-  .menu-toggle.is-open svg line:nth-child(2) {
-    opacity: 0 !important;
-  }
-  .menu-toggle.is-open svg line:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px) !important;
-    transform-origin: center !important;
-  }
+
 }
