@@ -22,7 +22,6 @@ if (menuToggle && nav) {
         e.stopPropagation();
         const isOpen = nav.classList.toggle("open");
         menuToggle.classList.toggle("is-open", isOpen);
-        menuToggle.textContent = isOpen ? "×" : "☰";
         menuToggle.setAttribute("aria-expanded", isOpen);
     });
 }
@@ -31,7 +30,6 @@ function closeAllMobileMenus() {
     if (nav && menuToggle) {
         nav.classList.remove('open');
         menuToggle.classList.remove('is-open');
-        menuToggle.textContent = "☰";
         menuToggle.setAttribute("aria-expanded", "false");
     }
 }
