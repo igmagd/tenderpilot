@@ -84,9 +84,9 @@ header .header-container {
   height: 42px !important;
   border-radius: 12px !important;
   background: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid transparent !important;
   box-shadow: none !important;
-  transition: border-color 0.1s ease !important;
+  transition: border-color 0.1s ease, box-shadow 0.1s ease !important;
   padding: 0 !important;
   cursor: pointer !important;
   -webkit-tap-highlight-color: transparent !important;
@@ -103,16 +103,19 @@ header .header-container {
 }
 
 .lk-btn:hover, .menu-toggle:hover {
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  border-color: transparent !important;
   background: transparent !important;
 }
 
+/* ЭФФЕКТ ВСПЫШКИ: Рамка ярко-белая, а ореол рассеивается с благородным голубоватым оттенком */
 .lk-btn:active, .menu-toggle:active {
   background: transparent !important;
   background-color: transparent !important;
   border-color: #ffffff !important;
-  box-shadow: 0 0 14px rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 0 15px rgba(56, 139, 253, 0.8), 0 0 30px rgba(56, 139, 253, 0.4) !important;
   transition: none !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
 }
 
 .lk-btn:active svg, .menu-toggle:active svg, .menu-toggle:active svg line {
