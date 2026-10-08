@@ -110,8 +110,8 @@ header .header-container {
 .lk-btn:active, .menu-toggle:active {
   background: transparent !important;
   background-color: transparent !important;
-  border-color: #ffffff !important; /* При тапе вспыхивает только сама рамка */
-  box-shadow: 0 0 15px rgba(56, 139, 253, 0.8), 0 0 30px rgba(56, 139, 253, 0.4) !important; /* Тот самый ледяной голубоватый отлив наружу */
+  border-color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), 0 0 20px rgba(0, 242, 254, 0.1) !important; /* Ультра-мягкое, едва заметное бирюзовое рассеивание */
   transition: none !important;
   outline: none !important;
   -webkit-appearance: none !important;
