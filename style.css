@@ -119,6 +119,14 @@ header {
 .lk-btn:hover, .menu-toggle:hover {
   border-color: rgba(255, 255, 255, 0.5) !important;
   box-shadow: none !important;
+  background: transparent !important;
+}
+
+.lk-btn:active, .menu-toggle:active {
+  background: transparent !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+  transition: none !important;
 }
 
 .lk-btn:active, .menu-toggle:active {
@@ -127,7 +135,6 @@ header {
   box-shadow: 0 0 35px #ffffff !important;
   transition: none !important;
 }
-
 
 .lk-btn:active, .menu-toggle:active {
   border-color: #ffffff !important;
