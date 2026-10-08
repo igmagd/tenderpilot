@@ -49,49 +49,51 @@ a {
 /* ==========================================================================
    2. ШАПКА САЙТА, НАВИГАЦИЯ И КНОПКИ УПРАВЛЕНИЯ
    ========================================================================== */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2.5rem;
-    background-color: var(--bg-dark, #000000);
-    position: relative;
-    z-index: 100;
-}
+@media (min-width: 769px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 1.6rem;
+        background-color: var(--bg-dark, #000000);
+        position: relative;
+        z-index: 100;
+    }
 
-.logo {
-    color: #ffffff;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
+    .logo {
+        color: #ffffff;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
 
-.logo span {
-    color: #00f2fe;
-}
+    .logo span {
+        color: #00f2fe;
+    }
 
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 0 2rem;
-    flex-grow: 1;
-    justify-content: center;
-}
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        margin: 0 1.5rem;
+        flex-grow: 1;
+        justify-content: center;
+    }
 
-.nav-links a {
-    color: #8a8a93;
-    font-size: 12.5px;
-    font-weight: 400;
-    letter-spacing: -0.15px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: color 0.2s ease;
-    white-space: nowrap;
-}
+    .nav-links a {
+        color: #8a8a93;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: -0.1px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+    }
 
-.nav-links a:hover {
-    color: #ffffff;
+    .nav-links a:hover {
+        color: #ffffff;
+    }
 }
 
 .menu-toggle {
