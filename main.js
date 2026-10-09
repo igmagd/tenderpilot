@@ -1,33 +1,24 @@
 // ==========================================
 // 1. МОБИЛЬНОЕ МЕНЮ И НАВИГАЦИЯ
 // ==========================================
-const menuToggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav-links");
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.querySelector('.nav-links');
 
-if (menuToggle && nav) {
-  // Открытие и закрытие шторки при клике на бургер
-  menuToggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isOpen = nav.classList.toggle("open");
-    menuToggle.classList.toggle("is-open", isOpen);
-    menuToggle.setAttribute("aria-expanded", isOpen);
-  });
-
-  // Автозакрытие шторки при клике на любую из 10 ссылок
-  const menuLinks = nav.querySelectorAll("a");
-  menuLinks.forEach(link => {
-    link.addEventListener("click", () => {
-      closeAllMobileMenus();
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = menuToggle.classList.toggle('is-open');
+        navLinks.classList.toggle('open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-  });
-}
 
-function closeAllMobileMenus() {
-  if (nav && menuToggle) {
-    nav.classList.remove('open');
-    menuToggle.classList.remove('is-open');
-    menuToggle.setAttribute("aria-expanded", "false");
-  }
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('is-open');
+            navLinks.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
 }
 
 // ==========================================
@@ -43,7 +34,7 @@ if (cookieBanner && cookieAccept) {
 }
 
 // ==========================================
-// 3. ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (BENTO GRID)
+// 3. ПЕР ЕКЛЮЧЕНИЕ РЕЖИМОВ (BENTO GRID)
 // ==========================================
 function switchMode(mode) {
   // Находим все три кнопки и убираем у них активный класс
