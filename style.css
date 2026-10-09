@@ -75,14 +75,14 @@ header .header-container {
 
 /* ==========================================================================
    3. КНОПКИ-БЛИЗНЕЦЫ ШАПКИ (БИЗНЕС-КЛАСС)
-   ========================================================================== */
+
 .lk-btn, .menu-toggle {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     width: 42px !important;
     height: 42px !important;
-    border-radius: 50% !important; /* Делаем подложку круглой для идеального рассеивания */
+    border-radius: 50% !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none;
@@ -90,38 +90,44 @@ header .header-container {
     cursor: pointer !important;
     -webkit-tap-highlight-color: transparent !important;
     outline: none !important;
-    transition: box-shadow 0.15s ease !important; /* Плавное затухание бирюзового облака */
+    transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Настройки иконок внутри кнопок в покое (мягкий белый, тонкие линии 1px) */
 .lk-btn svg, .menu-toggle svg {
-    color: rgba(240, 246, 252, 0.7) !important;
-    stroke: rgba(240, 246, 252, 0.7) !important;
+    color: rgba(240, 246, 252, 0.6) !important;
+    stroke: rgba(240, 246, 252, 0.6) !important;
     stroke-width: 1px !important;
     fill: none !important;
     width: 22px !important;
     height: 22px !important;
     background: transparent !important;
-    transition: stroke 0.15s ease !important; /* Плавное возвращение к приглушенному белому */
+    transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* МГНОВЕННЫЙ ТАП (Иконка вспыхивает белым, а вокруг разливается легкое бирюзовые облако) */
-.lk-btn:active, .menu-toggle:active {
-    /* Ровно в момент тапа мгновенно зажигаем мягкое бирюзовое облако из-под пальца */
-    box-shadow: 0 0 20px 4px rgba(0, 242, 254, 0.35) !important; 
-    transition: none !important; /* Мгновенный взрыв света */
+/* МГНОВЕННЫЙ ТАП ДЛЯ ЗАКРЫТОГО СОСТОЯНИЯ (Эффект "Дорогой простоты" — двухслойное тающее облако) */
+.lk-btn:active, .menu-toggle:not(.is-open):active {
+    box-shadow: 0 0 10px 1px rgba(0, 242, 254, 0.12), 
+                0 0 28px 4px rgba(0, 242, 254, 0.10) !important; 
+    transition: none !important;
 }
-.lk-btn:active svg, .menu-toggle:active svg {
-    stroke: #ffffff !important; /* Сами линии при тапе становятся чисто белыми */
-    transition: none !important; /* Мгновенное изменение цвета */
+.lk-btn:active svg, .menu-toggle:not(.is-open):active svg {
+    stroke: #ffffff !important;
+    transition: none !important;
 }
 
-/* Фиксируем состояние для ОТКРЫТОГО бургера (чтобы пользователь видел активность меню) */
+/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Когда шторка открыта) */
 .menu-toggle.is-open {
-    box-shadow: 0 0 15px 2px rgba(0, 242, 254, 0.2) !important; /* Постоянное легкое свечение */
+    box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.06) !important;
 }
 .menu-toggle.is-open svg {
-    stroke: #ffffff !important; /* Иконка остается белой */
+    stroke: #ffffff !important;
+}
+
+/* ТАП ПО КРЕСТИКУ ДЛЯ ЗАКРЫТИЯ (Свет уходит в тень без визуального хлопка) */
+.menu-toggle.is-open:active {
+    box-shadow: 0 0 8px 1px rgba(0, 242, 254, 0.04) !important; 
+    transition: none !important;
 }
 
 /* ==========================================================================
