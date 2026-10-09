@@ -70,8 +70,6 @@ header .header-container {
 }
 
 .nav-links a:hover {
-/* Это концовка предыдущего блока навигации, которая могла сломаться */
-.nav-links a:hover {
     color: #ffffff !important;
 }
 
@@ -83,7 +81,6 @@ header .header-container {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-;
     width: 42px !important;
     height: 42px !important;
     border-radius: 50% !important;
