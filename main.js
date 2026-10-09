@@ -18,20 +18,28 @@ const menuToggle = document.getElementById("menu-toggle");
 const nav = document.getElementById("nav-links");
 
 if (menuToggle && nav) {
-    menuToggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isOpen = nav.classList.toggle("open");
-        menuToggle.classList.toggle("is-open", isOpen);
-        menuToggle.setAttribute("aria-expanded", isOpen);
+  menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = nav.classList.toggle("open");
+    menuToggle.classList.toggle("is-open", isOpen);
+    menuToggle.setAttribute("aria-expanded", isOpen);
+  });
+
+  // Автозакрытие меню: ищем все 10 ссылок внутри шторки и вешаем на них закрытие
+  const menuLinks = nav.querySelectorAll("a");
+  menuLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      closeAllMobileMenus();
     });
+  });
 }
 
 function closeAllMobileMenus() {
-    if (nav && menuToggle) {
-        nav.classList.remove('open');
-        menuToggle.classList.remove('is-open');
-        menuToggle.setAttribute("aria-expanded", "false");
-    }
+  if (nav && menuToggle) {
+    nav.classList.remove('open');
+    menuToggle.classList.remove('is-open');
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
 }
 
 const cookieBanner = document.getElementById('cookie-banner');
