@@ -333,67 +333,52 @@ header .header-container {
 /* ==========================================================================
    9. МОБИЛЬНАЯ СЕКЦИЯ (ТЕЛЕФОНЫ)
    ========================================================================== */
-@media (max-width: 768px) {
-  /* Перестраиваем контейнер шапки в два ряда */
+    @media (max-width: 768px) {
   header .header-container {
     display: flex !important;
-    flex-wrap: wrap !important; /* Позволяет кнопкам уйти на вторую строчку */
+    flex-wrap: wrap !important;
     align-items: center !important;
     justify-content: flex-start !important;
     width: 100% !important;
     padding: 10px 15px !important;
-    gap: 15px 0 !important; /* Отступ между первым и вторым рядом */
+    gap: 15px 0 !important;
   }
-
-  .logo {
-    margin-left: 15px !important;
-  }
-
-  .lk-btn {
-    margin-left: auto !important;
-  }
-
-  /* ВТОРОЙ РЯД ШАПКИ: Тонкая строка переключателей режимов */
+  .logo { margin-left: 15px !important; }
+  .lk-btn { margin-left: auto !important; }
   .hero-actions {
     display: flex !important;
-    position: static !important; /* Сбрасываем ПК-позиционирование */
+    position: static !important;
     width: 100% !important;
     max-width: 100% !important;
     margin: 5px 0 0 0 !important;
     padding: 0 !important;
     justify-content: space-between !important;
-    border-top: 1px solid rgba(48, 54, 61, 0.4) !important; /* Ультра-тонкая разделительная линия сверху */
+    border-top: 1px solid rgba(48, 54, 61, 0.4) !important;
     box-sizing: border-box !important;
   }
-
-  /* СТИЛЬ "ДОРОГАЯ ПРОСТОТА" ДЛЯ КНОПОК ШАПКИ */
   .toggle-btn {
     flex: 1 !important;
     height: 38px !important;
-    background: transparent !important; /* Никаких фоновых плашек */
-    border: none !important; /* Полностью стёрли рамки */
-    border-bottom: 2px solid transparent !important; /* Заготовка под подчеркивание */
-    border-radius: 0 !important; /* Прямые линии для подчеркивания */
-    color: #8b949e !important; /* Приглушённый цвет в покое */
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    border-radius: 0 !important;
+    color: #8b949e !important;
     font-size: 13px !important;
     font-weight: 500 !important;
     white-space: nowrap !important;
     padding: 0 4px !important;
     transition: all 0.2s ease !important;
   }
-
-  /* АКТИВНЫЙ РЕЖИМ: Изящная бирюзовая ниточка в 1px */
   .toggle-btn.active {
     background: transparent !important;
-    color: #ffffff !important; /* Текст становится чисто белым */
-    border-bottom: 2px solid #00f2fe !important; /* Тонкая бирюзовая линия под текстом */
+    color: #ffffff !important;
+    border-bottom: 2px solid #00f2fe !important;
     font-weight: 600 !important;
   }
-
-  /* Навигационное меню (выпадающая шторка) */
   .nav-links {
     position: fixed;
-    top: 115px; /* Сдвинули шторку чуть ниже, так как шапка стала двухстрочной */
+    top: 115px;
     left: -100%;
     width: 100%;
     height: calc(100vh - 115px);
@@ -406,41 +391,25 @@ header .header-container {
     z-index: 999;
     border-top: 1px solid #30363d;
   }
-
-  .nav-links.open {
-    left: 0;
-  }
-
-  .hero-section {
-    padding: 40px 0 20px 0 !important; /* Уменьшили гигантский отступ главного экрана */
-  }
-
-  /* Мобильная Bento-лента */
+  .nav-links.open { left: 0; }
+  .hero-section { padding: 40px 0 20px 0 !important; }
   .bento-grid {
     grid-template-columns: 1fr !important;
     gap: 16px !important;
     padding: 0 15px !important;
   }
-
   .placeholder, .about {
     width: 100% !important;
     margin: 0 0 16px 0 !important;
     padding: 24px 16px !important;
     display: block !important;
   }
-
   footer {
     width: 100% !important;
     padding: 30px 16px !important;
     display: block !important;
     border-top: 1px solid #30363d !important;
   }
-
-  .menu-toggle.is-open .icon-burger {
-    display: none !important;
-  }
-
-  .menu-toggle.is-open .icon-close {
-    display: block !important;
-  }
-}
+  .menu-toggle.is-open .icon-burger { display: none !important; }
+  .menu-toggle.is-open .icon-close { display: block !important; }
+     }
