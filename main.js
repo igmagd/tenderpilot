@@ -1,25 +1,27 @@
 // ==========================================
 // 1. МОБИЛЬНОЕ МЕНЮ И НАВИГАЦИЯ
 // ==========================================
-const menuToggle = document.getElementById('menuToggle') || document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links') || document.getElementById('nav-links');
+const menuToggle = document.getElementById("menuToggle");
+const nav = document.getElementById("nav-links");
 
-if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', (e) => {
+if (menuToggle && nav) {
+    menuToggle.addEventListener("click", (e) => {
         e.stopPropagation();
-        const isOpen = menuToggle.classList.toggle('is-open');
-        navLinks.classList.toggle('open', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+        const isOpen = nav.classList.toggle("open");
+        menuToggle.classList.toggle("is-open", isOpen);
+        menuToggle.setAttribute("aria-expanded", isOpen);
+        document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener("click", () => {
             menuToggle.classList.remove('is-open');
-            navLinks.classList.remove('open');
+            nav.classList.remove('open');
             document.body.style.overflow = '';
         });
     });
 }
+
 
 // ==========================================
 // 2. БАННЕР КУКИ
