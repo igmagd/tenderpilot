@@ -372,17 +372,15 @@ header .header-container {
     justify-content: space-between !important;
     border-top: none !important; 
     box-sizing: border-box !important;
-    background-color: #0d1117 !important;
+    background-color: #161b22 !important;
 }
 
 .toggle-btn {
     flex: 1 !important;
-    height: 38px !important;
-    /* Неактивная кнопка приподнята: благородный цвет металла */
+    height: 42px !important;
     background: #161b22 !important; 
     border: none !important;
-    /* Тонкие металлические ребра объема (как в бургере) */
-    border-right: 1px solid rgba(48, 54, 61, 0.6) !important;
+    border-right: 1px solid rgba(48, 54, 61, 0.5) !important;
     border-bottom: 2px solid rgba(33, 38, 45, 0.8) !important; 
     border-radius: 0 !important;
     color: #8b949e !important;
@@ -391,7 +389,11 @@ header .header-container {
     white-space: nowrap !important;
     padding: 0 4px !important;
     position: relative !important;
-    -webkit-tap-highlight-color: transparent;
+    margin: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-tap-highlight-color: transparent !important;
     transition: all 0.15s ease !important;
 }
 
@@ -400,20 +402,18 @@ header .header-container {
 }
 
 .toggle-btn.active {
-    /* Активная кнопка полностью нажата: уходит в глубокую тень фона */
     background: #0d1117 !important;
     color: #ffffff !important;
     font-weight: 400 !important;
-    /* Убираем нижнюю грань, кнопка визуально проваливается вниз */
-    border-bottom: none !important; 
-    /* Добавляем легкую внутреннюю тень нажатия */
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5) !important; 
+    border-bottom: 2px solid transparent !important;
+    outline: none !important;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6) !important;
 }
 
 .toggle-btn.active::after {
     content: "" !important;
     position: absolute !important;
-    top: 6px !important;
+    top: 8px !important;
     left: 8px !important;
     width: 3px !important;
     height: 3px !important;
