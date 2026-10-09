@@ -106,29 +106,23 @@ header .header-container {
     transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* МГНОВЕННЫЙ ТАП ДЛЯ ЗАКРЫТОГО СОСТОЯНИЯ (Эффект "Дорогой простоты" — двухслойное тающее облако) */
-.lk-btn:active, .menu-toggle:not(.is-open):active {
+/* МГНОВЕННЫЙ ТАП ДЛЯ ОБЕИХ КНОПОК (Вспышка работает всегда железно) */
+.lk-btn:active, .menu-toggle:active {
     box-shadow: 0 0 10px 1px rgba(0, 242, 254, 0.12), 
                 0 0 28px 4px rgba(0, 242, 254, 0.10) !important; 
-    transition: none !important;
+    transition: none !important; /* Вспышка мгновенная */
 }
-.lk-btn:active svg, .menu-toggle:not(.is-open):active svg {
-    stroke: #ffffff !important;
+.lk-btn:active svg, .menu-toggle:active svg {
+    stroke: #ffffff !important; /* Иконки внутри при тапе становятся белыми */
     transition: none !important;
 }
 
-/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Когда шторка открыта) */
+/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Когда шторка открыта, крестик слегка подсвечен) */
 .menu-toggle.is-open {
     box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.06) !important;
 }
 .menu-toggle.is-open svg {
     stroke: #ffffff !important;
-}
-
-/* ТАП ПО КРЕСТИКУ ДЛЯ ЗАКРЫТИЯ (Свет уходит в тень без визуального хлопка) */
-.menu-toggle.is-open:active {
-    box-shadow: 0 0 8px 1px rgba(0, 242, 254, 0.04) !important; 
-    transition: none !important;
 }
 
 /* ==========================================================================
