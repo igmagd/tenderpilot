@@ -83,23 +83,18 @@ header .header-container {
     justify-content: center !important;
     width: 42px !important;
     height: 42px !important;
-    border-radius: 50% !important; /* Строго круглые кнопки */
+    border-radius: 50% !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none;
     padding: 0 !important;
     cursor: pointer !important;
     outline: none !important;
-    
-    /* Полностью отключаем дешёвую системную подсветку и квадраты браузера */
-    -webkit-tap-highlight-color: transparent !important; 
-    touch-action: manipulation !important;
-    user-select: none !important;
-    
+    -webkit-tap-highlight-color: transparent !important; /* Отключили системный мусор браузера */
     transition: background-color 0.25s ease, box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Настройки иконок внутри кнопок в покое (мягкий белый, тонкие линии 1px) */
+/* Настройки иконок внутри кнопок в покое */
 .lk-btn svg, .menu-toggle svg {
     color: rgba(240, 246, 252, 0.6) !important;
     stroke: rgba(240, 246, 252, 0.6) !important;
@@ -111,23 +106,21 @@ header .header-container {
     transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* МГНОВЕННЫЙ ТАП (Круглый бирюзовый блик внутри + воздушное двухслойное облако) */
-.lk-btn:active, .menu-toggle:active {
-    /* Внутри круга мгновенно вспыхивает ультра-мягкий бирюзовый блик (всего 8% плотности) */
+/* МГНОВЕННЫЙ ТАП (Тот самый чистый круглый блик + воздушное облако) */
+.lk-btn:active, .menu-toggle:active, .menu-toggle.is-open:active {
     background-color: rgba(0, 242, 254, 0.08) !important; 
-    /* Внешнее тающее облако */
-    box-shadow: 0 0 10px 1px rgba(0, 242, 254, 0.15), 
-                0 0 28px 4px rgba(0, 242, 254, 0.12) !important; 
-    transition: none !important; /* Вспышка мгновенная */
+    box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.14), 
+                0 0 28px 4px rgba(0, 242, 254, 0.10) !important; 
+    transition: none !important;
 }
-.lk-btn:active svg, .menu-toggle:active svg {
+.lk-btn:active svg, .menu-toggle:active svg, .menu-toggle.is-open:active svg {
     stroke: #ffffff !important;
     transition: none !important;
 }
 
-/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Когда шторка открыта, крестик изящно подсвечен) */
+/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА */
 .menu-toggle.is-open {
-    box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.08) !important;
+    box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.06) !important;
 }
 .menu-toggle.is-open svg {
     stroke: #ffffff !important;
