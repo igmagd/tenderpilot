@@ -70,16 +70,20 @@ header .header-container {
 }
 
 .nav-links a:hover {
-  color: #00f2fe;
+/* Это концовка предыдущего блока навигации, которая могла сломаться */
+.nav-links a:hover {
+    color: #ffffff !important;
 }
 
-/* ==========================================================================*/
-   3. КНОПКИ-БЛИЗНЕЦЫ ШАПКИ (БИЗНЕС-КЛАСС
+/* ==========================================================================
+   3. КНОПКИ-БЛИЗНЕЦЫ ШАПКИ (БИЗНЕС-КЛАСС)
+   ========================================================================== */
 
 .lk-btn, .menu-toggle {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+;
     width: 42px !important;
     height: 42px !important;
     border-radius: 50% !important;
