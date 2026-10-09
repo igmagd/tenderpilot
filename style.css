@@ -91,11 +91,13 @@ header .header-container {
     cursor: pointer !important;
     -webkit-tap-highlight-color: transparent !important;
     outline: none !important;
+    touch-action: manipulation !important; /* Убирает задержку тапа в 300мс на смартфонах */
     transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Настройки иконок внутри кнопок в покое (мягкий белый, тонкие линии 1px) */
+/* Защита: заставляем палец кликать по кнопке, а не по линиям внутри неё */
 .lk-btn svg, .menu-toggle svg {
+    pointer-events: none !important; 
     color: rgba(240, 246, 252, 0.6) !important;
     stroke: rgba(240, 246, 252, 0.6) !important;
     stroke-width: 1px !important;
@@ -106,18 +108,18 @@ header .header-container {
     transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* МГНОВЕННЫЙ ТАП ДЛЯ ОБЕИХ КНОПОК (Вспышка работает всегда железно) */
-.lk-btn:active, .menu-toggle:active {
+/* МГНОВЕННЫЙ ТАП (Срабатывает через JS-класс touch-active) */
+.lk-btn.touch-active, .menu-toggle.touch-active {
     box-shadow: 0 0 10px 1px rgba(0, 242, 254, 0.12), 
                 0 0 28px 4px rgba(0, 242, 254, 0.10) !important; 
-    transition: none !important; /* Вспышка мгновенная */
+    transition: none !important;
 }
-.lk-btn:active svg, .menu-toggle:active svg {
-    stroke: #ffffff !important; /* Иконки внутри при тапе становятся белыми */
+.lk-btn.touch-active svg, .menu-toggle.touch-active svg {
+    stroke: #ffffff !important;
     transition: none !important;
 }
 
-/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Когда шторка открыта, крестик слегка подсвечен) */
+/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА */
 .menu-toggle.is-open {
     box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.06) !important;
 }
