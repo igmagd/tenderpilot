@@ -1,8 +1,8 @@
 // ==========================================
 // 1. МОБИЛЬНОЕ МЕНЮ И НАВИГАЦИЯ
 // ==========================================
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.querySelector('.nav-links');
+const menuToggle = document.getElementById('menuToggle') || document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links') || document.getElementById('nav-links');
 
 if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', (e) => {
