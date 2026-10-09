@@ -488,3 +488,8 @@ header .header-container {
     .menu-toggle.is-open .icon-burger { display: none !important; }
     .menu-toggle.is-open .icon-close { display: block !important; }
    }
+ 
+.menu-open .hero-actions {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
