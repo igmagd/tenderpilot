@@ -2,7 +2,7 @@
 // 1. МОБИЛЬНОЕ МЕНЮ И НАВИГАЦИЯ
 // ==========================================
 const menuToggle = document.getElementById("menuToggle");
-const nav = document.getElementById("nav-links");
+const nav = document.querySelector(".nav-links");
 
 if (menuToggle && nav) {
     menuToggle.onclick = (e) => {
