@@ -4,23 +4,22 @@
 const menuToggle = document.getElementById("menuToggle");
 const nav = document.getElementById("nav-links");
 
-    menuToggle.addEventListener("click", (e) => {
+if (menuToggle && nav) {
+    menuToggle.onclick = (e) => {
         e.stopPropagation();
         const isOpen = nav.classList.toggle("open");
         menuToggle.classList.toggle("is-open", isOpen);
         document.body.classList.toggle("menu-open", isOpen);
         document.body.style.overflow = isOpen ? "hidden" : "";
-    });
+    };
 
-    nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener("click", () => {
-            nav.classList.remove('open');
-            menuToggle.classList.remove('is-open');
-            document.body.classList.remove("menu-open");
-            document.body.style.overflow = '';
-        });
-    });
-
+    nav.onclick = () => {
+        nav.classList.remove('open');
+        menuToggle.classList.remove('is-open');
+        document.body.classList.remove("menu-open");
+        document.body.style.overflow = '';
+    };
+}
 
 // ==========================================
 // 2. БАННЕР КУКИ
