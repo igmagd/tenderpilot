@@ -82,39 +82,46 @@ header .header-container {
     justify-content: center !important;
     width: 42px !important;
     height: 42px !important;
-    border-radius: 12px !important;
+    border-radius: 50% !important; /* Делаем подложку круглой для идеального рассеивания */
     background: transparent !important;
-    border: none !important; /* Полностью убираем рамку */
-    box-shadow: none !important;
+    border: none !important;
+    box-shadow: none;
     padding: 0 !important;
     cursor: pointer !important;
     -webkit-tap-highlight-color: transparent !important;
     outline: none !important;
+    transition: box-shadow 0.15s ease !important; /* Плавное затухание бирюзового облака */
 }
 
-/* Настройки иконок внутри кнопок в покое (сделали мягкий белый и тонкие линии 1px) */
+/* Настройки иконок внутри кнопок в покое (мягкий белый, тонкие линии 1px) */
 .lk-btn svg, .menu-toggle svg {
     color: rgba(240, 246, 252, 0.7) !important;
     stroke: rgba(240, 246, 252, 0.7) !important;
-    stroke-width: 1px !important; /* Силой делаем линии тонкими */
+    stroke-width: 1px !important;
     fill: none !important;
     width: 22px !important;
     height: 22px !important;
     background: transparent !important;
-    transition: stroke 0.15s ease, filter 0.15s ease !important; /* Плавное затухание вспышки */
+    transition: stroke 0.15s ease !important; /* Плавное возвращение к приглушенному белому */
 }
 
-/* МГНОВЕННЫЙ ТАП (взрыв бирюзового света при нажатии) */
+/* МГНОВЕННЫЙ ТАП (Иконка вспыхивает белым, а вокруг разливается легкое бирюзовые облако) */
+.lk-btn:active, .menu-toggle:active {
+    /* Ровно в момент тапа мгновенно зажигаем мягкое бирюзовое облако из-под пальца */
+    box-shadow: 0 0 20px 4px rgba(0, 242, 254, 0.35) !important; 
+    transition: none !important; /* Мгновенный взрыв света */
+}
 .lk-btn:active svg, .menu-toggle:active svg {
-    stroke: #00f2fe !important; /* Линии становятся бирюзовыми */
-    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.8)) !important; /* Мягкое бирюзовое облако */
-    transition: none !important; /* Вспышка происходит мгновенно, без задержек */
+    stroke: #ffffff !important; /* Сами линии при тапе становятся чисто белыми */
+    transition: none !important; /* Мгновенное изменение цвета */
 }
 
-/* Фиксируем бирюзовый цвет для открытого бургера, чтобы пользователь видел, что меню активно */
+/* Фиксируем состояние для ОТКРЫТОГО бургера (чтобы пользователь видел активность меню) */
+.menu-toggle.is-open {
+    box-shadow: 0 0 15px 2px rgba(0, 242, 254, 0.2) !important; /* Постоянное легкое свечение */
+}
 .menu-toggle.is-open svg {
-    stroke: #00f2fe !important;
-    filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.5)) !important;
+    stroke: #ffffff !important; /* Иконка остается белой */
 }
 
 /* ==========================================================================
