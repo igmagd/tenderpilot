@@ -3,7 +3,6 @@
 // ==========================================
 const menuToggle = document.getElementById("menuToggle");
 const nav = document.querySelector(".nav-links");
-
 if (menuToggle && nav) {
     menuToggle.onclick = (e) => {
         e.stopPropagation();
@@ -12,7 +11,6 @@ if (menuToggle && nav) {
         document.body.classList.toggle("menu-open", isOpen);
         document.body.style.overflow = isOpen ? "hidden" : "";
     };
-
     nav.onclick = () => {
         nav.classList.remove('open');
         menuToggle.classList.remove('is-open');
