@@ -83,7 +83,7 @@ header .header-container {
     justify-content: center !important;
     width: 42px !important;
     height: 42px !important;
-    border-radius: 50% !important;
+    border-radius: 50% !important; /* Строго круглые кнопки */
     background: transparent !important;
     border: none !important;
     box-shadow: none;
@@ -91,12 +91,12 @@ header .header-container {
     cursor: pointer !important;
     outline: none !important;
     
-    /* Сверхнадежные мобильные триггеры для тапа */
-    -webkit-tap-highlight-color: rgba(0, 242, 254, 0.1) !important; /* Родной отклик iOS/Android */
+    /* Полностью отключаем дешёвую системную подсветку и квадраты браузера */
+    -webkit-tap-highlight-color: transparent !important; 
     touch-action: manipulation !important;
     user-select: none !important;
     
-    transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: background-color 0.25s ease, box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Настройки иконок внутри кнопок в покое (мягкий белый, тонкие линии 1px) */
@@ -111,8 +111,11 @@ header .header-container {
     transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* МГНОВЕННЫЙ ТАП (Двухслойное бирюзовое облако "дорожной простоты") */
+/* МГНОВЕННЫЙ ТАП (Круглый бирюзовый блик внутри + воздушное двухслойное облако) */
 .lk-btn:active, .menu-toggle:active {
+    /* Внутри круга мгновенно вспыхивает ультра-мягкий бирюзовый блик (всего 8% плотности) */
+    background-color: rgba(0, 242, 254, 0.08) !important; 
+    /* Внешнее тающее облако */
     box-shadow: 0 0 10px 1px rgba(0, 242, 254, 0.15), 
                 0 0 28px 4px rgba(0, 242, 254, 0.12) !important; 
     transition: none !important; /* Вспышка мгновенная */
@@ -122,7 +125,7 @@ header .header-container {
     transition: none !important;
 }
 
-/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Крестик изящно подсвечен) */
+/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Когда шторка открыта, крестик изящно подсвечен) */
 .menu-toggle.is-open {
     box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.08) !important;
 }
