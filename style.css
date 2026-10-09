@@ -425,7 +425,7 @@ header .header-container {
 .nav-links {
     position: fixed !important;
     top: 94px !important;
-    left: 0 !important;
+    left: -100% !important;
     width: 100% !important;
     height: calc(100vh - 94px) !important;
     overflow-y: auto !important;
@@ -433,13 +433,14 @@ header .header-container {
     flex-direction: column !important;
     padding: 20px 0 !important;
     gap: 0 !important;
-    display: none !important;
     z-index: 999 !important;
     border-top: 1px solid rgba(48, 54, 61, 0.4) !important;
+    transition: none !important;
+    display: flex !important;
 }
 
 .nav-links.open {
-    display: flex !important;
+    left: 0 !important;
 }
 
 .nav-links a {
@@ -460,7 +461,6 @@ header .header-container {
     border-bottom-color: rgba(0, 242, 254, 0.6) !important;
     background: transparent !important;
 }
-
     
     .hero-section { 
         padding: 140px 0 20px 0 !important; /* Мягкий отступ главного контента под симметричную шапку */
