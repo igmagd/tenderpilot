@@ -4,23 +4,22 @@
 const menuToggle = document.getElementById("menuToggle");
 const nav = document.getElementById("nav-links");
 
-if (menuToggle && nav) {
     menuToggle.addEventListener("click", (e) => {
         e.stopPropagation();
         const isOpen = nav.classList.toggle("open");
         menuToggle.classList.toggle("is-open", isOpen);
-        menuToggle.setAttribute("aria-expanded", isOpen);
+        document.body.classList.toggle("menu-open", isOpen);
         document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener("click", () => {
-            menuToggle.classList.remove('is-open');
             nav.classList.remove('open');
+            menuToggle.classList.remove('is-open');
+            document.body.classList.remove("menu-open");
             document.body.style.overflow = '';
         });
     });
-}
 
 
 // ==========================================
