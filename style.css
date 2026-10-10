@@ -488,7 +488,7 @@ header .header-container {
     opacity: 0 !important;
     visibility: hidden !important;
 }
-.hero-actions button {
+.hero-actions div {
     -webkit-tap-highlight-color: transparent !important;
     tap-highlight-color: transparent !important;
 }
@@ -503,4 +503,8 @@ header .header-container {
     box-shadow: none !important;
     -webkit-tap-highlight-color: transparent !important;
    }
+.toggle-btn {
+    cursor: pointer !important;
+}
+
 }
