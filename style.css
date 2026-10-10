@@ -311,8 +311,8 @@ header .header-container {
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #0d1117 !important; /* Вернули родной глубокий черный цвет проекта */
-        z-index: 1000 !important;
+        background-color: #0d1117 !important;
+        z-index: 1001 !important;
         height: auto !important;
         border-bottom: none !important;
     }
@@ -330,26 +330,32 @@ header .header-container {
 
     .menu-toggle {
         margin-left: 10px !important;
+        position: relative !important;
+        z-index: 1005 !important; 
     }
 
     .logo {
         margin-left: 15px !important;
+        position: relative !important;
+        z-index: 1005 !important;
     }
 
     .lk-btn {
         margin-left: auto !important;
         margin-right: 10px !important;
-        transition: opacity 0.2s ease, visibility 0.2s ease !important;
+        position: relative !important;
+        z-index: 1005 !important;
+        transition: opacity 0.15s ease, visibility 0.15s ease !important;
     }
 
-    /* Плавно прячем ЛК, когда шторка меню распахнута, чтобы не мешать крестику */
+    /* Плавно прячем ЛК при открытом меню, освобождая фокус для крестика */
     .menu-open .lk-btn {
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
     }
 
-    /* Премиальный отклик контуров верхних кнопок */
+    /* Отклик контуров иконок */
     .lk-btn:active svg,
     .menu-toggle:active svg {
         stroke: #ffffff !important;
@@ -358,7 +364,6 @@ header .header-container {
         transition: transform 0.1s ease, stroke 0.1s ease !important;
     }
 
-    /* Очищаем фон и системные тени у верхних кнопок */
     .lk-btn:focus, .lk-btn:focus-visible, .lk-btn:active, .lk-btn:hover,
     .menu-toggle:focus, .menu-toggle:focus-visible, .menu-toggle:active, .menu-toggle:hover {
         outline: none !important;
@@ -370,7 +375,7 @@ header .header-container {
         display: flex !important;
         position: static !important;
         width: 100% !important;
-        background-color: #0d1117 !important; /* Синхронизировали цвет со всей шапкой */
+        background-color: #0d1117 !important;
         border-top: none !important;
         margin-top: 5px !important;
         padding: 0 14px 0px 14px !important;
@@ -394,10 +399,7 @@ header .header-container {
         -webkit-tap-highlight-color: transparent !important;
     }
 
-    /* Удерживаем цвет рамки при нажатии кнопок роли */
-    .toggle-btn:active, 
-    .toggle-btn:focus, 
-    .toggle-btn:focus-visible {
+    .toggle-btn:active, .toggle-btn:focus, .toggle-btn:focus-visible {
         outline: none !important;
         box-shadow: none !important;
         border: 1px solid #0066cc !important;
@@ -418,30 +420,31 @@ header .header-container {
         display: none !important;
     }
 
-    /* Меню четко под шапкой. Засвет аккуратно смещен вправо вверх, текст слева уходит в благородную глубокую тень */
+    /* Высокопроизводительная шторка меню. Свет зажат в 3 раза и загнан в самый верхний правый угол */
     .nav-links {
         position: fixed !important;
-        top: 94px !important; /* Строго под шапку — логотип и крестик теперь гарантированно поверх и видны */
-        left: -100% !important;
+        top: 0 !important; 
+        left: 0 !important;
         width: 100% !important;
-        height: calc(100vh - 94px) !important;
+        height: 100vh !important; 
         overflow-y: auto !important;
         background: 
-            radial-gradient(circle at 75% -20px, rgba(0, 242, 254, 0.15) 0%, transparent 55%),
-            radial-gradient(circle at 70% -10px, rgba(0, 149, 255, 0.10) 0%, transparent 65%),
+            radial-gradient(circle at 90% 0%, rgba(0, 242, 254, 0.12) 0%, transparent 15%),
+            radial-gradient(circle at 85% 0%, rgba(0, 149, 255, 0.08) 0%, transparent 30%),
             linear-gradient(to top, #020617 0%, #0d1117 100%) !important;
         background-size: cover !important;
         flex-direction: column !important;
-        padding: 12px 0 24px 0 !important;
+        padding: 110px 0 24px 0 !important;
         gap: 0 !important;
-        z-index: 999 !important;
+        z-index: 1000 !important;
         border-top: none !important;
         display: flex !important;
-        transition: left 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
+        transform: translate3d(-100%, 0, 0) !important; /* Усилено для хардверного GPU-рендеринга */
+        transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
     }
 
     .nav-links.open {
-        left: 0 !important;
+        transform: translate3d(0, 0, 0) !important;
     }
 
     /* Чистая верстка ссылок без эффекта тетради */
@@ -460,13 +463,12 @@ header .header-container {
         transition: none !important;
     }
 
-    /* Иерархия света для последних двух пунктов */
     .nav-links a:nth-last-child(1),
     .nav-links a:nth-last-child(2) {
         color: #6a737d !important;
     }
 
-    /* Моментальный интерактивный отклик линии при тапе */
+    /* Отклик линии */
     .nav-links a:active {
         background: transparent !important;
         border-bottom-color: #00f2fe !important;
