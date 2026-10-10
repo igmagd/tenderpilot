@@ -366,8 +366,8 @@ header .header-container {
     display: flex !important;
     position: static !important;
     width: 100% !important;
-    background-color: #0d1117 !important; 
-    border-top: 1px solid rgba(48, 54, 61, 0.4) !important;
+    background-color: #0d1117 !important;
+    border-top: none !important;
 }
    
 .toggle-btn {
@@ -376,10 +376,6 @@ header .header-container {
     background: #0d1117 !important;
     border: none !important;
     border-radius: 0 !important;
-    color: #8b949e !important;
-    font-size: 13px !important;
-    font-weight: 400 !important;
-    box-shadow: none !important;
 }
 
 .toggle-btn.active {
@@ -389,9 +385,8 @@ header .header-container {
     outline: none !important;
     border-bottom: 1px solid rgba(240, 246, 252, 0.6) !important;
     border-right: 1px solid rgba(240, 246, 252, 0.6) !important;
-    box-shadow: 0 4px 12px rgba(240, 246, 252, 0.08) !important;
+    box-shadow: 0 2px 5px rgba(240, 246, 252, 0.03) !important;
 }
-
 .toggle-btn.active::after {
     display: none !important;
 }
