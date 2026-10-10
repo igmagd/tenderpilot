@@ -366,60 +366,27 @@ header .header-container {
     display: flex !important;
     position: static !important;
     width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important; 
-    padding: 0 !important;
-    justify-content: space-between !important;
-    border-top: none !important; 
-    box-sizing: border-box !important;
-    background-color: #161b22 !important;
+    background-color: #0d1117 !important; 
+    border-top: 1px solid rgba(48, 54, 61, 0.4) !important;
 }
-
 .toggle-btn {
     flex: 1 !important;
-    height: 42px !important;
-    background: #161b22 !important; 
+    height: 44px !important;
+    background: #0d1117 !important;
     border: none !important;
-    border-right: 1px solid rgba(48, 54, 61, 0.5) !important;
-    border-bottom: 2px solid rgba(33, 38, 45, 0.8) !important; 
-    border-radius: 0 !important;
     color: #8b949e !important;
     font-size: 13px !important;
-    font-weight: 400 !important;
-    white-space: nowrap !important;
-    padding: 0 4px !important;
-    position: relative !important;
-    margin: 0 !important;
-    outline: none !important;
-    box-shadow: none !important;
-    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-    -webkit-tap-highlight-color: transparent !important;
-    transition: all 0.15s ease !important;
-}
-
-.toggle-btn:last-child {
-    border-right: none !important;
 }
 
 .toggle-btn.active {
     background: #0d1117 !important;
     color: #ffffff !important;
-    font-weight: 400 !important;
-    border-bottom: 2px solid transparent !important;
-    outline: none !important;
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+    border-bottom: 2.5px solid rgba(240, 246, 252, 0.6) !important;
+    border-right: 2.5px solid rgba(240, 246, 252, 0.6) !important;
 }
 
 .toggle-btn.active::after {
-    content: "" !important;
-    position: absolute !important;
-    top: 8px !important;
-    left: 8px !important;
-    width: 3px !important;
-    height: 3px !important;
-    border-radius: 50% !important;
-    background-color: #00f2fe !important;
-    box-shadow: 0 0 8px 2px rgba(0, 242, 254, 0.6) !important;
+    display: none !important;
 }
 
 .nav-links {
