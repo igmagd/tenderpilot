@@ -44,8 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // ----------------------------------------------------------------------
 // 3. СИСТЕМНОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (BENTO GRIDS)
 // ----------------------------------------------------------------------
-function switchMode(mode) {
-    // 1. Находим и отключаем активное состояние у всех кнопок переключателя
+function switchMode(mode, e) {
+    if (e && e.currentTarget) {
+        e.currentTarget.blur();
+    }
+    // 1. Находим и отличаем активное состояние кнопок...
     const buttons = [
         document.getElementById("btn-supplier"),
         document.getElementById("btn-customer"),
