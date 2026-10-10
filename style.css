@@ -439,7 +439,7 @@ header .header-container {
         display: none !important;
     }
 
-    /* Тот самый красивый тёмно-зелёный бутылочный фон с благородным радиальным засветом */
+    /* Фирменный космический фон с бирюзовыми и синими засветами прямо внутри шторки меню */
     .nav-links {
         position: fixed !important;
         top: 94px !important;
@@ -447,7 +447,11 @@ header .header-container {
         width: 100% !important;
         height: calc(100vh - 94px) !important;
         overflow-y: auto !important;
-        background: radial-gradient(circle at 80% 20%, #061611 0%, #030a08 50%, #020504 100%) !important;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 60%),
+            radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 70%),
+            linear-gradient(to top, #020617 0%, #09090b 100%) !important;
+        background-size: cover !important;
         flex-direction: column !important;
         padding: 12px 0 !important;
         gap: 0 !important;
@@ -472,7 +476,7 @@ header .header-container {
         color: #c9d1d9 !important;
         text-decoration: none !important;
         box-sizing: border-box !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important; /* Смягчили разделители под новый фон */
+        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important; /* Легкие разделители */
         -webkit-tap-highlight-color: transparent !important;
         transition: border-color 0.15s ease !important;
     }
