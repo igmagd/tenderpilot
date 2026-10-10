@@ -370,12 +370,14 @@ header .header-container {
     margin-left: auto !important;
     margin-right: 10px !important;
 }
+   
 .hero-actions {
     display: flex !important;
     position: static !important;
     width: 100% !important;
     background-color: #0d1117 !important;
     border-top: none !important;
+    margin-top: -10px !important;
 }
    
 .toggle-btn {
