@@ -311,9 +311,9 @@ header .header-container {
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #0d1117 !important; /* Плотный, непроницаемый монолит */
+        background-color: #0d1117 !important;
         z-index: 1001 !important;
-        height: 94px !important; /* Жестко зафиксировали высоту шапки, чтобы отсечь просветы */
+        height: auto !important;
         border-bottom: none !important;
     }
 
@@ -348,7 +348,7 @@ header .header-container {
         transition: opacity 0.15s ease, visibility 0.15s ease !important;
     }
 
-    /* Плавно прячем ЛК при открытом меню, освобождая фокус для крестика */
+    /* Плавно прячем ЛК при открытом меню */
     .menu-open .lk-btn {
         opacity: 0 !important;
         visibility: hidden !important;
@@ -420,18 +420,17 @@ header .header-container {
         display: none !important;
     }
 
-    /* Шторка меню: теперь ссылки не пересекают логотип, а благородно выплывают из-под шапки */
+    /* Шторка меню: вернули исходное положение СТРОГО под шапку. Родной глубокий космос сохранен */
     .nav-links {
         position: fixed !important;
-        top: 0 !important; 
+        top: 94px !important; /* Больше не пересекается с логотипом */
         left: 0 !important;
         width: 100% !important;
-        height: 100vh !important; 
+        height: calc(100vh - 94px) !important; 
         overflow-y: auto !important;
         background: linear-gradient(to top, #020617 0%, #0d1117 100%) !important;
-        background-size: cover !important;
         flex-direction: column !important;
-        padding: 110px 0 24px 0 !important;
+        padding: 20px 0 24px 0 !important; /* Уменьшили верхний паддинг, так как меню уже под шапкой */
         gap: 0 !important;
         z-index: 1000 !important;
         border-top: none !important;
@@ -440,12 +439,12 @@ header .header-container {
         transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
     }
 
-    /* Моментальное открытие сверху вниз за 0.25s */
+    /* Аппаратный выезд шторки сверху вниз */
     .nav-links.open {
         transform: translate3d(0, 0, 0) !important;
     }
 
-    /* Чистая верстка ссылок без эффекта тетради */
+    /* Чистая верстка ссылок с мягким проявлением после выезда */
     .nav-links a {
         display: block !important;
         width: 100% !important;
@@ -458,7 +457,16 @@ header .header-container {
         box-sizing: border-box !important;
         border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
         -webkit-tap-highlight-color: transparent !important;
-        transition: none !important;
+        
+        /* Эффект скрытия текста во время движения */
+        opacity: 0 !important;
+        transition: opacity 0.15s ease !important;
+    }
+
+    /* Когда меню открылось — ссылки благородно проявляются прямо на месте, без пролётов */
+    .nav-links.open a {
+        opacity: 1 !important;
+        transition-delay: 0.15s !important; /* Задержка, пока едет шторка */
     }
 
     .nav-links a:nth-last-child(1),
