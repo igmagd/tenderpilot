@@ -199,16 +199,19 @@ header .header-container {
    5. BENTO-СЕТКА И ПЛАШКИ
    ========================================================================== */
 .bento-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto 60px auto;
-  padding: 0 20px;
+    transition: opacity 0.25s ease, visibility 0.25s ease !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .bento-grid.hidden {
-  display: none !important;
+    display: block !important; /* Отменяем жесткое вырезание из кода */
+    opacity: 0 !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
 }
 
 .bento-item {
