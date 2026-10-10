@@ -311,9 +311,9 @@ header .header-container {
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #0d1117 !important;
+        background-color: #0d1117 !important; /* Родной глубокий цвет хедера */
         z-index: 1001 !important;
-        height: auto !important;
+        height: auto !important; /* Убрали фиксированную высоту, шапка дышит свободно */
         border-bottom: none !important;
     }
 
@@ -378,7 +378,7 @@ header .header-container {
         background-color: #0d1117 !important;
         border-top: none !important;
         margin-top: 7px !important;
-        padding: 0 14px 0px 14px !important;
+        padding: 0 14px 8px 14px !important; /* Добавили 8px снизу, чтобы шапка монолитно закрыла щель */
         gap: 6px !important;
         box-sizing: border-box !important;
     }
@@ -420,17 +420,17 @@ header .header-container {
         display: none !important;
     }
 
-    /* Шторка меню: вернули исходное положение СТРОГО под шапку. Родной глубокий космос сохранен */
+    /* Шторка меню: 100% высота, оригинальный космический фон без искажений */
     .nav-links {
         position: fixed !important;
-        top: 94px !important; /* Больше не пересекается с логотипом */
+        top: 0 !important; 
         left: 0 !important;
         width: 100% !important;
-        height: calc(100vh - 94px) !important; 
+        height: 100vh !important; 
         overflow-y: auto !important;
         background: linear-gradient(to top, #020617 0%, #0d1117 100%) !important;
         flex-direction: column !important;
-        padding: 20px 0 24px 0 !important; /* Уменьшили верхний паддинг, так как меню уже под шапкой */
+        padding: 110px 0 24px 0 !important; /* Увеличили верхний отступ под монолитную шапку */
         gap: 0 !important;
         z-index: 1000 !important;
         border-top: none !important;
@@ -466,7 +466,7 @@ header .header-container {
     /* Когда меню открылось — ссылки благородно проявляются прямо на месте, без пролётов */
     .nav-links.open a {
         opacity: 1 !important;
-        transition-delay: 0.15s !important; /* Задержка, пока едет шторка */
+        transition-delay: 0.15s !important;
     }
 
     .nav-links a:nth-last-child(1),
