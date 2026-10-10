@@ -302,27 +302,6 @@ header .header-container {
   z-index: 99999;
 }
 
-/* ==========================================================================
-   8. ДЕСКТОПНАЯ СЕКЦИЯ (ПК ВЕРСИЯ)
-   ========================================================================== */
-@media (min-width: 769px) {
-  .menu-toggle {
-    display: none !important;
-  }
-  .placeholder, .about {
-    max-width: 1200px;
-    margin: 0 auto 24px auto !important;
-    display: block !important;
-  }
-  footer {
-    max-width: 1200px;
-    margin: 40px auto 0 auto !important;
-    display: block !important;
-    padding: 20px;
-    border-top: 1px solid #30363d;
-  }
-}
-
 /*=============================================================================
    9. МОБИЛЬНАЯ СЕКЦИЯ (ТЕЛЕФОНЫ)
 =============================================================================*/
@@ -332,7 +311,7 @@ header .header-container {
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #0d1117 !important;
+        background-color: #09090b !important; /* Выставили цвет начала градиента для бесшовного монолита */
         z-index: 1000 !important;
         height: auto !important;
         border-bottom: none !important;
@@ -391,7 +370,7 @@ header .header-container {
         display: flex !important;
         position: static !important;
         width: 100% !important;
-        background-color: #0d1117 !important;
+        background-color: #09090b !important; /* Синхронизировали фон подложки второй строки */
         border-top: none !important;
         margin-top: 5px !important;
         padding: 0 14px 0px 14px !important;
@@ -439,7 +418,7 @@ header .header-container {
         display: none !important;
     }
 
-    /* Фирменный космический фон с бирюзовыми и синими засветами прямо внутри шторки меню */
+    /* Фирменный космический фон шторки меню */
     .nav-links {
         position: fixed !important;
         top: 94px !important;
@@ -476,9 +455,9 @@ header .header-container {
         color: #c9d1d9 !important;
         text-decoration: none !important;
         box-sizing: border-box !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important; /* Легкие разделители */
+        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
         -webkit-tap-highlight-color: transparent !important;
-        transition: border-color 0.15s ease !important;
+        transition: none !important; /* Убрали анимацию цвета рамок, чтобы ликвидировать взрыв при закрытии */
     }
 
     /* Иерархия света для последних двух пунктов */
@@ -491,7 +470,6 @@ header .header-container {
     .nav-links a:active {
         background: transparent !important;
         border-bottom-color: #00f2fe !important;
-        transition: none !important;
     }
 
     .hero-section {
