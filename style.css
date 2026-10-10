@@ -377,7 +377,7 @@ header .header-container {
         width: 100% !important;
         background-color: #0d1117 !important;
         border-top: none !important;
-        margin-top: 7px !important; /* Сместили на 2px вниз для идеальной симметрии с верхом экрана */
+        margin-top: 7px !important;
         padding: 0 14px 0px 14px !important;
         gap: 6px !important;
         box-sizing: border-box !important;
@@ -443,7 +443,6 @@ header .header-container {
         transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
     }
 
-    /* Моментальное открытие сверху вниз за 0.25s */
     .nav-links.open {
         transform: translate3d(0, 0, 0) !important;
     }
@@ -469,27 +468,42 @@ header .header-container {
         color: #6a737d !important;
     }
 
-    /* Очистили интерактивный отклик линий */
     .nav-links a:active {
         background: transparent !important;
         border-bottom-color: rgba(48, 54, 61, 0.2) !important;
     }
 
+    /* Корректировка отступа главного экрана под новую высоту шапки */
     .hero-section {
-        padding: 140px 0 20px 0 !important;
+        padding: 120px 0 20px 0 !important;
     }
 
-    .bento-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-        padding: 0 15px !important;
-    }
-
-    .placeholder, .about {
+    /* Наводим железный порядок в Bento-сетках роли на мобильных */
+    .bento-grid,
+    #grid-supplier,
+    #grid-customer,
+    #grid-transport {
+        display: flex !important;
+        flex-direction: column !important; /* Выстраиваем плашки строго в вертикальную цепочку */
         width: 100% !important;
-        margin: 0 0 16px 0 !important;
+        padding: 0 14px !important; /* Идеальное выравнивание по бокам с кнопками шапки */
+        gap: 12px !important; /* Одинаковый аккуратный зазор между плашками, они больше не слипнутся */
+        box-sizing: border-box !important;
+    }
+
+    /* Чистые стили для самих карточек/плашек: монолитная ширина и адаптивность */
+    .placeholder, 
+    .about,
+    .bento-grid > div,
+    #grid-supplier > div,
+    #grid-customer > div,
+    #grid-transport > div {
+        width: 100% !important; /* Все плашки становятся абсолютно одинаковой ширины */
+        max-width: 100% !important;
+        margin: 0 !important; /* Полностью убрали хаотичные отступы */
         padding: 24px 16px !important;
         display: block !important;
+        box-sizing: border-box !important;
     }
 
     footer {
