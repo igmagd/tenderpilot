@@ -377,24 +377,35 @@ header .header-container {
     width: 100% !important;
     background-color: #0d1117 !important;
     border-top: none !important;
-    margin-top: 1px !important;
+    margin-top: 0px !important;
+    /* Добавляем отступы по бокам и зазор 6px между прямоугольниками */
+    padding: 0 10px 10px 10px !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
 }
    
 .toggle-btn {
     flex: 1 !important;
     height: 42px !important;
-    background: #0d1117 !important;
-    border: none !important;
+    background: transparent !important;
+    color: #8b949e !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
     border-radius: 0 !important;
+    /* Ультратонкая изящная рамка-волосок синего цв */
+    border: 1px solid rgba(0, 102, 204, 0.45) !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
 }
 
 .toggle-btn.active {
-    background: linear-gradient(135deg, #1a2b4c 0%, #0d1625 50%, #020617 100%) !important;
+    /* Плотная заливка фирменным синим цветом */
+    background: #0066cc !important;
     color: #ffffff !important;
     font-weight: 500 !important;
     outline: none !important;
     border: none !important;
-    box-shadow: 0 3px 10px rgba(0, 242, 254, 0.12) !important;
+    box-shadow: none !important;
 }
 
 .toggle-btn.active::after {
