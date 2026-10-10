@@ -420,7 +420,7 @@ header .header-container {
         display: none !important;
     }
 
-    /* Шторка меню: выезд сверху вниз, блик строго под словом Pilot */
+    /* Шторка меню: Полностью чистый, благородный темный градиент БЕЗ цветных пятен */
     .nav-links {
         position: fixed !important;
         top: 0 !important; 
@@ -428,10 +428,7 @@ header .header-container {
         width: 100% !important;
         height: 100vh !important; 
         overflow-y: auto !important;
-        background: 
-            radial-gradient(circle at 240px 35px, rgba(0, 242, 254, 0.12) 0%, transparent 8%),
-            radial-gradient(circle at 240px 35px, rgba(0, 149, 255, 0.08) 0%, transparent 15%),
-            linear-gradient(to top, #020617 0%, #0d1117 100%) !important;
+        background: linear-gradient(to top, #020617 0%, #0d1117 100%) !important;
         background-size: cover !important;
         flex-direction: column !important;
         padding: 110px 0 24px 0 !important;
@@ -443,6 +440,7 @@ header .header-container {
         transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
     }
 
+    /* Моментальное открытие сверху вниз за 0.25s */
     .nav-links.open {
         transform: translate3d(0, 0, 0) !important;
     }
@@ -468,42 +466,27 @@ header .header-container {
         color: #6a737d !important;
     }
 
+    /* Очистили интерактивный отклик линий */
     .nav-links a:active {
         background: transparent !important;
         border-bottom-color: rgba(48, 54, 61, 0.2) !important;
     }
 
-    /* Корректировка отступа главного экрана под новую высоту шапки */
     .hero-section {
-        padding: 120px 0 20px 0 !important;
+        padding: 140px 0 20px 0 !important;
     }
 
-    /* Наводим железный порядок в Bento-сетках роли на мобильных */
-    .bento-grid,
-    #grid-supplier,
-    #grid-customer,
-    #grid-transport {
-        display: flex !important;
-        flex-direction: column !important; /* Выстраиваем плашки строго в вертикальную цепочку */
+    .bento-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 0 15px !important;
+    }
+
+    .placeholder, .about {
         width: 100% !important;
-        padding: 0 14px !important; /* Идеальное выравнивание по бокам с кнопками шапки */
-        gap: 12px !important; /* Одинаковый аккуратный зазор между плашками, они больше не слипнутся */
-        box-sizing: border-box !important;
-    }
-
-    /* Чистые стили для самих карточек/плашек: монолитная ширина и адаптивность */
-    .placeholder, 
-    .about,
-    .bento-grid > div,
-    #grid-supplier > div,
-    #grid-customer > div,
-    #grid-transport > div {
-        width: 100% !important; /* Все плашки становятся абсолютно одинаковой ширины */
-        max-width: 100% !important;
-        margin: 0 !important; /* Полностью убрали хаотичные отступы */
+        margin: 0 0 16px 0 !important;
         padding: 24px 16px !important;
         display: block !important;
-        box-sizing: border-box !important;
     }
 
     footer {
