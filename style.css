@@ -360,6 +360,14 @@ header .header-container {
     .lk-btn {
         margin-left: auto !important;
         margin-right: 10px !important;
+        transition: opacity 0.2s ease, visibility 0.2s ease !important; /* Плавное скрытие */
+    }
+
+    /* Директорское решение: плавно прячем ЛК, когда шторка меню распахнута */
+    .menu-open .lk-btn {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
     /* Премиальный отклик контуров верхних кнопок */
@@ -441,10 +449,10 @@ header .header-container {
         overflow-y: auto !important;
         background-color: #0d1117 !important;
         flex-direction: column !important;
-        padding: 12px 0 !important; /* Уменьшили внутренние отступы самого меню */
+        padding: 12px 0 !important;
         gap: 0 !important;
         z-index: 999 !important;
-        border-top: none !important; /* Полностью убрали полосу НАД первым пунктом меню */
+        border-top: none !important;
         transition: none !important;
         display: flex !important;
     }
@@ -453,31 +461,33 @@ header .header-container {
         left: 0 !important;
     }
 
-    /* Общие стили для ссылок в меню: делаем компактнее */
+    /* Дорогая верстка ссылок: убираем эффект тетради */
     .nav-links a {
         display: block !important;
         width: 100% !important;
-        padding: 12px 24px !important; /* Уменьшили высоту строк (было 16px) — теперь меню собранное */
+        padding: 12px 24px 12px 0 !important; /* Убрали левый внутренний отступ у самой ссылки */
+        margin-left: 24px !important; /* Сместили саму ссылку целиком — теперь текст встает идеально */
         font-size: 15px !important;
         font-weight: 400 !important;
-        color: #c9d1d9 !important; /* Сделали основные пункты более яркими, читаемыми */
+        color: #c9d1d9 !important;
         text-decoration: none !important;
         box-sizing: border-box !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important; /* Едва заметные тонкие разделители */
+        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important; /* Линия начинается строго под текстом! */
         -webkit-tap-highlight-color: transparent !important;
         transition: border-color 0.15s ease !important;
     }
 
-    /* Иерархия света для последних двух служебных пунктов (Контакты и FAQ) */
+    /* Иерархия света для последних двух пунктов */
     .nav-links a:nth-last-child(1),
     .nav-links a:nth-last-child(2) {
-        color: #7d8590 !important; /* Делаем их поменьше света, благородный приглушенный тон */
+        color: #7d8590 !important;
     }
 
-    /* Интерактивный отклик: при тапе загорается только линия, текст не прыгает */
+    /* Моментальный интерактивный отклик линии при тапе */
     .nav-links a:active {
-        background: transparent !important; /* Никаких фоновых заливок при нажатии */
-        border-bottom-color: #00f2fe !important; /* Линия под кнопкой сильнее загорается неоновым бирюзовым */
+        background: transparent !important;
+        border-bottom-color: #00f2fe !important;
+        transition: none !important; /* Убираем задержку: линия вспыхивает мгновенно при касании */
     }
 
     .hero-section {
