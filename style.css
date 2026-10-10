@@ -344,7 +344,7 @@ header .header-container {
         align-items: center !important;
         justify-content: flex-start !important;
         width: 100% !important;
-        padding: 12px 0px 3px 0px !important; /* Добавили еще 1px для идеального баланса строки */
+        padding: 12px 0px 3px 0px !important;
         gap: 0 !important;
         height: auto !important;
     }
@@ -362,16 +362,16 @@ header .header-container {
         margin-right: 10px !important;
     }
 
-    /* Премиальный отклик контуров: теперь и у ЛК, и у Бургера вспыхивают строго ЛИНИИ (stroke) */
+    /* Премиальный отклик контуров верхних кнопок */
     .lk-btn:active svg,
     .menu-toggle:active svg {
         stroke: #ffffff !important;
-        fill: transparent !important; /* Убираем сплошную заливку силуэта */
+        fill: transparent !important;
         transform: scale(0.95);
         transition: transform 0.1s ease, stroke 0.1s ease !important;
     }
 
-    /* Полностью очищаем фон и системные тени у верхних кнопок */
+    /* Очищаем фон и системные тени у верхних кнопок */
     .lk-btn:focus, .lk-btn:focus-visible, .lk-btn:active, .lk-btn:hover,
     .menu-toggle:focus, .menu-toggle:focus-visible, .menu-toggle:active, .menu-toggle:hover {
         outline: none !important;
@@ -407,7 +407,7 @@ header .header-container {
         -webkit-tap-highlight-color: transparent !important;
     }
 
-    /* Удерживаем цвет рамки при нажатии, даем мягкий отклик текста */
+    /* Удерживаем цвет рамки при нажатии кнопок роли */
     .toggle-btn:active, 
     .toggle-btn:focus, 
     .toggle-btn:focus-visible {
@@ -431,6 +431,7 @@ header .header-container {
         display: none !important;
     }
 
+    /* Настройки самого выпадающего меню */
     .nav-links {
         position: fixed !important;
         top: 94px !important;
@@ -440,10 +441,10 @@ header .header-container {
         overflow-y: auto !important;
         background-color: #0d1117 !important;
         flex-direction: column !important;
-        padding: 20px 0 !important;
+        padding: 12px 0 !important; /* Уменьшили внутренние отступы самого меню */
         gap: 0 !important;
         z-index: 999 !important;
-        border-top: 1px solid rgba(48, 54, 61, 0.8) !important;
+        border-top: none !important; /* Полностью убрали полосу НАД первым пунктом меню */
         transition: none !important;
         display: flex !important;
     }
@@ -452,23 +453,31 @@ header .header-container {
         left: 0 !important;
     }
 
+    /* Общие стили для ссылок в меню: делаем компактнее */
     .nav-links a {
         display: block !important;
         width: 100% !important;
-        padding: 16px 24px !important;
+        padding: 12px 24px !important; /* Уменьшили высоту строк (было 16px) — теперь меню собранное */
         font-size: 15px !important;
         font-weight: 400 !important;
-        color: #8b949e !important;
+        color: #c9d1d9 !important; /* Сделали основные пункты более яркими, читаемыми */
         text-decoration: none !important;
         box-sizing: border-box !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.5) !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important; /* Едва заметные тонкие разделители */
         -webkit-tap-highlight-color: transparent !important;
         transition: border-color 0.15s ease !important;
     }
 
+    /* Иерархия света для последних двух служебных пунктов (Контакты и FAQ) */
+    .nav-links a:nth-last-child(1),
+    .nav-links a:nth-last-child(2) {
+        color: #7d8590 !important; /* Делаем их поменьше света, благородный приглушенный тон */
+    }
+
+    /* Интерактивный отклик: при тапе загорается только линия, текст не прыгает */
     .nav-links a:active {
-        border-bottom-color: rgba(0, 242, 254, 0.3) !important;
-        background: transparent !important;
+        background: transparent !important; /* Никаких фоновых заливок при нажатии */
+        border-bottom-color: #00f2fe !important; /* Линия под кнопкой сильнее загорается неоновым бирюзовым */
     }
 
     .hero-section {
