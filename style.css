@@ -335,7 +335,6 @@ header .header-container {
         background-color: #0d1117 !important;
         z-index: 1000 !important;
         height: auto !important;
-        /* Полностью бесшовный монолит снизу */
         border-bottom: none !important;
     }
 
@@ -363,7 +362,15 @@ header .header-container {
         margin-right: 10px !important;
     }
 
-    /* Сброс залипающей подсветки для Бургера и ЛК на мобильных */
+    /* Красивый отклик для Бургера и ЛК: при тапе мягко вспыхивает ТОЛЬКО сама иконка */
+    .lk-btn:active svg,
+    .menu-toggle:active svg {
+        fill: #00f2fe !important; /* Цвет вспышки иконки (можно заменить на свой) */
+        transform: scale(0.95);
+        transition: transform 0.1s ease, fill 0.1s ease !important;
+    }
+
+    /* Полностью очищаем фон и системные тени у верхних кнопок */
     .lk-btn:focus, .lk-btn:focus-visible, .lk-btn:active, .lk-btn:hover,
     .menu-toggle:focus, .menu-toggle:focus-visible, .menu-toggle:active, .menu-toggle:hover {
         outline: none !important;
@@ -378,7 +385,6 @@ header .header-container {
         background-color: #0d1117 !important;
         border-top: none !important;
         margin-top: 5px !important;
-        /* Выставляем 14px по бокам для выравнивания с сеткой bento */
         padding: 0 14px 0px 14px !important;
         gap: 6px !important;
         box-sizing: border-box !important;
@@ -392,29 +398,32 @@ header .header-container {
         font-size: 13px !important;
         font-weight: 400 !important;
         border-radius: 6px !important;
-        border: 1px solid #0066cc !important;
+        border: 1px solid #0066cc !important; /* Рамка теперь железно зафиксирована */
         box-shadow: none !important;
         box-sizing: border-box !important;
         outline: none !important;
-        -webkit-tap-highlight-color: transparent;
+        transition: color 0.15s ease, background-color 0.15s ease !important;
+        -webkit-tap-highlight-color: transparent !important;
     }
 
-    /* Чистый мобильный фокус без изменения цвета рамок */
+    /* Лечим вторую строку: убираем прыжки рамок при тапе, оставляем мягкий отклик текста */
     .toggle-btn:active, 
     .toggle-btn:focus, 
     .toggle-btn:focus-visible {
         outline: none !important;
         box-shadow: none !important;
+        border: 1px solid #0066cc !important; /* Удерживаем цвет рамки при нажатии */
+        opacity: 0.7; /* Мягкое затухание текста при зажатии пальцем */
     }
 
     .toggle-btn.active {
-        /* Плотная заливка фирменным синим цветом */
         background: #0066cc !important;
         color: #ffffff !important;
         font-weight: 500 !important;
         outline: none !important;
-        border: none !important;
+        border: 1px solid #0066cc !important;
         box-shadow: none !important;
+        opacity: 1 !important; /* Активная кнопка не прозрачная */
     }
 
     .toggle-btn.active::after {
@@ -452,7 +461,7 @@ header .header-container {
         text-decoration: none !important;
         box-sizing: border-box !important;
         border-bottom: 1px solid rgba(48, 54, 61, 0.5) !important;
-        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: transparent !important;
         transition: border-color 0.15s ease !important;
     }
 
@@ -493,4 +502,3 @@ header .header-container {
         visibility: hidden !important;
     }
        }
-       
