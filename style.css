@@ -390,10 +390,11 @@ header .header-container {
     color: #8b949e !important;
     font-size: 13px !important;
     font-weight: 400 !important;
-    border-radius: 0 !important;
+    border-radius: 6px !important;
     border: 1px solid #0066cc !important;
     box-shadow: none !important;
     box-sizing: border-box !important;
+    outline: none !important;
     -webkit-tap-highlight-color: transparent !important;
 }
 
@@ -486,4 +487,16 @@ header .header-container {
 .hero-actions button {
     -webkit-tap-highlight-color: transparent !important;
     tap-highlight-color: transparent !important;
+}
+
+.toggle-btn.active {
+    background: #0066cc !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+   }
 }
