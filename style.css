@@ -506,5 +506,18 @@ header .header-container {
 .toggle-btn {
     cursor: pointer !important;
 }
+.toggle-btn:active, .toggle-btn:focus, .toggle-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border: 1px solid #0066cc !important;
+}
+
+.toggle-btn.active:active, .toggle-btn.active:focus, .toggle-btn.active:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    background: #0066cc !important;
+    border: none !important;
+}
 
 }
