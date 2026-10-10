@@ -311,7 +311,7 @@ header .header-container {
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        background-color: #09090b !important; /* Выставили цвет начала градиента для бесшовного монолита */
+        background-color: transparent !important; /* Сделали шапку прозрачной, чтобы убрать черную полосу */
         z-index: 1000 !important;
         height: auto !important;
         border-bottom: none !important;
@@ -358,7 +358,7 @@ header .header-container {
         transition: transform 0.1s ease, stroke 0.1s ease !important;
     }
 
-    /* Очищаем фон и системные тени у верхних кнопок */
+    /* Очищаем фон и системные тени у upper кнопок */
     .lk-btn:focus, .lk-btn:focus-visible, .lk-btn:active, .lk-btn:hover,
     .menu-toggle:focus, .menu-toggle:focus-visible, .menu-toggle:active, .menu-toggle:hover {
         outline: none !important;
@@ -370,7 +370,7 @@ header .header-container {
         display: flex !important;
         position: static !important;
         width: 100% !important;
-        background-color: #09090b !important; /* Синхронизировали фон подложки второй строки */
+        background-color: #09090b !important;
         border-top: none !important;
         margin-top: 5px !important;
         padding: 0 14px 0px 14px !important;
@@ -418,21 +418,21 @@ header .header-container {
         display: none !important;
     }
 
-    /* Фирменный космический фон шторки меню */
+    /* Перенастроенное меню: засвет ужат и загнан в самый верхний правый угол, фон под текстом глубокий и темный */
     .nav-links {
         position: fixed !important;
-        top: 94px !important;
+        top: 0 !important; /* Подняли шторку в самый верх (до уровня 0), чтобы она ложилась под прозрачную шапку */
         left: -100% !important;
         width: 100% !important;
-        height: calc(100vh - 94px) !important;
+        height: 100vh !important; /* Растянули на весь экран */
         overflow-y: auto !important;
         background: 
-            radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 60%),
-            radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 70%),
+            radial-gradient(circle at 95% 0%, rgba(0, 242, 254, 0.15) 0%, transparent 45%),
+            radial-gradient(circle at 90% 10%, rgba(0, 149, 255, 0.10) 0%, transparent 50%),
             linear-gradient(to top, #020617 0%, #09090b 100%) !important;
         background-size: cover !important;
         flex-direction: column !important;
-        padding: 12px 0 !important;
+        padding: 94px 0 24px 0 !important; /* Верхний отступ 94px перенесен сюда, чтобы ссылки не заезжали под логотип */
         gap: 0 !important;
         z-index: 999 !important;
         border-top: none !important;
@@ -450,14 +450,14 @@ header .header-container {
         width: 100% !important;
         padding: 12px 24px 12px 0 !important;
         margin-left: 24px !important;
-        font-size: 15px !important;
+        font-size: 18px !important; /* Увеличили шрифт с 15px до 18px — теперь смотрится крупно и дорого */
         font-weight: 400 !important;
         color: #c9d1d9 !important;
         text-decoration: none !important;
         box-sizing: border-box !important;
         border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
         -webkit-tap-highlight-color: transparent !important;
-        transition: none !important; /* Убрали анимацию цвета рамок, чтобы ликвидировать взрыв при закрытии */
+        transition: none !important;
     }
 
     /* Иерархия света для последних двух пунктов */
