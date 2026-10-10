@@ -377,7 +377,7 @@ header .header-container {
     width: 100% !important;
     background-color: #0d1117 !important;
     border-top: none !important;
-    margin-top: -10px !important;
+    margin-top: -5px !important;
 }
    
 .toggle-btn {
@@ -393,10 +393,10 @@ header .header-container {
     color: #ffffff !important;
     font-weight: 400 !important;
     outline: none !important;
-    border-bottom: 1px solid rgba(240, 246, 252, 0.6) !important;
-    border-right: 1px solid rgba(240, 246, 252, 0.6) !important;
+    border: none !important;
     box-shadow: 0 2px 5px rgba(240, 246, 252, 0.03) !important;
 }
+
 .toggle-btn.active::after {
     display: none !important;
 }
