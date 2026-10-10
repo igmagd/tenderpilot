@@ -483,3 +483,7 @@ header .header-container {
     opacity: 0 !important;
     visibility: hidden !important;
 }
+.hero-actions button {
+    -webkit-tap-highlight-color: transparent !important;
+    tap-highlight-color: transparent !important;
+}
