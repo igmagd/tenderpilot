@@ -108,26 +108,12 @@ header .header-container {
 }
 
 /* МГНОВЕННЫЙ ТАП (Тот самый чистый круглый блик + воздушное облако) */
-.lk-btn:active, .menu-toggle:active, .menu-toggle.is-open:active {
-    background-color: rgba(0, 242, 254, 0.08) !important; 
-    box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.14), 
-                0 0 28px 4px rgba(0, 242, 254, 0.10) !important; 
-    transition: none !important;
-}
-.lk-btn:active svg, .menu-toggle:active svg, .menu-toggle.is-open:active svg {
-    stroke: #ffffff !important;
-    transition: none !important;
-}
-
-/* ФИКСИРУЕМ СОСТОЯНИЕ ДЛЯ ОТКРЫТОГО БУРГЕРА (Крестик в едином мягком стиле) */
-.menu-toggle.is-open {
-    box-shadow: 0 0 12px 1px rgba(0, 242, 254, 0.06) !important;
-}
-.menu-toggle.is-open svg, 
-.menu-toggle.is-open .icon-close {
-    /* Силой приглушаем крестик до 60% яркости, убирая ядовитый белый цвет */
-    color: rgba(240, 246, 252, 0.6) !important;
-    stroke: rgba(240, 246, 252, 0.6) !important;
+.menu-toggle:focus, .menu-toggle:active,
+.lk-btn:focus, .lk-btn:active {
+    background: rgba(0, 102, 204, 0.08) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 0 10px rgba(0, 102, 204, 0.15) !important;
+    outline: none !important;
 }
 
 /* ==========================================================================
