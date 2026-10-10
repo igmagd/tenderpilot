@@ -378,10 +378,10 @@ header .header-container {
     background-color: #0d1117 !important;
     border-top: none !important;
     margin-top: 0px !important;
-    /* Добавляем отступы по бокам и зазор 6px между прямоугольниками */
-    padding: 0 10px 10px 10px !important;
+    padding: 0 10px 0px 10px !important;
     gap: 6px !important;
     box-sizing: border-box !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
    
 .toggle-btn {
@@ -392,8 +392,7 @@ header .header-container {
     font-size: 13px !important;
     font-weight: 400 !important;
     border-radius: 0 !important;
-    /* Ультратонкая изящная рамка-волосок синего цв */
-    border: 1px solid rgba(0, 102, 204, 0.45) !important;
+    border: 1px solid rgba(0, 102, 204, 0.25) !important;
     box-shadow: none !important;
     box-sizing: border-box !important;
 }
