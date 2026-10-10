@@ -344,7 +344,7 @@ header .header-container {
         align-items: center !important;
         justify-content: flex-start !important;
         width: 100% !important;
-        padding: 12px 0px 1px 0px !important; /* Добавили 1px снизу для микро-сдвига без появления дыр */
+        padding: 12px 0px 2px 0px !important; /* Увеличили до 2px для идеального микро-сдвига */
         gap: 0 !important;
         height: auto !important;
     }
@@ -371,7 +371,7 @@ header .header-container {
         transition: transform 0.1s ease, fill 0.1s ease, stroke 0.1s ease !important;
     }
 
-    /* Полностью очищаем фон и системные тени у верхних кнопок */
+    /* Полностью очищаем фон и системные тени у upper кнопок */
     .lk-btn:focus, .lk-btn:focus-visible, .lk-btn:active, .lk-btn:hover,
     .menu-toggle:focus, .menu-toggle:focus-visible, .menu-toggle:active, .menu-toggle:hover {
         outline: none !important;
@@ -385,7 +385,7 @@ header .header-container {
         width: 100% !important;
         background-color: #0d1117 !important;
         border-top: none !important;
-        margin-top: 5px !important; /* Вернули стабильный отступ, чтобы не росла дыра */
+        margin-top: 5px !important;
         padding: 0 14px 0px 14px !important;
         gap: 6px !important;
         box-sizing: border-box !important;
@@ -502,4 +502,4 @@ header .header-container {
         opacity: 0 !important;
         visibility: hidden !important;
     }
-       }
+}
