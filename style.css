@@ -355,7 +355,7 @@ header .header-container {
         pointer-events: none !important;
     }
 
-    /* Отклик контуров иконок */
+    /* Отклик контуров иконок первой строки */
     .lk-btn:active svg,
     .menu-toggle:active svg {
         stroke: #ffffff !important;
@@ -420,7 +420,7 @@ header .header-container {
         display: none !important;
     }
 
-    /* Высокопроизводительная шторка меню. Свет зажат в 3 раза и загнан в самый верхний правый угол */
+    /* Шторка меню: теперь вылетает сверху вниз (0, -100%, 0). Засвет микроскопический, строго под логотипом */
     .nav-links {
         position: fixed !important;
         top: 0 !important; 
@@ -429,8 +429,8 @@ header .header-container {
         height: 100vh !important; 
         overflow-y: auto !important;
         background: 
-            radial-gradient(circle at 90% 0%, rgba(0, 242, 254, 0.12) 0%, transparent 15%),
-            radial-gradient(circle at 85% 0%, rgba(0, 149, 255, 0.08) 0%, transparent 30%),
+            radial-gradient(circle at 55px 35px, rgba(0, 242, 254, 0.12) 0%, transparent 8%),
+            radial-gradient(circle at 55px 35px, rgba(0, 149, 255, 0.08) 0%, transparent 15%),
             linear-gradient(to top, #020617 0%, #0d1117 100%) !important;
         background-size: cover !important;
         flex-direction: column !important;
@@ -439,10 +439,12 @@ header .header-container {
         z-index: 1000 !important;
         border-top: none !important;
         display: flex !important;
-        transform: translate3d(-100%, 0, 0) !important; /* Усилено для хардверного GPU-рендеринга */
+        /* Изменили вектор на вертикальный выезд для GPU */
+        transform: translate3d(0, -100%, 0) !important;
         transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
     }
 
+    /* Моментальное открытие сверху вниз за 0.25s */
     .nav-links.open {
         transform: translate3d(0, 0, 0) !important;
     }
@@ -468,10 +470,10 @@ header .header-container {
         color: #6a737d !important;
     }
 
-    /* Отклик линии */
+    /* Очистили интерактивный отклик: линии при тапе больше не мигают бирюзовым */
     .nav-links a:active {
         background: transparent !important;
-        border-bottom-color: #00f2fe !important;
+        border-bottom-color: rgba(48, 54, 61, 0.2) !important; /* Удерживаем исходный цвет разделителя */
     }
 
     .hero-section {
