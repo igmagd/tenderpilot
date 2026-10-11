@@ -512,13 +512,13 @@ header .header-container {
   margin-bottom: 8px !important;
 }
 
-/* Настройка шрифта для названия категории */
+/* Настройка шрифта для названия категории — фирменный цвет для лучшего UX */
 .menu-status-text {
-  color: #58a6ff !important; /* Наш фирменный неоново-голубой цвет */
-  font-weight: 600 !important;
-  /* На 1 пиксель крупнее ссылок (ссылки 18px, заголовок 19px) */
+  color: #58a6ff !important; /* Твой синий цвет как на активных кнопках */
+  font-weight: 500 !important;
   font-size: 19px !important; 
 }
+
     .hero-section {
         padding: 140px 0 20px 0 !important;
     }
