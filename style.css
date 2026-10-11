@@ -585,30 +585,43 @@ header .header-container {
 /* Базовый контейнер Bento-карточки в сетке */
 .bento-card {
   background: transparent !important;
-  perspective: 1500px !important; /* Включаем глубокое 3D пространство */
+  perspective: 1500px !important; /* Глубокое 3D для дорогого вращения */
   width: 100% !important;
-  height: 220px !important; /* Стартовая фиксированная высота карточки */
+  height: 220px !important; /* Стартовая базовая высота карточки на мобилке */
   box-sizing: border-box !important;
   position: relative !important;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* Живая обертка, которая крутится в пространстве */
-.bento-card-inner {
-  position: relative !important;
+/* КИЛЛЕР-ФИЧА: при расширении сам контейнер мгновенно фиксируется на весь экран поверх сайта */
+.bento-card.is-expanded {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  transform-style: preserve-3d !important; /* Честный 3D-рендер */
-  /* Единый благородный тайминг переворота 0.35s под стать нашему меню */
+  z-index: 9999 !important; /* Становится поверх шапки и меню */
+}
+
+/* Живая обертка, которая крутится и расширяется */
+.bento-card-inner {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform-style: preserve-3d !important;
+  /* Единый синхронный тайминг 0.35s для переворота под стать меню */
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
   z-index: 10 !important;
 }
 
-/* Класс-триггер: когда он добавляется скриптом, карточка делает изящный 3D-переворот */
+/* Класс-триггер переворота: крутим обертку на 180 градусов */
 .bento-card.is-flipped .bento-card-inner {
   transform: rotateY(180deg) !important;
 }
 
-/* Общие премиальные стили для лица и рубашки плашки */
+/* Общие премиальные стили для обеих сторон плашки */
 .bento-card-front, .bento-card-back {
   position: absolute !important;
   top: 0 !important;
@@ -623,7 +636,7 @@ header .header-container {
   background: linear-gradient(to bottom, #0b1528, #020617) !important;
   padding: 24px !important;
   
-  /* ЗАЩИТА ОТ СДВИГА: Запрещаем выделение и случайное смещение текста пальцем */
+  /* ЗАЩИТА ТЕКСТА: Запрещаем случайное смещение и выделение букв пальцем */
   user-select: none !important;
   -webkit-user-select: none !important;
   overflow: hidden !important;
@@ -636,7 +649,7 @@ header .header-container {
   justify-content: space-between !important;
 }
 
-/* Обратная сторона (Виджет) изначально развернута спиной к экрану */
+/* Обратная сторона (Виджет калькулятора) изначально развернута изнанкой */
 .bento-card-back {
   transform: rotateY(180deg) !important;
   display: flex !important;
@@ -644,7 +657,14 @@ header .header-container {
   justify-content: space-between !important;
 }
 
-/* Защита текстового контента от сплющивания */
+/* На весь экран убираем закругления углов для строгости бизнес-класса */
+.bento-card.is-expanded .bento-card-front,
+.bento-card.is-expanded .bento-card-back {
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Защита контента от сплющивания в 3D */
 .bento-card-front-content, .bento-card-back-header {
   width: 100% !important;
 }
