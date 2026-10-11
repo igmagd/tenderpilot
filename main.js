@@ -6,12 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
 
-    // 1. ОЖИВЛЯЕМ БУРГЕР: Клик на кнопку открытия/закрытия меню
+    // Массив режимов для циклического перелистывания по стрелочкам и свайпам
+    const modesChain = ['supplier', 'customer', 'transport'];
+
+    // 1. ОЖИВЛЯЕМ БУРГЕР: Открытие и закрытие меню
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            // Переключаем класс открытия для шторки
             navLinks.classList.toggle('open');
-            // Переключаем класс на body для мгновенного скрытия кнопок шапки
             body.classList.toggle('menu-open');
         });
     }
@@ -24,34 +25,90 @@ document.addEventListener('DOMContentLoaded', () => {
             if (body) body.classList.remove('menu-open');
         });
     });
+
+    // 2. УПРАВЛЕНИЕ СТРЕЛОЧКАМИ ВНУТРИ МЕНЮ
+    const btnNext = document.querySelector('.btn-menu-next');
+    const btnPrev = document.querySelector('.btn-menu-prev');
+
+    function getActiveMode() {
+        // Вычисляем текущий активный режим по открытой группе ссылок
+        if (document.querySelector('.menu-group-customer').style.display === 'flex') return 'customer';
+        if (document.querySelector('.menu-group-transport').style.display === 'flex') return 'transport';
+        return 'supplier';
+    }
+
+    function shiftMode(direction) {
+        const currentMode = getActiveMode();
+        let currentIndex = modesChain.indexOf(currentMode);
+        
+        if (direction === 'next') {
+            currentIndex = (currentIndex + 1) % modesChain.length;
+        } else if (direction === 'prev') {
+            currentIndex = (currentIndex - 1 + modesChain.length) % modesChain.length;
+        }
+        
+        // Вызываем глобальную функцию переключения (она обновит и меню, и сетки на фоне)
+        switchMode(modesChain[currentIndex]);
+    }
+
+    if (btnNext) btnNext.addEventListener('click', () => shiftMode('next'));
+    if (btnPrev) btnPrev.addEventListener('click', () => shiftMode('prev'));
+
+    // 3. РЕВОЛЮЦИОННЫЕ СВАЙПЫ ПАЛЬЦЕМ НА ТЕЛЕФОНЕ
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Порог в 50 пикселей для защиты от случайных дрожаний
+
+    if (navLinks) {
+        navLinks.addEventListener('touchstart', (event) => {
+            touchStartX = event.changedTouches[0].screenX;
+        }, { passive: true });
+
+        navLinks.addEventListener('touchend', (event) => {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipeGesture();
+        }, { passive: true });
+    }
+
+    function handleSwipeGesture() {
+        const diffX = touchEndX - touchStartX;
+        
+        // Если палец смахнули влево (жест "Вперед")
+        if (diffX < -swipeThreshold) {
+            shiftMode('next');
+        } 
+        // Если палец смахнули вправо (жест "Назад")
+        else if (diffX > swipeThreshold) {
+            shiftMode('prev');
+        }
+    }
 });
 
-// 2. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Поставщик, Заказчик, Транспорт)
+// 4. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
 function switchMode(mode, event) {
-    // Находим все группы ссылок в бургер-меню для SEO
     const groupSupplier = document.querySelector('.menu-group-supplier');
     const groupCustomer = document.querySelector('.menu-group-customer');
     const groupTransport = document.querySelector('.menu-group-transport');
     const statusText = document.querySelector('.menu-status-text');
 
     // Прячем все три группы меню
-    if (groupSupplier) groupSupplier.style.display = 'none';
-    if (groupCustomer) groupCustomer.style.display = 'none';
-    if (groupTransport) groupTransport.style.display = 'none';
+    if (groupSupplier) groupSupplier.style.setProperty('display', 'none', 'important');
+    if (groupCustomer) groupCustomer.style.setProperty('display', 'none', 'important');
+    if (groupTransport) groupTransport.style.setProperty('display', 'none', 'important');
 
-    // Включаем только нужную группу и обновляем верхний статус-бар в бургере
+    // Включаем только нужную группу с высшим приоритетом и обновляем статус-бар
     if (mode === 'supplier' && groupSupplier) {
-        groupSupplier.style.display = 'flex';
+        groupSupplier.style.setProperty('display', 'flex', 'important');
         if (statusText) statusText.textContent = 'Поставщик';
     } else if (mode === 'customer' && groupCustomer) {
-        groupCustomer.style.display = 'flex';
+        groupCustomer.style.setProperty('display', 'flex', 'important');
         if (statusText) statusText.textContent = 'Заказчик';
     } else if (mode === 'transport' && groupTransport) {
-        groupTransport.style.display = 'flex';
+        groupTransport.style.setProperty('display', 'flex', 'important');
         if (statusText) statusText.textContent = 'Транспорт';
     }
 
-    // Логика переключения кнопок активности в шапке
+    // Переключение кнопок активности в шапке сайта
     const buttons = document.querySelectorAll('.toggle-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     
@@ -62,7 +119,7 @@ function switchMode(mode, event) {
         if (activeBtn) activeBtn.classList.add('active');
     }
     
-    // Логика переключения отображения Bento-сеток на главном экране
+    // Переключение отображения Bento-сеток на главном экране под меню
     const grids = document.querySelectorAll('.bento-grid');
     grids.forEach(grid => grid.classList.remove('active'));
     
@@ -70,4 +127,4 @@ function switchMode(mode, event) {
     if (targetGrid) {
         targetGrid.classList.add('active');
     }
-        }
+}
