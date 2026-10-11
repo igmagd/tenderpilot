@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
 
-    // Массив режимов для циклического перелистывания по стрелочкам и свайпам
+    // Массив режимов для циклического перелистывания по стрелочкам и свайпам в меню
     const modesChain = ['supplier', 'customer', 'transport'];
 
     // 1. ОЖИВЛЯЕМ БУРГЕР: Открытие и закрытие меню
@@ -48,65 +48,58 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIndex = (currentIndex - 1 + modesChain.length) % modesChain.length;
         }
         
-        // Запускаем синхронизированное премиальное переключение
         animateModeSwitch(modesChain[currentIndex]);
     }
 
     if (btnNext) btnNext.addEventListener('click', () => shiftMode('next'));
     if (btnPrev) btnPrev.addEventListener('click', () => shiftMode('prev'));
 
-    // 3. РЕВОЛЮЦИОННЫЕ СВАЙПЫ ПАЛЬЦЕМ НА ТЕЛЕФОНЕ (С ФИКСОМ СДВИГА)
+    // 3. РЕВОЛЮЦИОННЫЕ СВАЙПЫ ПАЛЬЦЕМ НА ТЕЛЕФОНЕ ДЛЯ МЕНЮ (С ФИКСОМ СДВИГА)
     let touchStartX = 0;
     let touchStartY = 0;
-    const swipeThreshold = 40; // Оптимальный порог чувствительности в пикселях
+    const swipeThreshold = 40;
 
     if (navLinks) {
         navLinks.addEventListener('touchstart', (event) => {
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
+            touchStartX = event.touches.clientX;
+            touchStartY = event.touches.clientY;
         }, { passive: true });
 
         navLinks.addEventListener('touchmove', (event) => {
-            const currentX = event.touches[0].clientX;
-            const currentY = event.touches[0].clientY;
+            const currentX = event.touches.clientX;
+            const currentY = event.touches.clientY;
             
             const diffX = Math.abs(currentX - touchStartX);
             const diffY = Math.abs(currentY - touchStartY);
 
-            // ФИКС ШИРИНЫ: Если юзер ведет пальцем горизонтально — блокируем стандартный сдвиг экрана браузером
             if (diffX > diffY && diffX > 10) {
                 if (event.cancelable) event.preventDefault();
             }
         }, { passive: false });
 
         navLinks.addEventListener('touchend', (event) => {
-            const touchEndX = event.changedTouches[0].clientX;
+            const touchEndX = event.changedTouches.clientX;
             const diffX = touchEndX - touchStartX;
             
-            // Если свайпнули влево (жест "Вперед")
             if (diffX < -swipeThreshold) {
                 shiftMode('next');
-            } 
-            // Если свайпнули вправо (жест "Назад")
-            else if (diffX > swipeThreshold) {
+            } else if (diffX > swipeThreshold) {
                 shiftMode('prev');
             }
         }, { passive: true });
     }
 
-    // 4. СИНХРОННАЯ АНИМАЦИЯ ПЕРЕКЛЮЧЕНИЯ (Единый стиль 0.35s с кубическим сглаживанием)
+    // 4. СИНХРОННАЯ АНИМАЦИЯ ПЕРЕКЛЮЧЕНИЯ МЕНЮ (0.35s)
     function animateModeSwitch(targetMode) {
         const activeGroup = document.querySelector(`.menu-group-${getActiveMode()}`);
         const allItems = activeGroup ? activeGroup.querySelectorAll('.menu-item-link') : [];
 
-        // Шаг А: Мягко тушим текущие ссылки за 0.2s, подготавливая сцену
         if (allItems.length > 0) {
             allItems.forEach(item => {
                 item.style.transition = 'opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1)';
                 item.style.opacity = '0';
             });
             
-            // Ждем 150мс (наша зеркальная пауза) и переключаем контент в тени
             setTimeout(() => {
                 switchMode(targetMode);
                 fadeInNewLinks(targetMode);
@@ -121,13 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const newItems = newGroup ? newGroup.querySelectorAll('.menu-item-link') : [];
         
         if (newItems.length > 0) {
-            // Изначально обнуляем прозрачность новых элементов перед проявлением
             newItems.forEach(item => {
                 item.style.opacity = '0';
                 item.style.transition = 'none';
             });
             
-            // Проявляем новые ссылки в точном ритме открытия меню: 0.35s с кубическим сглаживанием
             setTimeout(() => {
                 newItems.forEach(item => {
                     item.style.transition = 'opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -136,21 +127,72 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 20);
         }
     }
+
+    // 5. РЕВОЛЮЦИОННАЯ ИНТЕГРАЦИЯ УПРАВЛЕНИЯ BENTO-КАРТОЧКАМИ (СВАЙПЫ И КЛИКИ 3D)
+    const bentoCards = document.querySelectorAll('.bento-card');
+
+    bentoCards.forEach(card => {
+        const frontIcon = card.querySelector('.bento-card-front .bento-card-flip-icon');
+        const backIcon = card.querySelector('.bento-card-back .bento-card-flip-icon');
+
+        // Фаза А: Переворот и расширение карточки при клике на иконку "Вперед"
+        if (frontIcon) {
+            frontIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                card.classList.add('is-expanded');
+            });
+        }
+
+        // Фаза Б: Сворачивание карточки обратно в сетку при клике на иконку "Назад"
+        if (backIcon) {
+            backIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                card.classList.remove('is-expanded');
+            });
+        }
+
+        // Фаза В: Жесты свайпа для переворота и роста плашки на весь экран пальцем
+        let cardTouchStartX = 0;
+        let cardTouchStartY = 0;
+
+        card.addEventListener('touchstart', (e) => {
+            cardTouchStartX = e.touches.clientX;
+            cardTouchStartY = e.touches.clientY;
+        }, { passive: true });
+
+        card.addEventListener('touchend', (e) => {
+            const cardTouchEndX = e.changedTouches.clientX;
+            const cardTouchEndY = e.changedTouches.clientY;
+            
+            const cardDiffX = cardTouchEndX - cardTouchStartX;
+            const cardDiffY = Math.abs(cardTouchEndY - cardTouchStartY);
+
+            // Если палец смахнули горизонтально и превысили порог в 40px
+            if (Math.abs(cardDiffX) > cardDiffY && Math.abs(cardDiffX) > 40) {
+                // Если карточка компактная и её смахнули влево — взрываем на весь экран
+                if (!card.classList.contains('is-expanded') && cardDiffX < 0) {
+                    card.classList.add('is-expanded');
+                } 
+                // If карточка на весь экран и её смахнули вправо — сворачиваем обратно в сетку
+                else if (card.classList.contains('is-expanded') && cardDiffX > 0) {
+                    card.classList.remove('is-expanded');
+                }
+            }
+        }, { passive: true });
+    });
 });
 
-// 5. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
+// 6. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
 function switchMode(mode, event) {
     const groupSupplier = document.querySelector('.menu-group-supplier');
     const groupCustomer = document.querySelector('.menu-group-customer');
     const groupTransport = document.querySelector('.menu-group-transport');
     const statusText = document.querySelector('.menu-status-text');
 
-    // Прячем все три группы меню
     if (groupSupplier) groupSupplier.style.setProperty('display', 'none', 'important');
     if (groupCustomer) groupCustomer.style.setProperty('display', 'none', 'important');
     if (groupTransport) groupTransport.style.setProperty('display', 'none', 'important');
 
-    // Включаем только нужную группу с высшим приоритетом и обновляем статус-бар
     if (mode === 'supplier' && groupSupplier) {
         groupSupplier.style.setProperty('display', 'flex', 'important');
         if (statusText) statusText.textContent = 'Поставщик';
@@ -162,7 +204,6 @@ function switchMode(mode, event) {
         if (statusText) statusText.textContent = 'Транспорт';
     }
 
-    // Переключение кнопок активности в шапке сайта
     const buttons = document.querySelectorAll('.toggle-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     
@@ -173,7 +214,6 @@ function switchMode(mode, event) {
         if (activeBtn) activeBtn.classList.add('active');
     }
     
-    // Переключение отображения Bento-сеток на главном экране под меню
     const grids = document.querySelectorAll('.bento-grid');
     grids.forEach(grid => grid.classList.remove('active'));
     
