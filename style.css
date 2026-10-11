@@ -584,126 +584,105 @@ header .header-container {
 
 /* Базовый контейнер Bento-карточки в сетке */
 .bento-card {
-  background: transparent !important;
-  perspective: 1500px !important; /* Глубокое 3D для дорогого вращения */
-  width: 100% !important;
-  height: 220px !important; /* Стартовая базовая высота карточки на мобилке */
-  box-sizing: border-box !important;
-  position: relative !important;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    background: transparent !important;
+    perspective: 1500px !important;
+    width: 100% !important;
+    height: 220px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* КИЛЛЕР-ФИЧА: при расширении сам контейнер мгновенно фиксируется на весь экран поверх сайта */
+/* Контейнер на весь экран */
 .bento-card.is-expanded {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 9999 !important; /* Становится поверх шапки и меню */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 9999 !important;
 }
 
-/* Живая обертка, которая крутится и расширяется */
+/* Внутренняя обертка с 3D-анимацией */
 .bento-card-inner {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform-style: preserve-3d !important;
-  /* Единый синхронный тайминг 0.35s для переворота под стать меню */
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
-  z-index: 10 !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform-style: preserve-3d !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    z-index: 10 !important;
 }
 
-/* Класс-триггер переворота: крутим обертку на 180 градусов */
 .bento-card.is-flipped .bento-card-inner {
-  transform: rotateY(180deg) !important;
+    transform: rotateY(180deg) !important;
 }
 
-/* Общие премиальные стили для обеих сторон плашки */
+/* Лицевая и обратная стороны карточки */
 .bento-card-front, .bento-card-back {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  backface-visibility: hidden !important; 
-  -webkit-backface-visibility: hidden !important;
-  box-sizing: border-box !important;
-  border: 1px solid #30363d !important;
-  border-radius: 12px !important;
-  background: linear-gradient(to bottom, #0b1528, #020617) !important;
-  padding: 24px !important;
-  
-  /* ЗАЩИТА ТЕКСТА: Запрещаем случайное смещение и выделение букв пальцем */
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  overflow: hidden !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    box-sizing: border-box !important;
+    border: 1px solid #30363d !important;
+    border-radius: 12px !important;
+    background: linear-gradient(to bottom, #0b1528, #020617) !important;
+    padding: 24px !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    overflow: hidden !important;
 }
 
-/* Лицевая сторона (SEO-текст) */
-.bento-card-front {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
+.bento-card-front, .bento-card-back {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
 }
 
-/* Обратная сторона (Виджет калькулятора) изначально развернута изнанкой */
 .bento-card-back {
-  transform: rotateY(180deg) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
+    transform: rotateY(180deg) !important;
 }
 
-/* На весь экран убираем закругления углов для строгости бизнес-класса */
 .bento-card.is-expanded .bento-card-front,
 .bento-card.is-expanded .bento-card-back {
-  border-radius: 0 !important;
-  border: none !important;
+    border-radius: 0 !important;
+    border: none !important;
 }
 
-/* Защита контента от сплющивания в 3D */
 .bento-card-front-content, .bento-card-back-header {
-  width: 100% !important;
+    width: 100% !important;
 }
 
-.bento-card-front::after {
-    content: "›" !important;
-    position: absolute !important;
-    right: 24px !important;
-    bottom: 12px !important;
-    font-size: 32px !important;
+/* Иконка переворота */
+.bento-card-flip-icon {
+    width: 20px !important;
+    height: 20px !important;
     color: #768390 !important;
+    cursor: pointer !important;
+    align-self: flex-end !important;
+    padding: 12px !important;
+    box-sizing: content-box !important;
     transition: color 0.15s ease !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
-.bento-card-back::after {
-    content: "‹" !important;
-    position: absolute !important;
-    right: 24px !important;
-    bottom: 12px !important;
-    font-size: 32px !important;
-    color: #768390 !important;
-}
-
-.bento-card:active .bento-card-front::after,
-.bento-card:active .bento-card-back::after {
+.bento-card-flip-icon:active {
     color: #ffffff !important;
 }
 
-/* ФИНАЛЬНЫЙ КИЛЛЕР-ФИКС: Напрочь скрываем серые вертикальные полосы прокрутки по всему сайту */
-
-/* Скрытие скроллбара для Chrome, Safari, Opera и Яндекс.Браузера */
+/* Скрытие скроллбаров */
 ::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
-/* Скрытие скроллбара для Firefox */
 html, body, .nav-links, .bento-card-back, .bento-card-front {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important; /* Для старых браузеров Internet Explorer */
-   }
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
