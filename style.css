@@ -686,9 +686,9 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
     -ms-overflow-style: none !important;
 }
 
-/* БРОНЕБОЙНАЯ ЗАЩИТА ОТ СКВОЗНОГО СКРОЛЛА И ПРЫЖКОВ ТЕКСТА */
+/* БРОНЕБОЙНАЯ ЗАЩИТА ОТ СКВОЗНОГО СКРОЛЛА И МЕРЦАНИЯ ТЕКСТА */
 
-/* Когда карточка взлетела, намертво блокируем отображение остальных элементов сетки */
+/* Когда карточка взлетала, намертво блокируем отображение остальных элементов сетки */
 .bento-grid:has(.is-expanded) .bento-card:not(.is-expanded) {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -696,9 +696,19 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
     transition: opacity 0.2s ease !important;
 }
 
-/* Фиксируем подложку раскрытой карточки, чтобы исключить мерцание при 3D-схлопывании */
-.bento-card.is-expanded .bento-card-inner {
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+/* Удлиняем разворот обертки до 0.5s, делая его текучим как шторка меню */
+.bento-card-inner {
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* В момент кручения карточки полностью гасим изнанку, чтобы исключить просвечивание */
+.bento-card-front, .bento-card-back {
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease !important;
+}
+
+/* Когда карточка закрывается, лицо зажигается с задержкой, когда 3D-флип уже завершен */
+.bento-card:not(.is-flipped) .bento-card-front {
+    transition-delay: 0.15s !important;
 }
 
 /* Гарантируем, что во время взлета у нас не будет дергаться контент */
