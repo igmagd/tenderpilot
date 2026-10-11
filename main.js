@@ -54,37 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnNext) btnNext.addEventListener('click', () => shiftMode('next'));
     if (btnPrev) btnPrev.addEventListener('click', () => shiftMode('prev'));
 
-    // 3. РЕВОЛЮЦИОННЫЕ СВАЙПЫ ПАЛЬЦЕМ НА ТЕЛЕФОНЕ ДЛЯ МЕНЮ (С ФИКСОМ СДВИГА)
+    // 3. ЧИСТЫЕ СВАЙПЫ ПАЛЬЦЕМ ДЛЯ МЕНЮ (БЕЗ ЖЕСТКИХ БЛОКИРОВОК БРАУЗЕРА)
     let touchStartX = 0;
-    let touchStartY = 0;
-    const swipeThreshold = 40;
+    const swipeThreshold = 50;
 
     if (navLinks) {
         navLinks.addEventListener('touchstart', (event) => {
-            touchStartX = event.touches.clientX;
-            touchStartY = event.touches.clientY;
+            touchStartX = event.changedTouches[0].clientX;
         }, { passive: true });
 
-        navLinks.addEventListener('touchmove', (event) => {
-            const currentX = event.touches.clientX;
-            const currentY = event.touches.clientY;
-            
-            const diffX = Math.abs(currentX - touchStartX);
-            const diffY = Math.abs(currentY - touchStartY);
-
-            if (diffX > diffY && diffX > 10) {
-                if (event.cancelable) event.preventDefault();
-            }
-        }, { passive: false });
-
         navLinks.addEventListener('touchend', (event) => {
-            const touchEndX = event.changedTouches.clientX;
+            const touchEndX = event.changedTouches[0].clientX;
             const diffX = touchEndX - touchStartX;
             
+            // Легкий нативный свайп без конфликта с шириной
             if (diffX < -swipeThreshold) {
-                shiftMode('next');
+                shiftMode('next'); // Смахнули влево — листаем вперед
             } else if (diffX > swipeThreshold) {
-                shiftMode('prev');
+                shiftMode('prev'); // Смахнули вправо — возвращаем назад
             }
         }, { passive: true });
     }
@@ -128,14 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. РЕВОЛЮЦИОННАЯ ИНТЕГРАЦИЯ УПРАВЛЕНИЯ BENTO-КАРТОЧКАМИ (СВАЙПЫ И КЛИКИ 3D)
+    // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: 3D-ПЕРЕВОРОТ И ВЗЛЕТ НА ВЕСЬ ЭКРАН
     const bentoCards = document.querySelectorAll('.bento-card');
 
     bentoCards.forEach(card => {
         const frontIcon = card.querySelector('.bento-card-front .bento-card-flip-icon');
         const backIcon = card.querySelector('.bento-card-back .bento-card-flip-icon');
 
-        // Фаза А: Переворот и расширение карточки при клике на иконку "Вперед"
+        // Клик по изящной стрелочке на лицевой стороне — разворачиваем плашку
         if (frontIcon) {
             frontIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -143,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Фаза Б: Сворачивание карточки обратно в сетку при клике на иконку "Назад"
+        // Клик по стрелочке назад на рубашке — сворачиваем плашку обратно в сетку
         if (backIcon) {
             backIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -151,29 +138,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Фаза В: Жесты свайпа для переворота и роста плашки на весь экран пальцем
+        // Чистые свайпы для переворачивания и роста плашки на весь экран пальцем
         let cardTouchStartX = 0;
-        let cardTouchStartY = 0;
 
         card.addEventListener('touchstart', (e) => {
-            cardTouchStartX = e.touches.clientX;
-            cardTouchStartY = e.touches.clientY;
+            cardTouchStartX = e.changedTouches[0].clientX;
         }, { passive: true });
 
         card.addEventListener('touchend', (e) => {
-            const cardTouchEndX = e.changedTouches.clientX;
-            const cardTouchEndY = e.changedTouches.clientY;
-            
+            const cardTouchEndX = e.changedTouches[0].clientX;
             const cardDiffX = cardTouchEndX - cardTouchStartX;
-            const cardDiffY = Math.abs(cardTouchEndY - cardTouchStartY);
 
-            // Если палец смахнули горизонтально и превысили порог в 40px
-            if (Math.abs(cardDiffX) > cardDiffY && Math.abs(cardDiffX) > 40) {
-                // Если карточка компактная и её смахнули влево — взрываем на весь экран
+            // Если смахнули горизонтально пальцем больше чем на 50 пикселей
+            if (Math.abs(cardDiffX) > 50) {
+                // Если плашка в сетке и её смахнули влево — взрываем на весь экран
                 if (!card.classList.contains('is-expanded') && cardDiffX < 0) {
                     card.classList.add('is-expanded');
                 } 
-                // If карточка на весь экран и её смахнули вправо — сворачиваем обратно в сетку
+                // Если плашка на весь экран и её смахнули вправо — послушно сворачиваем в Bento
                 else if (card.classList.contains('is-expanded') && cardDiffX > 0) {
                     card.classList.remove('is-expanded');
                 }
