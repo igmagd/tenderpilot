@@ -371,17 +371,20 @@ header .header-container {
         box-shadow: none !important;
     }
 
-    .hero-actions {
-        display: flex !important;
-        position: static !important;
-        width: 100% !important;
-        background-color: #020617 !important; /* Синхронизировали с оригинальным фоном */
-        border-top: none !important;
-        margin-top: 7px !important;
-        padding: 0 14px 8px 14px !important;
-        gap: 6px !important;
-        box-sizing: border-box !important;
-    }
+.hero-actions {
+  display: flex !important;
+  position: static !important;
+  width: 100% !important;
+  background-color: #020617 !important;
+  border-top: none !important;
+  margin-top: 7px !important;
+  padding: 0 14px 8px 14px !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+  /* Добавили плавность появления и задержку в 0.35s при закрытии */
+  transition: opacity 0.25s ease !important, visibility 0.25s ease !important;
+  transition-delay: 0.35s !important;
+}
 
     .toggle-btn {
         flex: 1 !important;
@@ -509,8 +512,10 @@ header .header-container {
     .menu-toggle.is-open .icon-burger { display: none !important; }
     .menu-toggle.is-open .icon-close { display: block !important; }
 
-    .menu-open .hero-actions {
-        opacity: 0 !important;
-        visibility: hidden !important;
-    }
+.menu-open .hero-actions {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition-delay: 0s !important; /* При открытии скрываем кнопки без задержки */
+}
+
 }
