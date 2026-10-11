@@ -685,3 +685,18 @@ header .header-container {
 .bento-card-flip-icon:active {
   color: #ffffff !important; /* Мягко белеет при тапе */
    }
+
+/* ФИНАЛЬНЫЙ КИЛЛЕР-ФИКС: Напрочь скрываем серые вертикальные полосы прокрутки по всему сайту */
+
+/* Скрытие скроллбара для Chrome, Safari, Opera и Яндекс.Браузера */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Скрытие скроллбара для Firefox */
+html, body, .nav-links, .bento-card-back, .bento-card-front {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important; /* Для старых браузеров Internet Explorer */
+   }
