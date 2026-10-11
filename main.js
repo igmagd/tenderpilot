@@ -44,34 +44,47 @@ document.addEventListener("DOMContentLoaded", () => {
 // ----------------------------------------------------------------------
 // 3. СИСТЕМНОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (BENTO GRIDS)
 // ----------------------------------------------------------------------
-function switchMode(mode, e) {
-    if (e && e.currentTarget) {
-        e.currentTarget.blur();
+function switchMode(mode, event) {
+    // 1. Управление группами ссылок в бургер-меню для SEO
+    const groupSupplier = document.querySelector('.menu-group-supplier');
+    const groupCustomer = document.querySelector('.menu-group-customer');
+    const groupTransport = document.querySelector('.menu-group-transport');
+    const statusText = document.querySelector('.menu-status-text');
+
+    // Прячем все группы меню
+    if (groupSupplier) groupSupplier.style.display = 'none';
+    if (groupCustomer) groupCustomer.style.display = 'none';
+    if (groupTransport) groupTransport.style.display = 'none';
+
+    // Включаем нужную группу и обновляем верхний статус-бар в бургере
+    if (mode === 'supplier' && groupSupplier) {
+        groupSupplier.style.display = 'flex';
+        if (statusText) statusText.textContent = 'Поставщик';
+    } else if (mode === 'customer' && groupCustomer) {
+        groupCustomer.style.display = 'flex';
+        if (statusText) statusText.textContent = 'Заказчик';
+    } else if (mode === 'transport' && groupTransport) {
+        groupTransport.style.display = 'flex';
+        if (statusText) statusText.textContent = 'Транспорт';
     }
-    // 1. Находим и отличаем активное состояние кнопок...
-    const buttons = [
-        document.getElementById("btn-supplier"),
-        document.getElementById("btn-customer"),
-        document.getElementById("btn-transport")
-    ];
-    buttons.forEach(btn => btn?.classList.remove("active"));
 
-    // 2. Находим абсолютно все бенто-сетки на странице
-    const grids = [
-        document.getElementById("grid-supplier"),
-        document.getElementById("grid-customer"),
-        document.getElementById("grid-transport")
-    ];
-    // Прячем их системным классом по умолчанию
-    grids.forEach(grid => grid?.classList.add("hidden"));
-
-    // 3. Включаем целевую кнопку и целевую сетку по переданному аргументу
-    const targetButton = document.getElementById(`btn-${mode}`);
+    // 2. Оригинальная логика переключения кнопок активности и Bento-сеток
+    const buttons = document.querySelectorAll('.toggle-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    } else {
+        const activeBtn = document.querySelector(`.${mode}-btn`);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
+    
+    const grids = document.querySelectorAll('.bento-grid');
+    grids.forEach(grid => grid.classList.remove('active'));
+    
     const targetGrid = document.getElementById(`grid-${mode}`);
-
-    if (targetButton && targetGrid) {
-        targetButton.classList.add("active");
-        targetGrid.classList.remove("hidden");
+    if (targetGrid) {
+        targetGrid.classList.add('active');
     }
 }
 
