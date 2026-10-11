@@ -677,3 +677,10 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
+
+.bento-card-front, .bento-card-back {
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.15s ease !important;
+}
+.bento-card:not(.is-flipped) .bento-card-front {
+    transition-delay: 0s !important;
+}
