@@ -26,18 +26,45 @@
         </button>
 
         <a class="logo" href="#">Tender<span>Pilot</span></a>
-        <nav class="nav-links" id="nav-links">
-            <a href="#tenders" class="main-nav-link">Поиск тендеров</a>
-            <a href="#suppliers" class="main-nav-link">Поиск поставщиков</a>
-            <a href="#docs" class="main-nav-link">Подготовка документации</a>
-            <a href="#nmck" class="main-nav-link">Расчет НМЦК</a>
-            <a href="#delivery" class="main-nav-link">Расчет доставки</a>
-            <a href="#guarantees" class="main-nav-link">Банковские гарантии</a>
-            <a href="#legal" class="main-nav-link">Помощь юриста</a>
-            <a href="#education" class="main-nav-link">Обучение</a>
-            <a href="#contact" class="main-nav-link">Контакты</a>
-            <a href="#faq" class="main-nav-link">FAQ</a>
-        </nav>
+<nav class="nav-links">
+  <!-- Верхняя строка-индикатор текущего режима -->
+  <div class="menu-status-bar">Режим: <span class="menu-status-text">Поставщик</span></div>
+
+  <!-- БЛОК ПОСТАВЩИКА (Активен по умолчанию) -->
+  <div class="menu-group-links menu-group-supplier">
+    <a href="#grid-supplier-find" class="menu-item-link btn-supplier-find">Поиск тендеров</a>
+    <a href="#grid-supplier-analyser" class="menu-item-link btn-supplier-analyser">Анализ документов</a>
+    <a href="#grid-supplier-match" class="menu-item-link btn-supplier-match">Подбор поставщиков</a>
+    <a href="#grid-supplier-delivery" class="menu-item-link btn-supplier-delivery">Расчет доставки</a>
+    <a href="#grid-supplier-robot" class="menu-item-link btn-supplier-robot">Создание заявки</a>
+    <a href="#grid-supplier-checklist" class="menu-item-link btn-supplier-checklist">Чек-лист доков</a>
+    <a href="#grid-supplier-finance" class="menu-item-link btn-supplier-finance">Банковская гарантия</a>
+    <a href="#grid-supplier-legal" class="menu-item-link btn-supplier-legal">Тендерный юрист</a>
+  </div>
+
+  <!-- БЛОК ЗАКАЗЧИКА (Скрыт по умолчанию) -->
+  <div class="menu-group-links menu-group-customer" style="display: none;">
+    <a href="#grid-customer-spec" class="menu-item-link btn-customer-spec">Создание ТЗ</a>
+    <a href="#grid-customer-nmck" class="menu-item-link btn-customer-nmck">Расчет НМЦК</a>
+    <a href="#grid-customer-match" class="menu-item-link btn-customer-match">Поиск исполнителя</a>
+    <a href="#grid-customer-risk" class="menu-item-link btn-customer-risk">Анализ рисков</a>
+    <a href="#grid-customer-rnp" class="menu-item-link btn-customer-rnp">Проверка в РНП</a>
+    <a href="#grid-customer-control" class="menu-item-link btn-customer-control">Контроль этапов</a>
+    <a href="#grid-customer-legal" class="menu-item-link btn-customer-legal">Жалобы ФАС</a>
+    <a href="#grid-customer-training" class="menu-item-link btn-customer-training">Обучение</a>
+  </div>
+
+  <!-- БЛОК ТРАНСПОРТА (Скрыт по умолчанию) -->
+  <div class="menu-group-links menu-group-transport" style="display: none;">
+    <a href="#grid-transport-delivery" class="menu-item-link btn-transport-delivery">Расчет доставки</a>
+    <a href="#grid-transport-modes" class="menu-item-link btn-transport-modes">Выбор тарифа</a>
+    <a href="#grid-transport-discount" class="menu-item-link btn-transport-discount">Скидки от ТК</a>
+    <a href="#grid-transport-invoice" class="menu-item-link btn-transport-invoice">Счет на почту</a>
+    <a href="#grid-transport-pool" class="menu-item-link btn-transport-pool">Сборные грузы</a>
+    <a href="#grid-transport-calc" class="menu-item-link btn-transport-calc">Калькулятор объема</a>
+  </div>
+</nav>
+
         <a class="lk-btn" href="#login" aria-label="Личный кабинет">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
