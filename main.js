@@ -54,23 +54,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnNext) btnNext.addEventListener('click', () => shiftMode('next'));
     if (btnPrev) btnPrev.addEventListener('click', () => shiftMode('prev'));
 
-    // 3. ЧИСТЫЕ СВАЙПЫ ПАЛЬЦЕМ ДЛЯ ШТОРКИ МЕНЮ
+    // 3. БРОНЕБОЙНЫЕ СВАЙПЫ ПАЛЬЦЕМ ДЛЯ ШТОРКИ МЕНЮ (НА СТАНДАРТЕ TOUCHES)
     let touchStartX = 0;
     const swipeThreshold = 50;
 
     if (navLinks) {
         navLinks.addEventListener('touchstart', (event) => {
-            touchStartX = event.changedTouches.clientX;
+            if (event.touches && event.touches.length > 0) {
+                touchStartX = event.touches[0].clientX;
+            }
         }, { passive: true });
 
         navLinks.addEventListener('touchend', (event) => {
-            const touchEndX = event.changedTouches.clientX;
-            const diffX = touchEndX - touchStartX;
-            
-            if (diffX < -swipeThreshold) {
-                shiftMode('next'); // Смахнули влево — листаем вперед
-            } else if (diffX > swipeThreshold) {
-                shiftMode('prev'); // Смахнули вправо — возвращаем назад
+            // Для touchend берем данные из changedTouches безопасным методом
+            if (event.changedTouches && event.changedTouches.length > 0) {
+                const touchEndX = event.changedTouches[0].clientX;
+                const diffX = touchEndX - touchStartX;
+                
+                if (diffX < -swipeThreshold) {
+                    shiftMode('next'); // Смахнули влево — вперед
+                } else if (diffX > swipeThreshold) {
+                    shiftMode('prev'); // Смахнули вправо — назад
+                }
             }
         }, { passive: true });
     }
@@ -114,48 +119,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: ЧИСТЫЙ 3D-ПЕРЕВОРОТ ПО ТАПУ И СВАЙПУ
+    // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: ГИБРИДНЫЙ 3D-РАЗВОРOT И РОСТ ВО ВЕСЬ ЭКРАН
     const bentoCards = document.querySelectorAll('.bento-card');
 
     bentoCards.forEach(card => {
         const frontIcon = card.querySelector('.bento-card-front .bento-card-flip-icon');
         const backIcon = card.querySelector('.bento-card-back .bento-card-flip-icon');
 
-        // Клик по стрелочке на лицевой стороне — переворачиваем на рубашку
+        // Клик по стрелочке на лицевой стороне — переворачиваем и взрываем во весь экран
         if (frontIcon) {
             frontIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
-                card.classList.add('is-flipped');
+                card.classList.add('is-flipped', 'is-expanded');
             });
         }
 
-        // Клик по стрелочке назад на рубашке — возвращаем на лицо
+        // Клик по стрелочке назад на рубашке — возвращаем плашку компактно в сетку
         if (backIcon) {
             backIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
-                card.classList.remove('is-flipped');
+                card.classList.remove('is-flipped', 'is-expanded');
             });
         }
 
-        // Чистые свайпы по самой Bento-плашке на телефоне
+        // Бронебойные мобильные свайпы прямо по телу Bento-плашки
         let cardTouchStartX = 0;
 
         card.addEventListener('touchstart', (e) => {
-            cardTouchStartX = e.changedTouches.clientX;
+            if (e.touches && e.touches.length > 0) {
+                cardTouchStartX = e.touches[0].clientX;
+            }
         }, { passive: true });
 
         card.addEventListener('touchend', (e) => {
-            const cardTouchEndX = e.changedTouches.clientX;
-            const cardDiffX = cardTouchEndX - cardTouchStartX;
+            if (e.changedTouches && e.changedTouches.length > 0) {
+                const cardTouchEndX = e.changedTouches[0].clientX;
+                const cardDiffX = cardTouchEndX - cardTouchStartX;
 
-            if (Math.abs(cardDiffX) > 50) {
-                // Смахнули влево — перевернули карточку рубашкой к юзеру
-                if (!card.classList.contains('is-flipped') && cardDiffX < 0) {
-                    card.classList.add('is-flipped');
-                } 
-                // Смахнули вправо — вернули карточку лицом
-                else if (card.classList.contains('is-flipped') && cardDiffX > 0) {
-                    card.classList.remove('is-flipped');
+                if (Math.abs(cardDiffX) > 50) {
+                    // Смахнули влево — переворот и рост во весь экран к калькулятору
+                    if (!card.classList.contains('is-flipped') && cardDiffX < 0) {
+                        card.classList.add('is-flipped', 'is-expanded');
+                    } 
+                    // Смахнули вправо — послушное сворачивание обратно в Bento-сетку
+                    else if (card.classList.contains('is-flipped') && cardDiffX > 0) {
+                        card.classList.remove('is-flipped', 'is-expanded');
+                    }
                 }
             }
         }, { passive: true });
