@@ -423,15 +423,15 @@ header .header-container {
         display: none !important;
     }
 
-/* Шторка меню: 100% высота, оригинальный выезд */
-/* Шторка меню: 100% высота, оригинальный выезд */
+/* Шторка меню: 100% высота, оригинальный плавный выезд */
 .nav-links {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100vh !important;
-  overflow-y: auto !important;
+  /* ИСПРАВЛЕНИЕ: Заменили overflow-y: auto на hidden, чтобы шторка больше никогда не дергалась вверх-вниз */
+  overflow: hidden !important; 
   background: linear-gradient(to top, #020617, #0b1528) !important;
   background-size: cover !important;
   flex-direction: column !important;
@@ -440,7 +440,7 @@ header .header-container {
   z-index: 1000 !important;
   border-top: none !important;
   
-  /* ИСПРАВЛЕНИЕ: Скрываем шторку безопасно, уводя её наверх за экран */
+  /* Скрываем шторку безопасно, уводя её наверх за экран */
   display: flex !important;
   visibility: hidden !important;
   transform: translate3d(0, -100%, 0) !important;
@@ -585,44 +585,44 @@ header .header-container {
 /* Базовый контейнер Bento-карточки в сетке */
 .bento-card {
   background: transparent !important;
-  perspective: 1200px !important; /* Включаем глубокое 3D пространство */
+  perspective: 1500px !important; /* Увеличили глубину 3D для более дорогого вращения */
   width: 100% !important;
-  height: 200px !important; /* Стартовая базовая высота карточки на мобилке */
+  height: 220px !important; /* Оптимальная стартовая высота карточки */
   box-sizing: border-box !important;
   position: relative !important;
 }
 
-/* Живая обертка, которая крутится и расширяется */
+/* Живая обертка, которая крутится и взлетает через аппаратные трансформации */
 .bento-card-inner {
-  position: relative !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
   transform-style: preserve-3d !important;
-  /* Единый синхронный тайминг 0.35s для переворота и изменения геометрии */
+  /* Синхронизируем благородный тайминг переворота с нашим меню */
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
-              top 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
-              left 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
-              width 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
-              height 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+              z-index 0.35s ease !important;
   z-index: 10 !important;
-  top: 0 !important;
-  left: 0 !important;
+  transform: rotateY(0deg) !important;
 }
 
-/* КИЛЛЕР-ФИЧА: при активном классе карточка крутится и взлетает строго по границам экрана */
+/* КИЛЛЕР-ФИЧА: Фирменный 3D-переворот на 180° с одновременным плавным взлетом на весь экран */
 .bento-card.is-expanded .bento-card-inner {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
-  /* ИСПРАВЛЕНИЕ: Заменили vw/vh на 100% ширины и высоты окна, чтобы убрать полосы прокрутки */
   width: 100% !important;
   height: 100% !important;
   transform: rotateY(180deg) !important;
-  z-index: 9999 !important; /* Становится поверх всего сайта */
+  z-index: 9999 !important; /* Взлетает поверх шапки сайта */
 }
 
-/* Общие премиальные стили для лица и рубашки плашки */
+/* Премиальные матовые стили для обеих сторон плашки */
 .bento-card-front, .bento-card-back {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
   backface-visibility: hidden !important; 
@@ -634,38 +634,41 @@ header .header-container {
   padding: 24px !important;
 }
 
-/* Лицевая сторона (SEO-текст) */
+/* Лицевая сторона (Текст и заголовок) */
 .bento-card-front {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
 }
 
-/* Обратная сторона (Виджет калькулятора) изначально развернута спиной */
+/* Рубашка (Виджет калькулятора) изначально развернута изнанкой в 3D */
 .bento-card-back {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
   transform: rotateY(180deg) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  border-radius: 0 !important; /* Углы расправляются на весь экран для строгости */
 }
 
-/* Наша утонченная стрелочка переворота в углу плашки (дорогая простота) */
+/* Защита текста внутри карточек от сплющивания при перевороте */
+.bento-card-front-content, .bento-card-back-header {
+  width: 100% !important;
+}
+
+/* Наша утонченная премиальная стрелочка переворота в углу плашки */
 .bento-card-flip-icon {
   width: 20px !important;
   height: 20px !important;
   color: #768390 !important;
   cursor: pointer !important;
   align-self: flex-end !important;
-  padding: 8px !important;
+  padding: 12px !important; /* Увеличенная невидимая область для удобного тапа пальцем */
   box-sizing: content-box !important;
   transition: color 0.15s ease !important;
   -webkit-tap-highlight-color: transparent !important;
 }
 
+/* Дорогая простота: при нажатии стрелочка мягко белеет */
 .bento-card-flip-icon:active {
-  color: #ffffff !important; /* Мягко белеет при тапе */
+  color: #ffffff !important;
    }
+   
