@@ -462,14 +462,15 @@ header .header-container {
   box-sizing: border-box !important;
   border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   -webkit-tap-highlight-color: transparent !important;
-  /* Мягкое скрытие текста при закрытии шторки */
+  /* При закрытии меню ссылки исчезают МГНОВЕННО, чтобы не лезть на логотип */
   opacity: 0 !important;
-  transition: opacity 0.15s ease !important;
+  transition: none !important;
 }
 
-/* Мгновенное проявление ссылок на месте при открытии */
+/* Плавное проявление ссылок только ПРИ ОТКРЫТИИ */
 .nav-links.open a {
   opacity: 1 !important;
+  transition: opacity 0.15s ease !important;
   transition-delay: 0.15s !important;
 }
 
