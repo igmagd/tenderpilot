@@ -147,33 +147,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     card.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches.length > 0) {
-            cardTouchStartX = e.touches.clientX;
+            cardTouchStartX = e.touches[0].clientX;
         }
     }, { passive: true });
 
     card.addEventListener('touchend', (e) => {
         if (e.changedTouches && e.changedTouches.length > 0) {
-            const cardTouchEndX = e.changedTouches.clientX;
+            const cardTouchEndX = e.changedTouches[0].clientX;
             const cardDiffX = cardTouchStartX - cardTouchEndX;
 
             if (Math.abs(cardDiffX) > 50) {
-                // Смахнули влево – переворот вперед
                 if (cardDiffX > 0) {
                     if (!card.classList.contains('is-flipped')) {
-                        card.classList.add('is-expanded');
-                        card.classList.add('is-flipped');
+                        card.classList.add('is-expanded', 'is-flipped');
                     }
-                } 
-                // Смахнули вправо – разворот обратно в сетку
-                else {
+                } else {
                     if (card.classList.contains('is-flipped')) {
-                        card.classList.remove('is-flipped');
-                        card.classList.remove('is-expanded');
+                        card.classList.remove('is-flipped', 'is-expanded');
                     }
                 }
             }
         }
     }, { passive: true });
+
     }); // ЗАКРЫВАЕМ card ВНУТРИ bentoCards.forEach
 }); // ЗАКРЫВАЕМ ВСЁ ОБХОЖДЕНИЕ bentoCards.forEach
 
