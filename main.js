@@ -142,56 +142,38 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-    // Бронебойные мобильные свайпы с плавным гашением текста
+    // Бронебойные мобильные свайпы при зажатии пальцем на карточке
     let cardTouchStartX = 0;
 
     card.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches.length > 0) {
-            cardTouchStartX = e.touches[0].clientX;
+            cardTouchStartX = e.touches.clientX;
         }
     }, { passive: true });
 
     card.addEventListener('touchend', (e) => {
         if (e.changedTouches && e.changedTouches.length > 0) {
-            const cardTouchEndX = e.changedTouches[0].clientX;
+            const cardTouchEndX = e.changedTouches.clientX;
             const cardDiffX = cardTouchStartX - cardTouchEndX;
 
             if (Math.abs(cardDiffX) > 50) {
-                const frontContent = card.querySelector('.bento-card-front-content');
-                const backHeader = card.querySelector('.bento-card-back-header');
-                const widgetZone = card.querySelector('.bento-card-widget-zone');
-
+                // Смахнули влево – переворот вперед
                 if (cardDiffX > 0) {
-                    // Смахнули влево – плавный взлет и 3D-разворот
                     if (!card.classList.contains('is-flipped')) {
-                        if (frontContent) frontContent.style.opacity = '0';
                         card.classList.add('is-expanded');
-                        setTimeout(() => {
-                            card.classList.add('is-flipped');
-                            setTimeout(() => {
-                                if (backHeader) backHeader.style.opacity = '1';
-                                if (widgetZone) widgetZone.style.opacity = '1';
-                            }, 150);
-                        }, 50);
+                        card.classList.add('is-flipped');
                     }
-                } else {
-                    // Смахнули вправо – благородный спуск в сетку
+                } 
+                // Смахнули вправо – разворот обратно в сетку
+                else {
                     if (card.classList.contains('is-flipped')) {
-                        if (backHeader) backHeader.style.opacity = '0';
-                        if (widgetZone) widgetZone.style.opacity = '0';
                         card.classList.remove('is-flipped');
-                        setTimeout(() => {
-                            card.classList.remove('is-expanded');
-                            setTimeout(() => {
-                                if (frontContent) frontContent.style.opacity = '1';
-                            }, 150);
-                        }, 250);
+                        card.classList.remove('is-expanded');
                     }
                 }
             }
         }
     }, { passive: true });
-
 
 // 6. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
 function switchMode(mode, event) {
