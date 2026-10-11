@@ -31,9 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPrev = document.querySelector('.btn-menu-prev');
 
     function getActiveMode() {
-        // Вычисляем текущий активный режим по открытой группе ссылок
-        if (document.querySelector('.menu-group-customer').style.display === 'flex') return 'customer';
-        if (document.querySelector('.menu-group-transport').style.display === 'flex') return 'transport';
+        const groupCustomer = document.querySelector('.menu-group-customer');
+        const groupTransport = document.querySelector('.menu-group-transport');
+        if (groupCustomer && groupCustomer.style.display === 'flex') return 'customer';
+        if (groupTransport && groupTransport.style.display === 'flex') return 'transport';
         return 'supplier';
     }
 
@@ -47,44 +48,97 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIndex = (currentIndex - 1 + modesChain.length) % modesChain.length;
         }
         
-        // Вызываем глобальную функцию переключения (она обновит и меню, и сетки на фоне)
-        switchMode(modesChain[currentIndex]);
+        // Запускаем синхронизированное премиальное переключение
+        animateModeSwitch(modesChain[currentIndex]);
     }
 
     if (btnNext) btnNext.addEventListener('click', () => shiftMode('next'));
     if (btnPrev) btnPrev.addEventListener('click', () => shiftMode('prev'));
 
-    // 3. РЕВОЛЮЦИОННЫЕ СВАЙПЫ ПАЛЬЦЕМ НА ТЕЛЕФОНЕ
+    // 3. РЕВОЛЮЦИОННЫЕ СВАЙПЫ ПАЛЬЦЕМ НА ТЕЛЕФОНЕ (С ФИКСОМ СДВИГА)
     let touchStartX = 0;
-    let touchEndX = 0;
-    const swipeThreshold = 50; // Порог в 50 пикселей для защиты от случайных дрожаний
+    let touchStartY = 0;
+    const swipeThreshold = 40; // Оптимальный порог чувствительности в пикселях
 
     if (navLinks) {
         navLinks.addEventListener('touchstart', (event) => {
-            touchStartX = event.changedTouches[0].screenX;
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
         }, { passive: true });
 
+        navLinks.addEventListener('touchmove', (event) => {
+            const currentX = event.touches[0].clientX;
+            const currentY = event.touches[0].clientY;
+            
+            const diffX = Math.abs(currentX - touchStartX);
+            const diffY = Math.abs(currentY - touchStartY);
+
+            // ФИКС ШИРИНЫ: Если юзер ведет пальцем горизонтально — блокируем стандартный сдвиг экрана браузером
+            if (diffX > diffY && diffX > 10) {
+                if (event.cancelable) event.preventDefault();
+            }
+        }, { passive: false });
+
         navLinks.addEventListener('touchend', (event) => {
-            touchEndX = event.changedTouches[0].screenX;
-            handleSwipeGesture();
+            const touchEndX = event.changedTouches[0].clientX;
+            const diffX = touchEndX - touchStartX;
+            
+            // Если свайпнули влево (жест "Вперед")
+            if (diffX < -swipeThreshold) {
+                shiftMode('next');
+            } 
+            // Если свайпнули вправо (жест "Назад")
+            else if (diffX > swipeThreshold) {
+                shiftMode('prev');
+            }
         }, { passive: true });
     }
 
-    function handleSwipeGesture() {
-        const diffX = touchEndX - touchStartX;
+    // 4. СИНХРОННАЯ АНИМАЦИЯ ПЕРЕКЛЮЧЕНИЯ (Единый стиль 0.35s с кубическим сглаживанием)
+    function animateModeSwitch(targetMode) {
+        const activeGroup = document.querySelector(`.menu-group-${getActiveMode()}`);
+        const allItems = activeGroup ? activeGroup.querySelectorAll('.menu-item-link') : [];
+
+        // Шаг А: Мягко тушим текущие ссылки за 0.2s, подготавливая сцену
+        if (allItems.length > 0) {
+            allItems.forEach(item => {
+                item.style.transition = 'opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1)';
+                item.style.opacity = '0';
+            });
+            
+            // Ждем 150мс (наша зеркальная пауза) и переключаем контент в тени
+            setTimeout(() => {
+                switchMode(targetMode);
+                fadeInNewLinks(targetMode);
+            }, 150);
+        } else {
+            switchMode(targetMode);
+        }
+    }
+
+    function fadeInNewLinks(targetMode) {
+        const newGroup = document.querySelector(`.menu-group-${targetMode}`);
+        const newItems = newGroup ? newGroup.querySelectorAll('.menu-item-link') : [];
         
-        // Если палец смахнули влево (жест "Вперед")
-        if (diffX < -swipeThreshold) {
-            shiftMode('next');
-        } 
-        // Если палец смахнули вправо (жест "Назад")
-        else if (diffX > swipeThreshold) {
-            shiftMode('prev');
+        if (newItems.length > 0) {
+            // Изначально обнуляем прозрачность новых элементов перед проявлением
+            newItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transition = 'none';
+            });
+            
+            // Проявляем новые ссылки в точном ритме открытия меню: 0.35s с кубическим сглаживанием
+            setTimeout(() => {
+                newItems.forEach(item => {
+                    item.style.transition = 'opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1)';
+                    item.style.opacity = '1';
+                });
+            }, 20);
         }
     }
 });
 
-// 4. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
+// 5. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
 function switchMode(mode, event) {
     const groupSupplier = document.querySelector('.menu-group-supplier');
     const groupCustomer = document.querySelector('.menu-group-customer');
