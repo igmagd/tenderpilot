@@ -440,25 +440,19 @@ header .header-container {
   z-index: 1000 !important;
   border-top: none !important;
   
-  /* ХАРД-ФИКС БУРГЕРА: Изначально шторка скрыта для мобилок */
-  display: none !important; 
-  transform: translate3d(0, -100%, 0) !important;
-  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
-  transition-delay: 0.15s !important;
-}
-
-/* Когда бургер активен — включаем отображение и запускаем полет */
-.nav-links.open {
+  /* ИСПРАВЛЕНИЕ: Скрываем шторку безопасно, уводя её наверх за экран */
   display: flex !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition-delay: 0s !important;
+  visibility: hidden !important;
+  transform: translate3d(0, -100%, 0) !important;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important, visibility 0.35s ease !important;
+  transition-delay: 0.15s !important; /* Зеркальная задержка при закрытии */
 }
 
-/* Аппаратный выезд шторки сверху вниз при открытии */
+/* Когда бургер активен — возвращаем видимость и шторка летит вниз */
 .nav-links.open {
+  visibility: visible !important;
   transform: translate3d(0, 0, 0) !important;
-  /* ПРИ ОТКРЫТИИ: Шторка стартует мгновенно, без задержек */
-  transition-delay: 0s !important;
+  transition-delay: 0s !important; /* При открытии стартует мгновенно */
 }
 
 /* Чистая верстка новых ссылок меню */
