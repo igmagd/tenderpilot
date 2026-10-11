@@ -686,26 +686,3 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
     -ms-overflow-style: none !important;
 }
 
-/* БРОНЕБОЙНАЯ СИНХРОНИЗАЦИЯ 3D-РАЗВОР ОТА И СКОРОСТИ */
-
-/* Удлиняем разворот обертки до 0.5s — строго под плавность шторки меню */
-.bento-card-inner {
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
-}
-
-/* В момент кручения карточки полностью гасим неактивную сторону, чтобы исключить просвечивание */
-.bento-card-front, .bento-card-back {
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease !important;
-}
-
-/* Когда карточка закрывается, лицо плавно зажигается с микро-задержкой, когда 3D-флип уже завершен */
-.bento-card:not(.is-flipped) .bento-card-front {
-    transition-delay: 0.15s !important;
-}
-
-/* Гарантируем, что во время взлета у нас не будет дергаться контент */
-.bento-card.is-expanded {
-    overflow: hidden !important;
-    z-index: 9999 !important;
-}
-
