@@ -420,66 +420,67 @@ header .header-container {
         display: none !important;
     }
 
-    /* Шторка меню: 100% высота, оригинальный космический фон от иссиня-черного до графита */
-    .nav-links {
-        position: fixed !important;
-        top: 0 !important; 
-        left: 0 !important;
-        width: 100% !important;
-        height: 100vh !important; 
-        overflow-y: auto !important;
-        background: linear-gradient(to top, #020617 0%, #0d1117 100%) !important;
-        background-size: cover !important;
-        flex-direction: column !important;
-        padding: 110px 0 24px 0 !important;
-        gap: 0 !important;
-        z-index: 1000 !important;
-        border-top: none !important;
-        display: flex !important;
-        transform: translate3d(0, -100%, 0) !important;
-        transition: transform 0.25s cubic-bezier(0.1, 0.9, 0.2, 1) !important;
-    }
+/* Шторка меню: 100% высота, оригинальный выезд */
+.nav-links {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  background: linear-gradient(to top, #020617, #0b1528) !important;
+  background-size: cover !important;
+  flex-direction: column !important;
+  padding: 110px 0 24px 0 !important;
+  gap: 0 !important;
+  z-index: 1000 !important;
+  border-top: none !important;
+  display: flex !important;
+  /* Шторка плавно летит вверх за 0.35s с мягким замедлением в конце */
+  transform: translate3d(0, -100%, 0) !important;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
 
-    /* Аппаратный выезд шторки сверху вниз */
-    .nav-links.open {
-        transform: translate3d(0, 0, 0) !important;
-    }
+/* Аппаратный выезд шторки сверху вниз при открытии */
+.nav-links.open {
+  transform: translate3d(0, 0, 0) !important;
+}
 
-    /* Чистая верстка ссылок без эффекта тетради с мягким проявлением */
-    .nav-links a {
-        display: block !important;
-        width: 100% !important;
-        padding: 12px 24px 12px 0 !important;
-        margin-left: 24px !important;
-        font-size: 18px !important;
-        font-weight: 400 !important;
-        color: #c9d1d9 !important;
-        text-decoration: none !important;
-        box-sizing: border-box !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-        -webkit-tap-highlight-color: transparent !important;
-        
-        /* Эффект скрытия текста во время движения */
-        opacity: 0 !important;
-        transition: opacity 0.15s ease !important;
-    }
+/* Чистая верстка ссылок без эффекта подчеркивания */
+.nav-links a {
+  display: block !important;
+  width: 100% !important;
+  padding: 12px 24px 12px 0 !important;
+  margin-left: 24px !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  color: #c9d1d9 !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+  -webkit-tap-highlight-color: transparent !important;
+  /* Мягкое скрытие текста при закрытии шторки */
+  opacity: 0 !important;
+  transition: opacity 0.15s ease !important;
+}
 
-    /* Мгновенное проявление ссылок на месте */
-    .nav-links.open a {
-        opacity: 1 !important;
-        transition-delay: 0.15s !important;
-    }
+/* Мгновенное проявление ссылок на месте при открытии */
+.nav-links.open a {
+  opacity: 1 !important;
+  transition-delay: 0.15s !important;
+}
 
-    .nav-links a:nth-last-child(1),
-    .nav-links a:nth-last-child(2) {
-        color: #6a737d !important;
-    }
+/* Окраска последних служебных ссылок */
+.nav-links a:nth-last-child(1),
+.nav-links a:nth-last-child(2) {
+  color: #6a737d !important;
+}
 
-    /* Очистили интерактивный отклик линий */
-    .nav-links a:active {
-        background: transparent !important;
-        border-bottom-color: rgba(48, 54, 61, 0.2) !important;
-    }
+/* Очистили интерактивный отклик линий при нажатии */
+.nav-links a:active {
+  background: transparent !important;
+  border-bottom-color: rgba(48, 54, 61, 0.2) !important;
+}
 
     .hero-section {
         padding: 140px 0 20px 0 !important;
