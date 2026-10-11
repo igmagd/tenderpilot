@@ -54,20 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnNext) btnNext.addEventListener('click', () => shiftMode('next'));
     if (btnPrev) btnPrev.addEventListener('click', () => shiftMode('prev'));
 
-    // 3. ЧИСТЫЕ СВАЙПЫ ПАЛЬЦЕМ ДЛЯ МЕНЮ (БЕЗ ЖЕСТКИХ БЛОКИРОВОК БРАУЗЕРА)
+    // 3. ЧИСТЫЕ СВАЙПЫ ПАЛЬЦЕМ ДЛЯ ШТОРКИ МЕНЮ
     let touchStartX = 0;
     const swipeThreshold = 50;
 
     if (navLinks) {
         navLinks.addEventListener('touchstart', (event) => {
-            touchStartX = event.changedTouches[0].clientX;
+            touchStartX = event.changedTouches.clientX;
         }, { passive: true });
 
         navLinks.addEventListener('touchend', (event) => {
-            const touchEndX = event.changedTouches[0].clientX;
+            const touchEndX = event.changedTouches.clientX;
             const diffX = touchEndX - touchStartX;
             
-            // Легкий нативный свайп без конфликта с шириной
             if (diffX < -swipeThreshold) {
                 shiftMode('next'); // Смахнули влево — листаем вперед
             } else if (diffX > swipeThreshold) {
@@ -115,49 +114,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: 3D-ПЕРЕВОРОТ И ВЗЛЕТ НА ВЕСЬ ЭКРАН
+    // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: ЧИСТЫЙ 3D-ПЕРЕВОРОТ ПО ТАПУ И СВАЙПУ
     const bentoCards = document.querySelectorAll('.bento-card');
 
     bentoCards.forEach(card => {
         const frontIcon = card.querySelector('.bento-card-front .bento-card-flip-icon');
         const backIcon = card.querySelector('.bento-card-back .bento-card-flip-icon');
 
-        // Клик по изящной стрелочке на лицевой стороне — разворачиваем плашку
+        // Клик по стрелочке на лицевой стороне — переворачиваем на рубашку
         if (frontIcon) {
             frontIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
-                card.classList.add('is-expanded');
+                card.classList.add('is-flipped');
             });
         }
 
-        // Клик по стрелочке назад на рубашке — сворачиваем плашку обратно в сетку
+        // Клик по стрелочке назад на рубашке — возвращаем на лицо
         if (backIcon) {
             backIcon.addEventListener('click', (e) => {
                 e.stopPropagation();
-                card.classList.remove('is-expanded');
+                card.classList.remove('is-flipped');
             });
         }
 
-        // Чистые свайпы для переворачивания и роста плашки на весь экран пальцем
+        // Чистые свайпы по самой Bento-плашке на телефоне
         let cardTouchStartX = 0;
 
         card.addEventListener('touchstart', (e) => {
-            cardTouchStartX = e.changedTouches[0].clientX;
+            cardTouchStartX = e.changedTouches.clientX;
         }, { passive: true });
 
         card.addEventListener('touchend', (e) => {
-            const cardTouchEndX = e.changedTouches[0].clientX;
+            const cardTouchEndX = e.changedTouches.clientX;
             const cardDiffX = cardTouchEndX - cardTouchStartX;
 
-            // Если смахнули горизонтально пальцем больше чем на 50 пикселей
             if (Math.abs(cardDiffX) > 50) {
-                // Если плашка в сетке и её смахнули влево — взрываем на весь экран
-                if (!card.classList.contains('is-expanded') && cardDiffX < 0) {
-                    card.classList.add('is-expanded');
+                // Смахнули влево — перевернули карточку рубашкой к юзеру
+                if (!card.classList.contains('is-flipped') && cardDiffX < 0) {
+                    card.classList.add('is-flipped');
                 } 
-                // Если плашка на весь экран и её смахнули вправо — послушно сворачиваем в Bento
-                else if (card.classList.contains('is-expanded') && cardDiffX > 0) {
-                    card.classList.remove('is-expanded');
+                // Смахнули вправо — вернули карточку лицом
+                else if (card.classList.contains('is-flipped') && cardDiffX > 0) {
+                    card.classList.remove('is-flipped');
                 }
             }
         }, { passive: true });
