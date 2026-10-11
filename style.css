@@ -452,8 +452,8 @@ header .header-container {
   transition-delay: 0s !important;
 }
 
-/* Чистая верстка ссылок без эффекта подчеркивания */
-.nav-links a {
+/* Чистая верстка новых ссылок меню */
+.nav-links .menu-item-link {
   display: block !important;
   width: 100% !important;
   padding: 12px 24px 12px 0 !important;
@@ -465,29 +465,48 @@ header .header-container {
   box-sizing: border-box !important;
   border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   -webkit-tap-highlight-color: transparent !important;
-  /* ПРИ ЗАКРЫТИИ: Текст тает мгновенно за 0.15s без задержек */
+  /* ЗЕРКАЛЬНОЕ ЗАКРЫТИЕ: Текст тает мгновенно за 0.15s при закрытии шторки */
   opacity: 0 !important;
   transition: opacity 0.15s ease-in !important;
   transition-delay: 0s !important;
 }
 
 /* Плавное проявление ссылок только ПРИ ОТКРЫТИИ с задержкой */
-.nav-links.open a {
+.nav-links.open .menu-item-link {
   opacity: 1 !important;
   transition: opacity 0.2s ease-out !important;
-  transition-delay: 0.15s !important; /* Ждем, пока шторка проедет логотип */
+  transition-delay: 0.15s !important; /* Ждем пока шторка проедет логотип */
 }
 
-/* Окраска последних служебных ссылок */
-.nav-links a:nth-last-child(1),
-.nav-links a:nth-last-child(2) {
-  color: #6a737d !important;
-}
-
-/* Очистили интерактивный отклик линий при нажатии */
-.nav-links a:active {
+/* Очистили интерактивный отклик линий при нажатии с телефона */
+.nav-links .menu-item-link:active {
   background: transparent !important;
   border-bottom-color: rgba(48, 54, 61, 0.2) !important;
+}
+
+/* Управление видимостью групп ссылок в меню */
+.menu-group-links {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Строка-подсказка текущего режима вверху меню */
+.menu-status-bar {
+  width: 100% !important;
+  padding: 12px 24px !important;
+  font-size: 13px !important;
+  color: #6a737d !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  box-sizing: border-box !important;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+  margin-bottom: 8px !important;
+}
+
+.menu-status-text {
+  color: #58a6ff !important; /* Наш фирменный неоново-голубой цвет */
+  font-weight: 600 !important;
 }
 
     .hero-section {
