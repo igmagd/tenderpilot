@@ -503,8 +503,8 @@ header .header-container {
 /* Строка-подсказка текущего режима вверху меню */
 .menu-status-bar {
   width: 100% !important;
-  padding: 12px 24px !important;
-  /* Убрали принудительный капс, текст пишется естественно */
+  /* Увеличили левый отступ до 40px, чтобы текст встал в одну линию со ссылками */
+  padding: 12px 24px 12px 40px !important; 
   text-transform: none !important; 
   letter-spacing: 0.5px !important;
   box-sizing: border-box !important;
