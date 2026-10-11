@@ -593,7 +593,7 @@ header .header-container {
     z-index: 9999 !important;
 }
 
-/* Внутренняя обертка с честным 3D-рендером — замедляем до 0.5s для плавности шторки */
+/* Внутренняя обертка с честным 3D-рендером */
 .bento-card-inner {
     position: absolute !important;
     top: 0 !important;
@@ -601,8 +601,12 @@ header .header-container {
     width: 100% !important;
     height: 100% !important;
     transform-style: preserve-3d !important;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
     z-index: 10 !important;
+}
+
+.bento-card.is-flipped .bento-card-inner {
+    transform: rotateY(180deg) !important;
 }
 
 /* Лицевая и обратная стороны карточки */
@@ -625,10 +629,8 @@ header .header-container {
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    /* Плавное исчезновение/появление без прыжков: opacity ждет, пока карточка докрутится */
-    transition: opacity 0.3s ease 0.15s, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
-
 
 .bento-card-back {
     transform: rotateY(180deg) !important;
@@ -675,4 +677,3 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
-
