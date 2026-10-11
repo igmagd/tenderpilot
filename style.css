@@ -500,11 +500,14 @@ header .header-container {
   display: flex !important;
 }
 
-/* Строка-подсказка текущего режима вверху меню */
+/* Строка-подсказка текущего режима вверху меню с выравниванием элементов */
 .menu-status-bar {
   width: 100% !important;
-  /* Увеличили левый отступ до 40px, чтобы текст встал в одну линию со ссылками */
+  /* Левый отступ 40px для идеального выравнивания, правый 24px для стрелочек */
   padding: 12px 24px 12px 40px !important; 
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
   text-transform: none !important; 
   letter-spacing: 0.5px !important;
   box-sizing: border-box !important;
@@ -514,9 +517,34 @@ header .header-container {
 
 /* Настройка шрифта для названия категории — фирменный цвет для лучшего UX */
 .menu-status-text {
-  color: #58a6ff !important; /* Твой синий цвет как на активных кнопках */
+  color: #58a6ff !important; 
   font-weight: 500 !important;
   font-size: 19px !important; 
+}
+
+/* Контейнер для SVG-стрелочек */
+.menu-status-arrows {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important; 
+}
+
+/* Жестко фиксируем размер утонченных SVG-стрелочек, чтобы они не раздувались */
+.menu-status-arrows svg.menu-arrow-icon {
+  width: 20px !important; 
+  height: 20px !important;
+  color: #768390 !important; /* Глубокий сдержанный серый */
+  cursor: pointer !important;
+  /* Увеличенная невидимая зона тапа для удобства на смартфонах */
+  padding: 8px !important; 
+  box-sizing: content-box !important; /* Защита от сжатия иконки паддингом */
+  transition: color 0.15s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Дорогая простота: при тапе стрелочка мягко становится белой */
+.menu-status-arrows svg.menu-arrow-icon:active {
+  color: #ffffff !important;
 }
 
     .hero-section {
