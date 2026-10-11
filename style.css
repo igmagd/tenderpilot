@@ -603,7 +603,7 @@ header .header-container {
     z-index: 9999 !important;
 }
 
-/* Внутренняя обертка с 3D-анимацией */
+/* Внутренняя обертка с честным 3D-рендером */
 .bento-card-inner {
     position: absolute !important;
     top: 0 !important;
@@ -636,12 +636,11 @@ header .header-container {
     user-select: none !important;
     -webkit-user-select: none !important;
     overflow: hidden !important;
-}
-
-.bento-card-front, .bento-card-back {
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
+    /* Плавное растворение без прыжков контента */
+    transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 .bento-card-back {
@@ -658,7 +657,7 @@ header .header-container {
     width: 100% !important;
 }
 
-/* Иконка переворота */
+/* Наша утонченная стрелочка переворота в углу плашки */
 .bento-card-flip-icon {
     width: 20px !important;
     height: 20px !important;
@@ -667,6 +666,9 @@ header .header-container {
     align-self: flex-end !important;
     padding: 12px !important;
     box-sizing: content-box !important;
+    font-size: 22px !important;
+    line-height: 20px !important;
+    text-align: center !important;
     transition: color 0.15s ease !important;
     -webkit-tap-highlight-color: transparent !important;
 }
@@ -675,7 +677,7 @@ header .header-container {
     color: #ffffff !important;
 }
 
-/* Скрытие скроллбаров */
+/* Скрытие всех вертикальных и горизонтальных скроллбаров */
 ::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
