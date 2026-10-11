@@ -490,28 +490,35 @@ header .header-container {
 /* Управление видимостью групп ссылок в меню */
 .menu-group-links {
   width: 100% !important;
-  display: flex !important;
+  /* ИСПРАВЛЕНИЕ: Изначально прячем все списки, чтобы они не сливались в кашу */
+  display: none !important;
   flex-direction: column !important;
+}
+
+/* Принудительно открываем группу Поставщика при первой загрузке страницы */
+.menu-group-supplier {
+  display: flex !important;
 }
 
 /* Строка-подсказка текущего режима вверху меню */
 .menu-status-bar {
   width: 100% !important;
   padding: 12px 24px !important;
-  font-size: 13px !important;
-  color: #6a737d !important;
-  text-transform: uppercase !important;
-  letter-spacing: 1px !important;
+  /* Убрали принудительный капс, текст пишется естественно */
+  text-transform: none !important; 
+  letter-spacing: 0.5px !important;
   box-sizing: border-box !important;
   border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   margin-bottom: 8px !important;
 }
 
+/* Настройка шрифта для названия категории */
 .menu-status-text {
   color: #58a6ff !important; /* Наш фирменный неоново-голубой цвет */
   font-weight: 600 !important;
+  /* На 1 пиксель крупнее ссылок (ссылки 18px, заголовок 19px) */
+  font-size: 19px !important; 
 }
-
     .hero-section {
         padding: 140px 0 20px 0 !important;
     }
