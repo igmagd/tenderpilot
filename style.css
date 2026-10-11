@@ -600,21 +600,23 @@ header .header-container {
   transform-style: preserve-3d !important;
   /* Единый синхронный тайминг 0.35s для переворота и изменения геометрии */
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
-              position 0.35s ease !important,
-              top 0.35s ease !important,
-              left 0.35s ease !important,
-              width 0.35s ease !important,
-              height 0.35s ease !important !important;
+              top 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
+              left 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
+              width 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important,
+              height 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
   z-index: 10 !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 
-/* КИЛЛЕР-ФИЧА: когда класс активен, карточка крутится и плавно взлетает на весь экран */
+/* КИЛЛЕР-ФИЧА: при активном классе карточка крутится и взлетает строго по границам экрана */
 .bento-card.is-expanded .bento-card-inner {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
+  /* ИСПРАВЛЕНИЕ: Заменили vw/vh на 100% ширины и высоты окна, чтобы убрать полосы прокрутки */
+  width: 100% !important;
+  height: 100% !important;
   transform: rotateY(180deg) !important;
   z-index: 9999 !important; /* Становится поверх всего сайта */
 }
@@ -648,7 +650,7 @@ header .header-container {
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  border-radius: 0 !important; /* На весь экран углы расправляются для строгости */
+  border-radius: 0 !important; /* Углы расправляются на весь экран для строгости */
 }
 
 /* Наша утонченная стрелочка переворота в углу плашки (дорогая простота) */
@@ -666,4 +668,4 @@ header .header-container {
 
 .bento-card-flip-icon:active {
   color: #ffffff !important; /* Мягко белеет при тапе */
-}
+   }
