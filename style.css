@@ -686,27 +686,19 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
     -ms-overflow-style: none !important;
 }
 
-/* БРОНЕБОЙНАЯ ЗАЩИТА ОТ СКВОЗНОГО СКРОЛЛА И МЕРЦАНИЯ ТЕКСТА */
+/* БРОНЕБОЙНАЯ СИНХРОНИЗАЦИЯ 3D-РАЗВОР ОТА И СКОРОСТИ */
 
-/* Когда карточка взлетала, намертво блокируем отображение остальных элементов сетки */
-.bento-grid:has(.is-expanded) .bento-card:not(.is-expanded) {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-    transition: opacity 0.2s ease !important;
-}
-
-/* Удлиняем разворот обертки до 0.5s, делая его текучим как шторка меню */
+/* Удлиняем разворот обертки до 0.5s — строго под плавность шторки меню */
 .bento-card-inner {
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* В момент кручения карточки полностью гасим изнанку, чтобы исключить просвечивание */
+/* В момент кручения карточки полностью гасим неактивную сторону, чтобы исключить просвечивание */
 .bento-card-front, .bento-card-back {
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease !important;
 }
 
-/* Когда карточка закрывается, лицо зажигается с задержкой, когда 3D-флип уже завершен */
+/* Когда карточка закрывается, лицо плавно зажигается с микро-задержкой, когда 3D-флип уже завершен */
 .bento-card:not(.is-flipped) .bento-card-front {
     transition-delay: 0.15s !important;
 }
@@ -714,4 +706,6 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
 /* Гарантируем, что во время взлета у нас не будет дергаться контент */
 .bento-card.is-expanded {
     overflow: hidden !important;
+    z-index: 9999 !important;
 }
+
