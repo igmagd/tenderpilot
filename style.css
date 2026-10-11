@@ -669,22 +669,29 @@ header .header-container {
   width: 100% !important;
 }
 
-/* Наша утонченная стрелочка переворота в углу плашки (дорогая простота) */
-.bento-card-flip-icon {
-  width: 20px !important;
-  height: 20px !important;
-  color: #768390 !important;
-  cursor: pointer !important;
-  align-self: flex-end !important;
-  padding: 12px !important; /* Увеличенная невидимая область для удобного тапа пальцем */
-  box-sizing: content-box !important;
-  transition: color 0.15s ease !important;
-  -webkit-tap-highlight-color: transparent !important;
+.bento-card-front::after {
+    content: "›" !important;
+    position: absolute !important;
+    right: 24px !important;
+    bottom: 12px !important;
+    font-size: 32px !important;
+    color: #768390 !important;
+    transition: color 0.15s ease !important;
 }
 
-.bento-card-flip-icon:active {
-  color: #ffffff !important; /* Мягко белеет при тапе */
-   }
+.bento-card-back::after {
+    content: "‹" !important;
+    position: absolute !important;
+    right: 24px !important;
+    bottom: 12px !important;
+    font-size: 32px !important;
+    color: #768390 !important;
+}
+
+.bento-card:active .bento-card-front::after,
+.bento-card:active .bento-card-back::after {
+    color: #ffffff !important;
+}
 
 /* ФИНАЛЬНЫЙ КИЛЛЕР-ФИКС: Напрочь скрываем серые вертикальные полосы прокрутки по всему сайту */
 
