@@ -174,6 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }, { passive: true });
+    }); // ЗАКРЫВАЕМ card ВНУТРИ bentoCards.forEach
+}); // ЗАКРЫВАЕМ ВСЁ ОБХОЖДЕНИЕ bentoCards.forEach
 
 // 6. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
 function switchMode(mode, event) {
@@ -215,3 +217,7 @@ function switchMode(mode, event) {
         targetGrid.classList.add('active');
     }
 }
+
+// ПРИВЯЗЫВАЕМ ФУНКЦИЮ К ГЛОБАЛЬНОМУ ОКНУ ДЛЯ РАБОТЫ ONCLICK
+window.switchMode = switchMode;
+            
