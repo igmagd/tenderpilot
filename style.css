@@ -688,3 +688,23 @@ html, body, .nav-links, .bento-card-back, .bento-card-front {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
+
+/* БРОНЕБОЙНАЯ ЗАЩИТА ОТ СКВОЗНОГО СКРОЛЛА И ПРЫЖКОВ ТЕКСТА */
+
+/* Когда карточка взлетела, намертво блокируем отображение остальных элементов сетки */
+.bento-grid:has(.is-expanded) .bento-card:not(.is-expanded) {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    transition: opacity 0.2s ease !important;
+}
+
+/* Фиксируем подложку раскрытой карточки, чтобы исключить мерцание при 3D-схлопывании */
+.bento-card.is-expanded .bento-card-inner {
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Гарантируем, что во время взлета у нас не будет дергаться контент */
+.bento-card.is-expanded {
+    overflow: hidden !important;
+}
