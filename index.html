@@ -27,8 +27,18 @@
 
         <a class="logo" href="#">Tender<span>Pilot</span></a>
 <nav class="nav-links">
-<!-- Оставили только сочный чистый индикатор категории обычными буквами -->
-<div class="menu-status-bar"><span class="menu-status-text">Поставщик</span></div>
+<!-- Верхняя строка меню с премиальными SVG-стрелочками переключения на правом краю -->
+<div class="menu-status-bar">
+  <span class="menu-status-text">Поставщик</span>
+  <div class="menu-status-arrows">
+    <button class="menu-arrow-btn btn-menu-prev" aria-label="Назад">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="menu-arrow-btn btn-menu-next" aria-label="Вперед">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+</div>
 
   <!-- БЛОК ПОСТАВЩИКА (Активен по умолчанию) -->
   <div class="menu-group-links menu-group-supplier">
