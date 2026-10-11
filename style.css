@@ -439,14 +439,17 @@ header .header-container {
   z-index: 1000 !important;
   border-top: none !important;
   display: flex !important;
-  /* Плавный полет шторки на открытие и закрытие за 0.35s */
+  /* ПРИ ЗАКРЫТИИ: Ждем 0.15s пока растает текст, затем шторка плавно летит вверх за 0.35s */
   transform: translate3d(0, -100%, 0) !important;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  transition-delay: 0.15s !important;
 }
 
 /* Аппаратный выезд шторки сверху вниз при открытии */
 .nav-links.open {
   transform: translate3d(0, 0, 0) !important;
+  /* ПРИ ОТКРЫТИИ: Шторка стартует мгновенно, без задержек */
+  transition-delay: 0s !important;
 }
 
 /* Чистая верстка ссылок без эффекта подчеркивания */
@@ -462,9 +465,9 @@ header .header-container {
   box-sizing: border-box !important;
   border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   -webkit-tap-highlight-color: transparent !important;
-  /* При закрытии текст тает плавно за 0.2s и без задержек */
+  /* ПРИ ЗАКРЫТИИ: Текст тает мгновенно за 0.15s без задержек */
   opacity: 0 !important;
-  transition: opacity 0.2s ease-in !important;
+  transition: opacity 0.15s ease-in !important;
   transition-delay: 0s !important;
 }
 
