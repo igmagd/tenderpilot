@@ -786,3 +786,14 @@ header .header-container {
     pointer-events: auto !important;
     opacity: 1 !important;
 }
+
+/* ТЕХНОЛОГИЧНАЯ ФАЗА ЗАКРЫТИЯ: Удерживает fixed-окно и плавно сжимает его к центру */
+.bento-card.is-closing {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.01) !important;
+    opacity: 0 !important;
+    z-index: 9999 !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+   }
