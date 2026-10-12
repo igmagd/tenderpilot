@@ -746,7 +746,7 @@ header .header-container {
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
-    pointer-events: auto !important; /* Открываем тачи для крестика */
+    pointer-events: auto !important;
     z-index: 9999 !important;
 }
 
@@ -754,27 +754,24 @@ header .header-container {
    ФИНАЛЬНАЯ МОНОЛИТНАЯ ПЛАВНОСТЬ BENTO (БЕЗ ОТРИВА И РЫВКОВ)
    ========================================================================== */
 
-/* 1. Сбрасываем все жесткие скрытия, обеспечивая 100% отклик сенсора */
+/* Гарантируем 100% отклик сенсора на тачи */
 .bento-card-front, 
 .bento-card-back {
     visibility: visible !important;
 }
 
-/* 2. Задаем благородную скорость 3D-движения (0.35s) с мягким замедлением Apple в конце */
-.bento-card-inner {
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+/* Базовая плавная скорость для всех трансформаций Bento */
+.bento-card-inner,
+.bento-card {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* 3. Синхронизируем мягкое нарастание и затухание прозрачности сторон */
-.bento-card-front {
+.bento-card-front, 
+.bento-card-back {
     transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-.bento-card-back {
-    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
-}
-
-/* 4. Распределяем слои при перевороте карточки */
+/* Распределяем видимость слоев при 3D-перевороте */
 .bento-card.is-flipped .bento-card-front {
     pointer-events: none !important;
     opacity: 0 !important;
@@ -785,7 +782,13 @@ header .header-container {
     opacity: 1 !important;
 }
 
-/* 5. Мягкий доезд самого fixed-окна при разворачивании и сворачивании */
-.bento-card {
-    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+/* ТЕХНОЛОГИЧНАЯ ФАЗА ЗАКРЫТИЯ: Удерживает fixed-окно и плавно сжимает его без рывка */
+.bento-card.is-closing {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.1) !important; /* Бесшовно сжимается в центр */
+    opacity: 0 !important;
+    z-index: 9999 !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
