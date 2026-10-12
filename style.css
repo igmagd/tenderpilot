@@ -722,25 +722,25 @@ header .header-container {
     pointer-events: none !important; /* Тап проходит сквозь стрелку в карту */
 }
 
-/* Ограничиваем размер SVG стрелки */
 .bento-card-arrow svg {
     width: 22px !important;
     height: 22px !important;
 }
 
-/* Бьем точно по внутренним линиям стрелки для приглушения цвета как у бургера */
+/* Бьем по линиям SVG для приглушения цвета как у бургера */
 .bento-card-arrow svg line,
-.bento-card-arrow svg polyline {
+.bento-card-arrow svg polyline,
+.bento-card-close-icon svg line {
     stroke: rgba(240, 246, 252, 0.6) !important;
     stroke-width: 1px !important;
 }
 
 /* Полная изоляция слоев при 3D-перевороте для работы крестика */
 .bento-card.is-flipped .bento-card-front {
-    pointer-events: none !important; /* Лицо больше не перехватывает тапы */
+    pointer-events: none !important; /* Лицо больше не перехватывает клики */
 }
 
 .bento-card.is-flipped .bento-card-back {
-    pointer-events: auto !important; /* Рубашка с крестиком полностью кликабельна */
+    pointer-events: auto !important; /* Рубашка становится полностью кликабельной */
 }
 
