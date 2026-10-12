@@ -39,9 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const menuTouchEndX = e.changedTouches[0].clientX;
                 const menuDiffX = menuTouchStartX - menuTouchEndX;
 
-                // Если свайпнули достаточно сильно (больше 50px)
                 if (Math.abs(menuDiffX) > 50) {
-                    // Определяем текущий активный режим
                     const activeBtn = document.querySelector('.toggle-btn.active');
                     if (!activeBtn) return;
                     
@@ -52,12 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     let currentIndex = modes.indexOf(currentMode);
 
                     if (menuDiffX > 0) {
-                        // Свайп влево -> следующий режим
                         if (currentIndex < modes.length - 1) {
                             switchMode(modes[currentIndex + 1]);
                         }
                     } else {
-                        // Свайп вправо -> предыдущий режим
                         if (currentIndex > 0) {
                             switchMode(modes[currentIndex - 1]);
                         }
@@ -103,57 +99,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-  // 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА (ПОД ДОМ-СТРУКТУРУ)
-  document.addEventListener('DOMContentLoaded', () => {
+// 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
+function initBentoCards() {
     document.querySelectorAll('.bento-card').forEach(card => {
-      var frontSide = card.querySelector('.bento-card-front');
-      var closeBtn = card.querySelector('.bento-card-close-icon');
-      var startX = 0;
-      var startY = 0;
+        var frontSide = card.querySelector('.bento-card-front');
+        var closeBtn = card.querySelector('.bento-card-close-icon');
+        var startX = 0;
+        var startY = 0;
 
-      if (frontSide) {
-        frontSide.addEventListener('touchstart', (e) => {
-          if (e.touches.length > 0) {
-            startX = e.touches.clientX;
-            startY = e.touches.clientY;
-          }
-        }, { passive: true });
+        if (frontSide) {
+            frontSide.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 0) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                }
+            }, { passive: true });
 
-        frontSide.addEventListener('touchend', (e) => {
-          if (e.changedTouches.length > 0) {
-            var diffX = Math.abs(startX - e.changedTouches.clientX);
-            var diffY = Math.abs(startY - e.changedTouches.clientY);
+            frontSide.addEventListener('touchend', (e) => {
+                if (e.changedTouches.length > 0) {
+                    var diffX = Math.abs(startX - e.changedTouches[0].clientX);
+                    var diffY = Math.abs(startY - e.changedTouches[0].clientY);
 
-            // Увеличили зону тапа до 20px для идеального мобильного отклика
-            if (diffX < 20 && diffY < 20) {
-              e.stopPropagation();
-              if (!card.classList.contains('is-flipped')) {
-                card.classList.add('is-flipped');
+                    // 20px для идеального мобильного отклика подушечки пальца
+                    if (diffX < 20 && diffY < 20) {
+                        e.stopPropagation();
+                        if (!card.classList.contains('is-flipped')) {
+                            card.classList.add('is-flipped');
+                            setTimeout(() => {
+                                if (card.classList.contains('is-flipped')) {
+                                    card.classList.add('is-expanded');
+                                }
+                            }, 150);
+                        }
+                    }
+                }
+            }, { passive: true });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                card.classList.remove('is-expanded');
                 setTimeout(() => {
-                  if (card.classList.contains('is-flipped')) {
-                    card.classList.add('is-expanded');
-                  }
-                }, 150);
-              }
-            }
-          }
-        }, { passive: true });
-      }
-
-      if (closeBtn) {
-        closeBtn.addEventListener('touchend', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          card.classList.remove('is-expanded');
-          setTimeout(() => {
-            card.classList.remove('is-flipped');
-          }, 200);
-        }, { passive: false });
-      }
+                    card.classList.remove('is-flipped');
+                }, 200);
+            }, { passive: false });
+        }
     });
-  });
+}
 
+// Запуск при стартовой загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    initBentoCards();
+});
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
@@ -183,7 +183,7 @@ function switchMode(mode, event) {
     if (event && event.currentTarget) {
         event.currentTarget.classList.add('active');
     } else {
-        const activeBtn = document.querySelector(`.${mode}-btn`);
+        const activeBtn = document.querySelector('.' + mode + '-btn');
         if (activeBtn) activeBtn.classList.add('active');
     }
 
@@ -192,6 +192,10 @@ function switchMode(mode, event) {
 
     const targetGrid = document.getElementById(`grid-${mode}`);
     if (targetGrid) targetGrid.classList.add('active');
+
+    // Переинициализируем клики карточек строго в момент активации новой Bento-сетки!
+    initBentoCards();
 }
 
+// Единственный и финальный глобальный экспорт функции
 window.switchMode = switchMode;
