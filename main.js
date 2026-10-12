@@ -104,30 +104,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
   // 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРОТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
-  const bentoCards = document.querySelectorAll('.bento-card');
-  bentoCards.forEach(card => {
-    const frontSide = card.querySelector('.bento-card-front');
-    const closeBtn = card.querySelector('.bento-card-close-icon');
-    
-    let touchStartX = 0;
-    let touchStartY = 0;
+  document.querySelectorAll('.bento-card').forEach(card => {
+    var frontSide = card.querySelector('.bento-card-front');
+    var closeBtn = card.querySelector('.bento-card-close-icon');
+    var startX = 0;
+    var startY = 0;
 
     if (frontSide) {
       frontSide.addEventListener('touchstart', (e) => {
         if (e.touches.length > 0) {
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
         }
       }, { passive: true });
 
       frontSide.addEventListener('touchend', (e) => {
         if (e.changedTouches.length > 0) {
-          const touchEndX = e.changedTouches[0].clientX;
-          const touchEndY = e.changedTouches[0].clientY;
-          const diffX = Math.abs(touchStartX - touchEndX);
-          const diffY = Math.abs(touchStartY - touchEndY);
+          var diffX = Math.abs(startX - e.changedTouches[0].clientX);
+          var diffY = Math.abs(startY - e.changedTouches[0].clientY);
 
-          // Если это чистый тап без скролла (меньше 10px) — переворачиваем
           if (diffX < 10 && diffY < 10) {
             e.stopPropagation();
             if (!card.classList.contains('is-flipped')) {
@@ -136,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (card.classList.contains('is-flipped')) {
                   card.classList.add('is-expanded');
                 }
-              }, 150);
+              }, 100);
             }
           }
         }
@@ -144,13 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (closeBtn) {
-      // Изолированное событие для крестика без e.preventDefault()
       closeBtn.addEventListener('touchend', (e) => {
         e.stopPropagation();
         card.classList.remove('is-expanded');
         setTimeout(() => {
           card.classList.remove('is-flipped');
-        }, 150);
+        }, 180);
       }, { passive: true });
     }
   });
