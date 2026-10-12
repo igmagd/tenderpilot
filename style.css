@@ -744,3 +744,26 @@ header .header-container {
     pointer-events: auto !important; /* Рубашка становится полностью кликабельной */
 }
 
+/* ==========================================================================
+   ЖЕСТКАЯ ИЗОЛЯЦИЯ КОНТЕНТА СТОРОН (ЗАЩИТА ОТ МИГАНИЯ ТЕКСТА)
+   ========================================================================== */
+
+/* В покое намертво прячем изнанку от графического чипа смартфона */
+.bento-card .bento-card-back {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.2s !important;
+}
+
+/* Когда карточка повернулась — плавно проявляем изнанку и делаем видимой */
+.bento-card.is-flipped .bento-card-back {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Когда карточка повернулась — полностью гасим лицо, чтобы его текст не просвечивал */
+.bento-card.is-flipped .bento-card-front {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.2s !important;
+}
