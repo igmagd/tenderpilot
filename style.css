@@ -662,6 +662,7 @@ header .header-container {
     transition-delay: 0s;
 }
 
+/* Исправленный и изолированный блок Bento-карточек */
 .bento-card.is-expanded .bento-card-front,
 .bento-card.is-expanded .bento-card-back {
     border-radius: 0 !important;
