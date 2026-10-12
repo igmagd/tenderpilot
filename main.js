@@ -144,7 +144,7 @@ function initBentoCards() {
                 card.classList.remove('is-expanded');
                 setTimeout(() => {
                     card.classList.remove('is-flipped');
-                }, 200);
+                }, 350);
             }, { passive: false });
         }
     });
