@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ВОЗВРАЩАЕМ СВАЙПЫ ДЛЯ ТРЕХ МЕНЮ В ОДНОМ (ТО, ЧТО РАБОТАЛО!)
+    // СВАЙПЫ ДЛЯ ТРЕХ МЕНЮ В ОДНОМ (ИЗОЛИРОВАННЫЕ ДЛЯ НАВИГАЦИИ)
     let menuTouchStartX = 0;
     const modes = ['supplier', 'customer', 'transport'];
 
@@ -100,61 +100,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
-  // 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
-  document.querySelectorAll('.bento-card').forEach(card => {
-    var frontSide = card.querySelector('.bento-card-front');
-    var closeBtn = card.querySelector('.bento-card-close-icon');
-    var startX = 0;
-    var startY = 0;
+function initBentoCards() {
+    document.querySelectorAll('.bento-card').forEach(card => {
+        var frontSide = card.querySelector('.bento-card-front');
+        var closeBtn = card.querySelector('.bento-card-close-icon');
+        var startX = 0;
+        var startY = 0;
 
-    if (frontSide) {
-      frontSide.addEventListener('touchstart', (e) => {
-        if (e.touches.length > 0) {
-          startX = e.touches.clientX;
-          startY = e.touches.clientY;
-        }
-      }, { passive: true });
-
-      frontSide.addEventListener('touchend', (e) => {
-        if (e.changedTouches.length > 0) {
-          var diffX = Math.abs(startX - e.changedTouches.clientX);
-          var diffY = Math.abs(startY - e.changedTouches.clientY);
-
-          if (diffX < 20 && diffY < 20) {
-            e.stopPropagation();
-            if (!card.classList.contains('is-flipped')) {
-              card.classList.add('is-flipped');
-              // Задержка 150мс для бесшовного перехода в fixed-режим
-              setTimeout(() => {
-                if (card.classList.contains('is-flipped')) {
-                  card.classList.add('is-expanded');
+        if (frontSide) {
+            frontSide.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 0) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
                 }
-              }, 150);
-            }
-          }
+            }, { passive: true });
+
+            frontSide.addEventListener('touchend', (e) => {
+                if (e.changedTouches.length > 0) {
+                    var diffX = Math.abs(startX - e.changedTouches[0].clientX);
+                    var diffY = Math.abs(startY - e.changedTouches[0].clientY);
+
+                    // Золотая середина: 20px на погрешность пальца при тапе
+                    if (diffX < 20 && diffY < 20) {
+                        e.stopPropagation();
+                        if (!card.classList.contains('is-flipped')) {
+                            card.classList.add('is-flipped');
+                            setTimeout(() => {
+                                if (card.classList.contains('is-flipped')) {
+                                    card.classList.add('is-expanded');
+                                }
+                            }, 150);
+                        }
+                    }
+                }
+            }, { passive: true });
         }
-      }, { passive: true });
-    }
 
-    if (closeBtn) {
-      closeBtn.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Запускаем фазу плавного монолитного сдувания окна
-        card.classList.add('is-closing');
-        
-        // Ровно через 300мс, когда анимация глазами завершена, полностью сбрасываем fixed-состояние
-        setTimeout(() => {
-          card.classList.remove('is-expanded');
-          card.classList.remove('is-flipped');
-          card.classList.remove('is-closing');
-        }, 300);
-      }, { passive: false });
-    }
-  });
+        if (closeBtn) {
+            closeBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Одновременный сброс запускает плавный синхронный возврат через CSS cubic-bezier
+                card.classList.remove('is-expanded');
+                card.classList.remove('is-flipped');
+            }, { passive: false });
+        }
+    });
+}
 
-// Запуск при стартовой загрузке страницы
+// Первичный запуск обработчиков при загрузке документа
 document.addEventListener('DOMContentLoaded', () => {
     initBentoCards();
 });
@@ -197,9 +192,9 @@ function switchMode(mode, event) {
     const targetGrid = document.getElementById(`grid-${mode}`);
     if (targetGrid) targetGrid.classList.add('active');
 
-    // Переинициализируем клики карточек строго в момент активации новой Bento-сетки!
+    // Намертво привязываем тапы к карточкам новой Bento-сетки при смене вкладки
     initBentoCards();
 }
 
-// Единственный и финальный глобальный экспорт функции
+// Глобальный экспорт функции для внешних вызовов (из кликов и стрелок шапки)
 window.switchMode = switchMode;
