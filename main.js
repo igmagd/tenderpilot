@@ -108,7 +108,8 @@ const bentoCards = document.querySelectorAll('.bento-card');
 
 bentoCards.forEach(card => {
     const frontSide = card.querySelector('.bento-card-front');
-    const closeBtn = card.querySelector('.bento-card-close-btn');
+const closeBtn = card.querySelector('.bento-card-close-icon');
+
 
     let touchStartY = 0;
     let touchStartX = 0;
