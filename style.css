@@ -434,7 +434,6 @@ header .header-container {
     visibility: visible !important;
     transform: translate3d(0, 0, 0) !important;
 }
-
 .nav-links .menu-item-link {
     display: block !important;
     width: 100% !important;
