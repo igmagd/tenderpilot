@@ -751,27 +751,32 @@ header .header-container {
 }
 
 /* ==========================================================================
-   ФИНАЛЬНАЯ МОНОЛИТНАЯ ПЛАВНОСТЬ BENTO (БЕЗ ОТРИВА И РЫВКОВ)
+   ИДЕАЛЬНАЯ ЗОЛОТАЯ СЕРЕДИНА АНИМАЦИИ BENTO (МОНОЛИТНАЯ ПЛАВНОСТЬ APPLE)
    ========================================================================== */
 
-/* Гарантируем 100% отклик сенсора на тачи */
+/* Обеспечиваем 100% видимость элементов для тач-сенсора смартфона */
 .bento-card-front, 
 .bento-card-back {
     visibility: visible !important;
 }
 
-/* Базовая плавная скорость для всех трансформаций Bento */
-.bento-card-inner,
+/* Настройка плавности самого 3D-кувырка внутренней обертки */
+.bento-card-inner {
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Плавный переход для самой fixed-карточки при раскрытии и сжатии */
 .bento-card {
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.bento-card-front, 
+/* Синхронизируем мягкое нарастание и затухание прозрачности сторон */
+.bento-card-front,
 .bento-card-back {
-    transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Распределяем видимость слоев при 3D-перевороте */
+/* Распределяем слои и прозрачность при 3D-перевороте */
 .bento-card.is-flipped .bento-card-front {
     pointer-events: none !important;
     opacity: 0 !important;
@@ -780,15 +785,4 @@ header .header-container {
 .bento-card.is-flipped .bento-card-back {
     pointer-events: auto !important;
     opacity: 1 !important;
-}
-
-/* ТЕХНОЛОГИЧНАЯ ФАЗА ЗАКРЫТИЯ: Удерживает fixed-окно и плавно сжимает его без рывка */
-.bento-card.is-closing {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(0.1) !important; /* Бесшовно сжимается в центр */
-    opacity: 0 !important;
-    z-index: 9999 !important;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
