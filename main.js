@@ -122,29 +122,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: ГИБРИДНЫЙ 3D-РАЗВОРOT И РОСТ ВО ВЕСЬ ЭКРАН
     const bentoCards = document.querySelectorAll('.bento-card');
 
-    bentoCards.forEach(card => {
-        const frontIcon = card.querySelector('.bento-card-front .bento-card-flip-icon');
-        const backIcon = card.querySelector('.bento-card-back .bento-card-flip-icon');
+bentoCards.forEach(card => {
+    const frontIcon = card.querySelector('.bento-card-front .bento-card-flip-icon');
+    const backIcon = card.querySelector('.bento-card-back .bento-card-flip-icon');
 
-        // Клик по стрелочке на лицевой стороне — переворачиваем и взрываем во весь экран
-        if (frontIcon) {
-            frontIcon.addEventListener('click', (e) => {
-                e.stopPropagation();
-                card.classList.add('is-flipped', 'is-expanded');
-            });
-        }
+    // Клик по стрелочке на лицевой стороне — сначала переворот, затем рост во весь экран
+    if (frontIcon) {
+        frontIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Этап 1: Запускаем красивый 3D-переворот на месте
+            card.classList.add('is-flipped');
+            
+            // Этап 2: Ровно на 90 градусах (через 150мс) мягко раскрываем на весь экран
+            setTimeout(() => {
+                if (card.classList.contains('is-flipped')) {
+                    card.classList.add('is-expanded');
+                }
+            }, 150);
+        });
+    }
 
-        // Клик по стрелочке назад на рубашке — возвращаем плашку компактно в сетку
-        if (backIcon) {
-            backIcon.addEventListener('click', (e) => {
-                e.stopPropagation();
-                card.classList.remove('is-flipped', 'is-expanded');
-            });
-        }
+    // Клик по стрелочке назад на рубашке — сначала сжатие, затем переворот назад
+    if (backIcon) {
+        backIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Этап 1: Мягко возвращаем плашку в её ячейку сетки
+            card.classList.remove('is-expanded');
+            
+            // Этап 2: Даем время на уменьшение и возвращаем лицо карточки
+            setTimeout(() => {
+                card.classList.remove('is-flipped');
+            }, 150);
+        });
+    }
 
     // Бронебойные мобильные свайпы при зажатии пальцем на карточке
     let cardTouchStartX = 0;
-
+    
     card.addEventListener('touchstart', (e) => {
         if (e.touches && e.touches.length > 0) {
             cardTouchStartX = e.touches[0].clientX;
@@ -158,20 +172,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (Math.abs(cardDiffX) > 50) {
                 if (cardDiffX > 0) {
+                    // Свайп влево — открываем плашку пошагово
                     if (!card.classList.contains('is-flipped')) {
-                        card.classList.add('is-expanded', 'is-flipped');
+                        card.classList.add('is-flipped');
+                        setTimeout(() => {
+                            if (card.classList.contains('is-flipped')) {
+                                card.classList.add('is-expanded');
+                            }
+                        }, 150);
                     }
                 } else {
+                    // Свайп вправо — закрываем плашку пошагово
                     if (card.classList.contains('is-flipped')) {
-                        card.classList.remove('is-flipped', 'is-expanded');
+                        card.classList.remove('is-expanded');
+                        setTimeout(() => {
+                            card.classList.remove('is-flipped');
+                        }, 150);
                     }
                 }
             }
         }
     }, { passive: true });
-
-    }); // ЗАКРЫВАЕМ card ВНУТРИ bentoCards.forEach
-}); // ЗАКРЫВАЕМ ВСЁ ОБХОЖДЕНИЕ bentoCards.forEach
+}); // ЗАКРЫВАЕМ ЦИКЛ КАРТОЧЕК ОДИН РАЗ И БЕЗ ОПЕЧАТОК
 
 // 6. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
 function switchMode(mode, event) {
@@ -197,17 +219,17 @@ function switchMode(mode, event) {
 
     const buttons = document.querySelectorAll('.toggle-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
-    
+
     if (event && event.currentTarget) {
         event.currentTarget.classList.add('active');
     } else {
         const activeBtn = document.querySelector(`.${mode}-btn`);
         if (activeBtn) activeBtn.classList.add('active');
     }
-    
+
     const grids = document.querySelectorAll('.bento-grid');
     grids.forEach(grid => grid.classList.remove('active'));
-    
+
     const targetGrid = document.getElementById(`grid-${mode}`);
     if (targetGrid) {
         targetGrid.classList.add('active');
@@ -216,4 +238,4 @@ function switchMode(mode, event) {
 
 // ПРИВЯЗЫВАЕМ ФУНКЦИЮ К ГЛОБАЛЬНОМУ ОКНУ ДЛЯ РАБОТЫ ONCLICK
 window.switchMode = switchMode;
-            
+                                  
