@@ -693,16 +693,18 @@ header .header-container {
     color: #ffffff !important;
 }
 
-/* Скрытие скроллбаров СТРОГО для внутренних зон Bento-карточек */
+/* УЛЬТИМАТИВНОЕ СКРЫТИЕ ВСЕХ ПОЛОС ПРОКРУТКИ (КАРТОЧКИ + МОБИЛЬНОЕ МЕНЮ) */
 .bento-card-front::-webkit-scrollbar,
-.bento-card-back::-webkit-scrollbar {
+.bento-card-back::-webkit-scrollbar,
+.nav-links::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
 }
 
 .bento-card-front,
-.bento-card-back {
+.bento-card-back,
+.nav-links {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
