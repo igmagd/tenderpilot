@@ -767,30 +767,25 @@ header .header-container {
     visibility: hidden !important;
     transition: opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.2s !important;
 }
+
 /* ==========================================================================
-   ФАЗОВОЕ СДУВАНИЕ ОКНА BENTO (СТРОГО БЕСШОВНЫЙ МОНОЛИТ)
+   ИДЕАЛЬНАЯ ПЛАВНОСТЬ BENTO БЕЗ ОТРИВА И ЗАДЕРЖЕК
    ========================================================================== */
 
-/* Увеличиваем общее время движения до 0.38s для благородной плавности */
+/* Задаем благородную скорость 0.35s с мягким замедлением в конце */
 .bento-card-inner,
 .bento-card {
-    transition: all 0.38s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
+/* Синхронизируем стороны, чтобы контент лица и рубашки не прыгал отдельно */
 .bento-card-front, 
 .bento-card-back {
-    transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.38s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* Правило для фазы закрытия: удерживает фиксированное окно, пока оно сжимается */
-.bento-card.is-closing {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(0.3) !important; /* Уменьшается в центр */
-    width: 0 !important;
-    height: 0 !important;
-    opacity: 0 !important;
-    z-index: 9999 !important;
-    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
-   }
+/* Защита от резкого исчезновения окна при закрытии */
+.bento-card.is-expanded {
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
