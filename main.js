@@ -103,58 +103,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРОТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
-const bentoCards = document.querySelectorAll('.bento-card');
-
-bentoCards.forEach(card => {
+  // 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРОТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
+  const bentoCards = document.querySelectorAll('.bento-card');
+  bentoCards.forEach(card => {
     const frontSide = card.querySelector('.bento-card-front');
-const closeBtn = card.querySelector('.bento-card-close-icon');
-
-
-    let touchStartY = 0;
+    const closeBtn = card.querySelector('.bento-card-close-icon');
+    
     let touchStartX = 0;
+    let touchStartY = 0;
 
     if (frontSide) {
-        frontSide.addEventListener('touchstart', (e) => {
-            if (e.touches && e.touches.length > 0) {
-                touchStartY = e.touches[0].clientY;
-                touchStartX = e.touches[0].clientX;
-            }
-        }, { passive: true });
+      frontSide.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: true });
 
-        frontSide.addEventListener('touchend', (e) => {
-            if (e.changedTouches && e.changedTouches.length > 0) {
-                const touchEndY = e.changedTouches[0].clientY;
-                const touchEndX = e.changedTouches[0].clientX;
-                
-                const diffY = Math.abs(touchStartY - touchEndY);
-                const diffX = Math.abs(touchStartX - touchEndX);
+      frontSide.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length > 0) {
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
+          const diffX = Math.abs(touchStartX - touchEndX);
+          const diffY = Math.abs(touchStartY - touchEndY);
 
-                if (diffY > 10 || diffX > 10) return; 
-
-                if (!card.classList.contains('is-flipped')) {
-                    card.classList.add('is-flipped');
-                    setTimeout(() => {
-                        if (card.classList.contains('is-flipped')) {
-                            card.classList.add('is-expanded');
-                        }
-                    }, 150);
+          // Если это чистый тап без скролла (меньше 10px) — переворачиваем
+          if (diffX < 10 && diffY < 10) {
+            e.stopPropagation();
+            if (!card.classList.contains('is-flipped')) {
+              card.classList.add('is-flipped');
+              setTimeout(() => {
+                if (card.classList.contains('is-flipped')) {
+                  card.classList.add('is-expanded');
                 }
+              }, 150);
             }
-        }, { passive: true });
+          }
+        }
+      }, { passive: true });
     }
 
     if (closeBtn) {
-      // Тап по крестику закрывает карточку и НЕ трогает свайпы меню
+      // Изолированное событие для крестика без e.preventDefault()
       closeBtn.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Изолируем тап, чтобы меню не перехватывало его
+        e.stopPropagation();
         card.classList.remove('is-expanded');
         setTimeout(() => {
           card.classList.remove('is-flipped');
         }, 150);
-      }, { passive: false });
+      }, { passive: true });
     }
+  });
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
