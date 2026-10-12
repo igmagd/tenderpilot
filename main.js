@@ -113,25 +113,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (frontSide) {
       frontSide.addEventListener('touchstart', (e) => {
         if (e.touches.length > 0) {
-          startX = e.touches[0].clientX;
-          startY = e.touches[0].clientY;
+          startX = e.touches.clientX;
+          startY = e.touches.clientY;
         }
       }, { passive: true });
 
       frontSide.addEventListener('touchend', (e) => {
         if (e.changedTouches.length > 0) {
-          var diffX = Math.abs(startX - e.changedTouches[0].clientX);
-          var diffY = Math.abs(startY - e.changedTouches[0].clientY);
+          var diffX = Math.abs(startX - e.changedTouches.clientX);
+          var diffY = Math.abs(startY - e.changedTouches.clientY);
 
           if (diffX < 10 && diffY < 10) {
             e.stopPropagation();
             if (!card.classList.contains('is-flipped')) {
               card.classList.add('is-flipped');
+              // Замедлили до 140мс, чтобы 3D-поворот стал благородным и заметным
               setTimeout(() => {
                 if (card.classList.contains('is-flipped')) {
                   card.classList.add('is-expanded');
                 }
-              }, 100);
+              }, 140);
             }
           }
         }
@@ -141,13 +142,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBtn) {
       closeBtn.addEventListener('touchend', (e) => {
         e.stopPropagation();
+        // Включаем фазу бесшовного сдувания окна
+        card.classList.add('is-closing');
         card.classList.remove('is-expanded');
+        
+        // Даем карточке 250мс плавно сжаться до размеров ячейки
         setTimeout(() => {
+          card.classList.remove('is-closing');
           card.classList.remove('is-flipped');
-        }, 180);
+        }, 250);
       }, { passive: true });
     }
   });
+
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
