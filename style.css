@@ -751,22 +751,30 @@ header .header-container {
 }
 
 /* ==========================================================================
-   ИДЕАЛЬНАЯ ЗОЛОТАЯ СЕРЕДИНА АНИМАЦИИ BENTO (БЕЗ КОНФЛИКТОВ СЛОВ)
+   ФИНАЛЬНАЯ МОНОЛИТНАЯ ПЛАВНОСТЬ BENTO (БЕЗ ОТРИВА И РЫВКОВ)
    ========================================================================== */
 
-/* Сбрасываем все экспериментальные скрытия, возвращаем 100% отклик сенсора */
+/* 1. Сбрасываем все жесткие скрытия, обеспечивая 100% отклик сенсора */
 .bento-card-front, 
 .bento-card-back {
     visibility: visible !important;
 }
 
-/* Премиальная скорость движения 0.35s с мягким замедлением Apple в конце */
-.bento-card-inner,
-.bento-card {
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+/* 2. Задаем благородную скорость 3D-движения (0.35s) с мягким замедлением Apple в конце */
+.bento-card-inner {
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* Полная изоляция слоев при 3D-перевороте: когда карточка раскрыта, лицо засыпает */
+/* 3. Синхронизируем мягкое нарастание и затухание прозрачности сторон */
+.bento-card-front {
+    transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.bento-card-back {
+    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* 4. Распределяем слои при перевороте карточки */
 .bento-card.is-flipped .bento-card-front {
     pointer-events: none !important;
     opacity: 0 !important;
@@ -775,4 +783,9 @@ header .header-container {
 .bento-card.is-flipped .bento-card-back {
     pointer-events: auto !important;
     opacity: 1 !important;
+}
+
+/* 5. Мягкий доезд самого fixed-окна при разворачивании и сворачивании */
+.bento-card {
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
