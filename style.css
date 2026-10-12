@@ -464,47 +464,45 @@ header .header-container {
   transition-delay: 0s !important;
 }
 
-/* Плавное проявление ссылок только ПРИ ОТКРЫТИИ с задержкой */
-.nav-links.open .menu-item-link {
-  opacity: 1 !important;
-  transition: opacity 0.2s ease-out !important;
-  transition-delay: 0.15s !important; /* Ждем пока шторка проедет логотип */
-}
-
-/* Очистили интерактивный отклик линий при нажатии с телефона */
+/* Плавное проявление ссылок только ПРИ ОТКРЫТИИ */
 .nav-links.active .menu-item-link {
     opacity: 1 !important;
     transition: opacity 0.2s ease-out !important;
-    transition-delay: 0.15s !important;
+    transition-delay: 0.15s !important; /* Ждем пока шторка прилетит */
+}
+
+/* Очистили интерактивный отклик линий при нажатии */
+.nav-links .menu-item-link:active {
+    background: transparent !important;
+    border-bottom-color: rgba(48, 54, 61, 0.2) !important;
 }
 
 /* Управление видимостью групп ссылок в меню */
 .menu-group-links {
-  width: 100% !important;
-  /* ИСПРАВЛЕНИЕ: Изначально прячем все списки, чтобы они не сливались в кашу */
-  display: none !important;
-  flex-direction: column !important;
+    width: 100% !important;
+    display: none !important;
+    flex-direction: column !important;
 }
 
-/* Принудительно открываем группу Поставщика при первой загрузке страницы */
+/* Принудительно открываем группу Поставщика по умолчанию */
 .menu-group-supplier {
-  display: flex !important;
+    display: flex !important;
 }
 
-/* Строка-подсказка текущего режима вверху меню с выравниванием элементов */
+/* Строка-подсказка текущего режима вверху меню */
 .menu-status-bar {
-  width: 100% !important;
-  /* Левый отступ 40px для идеального выравнивания, правый 24px для стрелочек */
-  padding: 12px 24px 12px 40px !important; 
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  text-transform: none !important; 
-  letter-spacing: 0.5px !important;
-  box-sizing: border-box !important;
-  border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  margin-bottom: 8px !important;
+    width: 100% !important;
+    padding: 12px 24px 12px 40px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+    margin-bottom: 8px !important;
 }
+
 
 /* Настройка шрифта для названия категории — фирменный цвет для лучшего UX */
 .menu-status-text {
