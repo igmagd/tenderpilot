@@ -120,80 +120,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: ГИБРИДНЫЙ 3D-РАЗВОРOT И РОСТ ВО ВЕСЬ ЭКРАН
-    const bentoCards = document.querySelectorAll('.bento-card');
+const bentoCards = document.querySelectorAll('.bento-card');
 
 bentoCards.forEach(card => {
-    const frontIcon = card.querySelector('.bento-card-front .bento-card-flip-icon');
-    const backIcon = card.querySelector('.bento-card-back .bento-card-flip-icon');
+    const frontSide = card.querySelector('.bento-card-front');
+    const closeBtn = card.querySelector('.bento-card-close-btn');
 
-    // Клик по стрелочке на лицевой стороне — сначала переворот, затем рост во весь экран
-    if (frontIcon) {
-        frontIcon.addEventListener('click', (e) => {
-            e.stopPropagation();
-            // Этап 1: Запускаем красивый 3D-переворот на месте
-            card.classList.add('is-flipped');
-            
-            // Этап 2: Ровно на 90 градусах (через 150мс) мягко раскрываем на весь экран
-            setTimeout(() => {
-                if (card.classList.contains('is-flipped')) {
-                    card.classList.add('is-expanded');
+    // Переменные для защиты от ложных срабатываний при скролле
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    if (frontSide) {
+        // Запоминаем точку, где пользователь коснулся карточки лица
+        frontSide.addEventListener('touchstart', (e) => {
+            if (e.touches && e.touches.length > 0) {
+                touchStartY = e.touches[0].clientY;
+                touchStartX = e.touches[0].clientX;
+            }
+        }, { passive: true });
+
+        // Проверяем сдвиг при отпускании пальца
+        frontSide.addEventListener('touchend', (e) => {
+            if (e.changedTouches && e.changedTouches.length > 0) {
+                const touchEndY = e.changedTouches[0].clientY;
+                const touchEndX = e.changedTouches[0].clientX;
+                
+                const diffY = Math.abs(touchStartY - touchEndY);
+                const diffX = Math.abs(touchStartX - touchEndX);
+
+                // Если палец сдвинулся больше чем на 10px по вертикали или горизонтали — это скролл страницы!
+                if (diffY > 10 || diffX > 10) {
+                    return; // Игнорируем и ничего не открываем
                 }
-            }, 150);
-        });
+
+                // Это чистый, намеренный тап — запускаем идеальный пошаговый разворот
+                if (!card.classList.contains('is-flipped')) {
+                    card.classList.add('is-flipped');
+                    
+                    // Ровно в момент прохождения 90 градусов (середина анимации) раскрываем во весь экран
+                    setTimeout(() => {
+                        if (card.classList.contains('is-flipped')) {
+                            card.classList.add('is-expanded');
+                        }
+                    }, 150);
+                }
+            }
+        }, { passive: true });
     }
 
-    // Клик по стрелочке назад на рубашке — сначала сжатие, затем переворот назад
-    if (backIcon) {
-        backIcon.addEventListener('click', (e) => {
+    // Клик строго по нашему новому премиальному крестику закрытия
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            // Этап 1: Мягко возвращаем плашку в её ячейку сетки
+            
+            // Сначала плавно сжимаем карточку обратно в её ячейку сетки
             card.classList.remove('is-expanded');
             
-            // Этап 2: Даем время на уменьшение и возвращаем лицо карточки
+            // Даем время на уменьшение и возвращаем лицевую сторону
             setTimeout(() => {
                 card.classList.remove('is-flipped');
             }, 150);
         });
     }
-
-    // Бронебойные мобильные свайпы при зажатии пальцем на карточке
-    let cardTouchStartX = 0;
-    
-    card.addEventListener('touchstart', (e) => {
-        if (e.touches && e.touches.length > 0) {
-            cardTouchStartX = e.touches[0].clientX;
-        }
-    }, { passive: true });
-
-    card.addEventListener('touchend', (e) => {
-        if (e.changedTouches && e.changedTouches.length > 0) {
-            const cardTouchEndX = e.changedTouches[0].clientX;
-            const cardDiffX = cardTouchStartX - cardTouchEndX;
-
-            if (Math.abs(cardDiffX) > 50) {
-                if (cardDiffX > 0) {
-                    // Свайп влево — открываем плашку пошагово
-                    if (!card.classList.contains('is-flipped')) {
-                        card.classList.add('is-flipped');
-                        setTimeout(() => {
-                            if (card.classList.contains('is-flipped')) {
-                                card.classList.add('is-expanded');
-                            }
-                        }, 150);
-                    }
-                } else {
-                    // Свайп вправо — закрываем плашку пошагово
-                    if (card.classList.contains('is-flipped')) {
-                        card.classList.remove('is-expanded');
-                        setTimeout(() => {
-                            card.classList.remove('is-flipped');
-                        }, 150);
-                    }
-                }
-            }
-        }
-    }, { passive: true });
-}); // ЗАКРЫВАЕМ ЦИКЛ КАРТОЧЕК ОДИН РАЗ И БЕЗ ОПЕЧАТОК
+}); // Конец цикла Bento-карточек
 
 // 6. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
 function switchMode(mode, event) {
