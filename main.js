@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-  // 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРОТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
+  // 2. ИНТЕРАКТИВНЫЙ РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
   document.querySelectorAll('.bento-card').forEach(card => {
     var frontSide = card.querySelector('.bento-card-front');
     var closeBtn = card.querySelector('.bento-card-close-icon');
@@ -123,16 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
           var diffX = Math.abs(startX - e.changedTouches.clientX);
           var diffY = Math.abs(startY - e.changedTouches.clientY);
 
+          // Если это чистый тап без скролла — плавно открываем
           if (diffX < 10 && diffY < 10) {
             e.stopPropagation();
-            if (!card.classList.contains('is-flipped')) {
-              card.classList.add('is-flipped');
-              // Замедлили до 140мс, чтобы 3D-поворот стал благородным и заметным
-              setTimeout(() => {
-                if (card.classList.contains('is-flipped')) {
-                  card.classList.add('is-expanded');
-                }
-              }, 140);
+            if (!card.classList.contains('is-expanded')) {
+              card.classList.add('is-expanded');
             }
           }
         }
@@ -141,20 +136,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (closeBtn) {
       closeBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
         e.stopPropagation();
-        // Включаем фазу бесшовного сдувания окна
-        card.classList.add('is-closing');
-        card.classList.remove('is-expanded');
         
-        // Даем карточке 250мс плавно сжаться до размеров ячейки
+        // Включаем фазу плавного монолитного сдувания
+        card.classList.add('is-closing');
+        
+        // Даем окну 250мс плавно сжаться, и только потом полностью сбрасываем состояние
         setTimeout(() => {
+          card.classList.remove('is-expanded');
           card.classList.remove('is-closing');
-          card.classList.remove('is-flipped');
         }, 250);
-      }, { passive: true });
+      }, { passive: false });
     }
   });
-
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
