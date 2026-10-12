@@ -668,31 +668,46 @@ header .header-container {
     border: none !important;
 }
 
-.bento-card-front-content, .bento-card-back-header {
+.bento-card-front-content {
     width: 100% !important;
 }
 
-/* Наша утонченная стрелочка переворота в углу плашки */
-.bento-card-flip-icon {
-    width: 20px !important;
-    height: 20px !important;
-    color: #768390 !important;
+/* Выравнивание заголовка и крестика на одной линии */
+.bento-card-back-header {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Абсолютно чистый крестик без фона, кругов и областей тапа */
+.bento-card-close-btn {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
     cursor: pointer !important;
-    align-self: flex-end !important;
-    padding: 12px !important;
-    box-sizing: content-box !important;
-    font-size: 22px !important;
-    line-height: 20px !important;
-    text-align: center !important;
-    transition: color 0.15s ease !important;
+    outline: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     -webkit-tap-highlight-color: transparent !important;
 }
 
-.bento-card-flip-icon:active {
+/* Настройки самого SVG крестика */
+.bento-card-close-btn svg {
+    width: 16px !important;
+    height: 16px !important;
+    color: #768390 !important;
+    transition: color 0.15s ease;
+}
+
+/* Мгновенная подсветка самого крестика белым при тапе */
+.bento-card-close-btn:active svg {
     color: #ffffff !important;
 }
 
-/* Скрытие всех вертикальных и горизонтальных скроллбаров */
+/* Скрытие скроллбаров */
 ::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
@@ -702,4 +717,4 @@ header .header-container {
 html, body, .nav-links, .bento-card-back, .bento-card-front {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
-                                             }
+}
