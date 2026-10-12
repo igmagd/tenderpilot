@@ -144,16 +144,16 @@ const closeBtn = card.querySelector('.bento-card-close-icon');
         }, { passive: true });
     }
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            card.classList.remove('is-expanded');
-            setTimeout(() => {
-                card.classList.remove('is-flipped');
-            }, 150);
-        });
+     if (closeBtn) {
+      closeBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        card.classList.remove('is-expanded');
+        setTimeout(() => {
+          card.classList.remove('is-flipped');
+        }, 150);
+      }, { passive: false });
     }
-});
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
