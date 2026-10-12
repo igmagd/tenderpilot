@@ -136,16 +136,23 @@ function initBentoCards() {
             }, { passive: true });
         }
 
-        if (closeBtn) {
-            closeBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Одновременный сброс запускает плавный синхронный возврат через CSS cubic-bezier
-                card.classList.remove('is-expanded');
-                card.classList.remove('is-flipped');
-            }, { passive: false });
-        }
+    if (closeBtn) {
+      closeBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Включаем фазу плавного бесшовного сдувания окна
+        card.classList.add('is-closing');
+        
+        // Ровно через 300мс, когда анимация глазами завершена, бесшумно сбрасываем всё
+        setTimeout(() => {
+          card.classList.remove('is-expanded');
+          card.classList.remove('is-flipped');
+          card.classList.remove('is-closing');
+        }, 300);
+      }, { passive: false });
+    }
+
     });
 }
 
