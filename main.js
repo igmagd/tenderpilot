@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-  // 2. ИНТЕРАКТИВНЫЙ РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
+  // 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
   document.querySelectorAll('.bento-card').forEach(card => {
     var frontSide = card.querySelector('.bento-card-front');
     var closeBtn = card.querySelector('.bento-card-close-icon');
@@ -123,11 +123,17 @@ document.addEventListener('DOMContentLoaded', () => {
           var diffX = Math.abs(startX - e.changedTouches.clientX);
           var diffY = Math.abs(startY - e.changedTouches.clientY);
 
-          // Если это чистый тап без скролла — плавно открываем
+          // Если это чистый тап без скролла экрана — запускаем 3D-разворот
           if (diffX < 10 && diffY < 10) {
             e.stopPropagation();
-            if (!card.classList.contains('is-expanded')) {
-              card.classList.add('is-expanded');
+            if (!card.classList.contains('is-flipped')) {
+              card.classList.add('is-flipped');
+              // Задержка 150мс строго по твоей шпаргалке для бесшовного взлета
+              setTimeout(() => {
+                if (card.classList.contains('is-flipped')) {
+                  card.classList.add('is-expanded');
+                }
+              }, 150);
             }
           }
         }
@@ -139,14 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         e.stopPropagation();
         
-        // Включаем фазу плавного монолитного сдувания
-        card.classList.add('is-closing');
+        // Монолитное зеркальное закрытие без рывков: сначала сдуваем fixed-экран
+        card.classList.remove('is-expanded');
         
-        // Даем окну 250мс плавно сжаться, и только потом полностью сбрасываем состояние
+        // Даем окну 200мс плавно вернуться в ячейку сетки, и только потом крутим лицо
         setTimeout(() => {
-          card.classList.remove('is-expanded');
-          card.classList.remove('is-closing');
-        }, 250);
+          card.classList.remove('is-flipped');
+        }, 200);
       }, { passive: false });
     }
   });
