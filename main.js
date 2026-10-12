@@ -1,7 +1,7 @@
 // ==========================================================================
 //   АРХИТЕКТУРНЫЙ СКРИПТ ПЛАТФОРМЫ TENDERPILOT (ЖЕЛЕЗНЫЙ СТАНДАРТ 2026)
 // ==========================================================================
-// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР) С УЧЕТОМ ДИНАМИКИ СТИЛЕЙ
+// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР) С ПОЛНОЙ БЛОКИРОВКОЙ СКРОЛЛА И СЛОЕВ
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -14,11 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.setAttribute('aria-expanded', !isExpanded);
             navLinks.classList.toggle('active');
 
-            // Управляем видимостью шторки на мобильных устройствах
             if (navLinks.classList.contains('active')) {
-                navLinks.style.display = 'flex';
+                // Принудительно открываем шторку и поднимаем её над всеми кнопками
+                navLinks.style.setProperty('display', 'flex', 'important');
+                navLinks.style.setProperty('z-index', '99999', 'important');
+                
+                // Бронированная защита: запрещаем странице скроллиться на заднем плане
+                document.body.style.setProperty('overflow', 'hidden', 'important');
             } else {
+                // Возвращаем исходные стили при закрытии
                 navLinks.style.display = '';
+                navLinks.style.zIndex = '';
+                document.body.style.overflow = '';
             }
 
             if (iconBurger && iconClose) {
