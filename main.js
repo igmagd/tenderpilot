@@ -120,11 +120,15 @@ function initBentoCards() {
                     var diffX = Math.abs(startX - e.changedTouches[0].clientX);
                     var diffY = Math.abs(startY - e.changedTouches[0].clientY);
 
-                    // Золотая середина: 20px на погрешность пальца при тапе
+                    // 20px на погрешность пальца при тапе
                     if (diffX < 20 && diffY < 20) {
                         e.stopPropagation();
+                        
                         if (!card.classList.contains('is-flipped')) {
+                            // 1. Сначала плавно переворачиваем рубашкой вверх
                             card.classList.add('is-flipped');
+                            
+                            // 2. Через 150мс, когда карточка «на ребре», плавно разворачиваем на весь экран
                             setTimeout(() => {
                                 if (card.classList.contains('is-flipped')) {
                                     card.classList.add('is-expanded');
@@ -136,30 +140,23 @@ function initBentoCards() {
             }, { passive: true });
         }
 
-    if (closeBtn) {
-      closeBtn.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Включаем фазу плавного бесшовного сдувания окна
-        card.classList.add('is-closing');
-        
-        // Ровно через 300мс, когда анимация глазами завершена, бесшумно сбрасываем всё
-        setTimeout(() => {
-          card.classList.remove('is-expanded');
-          card.classList.remove('is-flipped');
-          card.classList.remove('is-closing');
-        }, 300);
-      }, { passive: false });
+        if (closeBtn) {
+            // Меняем touchend на стандартный click для стабильности на всех устройствах
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // 1. Сначала плавно сжимаем карточку обратно в её ячейку в сетке
+                card.classList.remove('is-expanded');
+                
+                // 2. Ждем, пока завершится анимация уменьшения (350мс), и только потом крутим её обратно «лицом»
+                setTimeout(() => {
+                    card.classList.remove('is-flipped');
+            }, 350);
+        });
     }
-
-    });
-}
-
-// Первичный запуск обработчиков при загрузке документа
-document.addEventListener('DOMContentLoaded', () => {
-    initBentoCards();
 });
+}
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
