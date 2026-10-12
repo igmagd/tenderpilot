@@ -672,7 +672,7 @@ header .header-container {
     width: 100% !important;
 }
 
-/* Выравнивание заголовка и крестика на одной линии */
+/* Выравнивание заголовка и крестика строго на обратной стороне карточки */
 .bento-card-back-header {
     width: 100% !important;
     display: flex !important;
@@ -680,7 +680,7 @@ header .header-container {
     align-items: center !important;
 }
 
-/* Абсолютно чистый крестик без фона, кругов и областей тапа */
+/* Абсолютно чистый крестик, изолированный внутри bento-card */
 .bento-card-close-btn {
     background: transparent !important;
     border: none !important;
@@ -694,7 +694,7 @@ header .header-container {
     -webkit-tap-highlight-color: transparent !important;
 }
 
-/* Настройки самого SVG крестика */
+/* Тонкие линии SVG крестика закрытия */
 .bento-card-close-btn svg {
     width: 16px !important;
     height: 16px !important;
@@ -702,19 +702,21 @@ header .header-container {
     transition: color 0.15s ease;
 }
 
-/* Мгновенная подсветка самого крестика белым при тапе */
+/* Подсветка крестика белым при тапе на смартфоне */
 .bento-card-close-btn:active svg {
     color: #ffffff !important;
 }
 
-/* Скрытие скроллбаров */
-::-webkit-scrollbar {
+/* Скрытие скроллбаров ТУТ ТОЛЬКО ДЛЯ БЕНТО-КАРТОЧЕК */
+.bento-card-front::-webkit-scrollbar,
+.bento-card-back::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
 }
 
-html, body, .nav-links, .bento-card-back, .bento-card-front {
+.bento-card-front,
+.bento-card-back {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
