@@ -1,7 +1,4 @@
-// ==========================================================================
-//   АРХИТЕКТУРНЫЙ СКРИПТ ПЛАТФОРМЫ TENDERPILOT (ЖЕЛЕЗНЫЙ СТАНДАРТ 2026)
-// ==========================================================================
-// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР) С ПОЛНОЙ БЛОКИРОВКОЙ СКРОЛЛА И СЛОЕВ
+// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (ВАША РОДНАЯ РАБОЧАЯ ВЕРСИЯ)
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -13,20 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', !isExpanded);
             navLinks.classList.toggle('active');
-
-            if (navLinks.classList.contains('active')) {
-                // Принудительно открываем шторку и поднимаем её над всеми кнопками
-                navLinks.style.setProperty('display', 'flex', 'important');
-                navLinks.style.setProperty('z-index', '99999', 'important');
-                
-                // Бронированная защита: запрещаем странице скроллиться на заднем плане
-                document.body.style.setProperty('overflow', 'hidden', 'important');
-            } else {
-                // Возвращаем исходные стили при закрытии
-                navLinks.style.display = '';
-                navLinks.style.zIndex = '';
-                document.body.style.overflow = '';
-            }
 
             if (iconBurger && iconClose) {
                 if (!isExpanded) {
@@ -67,13 +50,16 @@ bentoCards.forEach(card => {
                 const diffY = Math.abs(touchStartY - touchEndY);
                 const diffX = Math.abs(touchStartX - touchEndX);
 
+                // Если палец сдвинулся больше чем на 10px — это обычный скролл страницы сайта
                 if (diffY > 10 || diffX > 10) {
                     return; 
                 }
 
+                // Чистый тап: запускаем элитный 3D-переворот
                 if (!card.classList.contains('is-flipped')) {
                     card.classList.add('is-flipped');
                     
+                    // Ровно в момент прохождения 90 градусов (через 150мс) раскрываем во весь экран
                     setTimeout(() => {
                         if (card.classList.contains('is-flipped')) {
                             card.classList.add('is-expanded');
@@ -84,6 +70,7 @@ bentoCards.forEach(card => {
         }, { passive: true });
     }
 
+    // Закрытие карточки строго по нашему новому крестику
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -96,7 +83,7 @@ bentoCards.forEach(card => {
     }
 });
 
-// 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Поставщик / Заказчик / ТК)
+// 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Поставщик / Заказчик / Транспорт)
 function switchMode(mode, event) {
     const groupSupplier = document.querySelector('.menu-group-supplier');
     const groupCustomer = document.querySelector('.menu-group-customer');
@@ -138,4 +125,3 @@ function switchMode(mode, event) {
 }
 
 window.switchMode = switchMode;
-                        
