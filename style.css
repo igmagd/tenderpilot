@@ -439,10 +439,10 @@ header .header-container {
 }
 
 /* Когда бургер активен — возвращаем видимость и шторка летит вниз */
-.nav-links.open {
-  visibility: visible !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition-delay: 0s !important; /* При открытии стартует мгновенно */
+.nav-links.active {
+    visibility: visible !important;
+    transform: translate3d(0, 0, 0) !important;
+    transition-delay: 0s !important;
 }
 
 /* Чистая верстка новых ссылок меню */
@@ -472,9 +472,10 @@ header .header-container {
 }
 
 /* Очистили интерактивный отклик линий при нажатии с телефона */
-.nav-links .menu-item-link:active {
-  background: transparent !important;
-  border-bottom-color: rgba(48, 54, 61, 0.2) !important;
+.nav-links.active .menu-item-link {
+    opacity: 1 !important;
+    transition: opacity 0.2s ease-out !important;
+    transition-delay: 0.15s !important;
 }
 
 /* Управление видимостью групп ссылок в меню */
