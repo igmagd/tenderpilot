@@ -1,7 +1,7 @@
 // ==========================================================================
 //   АРХИТЕКТУРНЫЙ СКРИПТ ПЛАТФОРМЫ TENDERPILOT (ЖЕЛЕЗНЫЙ СТАНДАРТ 2026)
 // ==========================================================================
-// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР)
+// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР) С УЧЕТОМ ДИНАМИКИ СТИЛЕЙ
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', !isExpanded);
             navLinks.classList.toggle('active');
+
+            // Управляем видимостью шторки на мобильных устройствах
+            if (navLinks.classList.contains('active')) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = '';
+            }
 
             if (iconBurger && iconClose) {
                 if (!isExpanded) {
@@ -38,33 +45,28 @@ bentoCards.forEach(card => {
     let touchStartX = 0;
 
     if (frontSide) {
-        // Ловим точку первого прикосновения к лицу карточки
         frontSide.addEventListener('touchstart', (e) => {
             if (e.touches && e.touches.length > 0) {
-                touchStartY = e.touches[0].clientY;
-                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches.clientY;
+                touchStartX = e.touches.clientX;
             }
         }, { passive: true });
 
-        // Проверяем сдвиг пальца при отпускании
         frontSide.addEventListener('touchend', (e) => {
             if (e.changedTouches && e.changedTouches.length > 0) {
-                const touchEndY = e.changedTouches[0].clientY;
-                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches.clientY;
+                const touchEndX = e.changedTouches.clientX;
                 
                 const diffY = Math.abs(touchStartY - touchEndY);
                 const diffX = Math.abs(touchStartX - touchEndX);
 
-                // Если палец сдвинулся больше чем на 10px — это обычный скролл страницы!
                 if (diffY > 10 || diffX > 10) {
-                    return; // Полностью игнорируем ложное нажатие
+                    return; 
                 }
 
-                // Это чистый тап: запускаем элитный пошаговый переворот
                 if (!card.classList.contains('is-flipped')) {
                     card.classList.add('is-flipped');
                     
-                    // Мягко разворачиваем во весь экран строго на 90 градусах (через 150мс)
                     setTimeout(() => {
                         if (card.classList.contains('is-flipped')) {
                             card.classList.add('is-expanded');
@@ -75,15 +77,11 @@ bentoCards.forEach(card => {
         }, { passive: true });
     }
 
-    // Закрытие карточки строго по нашему новому крестику
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            
-            // Сначала плавно уменьшаем карточку обратно в сетку
             card.classList.remove('is-expanded');
             
-            // Спустя 150мс мягко возвращаем её лицом к пользователю
             setTimeout(() => {
                 card.classList.remove('is-flipped');
             }, 150);
@@ -91,7 +89,7 @@ bentoCards.forEach(card => {
     }
 });
 
-// 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Поставщик / Заказчик / Транспорт)
+// 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Поставщик / Заказчик / ТК)
 function switchMode(mode, event) {
     const groupSupplier = document.querySelector('.menu-group-supplier');
     const groupCustomer = document.querySelector('.menu-group-customer');
@@ -132,5 +130,5 @@ function switchMode(mode, event) {
     }
 }
 
-// Привязываем функцию переключения к глобальному окну
 window.switchMode = switchMode;
+                        
