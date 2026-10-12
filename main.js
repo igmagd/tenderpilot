@@ -1,137 +1,44 @@
 // ==========================================================================
 //   АРХИТЕКТУРНЫЙ СКРИПТ ПЛАТФОРМЫ TENDERPILOT (ЖЕЛЕЗНЫЙ СТАНДАРТ 2026)
 // ==========================================================================
+// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР)
 document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('.menu-toggle');
+    const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const body = document.body;
+    const iconBurger = document.querySelector('.icon-burger');
+    const iconClose = document.querySelector('.icon-close');
 
-    // Массив режимов для циклического перелистывания по стрелочкам и свайпам в меню
-    const modesChain = ['supplier', 'customer', 'transport'];
-
-    // 1. ОЖИВЛЯЕМ БУРГЕР: Открытие и закрытие меню
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            body.classList.toggle('menu-open');
-        });
-    }
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            navLinks.classList.toggle('active');
 
-    // Закрытие меню при клике на любую ссылку внутри шторки
-    const menuLinks = document.querySelectorAll('.menu-item-link');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks) navLinks.classList.remove('open');
-            if (body) body.classList.remove('menu-open');
-        });
-    });
-
-    // 2. УПРАВЛЕНИЕ СТРЕЛОЧКАМИ ВНУТРИ МЕНЮ
-    const btnNext = document.querySelector('.btn-menu-next');
-    const btnPrev = document.querySelector('.btn-menu-prev');
-
-    function getActiveMode() {
-        const groupCustomer = document.querySelector('.menu-group-customer');
-        const groupTransport = document.querySelector('.menu-group-transport');
-        if (groupCustomer && groupCustomer.style.display === 'flex') return 'customer';
-        if (groupTransport && groupTransport.style.display === 'flex') return 'transport';
-        return 'supplier';
-    }
-
-    function shiftMode(direction) {
-        const currentMode = getActiveMode();
-        let currentIndex = modesChain.indexOf(currentMode);
-        
-        if (direction === 'next') {
-            currentIndex = (currentIndex + 1) % modesChain.length;
-        } else if (direction === 'prev') {
-            currentIndex = (currentIndex - 1 + modesChain.length) % modesChain.length;
-        }
-        
-        animateModeSwitch(modesChain[currentIndex]);
-    }
-
-    if (btnNext) btnNext.addEventListener('click', () => shiftMode('next'));
-    if (btnPrev) btnPrev.addEventListener('click', () => shiftMode('prev'));
-
-    // 3. БРОНЕБОЙНЫЕ СВАЙПЫ ПАЛЬЦЕМ ДЛЯ ШТОРКИ МЕНЮ (НА СТАНДАРТЕ TOUCHES)
-    let touchStartX = 0;
-    const swipeThreshold = 50;
-
-    if (navLinks) {
-        navLinks.addEventListener('touchstart', (event) => {
-            if (event.touches && event.touches.length > 0) {
-                touchStartX = event.touches[0].clientX;
-            }
-        }, { passive: true });
-
-        navLinks.addEventListener('touchend', (event) => {
-            // Для touchend берем данные из changedTouches безопасным методом
-            if (event.changedTouches && event.changedTouches.length > 0) {
-                const touchEndX = event.changedTouches[0].clientX;
-                const diffX = touchEndX - touchStartX;
-                
-                if (diffX < -swipeThreshold) {
-                    shiftMode('next'); // Смахнули влево — вперед
-                } else if (diffX > swipeThreshold) {
-                    shiftMode('prev'); // Смахнули вправо — назад
+            if (iconBurger && iconClose) {
+                if (!isExpanded) {
+                    iconBurger.style.display = 'none';
+                    iconClose.style.display = 'block';
+                } else {
+                    iconBurger.style.display = 'block';
+                    iconClose.style.display = 'none';
                 }
             }
-        }, { passive: true });
+        });
     }
+});
 
-    // 4. СИНХРОННАЯ АНИМАЦИЯ ПЕРЕКЛЮЧЕНИЯ МЕНЮ (0.35s)
-    function animateModeSwitch(targetMode) {
-        const activeGroup = document.querySelector(`.menu-group-${getActiveMode()}`);
-        const allItems = activeGroup ? activeGroup.querySelectorAll('.menu-item-link') : [];
-
-        if (allItems.length > 0) {
-            allItems.forEach(item => {
-                item.style.transition = 'opacity 0.2s cubic-bezier(0.25, 1, 0.5, 1)';
-                item.style.opacity = '0';
-            });
-            
-            setTimeout(() => {
-                switchMode(targetMode);
-                fadeInNewLinks(targetMode);
-            }, 150);
-        } else {
-            switchMode(targetMode);
-        }
-    }
-
-    function fadeInNewLinks(targetMode) {
-        const newGroup = document.querySelector(`.menu-group-${targetMode}`);
-        const newItems = newGroup ? newGroup.querySelectorAll('.menu-item-link') : [];
-        
-        if (newItems.length > 0) {
-            newItems.forEach(item => {
-                item.style.opacity = '0';
-                item.style.transition = 'none';
-            });
-            
-            setTimeout(() => {
-                newItems.forEach(item => {
-                    item.style.transition = 'opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1)';
-                    item.style.opacity = '1';
-                });
-            }, 20);
-        }
-    }
-
-    // 5. ОЖИВЛЯЕМ BENTO-КАРТОЧКУ: ГИБРИДНЫЙ 3D-РАЗВОРOT И РОСТ ВО ВЕСЬ ЭКРАН
+// 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРОТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
 const bentoCards = document.querySelectorAll('.bento-card');
 
 bentoCards.forEach(card => {
     const frontSide = card.querySelector('.bento-card-front');
     const closeBtn = card.querySelector('.bento-card-close-btn');
 
-    // Переменные для защиты от ложных срабатываний при скролле
     let touchStartY = 0;
     let touchStartX = 0;
 
     if (frontSide) {
-        // Запоминаем точку, где пользователь коснулся карточки лица
+        // Ловим точку первого прикосновения к лицу карточки
         frontSide.addEventListener('touchstart', (e) => {
             if (e.touches && e.touches.length > 0) {
                 touchStartY = e.touches[0].clientY;
@@ -139,7 +46,7 @@ bentoCards.forEach(card => {
             }
         }, { passive: true });
 
-        // Проверяем сдвиг при отпускании пальца
+        // Проверяем сдвиг пальца при отпускании
         frontSide.addEventListener('touchend', (e) => {
             if (e.changedTouches && e.changedTouches.length > 0) {
                 const touchEndY = e.changedTouches[0].clientY;
@@ -148,16 +55,16 @@ bentoCards.forEach(card => {
                 const diffY = Math.abs(touchStartY - touchEndY);
                 const diffX = Math.abs(touchStartX - touchEndX);
 
-                // Если палец сдвинулся больше чем на 10px по вертикали или горизонтали — это скролл страницы!
+                // Если палец сдвинулся больше чем на 10px — это обычный скролл страницы!
                 if (diffY > 10 || diffX > 10) {
-                    return; // Игнорируем и ничего не открываем
+                    return; // Полностью игнорируем ложное нажатие
                 }
 
-                // Это чистый, намеренный тап — запускаем идеальный пошаговый разворот
+                // Это чистый тап: запускаем элитный пошаговый переворот
                 if (!card.classList.contains('is-flipped')) {
                     card.classList.add('is-flipped');
                     
-                    // Ровно в момент прохождения 90 градусов (середина анимации) раскрываем во весь экран
+                    // Мягко разворачиваем во весь экран строго на 90 градусах (через 150мс)
                     setTimeout(() => {
                         if (card.classList.contains('is-flipped')) {
                             card.classList.add('is-expanded');
@@ -168,23 +75,23 @@ bentoCards.forEach(card => {
         }, { passive: true });
     }
 
-    // Клик строго по нашему новому премиальному крестику закрытия
+    // Закрытие карточки строго по нашему новому крестику
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             
-            // Сначала плавно сжимаем карточку обратно в её ячейку сетки
+            // Сначала плавно уменьшаем карточку обратно в сетку
             card.classList.remove('is-expanded');
             
-            // Даем время на уменьшение и возвращаем лицевую сторону
+            // Спустя 150мс мягко возвращаем её лицом к пользователю
             setTimeout(() => {
                 card.classList.remove('is-flipped');
             }, 150);
         });
     }
-}); // Конец цикла Bento-карточек
+});
 
-// 6. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Синхронизация меню и Bento-сеток)
+// 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Поставщик / Заказчик / Транспорт)
 function switchMode(mode, event) {
     const groupSupplier = document.querySelector('.menu-group-supplier');
     const groupCustomer = document.querySelector('.menu-group-customer');
@@ -225,6 +132,5 @@ function switchMode(mode, event) {
     }
 }
 
-// ПРИВЯЗЫВАЕМ ФУНКЦИЮ К ГЛОБАЛЬНОМУ ОКНУ ДЛЯ РАБОТЫ ONCLICK
+// Привязываем функцию переключения к глобальному окну
 window.switchMode = switchMode;
-                                  
