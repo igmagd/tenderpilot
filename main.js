@@ -144,10 +144,11 @@ const closeBtn = card.querySelector('.bento-card-close-icon');
         }, { passive: true });
     }
 
-     if (closeBtn) {
+    if (closeBtn) {
+      // Тап по крестику закрывает карточку и НЕ трогает свайпы меню
       closeBtn.addEventListener('touchend', (e) => {
         e.preventDefault();
-        e.stopPropagation();
+        e.stopPropagation(); // Изолируем тап, чтобы меню не перехватывало его
         card.classList.remove('is-expanded');
         setTimeout(() => {
           card.classList.remove('is-flipped');
