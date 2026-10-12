@@ -663,7 +663,6 @@ header .header-container {
     align-items: center !important;
 }
 
-/* Абсолютно чистый крестик, изолированный внутри bento-card */
 /* Настройка позиции иконки крестика (Правый верхний угол обратной стороны) */
 .bento-card-close-icon {
     position: absolute !important;
@@ -675,7 +674,8 @@ header .header-container {
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
-    z-index: 999 !important; /* Чтобы крестик всегда был поверх виджетов */
+    pointer-events: auto !important; /* Принудительно разрешаем клики */
+    z-index: 9999 !important; /* Поднимаем в самый верх над всеми слоями */
 }
 
 /* Тонкие линии SVG крестика закрытия (Размер 22px, как у бургера) */
@@ -683,14 +683,14 @@ header .header-container {
     width: 22px !important;
     height: 22px !important;
     color: rgba(240, 246, 252, 0.6) !important;
-    stroke: rgba(240, 246, 252, 0.6) !important;
+    stroke: rgba(240, 246, 252, 0.6) !important; /* Приглушенный цвет бургера */
     stroke-width: 1px !important;
-    transition: color 0.15s ease;
+    transition: stroke 0.15s ease;
 }
 
 /* Подсветка крестика белым при тапе на смартфоне */
 .bento-card-close-icon:active svg {
-    color: #ffffff !important;
+    stroke: #ffffff !important;
 }
 
 /* УЛЬТИМАТИВНОЕ СКРЫТИЕ ВСЕХ ПОЛОС ПРОКРУТКИ (КАРТОЧКИ + МОБИЛЬНОЕ МЕНЮ) */
@@ -708,6 +708,7 @@ header .header-container {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
+
 /* Настройка и позиционирование стрелки (Правый нижний угол лицевой стороны) */
 .bento-card-arrow {
     position: absolute !important;
@@ -721,11 +722,17 @@ header .header-container {
     pointer-events: none !important; /* Тап проходит сквозь стрелку прямо в карту */
 }
 
-/* Ограничиваем размер SVG стрелки и делаем линии тонкими (1px как у бургера) */
+/* Ограничиваем размер SVG стрелки и делаем цвет приглушенным как у бургера */
 .bento-card-arrow svg {
     width: 22px !important;
     height: 22px !important;
     color: rgba(240, 246, 252, 0.6) !important;
-    stroke: rgba(240, 246, 252, 0.6) !important;
+    stroke: rgba(240, 246, 252, 0.6) !important; /* Жестко фиксируем приглушенный цвет */
     stroke-width: 1px !important;
 }
+
+/* Защита от перекрытия: когда карточка перевернута, лицо не должно перехватывать клики */
+.bento-card.is-flipped .bento-card-front {
+    pointer-events: none !important;
+}
+
