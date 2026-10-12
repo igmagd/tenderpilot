@@ -735,38 +735,46 @@ header .header-container {
     stroke-width: 1px !important;
 }
 
-/* Полная изоляция слоев при 3D-перевороте для работы крестика */
-.bento-card.is-flipped .bento-card-front {
-    pointer-events: none !important; /* Лицо больше не перехватывает клики */
-}
-
-.bento-card.is-flipped .bento-card-back {
-    pointer-events: auto !important; /* Рубашка становится полностью кликабельной */
+/* Настройка позиции иконки крестика (Правый верхний угол обратной стороны) */
+.bento-card-close-icon {
+    position: absolute !important;
+    top: 24px !important;
+    right: 24px !important;
+    width: 22px !important;
+    height: 22px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 9999 !important;
 }
 
 /* ==========================================================================
-   ИСПРАВЛЕНИЕ КЛИКАБЕЛЬНОСТИ И ПЛАВНОСТИ BENTO (СТРОГО МОНОЛИТ)
+   ЗОЛОТАЯ СЕРЕДИНА ПЛАВНОСТИ BENTO (МОНОЛИТНАЯ АНИМАЦИЯ APPLE)
    ========================================================================== */
 
-/* 1. Защита сенсора смартфона: возвращаем 100% видимость для тапов */
-.bento-card .bento-card-front,
-.bento-card .bento-card-back {
+/* Убираем конфликты старого 3D-переворота, возвращаем 100% отклик сенсора */
+.bento-card-front, 
+.bento-card-back {
+    transform: none !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
     visibility: visible !important;
 }
 
-/* 2. Задаем общую скорость 3D-движения с мягким замедлением Apple в конце */
-.bento-card-inner,
+/* Задаем премиальную скорость 0.35s с мягким замедлением Apple в конце */
 .bento-card {
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
-}
-
-/* 3. Синхронизируем прозрачность сторон при перевороте */
-.bento-card-front, 
-.bento-card-back {
-    transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
-}
-
-/* 4. Лечим «эффект отрыва»: даем fixed-окну плавно сжаться в ячейку */
-.bento-card.is-expanded {
     transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+/* Фаза закрытия: удерживает фиксированное окно на экране, пока оно плавно сжимается в ноль */
+.bento-card.is-closing {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.2) !important; /* Бесшовно сжимается в центр */
+    opacity: 0 !important;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    z-index: 9999 !important;
 }
