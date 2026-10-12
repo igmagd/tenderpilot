@@ -745,47 +745,28 @@ header .header-container {
 }
 
 /* ==========================================================================
-   ЖЕСТКАЯ ИЗОЛЯЦИЯ КОНТЕНТА СТОРОН (ЗАЩИТА ОТ МИГАНИЯ ТЕКСТА)
+   ИСПРАВЛЕНИЕ КЛИКАБЕЛЬНОСТИ И ПЛАВНОСТИ BENTO (СТРОГО МОНОЛИТ)
    ========================================================================== */
 
-/* В покое намертво прячем изнанку от графического чипа смартфона */
+/* 1. Защита сенсора смартфона: возвращаем 100% видимость для тапов */
+.bento-card .bento-card-front,
 .bento-card .bento-card-back {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transition: opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.2s !important;
-}
-
-/* Когда карточка повернулась — плавно проявляем изнанку и делаем видимой */
-.bento-card.is-flipped .bento-card-back {
-    opacity: 1 !important;
     visibility: visible !important;
 }
 
-/* Когда карточка повернулась — полностью гасим лицо, чтобы его текст не просвечивал */
-.bento-card.is-flipped .bento-card-front {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transition: opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.2s !important;
-}
-
-/* ==========================================================================
-   ИДЕАЛЬНАЯ ПЛАВНОСТЬ BENTO БЕЗ ОТРИВА И ЗАДЕРЖЕК
-   ========================================================================== */
-
-/* Задаем благородную скорость 0.35s с мягким замедлением в конце */
+/* 2. Задаем общую скорость 3D-движения с мягким замедлением Apple в конце */
 .bento-card-inner,
 .bento-card {
     transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* Синхронизируем стороны, чтобы контент лица и рубашки не прыгал отдельно */
+/* 3. Синхронизируем прозрачность сторон при перевороте */
 .bento-card-front, 
 .bento-card-back {
     transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* Защита от резкого исчезновения окна при закрытии */
+/* 4. Лечим «эффект отрыва»: даем fixed-окну плавно сжаться в ячейку */
 .bento-card.is-expanded {
     transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
-
