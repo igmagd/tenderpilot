@@ -6,37 +6,57 @@ const modes = ['supplier', 'customer', 'transport'];
 let currentModeIndex = 0;
 let menuTouchStartX = 0;
 
-// 1. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Привязываем к window, чтобы работали onclick в HTML)
-window.switchMode = function(mode, event) {
-    if (event) event.preventDefault();
-    
-    // Переключаем видимость блоков групп
+// 1. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
+function switchMode(mode) {
     modes.forEach(m => {
+        // Переключаем видимость блоков групп ссылок в меню
         document.querySelectorAll(`.group-${m}`).forEach(el => {
-            el.style.setProperty('display', m === mode ? 'block' : 'none', 'important');
+            el.style.setProperty('display', m === mode ? 'flex' : 'none', 'important');
         });
+        
+        // Переключаем Bento-сетки на странице
+        const gridEl = document.getElementById(`grid-${m}`);
+        if (gridEl) {
+            if (m === mode) {
+                gridEl.classList.add('active');
+                gridEl.style.setProperty('display', 'grid', 'important');
+            } else {
+                gridEl.classList.remove('active');
+                gridEl.style.setProperty('display', 'none', 'important');
+            }
+        }
     });
 
-    // Обновляем статус-текст текущего режима
+    // Обновляем статус-текст текущего режима в меню
     const titles = { supplier: 'Поставщик', customer: 'Заказчик', transport: 'Грузоперевозки' };
-    const statusText = document.querySelector('.mode-status-text');
+    const statusText = document.querySelector('.menu-status-text');
     if (statusText && titles[mode]) {
-        statusText.textContent = `Режим: ${titles[mode]}`;
+        statusText.textContent = titles[mode];
     }
-    
-    // Корректируем индекс для свайпов
+
     currentModeIndex = modes.indexOf(mode);
 
-    // Подсвечиваем активную кнопку режима в меню
+    // Подсвечиваем активную кнопку
     document.querySelectorAll('.mode-btn').forEach(btn => {
-        const onclickAttr = btn.getAttribute('onclick');
-        if (onclickAttr && onclickAttr.includes(mode)) {
+        if (btn.getAttribute('data-mode') === mode) {
             btn.classList.add('active');
         } else {
             btn.classList.remove('active');
         }
     });
-};
+}
+
+function initModeButtons() {
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetMode = btn.getAttribute('data-mode');
+            if (targetMode) {
+                switchMode(targetMode);
+            }
+        });
+    });
+}
 
 // 2. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР)
 function initMobileMenu() {
@@ -111,20 +131,22 @@ function initBentoCards() {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Включаем фазу плавного сжатия
-                card.classList.add('is-closing');
+                // Сразу убираем полноэкранный режим, запуская плавное сжатие в сетку
+                card.classList.remove('is-expanded');
                 setTimeout(() => {
-                    // После завершения анимации полностью очищаем классы
-                    card.classList.remove('is-expanded', 'is-flipped', 'is-closing');
-                }, 350);
+                    // Разворачиваем карточку рубашкой к пользователю после её уменьшения
+                    card.classList.remove('is-flipped');
+                }, 150);
             });
         }
     });
 }
 
-// 5. ГЛОБАЛЬНЫЙ ЗАПУСК ВСЕХ СКРИПТОВ
+// 5. ГЛОБАЛЬНЫЕ ЗАПУСК ВСЕХ СКРИПТОВ
 document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
+    initModeButtons(); // ВОТ ЭТА СТРОКА ЗАПУСТИТ НАШИ КНОПКИ
     initMenuSwipes();
     initBentoCards();
+    switchMode('supplier'); // Включаем режим поставщика на старте
 });
