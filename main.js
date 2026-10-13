@@ -1,8 +1,44 @@
 // =========================================================================
-// ИЗОЛИРОВАННЫЙ И ОБЪЕДИНЕННЫЙ ФАЙЛ MAIN.JS
+// ГЛОБАЛЬНЫЕ ФУНКЦИИ И ИНИЦИАЛИЗАЦИЯ ИНТЕРФЕЙСА TENDERPILOT
 // =========================================================================
 
-// 1. Управление мобильным меню (бургер)
+const modes = ['supplier', 'customer', 'transport'];
+let currentModeIndex = 0;
+let menuTouchStartX = 0;
+
+// 1. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ (Привязываем к window, чтобы работали onclick в HTML)
+window.switchMode = function(mode, event) {
+    if (event) event.preventDefault();
+    
+    // Переключаем видимость блоков групп
+    modes.forEach(m => {
+        document.querySelectorAll(`.group-${m}`).forEach(el => {
+            el.style.setProperty('display', m === mode ? 'block' : 'none', 'important');
+        });
+    });
+
+    // Обновляем статус-текст текущего режима
+    const titles = { supplier: 'Поставщик', customer: 'Заказчик', transport: 'Грузоперевозки' };
+    const statusText = document.querySelector('.mode-status-text');
+    if (statusText && titles[mode]) {
+        statusText.textContent = `Режим: ${titles[mode]}`;
+    }
+    
+    // Корректируем индекс для свайпов
+    currentModeIndex = modes.indexOf(mode);
+
+    // Подсвечиваем активную кнопку режима в меню
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        const onclickAttr = btn.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes(mode)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+};
+
+// 2. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР)
 function initMobileMenu() {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -23,16 +59,13 @@ function initMobileMenu() {
     }
 }
 
-// 2. Свайпы для меню и переключение режимов (табы)
-let menuTouchStartX = 0;
-const modes = ['supplier', 'customer', 'transport'];
-let currentModeIndex = 0;
-
+// 3. СВАЙПЫ ДЛЯ ПЕРЕКЛЮЧЕНИЯ РЕЖИМОВ ПАЛЬЦЕМ
 function initMenuSwipes() {
     const bentoGrid = document.querySelector('.bento-grid');
     if (!bentoGrid) return;
 
     bentoGrid.addEventListener('touchstart', (e) => {
+        // Если открыто модальное окно карточки, свайп сетки не работает
         if (e.target.closest('.bento-card.is-expanded')) return;
         menuTouchStartX = e.touches[0].clientX;
     }, { passive: true });
@@ -41,32 +74,19 @@ function initMenuSwipes() {
         if (e.target.closest('.bento-card.is-expanded')) return;
         const diffX = menuTouchStartX - e.changedTouches[0].clientX;
 
+        // Порог свайпа в 70 пикселей для защиты от случайных сдвигов
         if (Math.abs(diffX) > 70) {
-            if (diffX > 0 && currentModeIndex < modes.length - 1) currentModeIndex++;
-            else if (diffX < 0 && currentModeIndex > 0) currentModeIndex--;
-            switchMode(modes[currentModeIndex]);
+            if (diffX > 0 && currentModeIndex < modes.length - 1) {
+                currentModeIndex++;
+            } else if (diffX < 0 && currentModeIndex > 0) {
+                currentModeIndex--;
+            }
+            window.switchMode(modes[currentModeIndex]);
         }
     }, { passive: true });
 }
 
-function switchMode(mode, event) {
-    if (event) event.preventDefault();
-    ['supplier', 'customer', 'transport'].forEach(m => {
-        document.querySelectorAll(`.group-${m}`).forEach(el => el.style.setProperty('display', m === mode ? 'block' : 'none', 'important'));
-    });
-
-    const titles = { supplier: 'Поставщик', customer: 'Заказчик', transport: 'Грузоперевозки' };
-    const statusText = document.querySelector('.mode-status-text');
-    if (statusText && titles[mode]) statusText.textContent = `Режим: ${titles[mode]}`;
-    currentModeIndex = modes.indexOf(mode);
-
-    document.querySelectorAll('.mode-btn').forEach(btn => {
-        const onclickAttr = btn.getAttribute('onclick');
-        btn.classList.toggle('active', !!(onclickAttr && onclickAttr.includes(mode)));
-    });
-}
-
-// 3. Интерактивный 3D-разворот бенто-карточек
+// 4. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ БЕНТО-КАРТОЧЕК
 function initBentoCards() {
     document.querySelectorAll('.bento-card').forEach(card => {
         const frontSide = card.querySelector('.bento-card-front');
@@ -78,7 +98,9 @@ function initBentoCards() {
                 if (!card.classList.contains('is-flipped')) {
                     card.classList.add('is-flipped');
                     setTimeout(() => {
-                        if (card.classList.contains('is-flipped')) card.classList.add('is-expanded');
+                        if (card.classList.contains('is-flipped')) {
+                            card.classList.add('is-expanded');
+                        }
                     }, 150);
                 }
             });
@@ -88,8 +110,11 @@ function initBentoCards() {
             closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Включаем фазу плавного сжатия
                 card.classList.add('is-closing');
                 setTimeout(() => {
+                    // После завершения анимации полностью очищаем классы
                     card.classList.remove('is-expanded', 'is-flipped', 'is-closing');
                 }, 350);
             });
@@ -97,7 +122,7 @@ function initBentoCards() {
     });
 }
 
-// 5. Глобальный запуск
+// 5. ГЛОБАЛЬНЫЙ ЗАПУСК ВСЕХ СКРИПТОВ
 document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initMenuSwipes();
