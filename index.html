@@ -37,8 +37,8 @@
   </div>
 </div>
 
-  <!-- БЛОК ПОСТАВЩИКА (Активен по умолчанию) -->
-  <div class="menu-group-links menu-group-supplier">
+        <!-- БЛОК ПОСТАВЩИКА (Активен по умолчанию) -->
+        <div class="menu-group-links group-supplier">
     <a href="#grid-supplier-find" class="menu-item-link btn-supplier-find">Поиск тендеров</a>
     <a href="#grid-supplier-analyser" class="menu-item-link btn-supplier-analyser">Анализ документов</a>
     <a href="#grid-supplier-match" class="menu-item-link btn-supplier-match">Подбор поставщиков</a>
@@ -49,8 +49,8 @@
     <a href="#grid-supplier-legal" class="menu-item-link btn-supplier-legal">Тендерный юрист</a>
   </div>
 
-  <!-- БЛОК ЗАКАЗЧИКА (Скрыт по умолчанию) -->
-  <div class="menu-group-links menu-group-customer" style="display: none;">
+        <!-- БЛОК ЗАКАЗЧИКА (Скрыт по умолчанию) -->
+        <div class="menu-group-links group-customer" style="display: none;">
     <a href="#grid-customer-spec" class="menu-item-link btn-customer-spec">Создание ТЗ</a>
     <a href="#grid-customer-nmck" class="menu-item-link btn-customer-nmck">Расчет НМЦК</a>
     <a href="#grid-customer-match" class="menu-item-link btn-customer-match">Поиск исполнителя</a>
@@ -61,8 +61,8 @@
     <a href="#grid-customer-training" class="menu-item-link btn-customer-training">Обучение</a>
   </div>
 
-  <!-- БЛОК ТРАНСПОРТА (Скрыт по умолчанию) -->
-  <div class="menu-group-links menu-group-transport" style="display: none;">
+        <!-- БЛОК ТРАНСПОРТА (Скрыт по умолчанию) -->
+        <div class="menu-group-links group-transport" style="display: none;">
     <a href="#grid-transport-delivery" class="menu-item-link btn-transport-delivery">Расчет доставки</a>
     <a href="#grid-transport-modes" class="menu-item-link btn-transport-modes">Выбор тарифа</a>
     <a href="#grid-transport-discount" class="menu-item-link btn-transport-discount">Скидки от ТК</a>
@@ -78,11 +78,11 @@
                 <circle cx="12" cy="7" r="4" />
             </svg>              
         </a>
-<div class="hero-actions">
-        <div class="toggle-btn supplier-btn active" id="btn-supplier" onclick="switchMode('supplier', event)">Поставщикам</div>
-        <div class="toggle-btn customer-btn" id="btn-customer" onclick="switchMode('customer', event)">Заказчикам</div>
-        <div class="toggle-btn transport-btn" id="btn-transport" onclick="switchMode('transport', event)">Грузоперевозки</div>
-</div>
+        <div class="hero-actions">
+            <div class="mode-btn supplier-btn active" data-mode="supplier">Поставщикам</div>
+            <div class="mode-btn customer-btn" data-mode="customer">Заказчикам</div>
+            <div class="mode-btn transport-btn" data-mode="transport">Грузоперевозки</div>
+        </div>
         </div>
 </header>
 
