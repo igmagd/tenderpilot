@@ -1,12 +1,11 @@
 // =========================================================================
-// ГЛОБАЛЬНЫЕ ФУНКЦИИ И ИНИЦИАЛИЗАЦИЯ ИНТЕРФЕЙСА TENDERPILOT
+// 1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ И ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 // =========================================================================
 
 const modes = ['supplier', 'customer', 'transport'];
 let currentModeIndex = 0;
 let menuTouchStartX = 0;
 
-// 1. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode) {
     modes.forEach(m => {
         // Переключаем видимость блоков групп ссылок в меню
@@ -36,7 +35,7 @@ function switchMode(mode) {
 
     currentModeIndex = modes.indexOf(mode);
 
-    // Подсвечиваем активную кнопку
+    // Подсвечиваем активную кнопку под шапкой
     document.querySelectorAll('.mode-btn').forEach(btn => {
         if (btn.getAttribute('data-mode') === mode) {
             btn.classList.add('active');
@@ -57,56 +56,65 @@ function initModeButtons() {
         });
     });
 }
-
+// =========================================================================
 // 2. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР)
+// =========================================================================
+
 function initMobileMenu() {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const iconBurger = document.querySelector('.icon-burger');
-    const iconClose = document.querySelector('.icon-close');
 
     if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
+        menuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', !isExpanded);
+            
+            // Включаем / выключаем класс СТРОГО по правилам проекта
+            menuToggle.classList.toggle('active');
             navLinks.classList.toggle('active');
+        });
 
-            if (iconBurger && iconClose) {
-                iconBurger.style.display = !isExpanded ? 'none' : 'block';
-                iconClose.style.display = !isExpanded ? 'block' : 'none';
-            }
+        // Закрываем меню при тапе по ссылкам
+        navLinks.querySelectorAll('.menu-item-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
         });
     }
 }
+// =========================================================================
+// 3. СВАЙПЫ И СТРЕЛОЧКИ ДЛЯ ПЕРЕКЛЮЧЕНИЯ РЕЖИМОВ
+// =========================================================================
 
-// 3. СВАЙПЫ ДЛЯ ПЕРЕКЛЮЧЕНИЯ РЕЖИМОВ ПАЛЬЦЕМ
 function initMenuSwipes() {
-    const bentoGrid = document.querySelector('.bento-grid');
+    const bentoGrid = document.querySelector('.bento-grid-container') || document.body;
     if (!bentoGrid) return;
 
     bentoGrid.addEventListener('touchstart', (e) => {
-        // Если открыто модальное окно карточки, свайп сетки не работает
-        if (e.target.closest('.bento-card.is-expanded')) return;
+        if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-front.is-flipped')) return;
         menuTouchStartX = e.touches[0].clientX;
     }, { passive: true });
 
     bentoGrid.addEventListener('touchend', (e) => {
-        if (e.target.closest('.bento-card.is-expanded')) return;
+        if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-front.is-flipped')) return;
         const diffX = menuTouchStartX - e.changedTouches[0].clientX;
 
-        // Порог свайпа в 70 пикселей для защиты от случайных сдвигов
         if (Math.abs(diffX) > 70) {
-            if (diffX > 0 && currentModeIndex < modes.length - 1) {
-                currentModeIndex++;
-            } else if (diffX < 0 && currentModeIndex > 0) {
-                currentModeIndex--;
+            if (diffX > 0) {
+                currentModeIndex = (currentModeIndex + 1) % modes.length;
+            } else {
+                currentModeIndex = (currentModeIndex - 1 + modes.length) % modes.length;
             }
-                 switchMode(modes[currentModeIndex]);
-            }
+            switchMode(modes[currentModeIndex]);
         }
     }, { passive: true });
 
-    // Инициализация стрелочек в шапке мобильного меню
+    // Обработчики кликов по стрелочкам навигации меню
     const prevBtn = document.querySelector('.btn-menu-prev');
     const nextBtn = document.querySelector('.btn-menu-next');
 
@@ -127,7 +135,10 @@ function initMenuSwipes() {
     }
 }
 
-// 4. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ БЕНТО-КАРТОЧЕК
+// =========================================================================
+// 4. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРОТ КАРТОЧЕК И ГЛОБАЛЬНЫЙ ЗАПУСК
+// =========================================================================
+
 function initBentoCards() {
     document.querySelectorAll('.bento-card').forEach(card => {
         const frontSide = card.querySelector('.bento-card-front');
@@ -136,7 +147,7 @@ function initBentoCards() {
         if (frontSide) {
             frontSide.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (!card.classList.contains('is-flipped')) {
+                if (!card.classList.contains('is-expanded')) {
                     card.classList.add('is-flipped');
                     setTimeout(() => {
                         if (card.classList.contains('is-flipped')) {
@@ -152,10 +163,10 @@ function initBentoCards() {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Сразу убираем полноэкранный режим, запуская плавное сжатие в сетку
+                // Сначала запускаем плавное сжатие карточки из полноэкранного режима
                 card.classList.remove('is-expanded');
+                // Ждем 150мс (пока она уменьшается) и возвращаем 3D-поворот на место
                 setTimeout(() => {
-                    // Разворачиваем карточку рубашкой к пользователю после её уменьшения
                     card.classList.remove('is-flipped');
                 }, 150);
             });
@@ -163,11 +174,12 @@ function initBentoCards() {
     });
 }
 
-// 5. ГЛОБАЛЬНЫЕ ЗАПУСК ВСЕХ СКРИПТОВ
+// 5. ГЛОБАЛЬНЫЙ ИНИЦИАТОР ВСЕХ СКРИПТОВ
 document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
-    initModeButtons(); // ВОТ ЭТА СТРОКА ЗАПУСТИТ НАШИ КНОПКИ
+    initModeButtons();
     initMenuSwipes();
     initBentoCards();
-    switchMode('supplier'); // Включаем режим поставщика на старте
+    switchMode('supplier');
 });
+        
