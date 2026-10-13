@@ -790,8 +790,8 @@ header .header-container {
     opacity: 1 !important;
 }
 
-/* ТЕХНОЛОГИЧНАЯ ФАЗА ЗАКРЫТИЯ: Удерживает fixed-окно и плавно сжимает его к центру */
-.bento-card.is-closing {
+/* ТЕХНОЛОГИЧНАЯ ФАЗА ЗАКРЫТИЯ: Удерживает... */
+.bento-card.is-expanded.is-closing {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
