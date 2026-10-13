@@ -163,22 +163,24 @@ header {
     width: 100% !important;
     height: 100vh !important;
     background: linear-gradient(to top, #020617, #0d1117) !important;
-    flex-direction: column !important;
+    
+    /* Принудительно выстраиваем меню вертикально на смартфонах */
     display: flex !important;
-    padding: 110px 24px 40px 24px !important;
+    flex-direction: column !important;
+    
+    padding: 140px 24px 40px 24px !important; /* Увеличили верхний отступ под новую шапку */
     z-index: 1000 !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
-    pointer-events: none !important; /* Меню не кликается, когда скрыто */
+    pointer-events: none !important;
   }
 
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
-    pointer-events: auto !important; /* Меню кликается, когда открыто */
+    pointer-events: auto !important;
   }
-}
 
 /* Мобильная строка статуса */
 .menu-status-bar {
@@ -218,6 +220,8 @@ header {
   text-decoration: none !important;
   border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
 }
+}
+
 /* Базовый bento-каркас */
 .bento-grid {
   display: grid;
