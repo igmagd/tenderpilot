@@ -198,8 +198,9 @@ header {
   transform-style: preserve-3d !important;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
    }
-/* Базовые свойства сторон карточки */
-.bento-card-front, .bento-card-back {
+/* Полный монолитный блок 3D-механики Bento-карточек */
+.bento-card-front, 
+.bento-card-back {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -211,34 +212,42 @@ header {
   border-radius: 12px !important;
   background: linear-gradient(to bottom, #0b1528, #020617) !important;
   padding: 24px !important;
-   }
-/* Разворот рубашки карточки */
+  transition: opacity 0.2s ease !important;
+}
+
+/* Рубашка карты изначально развернута по оси Y и полностью скрыта */
 .bento-card-back {
   transform: rotateY(180deg) !important;
-  opacity: 0;
+  opacity: 0 !important; 
 }
 
+/* ФАЗА 1: При 3D-перевороте проявляем рубашку и гасим лицо */
 .bento-card.is-flipped .bento-card-inner {
   transform: rotateY(180deg) !important;
-     }
-/* GPU-ускорение и магия разворачивания карточки */
-.bento-card {
-  will-change: transform, opacity;
-  z-index: 1;
+}
+.bento-card.is-flipped .bento-card-back {
+  opacity: 1 !important; /* Убирает баг исчезновения! */
+}
+.bento-card.is-flipped .bento-card-front {
+  opacity: 0 !important;
 }
 
-/* Применение динамической матрицы трансформации на весь экран */
+/* ФАЗА 2: Аппаратное GPU-раскрытие контейнера на весь экран */
 .bento-card.is-expanded .bento-card-inner {
   transform: var(--target-transform) rotateY(180deg) !important;
   z-index: 9999 !important;
 }
 
-/* Убираем рамки в развернутом виде для монолитного эффекта */
+/* Фиксация размеров обратной стороны модального окна без прыжков */
 .bento-card.is-expanded .bento-card-back {
   border-radius: 0 !important;
   border: none !important;
-   }
-/* Позиционирование стрелки на лицевой стороне */
+  position: fixed !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Иконки управления внутри карточек */
 .bento-card-arrow {
   position: absolute !important;
   bottom: 24px !important;
@@ -248,7 +257,6 @@ header {
   pointer-events: none !important;
 }
 
-/* Позиционирование крестика на обратной стороне */
 .bento-card-close-icon {
   position: absolute !important;
   top: 24px !important;
