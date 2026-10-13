@@ -101,9 +101,30 @@ function initMenuSwipes() {
             } else if (diffX < 0 && currentModeIndex > 0) {
                 currentModeIndex--;
             }
-            window.switchMode(modes[currentModeIndex]);
+                 switchMode(modes[currentModeIndex]);
+            }
         }
     }, { passive: true });
+
+    // Инициализация стрелочек в шапке мобильного меню
+    const prevBtn = document.querySelector('.btn-menu-prev');
+    const nextBtn = document.querySelector('.btn-menu-next');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentModeIndex = (currentModeIndex - 1 + modes.length) % modes.length;
+            switchMode(modes[currentModeIndex]);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentModeIndex = (currentModeIndex + 1) % modes.length;
+            switchMode(modes[currentModeIndex]);
+        });
+    }
 }
 
 // 4. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ БЕНТО-КАРТОЧЕК
