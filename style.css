@@ -562,8 +562,11 @@ header .header-container {
     height: 220px !important;
     box-sizing: border-box !important;
     position: relative !important;
-    /* transition только для плавного изменения размеров */
-    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), width 0.35s cubic-bezier(0.25, 1, 0.5, 1), height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                width 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                left 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Контейнер на весь экран */
@@ -797,3 +800,15 @@ header .header-container {
     z-index: 9999 !important;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
    }
+
+/* Фикс: удерживаем корректное 3D-положение оборотной стороны в полноэкранном режиме */
+.bento-card.is-expanded.is-flipped .bento-card-inner {
+    transform: rotateY(180deg) !important;
+}
+
+/* Растягиваем контент задней части на всю площадь развернутого экрана */
+.bento-card.is-expanded .bento-card-back {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+}
