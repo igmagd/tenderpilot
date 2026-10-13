@@ -167,10 +167,10 @@ function initBentoCards() {
                 card.classList.add('is-closing');
                 card.classList.remove('is-flipped');
                 
-                // Через 150мс, когда карточка полностью развернулась и уменьшилась, очищаем всё
+                // Через 350мс, когда анимация полностью завершится, очищаем всё
                 setTimeout(() => {
                     card.classList.remove('is-expanded', 'is-closing');
-                }, 150);
+                }, 350);
             });
         }
 
