@@ -141,22 +141,25 @@ function initBentoCards() {
         }
 
         if (closeBtn) {
-            // Меняем touchend на стандартный click для стабильности на всех устройствах
             closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
 
-                // 1. Сначала плавно сжимаем карточку обратно в её ячейку в сетке
-                card.classList.remove('is-expanded');
+                // 1. Сначала плавно сжимаем карточку в точку на экране
+                card.classList.add('is-closing');
                 
-                // 2. Ждем, пока завершится анимация уменьшения (350мс), и только потом крутим её обратно «лицом»
+                // 2. Ждем 350мс, пока завершится визуальная анимация уменьшения
                 setTimeout(() => {
+                    // 3. Только теперь полностью сбрасываем все fullscreen-режимы
+                    card.classList.remove('is-expanded');
                     card.classList.remove('is-flipped');
-            }, 350);
-        });
-    }
-});
+                    card.classList.remove('is-closing');
+                }, 350);
+            });
+        }
+    });
 }
+
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
