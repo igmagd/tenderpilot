@@ -163,11 +163,16 @@ function initBentoCards() {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Ультимативное одновременное удаление классов
-                card.classList.remove('is-expanded', 'is-flipped');
+                // Включаем фазу закрытия для удержания координат и запускаем обратный разворот
+                card.classList.add('is-closing');
+                card.classList.remove('is-flipped');
+                
+                // Через 150мс, когда карточка полностью развернулась и уменьшилась, очищаем всё
+                setTimeout(() => {
+                    card.classList.remove('is-expanded', 'is-closing');
+                }, 150);
             });
         }
-}
 
 // 5. ГЛОБАЛЬНЫЙ ИНИЦИАТОР ВСЕХ СКРИПТОВ
 document.addEventListener('DOMContentLoaded', () => {
