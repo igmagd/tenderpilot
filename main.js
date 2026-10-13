@@ -120,15 +120,11 @@ function initBentoCards() {
                     var diffX = Math.abs(startX - e.changedTouches[0].clientX);
                     var diffY = Math.abs(startY - e.changedTouches[0].clientY);
 
-                    // 20px на погрешность пальца при тапе
                     if (diffX < 20 && diffY < 20) {
                         e.stopPropagation();
                         
                         if (!card.classList.contains('is-flipped')) {
-                            // 1. Сначала плавно переворачиваем рубашкой вверх
                             card.classList.add('is-flipped');
-                            
-                            // 2. Через 150мс, когда карточка «на ребре», плавно разворачиваем на весь экран
                             setTimeout(() => {
                                 if (card.classList.contains('is-flipped')) {
                                     card.classList.add('is-expanded');
@@ -145,12 +141,12 @@ function initBentoCards() {
                 e.preventDefault();
                 e.stopPropagation();
 
-                // 1. Сначала плавно сжимаем карточку в точку на экране
+                // 1. Включаем фазу закрытия (карточка плавно уменьшается)
                 card.classList.add('is-closing');
                 
-                // 2. Ждем 350мс, пока завершится визуальная анимация уменьшения
+                // 2. Ждем 350мс, пока завершится анимация сжатия в CSS
                 setTimeout(() => {
-                    // 3. Только теперь полностью сбрасываем все fullscreen-режимы
+                    // 3. Полностью убираем все fullscreen-классы, возвращая карту в сетку
                     card.classList.remove('is-expanded');
                     card.classList.remove('is-flipped');
                     card.classList.remove('is-closing');
@@ -159,7 +155,6 @@ function initBentoCards() {
         }
     });
 }
-
 
 // 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
 function switchMode(mode, event) {
