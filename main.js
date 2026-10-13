@@ -108,32 +108,22 @@ function initBentoCards() {
         var startY = 0;
 
         if (frontSide) {
-            frontSide.addEventListener('touchstart', (e) => {
-                if (e.touches.length > 0) {
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                }
-            }, { passive: true });
-
-            frontSide.addEventListener('touchend', (e) => {
-                if (e.changedTouches.length > 0) {
-                    var diffX = Math.abs(startX - e.changedTouches[0].clientX);
-                    var diffY = Math.abs(startY - e.changedTouches[0].clientY);
-
-                    if (diffX < 20 && diffY < 20) {
-                        e.stopPropagation();
-                        
-                        if (!card.classList.contains('is-flipped')) {
-                            card.classList.add('is-flipped');
-                            setTimeout(() => {
-                                if (card.classList.contains('is-flipped')) {
-                                    card.classList.add('is-expanded');
-                                }
-                            }, 150);
+            // Переводим открытие на обычный click — он стабильно работает и на ПК, и на смартфонах
+            frontSide.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                if (!card.classList.contains('is-flipped')) {
+                    // 1. Плавно переворачиваем карточку
+                    card.classList.add('is-flipped');
+                    
+                    // 2. Через 150мс разворачиваем на весь экран
+                    setTimeout(() => {
+                        if (card.classList.contains('is-flipped')) {
+                            card.classList.add('is-expanded');
                         }
-                    }
+                    }, 150);
                 }
-            }, { passive: true });
+            });
         }
 
         if (closeBtn) {
