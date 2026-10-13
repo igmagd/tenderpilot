@@ -518,11 +518,7 @@ header .header-container {
     height: 220px !important;
     box-sizing: border-box !important;
     position: relative !important;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
-                width 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
-                height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                left 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 /* Контейнер на весь экран */
@@ -722,11 +718,6 @@ header .header-container {
 /* Настройка плавности самого 3D-кувырка внутренней обертки */
 .bento-card-inner {
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Плавный переход для самой fixed-карточки при раскрытии и сжатии */
-.bento-card {
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Синхронизируем мягкое нарастание и затухание прозрачности сторон */
