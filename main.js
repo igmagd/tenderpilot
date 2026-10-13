@@ -141,8 +141,8 @@ function initBentoCards() {
                     card.classList.remove('is-flipped');
                     card.classList.remove('is-closing');
                 }, 350);
-            });
-        }
+    
+            }
     });
 }
 
