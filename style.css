@@ -756,8 +756,8 @@ header .header-container {
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    z-index: -1 !important; /* Уводит слой на самый задний план */
+    z-index: -1000 !important; /* Жестко уводим под все элементы */
     opacity: 0 !important;
-    pointer-events: none !important; /* Кнопки будут кликаться насквозь */
+    pointer-events: none !important; /* Пропускает клики насквозь */
     transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
