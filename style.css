@@ -428,6 +428,7 @@ header .header-container {
     visibility: hidden !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+       overflow-y: auto !important; 
 }
 
 .nav-links.active {
@@ -789,17 +790,6 @@ header .header-container {
     pointer-events: auto !important;
     opacity: 1 !important;
 }
-
-/* ТЕХНОЛОГИЧНАЯ ФАЗА ЗАКРЫТИЯ: Удерживает... */
-.bento-card.is-expanded.is-closing {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(0.01) !important;
-    opacity: 0 !important;
-    z-index: 9999 !important;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
-   }
 
 /* Фикс: удерживаем корректное 3D-положение оборотной стороны в полноэкранном режиме */
 .bento-card.is-expanded.is-flipped .bento-card-inner {
