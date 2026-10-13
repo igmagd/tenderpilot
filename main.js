@@ -1,5 +1,9 @@
-// 1. УПРАВЛЕНИЕ МОБИЛЬНЫМ МЕНЮ (БУРГЕР)
-document.addEventListener('DOMContentLoaded', () => {
+// =========================================================================
+// ИЗОЛИРОВАННЫЙ И ОБЪЕДИНЕННЫЙ ФАЙЛ MAIN.JS
+// =========================================================================
+
+// 1. Управление мобильным меню (бургер)
+function initMobileMenu() {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const iconBurger = document.querySelector('.icon-burger');
@@ -12,115 +16,69 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('active');
 
             if (iconBurger && iconClose) {
-                if (!isExpanded) {
-                    iconBurger.style.display = 'none';
-                    iconClose.style.display = 'block';
-                } else {
-                    iconBurger.style.display = 'block';
-                    iconClose.style.display = 'none';
-                }
+                iconBurger.style.display = !isExpanded ? 'none' : 'block';
+                iconClose.style.display = !isExpanded ? 'block' : 'none';
             }
         });
     }
+}
 
-    // СВАЙПЫ ДЛЯ ТРЕХ МЕНЮ В ОДНОМ (ИЗОЛИРОВАННЫЕ ДЛЯ НАВИГАЦИИ)
-    let menuTouchStartX = 0;
-    const modes = ['supplier', 'customer', 'transport'];
+// 2. Свайпы для меню и переключение режимов (табы)
+let menuTouchStartX = 0;
+const modes = ['supplier', 'customer', 'transport'];
+let currentModeIndex = 0;
 
-    if (navLinks) {
-        navLinks.addEventListener('touchstart', (e) => {
-            if (e.touches && e.touches.length > 0) {
-                menuTouchStartX = e.touches[0].clientX;
-            }
-        }, { passive: true });
+function initMenuSwipes() {
+    const bentoGrid = document.querySelector('.bento-grid');
+    if (!bentoGrid) return;
 
-        navLinks.addEventListener('touchend', (e) => {
-            if (e.changedTouches && e.changedTouches.length > 0) {
-                const menuTouchEndX = e.changedTouches[0].clientX;
-                const menuDiffX = menuTouchStartX - menuTouchEndX;
+    bentoGrid.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.bento-card.is-expanded')) return;
+        menuTouchStartX = e.touches[0].clientX;
+    }, { passive: true });
 
-                if (Math.abs(menuDiffX) > 50) {
-                    const activeBtn = document.querySelector('.toggle-btn.active');
-                    if (!activeBtn) return;
-                    
-                    let currentMode = 'supplier';
-                    if (activeBtn.classList.contains('customer-btn')) currentMode = 'customer';
-                    if (activeBtn.classList.contains('transport-btn')) currentMode = 'transport';
-                    
-                    let currentIndex = modes.indexOf(currentMode);
+    bentoGrid.addEventListener('touchend', (e) => {
+        if (e.target.closest('.bento-card.is-expanded')) return;
+        const diffX = menuTouchStartX - e.changedTouches[0].clientX;
 
-                    if (menuDiffX > 0) {
-                        if (currentIndex < modes.length - 1) {
-                            switchMode(modes[currentIndex + 1]);
-                        }
-                    } else {
-                        if (currentIndex > 0) {
-                            switchMode(modes[currentIndex - 1]);
-                        }
-                    }
-                }
-            }
-        }, { passive: true });
-    }
-});
+        if (Math.abs(diffX) > 70) {
+            if (diffX > 0 && currentModeIndex < modes.length - 1) currentModeIndex++;
+            else if (diffX < 0 && currentModeIndex > 0) currentModeIndex--;
+            switchMode(modes[currentModeIndex]);
+        }
+    }, { passive: true });
+}
 
-// КЛИК ПО СТРЕЛОЧКАМ ВНУТРИ МЕНЮ
-document.addEventListener('DOMContentLoaded', () => {
-    const btnPrev = document.querySelector('.btn-menu-prev');
-    const btnNext = document.querySelector('.btn-menu-next');
-    const modes = ['supplier', 'customer', 'transport'];
+function switchMode(mode, event) {
+    if (event) event.preventDefault();
+    ['supplier', 'customer', 'transport'].forEach(m => {
+        document.querySelectorAll(`.group-${m}`).forEach(el => el.style.setProperty('display', m === mode ? 'block' : 'none', 'important'));
+    });
 
-    function getNextMode(direction) {
-        const activeBtn = document.querySelector('.toggle-btn.active');
-        if (!activeBtn) return 'supplier';
-        
-        let currentMode = 'supplier';
-        if (activeBtn.classList.contains('customer-btn')) currentMode = 'customer';
-        if (activeBtn.classList.contains('transport-btn')) currentMode = 'transport';
-        
-        let index = modes.indexOf(currentMode);
-        if (direction === 'next' && index < modes.length - 1) return modes[index + 1];
-        if (direction === 'prev' && index > 0) return modes[index - 1];
-        return null;
-    }
+    const titles = { supplier: 'Поставщик', customer: 'Заказчик', transport: 'Грузоперевозки' };
+    const statusText = document.querySelector('.mode-status-text');
+    if (statusText && titles[mode]) statusText.textContent = `Режим: ${titles[mode]}`;
+    currentModeIndex = modes.indexOf(mode);
 
-    if (btnPrev) {
-        btnPrev.addEventListener('click', () => {
-            const nextMode = getNextMode('prev');
-            if (nextMode) switchMode(nextMode);
-        });
-    }
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        const onclickAttr = btn.getAttribute('onclick');
+        btn.classList.toggle('active', !!(onclickAttr && onclickAttr.includes(mode)));
+    });
+}
 
-    if (btnNext) {
-        btnNext.addEventListener('click', () => {
-            const nextMode = getNextMode('next');
-            if (nextMode) switchMode(nextMode);
-        });
-    }
-});
-
-// 2. ИНТЕРАКТИВНЫЙ 3D-РАЗВОРOТ КАРТОЧЕК С ЗАЩИТОЙ ОТ СКРОЛЛА
+// 3. Интерактивный 3D-разворот бенто-карточек
 function initBentoCards() {
     document.querySelectorAll('.bento-card').forEach(card => {
-        var frontSide = card.querySelector('.bento-card-front');
-        var closeBtn = card.querySelector('.bento-card-close-icon');
-        var startX = 0;
-        var startY = 0;
+        const frontSide = card.querySelector('.bento-card-front');
+        const closeBtn = card.querySelector('.bento-card-close-icon');
 
         if (frontSide) {
-            // Переводим открытие на обычный click — он стабильно работает и на ПК, и на смартфонах
             frontSide.addEventListener('click', (e) => {
                 e.stopPropagation();
-                
                 if (!card.classList.contains('is-flipped')) {
-                    // 1. Плавно переворачиваем карточку
                     card.classList.add('is-flipped');
-                    
-                    // 2. Через 150мс разворачиваем на весь экран
                     setTimeout(() => {
-                        if (card.classList.contains('is-flipped')) {
-                            card.classList.add('is-expanded');
-                        }
+                        if (card.classList.contains('is-flipped')) card.classList.add('is-expanded');
                     }, 150);
                 }
             });
@@ -130,63 +88,18 @@ function initBentoCards() {
             closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-
-                // 1. Включаем фазу закрытия (карточка плавно уменьшается)
                 card.classList.add('is-closing');
-                
-                // 2. Ждем 350мс, пока завершится анимация сжатия в CSS
                 setTimeout(() => {
-                    // 3. Полностью убираем все fullscreen-классы, возвращая карту в сетку
-                    card.classList.remove('is-expanded');
-                    card.classList.remove('is-flipped');
-                    card.classList.remove('is-closing');
+                    card.classList.remove('is-expanded', 'is-flipped', 'is-closing');
                 }, 350);
-    
-            }
+            });
+        }
     });
 }
 
-// 3. ДИНАМИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
-function switchMode(mode, event) {
-    const groupSupplier = document.querySelector('.menu-group-links.menu-group-supplier');
-    const groupCustomer = document.querySelector('.menu-group-links.menu-group-customer');
-    const groupTransport = document.querySelector('.menu-group-links.menu-group-transport');
-    const statusText = document.querySelector('.menu-status-text');
-
-    if (groupSupplier) groupSupplier.style.setProperty('display', 'none', 'important');
-    if (groupCustomer) groupCustomer.style.setProperty('display', 'none', 'important');
-    if (groupTransport) groupTransport.style.setProperty('display', 'none', 'important');
-
-    if (mode === 'supplier' && groupSupplier) {
-        groupSupplier.style.setProperty('display', 'flex', 'important');
-        if (statusText) statusText.textContent = 'Поставщик';
-    } else if (mode === 'customer' && groupCustomer) {
-        groupCustomer.style.setProperty('display', 'flex', 'important');
-        if (statusText) statusText.textContent = 'Заказчик';
-    } else if (mode === 'transport' && groupTransport) {
-        groupTransport.style.setProperty('display', 'flex', 'important');
-        if (statusText) statusText.textContent = 'Транспорт';
-    }
-
-    const buttons = document.querySelectorAll('.toggle-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-    } else {
-        const activeBtn = document.querySelector('.' + mode + '-btn');
-        if (activeBtn) activeBtn.classList.add('active');
-    }
-
-    const grids = document.querySelectorAll('.bento-grid');
-    grids.forEach(grid => grid.classList.remove('active'));
-
-    const targetGrid = document.getElementById(`grid-${mode}`);
-    if (targetGrid) targetGrid.classList.add('active');
-
-    // Намертво привязываем тапы к карточкам новой Bento-сетки при смене вкладки
+// 5. Глобальный запуск
+document.addEventListener('DOMContentLoaded', () => {
+    initMobileMenu();
+    initMenuSwipes();
     initBentoCards();
-}
-
-// Глобальный экспорт функции для внешних вызовов (из кликов и стрелок шапки)
-window.switchMode = switchMode;
+});
