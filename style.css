@@ -81,7 +81,7 @@ header {
   border-color: #ffffff;
   font-weight: 600;
 }
-/* Базовый выезжающий слой мобильного меню */
+/* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
   .nav-links {
     position: fixed !important;
@@ -95,19 +95,17 @@ header {
     z-index: 1000 !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
-  }
-     }
-/* Включение скролла для мобильного меню */
-@media (max-width: 768px) {
-  .nav-links {
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    pointer-events: none !important; /* Меню не кликается, когда скрыто */
   }
-  
+
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
+    pointer-events: auto !important; /* Меню кликается, когда открыто */
   }
 }
+
 /* Мобильная строка статуса */
 .menu-status-bar {
   width: 100% !important;
