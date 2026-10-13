@@ -163,12 +163,14 @@ function initBentoCards() {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Сначала запускаем плавное сжатие карточки из полноэкранного режима
+            // 1. Сначала запускаем обратный 3D-разворот карточки к пользователю лицом
+            card.classList.remove('is-flipped');
+            
+            // 2. Ждем 150мс, пока она докрутится, и только тогда плавно сжимаем её в сетку
+            setTimeout(() => {
                 card.classList.remove('is-expanded');
-                // Ждем 150мс (пока она уменьшается) и возвращаем 3D-поворот на место
-                setTimeout(() => {
-                    card.classList.remove('is-flipped');
-                }, 150);
+            }, 150);
+
             });
         }
     });
