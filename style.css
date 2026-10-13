@@ -135,6 +135,7 @@ header {
     height: 100vh !important;
     background: linear-gradient(to top, #020617, #0d1117) !important;
     flex-direction: column !important;
+    display: flex !important;
     padding: 110px 24px 40px 24px !important;
     z-index: 1000 !important;
     transform: translate3d(0, -100%, 0) !important;
