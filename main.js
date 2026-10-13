@@ -169,7 +169,7 @@ function initBentoCards() {
                 
                 // Через 350мс, когда анимация полностью завершится, очищаем всё
                 setTimeout(() => {
-                    card.classList.remove('is-expanded', 'is-closing');
+               card.classList.remove('is-expanded', 'is-closing');
                 }, 350);
             });
         }
