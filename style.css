@@ -86,7 +86,10 @@ header {
 
 .menu-toggle { order: 1 !important; }
 .lk-btn { order: 2 !important; }
+/* По умолчанию крестик закрытия внутри бургера всегда скрыт */
+.menu-toggle .icon-close { display: none !important; }
 .menu-toggle .icon-burger { display: block !important; }
+
 
 /* Второй ярус шапки: Переключатели режимов */
 .hero-actions {
