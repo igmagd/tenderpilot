@@ -60,7 +60,6 @@ function switch_app_mode(target_mode) {
                 navLinksContainer.classList.remove('active');
                 document.body.style.overflow = '';
             });
-        });
     }
 }
 
