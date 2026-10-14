@@ -156,7 +156,7 @@ header {
 
 /* Базовый выезжающий слой мобильного меню */
 @media (max-width: 768px) {
-  /* 1. Двухэтажная шапка — жестко фиксируем высоту */
+  /* 1. Двухэтажная шапка — жестко фиксируем геометрию */
   header {
     height: 120px !important;
     display: flex !important;
@@ -164,7 +164,7 @@ header {
     justify-content: flex-start !important;
   }
 
-  /* 2. Первый ярус шапки — поднимаем z-index выше выезжающей шторки */
+  /* 2. Первый ярус: бургер и лого слева, ЛК в правом углу */
   .header-container {
     height: 65px !important;
     display: flex !important;
@@ -172,10 +172,28 @@ header {
     align-items: center !important;
     gap: 16px !important;
     position: relative !important;
-    z-index: 100005 !important; /* Пробивает шторку, оставляя бургер и лого видимыми */
+    z-index: 100005 !important; /* Пробивает шторку меню */
+    width: 100% !important;
   }
 
-  /* 3. Шторка меню — опускаем padding под верхний ярус и выравниваем в столбцы */
+  /* Отменяем десктопное абсолютное центрирование логотипа */
+  .logo {
+    position: static !important;
+    transform: none !important;
+  }
+
+  /* Кнопка Личного Кабинета: скрывается при открытой шторке */
+  .lk-btn {
+    margin-left: auto !important; /* Намертво прижимает ЛК в правый угол */
+    z-index: 100006 !important;
+    transition: opacity 0.2s ease !important;
+  }
+  #menu-toggle.active ~ .lk-btn {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* 3. Шторка меню: разрешаем сквозные свайпы пальцем */
   .nav-links {
     position: fixed !important;
     top: 0 !important;
@@ -185,31 +203,35 @@ header {
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
     flex-direction: column !important;
-    padding: 85px 24px 40px 24px !important; /* Учли высоту первого яруса */
+    padding: 85px 24px 40px 24px !important; /* Отступ под первый ярус шапки */
     z-index: 99999 !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
-    pointer-events: none !important;
+    pointer-events: none !important; /* Пропускает свайпы к подложке body */
   }
 
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
+  }
+
+  /* Разрешаем клики по элементам статус-бара шторки */
+  .menu-status-bar {
     pointer-events: auto !important;
   }
 
-  /* 4. Разделение ссылок — гасим неактивные группы, которые принудительно включает JS */
+  /* 4. Разделение ссылок — гасим неактивные группы */
   .nav-links .menu-group-links {
-    display: none !important; /* Прячем все три группы по умолчанию */
+    display: none !important;
     flex-direction: column !important;
     width: 100% !important;
   }
 
-  /* Магия фильтрации: показываем только ту группу, которая соответствует активной кнопке в шапке */
+  /* Магия фильтрации: включаем вертикально только один нужный мир */
   header:has(.supplier-btn.active) .nav-links .group-supplier,
   header:has(.customer-btn.active) .nav-links .group-customer,
   header:has(.transport-btn.active) .nav-links .group-transport {
-    display: flex !important; /* Включаем вертикально только один нужный мир */
+    display: flex !important;
   }
 
   /* 5. Исправление иконок бургера — превращение в белый крестик */
@@ -218,7 +240,8 @@ header {
   }
   #menu-toggle.active .icon-close {
     display: block !important;
-    stroke: #ffffff !important; /* Белый контрастный крестик закрытия */
+    stroke: #ffffff !important; /* Контрастный белый крестик */
+    fill: none !important;
   }
 
 /* * Мобильная строка статуса внутри меню */
