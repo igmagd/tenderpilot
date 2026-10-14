@@ -221,46 +221,48 @@ header {
     stroke: #ffffff !important; /* Белый контрастный крестик закрытия */
   }
 
-  /* Мобильная строка статуса внутри меню */
-  .menu-status-bar {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-    margin-bottom: 8px !important;
-    padding-bottom: 12px !important;
-  }
+/* * Мобильная строка статуса внутри меню */
+.menu-status-bar {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+  margin-bottom: 8px !important;
+  padding-bottom: 12px !important;
+}
 
-  .menu-status-text {
-    color: #58a6ff !important;
-    font-weight: 500 !important;
-    font-size: 19px !important;
-  }
+.menu-status-text {
+  color: #58a6ff !important;
+  font-weight: 500 !important;
+  font-size: 18px !important; /* Утвержденный размер 18px */
+}
 
-  .menu-status-arrows {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
+.menu-status-arrows {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
 
-  .menu-status-arrows .menu-arrow-icon {
-    width: 20px !important;
-    height: 20px !important;
-    color: #768390 !important;
-    cursor: pointer !important;
-  }
+.menu-status-arrows .menu-arrow-icon {
+  width: 20px !important;
+  height: 20px !important;
+  color: #768390 !important;
+  cursor: pointer !important;
+}
 
-  /* Стили самих ссылок */
-  .nav-links .menu-item-link {
-    display: block !important;
-    width: 100% !important;
-    padding: 12px 0 !important;
-    font-size: 18px !important;
-    color: #c9d1d9 !important;
-    text-decoration: none !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  }
+/* Стили самих ссылок */
+.nav-links .menu-item-link {
+  display: block !important;
+  width: 100% !important;
+  padding: 12px 0 !important;
+  font-size: 16px !important; /* Утвержденный размер 16px */
+  color: #c9d1d9 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+  pointer-events: auto !important;
+}
+
 
 /* Базовый bento-каркас */
 .bento-grid {
