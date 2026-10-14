@@ -218,9 +218,9 @@ header {
   }
 
   .menu-status-text {
-    color: #00f2fe !important; /* Фирменный неон для активного режима */
+    color: #388bfd !important; /* Фирменный синий цвет режима по вашему ТЗ */
     font-weight: 600 !important;
-    font-size: 20px !important;
+    font-size: 20px !important; /* Шрифт 20px по ТЗ */
   }
 
   .menu-status-arrows {
@@ -229,11 +229,11 @@ header {
     gap: 16px !important;
   }
 
-  /* Обеспечиваем гарантированный клик по стрелочкам на тач-экранах */
+  /* Приглушенные белые стрелочки переключения */
   .menu-status-arrows .menu-arrow-icon {
     width: 24px !important;
     height: 24px !important;
-    color: #58a6ff !important;
+    color: rgba(255, 255, 255, 0.5) !important; /* Приглушенный белый цвет */
     cursor: pointer !important;
     pointer-events: auto !important;
   }
@@ -248,55 +248,7 @@ header {
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.1) !important;
   }
-} /* <--- Финальная скобка закрывает медиа-запрос @media (max-width: 768px) */
-
-
-  .nav-links .menu-item-link {
-    display: block !important;
-    width: 100% !important;
-    padding: 16px 0 !important; /* Увеличенные отступы для тач-интерфейсов */
-    font-size: 18px !important;
-    color: #c9d1d9 !important;
-    text-decoration: none !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.1) !important;
-  }
-} /* Конец медиа-запроса */
-
-  .menu-status-arrows .menu-arrow-icon {
-    width: 20px !important;
-    height: 20px !important;
-    color: #768390 !important;
-    cursor: pointer !important;
-  }
-
-  .nav-links .menu-item-link {
-    display: block !important;
-    width: 100% !important;
-    padding: 12px 0 !important;
-    font-size: 18px !important;
-    color: #c9d1d9 !important;
-    text-decoration: none !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  }
-} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
-
-  .menu-status-arrows .menu-arrow-icon {
-    width: 20px !important;
-    height: 20px !important;
-    color: #768390 !important;
-    cursor: pointer !important;
-  }
-
-  .nav-links .menu-item-link {
-    display: block !important;
-    width: 100% !important;
-    padding: 12px 0 !important;
-    font-size: 18px !important;
-    color: #c9d1d9 !important;
-    text-decoration: none !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  }
-} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
+}
 
 /* Базовый bento-каркас */
 .bento-grid {
