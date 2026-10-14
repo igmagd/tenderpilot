@@ -302,10 +302,9 @@ header {
   opacity: 0 !important;
 }
 
-/* ФАЗА 2: Аппаратное GPU-раскрытие контейнера на весь экран */
 .bento-card.is-expanded .bento-card-inner {
   transform: var(--target-transform) rotateY(180deg) !important;
-  z-index: 9999 !important;
+  z-index: 14000000 !important;
 }
 
 /* Фиксация размеров обратной стороны модального окна на максимальный слой */
@@ -317,8 +316,8 @@ header {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: 1000000 !important; /* Пробивает двухэтажную шапку */
-  padding-top: 140px !important; /* Сдвигаем внутренний текст виджетов ниже шапки */
+  z-index: 15000000 !important; /* Гарантированно перекрывает двухэтажный header */
+  padding-top: 140px !important; 
 }
 
 /* Иконки управления внутри карточек */
