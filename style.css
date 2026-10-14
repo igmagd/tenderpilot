@@ -154,46 +154,9 @@ header {
   margin-bottom: 20px !important;
 }
 
-/* Базовый выезжающий слой мобильного меню */
+/* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
-  /* 1. Двухэтажная шапка — жестко фиксируем геометрию */
-  header {
-    height: 120px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-  }
-
-  /* 2. Первый ярус: бургер и лого слева, ЛК в правом углу */
-  .header-container {
-    height: 65px !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 16px !important;
-    position: relative !important;
-    z-index: 100005 !important; /* Пробивает шторку меню */
-    width: 100% !important;
-  }
-
-  /* Отменяем десктопное абсолютное центрирование логотипа */
-  .logo {
-    position: static !important;
-    transform: none !important;
-  }
-
-  /* Кнопка Личного Кабинета: скрывается при открытой шторке */
-  .lk-btn {
-    margin-left: auto !important; /* Намертво прижимает ЛК в правый угол */
-    z-index: 100006 !important;
-    transition: opacity 0.2s ease !important;
-  }
-  #menu-toggle.active ~ .lk-btn {
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-
-  /* 3. Шторка меню: разрешаем сквозные свайпы пальцем */
+  /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
   .nav-links {
     position: fixed !important;
     top: 0 !important;
@@ -202,89 +165,62 @@ header {
     height: 100vh !important;
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
-    flex-direction: column !important;
-    padding: 85px 24px 40px 24px !important; /* Отступ под первый ярус шапки */
-    z-index: 99999 !important;
+    flex-direction: column !important; /* Принудительный вертикальный список */
+    padding: 150px 24px 40px 24px !important; /* Отступ с учетом двухэтажной шапки */
+    z-index: 99999 !important; /* Поднимаем выше шапки при открытии */
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
-    pointer-events: none !important; /* Пропускает свайпы к подложке body */
+    -webkit-overflow-scrolling: touch !important;
+    pointer-events: none !important;
   }
 
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
-  }
-
-  /* Разрешаем клики по элементам статус-бара шторки */
-  .menu-status-bar {
     pointer-events: auto !important;
   }
 
-  /* 4. Разделение ссылок — гасим неактивные группы */
-  .nav-links .menu-group-links {
-    display: none !important;
-    flex-direction: column !important;
+  /* Мобильная строка статуса */
+  .menu-status-bar {
     width: 100% !important;
-  }
-
-  /* Магия фильтрации: включаем вертикально только один нужный мир */
-  header:has(.supplier-btn.active) .nav-links .group-supplier,
-  header:has(.customer-btn.active) .nav-links .group-customer,
-  header:has(.transport-btn.active) .nav-links .group-transport {
     display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 12px !important;
   }
 
-  /* 5. Исправление иконок бургера — превращение в белый крестик */
-  #menu-toggle.active .icon-burger {
-    display: none !important;
+  .menu-status-text {
+    color: #58a6ff !important;
+    font-weight: 500 !important;
+    font-size: 19px !important;
   }
-  #menu-toggle.active .icon-close {
+
+  .menu-status-arrows {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .menu-status-arrows .menu-arrow-icon {
+    width: 20px !important;
+    height: 20px !important;
+    color: #768390 !important;
+    cursor: pointer !important;
+  }
+
+  .nav-links .menu-item-link {
     display: block !important;
-    stroke: #ffffff !important; /* Контрастный белый крестик */
-    fill: none !important;
+    width: 100% !important;
+    padding: 12px 0 !important;
+    font-size: 18px !important;
+    color: #c9d1d9 !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-
-/* * Мобильная строка статуса внутри меню */
-.menu-status-bar {
-  width: 100% !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  margin-bottom: 8px !important;
-  padding-bottom: 12px !important;
-}
-
-.menu-status-text {
-  color: #58a6ff !important;
-  font-weight: 500 !important;
-  font-size: 18px !important; /* Утвержденный размер 18px */
-}
-
-.menu-status-arrows {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-}
-
-.menu-status-arrows .menu-arrow-icon {
-  width: 20px !important;
-  height: 20px !important;
-  color: #768390 !important;
-  cursor: pointer !important;
-}
-
-/* Стили самих ссылок */
-.nav-links .menu-item-link {
-  display: block !important;
-  width: 100% !important;
-  padding: 12px 0 !important;
-  font-size: 16px !important; /* Утвержденный размер 16px */
-  color: #c9d1d9 !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  pointer-events: auto !important;
-}
+   
+} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
 
 
 /* Базовый bento-каркас */
@@ -360,9 +296,10 @@ header {
   opacity: 0 !important;
 }
 
+/* ФАЗА 2: Аппаратное GPU-раскрытие контейнера на весь экран */
 .bento-card.is-expanded .bento-card-inner {
   transform: var(--target-transform) rotateY(180deg) !important;
-  z-index: 14000000 !important;
+  z-index: 9999 !important;
 }
 
 /* Фиксация размеров обратной стороны модального окна на максимальный слой */
@@ -374,8 +311,8 @@ header {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: 15000000 !important; /* Гарантированно перекрывает двухэтажный header */
-  padding-top: 140px !important; 
+  z-index: 1000000 !important; /* Пробивает двухэтажную шапку */
+  padding-top: 140px !important; /* Сдвигаем внутренний текст виджетов ниже шапки */
 }
 
 /* Иконки управления внутри карточек */
@@ -390,14 +327,13 @@ header {
 
 /* Кнопка закрытия — фиксируем на экране поверх всего */
 .bento-card-close-icon {
-  position: fixed !important;
-  top: 25px !important; /* Жестко прибиваем к верху экрана, игнорируя внутренние паддинги */
-  right: 25px !important;
-  width: 32px !important; /* Сделали чуть побольше, чтобы было легче попасть пальцем */
-  height: 32px !important;
+  position: fixed !important; /* Всегда на одном месте при скролле */
+  top: 25px !important; /* Удобный отступ от верхнего края экрана */
+  right: 25px !important; /* Удобный отступ от правого края */
+  width: 28px !important; /* Оптимальный размер для тапа пальцем */
+  height: 28px !important;
   cursor: pointer !important;
-  z-index: 2000000 !important; /* Пробивает шапку */
-  pointer-events: auto !important; /* Игнорирует невидимые 3D-слои */
+  z-index: 2000000 !important; /* Самый высокий z-index на платформе */
 }
 
 .bento-card-arrow svg {
