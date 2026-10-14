@@ -154,15 +154,17 @@ header {
   margin-bottom: 20px !important;
 }
 
-/* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
+/* ==========================================================================
+   2. ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ МЕДИА-ЗАПРОС TENDERPILOT (СТРОГО БЕЗ КОСТЫЛЕЙ)
+   ========================================================================== */
 @media (max-width: 768px) {
-  /* Поднимаем контейнер шапки на самый высокий слой, чтобы логотип и бургер не исчезали */
+  /* Выносим бургер, лого и ЛК на самый верхний слой, чтобы они не исчезали */
   .header-container {
     z-index: 1000001 !important;
     position: relative !important;
   }
 
-  /* Переключение иконок внутри бургера при его активации */
+  /* Переключение видимости иконок внутри кнопки бургера */
   .menu-toggle.active .icon-burger {
     display: none !important;
   }
@@ -170,7 +172,7 @@ header {
     display: block !important;
   }
 
-  /* Каркас полноэкранного мобильного меню */
+  /* Полноэкранный каркас мобильного меню со скроллом */
   .nav-links {
     position: fixed !important;
     top: 0 !important;
@@ -180,8 +182,10 @@ header {
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
     flex-direction: column !important;
-    padding: 130px 24px 40px 24px !important; /* Четкий отступ ниже двухэтажной шапки */
-    z-index: 999999 !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    padding: 140px 24px 40px 24px !important; /* Опускаем контент строго ниже шапки */
+    z-index: 999999 !important; /* На один слой ниже, чем кнопки в header-container */
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
@@ -189,26 +193,20 @@ header {
     pointer-events: none !important;
   }
 
+  /* Активация тапов при открытии меню */
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
   }
 
-  /* Управление видимостью групп ссылок на основе глобального стейта tenderpilot */
+  /* Побеждаем инлайн-стили JS: принудительно разворачиваем группы ссылок в колонку */
   .nav-links .menu-group-links {
-    display: none !important; /* Изначально скрываем все группы */
     flex-direction: column !important;
+    align-items: stretch !important;
     width: 100% !important;
   }
 
-  /* Отображаем только ту группу, которая соответствует активному "миру" */
-  body[data-world="supplier"] .nav-links .menu-group-links.group-supplier,
-  body[data-world="customer"] .nav-links .menu-group-links.group-customer,
-  body[data-world="transport"] .nav-links .menu-group-links.group-transport {
-    display: flex !important;
-  }
-
-  /* Мобильная строка статуса со стрелками */
+  /* Мобильная строка статуса */
   .menu-status-bar {
     width: 100% !important;
     display: flex !important;
@@ -220,7 +218,7 @@ header {
   }
 
   .menu-status-text {
-    color: #00f2fe !important; /* Премиальный неоновый цвет текущего режима */
+    color: #00f2fe !important; /* Фирменный неон для активного режима */
     font-weight: 600 !important;
     font-size: 20px !important;
   }
@@ -228,17 +226,30 @@ header {
   .menu-status-arrows {
     display: flex !important;
     align-items: center !important;
-    gap: 16px !important; /* Увеличили расстояние для удобства клика пальцем */
-    z-index: 1000002 !important; /* Стрелки всегда кликабельны */
+    gap: 16px !important;
   }
 
+  /* Обеспечиваем гарантированный клик по стрелочкам на тач-экранах */
   .menu-status-arrows .menu-arrow-icon {
     width: 24px !important;
     height: 24px !important;
     color: #58a6ff !important;
     cursor: pointer !important;
-    pointer-events: auto !important; /* Разрешаем тапы по стрелкам */
+    pointer-events: auto !important;
   }
+
+  /* Ссылки списком с премиальными тач-отступами */
+  .nav-links .menu-item-link {
+    display: block !important;
+    width: 100% !important;
+    padding: 16px 0 !important;
+    font-size: 18px !important;
+    color: #c9d1d9 !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.1) !important;
+  }
+} /* <--- Финальная скобка закрывает медиа-запрос @media (max-width: 768px) */
+
 
   .nav-links .menu-item-link {
     display: block !important;
