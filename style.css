@@ -199,12 +199,21 @@ header {
     pointer-events: auto !important;
   }
 
-  /* 2. Заставляем группы ссылок встать в вертикальную колонку */
+  /* Управление видимостью групп на основе стейта data-world из JS */
   .nav-links .menu-group-links {
+    display: none !important; /* По умолчанию скрываем кашу из всех ссылок */
     flex-direction: column !important;
     align-items: stretch !important;
     width: 100% !important;
   }
+
+  /* Показываем только ту группу, которая соответствует активному режиму */
+  body[data-world="supplier"] .nav-links .group-supplier,
+  body[data-world="customer"] .nav-links .group-customer,
+  body[data-world="transport"] .nav-links .group-transport {
+    display: flex !important;
+  }
+
 
   /* 3. Оформление статус-бара и приглушенных стрелочек */
   .menu-status-bar {
