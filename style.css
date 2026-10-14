@@ -154,8 +154,7 @@ header {
   margin-bottom: 20px !important;
 }
 
-/* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
-@media (max-width: 768px) {
+/* Базовый выезжающий слой мобильного меню */
 @media (max-width: 768px) {
   .nav-links {
     position: fixed !important;
@@ -179,11 +178,14 @@ header {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
   }
-   
-  .nav-links.active .menu-group-links {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
+
+  /* Переключение иконок внутри кнопки бургер-меню */
+  #menu-toggle.active .icon-burger {
+    display: none !important;
+  }
+  #menu-toggle.active .icon-close {
+    display: block !important;
+    stroke: #ffffff !important;
   }
 
   /* Мобильная строка статуса */
@@ -226,9 +228,6 @@ header {
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
    
-} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
-
-
 /* Базовый bento-каркас */
 .bento-grid {
   display: grid;
