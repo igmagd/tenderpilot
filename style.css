@@ -184,8 +184,8 @@ header {
     flex-direction: column !important;
     align-items: stretch !important;
     justify-content: flex-start !important;
-    padding: 140px 24px 40px 24px !important; /* Опускаем контент строго ниже шапки */
-    z-index: 999999 !important; /* На один слой ниже, чем кнопки в header-container */
+    padding: 90px 24px 40px 24px !important; /* Уменьшили отступ, так как меню вышло из шапки */
+    z-index: 999999 !important; /* Железно поверх всего контента сайта */
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
