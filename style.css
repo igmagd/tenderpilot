@@ -156,6 +156,19 @@ header {
 
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
+  /* Фиксируем контейнер шапки выше меню, чтобы логотип и бургер не исчезали */
+  .header-container {
+    z-index: 100001 !important;
+  }
+
+  /* Переключение иконок внутри бургера при его активации */
+  .menu-toggle.active .icon-burger {
+    display: none !important;
+  }
+  .menu-toggle.active .icon-close {
+    display: block !important;
+  }
+
   /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
   .nav-links {
     position: fixed !important;
@@ -165,9 +178,9 @@ header {
     height: 100vh !important;
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
-    flex-direction: column !important; /* Принудительный вертикальный список */
-    padding: 150px 24px 40px 24px !important; /* Отступ с учетом двухэтажной шапки */
-    z-index: 99999 !important; /* Поднимаем выше шапки при открытии */
+    flex-direction: column !important;
+    padding: 140px 24px 40px 24px !important; /* Сдвиг контента ниже шапки */
+    z-index: 99999 !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
@@ -178,6 +191,13 @@ header {
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
+  }
+
+  /* Принудительно разворачиваем группы ссылок в вертикальный столбец */
+  .nav-links .menu-group-links {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
   }
 
   /* Мобильная строка статуса */
@@ -219,9 +239,7 @@ header {
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-   
 } /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
-
 
 /* Базовый bento-каркас */
 .bento-grid {
