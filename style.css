@@ -86,10 +86,7 @@ header {
 
 .menu-toggle { order: 1 !important; }
 .lk-btn { order: 2 !important; }
-/* По умолчанию крестик закрытия внутри бургера всегда скрыт */
-.menu-toggle .icon-close { display: none !important; }
 .menu-toggle .icon-burger { display: block !important; }
-
 
 /* Второй ярус шапки: Переключатели режимов */
 .hero-actions {
@@ -157,38 +154,20 @@ header {
   margin-bottom: 20px !important;
 }
 
-/* ==========================================================================
-   2. ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ МЕДИА-ЗАПРОС TENDERPILOT (СТРОГО БЕЗ КОСТЫЛЕЙ)
-   ========================================================================== */
+/* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
-  /* Выносим бургер, лого и ЛК на самый верхний слой, чтобы они не исчезали */
-  .header-container {
-    z-index: 1000001 !important;
-    position: relative !important;
-  }
-
-  /* Переключение видимости иконок внутри кнопки бургера */
-  .menu-toggle.active .icon-burger {
-    display: none !important;
-  }
-  .menu-toggle.active .icon-close {
-    display: block !important;
-  }
-
-  /* Полноэкранный каркас мобильного меню со скроллом */
+  /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
   .nav-links {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100vw !important;
+    width: 100% !important;
     height: 100vh !important;
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
-    padding: 90px 24px 40px 24px !important; /* Уменьшили отступ, так как меню вышло из шапки */
-    z-index: 999999 !important; /* Железно поверх всего контента сайта */
+    flex-direction: column !important; /* Принудительный вертикальный список */
+    padding: 150px 24px 40px 24px !important; /* Отступ с учетом двухэтажной шапки */
+    z-index: 99999 !important; /* Поднимаем выше шапки при открытии */
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
@@ -196,70 +175,53 @@ header {
     pointer-events: none !important;
   }
 
-  /* 1. Активация тапов при открытии меню */
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
   }
 
-  /* Управление видимостью групп на основе стейта data-world из JS */
-  .nav-links .menu-group-links {
-    display: none !important; /* По умолчанию скрываем кашу из всех ссылок */
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-  }
-
-  /* Показываем только ту группу, которая соответствует активному режиму */
-  body[data-world="supplier"] .nav-links .group-supplier,
-  body[data-world="customer"] .nav-links .group-customer,
-  body[data-world="transport"] .nav-links .group-transport {
-    display: flex !important;
-  }
-
-
-  /* 3. Оформление статус-бара и приглушенных стрелочек */
+  /* Мобильная строка статуса */
   .menu-status-bar {
     width: 100% !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 8px !important;
     padding-bottom: 12px !important;
   }
 
   .menu-status-text {
-    color: #388bfd !important; /* Тот самый синий цвет по вашему ТЗ */
-    font-weight: 600 !important;
-    font-size: 20px !important; /* Шрифт 20px */
+    color: #58a6ff !important;
+    font-weight: 500 !important;
+    font-size: 19px !important;
   }
 
   .menu-status-arrows {
     display: flex !important;
     align-items: center !important;
-    gap: 16px !important;
+    gap: 8px !important;
   }
 
   .menu-status-arrows .menu-arrow-icon {
-    width: 24px !important;
-    height: 24px !important;
-    color: rgba(255, 255, 255, 0.5) !important; /* Приглушенный белый */
+    width: 20px !important;
+    height: 20px !important;
+    color: #768390 !important;
     cursor: pointer !important;
-    pointer-events: auto !important;
   }
 
-  /* 4. Крупные отступы ссылок для удобного скролла пальцем */
   .nav-links .menu-item-link {
     display: block !important;
     width: 100% !important;
-    padding: 16px 0 !important;
+    padding: 12px 0 !important;
     font-size: 18px !important;
     color: #c9d1d9 !important;
     text-decoration: none !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.1) !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-}
+   
+} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
+
 
 /* Базовый bento-каркас */
 .bento-grid {
@@ -270,13 +232,6 @@ header {
   margin: 40px auto;
   padding: 0 20px;
 }
-  /* Жестко запрещаем ссылкам и их контейнерам растягивать мобильный экран вширь */
-  .nav-links .menu-group-links,
-  .nav-links .menu-item-link {
-    max-width: 100vw !important;
-    white-space: normal !important; /* Разрешаем перенос длинного текста на новую строку */
-    box-sizing: border-box !important;
-  }
 
 @media (max-width: 1024px) {
   .bento-grid { grid-template-columns: repeat(2, 1fr); }
@@ -395,4 +350,4 @@ header {
   stroke: #ffffff !important; /* Контрастный белый цвет крестика */
   stroke-width: 2.5px !important; /* Делаем линии чуть четче */
   fill: none !important;
-}
+   }
