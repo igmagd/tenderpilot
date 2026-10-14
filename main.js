@@ -50,17 +50,19 @@ function switch_app_mode(target_mode) {
         });
     }
 
-    // Динамически вешаем клики на ссылки при открытии
-    document.addEventListener('click', function (e) {
-        var link = e.target.closest('.menu-item-link');
-        if (!link) return;
-        var toggle_btn = document.getElementById('menu-toggle');
-        var nav_bar = document.querySelector('.nav-links');
-        if (toggle_btn) toggle_btn.classList.remove('active');
-        if (nav_bar) nav_bar.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-
+    // Обработка кликов по ссылкам внутри шторки
+    var navLinksContainer = document.querySelector('.nav-links');
+    if (navLinksContainer) {
+        navLinksContainer.querySelectorAll('.menu-item-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var toggle_btn = document.getElementById('menu-toggle');
+                if (toggle_btn) toggle_btn.classList.remove('active');
+                navLinksContainer.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+}
 
     function shift(dir) {
       var state = window.tenderpilot;
