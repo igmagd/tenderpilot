@@ -156,6 +156,26 @@ header {
 
 /* Базовый выезжающий слой мобильного меню */
 @media (max-width: 768px) {
+  /* 1. Двухэтажная шапка — жестко фиксируем высоту */
+  header {
+    height: 120px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  /* 2. Первый ярус шапки — поднимаем z-index выше выезжающей шторки */
+  .header-container {
+    height: 65px !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 16px !important;
+    position: relative !important;
+    z-index: 100005 !important; /* Пробивает шторку, оставляя бургер и лого видимыми */
+  }
+
+  /* 3. Шторка меню — опускаем padding под верхний ярус и выравниваем в столбцы */
   .nav-links {
     position: fixed !important;
     top: 0 !important;
@@ -165,12 +185,11 @@ header {
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
     flex-direction: column !important;
-    padding: 150px 24px 40px 24px !important;
+    padding: 85px 24px 40px 24px !important; /* Учли высоту первого яруса */
     z-index: 99999 !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
     pointer-events: none !important;
   }
 
@@ -179,16 +198,30 @@ header {
     pointer-events: auto !important;
   }
 
-  /* Переключение иконок внутри кнопки бургер-меню */
+  /* 4. Разделение ссылок — гасим неактивные группы, которые принудительно включает JS */
+  .nav-links .menu-group-links {
+    display: none !important; /* Прячем все три группы по умолчанию */
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  /* Магия фильтрации: показываем только ту группу, которая соответствует активной кнопке в шапке */
+  header:has(.supplier-btn.active) .nav-links .group-supplier,
+  header:has(.customer-btn.active) .nav-links .group-customer,
+  header:has(.transport-btn.active) .nav-links .group-transport {
+    display: flex !important; /* Включаем вертикально только один нужный мир */
+  }
+
+  /* 5. Исправление иконок бургера — превращение в белый крестик */
   #menu-toggle.active .icon-burger {
     display: none !important;
   }
   #menu-toggle.active .icon-close {
     display: block !important;
-    stroke: #ffffff !important;
+    stroke: #ffffff !important; /* Белый контрастный крестик закрытия */
   }
 
-  /* Мобильная строка статуса */
+  /* Мобильная строка статуса внутри меню */
   .menu-status-bar {
     width: 100% !important;
     display: flex !important;
@@ -218,6 +251,7 @@ header {
     cursor: pointer !important;
   }
 
+  /* Стили самих ссылок */
   .nav-links .menu-item-link {
     display: block !important;
     width: 100% !important;
@@ -227,7 +261,7 @@ header {
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-   
+
 /* Базовый bento-каркас */
 .bento-grid {
   display: grid;
