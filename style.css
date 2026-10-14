@@ -241,6 +241,24 @@ header {
   }
 } /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
 
+  .menu-status-arrows .menu-arrow-icon {
+    width: 20px !important;
+    height: 20px !important;
+    color: #768390 !important;
+    cursor: pointer !important;
+  }
+
+  .nav-links .menu-item-link {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 0 !important;
+    font-size: 18px !important;
+    color: #c9d1d9 !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+  }
+} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
+
 /* Базовый bento-каркас */
 .bento-grid {
   display: grid;
