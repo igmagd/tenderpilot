@@ -156,7 +156,7 @@ header {
 
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
-  /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
+@media (max-width: 768px) {
   .nav-links {
     position: fixed !important;
     top: 0 !important;
@@ -165,9 +165,9 @@ header {
     height: 100vh !important;
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
-    flex-direction: column !important; /* Принудительный вертикальный список */
-    padding: 150px 24px 40px 24px !important; /* Отступ с учетом двухэтажной шапки */
-    z-index: 99999 !important; /* Поднимаем выше шапки при открытии */
+    flex-direction: column !important;
+    padding: 150px 24px 40px 24px !important;
+    z-index: 99999 !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
@@ -178,6 +178,12 @@ header {
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
+  }
+   
+  .nav-links.active .menu-group-links {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
   }
 
   /* Мобильная строка статуса */
@@ -327,13 +333,14 @@ header {
 
 /* Кнопка закрытия — фиксируем на экране поверх всего */
 .bento-card-close-icon {
-  position: fixed !important; /* Всегда на одном месте при скролле */
-  top: 25px !important; /* Удобный отступ от верхнего края экрана */
-  right: 25px !important; /* Удобный отступ от правого края */
-  width: 28px !important; /* Оптимальный размер для тапа пальцем */
-  height: 28px !important;
+  position: fixed !important;
+  top: 25px !important; /* Жестко прибиваем к верху экрана, игнорируя внутренние паддинги */
+  right: 25px !important;
+  width: 32px !important; /* Сделали чуть побольше, чтобы было легче попасть пальцем */
+  height: 32px !important;
   cursor: pointer !important;
-  z-index: 2000000 !important; /* Самый высокий z-index на платформе */
+  z-index: 2000000 !important; /* Пробивает шапку */
+  pointer-events: auto !important; /* Игнорирует невидимые 3D-слои */
 }
 
 .bento-card-arrow svg {
