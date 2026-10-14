@@ -193,20 +193,20 @@ header {
     pointer-events: none !important;
   }
 
-  /* Активация тапов при открытии меню */
+  /* 1. Активация тапов при открытии меню */
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
   }
 
-  /* Побеждаем инлайн-стили JS: принудительно разворачиваем группы ссылок в колонку */
+  /* 2. Заставляем группы ссылок встать в вертикальную колонку */
   .nav-links .menu-group-links {
     flex-direction: column !important;
     align-items: stretch !important;
     width: 100% !important;
   }
 
-  /* Мобильная строка статуса */
+  /* 3. Оформление статус-бара и приглушенных стрелочек */
   .menu-status-bar {
     width: 100% !important;
     display: flex !important;
@@ -218,9 +218,9 @@ header {
   }
 
   .menu-status-text {
-    color: #388bfd !important; /* Фирменный синий цвет режима по вашему ТЗ */
+    color: #388bfd !important; /* Тот самый синий цвет по вашему ТЗ */
     font-weight: 600 !important;
-    font-size: 20px !important; /* Шрифт 20px по ТЗ */
+    font-size: 20px !important; /* Шрифт 20px */
   }
 
   .menu-status-arrows {
@@ -229,16 +229,15 @@ header {
     gap: 16px !important;
   }
 
-  /* Приглушенные белые стрелочки переключения */
   .menu-status-arrows .menu-arrow-icon {
     width: 24px !important;
     height: 24px !important;
-    color: rgba(255, 255, 255, 0.5) !important; /* Приглушенный белый цвет */
+    color: rgba(255, 255, 255, 0.5) !important; /* Приглушенный белый */
     cursor: pointer !important;
     pointer-events: auto !important;
   }
 
-  /* Ссылки списком с премиальными тач-отступами */
+  /* 4. Крупные отступы ссылок для удобного скролла пальцем */
   .nav-links .menu-item-link {
     display: block !important;
     width: 100% !important;
