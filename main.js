@@ -8,15 +8,16 @@
     'modes-titles': { 'supplier': 'Поставщик', 'customer': 'Заказчик', 'transport': 'Грузоперевозки' }
   };
 
-  function switch_app_mode(target_mode) {
+function switch_app_mode(target_mode) {
     var state = window.tenderpilot;
     if (!state['modes-list'].includes(target_mode)) return;
+    
+    // Переключаем стейт на самом верхнем уровне body
+    document.body.setAttribute('data-world', target_mode);
 
     state['modes-list'].forEach(function (mode) {
-      var groups = document.querySelectorAll('.group-' + mode);
-      groups.forEach(function (el) { el.style.display = (mode === target_mode) ? 'flex' : 'none'; });
-      var grid = document.getElementById('grid-' + mode);
-      if (grid) { grid.style.display = (mode === target_mode) ? 'grid' : 'none'; }
+        var grid = document.getElementById('grid-' + mode);
+        if (grid) { grid.style.display = (mode === target_mode) ? 'grid' : 'none'; }
     });
 
     var status_text = document.querySelector('.menu-status-text');
@@ -24,9 +25,9 @@
     state['current-mode-index'] = state['modes-list'].indexOf(target_mode);
 
     document.querySelectorAll('.mode-btn').forEach(function (btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-mode') === target_mode);
+        btn.classList.toggle('active', btn.getAttribute('data-mode') === target_mode);
     });
-  }
+}
 
   // 2. НАВИГАЦИЯ, МЕНЮ И СВАЙПЫ
   function init_core_events() {
