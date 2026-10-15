@@ -103,16 +103,17 @@ function init_bento() {
                 'translate3d(' + (-rect.left) + 'px, ' + (-rect.top) + 'px, 0) ' +
                 'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
             );
-            card.classList.add('is-flipped');
+        card.classList.add('is-flipped');
         setTimeout(function () {
             if (card.classList.contains('is-flipped')) {
                 card.classList.add('is-expanded');
                 card.style.zIndex = '3000000';
-                card.style.removeProperty('--target-transform');
+                card.style.setProperty('--target-transform', 'rotateY(180deg)');
             }
         }, 150);
-        });
-      
+
+    }); // Вот теперь функция клика на карточку закрывается правильно!
+
       if (close) {
         close.addEventListener('click', function (e) {
           e.preventDefault(); e.stopPropagation();
