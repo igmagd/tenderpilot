@@ -200,8 +200,46 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
         grid-template-columns: 1fr !important;
         gap: 16px;
         padding: 0 24px 24px 24px;
+    /* Сжимаем второй этаж шапки под узкие экраны смартфонов */
+    .hero-actions {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        padding: 10px 12px !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+        background-color: #0d1117 !important;
+        border-top: 1px solid #30363d !important;
     }
-}
+
+    /* Изолируем кнопки: они делят экран поровну, текст больше не вылетает */
+    .mode-btn {
+        padding: 6px 8px !important;
+        font-size: 11px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        background: #21262d !important;
+        border: 1px solid #30363d !important;
+        border-radius: 6px !important;
+        color: #c9d1d9 !important;
+        cursor: pointer !important;
+    }
+    
+    .mode-btn.active {
+        background: #238636 !important;
+        border-color: #2ea44f !important;
+        color: #ffffff !important;
+    }
+
+    /* РАЗРУШАЕМ ГЛАВНУЮ ЗАСАДУ: когда карточка раскрыта, мы полностью гасим 
+       3D-контекст у сетки, и изнанка мгновенно расправляется ЧЁТКО ПО КРАЯМ ЭКРАНА! */
+    body:has(.bento-card.is-expanded) .bento-grid {
+        transform: none !important;
+        perspective: none !important;
+        transform-style: flat !important;
+        }
+    }
+    
 .bento-card {
     background: none;
     perspective: 1000px;
