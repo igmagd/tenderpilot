@@ -286,6 +286,7 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
 .bento-card.is-flipped .bento-card-front {
     opacity: 0 !important;
     }
+
 .bento-card.is-expanded .bento-card-back {
     border-radius: 0 !important;
     border: none !important;
@@ -294,18 +295,20 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    padding: 140px 40px 40px 40px !important; /* Контент строго под двухэтажным хедером */
+    padding: 140px 40px 40px 40px !important;
     overflow-y: auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: flex-start !important;
     z-index: 3000000 !important;
-        transform: rotateY(180deg) !important;
-        transform-style: flat !important;
+    /* УБИРАЕМ ЗЕРКАЛЬНОСТЬ: сбрасываем лишний разворот, и буквы мгновенно читаются слева направо! */
+    transform: none !important;
+    transform-style: flat !important;
     backface-visibility: visible !important;
     -webkit-backface-visibility: visible !important;
 }
+
 .bento-card.is-expanded .bento-card-back * {
     transform: scale(1) !important;
     max-width: 100% !important;
