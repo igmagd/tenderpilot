@@ -26,30 +26,7 @@ header {
     flex-direction: column !important;
     z-index: 2000000;
 }
-.hero-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    padding: 10px 0;
-    height: 55px;
-    background-color: #0d1117;
-    border-top: 1px solid #30363d;
-}
-.mode-btn {
-    padding: 6px 16px;
-    background: #21262d;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-.mode-btn.active {
-    background: #238636;
-    border-color: #2ea44f;
-    color: #ffffff;
-}
+
 .header-container {
     display: flex !important;
     align-items: center !important;
