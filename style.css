@@ -226,34 +226,35 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
 }
 @media (max-width: 768px) {
     .bento-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 0 24px 24px 24px;
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 0 24px 24px 24px !important;
     }
     .hero-section {
-        padding-top: 95px;
+        padding-top: 95px !important;
     }
     .hero-actions {
-        display: flex;
-        flex-direction: row; 
-        justify-content: space-between;
-        gap: 8px;
-        padding: 0;
-        width: 100%;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        width: 100% !important;
     }
     .mode-btn {
-        padding: 8px 4px;
-        font-size: 11px; 
-        flex: 1;
-        text-align: center;
-        white-space: nowrap;
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        white-space: nowrap !important;
     }
     body:has(.bento-card.is-expanded) .bento-grid {
-        transform: none;
-        perspective: none;
-        transform-style: flat;
+        transform: none !important;
+        perspective: none !important;
+        transform-style: flat !important;
     }
-    }
+}
+
     .bento-card {
     background: none;
     perspective: 1000px;
@@ -412,4 +413,39 @@ footer {
 footer a {
     color: #58a6ff;
     margin: 0 8px;
+}
+/* ФИКС ЗАГОЛОВКА, БУРГЕРА И КРЕСТИКА НА СМАРТФОНАХ */
+@media (max-width: 768px) {
+    /* Жестко возвращаем бургеру его родные размеры и запрещаем растягиваться */
+    .menu-toggle {
+        display: flex !important;
+        width: 32px !important;
+        height: 32px !important;
+        flex: none !important; /* Убирает огромный размер и растягивание */
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Корректируем размер SVG внутри бургера */
+    .menu-toggle svg {
+        width: 22px !important;
+        height: 22px !important;
+        display: block !important;
+    }
+
+    /* Гарантируем, что линии при скручивании в крестик не деформируются */
+    body:has(.nav-links.active) .menu-toggle svg line {
+        stroke-width: 2.5px !important;
+    }
+    
+    /* Ограничиваем логотип и кнопку ЛК, чтобы они не ломали строку */
+    .logo {
+        font-size: 1.3rem !important;
+        margin-left: 12px !important;
+    }
+    .lk-btn {
+        width: 32px !important;
+        height: 32px !important;
+        flex: none !important;
+    }
 }
