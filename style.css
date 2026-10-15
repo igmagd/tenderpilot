@@ -162,17 +162,30 @@ header {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 0 16px !important;
+    padding: 0 24px !important;
+  }
+  .menu-toggle {
+    order: 1 !important;
+    position: relative !important;
+    z-index: 2000005 !important;
   }
   .logo {
-    position: static !important;
-    transform: none !important;
-    margin-left: 8px !important;
-    font-size: 1.15rem !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    order: 2 !important;
+    font-size: 1.25rem !important;
+    z-index: 2000005 !important;
   }
   .lk-btn {
     display: flex !important;
-    margin-left: auto !important;
+    order: 3 !important;
+    transition: opacity 0.2s ease !important;
+    z-index: 2000005 !important;
+  }
+  .menu-toggle.active ~ .lk-btn {
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   .nav-links {
     position: fixed !important;
@@ -180,17 +193,17 @@ header {
     left: 0 !important;
     width: 100% !important;
     height: 100vh !important;
-    background: linear-gradient(to top, #020617, #0d1117) !important;
+    background: #0d1117 !important;
     display: flex !important;
     flex-direction: column !important;
-    padding: 90px 24px 40px 24px !important;
+    padding: 85px 24px 40px 24px !important;
     z-index: 99999 !important;
     transform: translate3d(0, -100%, 0) !important;
-    transition: transform 0.35s ease !important;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
     pointer-events: none !important;
   }
+
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
@@ -341,12 +354,27 @@ header {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  padding: 100px 24px 40px 24px !important;
-  overflow-y: auto !important;
+  padding: 120px 24px 40px 24px !important;
+  overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  justify-content: flex-start !important;
+  justify-content: center !important;
+  transform: none !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+}
+.bento-card.is-expanded .bento-card-back * {
+  transform: none !important;
+  max-width: 100% !important;
+}
+
+.bento-card.is-expanded .bento-card-back h3 {
+  font-size: 2rem !important;
+  color: #f0f6fc !important;
+  text-align: center !important;
+  margin-bottom: 16px !important;
+  letter-spacing: normal !important;
 }
 
 /* Иконки управления внутри карточек */
