@@ -429,3 +429,31 @@ header {
   stroke-width: 2.5px !important;
   fill: none !important;
    }
+/* ==========================================================================
+   6. ЭЛЕМЕНТЫ УПРАВЛЕНИЯ КАРТОЧЕК
+   ========================================================================== */
+
+/* Иконки-стрелочки в правом нижнем углу закрытых Bento-карточек */
+.bento-card-arrow {
+    position: absolute !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    width: 22px !important;
+    height: 22px !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Элегантный наклон стрелочки при наведении на карточку */
+.bento-card:hover .bento-card-arrow {
+    transform: translate(2px, -2px) !important;
+}
+
+.bento-card-arrow svg {
+    width: 100% !important;
+    height: 100% !important;
+    stroke: rgba(240, 246, 252, 0.6) !important;
+    stroke-width: 1.5px !important;
+    fill: none !important;
+}
