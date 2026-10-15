@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-
+  // 1. ГЛОБАЛЬНЫЙ СТЭЙТ И РЕАКТИВНОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
   window.tenderpilot = {
     'current-mode-index': 0,
     'modes-list': ['supplier', 'customer', 'transport'],
@@ -11,7 +11,7 @@
   function switch_app_mode(target_mode) {
     var state = window.tenderpilot;
     if (!state['modes-list'].includes(target_mode)) return;
-    
+
     state['modes-list'].forEach(function (mode) {
       var groups = document.querySelectorAll('.group-' + mode);
       groups.forEach(function (el) { el.style.display = (mode === target_mode) ? 'flex' : 'none'; });
@@ -28,6 +28,7 @@
     });
   }
 
+  // 2. НАВИГАЦИЯ, МЕНЮ И СВАЙПЫ
   function init_core_events() {
     document.querySelectorAll('.mode-btn').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
@@ -38,25 +39,18 @@
 
     var toggle = document.getElementById('menu-toggle');
     var nav = document.querySelector('.nav-links');
-    var headerContainer = document.querySelector('.header-container');
-
     if (toggle && nav) {
       toggle.addEventListener('click', function (e) {
         e.preventDefault();
         var active = toggle.classList.toggle('active');
         nav.classList.toggle('active');
         document.body.style.overflow = active ? 'hidden' : '';
-        if (headerContainer) {
-          headerContainer.style.zIndex = active ? '2000000' : '';
-        }
       });
-
       nav.querySelectorAll('.menu-item-link').forEach(function (link) {
         link.addEventListener('click', function () {
           toggle.classList.remove('active');
           nav.classList.remove('active');
           document.body.style.overflow = '';
-          if (headerContainer) headerContainer.style.zIndex = '';
         });
       });
     }
@@ -85,6 +79,7 @@
     }, { passive: true });
   }
 
+  // 3. АНИМАЦИЯ БЕНТО-КАРТОЧЕК (РАСЧЕТ МАТРИЦЫ GPU)
   function init_bento() {
     document.querySelectorAll('.bento-card').forEach(function (card) {
       var front = card.querySelector('.bento-card-front');
@@ -95,20 +90,19 @@
       front.addEventListener('click', function (e) {
         e.stopPropagation();
         if (card.classList.contains('is-expanded')) return;
+
         var rect = card.getBoundingClientRect();
         var scale_x = window.innerWidth / rect.width;
         var scale_y = window.innerHeight / rect.height;
         
-        card.style.setProperty('--target-transform',
+        card.style.setProperty('--target-transform', 
           'translate3d(' + (-rect.left) + 'px, ' + (-rect.top) + 'px, 0) ' +
           'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
         );
+
         card.classList.add('is-flipped');
         setTimeout(function () {
-          if (card.classList.contains('is-flipped')) {
-            card.classList.add('is-expanded');
-            card.style.zIndex = '3000000';
-          }
+          if (card.classList.contains('is-flipped')) card.classList.add('is-expanded');
         }, 150);
       });
 
@@ -120,13 +114,13 @@
           setTimeout(function () {
             card.classList.remove('is-closing');
             card.style.removeProperty('--target-transform');
-            card.style.zIndex = '';
           }, 350);
         });
       }
     });
   }
 
+  // ТОЧКА ВХОДА
   document.addEventListener('DOMContentLoaded', function () {
     init_core_events();
     init_bento();
