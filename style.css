@@ -50,6 +50,7 @@ header {
   height: 120px !important;
   z-index: 1000 !important;
   display: flex !important;
+  flex-direction: column !important; /* Возвращаем двухэтажную структуру */
   justify-content: flex-start !important;
   transition: all 0.3s ease;
 }
@@ -360,10 +361,12 @@ header {
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  transform: none !important;
+  /* Меняем transform: none на rotateY(180deg) для исправления зеркальности */
+  transform: rotateY(180deg) !important;
   backface-visibility: visible !important;
   -webkit-backface-visibility: visible !important;
 }
+
 .bento-card.is-expanded .bento-card-back * {
   transform: none !important;
   max-width: 100% !important;
