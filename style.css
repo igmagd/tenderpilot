@@ -156,20 +156,21 @@ header {
 3. МОБИЛЬНАЯ АДАПТАЦИЯ (ШТОРКА МЕНЮ В СТОЛБИК)
 ========================================================================== */
 @media (max-width: 768px) {
-  /* Переопределение первого яруса в мобильной шторке */
   .header-container {
-    justify-content: flex-start !important;
-    gap: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 16px !important;
   }
-
   .logo {
     position: static !important;
     transform: none !important;
-    font-size: 1.3rem !important;
+    margin-left: 8px !important;
+    font-size: 1.15rem !important;
   }
-
   .lk-btn {
-    display: none !important;
+    display: flex !important;
+    margin-left: auto !important;
   }
 
   /* Сама вертикальная шторка меню */
@@ -241,7 +242,27 @@ header {
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
+  /* Отключаем серую вспышку при тапах на мобильных */
+  .menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
+    -webkit-tap-highlight-color: transparent !important;
+    tap-highlight-color: transparent !important;
+  }
+
+  /* Трансформация бургера в крестик при открытой шторке */
+  .menu-toggle.active svg line:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px) !important;
+    transform-origin: center !important;
+  }
+  .menu-toggle.active svg line:nth-child(2) {
+    opacity: 0 !important;
+  }
+  .menu-toggle.active svg line:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px) !important;
+    transform-origin: center !important;
+  }
+  
 } /* Конец медиа-запроса мобильного меню */
+
 
 /* ==========================================================================
 4. БАЗОВЫЙ BENTO-КАРКАС СЕТКИ
@@ -333,9 +354,14 @@ header {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  padding-top: 140px !important;
+  padding: 100px 24px 40px 24px !important;
   overflow-y: auto !important;
-   }
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
 /* Иконки управления внутри карточек */
 .bento-card-arrow {
   position: absolute !important;
