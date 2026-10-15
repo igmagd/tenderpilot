@@ -110,7 +110,7 @@ function init_bento() {
                 card.style.zIndex = '3000000';
                 card.style.setProperty('--target-transform', 'rotateY(180deg)');
             }
-        }, 150);
+        }, 300);
 
     }); // Вот теперь функция клика на карточку закрывается правильно!
 
