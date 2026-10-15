@@ -301,7 +301,8 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
     align-items: flex-start !important;
     justify-content: flex-start !important;
     z-index: 3000000 !important;
-    transform: rotateY(180deg) translate3d(0,0,0) scale(1) !important;
+    transform: rotateY(180deg) scale(1) !important;
+        transform-style: flat !important;
     backface-visibility: visible !important;
     -webkit-backface-visibility: visible !important;
 }
