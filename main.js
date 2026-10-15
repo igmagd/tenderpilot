@@ -85,34 +85,32 @@
     }, { passive: true });
   }
 
-function init_bento() {
+  function init_bento() {
     document.querySelectorAll('.bento-card').forEach(function (card) {
-        var front = card.querySelector('.bento-card-front');
-        var inner = card.querySelector('.bento-card-inner');
-        var close = card.querySelector('.bento-card-close-icon');
-        if (!front || !inner) return;
+      var front = card.querySelector('.bento-card-front');
+      var inner = card.querySelector('.bento-card-inner');
+      var close = card.querySelector('.bento-card-close-icon');
+      if (!front || !inner) return;
 
-        front.addEventListener('click', function (e) {
-            e.stopPropagation();
-            if (card.classList.contains('is-expanded')) return;
-            var rect = card.getBoundingClientRect();
-            var scale_x = window.innerWidth / rect.width;
-            var scale_y = window.innerHeight / rect.height;
-
-            card.style.setProperty('--target-transform',
-                'translate3d(' + (-rect.left) + 'px, ' + (-rect.top) + 'px, 0) ' +
-                'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
-            );
+      front.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (card.classList.contains('is-expanded')) return;
+        var rect = card.getBoundingClientRect();
+        var scale_x = window.innerWidth / rect.width;
+        var scale_y = window.innerHeight / rect.height;
+        
+        card.style.setProperty('--target-transform',
+          'translate3d(' + (-rect.left) + 'px, ' + (-rect.top) + 'px, 0) ' +
+          'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
+        );
         card.classList.add('is-flipped');
         setTimeout(function () {
-            if (card.classList.contains('is-flipped')) {
-                card.classList.add('is-expanded');
-                card.style.zIndex = '3000000';
-                card.style.setProperty('--target-transform', 'rotateY(180deg)');
-            }
-        }, 300);
-
-    }); // Вот теперь функция клика на карточку закрывается правильно!
+          if (card.classList.contains('is-flipped')) {
+            card.classList.add('is-expanded');
+            card.style.zIndex = '3000000';
+          }
+        }, 150);
+      });
 
       if (close) {
         close.addEventListener('click', function (e) {
