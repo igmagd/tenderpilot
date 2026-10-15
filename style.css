@@ -1,511 +1,433 @@
-/* ==========================================================================
-1. БАЗОВЫЕ НАСТРОЙКИ, СБРОС СТИЛЕЙ И ТИПОГРАФИКА TENDERPILOT
-========================================================================== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-  -webkit-tap-highlight-color: transparent !important;
-  tap-highlight-color: transparent !important;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background-color: #0d1117;
-  color: #c9d1d9;
-  line-height: 1.5;
-  overflow-x: hidden;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-.lk-btn, .menu-toggle {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 42px !important;
-  height: 42px !important;
-  border-radius: 50% !important;
-  background: transparent !important;
-  border: none !important;
-  cursor: pointer !important;
+a {
+    color: inherit;
+    text-decoration: none;
 }
-
-.lk-btn svg, .menu-toggle svg {
-  color: rgba(240, 246, 252, 0.6) !important;
-  stroke: rgba(240, 246, 252, 0.6) !important;
-  stroke-width: 1px !important;
-  fill: none !important;
-  width: 22px !important;
-  height: 22px !important;
-}
-
+/* Шапка сайта: жесткая двухэтажная структура */
 header {
-  background-color: rgba(22, 27, 34, 0.95) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border-bottom: 1px solid #30363d !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 120px !important;
-  z-index: 1000 !important;
-  display: flex !important;
-  flex-direction: column !important; /* Возвращаем двухэтажную структуру */
-  justify-content: flex-start !important;
-  transition: all 0.3s ease;
+    background-color: #161b22;
+    border-bottom: 1px solid #30363d;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px !important; /* Фиксируем общую высоту двух ярусов */
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 2000000;
 }
 
-/* Первый ярус: Бургер - Лого - ЛК */
+/* Второй ярус шапки: Переключатели режимов (Поставщикам, Заказчикам...) */
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 0;
+    height: 55px;
+    background-color: #0d1117;
+    border-top: 1px solid #30363d;
+}
+
+.mode-btn {
+    padding: 6px 16px;
+    background: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.mode-btn.active {
+    background: #238636;
+    border-color: #2ea44f;
+    color: #ffffff;
+  }
+/* Первый ярус шапки: Контейнер элементов управления */
 .header-container {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  max-width: 1200px !important;
-  height: 65px !important;
-  padding: 0 24px !important;
-  margin: 0 auto !important;
-  position: relative !important;
-  z-index: 2000001 !important; /* Поднимаем над мобильной шторкой */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 0 24px !important;
+    height: 65px !important;
+    background-color: #161b22;
+    position: relative;
+    z-index: 2000001;
 }
 
+/* Кнопка Бургера */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: rgba(240, 246, 252, 0.4);
+    transition: color 0.2s;
+    z-index: 2000005;
+}
 
+.menu-toggle:hover, .menu-toggle:active {
+    color: #ffffff;
+}
+
+/* Логотип: прижат к бургеру с благородным зазором */
 .logo {
-  font-size: 1.20rem !important;
-  font-weight: 700 !important;
-  color: #f0f6fc !important;
-  letter-spacing: 0.5px !important;
-  white-space: nowrap !important;
-  text-decoration: none !important;
-  position: absolute !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-left: 16px !important;
+    margin-right: auto !important; /* Магия флексов: выталкивает ЛК в правый край */
+    z-index: 2000005;
 }
 
 .logo span {
-  color: #00f2fe !important;
+    color: #58a6ff;
 }
 
-.menu-toggle { order: 1 !important; }
-.lk-btn { order: 2 !important; }
-.menu-toggle .icon-burger { display: block !important; }
-
-/* Второй ярус шапки: Переключатели режимов */
-.hero-actions {
-  display: flex !important;
-  justify-content: center !important;
-  gap: 12px !important;
-  width: 100% !important;
-  max-width: 600px !important;
-  margin: 5px auto 0 auto !important;
-  padding: 0 20px !important;
-  box-sizing: border-box !important;
+/* Личный кабинет */
+.lk-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(240, 246, 252, 0.4);
+    transition: color 0.2s, opacity 0.2s;
+    width: 32px;
+    height: 32px;
+    z-index: 2000005;
 }
 
-.mode-btn, .toggle-btn {
-  flex: 1 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  height: 38px !important;
-  background: rgba(255, 255, 255, 0.03) !important;
-  border: 1px solid #30363d !important;
-  color: #8b949e !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  border-radius: 20px !important;
-  cursor: pointer !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  -webkit-tap-highlight-color: transparent !important;
-  outline: none !important;
+.lk-btn:hover, .lk-btn:active {
+    color: #ffffff;
+  }
+/* Мобильная шторка меню */
+.nav-links {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background: #0d1117 !important; /* Монолитный плотный фон */
+    display: flex !important;
+    flex-direction: column !important;
+    /* Отступ сверху: 65px (высота первого яруса) + воздух для контента */
+    padding: 100px 24px 40px 24px !important;
+    z-index: 2000000 !important; /* Строго под кнопками первого яруса */
+    transform: translate3d(0, -100%, 0) !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; /* Плавный выезд */
+    overflow-y: auto !important;
+    pointer-events: none !important;
 }
 
-.mode-btn:hover, .toggle-btn:hover {
-  color: #ffffff !important;
-  border-color: #8b949e !important;
-  background: rgba(255, 255, 255, 0.06) !important;
+.nav-links.active {
+    transform: translate3d(0, 0, 0) !important;
+    pointer-events: auto !important;
+      }
+/* Контентная строка статуса (Поставщик / Заказчик) внутри меню */
+.menu-status-bar {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 16px !important;
 }
 
-.mode-btn.active, .toggle-btn.active {
-  background: linear-gradient(135deg, #388bfd, #00f2fe) !important;
-  color: #ffffff !important;
-  border-color: transparent !important;
-  font-weight: 600 !important;
-  box-shadow: 0 0 16px rgba(56, 139, 253, 0.4) !important;
-   }
-   /* ==========================================================================
-2. ГЛАВНЫЙ ЭКРАН С РАДИАЛЬНЫМ ГРАДИЕНТОМ
-========================================================================== */
-@media (max-width: 768px) {
-    /* ==========================================================================
-       МОБИЛЬНАЯ НАВИГАЦИЯ ПРЕМИУМ-КЛАССА (МОНОЛИТНАЯ ШТОРКА И ТАКТИЛЬНЫЙ КРЕСТИК)
-       ========================================================================== */
+.menu-status-text {
+    color: #58a6ff !important;
+    font-weight: 600 !important;
+    font-size: 1.15rem !important;
+}
 
-    /* Базовое состояние двухэтажной шапки на мобильных */
-    header {
-        height: 120px !important;
-        transition: background-color 0.25s ease, border-color 0.25s ease !important;
-    }
+.menu-status-arrows {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
 
-    /* Эффект бесшовного растворения шапки: когда меню открыто, фон и границы исчезают */
-    body:has(.nav-links.active) header {
-        background-color: transparent !important;
-        border-bottom-color: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-    }
+.menu-status-arrows .menu-arrow-icon {
+    width: 22px !important;
+    height: 22px !important;
+    color: #768390 !important;
+    cursor: pointer !important;
+}
 
-    /* Скрываем второй ярус (ПК-кнопки), чтобы они не просвечивали сквозь меню */
-    .menu-toggle.active ~ .lk-btn,
-    body:has(.nav-links.active) .hero-actions {
-        opacity: 0 !important;
-        pointer-events: none !important;
-    }
+/* Ссылки меню в столбик */
+.menu-group-links {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 2px !important;
+}
 
-    /* Первый ярус: фиксируем координаты элементов управления */
-    .header-container {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        padding: 0 24px !important;
-        height: 65px !important;
-        position: relative !important;
-        z-index: 2000001 !important; /* Всегда поверх выезжающего холста */
-    }
-
-    /* Тактильный бургер-крестик */
-    .menu-toggle {
-        order: 1 !important;
-        margin: 0 !important;
-        position: relative !important;
-        z-index: 2000005 !important;
-    }
-
-    /* Логотип: жестко прижат к бургеру с благородным отступом в 16px */
-    .logo {
-        position: static !important;
-        transform: none !important;
-        order: 2 !important;
-        margin-left: 16px !important;
-        margin-right: auto !important; /* Выталкивает ЛК в правый угол */
-        font-size: 1.25rem !important;
-        z-index: 2000005 !important;
-    }
-
-    .lk-btn {
-        display: flex !important;
-        order: 3 !important;
-        z-index: 2000005 !important;
-        transition: opacity 0.2s ease !important;
-    }
-
-    /* МОНОЛИТНЫЙ ВЫЕЗЖАЮЩИЙ ХОЛСТ МЕНЮ */
-    .nav-links {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100vh !important;
-        background: #0d1117 !important; /* Абсолютно глубокий, благородный темный фон */
-        display: flex !important;
-        flex-direction: column !important;
-        /* Идеальный отступ сверху: 65px под Бургер+Логотип + 32px премиальный воздух до контента */
-        padding: 97px 24px 40px 24px !important;
-        z-index: 2000000 !important; /* Ровно под кнопками первого яруса */
-        transform: translate3d(0, -100%, 0) !important;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; /* Кинематографичный плавный выезд Apple-style */
-        overflow-y: auto !important;
-        pointer-events: none !important;
-    }
-
-    .nav-links.active {
-        transform: translate3d(0, 0, 0) !important;
-        pointer-events: auto !important;
-    }
-
-    /* Контентная навигационная строка внутри шторки */
-    .menu-status-bar {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
-        margin-bottom: 16px !important;
-        padding-bottom: 16px !important;
-    }
-
-    .menu-status-text {
-        color: #58a6ff !important;
-        font-weight: 600 !important;
-        font-size: 1.15rem !important;
-        letter-spacing: -0.2px !important;
-    }
-
-    .menu-status-arrows {
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-    }
-
-    .menu-status-arrows .menu-arrow-icon {
-        width: 22px !important;
-        height: 22px !important;
-        color: #768390 !important;
-        cursor: pointer !important;
-        transition: color 0.2s ease !important;
-    }
-
-    .menu-status-arrows .menu-arrow-icon:active {
-        color: #58a6ff !important;
-    }
-
-    /* Ссылки меню в столбик */
-    .menu-group-links {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        gap: 2px !important;
-    }
-
-    .nav-links .menu-item-link {
-        display: block !important;
-        width: 100% !important;
-        padding: 14px 0 !important;
-        font-size: 1.1rem !important;
-        color: #c9d1d9 !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-        transition: color 0.2s ease, padding-left 0.2s ease !important;
-    }
-
-    .nav-links .menu-item-link:active {
-        color: #00f2fe !important;
-        padding-left: 4px !important; /* Легкий интерактивный отклик при нажатии */
-    }
-
-    .menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
-        -webkit-tap-highlight-color: transparent !important;
-        tap-highlight-color: transparent !important;
-    }
-
-    /* ЮВЕЛИРНАЯ ТРАНСФОРМАЦИЯ БУРГЕРА В КРЕСТИК (БЕЗ ИСКАЖЕНИЙ ГЕОМЕТРИИ) */
-    .menu-toggle svg line {
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease !important;
-        transform-origin: center !important; /* Вращение строго вокруг геометрического центра */
-    }
-
-    /* Верхняя линия: смещается в центр по оси Y и изящно разворачивается на 45 градусов */
-    .menu-toggle.active svg line:nth-of-type(1) {
-        transform: translateY(6px) rotate(45deg) !important;
-    }
-
-    /* Средняя линия: бесследно растворяется в пространстве */
-    .menu-toggle.active svg line:nth-of-type(2) {
-        opacity: 0 !important;
-    }
-
-    /* Нижняя линия: смещается вверх в центр оси Y и разворачивается на -45 градусов */
-    .menu-toggle.active svg line:nth-of-type(3) {
-        transform: translateY(-6px) rotate(-45deg) !important;
-    }
-} /* Конец премиального медиа-запроса мобильного меню */
-
-
-/* ==========================================================================
-3. МОБИЛЬНАЯ АДАПТАЦИЯ (ШТОРКА МЕНЮ В СТОЛБИК)
-========================================================================== */
-@    padding: 12px 0 !important;
-    font-size: 18px !important;
+.nav-links .menu-item-link {
+    display: block !important;
+    width: 100% !important;
+    padding: 14px 0 !important;
+    font-size: 1.1rem !important;
     color: #c9d1d9 !important;
-    text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-  .menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
+/* Убираем синюю тач-подсветку при клике на смартфонах */
+.menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
     -webkit-tap-highlight-color: transparent !important;
     tap-highlight-color: transparent !important;
-  }
-  .menu-toggle.active svg line:nth-of-type(1) {
-    transform: rotate(45deg) translate(5px, 5px) !important;
-    transform-origin: center !important;
-  }
-  .menu-toggle.active svg line:nth-of-type(2) {
+}
+
+/* Когда меню активно, бесшовно гасим оригинальный фон хедера и скрываем ПК-кнопки */
+body:has(.nav-links.active) header {
+    background-color: transparent !important;
+    border-bottom-color: transparent !important;
+}
+
+.menu-toggle.active ~ .lk-btn,
+body:has(.nav-links.active) .hero-actions {
     opacity: 0 !important;
-  }
-  .menu-toggle.active svg line:nth-of-type(3) {
-    transform: rotate(-45deg) translate(5px, -5px) !important;
+    pointer-events: none !important;
+}
+
+/* ИДЕАЛЬНЫЙ ТАКТИЛЬНЫЙ КРЕСТИК (Чистый rotate вокруг центра без перекосов) */
+.menu-toggle svg line {
+    transition: transform 0.3s ease, opacity 0.2s ease !important;
     transform-origin: center !important;
-  }
-} /* Конец медиа-запроса мобильного меню */
+}
 
-/* ==========================================================================
-4. БАЗОВЫЙ BENTO-КАРКАС СЕТКИ
-========================================================================== */
+.menu-toggle.active svg line:nth-of-type(1) {
+    transform: translateY(6px) rotate(45deg) !important;
+}
+
+.menu-toggle.active svg line:nth-of-type(2) {
+    opacity: 0 !important;
+}
+
+.menu-toggle.active svg line:nth-of-type(3) {
+    transform: translateY(-6px) rotate(-45deg) !important;
+  }
+/* Главный экран: сдвигаем контент ниже двухэтажной шапки */
+.hero-section {
+    text-align: center;
+    padding: 140px 24px 40px 24px;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.hero-section p {
+    font-size: 1.15rem;
+    color: #8b949e;
+}
+
+/* Базовый bento-каркас сеток */
 .bento-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 24px;
+    padding: 0 40px 40px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
+/* Адаптивность сеток под планшеты */
 @media (max-width: 1024px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 }
 
+/* Адаптивность сеток под мобильные телефоны */
 @media (max-width: 768px) {
-  .bento-grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
-    padding: 0 16px !important;
-  }
+    .bento-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+        padding: 0 24px 24px 24px;
+    }
 }
-/* ==========================================================================
-5. 3D-МЕХАНИКА И АНИМАЦИЯ BENTO-КАРТОЧЕК
-========================================================================== */
+/* Базовый контейнер Bento-карточки */
 .bento-card {
-  background: transparent !important;
-  perspective: 1500px !important;
-  width: 100% !important;
-  height: 220px !important;
-  position: relative !important;
+    background: none;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    height: 220px;
+    cursor: pointer;
+    position: relative;
 }
 
+/* Внутренняя обертка, которая физически вращается */
 .bento-card-inner {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform-style: preserve-3d !important;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.bento-card-front,
+/* Общие свойства для лица и изнанки карточки */
+.bento-card-front, .bento-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Лицевая сторона карточки (Фронт) */
+.bento-card-front {
+    background-color: #161b22;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.bento-card-front h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.bento-card-front p {
+    font-size: 0.95rem;
+    color: #8b949e;
+    line-height: 1.5;
+}
+/* Изнанка карточки в обычном закрытом состоянии */
 .bento-card-back {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  backface-visibility: hidden !important;
-  -webkit-backface-visibility: hidden !important;
-  border: 1px solid #30363d !important;
-  border-radius: 12px !important;
-  background: linear-gradient(to bottom, #0b1528, #020617) !important;
-  padding: 24px !important;
-  transition: opacity 0.2s ease !important;
+    background-color: #161b22;
+    transform: rotateY(180deg) !important;
+    opacity: 0 !important;
+    justify-content: flex-start;
 }
 
-.bento-card-back {
-  transform: rotateY(180deg) !important;
-  opacity: 0 !important;
-}
-
-/* ФАЗЫ АНИМАЦИИ: Переворот и раскрытие */
+/* ФАЗЫ ВРАЩЕНИЯ: Переворот и плавный полет по JS-матрице */
 .bento-card.is-flipped .bento-card-inner {
-  transform: rotateY(180deg) !important;
+    transform: rotateY(180deg) !important;
 }
 
 .bento-card.is-flipped .bento-card-back {
-  opacity: 1 !important;
+    opacity: 1 !important;
 }
 
 .bento-card.is-flipped .bento-card-front {
-  opacity: 0 !important;
+    opacity: 0 !important;
 }
 
-.bento-card.is-expanded .bento-card-inner {
-  transform: var(--target-transform) rotateY(180deg) !important;
+/* Полет по траектории, рассчитанной в JS */
+.bento-card.is-flipped .bento-card-inner {
+    transform: var(--target-transform) rotateY(180deg) !important;
 }
 
+/* ФИНАЛЬНАЯ ФАЗА: Карточка встала на весь экран. Уничтожаем ложный scale-масштаб! */
 .bento-card.is-expanded .bento-card-back {
-  border-radius: 0 !important;
-  border: none !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  padding: 120px 24px 40px 24px !important;
-  overflow: hidden !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  /* Меняем transform: none на rotateY(180deg) для исправления зеркальности */
-  transform: rotateY(180deg) !important;
-  backface-visibility: visible !important;
-  -webkit-backface-visibility: visible !important;
+    border-radius: 0 !important;
+    border: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    /* Отступ сверху с учетом мобильного и десктопного хедера */
+    padding: 140px 40px 40px 40px !important; 
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;    /* Выравниваем контент по левому краю */
+    justify-content: flex-start !important; /* Направление строго сверху вниз */
+    z-index: 3000000 !important;
+    
+    /* СБРОС ДВОЙНИКА: Оставляем чистый 3D-разворот БЕЗ scale-растяжения пикселей */
+    transform: rotateY(180deg) !important; 
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
 }
 
+/* Полный сброс искажений шрифтов для всех внутренних элементов */
 .bento-card.is-expanded .bento-card-back * {
-  transform: none !important;
-  max-width: 100% !important;
+    transform: none !important; /* Текст больше не растягивается и не плывет */
+    max-width: 100% !important;
+    text-align: left !important;
 }
 
+/* Крупный монументальный заголовок открытой карточки */
 .bento-card.is-expanded .bento-card-back h3 {
-  font-size: 2rem !important;
-  color: #f0f6fc !important;
-  text-align: center !important;
-  margin-bottom: 16px !important;
-  letter-spacing: normal !important;
+    font-size: 2.25rem !important;
+    font-weight: 800 !important;
+    color: #f0f6fc !important;
+    margin-bottom: 24px !important;
+    align-self: flex-start !important;
 }
 
-/* Иконки управления внутри карточек */
-.bento-card-arrow {
-  position: absolute !important;
-  bottom: 24px !important;
-  right: 24px !important;
-  width: 22px !important;
-  height: 22px !important;
-  pointer-events: none !important;
+/* Виджетная зона изнанки */
+.bento-card.is-expanded .bento-card-widget-zone {
+    width: 100% !important;
+    flex-grow: 1 !important;
+    display: block !important;
 }
 
-.bento-card-arrow svg {
-  width: 100% !important;
-  height: 100% !important;
-  stroke: rgba(240, 246, 252, 0.6) !important;
-  stroke-width: 1.5px !important;
-  fill: none !important;
-}
-
-/* КНОПКА ЗАКРЫТИЯ КАРТОЧКИ — Фиксация на экране поверх всего */
+/* КНОПКА ЗАКРЫТИЯ КАРТОЧКИ (Абсолютная фиксация поверх холста) */
 .bento-card-close-icon {
-  position: fixed !important;
-  top: 25px !important;
-  right: 25px !important;
-  width: 32px !important;
-  height: 32px !important;
-  cursor: pointer !important;
-  z-index: 3000005 !important;
-  background: rgba(22, 27, 34, 0.6) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 6px !important;
-  transition: background 0.2s ease !important;
+    position: fixed !important;
+    top: 24px !important;
+    right: 24px !important;
+    width: 40px !important;
+    height: 40px !important;
+    cursor: pointer !important;
+    z-index: 3000005 !important;
+    background: rgba(22, 27, 34, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid #30363d !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.2s ease !important;
 }
 
 .bento-card-close-icon:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #8b949e !important;
 }
 
 .bento-card-close-icon svg {
-  width: 100% !important;
-  height: 100% !important;
-  stroke: #ffffff !important;
-  stroke-width: 2.5px !important;
-  fill: none !important;
-   }
-/* ==========================================================================
-   6. ЭЛЕМЕНТЫ УПРАВЛЕНИЯ КАРТОЧЕК
-   ========================================================================== */
+    width: 20px !important;
+    height: 20px !important;
+    stroke: #ffffff !important;
+    stroke-width: 2.5px !important;
+    fill: none !important;
+}
 
-/* Иконки-стрелочки в правом нижнем углу закрытых Bento-карточек */
+/* ИКОНКИ-СТРЕЛКИ ЗАКРЫТЫХ КАРТОЧЕК */
 .bento-card-arrow {
     position: absolute !important;
     bottom: 24px !important;
@@ -517,7 +439,6 @@ header {
     transition: transform 0.3s ease !important;
 }
 
-/* Элегантный наклон стрелочки при наведении на карточку */
 .bento-card:hover .bento-card-arrow {
     transform: translate(2px, -2px) !important;
 }
@@ -529,3 +450,18 @@ header {
     stroke-width: 1.5px !important;
     fill: none !important;
 }
+
+/* ФУТЕР САЙТА */
+footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid #30363d;
+    color: #8b949e;
+    font-size: 14px;
+}
+
+footer a {
+    color: #58a6ff;
+    margin: 0 8px;
+  }
+  
