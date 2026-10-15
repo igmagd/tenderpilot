@@ -201,15 +201,19 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
         gap: 16px;
         padding: 0 24px 24px 24px;
     /* Сжимаем второй этаж шапки под узкие экраны смартфонов */
+        
     .hero-actions {
         display: flex !important;
+        flex-direction: row !important; /* Выстроит кнопки строго на одной линии */
         justify-content: center !important;
-        gap: 6px !important;
-        padding: 10px 12px !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 0 16px !important;
         width: 100% !important;
-        overflow-x: hidden !important;
+        height: 50px !important; /* Фиксируем высоту шапки, чтобы сетка Bento не прыгала */
         background-color: #0d1117 !important;
         border-top: 1px solid #30363d !important;
+        overflow: hidden !important;
     }
 
     /* Изолируем кнопки: они делят экран поровну, текст больше не вылетает */
