@@ -405,10 +405,39 @@ footer a {
     color: #58a6ff;
     margin: 0 8px;
 }
-/* ГЛОБАЛЬНАЯ ИЗОЛЯЦИЯ: Этот код сработает в обход медиазапросов, карточка встанет на весь экран! */
-body:has(.bento-card.is-expanded) .bento-grid {
+/* ==========================================================================
+   УЛЬТИМАТИВНЫЙ БЛОК ДЛЯ СМАРТФОНОВ (ВНЕ КАПРИЗНЫХ МЕДИА-ЗАПРОСОВ)
+   ========================================================================== */
+
+/* 1. ЖЕСТКО ЗАСТАВЛЯЕМ КНОПКИ ВСТАТЬ В ОДНУ ЛИНИЮ */
+.hero-actions {
+    display: flex !important;
+    flex-direction: row !important; /* Кнопки встанут строго в горизонтальный ряд */
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 0 16px !important;
+    width: 100% !important;
+    height: 50px !important; /* Фиксируем высоту, чтобы не распирало хедер */
+    background-color: #0d1117 !important;
+    border-top: 1px solid #30363d !important;
+    overflow: hidden !important;
+}
+
+/* 2. ПОДГОНЯЕМ ШРИФТЫ И РАЗМЕРЫ КНОПОК ПОД ЭКРАН ТЕЛЕФОНА */
+.mode-btn {
+    padding: 6px 4px !important;
+    font-size: 11px !important; /* Текст гарантированно влезет и не уйдет в столбик */
+    flex: 1 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+
+/* 3. УНИЧТОЖАЕМ СБОЙ И ОТСКОК КАРТОЧКИ СЕТКИ */
+body:has(.bento-card.is-expanded) .bento-grid,
+body:has(.bento-card.is-expanded) .bento-card-inner {
     transform: none !important;
     perspective: none !important;
-    transform-style: flat !important;
-    }
-    
+    transform-style: flat !important; /* Намертво убиваем 3D-коллапс, фиксируя карту на весь экран! */
+}
+
