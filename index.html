@@ -1,101 +1,92 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TenderPilot — Платформа для работы с тендерами</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TenderPilot — Платформа для работы с тендерами</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- НАВИГАЦИЯ И ШАПКА -->
+<!-- НАВИГАЦИЯ И ШАПКА -->
 <header>
-        <div class="header-container">
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
-            <!-- Иконка Полосок (Бургер) -->
-            <svg class="icon-burger" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-            <!-- Иконка Маленького Крестика -->
-            <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; display: none;">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-
-        <a class="logo" href="#">Tender<span>Pilot</span></a>
-<nav class="nav-links">
+      <div class="header-container">
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">
+      <!-- Иконка Бургера -->
+      <svg class="icon-burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px;">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
     
-<!-- Верхняя строка меню с ультра-тонкими премиальными SVG-стрелочками -->
-<div class="menu-status-bar">
-  <span class="menu-status-text">Поставщик</span>
-  <div class="menu-status-arrows">
-    <svg class="menu-arrow-icon btn-menu-prev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Назад"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    <svg class="menu-arrow-icon btn-menu-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Вперед"><polyline points="9 18 15 12 9 6"></polyline></svg>
-  </div>
-</div>
+    <a class="logo" href="#">Tender<span>Pilot</span></a>
 
+    <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+    </a>
+      </div>
+        <nav class="nav-links">
+    <!-- Верхняя строка меню со стрелочками переключения миров -->
+    <div class="menu-status-bar">
+      <span class="menu-status-text">Поставщик</span>
+      <div class="menu-status-arrows">
+        <svg class="menu-arrow-icon btn-menu-prev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Назад"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <svg class="menu-arrow-icon btn-menu-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Вперед"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    </div>
         <!-- БЛОК ПОСТАВЩИКА (Активен по умолчанию) -->
-        <div class="menu-group-links group-supplier">
-    <a href="#grid-supplier-find" class="menu-item-link btn-supplier-find">Поиск тендеров</a>
-    <a href="#grid-supplier-analyser" class="menu-item-link btn-supplier-analyser">Анализ документов</a>
-    <a href="#grid-supplier-match" class="menu-item-link btn-supplier-match">Подбор поставщиков</a>
-    <a href="#grid-supplier-delivery" class="menu-item-link btn-supplier-delivery">Расчет доставки</a>
-    <a href="#grid-supplier-robot" class="menu-item-link btn-supplier-robot">Создание заявки</a>
-    <a href="#grid-supplier-checklist" class="menu-item-link btn-supplier-checklist">Чек-лист доков</a>
-    <a href="#grid-supplier-finance" class="menu-item-link btn-supplier-finance">Банковская гарантия</a>
-    <a href="#grid-supplier-legal" class="menu-item-link btn-supplier-legal">Тендерный юрист</a>
-  </div>
-
+    <div class="menu-group-links group-supplier">
+      <a href="#card-supplier-find" class="menu-item-link btn-supplier-find">Поиск тендеров</a>
+      <a href="#card-supplier-analyser" class="menu-item-link btn-supplier-analyser">Анализ документов</a>
+      <a href="#card-supplier-match" class="menu-item-link btn-supplier-match">Подбор поставщиков</a>
+      <a href="#card-supplier-delivery" class="menu-item-link btn-supplier-delivery">Расчет доставки</a>
+      <a href="#card-supplier-robot" class="menu-item-link btn-supplier-robot">Создание заявки</a>
+      <a href="#card-supplier-checklist" class="menu-item-link btn-supplier-checklist">Чек-лист доков</a>
+      <a href="#card-supplier-finance" class="menu-item-link btn-supplier-finance">Банковская гарантия</a>
+      <a href="#card-supplier-legal" class="menu-item-link btn-supplier-legal">Тендерный юрист</a>
+    </div>
         <!-- БЛОК ЗАКАЗЧИКА (Скрыт по умолчанию) -->
-        <div class="menu-group-links group-customer" style="display: none;">
-    <a href="#grid-customer-spec" class="menu-item-link btn-customer-spec">Создание ТЗ</a>
-    <a href="#grid-customer-nmck" class="menu-item-link btn-customer-nmck">Расчет НМЦК</a>
-    <a href="#grid-customer-match" class="menu-item-link btn-customer-match">Поиск исполнителя</a>
-    <a href="#grid-customer-risk" class="menu-item-link btn-customer-risk">Анализ рисков</a>
-    <a href="#grid-customer-rnp" class="menu-item-link btn-customer-rnp">Проверка в РНП</a>
-    <a href="#grid-customer-control" class="menu-item-link btn-customer-control">Контроль этапов</a>
-    <a href="#grid-customer-legal" class="menu-item-link btn-customer-legal">Жалобы ФАС</a>
-    <a href="#grid-customer-training" class="menu-item-link btn-customer-training">Обучение</a>
-  </div>
-
+    <div class="menu-group-links group-customer" style="display: none;">
+      <a href="#card-customer-spec" class="menu-item-link btn-customer-spec">Создание ТЗ</a>
+      <a href="#card-customer-nmck" class="menu-item-link btn-customer-nmck">Расчет НМЦК</a>
+      <a href="#card-customer-match" class="menu-item-link btn-customer-match">Поиск исполнителя</a>
+      <a href="#card-customer-risk" class="menu-item-link btn-customer-risk">Анализ рисков</a>
+      <a href="#card-customer-rnp" class="menu-item-link btn-customer-rnp">Проверка в РНП</a>
+      <a href="#card-customer-control" class="menu-item-link btn-customer-control">Контроль этапов</a>
+      <a href="#card-customer-legal" class="menu-item-link btn-customer-legal">Жалобы ФАС</a>
+      <a href="#card-customer-training" class="menu-item-link btn-customer-training">Обучение</a>
+    </div>
         <!-- БЛОК ТРАНСПОРТА (Скрыт по умолчанию) -->
-        <div class="menu-group-links group-transport" style="display: none;">
-    <a href="#grid-transport-delivery" class="menu-item-link btn-transport-delivery">Расчет доставки</a>
-    <a href="#grid-transport-modes" class="menu-item-link btn-transport-modes">Выбор тарифа</a>
-    <a href="#grid-transport-discount" class="menu-item-link btn-transport-discount">Скидки от ТК</a>
-    <a href="#grid-transport-invoice" class="menu-item-link btn-transport-invoice">Счет на почту</a>
-    <a href="#grid-transport-pool" class="menu-item-link btn-transport-pool">Сборные грузы</a>
-    <a href="#grid-transport-calc" class="menu-item-link btn-transport-calc">Калькулятор объема</a>
+    <div class="menu-group-links group-transport" style="display: none;">
+      <a href="#card-transport-delivery" class="menu-item-link btn-transport-delivery">Расчет доставки</a>
+      <a href="#card-transport-modes" class="menu-item-link btn-transport-modes">Выбор тарифа</a>
+      <a href="#card-transport-discount" class="menu-item-link btn-transport-discount">Скидки от ТК</a>
+      <a href="#card-transport-invoice" class="menu-item-link btn-transport-invoice">Счет на почту</a>
+      <a href="#card-transport-pool" class="menu-item-link btn-transport-pool">Сборные грузы</a>
+      <a href="#card-transport-calc" class="menu-item-link btn-transport-calc">Калькулятор объема</a>
+    </div>
+  </nav>
+
+  <!-- ВТОРОЙ ЯРУС ШАПКИ: Десктопные кнопки переключения миров -->
+  <div class="hero-actions">
+    <div class="mode-btn supplier-btn active" data-mode="supplier">Поставщикам</div>
+    <div class="mode-btn customer-btn" data-mode="customer">Заказчикам</div>
+    <div class="mode-btn transport-btn" data-mode="transport">Грузоперевозки</div>
   </div>
-</nav>
+</header>
 
-        <a class="lk-btn" href="#login" aria-label="Личный кабинет">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; display: block;">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-            </svg>              
-        </a>
-        </div>
-            <!-- Три кнопки вернулись внутрь шапки на свой нижний уровень: -->
-        <div class="hero-actions">
-            <div class="mode-btn supplier-btn active" data-mode="supplier">Поставщикам</div>
-            <div class="mode-btn customer-btn" data-mode="customer">Заказчикам</div>
-            <div class="mode-btn transport-btn" data-mode="transport">Грузоперевозки</div>
-        </div>
-    
-    </header>
-    <!-- ГЛАВНЫЙ ЭКРАН -->
-    <main class="hero-section">
-        <h1>Управляйте тендерами эффективно</h1>
-        <p>Интеллектуальные инструменты для автоматизации работы с закупками</p>
+<!-- ГЛАВНЫЙ ЭКРАН -->
+<main class="hero-section">
+  <h1>Управляйте тендерами эффективно</h1>
+  <p>Интеллектуальные инструменты для автоматизации работы с закупками</p>
     </main>
-    
-<!-- Контейнеры Bento-сеток для трех миров Tenderpilot -->
+    <!-- Контейнеры Bento-сеток для трех миров Tenderpilot -->
+<div id="grid-supplier" class="bento-grid">
 
-<div id="grid-supplier" class="bento-grid active">
   <!-- КАРТОЧКА 1: Поиск тендеров -->
   <div class="bento-card" id="card-supplier-find">
     <div class="bento-card-inner">
@@ -125,8 +116,7 @@
       </div>
     </div>
   </div>
-
-  <!-- КАРТОЧКА 2: Анализ документов -->
+    <!-- КАРТОЧКА 2: Анализ документов -->
   <div class="bento-card" id="card-supplier-analyser">
     <div class="bento-card-inner">
       <div class="bento-card-front">
@@ -155,8 +145,7 @@
       </div>
     </div>
   </div>
-
-  <!-- КАРТОЧКА 3: Подбор поставщиков -->
+    <!-- КАРТОЧКА 3: Подбор поставщиков -->
   <div class="bento-card" id="card-supplier-match">
     <div class="bento-card-inner">
       <div class="bento-card-front">
@@ -184,15 +173,14 @@
         <div class="bento-card-widget-zone"></div>
       </div>
     </div>
-  </div>
-
-  <!-- КАРТОЧКА 4: Расчет доставки -->
+                </div>
+                  <!-- КАРТОЧКА 4: Расчет доставки -->
   <div class="bento-card" id="card-supplier-delivery">
     <div class="bento-card-inner">
       <div class="bento-card-front">
         <div class="bento-card-front-content">
           <h3>Расчет доставки</h3>
-          <p>Логистическое плечо от学院 склада до заказчика с учетом веса и габаритов.</p>
+          <p>Логистическое плечо от вашего склада до заказчика с учетом веса и габаритов.</p>
         </div>
         <div class="bento-card-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -215,8 +203,7 @@
       </div>
     </div>
   </div>
-
-  <!-- КАРТОЧКА 5: Создание заявки -->
+    <!-- КАРТОЧКА 5: Создание заявки -->
   <div class="bento-card" id="card-supplier-robot">
     <div class="bento-card-inner">
       <div class="bento-card-front">
@@ -245,8 +232,7 @@
       </div>
     </div>
   </div>
-
-  <!-- КАРТОЧКА 6: Чек-лист доков -->
+    <!-- КАРТОЧКА 6: Чек-лист доков -->
   <div class="bento-card" id="card-supplier-checklist">
     <div class="bento-card-inner">
       <div class="bento-card-front">
@@ -275,8 +261,7 @@
       </div>
     </div>
   </div>
-
-  <!-- КАРТОЧКА 7: Банковская гарантия -->
+    <!-- КАРТОЧКА 7: Банковская гарантия -->
   <div class="bento-card" id="card-supplier-finance">
     <div class="bento-card-inner">
       <div class="bento-card-front">
@@ -305,8 +290,7 @@
       </div>
     </div>
   </div>
-
-  <!-- КАРТОЧКА 8: Тендерный юрист -->
+    <!-- КАРТОЧКА 8: Тендерный юрист -->
   <div class="bento-card" id="card-supplier-legal">
     <div class="bento-card-inner">
       <div class="bento-card-front">
@@ -335,21 +319,362 @@
       </div>
     </div>
   </div>
-    
+</div> <!-- КОНЕЦ СЕТКИ ПОСТАВЩИКОВ -->
+    <!-- Контейнер Bento-сетки для мира Заказчиков -->
+<div id="grid-customer" class="bento-grid" style="display: none;">
 
-<!-- Сетко-заготовки для остальных двух миров (JS будет включать их на лету) -->
-<div id="grid-customer" class="bento-grid"></div>
-<div id="grid-transport" class="bento-grid"></div>
-
-
-    <!-- ФУТЕР (ПОДВАЛ) САЙТА -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 TenderPilot. Все права защищены. | <a href="#terms">Условия</a> | <a href="#privacy">Конфиденциальность</a></p>
+  <!-- КАРТОЧКА 1 (ЗАКАЗЧИК): Создание ТЗ -->
+  <div class="bento-card" id="card-customer-spec">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Создание ТЗ</h3>
+          <p>Интеллектуальный конструктор технических заданий без ошибок и нарушений 44/223-ФЗ.</p>
         </div>
-    </footer>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Создание ТЗ</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+        <!-- КАРТОЧКА 2 (ЗАКАЗЧИК): Расчет НМЦК -->
+  <div class="bento-card" id="card-customer-nmck">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Расчет НМЦК</h3>
+          <p>Автоматический сбор коммерческих предложений и обоснование начальной цены контракта.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Расчет НМЦК</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+      <!-- КАРТОЧКА 3 (ЗАКАЗЧИК): Поиск исполнителя -->
+  <div class="bento-card" id="card-customer-match">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Поиск исполнителя</h3>
+          <p>Интеллектуальный анализ рынка и подбор надежных поставщиков по ИНН и ОКВЭД.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Поиск исполнителя</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+      </div>
+        <!-- КАРТОЧКА 4 (ЗАКАЗЧИК): Анализ рисков -->
+  <div class="bento-card" id="card-customer-risk">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Анализ рисков</h3>
+          <p>Автоматическая проверка заявок участников на аффилированность и скрытый сговор.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Анализ рисков</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+    <!-- КАРТОЧКА 5 (ЗАКАЗЧИК): Проверка в РНП -->
+  <div class="bento-card" id="card-customer-rnp">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Проверка в РНП</h3>
+          <p>Экспресс-скоринг участников по реестрам недобросовестных поставщиков в один клик.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Проверка в РНП</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+                                </div>
+                                  <!-- КАРТОЧКА 6 (ЗАКАЗЧИК): Контроль этапов -->
+  <div class="bento-card" id="card-customer-control">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Контроль этапов</h3>
+          <p>Мониторинг исполнения контракта, соблюдения сроков поставок и оплат в реальном времени.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Контроль этапов</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+    <!-- КАРТОЧКА 7 (ЗАКАЗЧИК): Жалобы ФАС -->
+  <div class="bento-card" id="card-customer-legal">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Жалобы ФАС</h3>
+          <p>Правовая поддержка при спорах, подготовка возражений и защита интересов в антимонопольной службе.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Жалобы ФАС</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+    <!-- КАРТОЧКА 8 (ЗАКАЗЧИК): Обучение -->
+  <div class="bento-card" id="card-customer-training">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Обучение</h3>
+          <p>Интерактивная база знаний, вебинары и курсы повышения квалификации для контрактных управляющих.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Обучение</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+</div> <!-- КОНЕЦ СЕТКИ ЗАКАЗЧИКОВ -->
+    <!-- Контейнер Bento-сетки для мира Грузоперевозок -->
+<div id="grid-transport" class="bento-grid" style="display: none;">
 
-    <script src="main.js"></script>
+  <!-- КАРТОЧКА 1 (ТРАНСПОРТ): Расчет доставки -->
+  <div class="bento-card" id="card-transport-delivery">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Расчет доставки</h3>
+          <p>Автоматический калькулятор стоимости и сроков транспортировки по всей территории РФ.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Расчет доставки</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+    <!-- КАРТОЧКА 2 (ТРАНСПОРТ): Выбор тарифа -->
+  <div class="bento-card" id="card-transport-modes">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Выбор тарифа</h3>
+          <p>Интеллектуальное сравнение цен и условий различных транспортных компаний на одной панели.</p>
+        </div>
+        <div class="bento-card-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Выбор тарифа</h3>
+          <div class="bento-card-close-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+  </div>
+    <div class="bento-card" id="card-transport-discount">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Скидки от ТК</h3>
+          <p>Эксклюзивные предложения.</p>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Скидки от ТК</h3>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+    </div>
+      <div class="bento-card" id="card-transport-invoice">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Счет на почту</h3>
+          <p>Мгновенная отправка документов.</p>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Счет на почту</h3>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+    </div>
+      <div class="bento-card" id="card-transport-pool">
+    <div class="bento-card-inner">
+      <div class="bento-card-front">
+        <div class="bento-card-front-content">
+          <h3>Сборные грузы</h3>
+          <p>Оптимизация сборных отправлений.</p>
+        </div>
+      </div>
+      <div class="bento-card-back">
+        <div class="bento-card-back-header">
+          <h3>Сборные грузы</h3>
+        </div>
+        <div class="bento-card-widget-zone"></div>
+      </div>
+    </div>
+      </div>
+      </div> <!-- КОНЕЦ СЕТКИ ТРАНСПОРТА -->
+
+<!-- ФУТЕР (ПОДВАЛ) САЙТА -->
+<footer>
+  <div class="container">
+    <p>&copy; 2026 TenderPilot. Все права защищены. | <a href="#terms">Условия</a> | <a href="#privacy">Конфиденциальность</a></p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
 </body>
-                                                                                                                                                                                                                                 </html>
-    
+              </html>
+              
