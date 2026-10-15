@@ -1,18 +1,18 @@
 /* ==========================================================================
-1. БАЗОВЫЕ НАСТРОЙКИ, СБРОС СТИЛЕЙ И ТИПОГРАФИКА TENDERPILOT
-========================================================================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+   1. БАЗОВЫЕ НАСТРОЙКИ, СБРОС СТИЛЕЙ И ЕДИНАЯ ТИПОГРАФИКА ТЕНДЕРПИЛОТ
+   ========================================================================== */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
   -webkit-tap-highlight-color: transparent !important;
   tap-highlight-color: transparent !important;
 }
 
-body {
-  background-color: #0d1117;
-  color: #c9d1d9;
+body { 
+  background-color: #0d1117; 
+  color: #c9d1d9; 
   line-height: 1.5;
   overflow-x: hidden;
 }
@@ -47,10 +47,10 @@ header {
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  height: 120px !important;
+  height: 120px !important; /* Четкие два этажа */
   z-index: 1000 !important;
   display: flex !important;
-  flex-direction: column !important; /* Возвращаем двухэтажную структуру */
+  flex-direction: column !important;
   justify-content: flex-start !important;
   transition: all 0.3s ease;
 }
@@ -66,12 +66,10 @@ header {
   padding: 0 24px !important;
   margin: 0 auto !important;
   position: relative !important;
-  z-index: 2000001 !important; /* Поднимаем над мобильной шторкой */
 }
 
-
 .logo {
-  font-size: 1.20rem !important;
+  font-size: 1.20rem !important; /* Премиальное изящество по ТЗ */
   font-weight: 700 !important;
   color: #f0f6fc !important;
   letter-spacing: 0.5px !important;
@@ -102,6 +100,7 @@ header {
   box-sizing: border-box !important;
 }
 
+/* Кнопки переключателей с поддержкой оригинальных классов из ТЗ */
 .mode-btn, .toggle-btn {
   flex: 1 !important;
   display: flex !important;
@@ -126,220 +125,105 @@ header {
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
+/* Премиальное синее активное состояние с неоновым свечением из истории */
 .mode-btn.active, .toggle-btn.active {
   background: linear-gradient(135deg, #388bfd, #00f2fe) !important;
   color: #ffffff !important;
   border-color: transparent !important;
   font-weight: 600 !important;
   box-shadow: 0 0 16px rgba(56, 139, 253, 0.4) !important;
-   }
-   /* ==========================================================================
-2. ГЛАВНЫЙ ЭКРАН С РАДИАЛЬНЫМ ГРАДИЕНТОМ
-========================================================================== */
+}
+
+/* Главная секция с красивым синим радиальным градиентом */
+.hero-section {
+  padding: 160px 20px 40px 20px !important; /* Учли высоту двухэтажной шапки */
+  text-align: center !important;
+  background: radial-gradient(circle at top, rgba(56, 139, 253, 0.15), transparent 60%) !important;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem !important;
+  color: #f0f6fc !important;
+  margin-bottom: 15px !important;
+  font-weight: 800 !important;
+}
+
+.hero-section p {
+  font-size: 1.2rem !important;
+  color: #8b949e !important;
+  margin-bottom: 20px !important;
+}
+
+/* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
-    /* ==========================================================================
-       МОБИЛЬНАЯ НАВИГАЦИЯ ПРЕМИУМ-КЛАССА (МОНОЛИТНАЯ ШТОРКА И ТАКТИЛЬНЫЙ КРЕСТИК)
-       ========================================================================== */
+  /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
+  .nav-links {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background: linear-gradient(to top, #020617, #0d1117) !important;
+    display: flex !important;
+    flex-direction: column !important; /* Принудительный вертикальный список */
+    padding: 150px 24px 40px 24px !important; /* Отступ с учетом двухэтажной шапки */
+    z-index: 99999 !important; /* Поднимаем выше шапки при открытии */
+    transform: translate3d(0, -100%, 0) !important;
+    transition: transform 0.35s ease !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    pointer-events: none !important;
+  }
 
-    /* Базовое состояние двухэтажной шапки на мобильных */
-    header {
-        height: 120px !important;
-        transition: background-color 0.25s ease, border-color 0.25s ease !important;
-    }
+  .nav-links.active {
+    transform: translate3d(0, 0, 0) !important;
+    pointer-events: auto !important;
+  }
 
-    /* Эффект бесшовного растворения шапки: когда меню открыто, фон и границы исчезают */
-    body:has(.nav-links.active) header {
-        background-color: transparent !important;
-        border-bottom-color: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-    }
+  /* Мобильная строка статуса */
+  .menu-status-bar {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+    margin-bottom: 8px !important;
+    padding-bottom: 12px !important;
+  }
 
-    /* Скрываем второй ярус (ПК-кнопки), чтобы они не просвечивали сквозь меню */
-    .menu-toggle.active ~ .lk-btn,
-    body:has(.nav-links.active) .hero-actions {
-        opacity: 0 !important;
-        pointer-events: none !important;
-    }
+  .menu-status-text {
+    color: #58a6ff !important;
+    font-weight: 500 !important;
+    font-size: 19px !important;
+  }
 
-    /* Первый ярус: фиксируем координаты элементов управления */
-    .header-container {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        padding: 0 24px !important;
-        height: 65px !important;
-        position: relative !important;
-        z-index: 2000001 !important; /* Всегда поверх выезжающего холста */
-    }
+  .menu-status-arrows {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
 
-    /* Тактильный бургер-крестик */
-    .menu-toggle {
-        order: 1 !important;
-        margin: 0 !important;
-        position: relative !important;
-        z-index: 2000005 !important;
-    }
+  .menu-status-arrows .menu-arrow-icon {
+    width: 20px !important;
+    height: 20px !important;
+    color: #768390 !important;
+    cursor: pointer !important;
+  }
 
-    /* Логотип: жестко прижат к бургеру с благородным отступом в 16px */
-    .logo {
-        position: static !important;
-        transform: none !important;
-        order: 2 !important;
-        margin-left: 16px !important;
-        margin-right: auto !important; /* Выталкивает ЛК в правый угол */
-        font-size: 1.25rem !important;
-        z-index: 2000005 !important;
-    }
-
-    .lk-btn {
-        display: flex !important;
-        order: 3 !important;
-        z-index: 2000005 !important;
-        transition: opacity 0.2s ease !important;
-    }
-
-    /* МОНОЛИТНЫЙ ВЫЕЗЖАЮЩИЙ ХОЛСТ МЕНЮ */
-    .nav-links {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100vh !important;
-        background: #0d1117 !important; /* Абсолютно глубокий, благородный темный фон */
-        display: flex !important;
-        flex-direction: column !important;
-        /* Идеальный отступ сверху: 65px под Бургер+Логотип + 32px премиальный воздух до контента */
-        padding: 97px 24px 40px 24px !important;
-        z-index: 2000000 !important; /* Ровно под кнопками первого яруса */
-        transform: translate3d(0, -100%, 0) !important;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; /* Кинематографичный плавный выезд Apple-style */
-        overflow-y: auto !important;
-        pointer-events: none !important;
-    }
-
-    .nav-links.active {
-        transform: translate3d(0, 0, 0) !important;
-        pointer-events: auto !important;
-    }
-
-    /* Контентная навигационная строка внутри шторки */
-    .menu-status-bar {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
-        margin-bottom: 16px !important;
-        padding-bottom: 16px !important;
-    }
-
-    .menu-status-text {
-        color: #58a6ff !important;
-        font-weight: 600 !important;
-        font-size: 1.15rem !important;
-        letter-spacing: -0.2px !important;
-    }
-
-    .menu-status-arrows {
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-    }
-
-    .menu-status-arrows .menu-arrow-icon {
-        width: 22px !important;
-        height: 22px !important;
-        color: #768390 !important;
-        cursor: pointer !important;
-        transition: color 0.2s ease !important;
-    }
-
-    .menu-status-arrows .menu-arrow-icon:active {
-        color: #58a6ff !important;
-    }
-
-    /* Ссылки меню в столбик */
-    .menu-group-links {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        gap: 2px !important;
-    }
-
-    .nav-links .menu-item-link {
-        display: block !important;
-        width: 100% !important;
-        padding: 14px 0 !important;
-        font-size: 1.1rem !important;
-        color: #c9d1d9 !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-        transition: color 0.2s ease, padding-left 0.2s ease !important;
-    }
-
-    .nav-links .menu-item-link:active {
-        color: #00f2fe !important;
-        padding-left: 4px !important; /* Легкий интерактивный отклик при нажатии */
-    }
-
-    .menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
-        -webkit-tap-highlight-color: transparent !important;
-        tap-highlight-color: transparent !important;
-    }
-
-    /* ЮВЕЛИРНАЯ ТРАНСФОРМАЦИЯ БУРГЕРА В КРЕСТИК (БЕЗ ИСКАЖЕНИЙ ГЕОМЕТРИИ) */
-    .menu-toggle svg line {
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease !important;
-        transform-origin: center !important; /* Вращение строго вокруг геометрического центра */
-    }
-
-    /* Верхняя линия: смещается в центр по оси Y и изящно разворачивается на 45 градусов */
-    .menu-toggle.active svg line:nth-of-type(1) {
-        transform: translateY(6px) rotate(45deg) !important;
-    }
-
-    /* Средняя линия: бесследно растворяется в пространстве */
-    .menu-toggle.active svg line:nth-of-type(2) {
-        opacity: 0 !important;
-    }
-
-    /* Нижняя линия: смещается вверх в центр оси Y и разворачивается на -45 градусов */
-    .menu-toggle.active svg line:nth-of-type(3) {
-        transform: translateY(-6px) rotate(-45deg) !important;
-    }
-} /* Конец премиального медиа-запроса мобильного меню */
-
-
-/* ==========================================================================
-3. МОБИЛЬНАЯ АДАПТАЦИЯ (ШТОРКА МЕНЮ В СТОЛБИК)
-========================================================================== */
-@    padding: 12px 0 !important;
+  .nav-links .menu-item-link {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 0 !important;
     font-size: 18px !important;
     color: #c9d1d9 !important;
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-  .menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
-    -webkit-tap-highlight-color: transparent !important;
-    tap-highlight-color: transparent !important;
-  }
-  .menu-toggle.active svg line:nth-of-type(1) {
-    transform: rotate(45deg) translate(5px, 5px) !important;
-    transform-origin: center !important;
-  }
-  .menu-toggle.active svg line:nth-of-type(2) {
-    opacity: 0 !important;
-  }
-  .menu-toggle.active svg line:nth-of-type(3) {
-    transform: rotate(-45deg) translate(5px, -5px) !important;
-    transform-origin: center !important;
-  }
-} /* Конец медиа-запроса мобильного меню */
+   
+} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
 
-/* ==========================================================================
-4. БАЗОВЫЙ BENTO-КАРКАС СЕТКИ
-========================================================================== */
+
+/* Базовый bento-каркас */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -354,15 +238,13 @@ header {
 }
 
 @media (max-width: 768px) {
-  .bento-grid {
-    grid-template-columns: 1fr !important;
+  .bento-grid { 
+    grid-template-columns: 1fr !important; 
     gap: 16px !important;
     padding: 0 16px !important;
   }
-}
-/* ==========================================================================
-5. 3D-МЕХАНИКА И АНИМАЦИЯ BENTO-КАРТОЧЕК
-========================================================================== */
+     }
+/* 3D-контекст Bento-карточек */
 .bento-card {
   background: transparent !important;
   perspective: 1500px !important;
@@ -379,9 +261,9 @@ header {
   height: 100% !important;
   transform-style: preserve-3d !important;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-.bento-card-front,
+   }
+/* Полный монолитный блок 3D-механики Bento-карточек */
+.bento-card-front, 
 .bento-card-back {
   position: absolute !important;
   top: 0 !important;
@@ -397,28 +279,30 @@ header {
   transition: opacity 0.2s ease !important;
 }
 
+/* Рубашка карты изначально развернута по оси Y и полностью скрыта */
 .bento-card-back {
   transform: rotateY(180deg) !important;
-  opacity: 0 !important;
+  opacity: 0 !important; 
 }
 
-/* ФАЗЫ АНИМАЦИИ: Переворот и раскрытие */
+/* ФАЗА 1: При 3D-перевороте проявляем рубашку и гасим лицо */
 .bento-card.is-flipped .bento-card-inner {
   transform: rotateY(180deg) !important;
 }
-
 .bento-card.is-flipped .bento-card-back {
-  opacity: 1 !important;
+  opacity: 1 !important; /* Убирает баг исчезновения! */
 }
-
 .bento-card.is-flipped .bento-card-front {
   opacity: 0 !important;
 }
 
+/* ФАЗА 2: Аппаратное GPU-раскрытие контейнера на весь экран */
 .bento-card.is-expanded .bento-card-inner {
   transform: var(--target-transform) rotateY(180deg) !important;
+  z-index: 9999 !important;
 }
 
+/* Фиксация размеров обратной стороны модального окна на максимальный слой */
 .bento-card.is-expanded .bento-card-back {
   border-radius: 0 !important;
   border: none !important;
@@ -427,29 +311,8 @@ header {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  padding: 120px 24px 40px 24px !important;
-  overflow: hidden !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  /* Меняем transform: none на rotateY(180deg) для исправления зеркальности */
-  transform: rotateY(180deg) !important;
-  backface-visibility: visible !important;
-  -webkit-backface-visibility: visible !important;
-}
-
-.bento-card.is-expanded .bento-card-back * {
-  transform: none !important;
-  max-width: 100% !important;
-}
-
-.bento-card.is-expanded .bento-card-back h3 {
-  font-size: 2rem !important;
-  color: #f0f6fc !important;
-  text-align: center !important;
-  margin-bottom: 16px !important;
-  letter-spacing: normal !important;
+  z-index: 1000000 !important; /* Пробивает двухэтажную шапку */
+  padding-top: 140px !important; /* Сдвигаем внутренний текст виджетов ниже шапки */
 }
 
 /* Иконки управления внутри карточек */
@@ -462,6 +325,17 @@ header {
   pointer-events: none !important;
 }
 
+/* Кнопка закрытия — фиксируем на экране поверх всего */
+.bento-card-close-icon {
+  position: fixed !important; /* Всегда на одном месте при скролле */
+  top: 25px !important; /* Удобный отступ от верхнего края экрана */
+  right: 25px !important; /* Удобный отступ от правого края */
+  width: 28px !important; /* Оптимальный размер для тапа пальцем */
+  height: 28px !important;
+  cursor: pointer !important;
+  z-index: 2000000 !important; /* Самый высокий z-index на платформе */
+}
+
 .bento-card-arrow svg {
   width: 100% !important;
   height: 100% !important;
@@ -470,62 +344,10 @@ header {
   fill: none !important;
 }
 
-/* КНОПКА ЗАКРЫТИЯ КАРТОЧКИ — Фиксация на экране поверх всего */
-.bento-card-close-icon {
-  position: fixed !important;
-  top: 25px !important;
-  right: 25px !important;
-  width: 32px !important;
-  height: 32px !important;
-  cursor: pointer !important;
-  z-index: 3000005 !important;
-  background: rgba(22, 27, 34, 0.6) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 6px !important;
-  transition: background 0.2s ease !important;
-}
-
-.bento-card-close-icon:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-}
-
 .bento-card-close-icon svg {
   width: 100% !important;
   height: 100% !important;
-  stroke: #ffffff !important;
-  stroke-width: 2.5px !important;
+  stroke: #ffffff !important; /* Контрастный белый цвет крестика */
+  stroke-width: 2.5px !important; /* Делаем линии чуть четче */
   fill: none !important;
-   }
-/* ==========================================================================
-   6. ЭЛЕМЕНТЫ УПРАВЛЕНИЯ КАРТОЧЕК
-   ========================================================================== */
-
-/* Иконки-стрелочки в правом нижнем углу закрытых Bento-карточек */
-.bento-card-arrow {
-    position: absolute !important;
-    bottom: 24px !important;
-    right: 24px !important;
-    width: 22px !important;
-    height: 22px !important;
-    pointer-events: none !important;
-    z-index: 10 !important;
-    transition: transform 0.3s ease !important;
-}
-
-/* Элегантный наклон стрелочки при наведении на карточку */
-.bento-card:hover .bento-card-arrow {
-    transform: translate(2px, -2px) !important;
-}
-
-.bento-card-arrow svg {
-    width: 100% !important;
-    height: 100% !important;
-    stroke: rgba(240, 246, 252, 0.6) !important;
-    stroke-width: 1.5px !important;
-    fill: none !important;
     }
