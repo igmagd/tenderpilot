@@ -50,10 +50,10 @@ header {
   height: 120px !important;
   z-index: 1000 !important;
   display: flex !important;
-  flex-direction: column !important;
   justify-content: flex-start !important;
-  transition: all 0.3 s ease;
-   }
+  transition: all 0.3s ease;
+}
+
 /* Первый ярус: Бургер - Лого - ЛК */
 .header-container {
   display: flex !important;
@@ -65,7 +65,9 @@ header {
   padding: 0 24px !important;
   margin: 0 auto !important;
   position: relative !important;
+  z-index: 2000001 !important; /* Поднимаем над мобильной шторкой */
 }
+
 
 .logo {
   font-size: 1.20rem !important;
@@ -172,8 +174,6 @@ header {
     display: flex !important;
     margin-left: auto !important;
   }
-
-  /* Сама вертикальная шторка меню */
   .nav-links {
     position: fixed !important;
     top: 0 !important;
@@ -191,19 +191,15 @@ header {
     -webkit-overflow-scrolling: touch !important;
     pointer-events: none !important;
   }
-
   .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
   }
-
-  /* Группы ссылок строго в столбик, отменяем ПК-инлайн */
   .menu-group-links {
     flex-direction: column !important;
     width: 100% !important;
     gap: 4px !important;
-   }
-     /* Строка статуса в мобильном меню */
+  }
   .menu-status-bar {
     width: 100% !important;
     display: flex !important;
@@ -213,26 +209,22 @@ header {
     margin-bottom: 8px !important;
     padding-bottom: 12px !important;
   }
-
   .menu-status-text {
     color: #58a6ff !important;
     font-weight: 500 !important;
     font-size: 19px !important;
   }
-
   .menu-status-arrows {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
   }
-
   .menu-status-arrows .menu-arrow-icon {
     width: 20px !important;
     height: 20px !important;
     color: #768390 !important;
     cursor: pointer !important;
   }
-
   .nav-links .menu-item-link {
     display: block !important;
     width: 100% !important;
@@ -242,27 +234,22 @@ header {
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-  /* Отключаем серую вспышку при тапах на мобильных */
   .menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
     -webkit-tap-highlight-color: transparent !important;
     tap-highlight-color: transparent !important;
   }
-
-  /* Трансформация бургера в крестик при открытой шторке */
-  .menu-toggle.active svg line:nth-child(1) {
-    transform: rotate(45deg) translate(4px, 4px) !important;
+  .menu-toggle.active svg line:nth-of-type(1) {
+    transform: rotate(45deg) translate(5px, 5px) !important;
     transform-origin: center !important;
   }
-  .menu-toggle.active svg line:nth-child(2) {
+  .menu-toggle.active svg line:nth-of-type(2) {
     opacity: 0 !important;
   }
-  .menu-toggle.active svg line:nth-child(3) {
-    transform: rotate(-45deg) translate(4px, -4px) !important;
+  .menu-toggle.active svg line:nth-of-type(3) {
+    transform: rotate(-45deg) translate(5px, -5px) !important;
     transform-origin: center !important;
   }
-  
 } /* Конец медиа-запроса мобильного меню */
-
 
 /* ==========================================================================
 4. БАЗОВЫЙ BENTO-КАРКАС СЕТКИ
