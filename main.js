@@ -104,12 +104,13 @@ function init_bento() {
                 'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
             );
             card.classList.add('is-flipped');
-            setTimeout(function () {
-                if (card.classList.contains('is-flipped')) {
-                    card.classList.add('is-expanded');
-                    card.style.zIndex = '3000000';
-                }
-            }, 150);
+        setTimeout(function () {
+            if (card.classList.contains('is-flipped')) {
+                card.classList.add('is-expanded');
+                card.style.zIndex = '3000000';
+                card.style.removeProperty('--target-transform');
+            }
+        }, 150);
         });
       
       if (close) {
