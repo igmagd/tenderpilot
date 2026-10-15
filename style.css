@@ -3,20 +3,17 @@
     margin: 0;
     padding: 0;
 }
-
 body {
     background-color: #0d1117;
     color: #c9d1d9;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
 }
-
 a {
     color: inherit;
     text-decoration: none;
 }
-/* Шапка сайта: жесткая двухэтажная структура */
 header {
     background-color: #161b22;
     border-bottom: 1px solid #30363d;
@@ -24,13 +21,11 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120px !important; /* Фиксируем общую высоту двух ярусов */
+    height: 120px !important;
     display: flex !important;
     flex-direction: column !important;
     z-index: 2000000;
 }
-
-/* Второй ярус шапки: Переключатели режимов (Поставщикам, Заказчикам...) */
 .hero-actions {
     display: flex;
     justify-content: center;
@@ -40,7 +35,6 @@ header {
     background-color: #0d1117;
     border-top: 1px solid #30363d;
 }
-
 .mode-btn {
     padding: 6px 16px;
     background: #21262d;
@@ -51,13 +45,11 @@ header {
     font-weight: 500;
     transition: all 0.2s;
 }
-
 .mode-btn.active {
     background: #238636;
     border-color: #2ea44f;
     color: #ffffff;
-  }
-/* Первый ярус шапки: Контейнер элементов управления */
+}
 .header-container {
     display: flex !important;
     align-items: center !important;
@@ -66,10 +58,8 @@ header {
     height: 65px !important;
     background-color: #161b22;
     position: relative;
-    z-index: 2000001;
+    z-index: 2000005 !important; /* Поднимаем над шторкой, чтобы кнопки не перекрывались */
 }
-
-/* Кнопка Бургера */
 .menu-toggle {
     background: none;
     border: none;
@@ -82,28 +72,22 @@ header {
     height: 32px;
     color: rgba(240, 246, 252, 0.4);
     transition: color 0.2s;
-    z-index: 2000005;
+    z-index: 2000006;
 }
-
 .menu-toggle:hover, .menu-toggle:active {
     color: #ffffff;
 }
-
-/* Логотип: прижат к бургеру с благородным зазором */
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
     color: #ffffff;
     margin-left: 16px !important;
-    margin-right: auto !important; /* Магия флексов: выталкивает ЛК в правый край */
-    z-index: 2000005;
+    margin-right: auto !important; /* Магия флексов: прижимает лого к бургеру, а ЛК толкает вправо */
+    z-index: 2000006;
 }
-
 .logo span {
     color: #58a6ff;
 }
-
-/* Личный кабинет */
 .lk-btn {
     display: flex;
     align-items: center;
@@ -112,36 +96,31 @@ header {
     transition: color 0.2s, opacity 0.2s;
     width: 32px;
     height: 32px;
-    z-index: 2000005;
+    z-index: 2000006;
 }
-
 .lk-btn:hover, .lk-btn:active {
     color: #ffffff;
-  }
-/* Мобильная шторка меню */
+    }
 .nav-links {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
     height: 100vh !important;
-    background: #0d1117 !important; /* Монолитный плотный фон */
+    background: #0d1117 !important; /* Глубокий премиальный космос */
     display: flex !important;
     flex-direction: column !important;
-    /* Отступ сверху: 65px (высота первого яруса) + воздух для контента */
-    padding: 100px 24px 40px 24px !important;
-    z-index: 2000000 !important; /* Строго под кнопками первого яруса */
+    padding: 140px 24px 40px 24px !important; /* Контент строго под двухэтажной шапкой */
+    z-index: 2000000 !important; /* Слой строго под кнопками управления */
     transform: translate3d(0, -100%, 0) !important;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; /* Плавный выезд */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     overflow-y: auto !important;
     pointer-events: none !important;
 }
-
 .nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
-      }
-/* Контентная строка статуса (Поставщик / Заказчик) внутри меню */
+}
 .menu-status-bar {
     width: 100% !important;
     display: flex !important;
@@ -151,34 +130,32 @@ header {
     margin-bottom: 16px !important;
     padding-bottom: 16px !important;
 }
-
 .menu-status-text {
     color: #58a6ff !important;
     font-weight: 600 !important;
     font-size: 1.15rem !important;
 }
-
 .menu-status-arrows {
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
 }
-
 .menu-status-arrows .menu-arrow-icon {
     width: 22px !important;
     height: 22px !important;
     color: #768390 !important;
     cursor: pointer !important;
 }
-
-/* Ссылки меню в столбик */
 .menu-group-links {
-    display: flex !important;
+    display: none; /* По умолчанию скрываем все три мира */
     flex-direction: column !important;
     width: 100% !important;
     gap: 2px !important;
 }
-
+/* ПОДРУЖИЛИ С HTML: Показываем во флексе только тот мир, который JS НЕ скрыл в display: none */
+.menu-group-links:not([style*="display: none"]) {
+    display: flex !important;
+}
 .nav-links .menu-item-link {
     display: block !important;
     width: 100% !important;
@@ -186,61 +163,48 @@ header {
     font-size: 1.1rem !important;
     color: #c9d1d9 !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  }
-/* Убираем синюю тач-подсветку при клике на смартфонах */
+    }
 .menu-toggle, .menu-item-link, .lk-btn, .mode-btn {
     -webkit-tap-highlight-color: transparent !important;
     tap-highlight-color: transparent !important;
 }
-
-/* Когда меню активно, бесшовно гасим оригинальный фон хедера и скрываем ПК-кнопки */
 body:has(.nav-links.active) header {
     background-color: transparent !important;
     border-bottom-color: transparent !important;
 }
-
 .menu-toggle.active ~ .lk-btn,
 body:has(.nav-links.active) .hero-actions {
     opacity: 0 !important;
     pointer-events: none !important;
 }
-
-/* ИДЕАЛЬНЫЙ ТАКТИЛЬНЫЙ КРЕСТИК (Чистый rotate вокруг центра без перекосов) */
 .menu-toggle svg line {
     transition: transform 0.3s ease, opacity 0.2s ease !important;
     transform-origin: center !important;
 }
-
-.menu-toggle.active svg line:nth-of-type(1) {
+/* СКРУЧИВАНИЕ КРЕСТИКА: Ориентируемся на класс активной шторки через контекст body */
+body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(1) {
     transform: translateY(6px) rotate(45deg) !important;
 }
-
-.menu-toggle.active svg line:nth-of-type(2) {
+body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(2) {
     opacity: 0 !important;
 }
-
-.menu-toggle.active svg line:nth-of-type(3) {
+body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
     transform: translateY(-6px) rotate(-45deg) !important;
-  }
-/* Главный экран: сдвигаем контент ниже двухэтажной шапки */
+}
 .hero-section {
     text-align: center;
     padding: 140px 24px 40px 24px;
 }
-
 .hero-section h1 {
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 12px;
     color: #ffffff;
 }
-
 .hero-section p {
     font-size: 1.15rem;
     color: #8b949e;
 }
-
-/* Базовый bento-каркас сеток */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr) !important;
@@ -249,15 +213,11 @@ body:has(.nav-links.active) .hero-actions {
     max-width: 1400px;
     margin: 0 auto;
 }
-
-/* Адаптивность сеток под планшеты */
 @media (max-width: 1024px) {
     .bento-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
-
-/* Адаптивность сеток под мобильные телефоны */
 @media (max-width: 768px) {
     .bento-grid {
         grid-template-columns: 1fr !important;
@@ -265,7 +225,6 @@ body:has(.nav-links.active) .hero-actions {
         padding: 0 24px 24px 24px;
     }
 }
-/* Базовый контейнер Bento-карточки */
 .bento-card {
     background: none;
     perspective: 1000px;
@@ -273,9 +232,7 @@ body:has(.nav-links.active) .hero-actions {
     height: 220px;
     cursor: pointer;
     position: relative;
-}
-
-/* Внутренняя обертка, которая физически вращается */
+    }
 .bento-card-inner {
     position: relative;
     width: 100%;
@@ -283,9 +240,7 @@ body:has(.nav-links.active) .hero-actions {
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Общие свойства для лица и изнанки карточки */
+    }
 .bento-card-front, .bento-card-back {
     position: absolute;
     top: 0;
@@ -300,53 +255,37 @@ body:has(.nav-links.active) .hero-actions {
     display: flex;
     flex-direction: column;
 }
-
-/* Лицевая сторона карточки (Фронт) */
 .bento-card-front {
     background-color: #161b22;
     justify-content: space-between;
     z-index: 2;
 }
-
 .bento-card-front h3 {
     font-size: 1.25rem;
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 8px;
 }
-
 .bento-card-front p {
     font-size: 0.95rem;
     color: #8b949e;
     line-height: 1.5;
 }
-/* Изнанка карточки в обычном закрытом состоянии */
 .bento-card-back {
     background-color: #161b22;
     transform: rotateY(180deg) !important;
     opacity: 0 !important;
     justify-content: flex-start;
 }
-
-/* ФАЗЫ ВРАЩЕНИЯ: Переворот и плавный полет по JS-матрице */
-.bento-card.is-flipped .bento-card-inner {
-    transform: rotateY(180deg) !important;
-}
-
-.bento-card.is-flipped .bento-card-back {
-    opacity: 1 !important;
-}
-
-.bento-card.is-flipped .bento-card-front {
-    opacity: 0 !important;
-}
-
-/* Полет по траектории, рассчитанной в JS */
 .bento-card.is-flipped .bento-card-inner {
     transform: var(--target-transform) rotateY(180deg) !important;
 }
-
-/* ФИНАЛЬНАЯ ФАЗА: Карточка встала на весь экран. Уничтожаем ложный scale-масштаб! */
+.bento-card.is-flipped .bento-card-back {
+    opacity: 1 !important;
+}
+.bento-card.is-flipped .bento-card-front {
+    opacity: 0 !important;
+    }
 .bento-card.is-expanded .bento-card-back {
     border-radius: 0 !important;
     border: none !important;
@@ -355,29 +294,22 @@ body:has(.nav-links.active) .hero-actions {
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    /* Отступ сверху с учетом мобильного и десктопного хедера */
-    padding: 140px 40px 40px 40px !important; 
+    padding: 140px 40px 40px 40px !important; /* Контент строго под двухэтажным хедером */
     overflow-y: auto !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;    /* Выравниваем контент по левому краю */
-    justify-content: flex-start !important; /* Направление строго сверху вниз */
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
     z-index: 3000000 !important;
-    
-    /* СБРОС ДВОЙНИКА: Оставляем чистый 3D-разворот БЕЗ scale-растяжения пикселей */
-    transform: rotateY(180deg) !important; 
+    transform: rotateY(180deg) !important; /* Чистый разворот без scale-растяжения пикселей */
     backface-visibility: visible !important;
     -webkit-backface-visibility: visible !important;
 }
-
-/* Полный сброс искажений шрифтов для всех внутренних элементов */
 .bento-card.is-expanded .bento-card-back * {
     transform: none !important; /* Текст больше не растягивается и не плывет */
     max-width: 100% !important;
     text-align: left !important;
 }
-
-/* Крупный монументальный заголовок открытой карточки */
 .bento-card.is-expanded .bento-card-back h3 {
     font-size: 2.25rem !important;
     font-weight: 800 !important;
@@ -385,15 +317,11 @@ body:has(.nav-links.active) .hero-actions {
     margin-bottom: 24px !important;
     align-self: flex-start !important;
 }
-
-/* Виджетная зона изнанки */
 .bento-card.is-expanded .bento-card-widget-zone {
     width: 100% !important;
     flex-grow: 1 !important;
     display: block !important;
 }
-
-/* КНОПКА ЗАКРЫТИЯ КАРТОЧКИ (Абсолютная фиксация поверх холста) */
 .bento-card-close-icon {
     position: fixed !important;
     top: 24px !important;
@@ -413,21 +341,17 @@ body:has(.nav-links.active) .hero-actions {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
     transition: all 0.2s ease !important;
 }
-
 .bento-card-close-icon:hover {
     background: rgba(255, 255, 255, 0.1) !important;
     border-color: #8b949e !important;
 }
-
 .bento-card-close-icon svg {
     width: 20px !important;
     height: 20px !important;
     stroke: #ffffff !important;
     stroke-width: 2.5px !important;
     fill: none !important;
-}
-
-/* ИКОНКИ-СТРЕЛКИ ЗАКРЫТЫХ КАРТОЧЕК */
+    }
 .bento-card-arrow {
     position: absolute !important;
     bottom: 24px !important;
@@ -438,11 +362,9 @@ body:has(.nav-links.active) .hero-actions {
     z-index: 10 !important;
     transition: transform 0.3s ease !important;
 }
-
 .bento-card:hover .bento-card-arrow {
     transform: translate(2px, -2px) !important;
 }
-
 .bento-card-arrow svg {
     width: 100% !important;
     height: 100% !important;
@@ -450,8 +372,6 @@ body:has(.nav-links.active) .hero-actions {
     stroke-width: 1.5px !important;
     fill: none !important;
 }
-
-/* ФУТЕР САЙТА */
 footer {
     text-align: center;
     padding: 40px 24px;
@@ -459,9 +379,7 @@ footer {
     color: #8b949e;
     font-size: 14px;
 }
-
 footer a {
     color: #58a6ff;
     margin: 0 8px;
-  }
-  
+}
