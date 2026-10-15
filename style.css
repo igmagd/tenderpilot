@@ -1,18 +1,18 @@
 /* ==========================================================================
-   1. БАЗОВЫЕ НАСТРОЙКИ, СБРОС СТИЛЕЙ И ЕДИНАЯ ТИПОГРАФИКА ТЕНДЕРПИЛОТ
-   ========================================================================== */
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
+1. БАЗОВЫЕ НАСТРОЙКИ, СБРОС СТИЛЕЙ И ТИПОГРАФИКА TENDERPILOT
+========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
   -webkit-tap-highlight-color: transparent !important;
   tap-highlight-color: transparent !important;
 }
 
-body { 
-  background-color: #0d1117; 
-  color: #c9d1d9; 
+body {
+  background-color: #0d1117;
+  color: #c9d1d9;
   line-height: 1.5;
   overflow-x: hidden;
 }
@@ -47,14 +47,13 @@ header {
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  height: 120px !important; /* Четкие два этажа */
+  height: 120px !important;
   z-index: 1000 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-start !important;
-  transition: all 0.3s ease;
-}
-
+  transition: all 0.3 s ease;
+   }
 /* Первый ярус: Бургер - Лого - ЛК */
 .header-container {
   display: flex !important;
@@ -69,7 +68,7 @@ header {
 }
 
 .logo {
-  font-size: 1.20rem !important; /* Премиальное изящество по ТЗ */
+  font-size: 1.20rem !important;
   font-weight: 700 !important;
   color: #f0f6fc !important;
   letter-spacing: 0.5px !important;
@@ -100,7 +99,6 @@ header {
   box-sizing: border-box !important;
 }
 
-/* Кнопки переключателей с поддержкой оригинальных классов из ТЗ */
 .mode-btn, .toggle-btn {
   flex: 1 !important;
   display: flex !important;
@@ -125,18 +123,18 @@ header {
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
-/* Премиальное синее активное состояние с неоновым свечением из истории */
 .mode-btn.active, .toggle-btn.active {
   background: linear-gradient(135deg, #388bfd, #00f2fe) !important;
   color: #ffffff !important;
   border-color: transparent !important;
   font-weight: 600 !important;
   box-shadow: 0 0 16px rgba(56, 139, 253, 0.4) !important;
-}
-
-/* Главная секция с красивым синим радиальным градиентом */
+   }
+   /* ==========================================================================
+2. ГЛАВНЫЙ ЭКРАН С РАДИАЛЬНЫМ ГРАДИЕНТОМ
+========================================================================== */
 .hero-section {
-  padding: 160px 20px 40px 20px !important; /* Учли высоту двухэтажной шапки */
+  padding: 160px 20px 40px 20px !important;
   text-align: center !important;
   background: radial-gradient(circle at top, rgba(56, 139, 253, 0.15), transparent 60%) !important;
 }
@@ -154,9 +152,27 @@ header {
   margin-bottom: 20px !important;
 }
 
-/* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
+/* ==========================================================================
+3. МОБИЛЬНАЯ АДАПТАЦИЯ (ШТОРКА МЕНЮ В СТОЛБИК)
+========================================================================== */
 @media (max-width: 768px) {
-  /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
+  /* Переопределение первого яруса в мобильной шторке */
+  .header-container {
+    justify-content: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .logo {
+    position: static !important;
+    transform: none !important;
+    font-size: 1.3rem !important;
+  }
+
+  .lk-btn {
+    display: none !important;
+  }
+
+  /* Сама вертикальная шторка меню */
   .nav-links {
     position: fixed !important;
     top: 0 !important;
@@ -165,9 +181,9 @@ header {
     height: 100vh !important;
     background: linear-gradient(to top, #020617, #0d1117) !important;
     display: flex !important;
-    flex-direction: column !important; /* Принудительный вертикальный список */
-    padding: 150px 24px 40px 24px !important; /* Отступ с учетом двухэтажной шапки */
-    z-index: 99999 !important; /* Поднимаем выше шапки при открытии */
+    flex-direction: column !important;
+    padding: 90px 24px 40px 24px !important;
+    z-index: 99999 !important;
     transform: translate3d(0, -100%, 0) !important;
     transition: transform 0.35s ease !important;
     overflow-y: auto !important;
@@ -180,7 +196,13 @@ header {
     pointer-events: auto !important;
   }
 
-  /* Мобильная строка статуса */
+  /* Группы ссылок строго в столбик, отменяем ПК-инлайн */
+  .menu-group-links {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 4px !important;
+   }
+     /* Строка статуса в мобильном меню */
   .menu-status-bar {
     width: 100% !important;
     display: flex !important;
@@ -219,11 +241,11 @@ header {
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
   }
-   
-} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
+} /* Конец медиа-запроса мобильного меню */
 
-
-/* Базовый bento-каркас */
+/* ==========================================================================
+4. БАЗОВЫЙ BENTO-КАРКАС СЕТКИ
+========================================================================== */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -238,13 +260,15 @@ header {
 }
 
 @media (max-width: 768px) {
-  .bento-grid { 
-    grid-template-columns: 1fr !important; 
+  .bento-grid {
+    grid-template-columns: 1fr !important;
     gap: 16px !important;
     padding: 0 16px !important;
   }
-     }
-/* 3D-контекст Bento-карточек */
+}
+/* ==========================================================================
+5. 3D-МЕХАНИКА И АНИМАЦИЯ BENTO-КАРТОЧЕК
+========================================================================== */
 .bento-card {
   background: transparent !important;
   perspective: 1500px !important;
@@ -261,9 +285,9 @@ header {
   height: 100% !important;
   transform-style: preserve-3d !important;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-   }
-/* Полный монолитный блок 3D-механики Bento-карточек */
-.bento-card-front, 
+}
+
+.bento-card-front,
 .bento-card-back {
   position: absolute !important;
   top: 0 !important;
@@ -279,30 +303,28 @@ header {
   transition: opacity 0.2s ease !important;
 }
 
-/* Рубашка карты изначально развернута по оси Y и полностью скрыта */
 .bento-card-back {
   transform: rotateY(180deg) !important;
-  opacity: 0 !important; 
+  opacity: 0 !important;
 }
 
-/* ФАЗА 1: При 3D-перевороте проявляем рубашку и гасим лицо */
+/* ФАЗЫ АНИМАЦИИ: Переворот и раскрытие */
 .bento-card.is-flipped .bento-card-inner {
   transform: rotateY(180deg) !important;
 }
+
 .bento-card.is-flipped .bento-card-back {
-  opacity: 1 !important; /* Убирает баг исчезновения! */
+  opacity: 1 !important;
 }
+
 .bento-card.is-flipped .bento-card-front {
   opacity: 0 !important;
 }
 
-/* ФАЗА 2: Аппаратное GPU-раскрытие контейнера на весь экран */
 .bento-card.is-expanded .bento-card-inner {
   transform: var(--target-transform) rotateY(180deg) !important;
-  z-index: 9999 !important;
 }
 
-/* Фиксация размеров обратной стороны модального окна на максимальный слой */
 .bento-card.is-expanded .bento-card-back {
   border-radius: 0 !important;
   border: none !important;
@@ -311,10 +333,9 @@ header {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: 1000000 !important; /* Пробивает двухэтажную шапку */
-  padding-top: 140px !important; /* Сдвигаем внутренний текст виджетов ниже шапки */
-}
-
+  padding-top: 140px !important;
+  overflow-y: auto !important;
+   }
 /* Иконки управления внутри карточек */
 .bento-card-arrow {
   position: absolute !important;
@@ -325,17 +346,6 @@ header {
   pointer-events: none !important;
 }
 
-/* Кнопка закрытия — фиксируем на экране поверх всего */
-.bento-card-close-icon {
-  position: fixed !important; /* Всегда на одном месте при скролле */
-  top: 25px !important; /* Удобный отступ от верхнего края экрана */
-  right: 25px !important; /* Удобный отступ от правого края */
-  width: 28px !important; /* Оптимальный размер для тапа пальцем */
-  height: 28px !important;
-  cursor: pointer !important;
-  z-index: 2000000 !important; /* Самый высокий z-index на платформе */
-}
-
 .bento-card-arrow svg {
   width: 100% !important;
   height: 100% !important;
@@ -344,10 +354,34 @@ header {
   fill: none !important;
 }
 
+/* КНОПКА ЗАКРЫТИЯ КАРТОЧКИ — Фиксация на экране поверх всего */
+.bento-card-close-icon {
+  position: fixed !important;
+  top: 25px !important;
+  right: 25px !important;
+  width: 32px !important;
+  height: 32px !important;
+  cursor: pointer !important;
+  z-index: 3000005 !important;
+  background: rgba(22, 27, 34, 0.6) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px !important;
+  transition: background 0.2s ease !important;
+}
+
+.bento-card-close-icon:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
 .bento-card-close-icon svg {
   width: 100% !important;
   height: 100% !important;
-  stroke: #ffffff !important; /* Контрастный белый цвет крестика */
-  stroke-width: 2.5px !important; /* Делаем линии чуть четче */
+  stroke: #ffffff !important;
+  stroke-width: 2.5px !important;
   fill: none !important;
    }
