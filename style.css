@@ -204,16 +204,14 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
         
     .hero-actions {
         display: flex !important;
-        flex-direction: row !important; /* Выстроит кнопки строго на одной линии */
+        flex-direction: row !important; /* ВЫСТРАИВАЕМ КНОПКИ В ШЕРЕНГУ */
         justify-content: center !important;
-        align-items: center !important;
-        gap: 8px !important;
-        padding: 0 16px !important;
+        gap: 6px !important;
+        padding: 10px 12px !important;
         width: 100% !important;
-        height: 50px !important; /* Фиксируем высоту шапки, чтобы сетка Bento не прыгала */
+        overflow-x: hidden !important;
         background-color: #0d1117 !important;
         border-top: 1px solid #30363d !important;
-        overflow: hidden !important;
     }
 
     /* Изолируем кнопки: они делят экран поровну, текст больше не вылетает */
@@ -407,3 +405,10 @@ footer a {
     color: #58a6ff;
     margin: 0 8px;
 }
+/* ГЛОБАЛЬНАЯ ИЗОЛЯЦИЯ: Этот код сработает в обход медиазапросов, карточка встанет на весь экран! */
+body:has(.bento-card.is-expanded) .bento-grid {
+    transform: none !important;
+    perspective: none !important;
+    transform-style: flat !important;
+    }
+    
