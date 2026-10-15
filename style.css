@@ -301,12 +301,11 @@ body:has(.nav-links.active) .menu-toggle svg line:nth-of-type(3) {
     align-items: flex-start !important;
     justify-content: flex-start !important;
     z-index: 3000000 !important;
-    transform: rotateY(180deg) !important; /* Чистый разворот без scale-растяжения пикселей */
+    transform: rotateY(180deg) translate3d(0,0,0) scale(1) !important;
     backface-visibility: visible !important;
     -webkit-backface-visibility: visible !important;
 }
 .bento-card.is-expanded .bento-card-back * {
-    transform: none !important; /* Текст больше не растягивается и не плывет */
     max-width: 100% !important;
     text-align: left !important;
 }
