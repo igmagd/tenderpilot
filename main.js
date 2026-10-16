@@ -114,19 +114,22 @@ function init_bento() {
 
             var rect = card.getBoundingClientRect();
             
-            // Расчет сдвига строго от ЦЕНТРА карточки к ЦЕНТРА экрана
+            // Честно считаем, во сколько раз нужно растянуть карточку до размеров экрана
+            var scale_x = window.innerWidth / rect.width;
+            var scale_y = window.innerHeight / rect.height;
+
+            // Считаем сдвиг строго от центра карточки к центру экрана
             var move_x = (window.innerWidth / 2) - (rect.left + rect.width / 2);
             var move_y = (window.innerHeight / 2) - (rect.top + rect.height / 2);
 
-            // Возвращаем стандартную точку отсчета анимации (центр)
             inner.style.transformOrigin = 'center center';
 
+            // Объединяем полет и 3D-разворот в ОДНУ плавную команду для видеокарты
             card.style.setProperty('--target-transform',
-                'translate3d(' + move_x + 'px, ' + move_y + 'px, 0)'
+                'translate3d(' + move_x + 'px, ' + move_y + 'px, 0) scale3d(' + scale_x + ', ' + scale_y + ', 1)'
             );
 
             card.classList.add('is-flipped');
-            
             if (headerElement) headerElement.classList.add('header-behind');
 
             setTimeout(function () {
