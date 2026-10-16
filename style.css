@@ -191,71 +191,75 @@ header {
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
   /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
-  .nav-links {
+.nav-links {
     position: fixed !important;
-    top: 0 !important;
+    top: 65px !important; /* Начинается ровно под первым ярусом шапки */
     left: 0 !important;
     width: 100% !important;
-    height: 100vh !important;
-    background: linear-gradient(to top, #020617, #0d1117) !important;
+    height: calc(100vh - 65px) !important; /* Занимает весь экран ниже шапки */
+    background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Плавный темный космос */
     display: flex !important;
-    flex-direction: column !important; /* Принудительный вертикальный список */
-    padding: 150px 24px 40px 24px !important; /* Отступ с учетом двухэтажной шапки */
-    z-index: 99999 !important; /* Поднимаем выше шапки при открытии */
-    transform: translate3d(0, -100%, 0) !important;
-    transition: transform 0.35s ease !important;
-    overflow-y: auto !important;
+    flex-direction: column !important; /* Строго в столбец */
+    padding: 24px 24px 40px 24px !important; /* Уменьшили верхний паддинг, ссылки встанут ровно */
+    z-index: 99 !important; /* Ниже первого яруса шапки, но выше Bento-карточек */
+    transform: translate3d(0, -120%, 0) !important; /* Уезжает полностью наверх */
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Идеальная синхронность с Bento */
+    overflow-y: auto !important; /* Нативный вертикальный скролл */
     -webkit-overflow-scrolling: touch !important;
     pointer-events: none !important;
-  }
+}
 
-  .nav-links.active {
+.nav-links.active {
     transform: translate3d(0, 0, 0) !important;
     pointer-events: auto !important;
-  }
+}
 
-  /* Мобильная строка статуса */
-  .menu-status-bar {
+/* Скрываем Личный Кабинет на мобилках, когда шторка активна */
+body:has(.nav-links.active) .lk-btn {
+    display: none !important;
+}
+
+/* Мобильная строка статуса со стрелочками */
+.menu-status-bar {
     width: 100% !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-    margin-bottom: 8px !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
+    margin-bottom: 16px !important;
     padding-bottom: 12px !important;
-  }
+}
 
-  .menu-status-text {
+.menu-status-text {
     color: #58a6ff !important;
     font-weight: 500 !important;
     font-size: 19px !important;
-  }
+}
 
-  .menu-status-arrows {
+.menu-status-arrows {
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
-  }
+    gap: 16px !important;
+}
 
-  .menu-status-arrows .menu-arrow-icon {
-    width: 20px !important;
-    height: 20px !important;
+.menu-status-arrows .menu-arrow-icon {
+    width: 24px !important;
+    height: 24px !important;
     color: #768390 !important;
     cursor: pointer !important;
-  }
+}
 
-  .nav-links .menu-item-link {
+/* Ссылки мобильного меню */
+.nav-links .menu-item-link {
     display: block !important;
     width: 100% !important;
-    padding: 12px 0 !important;
+    padding: 16px 0 !important;
     font-size: 18px !important;
     color: #c9d1d9 !important;
     text-decoration: none !important;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-  }
-   
-} /* <--- Финальная скобка, которая закрывает медиа-запрос @media (max-width: 768px) */
-
+}
+} /* Финальная скобка, закрывающая медиа-запрос @media (max-width: 768px) */
 
 /* Базовый bento-каркас */
 .bento-grid {
