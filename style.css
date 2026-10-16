@@ -190,27 +190,44 @@ header {
 
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
-    /* Фикс родительского контейнера: когда меню открыто, шапка не должна блокировать Bento и скролл */
-    header:has(.nav-links.active) {
-        display: block !important; /* Отменяем огромный ПК-флекс */
-        height: 65px !important;   /* Зажимаем шапку строго по высоте первого яруса */
+
+    /* Фиксируем шапку на мобильных: она всегда монолитна, 103px в высоту и не прыгает */
+    header {
+        height: 103px !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
-    /* Настройка независимого слоя шторки меню */
+    /* Анимация исчезновения нижних кнопок, чтобы они не перекрывали шторку */
+    .hero-actions {
+        transition: opacity 0.25s ease, visibility 0.25s ease !important;
+    }
+
+    /* Когда шторка открыта, плавно растворяем кнопки переключения */
+    body:has(.nav-links.active) .hero-actions {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    /* Настройка независимого слоя шторки */
     .nav-links {
         position: fixed !important;
-        top: 65px !important; /* Начинается ровно под первым ярусом шапки */
+        top: 65px !important; /* Начинается строго под логотипом и бургером */
         left: 0 !important;
         width: 100% !important;
         height: calc(100vh - 65px) !important; /* Занимает весь оставшийся экран */
-        background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Родной темный космос */
+        
+        /* НОВЫЙ ФОН: Глубокий премиальный сине-серый градиент вместо черного */
+        background: linear-gradient(to bottom, #0b1321, #070b12) !important; 
+        
         display: flex !important;
         flex-direction: column !important; /* Ссылки строго в столбец */
         padding: 24px !important;
-        z-index: 99 !important; /* Изолировано от Bento-карточек */
-        transform: translate3d(0, -120%, 0) !important; /* Уезжает наверх */
+        z-index: 98 !important; /* На один уровень ниже первого яруса шапки, но выше кнопок */
+        transform: translate3d(0, -120%, 0) !important; /* Плавный уезд вверх */
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        overflow-y: auto !important; /* Нативный, бесконечный вертикальный скролл */
+        overflow-y: auto !important; /* Бесконечный нативный мобильный скролл */
     }
 
     /* Активация шторки при клике на бургер */
@@ -276,7 +293,6 @@ header {
         border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
     }
 }
-
 
 /* Базовый bento-каркас */
 .bento-grid {
