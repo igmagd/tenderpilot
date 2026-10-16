@@ -200,7 +200,7 @@ header {
     background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Плавный темный космос */
     display: flex !important;
     flex-direction: column !important; /* Строго в столбец */
-    padding: 24px 24px 40px 24px !important; /* Уменьшили верхний паддинг, ссылки встанут ровно */
+    padding: 24px 24px 40px 24px !important; 
     z-index: 99 !important; /* Ниже первого яруса шапки, но выше Bento-карточек */
     transform: translate3d(0, -120%, 0) !important; /* Уезжает полностью наверх */
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Идеальная синхронность с Bento */
@@ -219,6 +219,14 @@ body:has(.nav-links.active) .lk-btn {
     display: none !important;
 }
 
+/* ФИКС СЛИПАНИЯ ССЫЛОК: Сбрасываем ПК-флексы внутренних контейнеров на мобильных */
+.nav-links .menu-group-links {
+    display: flex !important;
+    flex-direction: column !important; /* Разворачиваем ссылки строго в столбец */
+    width: 100% !important;
+    background: transparent !important;
+}
+
 /* Мобильная строка статуса со стрелочками */
 .menu-status-bar {
     width: 100% !important;
@@ -228,6 +236,7 @@ body:has(.nav-links.active) .lk-btn {
     border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
     margin-bottom: 16px !important;
     padding-bottom: 12px !important;
+    background: transparent !important;
 }
 
 .menu-status-text {
@@ -255,9 +264,10 @@ body:has(.nav-links.active) .lk-btn {
     width: 100% !important;
     padding: 16px 0 !important;
     font-size: 18px !important;
-    color: #c9d1d9 !important;
+    color: #c9d1d9 !important; /* Принудительный благородный светлый цвет ссылок */
     text-decoration: none !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important; /* Тонкая серая линия-разделитель */
+    background: transparent !important;
 }
 } /* Финальная скобка, закрывающая медиа-запрос @media (max-width: 768px) */
 
