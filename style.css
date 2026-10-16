@@ -474,14 +474,16 @@ header {
 .bento-card.is-expanded .bento-card-back {
     border-radius: 0 !important;
     border: none !important;
-    position: absolute !important;
+    
+    /* Возвращаем fixed, чтобы карточка гарантированно закрывала весь экран */
+    position: fixed !important; 
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    z-index: 1000000 !important;
+    z-index: 1000000 !important; 
     padding-top: 40px !important;
-    transform: none !important; 
+    transform: none !important;
 }
 
 header.header-behind {
