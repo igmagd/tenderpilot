@@ -475,23 +475,19 @@ header {
     border-radius: 0 !important;
     border: none !important;
     
-    /* Оставляем абсолютное позиционирование внутри сетки */
-    position: absolute !important; 
-    
-    /* Растягиваем с запасом на мобильные браузеры */
+    /* ИСПРАВЛЕНИЕ: Переводим в fixed в финальной точке, 
+       чтобы карточка гарантированно перекрыла шапку и весь экран */
+    position: fixed !important; 
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    margin: 0 !important;
-    transform-origin: center center !important;
     z-index: 1000000 !important; 
-    padding: 40px 24px 24px 24px !important; /* Удобные аккуратные отступы для текста */
+    padding: 40px 24px 24px 24px !important;
     box-sizing: border-box !important;
     opacity: 1 !important;
-    
-    /* Разворачиваем рубашку нормально к пользователю */
-    transform: rotateY(180deg) !important; 
+    transform: none !important; 
+    margin: 0 !important;
 }
 
 header.header-behind {
