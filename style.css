@@ -191,7 +191,7 @@ header {
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
 
-    /* 1. Возвращаем шапке стабильность, убираем overflow:hidden */
+    /* Шапка жестко закреплена на самом верху, z-index 100 — она перекрывает шторку */
     header {
         height: 103px !important;
         display: flex !important;
@@ -200,70 +200,85 @@ header {
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
-        /* Шапка должна стоять строго поверх выезжающего меню */
-        z-index: 100 !important; 
+        z-index: 100 !important;
     }
 
-    /* 2. Плавное исчезновение нижних кнопок при открытии меню */
+    /* Анимация исчезновения и появления нижних кнопок шапки */
     .hero-actions {
-        transition: opacity 0.25s ease, visibility 0.25s ease !important;
+        /* При закрытии добавляем задержку в 0.1s, чтобы они не вылезали посреди полета */
+        transition: opacity 0.25s ease 0.1s, visibility 0.25s ease 0.1s !important;
     }
 
+    /* Когда меню активно, плавно растворяем кнопки без задержки */
     body:has(.nav-links.active) .hero-actions {
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
+        transition: opacity 0.2s ease, visibility 0.2s ease !important;
     }
 
-    body:has(.nav-links.active) .hero-actions {
-        opacity: 0 !important;
-        transform: translate3d(0, 20px, 0) !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-    }
-
-    /* Настройка независимого слоя шторки */
+    /* Шторка меню — слой z-index 99, строго под шапкой */
     .nav-links {
         position: fixed !important;
-        top: 65px !important; /* Начинается строго под логотипом и бургером */
+        top: 65px !important; 
         left: 0 !important;
         width: 100% !important;
-        height: calc(100vh - 65px) !important; /* Занимает весь оставшийся экран */
-        
-        /* НОВЫЙ ФОН: Глубокий премиальный сине-серый градиент вместо черного */
+        height: calc(100vh - 65px) !important;
         background: linear-gradient(to bottom, #0b1321, #070b12) !important; 
-        
         display: flex !important;
-        flex-direction: column !important; /* Ссылки строго в столбец */
+        flex-direction: column !important;
         padding: 24px !important;
-        z-index: 99 !important; /* На один уровень ниже первого яруса шапки, но выше кнопок */
+        z-index: 99 !important;
+        
+        /* Возвращаем и сохраняем нативный скролл и свайпы во все стороны! */
+        touch-action: auto !important; 
+        
+        /* Плавный уезд наверх строго за 0.35 секунды */
         transform: translate3d(0, -120%, 0) !important;
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
         overflow-y: auto !important;
     }
 
-    /* Активация шторки при клике на бургер */
     .nav-links.active {
         transform: translate3d(0, 0, 0) !important;
     }
 
-    /* Скрываем Личный Кабинет на мобильных, когда меню открыто */
+    /* Полная чистота интерфейса при открытом меню: скрываем ЛК */
     body:has(.nav-links.active) .lk-btn {
         display: none !important;
     }
 
-    /* Разворачиваем контейнеры групп ссылок в вертикальный поток */
+    /* Ссылки мобильного меню и эффект подсветки при ТАПЕ */
+    .nav-links .menu-item-link {
+        display: block !important;
+        width: 100% !important;
+        padding: 16px 0 !important;
+        font-size: 18px !important;
+        color: #c9d1d9 !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+        
+        /* Плавный возврат цвета полосы после отпускания пальца */
+        transition: border-bottom-color 0.2s ease !important; 
+    }
+
+    /* ЭФФЕКТ ТАПА: При нажатии пальцем линия загорается тусклым белым, как бургер */
+    .nav-links .menu-item-link:active {
+        border-bottom-color: rgba(240, 246, 252, 0.4) !important;
+        color: #fff !important;
+    }
+
+    /* Разворачиваем группы ссылок */
     .nav-links .menu-group-links {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
     }
 
-    /* Исключаем наложение скрытых режимов меню */
     .nav-links .menu-group-links[style*="display: none"] { display: none !important; }
     .nav-links .menu-group-links[style*="display: flex"] { display: flex !important; }
 
-    /* Строка статуса (Поставщик) */
+    /* Строка статуса (Поставщик / Заказчик) */
     .menu-status-bar {
         width: 100% !important;
         display: flex !important;
@@ -280,7 +295,6 @@ header {
         font-size: 19px !important;
     }
 
-    /* Геометрия стрелочек */
     .menu-status-arrows {
         display: flex !important;
         align-items: center !important;
@@ -292,17 +306,6 @@ header {
         height: 24px !important;
         color: #768390 !important;
         cursor: pointer;
-    }
-
-    /* Ссылки мобильного меню */
-    .nav-links .menu-item-link {
-        display: block !important;
-        width: 100% !important;
-        padding: 16px 0 !important;
-        font-size: 18px !important;
-        color: #c9d1d9 !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
     }
 }
 
