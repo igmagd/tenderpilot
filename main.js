@@ -133,15 +133,16 @@ function init_bento() {
             // Сделем оригинальную карточку полупрозрачной заглушкой
             card.classList.add('is-cloned');
 
-            // 5. Запускаем анимацию 3D-переворота и взлёта (через микро-таймаут для браузера)
-            setTimeout(function () {
-                clone.classList.add('is-flipped');
-                clone.classList.add('is-expanded');
-                
-                // Гасим шапку и убираем скролл сайта
-                if (headerElement) headerElement.classList.add('header-hidden');
-                if (bodyElement) bodyElement.classList.add('modal-open');
-            }, 30);
+            // Принудительный Reflow: заставляем браузер зафиксировать маленькую карточку
+            var forceReflow = clone.offsetHeight; 
+
+            // Запускаем плавный взлет и переворот
+            clone.classList.add('is-flipped');
+            clone.classList.add('is-expanded');
+            
+            // Гасим шапку и убираем скролл сайта
+            if (headerElement) headerElement.classList.add('header-hidden');
+            if (bodyElement) bodyElement.classList.add('modal-open');
 
             // 6. Вешаем обработчик на КРЕСТИК ЗАКРЫТИЯ внутри клона
             var closeIcon = clone.querySelector('.bento-card-close-icon');
