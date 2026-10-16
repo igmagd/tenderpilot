@@ -190,37 +190,37 @@ header {
 
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
-    /* 1. Изолируем шторку от флекс-потока шапки и Bento */
+    /* 1. Изолируем шторку меню от флекс-потока шапки и Bento-сетки */
     .nav-links {
         position: fixed !important;
         top: 65px !important; /* Начинается строго под первым ярусом шапки */
         left: 0 !important;
         width: 100% !important;
-        height: calc(100vh - 65px) !important; /* Занимает строго оставшийся экран */
-        background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Глубокий космос */
+        height: calc(100vh - 65px) !important; /* Занимает весь оставшийся экран */
+        background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Темный космос */
         display: flex !important;
-        flex-direction: column !important; /* Ссылки строго в столбец */
-        padding: 24px 24px 40px 24px !important;
-        z-index: 99 !important; /* Ниже первого яруса шапки, но не мешает Bento */
-        transform: translate3d(0, -120%, 0) !important; /* Полностью уезжает наверх */
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        overflow-y: auto !important; /* Чистый вертикальный скролл контента */
+        flex-direction: column !important; /* Пункты строго в столбец */
+        padding: 24px !important;
+        z-index: 99 !important; /* Находится под шапкой, но не конфликтует с Bento */
+        transform: translate3d(0, -120%, 0) !important; /* Полностью прячется наверх */
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Синхронная плавность */
+        overflow-y: auto !important; /* Вертикальный скролл контента меню */
         -webkit-overflow-scrolling: touch !important;
         pointer-events: none !important;
     }
 
-    /* Активация шторки */
+    /* Активация шторки при тапе на бургер */
     .nav-links.active {
         transform: translate3d(0, 0, 0) !important;
         pointer-events: auto !important;
     }
 
-    /* 2. Скрываем ЛК при открытом меню, чтобы не дублировать крестик */
+    /* Автоматически скрываем ЛК (человечка) на мобильных, когда меню открыто */
     body:has(.nav-links.active) .lk-btn {
         display: none !important;
     }
 
-    /* 3. Жестко разворачиваем контейнеры ссылок в столбец */
+    /* Переводим группы ссылок в вертикальный режим */
     .nav-links .menu-group-links {
         display: flex !important;
         flex-direction: column !important;
@@ -228,7 +228,7 @@ header {
         background: transparent !important;
     }
 
-    /* Блокируем отображение неактивных групп ссылок */
+    /* Блокируем отображение неактивных групп меню */
     .nav-links .menu-group-links[style*="display: none"] {
         display: none !important;
     }
@@ -236,14 +236,16 @@ header {
         display: flex !important;
     }
 
-    /* 4. Полностью выжигаем черный ПК-фон и фиксируем ссылки */
+    /* 2. Строка статуса (Поставщик) и фикс гигантских стрелочек */
     header .nav-links .menu-status-bar {
         width: 100% !important;
-        background: transparent !important; 
-    }
-
-    header .nav-links .menu-item-link {
-        color: #c9d1d9 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
+        margin-bottom: 16px !important;
+        padding-bottom: 12px !important;
+        background: transparent !important;
     }
 
     .menu-status-text {
@@ -255,18 +257,29 @@ header {
     .menu-status-arrows {
         display: flex !important;
         align-items: center !important;
-        gap: 16px !important;
+        gap: 20px !important;
     }
 
-    /* 5. Красивые ссылки списком */
-    .nav-links .menu-item-link {
+    /* Жестко ограничиваем размеры стрелочек, чтобы они не растягивались */
+    .menu-status-arrows .menu-arrow-icon {
+        width: 24px !important;
+        height: 24px !important;
+        max-width: 24px !important;
+        max-height: 24px !important;
+        color: #768390 !important;
+        cursor: pointer !important;
+        display: block !important;
+    }
+
+    /* 3. Ссылки мобильного меню списком */
+    header .nav-links .menu-item-link {
         display: block !important;
         width: 100% !important;
         padding: 16px 0 !important;
         font-size: 18px !important;
-        color: #c9d1d9 !important; /* Благородный светлый цвет */
+        color: #c9d1d9 !important; /* Принудительный светлый цвет текста */
         text-decoration: none !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important; /* Тонкий разделитель */
         background: transparent !important;
     }
 }
