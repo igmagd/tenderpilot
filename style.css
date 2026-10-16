@@ -475,15 +475,22 @@ header {
     border-radius: 0 !important;
     border: none !important;
     
-    /* Возвращаем в абсолютный поток Bento-сетки, чтобы не было схлопывания */
+    /* Оставляем абсолютное позиционирование внутри сетки */
     position: absolute !important; 
+    
+    /* Растягиваем с запасом на мобильные браузеры */
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
+    margin: 0 !important;
+    transform-origin: center center !important;
     z-index: 1000000 !important; 
-    padding-top: 40px !important;
+    padding: 40px 24px 24px 24px !important; /* Удобные аккуратные отступы для текста */
+    box-sizing: border-box !important;
     opacity: 1 !important;
+    
+    /* Разворачиваем рубашку нормально к пользователю */
     transform: rotateY(180deg) !important; 
 }
 
