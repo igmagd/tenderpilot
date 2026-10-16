@@ -17,76 +17,114 @@ body {
   overflow-x: hidden;
 }
 
+/* Базовый каркас кнопок-контейнеров (Оставляем прозрачным) */
 .lk-btn, .menu-toggle {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 42px !important;
-  height: 42px !important;
-  border-radius: 50% !important;
-  background: transparent !important;
-  border: none !important;
-  cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    outline: none !important;
+    transition: transform 0.1s ease !important;
 }
 
+/* Базовое состояние иконок (Полупрозрачный премиальный цвет) */
 .lk-btn svg, .menu-toggle svg {
-  color: rgba(240, 246, 252, 0.6) !important;
-  stroke: rgba(240, 246, 252, 0.6) !important;
-  stroke-width: 1px !important;
-  fill: none !important;
-  width: 22px !important;
-  height: 22px !important;
+    color: rgba(240, 246, 252, 0.6) !important;
+    stroke: rgba(240, 246, 252, 0.6) !important;
+    stroke-width: 1.5px !important;
+    fill: none !important;
+    width: 22px !important;
+    height: 22px !important;
+    transition: color 0.1s ease, stroke 0.1s ease, filter 0.1s ease !important;
+}
+
+/* ЭФФЕКТ ВСПЫШКИ: Белое свечение и микро-масштаб при зажатии/тапе */
+.lk-btn:active, .menu-toggle:active {
+    transform: scale(0.92) !important;
+}
+
+.lk-btn:active svg, .menu-toggle:active svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
+}
+
+/* Исправление переключения иконок Бургер / Крестик */
+.menu-toggle .icon-burger {
+    display: block !important;
+}
+
+.menu-toggle .icon-close {
+    display: none !important;
+}
+
+.menu-toggle.active .icon-burger {
+    display: none !important;
+}
+
+.menu-toggle.active .icon-close {
+    display: block !important;
+    stroke: #ffffff !important;
 }
 
 header {
-  background-color: rgba(22, 27, 34, 0.95) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border-bottom: 1px solid #30363d !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 120px !important; /* Четкие два этажа */
-  z-index: 1000 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  transition: all 0.3s ease;
+    background-color: rgba(11, 19, 33, 0.92) !important; /* Цвет Глубокий Космос */
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-bottom: 1px solid #30363d !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 120px !important; /* Четкие два этажа */
+    z-index: 1000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    transition: all 0.3s ease;
 }
 
-/* Первый ярус: Бургер - Лого - ЛК */
+/* Первый ярус: Бургер (слева) -> Логотип -> ЛК (справа) */
 .header-container {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  max-width: 1200px !important;
-  height: 65px !important;
-  padding: 0 24px !important;
-  margin: 0 auto !important;
-  position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important; /* Выстраиваем элементы по порядку слева направо */
+    width: 100% !important;
+    max-width: 1200px !important;
+    height: 65px !important;
+    padding: 0 12px !important; /* Отступ 12px от краев экрана */
+    margin: 0 auto !important;
+    position: relative !important;
+}
+
+.menu-toggle { 
+    order: 1 !important; 
 }
 
 .logo {
-  font-size: 1.20rem !important; /* Премиальное изящество по ТЗ */
-  font-weight: 700 !important;
-  color: #f0f6fc !important;
-  letter-spacing: 0.5px !important;
-  white-space: nowrap !important;
-  text-decoration: none !important;
-  position: absolute !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+    order: 2 !important;
+    margin-left: 24px !important; /* Строгий отступ 24px от правой границы бургер-кнопки */
+    font-size: 1.20rem !important;
+    font-weight: 700 !important;
+    color: #f0f6fc !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    text-decoration: none !important;
 }
 
 .logo span {
-  color: #00f2fe !important;
+    color: #00f2fe !important;
 }
 
-.menu-toggle { order: 1 !important; }
-.lk-btn { order: 2 !important; }
-.menu-toggle .icon-burger { display: block !important; }
+.lk-btn { 
+    order: 3 !important; 
+    margin-left: auto !important; /* Авто-отступ отталкивает ЛК к самому правому краю */
+}
 
 /* Второй ярус шапки: Переключатели режимов */
 .hero-actions {
