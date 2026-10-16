@@ -472,15 +472,19 @@ header {
 
 /* Фиксация размеров обратной стороны модального окна на максимальный слой */
 .bento-card.is-expanded .bento-card-back {
-  border-radius: 0 !important;
-  border: none !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 1000000 !important; /* Пробивает двухэтажную шапку */
-  padding-top: 140px !important; /* Сдвигаем внутренний текст виджетов ниже шапки */
+    border-radius: 0 !important;
+    border: none !important;
+    position: absolute !important; 
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 1000000 !important; 
+    padding-top: 40px !important; 
+}
+
+header.header-behind {
+    z-index: 10 !important;
 }
 
 /* Иконки управления внутри карточек */
@@ -519,3 +523,6 @@ header {
   stroke-width: 2.5px !important; /* Делаем линии чуть четче */
   fill: none !important;
     }
+.bento-card.is-expanded .bento-card-back * {
+    transform: scale(1) !important;
+}
