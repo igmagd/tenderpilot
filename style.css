@@ -475,22 +475,16 @@ header {
     border-radius: 0 !important;
     border: none !important;
     
-    /* Фиксируем окно на весь экран */
-    position: fixed !important; 
+    /* Возвращаем в абсолютный поток Bento-сетки, чтобы не было схлопывания */
+    position: absolute !important; 
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    
-    /* Поднимаем на самый верхний слой платформы */
     z-index: 1000000 !important; 
     padding-top: 40px !important;
-    
-    /* ЖЕСТКО ДЕРЖИМ ВИДИМОСТЬ, ЧТОБЫ КАРТОЧКА НЕ ИСЧЕЗАЛА ЗА ФОНОМ: */
     opacity: 1 !important;
-    
-    /* Сбрасываем лишние 3D-повороты для fixed-окна */
-    transform: none !important;
+    transform: rotateY(180deg) !important; 
 }
 
 header.header-behind {
