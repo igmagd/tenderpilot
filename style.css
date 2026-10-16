@@ -202,9 +202,20 @@ header {
         width: 100% !important;
         z-index: 100 !important; 
     }
+    header .header-container {
+        background: #0b1321 !important;
+        position: relative !important;
+        z-index: 102 !important;
+    }
+    .logo, #menu-toggle {
+        position: relative !important;
+        z-index: 102 !important;
+    }
+    .logo span {
+        color: #00f2fe !important;
+    }
 
     /* 2. ШТОРКА МЕНЮ ПОВЕРХ ВСЕГО (на весь экран, без вертикальных скроллов) */
-    /* Шторка меню в покое (когда она ЗАКРЫВАЕТСЯ и улетает наверх) */
     .nav-links {
         position: fixed !important;
         top: 0 !important; 
@@ -218,33 +229,27 @@ header {
         z-index: 101 !important; 
         overflow: hidden !important; 
         touch-action: pan-x !important; 
-        
-        /* СМЕЩЕНИЕ: Уводим чуть меньше (-105% вместо -120%), чтобы она не тратила время на разгон */
+        opacity: 0 !important;
         transform: translate3d(0, -105%, 0) !important;
-        
-        /* АНИМАЦИЯ ЗАКРЫТИЯ: Делаем её мягкой, равномерной и плавной (ease-in-out) */
-        /* Увеличиваем время до 0.38s, чтобы компенсировать задержку JS */
-        transition: transform 0.38s ease-in-out !important;
+        transition: transform 0.38s ease-in-out, opacity 0.25s ease-in-out !important;
     }
-
-    /* Состояние, когда шторка ОТКРЫВАЕТСЯ */
     .nav-links.active {
+        opacity: 1 !important;
         transform: translate3d(0, 0, 0) !important;
-        
-        /* АНИМАЦИЯ ОТКРЫТИЯ: Оставляем твой быстрый, премиальный влёт (0.35s) */
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease !important;
     }
 
     /* Кнопки шапки плавно растворяются, чтобы не просвечивали */
     .hero-actions {
         transition: opacity 0.2s ease !important;
     }
-
-    /* Когда меню открыто, полностью прячем нижний ярус */
     body.menu-open .hero-actions {
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
+    }
+    body.menu-open .lk-btn {
+        display: none !important;
     }
 
     /* ЛОГОТИП И БУРГЕР ОСТАЮТСЯ НА САМОМ ВЕРХУ */
