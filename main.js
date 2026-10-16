@@ -37,33 +37,43 @@
       });
     });
 
-        var toggle = document.getElementById('menu-toggle');
-        var nav = document.querySelector('.nav-links');
-        
-        if (toggle && nav) {
-            // Клик по бургер-кнопке (открытие / закрытие)
-            toggle.addEventListener('click', function (e) {
-                e.preventDefault();
-                var isActive = toggle.classList.toggle('active');
-                nav.classList.toggle('active');
-                
-                // Блокируем скролл страницы только если меню открыто
-                document.body.style.overflow = isActive ? 'hidden' : '';
-            });
+    var toggle = document.getElementById('menu-toggle');
+    var nav = document.querySelector('.nav-links');
 
-            // Плавное закрытие при клике на любую ссылку внутри шторки
-            nav.querySelectorAll('.menu-item-link').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    toggle.classList.remove('active');
-                    nav.classList.remove('active');
-                    
-                    // Ждем 350мс, пока шторка полностью уедет наверх, и только потом возвращаем скролл
-                    setTimeout(function () {
-                        document.body.style.overflow = '';
-                    }, 350);
-                });
-            });
+    if (toggle && nav) {
+        // Функция для плавного закрытия шторки
+        function closeMenu() {
+            toggle.classList.remove('active');
+            nav.classList.remove('active');
+            // Возвращаем скролл страницы строго через 350мс, когда шторка улетела
+            setTimeout(function () {
+                document.body.style.overflow = '';
+            }, 350);
         }
+
+        // Клик по бургер-кнопке (открытие / закрытие)
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            var isActive = toggle.classList.toggle('active');
+            nav.classList.toggle('active');
+
+            if (isActive) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Если закрываем по бургеру — ждем окончания анимации
+                setTimeout(function () {
+                    document.body.style.overflow = '';
+                }, 350);
+            }
+        });
+
+        // Плавное закрытие при клике на любую ссылку в меню
+        nav.querySelectorAll('.menu-item-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+                closeMenu();
+            });
+        });
+    }
 
     function shift(dir) {
       var state = window.tenderpilot;
