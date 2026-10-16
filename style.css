@@ -190,94 +190,88 @@ header {
 
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
-  /* Исправленный мобильный каркас меню со скроллом и блокировкой тапов */
-.nav-links {
-    position: fixed !important;
-    top: 65px !important; /* Начинается ровно под первым ярусом шапки */
-    left: 0 !important;
-    width: 100% !important;
-    height: calc(100vh - 65px) !important; /* Занимает весь экран ниже шапки */
-    background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Плавный темный космос */
-    display: flex !important;
-    flex-direction: column !important; /* Строго в столбец */
-    padding: 24px 24px 40px 24px !important; 
-    z-index: 99 !important; /* Ниже первого яруса шапки, но выше Bento-карточек */
-    transform: translate3d(0, -120%, 0) !important; /* Уезжает полностью наверх */
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Идеальная синхронность с Bento */
-    overflow-y: auto !important; /* Нативный вертикальный скролл */
-    -webkit-overflow-scrolling: touch !important;
-    pointer-events: none !important;
-}
+    /* 1. Изолируем шторку от флекс-потока шапки и Bento */
+    .nav-links {
+        position: fixed !important;
+        top: 65px !important; /* Начинается строго под первым ярусом шапки */
+        left: 0 !important;
+        width: 100% !important;
+        height: calc(100vh - 65px) !important; /* Занимает строго оставшийся экран */
+        background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Глубокий космос */
+        display: flex !important;
+        flex-direction: column !important; /* Ссылки строго в столбец */
+        padding: 24px 24px 40px 24px !important;
+        z-index: 99 !important; /* Ниже первого яруса шапки, но не мешает Bento */
+        transform: translate3d(0, -120%, 0) !important; /* Полностью уезжает наверх */
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        overflow-y: auto !important; /* Чистый вертикальный скролл контента */
+        -webkit-overflow-scrolling: touch !important;
+        pointer-events: none !important;
+    }
 
-.nav-links.active {
-    transform: translate3d(0, 0, 0) !important;
-    pointer-events: auto !important;
-}
+    /* Активация шторки */
+    .nav-links.active {
+        transform: translate3d(0, 0, 0) !important;
+        pointer-events: auto !important;
+    }
 
-/* Скрываем Личный Кабинет на мобилках, когда шторка активна */
-body:has(.nav-links.active) .lk-btn {
-    display: none !important;
-}
+    /* 2. Скрываем ЛК при открытом меню, чтобы не дублировать крестик */
+    body:has(.nav-links.active) .lk-btn {
+        display: none !important;
+    }
 
-/* ФИКС СЛИПАНИЯ ССЫЛОК: Ссылки внутри групп строго в столбец */
-.nav-links .menu-group-links {
-    flex-direction: column !important; 
-    width: 100% !important;
-    background: transparent !important;
-}
+    /* 3. Жестко разворачиваем контейнеры ссылок в столбец */
+    .nav-links .menu-group-links {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        background: transparent !important;
+    }
 
-/* ФИКС НАЛОЖЕНИЯ: На мобильных скрытые через inline-style группы не должны занимать место */
-.nav-links .menu-group-links[style*="display: none"] {
-    display: none !important;
-}
+    /* Блокируем отображение неактивных групп ссылок */
+    .nav-links .menu-group-links[style*="display: none"] {
+        display: none !important;
+    }
+    .nav-links .menu-group-links[style*="display: flex"] {
+        display: flex !important;
+    }
 
-.nav-links .menu-group-links[style*="display: flex"] {
-    display: flex !important;
-}
+    /* 4. Очищаем строку статуса от черного ПК-фона */
+    .menu-status-bar {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
+        margin-bottom: 16px !important;
+        padding-bottom: 12px !important;
+        background: transparent !important; /* Полная прозрачность */
+    }
 
-/* Мобильная строка статуса со стрелочками */
-.menu-status-bar {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
-    margin-bottom: 16px !important;
-    padding-bottom: 12px !important;
-    background: transparent !important; /* Убрали черный цвет фона начисто */
-}
+    .menu-status-text {
+        color: #58a6ff !important;
+        font-weight: 500 !important;
+        font-size: 19px !important;
+    }
 
-.menu-status-text {
-    color: #58a6ff !important;
-    font-weight: 500 !important;
-    font-size: 19px !important;
-}
+    .menu-status-arrows {
+        display: flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+    }
 
-.menu-status-arrows {
-    display: flex !important;
-    align-items: center !important;
-    gap: 16px !important;
+    /* 5. Красивые ссылки списком */
+    .nav-links .menu-item-link {
+        display: block !important;
+        width: 100% !important;
+        padding: 16px 0 !important;
+        font-size: 18px !important;
+        color: #c9d1d9 !important; /* Благородный светлый цвет */
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+        background: transparent !important;
+    }
 }
-
-.menu-status-arrows .menu-arrow-icon {
-    width: 24px !important;
-    height: 24px !important;
-    color: #768390 !important;
-    cursor: pointer !important;
-}
-
-/* Ссылки мобильного меню */
-.nav-links .menu-item-link {
-    display: block !important;
-    width: 100% !important;
-    padding: 16px 0 !important;
-    font-size: 18px !important;
-    color: #c9d1d9 !important; /* Принудительный благородный светлый цвет ссылок */
-    text-decoration: none !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important; /* Тонкая серая линия-разделитель */
-    background: transparent !important;
-}
-} /* Финальная скобка, закрывающая медиа-запрос @media (max-width: 768px) */
 
 /* Базовый bento-каркас */
 .bento-grid {
