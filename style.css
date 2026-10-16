@@ -191,21 +191,29 @@ header {
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
 
-    /* Фиксируем шапку на мобильных: она всегда монолитна, 103px в высоту и не прыгает */
+    /* 1. Убрали !important, чтобы высота могла плавно меняться */
     header {
-        height: 103px !important;
+        height: 103px;
         display: flex !important;
         flex-direction: column !important;
+        overflow: hidden !important; 
+        transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
-    /* Анимация исчезновения нижних кнопок, чтобы они не перекрывали шторку */
+    /* 2. При открытом меню шапка аккуратно сжимается до первого яруса */
+    body:has(.nav-links.active) header {
+        height: 65px !important;
+    }
+
+    /* 3. Кнопки плавно растворяются и смещаются, не ломая разметку */
     .hero-actions {
-        transition: opacity 0.25s ease, visibility 0.25s ease !important;
+        transition: opacity 0.2s ease, transform 0.25s ease, visibility 0.25s ease !important;
+        transform: translate3d(0, 0, 0) !important;
     }
 
-    /* Когда шторка открыта, плавно растворяем кнопки переключения */
     body:has(.nav-links.active) .hero-actions {
         opacity: 0 !important;
+        transform: translate3d(0, 20px, 0) !important;
         visibility: hidden !important;
         pointer-events: none !important;
     }
