@@ -50,7 +50,7 @@
             setTimeout(function () {
                 document.body.classList.remove('menu-open');
                 document.body.style.overflow = '';
-            }, 350);
+            }, 250);
         }
 
         // Клик по бургеру / крестику
