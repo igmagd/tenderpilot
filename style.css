@@ -191,7 +191,7 @@ header {
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
 
-    /* Шапка жестко закреплена на самом верху, z-index 100 — она перекрывает шторку */
+    /* 1. Шапка жестко закреплена на самом верху, z-index 100 — она перекрывает шторку */
     header {
         height: 103px !important;
         display: flex !important;
@@ -203,21 +203,25 @@ header {
         z-index: 100 !important;
     }
 
-    /* Анимация исчезновения и появления нижних кнопок шапки */
+    /* Анимация проявления нижних кнопок шапки ПОСЛЕ того, как шторка полностью улетела */
     .hero-actions {
-        /* При закрытии добавляем задержку в 0.1s, чтобы они не вылезали посреди полета */
-        transition: opacity 0.25s ease 0.1s, visibility 0.25s ease 0.1s !important;
+        transition: opacity 0.2s ease !important;
     }
 
-    /* Когда меню активно, плавно растворяем кнопки без задержки */
-    body:has(.nav-links.active) .hero-actions {
+    /* ПОКА МЕНЮ ОТКРЫТО: Жестко скрываем кнопки, чтобы они не мерцали во время полета шторки */
+    body.menu-open .hero-actions {
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
-        transition: opacity 0.2s ease, visibility 0.2s ease !important;
+        transition: none !important; /* Скрываем мгновенно при открытии */
     }
 
-    /* Шторка меню — слой z-index 99, строго под шапкой */
+    /* ПОКА МЕНЮ ОТКРЫТО: Полностью изолируем ЛК, оставляя только логотип и крестик */
+    body.menu-open .lk-btn {
+        display: none !important;
+    }
+
+    /* Шторка меню — слой z-index 99, строго под шапкой, со свободным скроллом и свайпами */
     .nav-links {
         position: fixed !important;
         top: 65px !important; 
@@ -230,22 +234,19 @@ header {
         padding: 24px !important;
         z-index: 99 !important;
         
-        /* Возвращаем и сохраняем нативный скролл и свайпы во все стороны! */
+        /* Включаем независимый нативный скролл и свайпы по шагам внутри шторки */
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
         touch-action: auto !important; 
         
-        /* Плавный уезд наверх строго за 0.35 секунды */
+        /* Анимация плавного уезда строго вверх за 0.35 секунды */
         transform: translate3d(0, -120%, 0) !important;
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        overflow-y: auto !important;
     }
 
+    /* Состояние открытой шторки */
     .nav-links.active {
         transform: translate3d(0, 0, 0) !important;
-    }
-
-    /* Полная чистота интерфейса при открытом меню: скрываем ЛК */
-    body:has(.nav-links.active) .lk-btn {
-        display: none !important;
     }
 
     /* Ссылки мобильного меню и эффект подсветки при ТАПЕ */
