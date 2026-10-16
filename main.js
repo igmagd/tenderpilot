@@ -41,33 +41,32 @@
     var nav = document.querySelector('.nav-links');
 
     if (toggle && nav) {
-        // Функция для плавного закрытия шторки
+        // Функция плавного закрытия шторки
         function closeMenu() {
             toggle.classList.remove('active');
             nav.classList.remove('active');
-            // Возвращаем скролл страницы строго через 350мс, когда шторка улетела
+            
+            // Ждём 350мс (пока улетает шторка) и только потом возвращаем кнопки и скролл!
             setTimeout(function () {
+                document.body.classList.remove('menu-open');
                 document.body.style.overflow = '';
             }, 350);
         }
 
-        // Клик по бургер-кнопке (открытие / закрытие)
+        // Клик по бургеру / крестику
         toggle.addEventListener('click', function (e) {
             e.preventDefault();
-            var isActive = toggle.classList.toggle('active');
-            nav.classList.toggle('active');
-
-            if (isActive) {
-                document.body.style.overflow = 'hidden';
+            if (toggle.classList.contains('active')) {
+                closeMenu();
             } else {
-                // Если закрываем по бургеру — ждем окончания анимации
-                setTimeout(function () {
-                    document.body.style.overflow = '';
-                }, 350);
+                toggle.classList.add('active');
+                nav.classList.add('active');
+                document.body.classList.add('menu-open'); // Фиксируем чистоту шапки
+                document.body.style.overflow = 'hidden';  // Блокируем скролл основного сайта
             }
         });
 
-        // Плавное закрытие при клике на любую ссылку в меню
+        // Плавное закрытие при клике на ссылки внутри меню
         nav.querySelectorAll('.menu-item-link').forEach(function (link) {
             link.addEventListener('click', function () {
                 closeMenu();
