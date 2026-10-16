@@ -219,12 +219,20 @@ body:has(.nav-links.active) .lk-btn {
     display: none !important;
 }
 
-/* ФИКС СЛИПАНИЯ ССЫЛОК: Сбрасываем ПК-флексы внутренних контейнеров на мобильных */
+/* ФИКС СЛИПАНИЯ ССЫЛОК: Ссылки внутри групп строго в столбец */
 .nav-links .menu-group-links {
-    display: flex !important;
-    flex-direction: column !important; /* Разворачиваем ссылки строго в столбец */
+    flex-direction: column !important; 
     width: 100% !important;
     background: transparent !important;
+}
+
+/* ФИКС НАЛОЖЕНИЯ: На мобильных скрытые через inline-style группы не должны занимать место */
+.nav-links .menu-group-links[style*="display: none"] {
+    display: none !important;
+}
+
+.nav-links .menu-group-links[style*="display: flex"] {
+    display: flex !important;
 }
 
 /* Мобильная строка статуса со стрелочками */
@@ -236,7 +244,7 @@ body:has(.nav-links.active) .lk-btn {
     border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
     margin-bottom: 16px !important;
     padding-bottom: 12px !important;
-    background: transparent !important;
+    background: transparent !important; /* Убрали черный цвет фона начисто */
 }
 
 .menu-status-text {
