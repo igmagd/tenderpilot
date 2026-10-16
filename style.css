@@ -204,34 +204,35 @@ header {
     }
 
     /* 2. ШТОРКА МЕНЮ ПОВЕРХ ВСЕГО (на весь экран, без вертикальных скроллов) */
+    /* Шторка меню в покое (когда она ЗАКРЫВАЕТСЯ и улетает наверх) */
     .nav-links {
         position: fixed !important;
         top: 0 !important; 
         left: 0 !important;
         width: 100% !important;
-        height: 100vh !important; /* Строго на весь экран мобильного */
+        height: 100vh !important;
         background: linear-gradient(to bottom, #0b1321, #070b12) !important; 
         display: flex !important;
         flex-direction: column !important;
-        
-        /* Отступ сверху, чтобы ссылки не залезали под Логотип и Крестик */
         padding: 95px 24px 24px 24px !important; 
-        z-index: 101 !important; /* Выше хедера */
-        
-        /* ПОЛНОСТЬЮ ПРЯЧЕМ СКРОЛЛБАРЫ И ПРОКРУТКУ ВНИЗ */
+        z-index: 101 !important; 
         overflow: hidden !important; 
-        
-        /* Разрешаем браузеру обрабатывать только горизонтальный свайп влево-вправо */
         touch-action: pan-x !important; 
         
-        /* Честная плавная анимация уезда строго наверх */
-        transform: translate3d(0, -120%, 0) !important;
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        /* СМЕЩЕНИЕ: Уводим чуть меньше (-105% вместо -120%), чтобы она не тратила время на разгон */
+        transform: translate3d(0, -105%, 0) !important;
+        
+        /* АНИМАЦИЯ ЗАКРЫТИЯ: Делаем её мягкой, равномерной и плавной (ease-in-out) */
+        /* Увеличиваем время до 0.38s, чтобы компенсировать задержку JS */
+        transition: transform 0.38s ease-in-out !important;
     }
 
-    /* Состояние открытой шторки */
+    /* Состояние, когда шторка ОТКРЫВАЕТСЯ */
     .nav-links.active {
         transform: translate3d(0, 0, 0) !important;
+        
+        /* АНИМАЦИЯ ОТКРЫТИЯ: Оставляем твой быстрый, премиальный влёт (0.35s) */
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* Кнопки шапки плавно растворяются, чтобы не просвечивали */
