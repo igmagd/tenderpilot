@@ -480,7 +480,8 @@ header {
     width: 100vw !important;
     height: 100vh !important;
     z-index: 1000000 !important; 
-    padding-top: 40px !important; 
+    padding-top: 40px !important;
+    transform: rotateY(180deg) !important; 
 }
 
 header.header-behind {
@@ -526,3 +527,4 @@ header.header-behind {
 .bento-card.is-expanded .bento-card-back * {
     transform: scale(1) !important;
 }
+
