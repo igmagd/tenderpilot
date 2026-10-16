@@ -37,23 +37,33 @@
       });
     });
 
-    var toggle = document.getElementById('menu-toggle');
-    var nav = document.querySelector('.nav-links');
-    if (toggle && nav) {
-      toggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        var active = toggle.classList.toggle('active');
-        nav.classList.toggle('active');
-        document.body.style.overflow = active ? 'hidden' : '';
-      });
-      nav.querySelectorAll('.menu-item-link').forEach(function (link) {
-        link.addEventListener('click', function () {
-          toggle.classList.remove('active');
-          nav.classList.remove('active');
-          document.body.style.overflow = '';
-        });
-      });
-    }
+        var toggle = document.getElementById('menu-toggle');
+        var nav = document.querySelector('.nav-links');
+        
+        if (toggle && nav) {
+            // Клик по бургер-кнопке (открытие / закрытие)
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                var isActive = toggle.classList.toggle('active');
+                nav.classList.toggle('active');
+                
+                // Блокируем скролл страницы только если меню открыто
+                document.body.style.overflow = isActive ? 'hidden' : '';
+            });
+
+            // Плавное закрытие при клике на любую ссылку внутри шторки
+            nav.querySelectorAll('.menu-item-link').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    toggle.classList.remove('active');
+                    nav.classList.remove('active');
+                    
+                    // Ждем 350мс, пока шторка полностью уедет наверх, и только потом возвращаем скролл
+                    setTimeout(function () {
+                        document.body.style.overflow = '';
+                    }, 350);
+                });
+            });
+        }
 
     function shift(dir) {
       var state = window.tenderpilot;
