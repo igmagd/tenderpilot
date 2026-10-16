@@ -453,45 +453,107 @@ header {
   opacity: 0 !important; 
 }
 
-/* ФАЗА 1: При 3D-перевороте проявляем рубашку и гасим лицо */
-.bento-card.is-flipped .bento-card-inner {
-  transform: rotateY(180deg) !important;
-}
-.bento-card.is-flipped .bento-card-back {
-  opacity: 1 !important; /* Убирает баг исчезновения! */
-}
-.bento-card.is-flipped .bento-card-front {
-  opacity: 0 !important;
-}
+/* ==========================================================================
+   МЕХАНИЗМ КЛОНИРОВАНИЯ И ПРЕМИАЛЬНОГО 3D-ВЗЛЕТА КАРТОЧКИ ТЕНДЕРПИЛОТ
+========================================================================== */
 
-/* ФАЗА 2: Аппаратное GPU-раскрытие контейнера на весь экран */
-.bento-card.is-expanded .bento-card-inner {
-  transform: var(--target-transform) rotateY(180deg) !important;
-  z-index: 9999 !important;
-}
-
-/* Фиксация размеров обратной стороны модального окна на максимальный слой */
-.bento-card.is-expanded .bento-card-back {
-    border-radius: 0 !important;
-    border: none !important;
+/* 1. Исходное состояние Клона (в момент появления в body) */
+.bento-card-clone {
+    position: fixed !important;
+    z-index: 999999 !important; /* Гарантированно выше шапки и всего сайта */
+    background: linear-gradient(to bottom, #0b1528, #020617) !important;
+    border: 1px solid #30363d !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    box-sizing: border-box !important;
     
-    /* ИСПРАВЛЕНИЕ: Переводим в fixed в финальной точке, 
-       чтобы карточка гарантированно перекрыла шапку и весь экран */
-    position: fixed !important; 
+    /* Включаем 3D-сцену для клона */
+    perspective: 1500px !important;
+    
+    /* Плавность перехода: размеры летят по твоей кубической безье */
+    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-radius 0.3s ease !important;
+}
+
+/* Внутренний контейнер клона, который будет крутиться */
+.bento-card-clone .bento-card-inner {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform-style: preserve-3d !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 2. АНИМАЦИЯ: Запускаем переворот в воздухе */
+.bento-card-clone.is-flipped .bento-card-inner {
+    transform: rotateY(180deg) !important;
+}
+
+/* 3. ФИНАЛ: Клон плавно расширился на весь экран */
+.bento-card-clone.is-expanded {
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    z-index: 1000000 !important; 
+    border-radius: 0 !important;
+    border: none !important;
     padding: 40px 24px 24px 24px !important;
-    box-sizing: border-box !important;
-    opacity: 1 !important;
-    transform: none !important; 
-    margin: 0 !important;
 }
 
-header.header-behind {
-    z-index: 10 !important;
+/* Переключаем видимость сторон внутри летящего клона */
+.bento-card-clone .bento-card-front,
+.bento-card-clone .bento-card-back {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    padding: inherit !important;
+}
+
+.bento-card-clone .bento-card-back {
+    transform: rotateY(180deg) !important;
+    opacity: 0;
+    transition: opacity 0.15s ease !important;
+}
+
+/* Проявляем рубашку ровно в середине кувырка */
+.bento-card-clone.is-flipped .bento-card-back {
+    opacity: 1 !important;
+}
+.bento-card-clone.is-flipped .bento-card-front {
+    opacity: 0 !important;
+}
+
+/* 4. ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ СИСТЕМЫ */
+
+/* Плавное исчезновение шапки, чтобы не мешала читать */
+header {
+    transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+header.header-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(-10px) !important;
+}
+
+/* Запрет скролла самого лендинга на фоне открытого окна */
+body.modal-open {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
+
+/* Делаем оригинальную карточку полупрозрачной заглушкой в момент полета клона */
+.bento-card.is-cloned {
+    opacity: 0.1 !important;
+    pointer-events: none !important;
 }
 
 /* Иконки управления внутри карточек */
@@ -530,7 +592,3 @@ header.header-behind {
   stroke-width: 2.5px !important; /* Делаем линии чуть четче */
   fill: none !important;
     }
-.bento-card.is-expanded .bento-card-back * {
-    transform: scale(1) !important;
-}
-
