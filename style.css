@@ -474,14 +474,14 @@ header {
 .bento-card.is-expanded .bento-card-back {
     border-radius: 0 !important;
     border: none !important;
-    position: absolute !important; 
+    position: absolute !important;
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    z-index: 1000000 !important; 
+    z-index: 1000000 !important;
     padding-top: 40px !important;
-    transform: rotateY(180deg) !important; 
+    transform: none !important; 
 }
 
 header.header-behind {
