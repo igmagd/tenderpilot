@@ -99,45 +99,58 @@
   }
 
   // 3. АНИМАЦИЯ БЕНТО-КАРТОЧЕК (РАСЧЕТ МАТРИЦЫ GPU)
-  function init_bento() {
+function init_bento() {
+    var headerElement = document.querySelector('header');
+
     document.querySelectorAll('.bento-card').forEach(function (card) {
-      var front = card.querySelector('.bento-card-front');
-      var inner = card.querySelector('.bento-card-inner');
-      var close = card.querySelector('.bento-card-close-icon');
-      if (!front || !inner) return;
+        var front = card.querySelector('.bento-card-front');
+        var inner = card.querySelector('.bento-card-inner');
+        var close = card.querySelector('.bento-card-close-icon');
+        if (!front || !inner) return;
 
-      front.addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (card.classList.contains('is-expanded')) return;
+        front.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (card.classList.contains('is-expanded')) return;
 
-        var rect = card.getBoundingClientRect();
-        var scale_x = window.innerWidth / rect.width;
-        var scale_y = window.innerHeight / rect.height;
-        
-        card.style.setProperty('--target-transform', 
-          'translate3d(' + (-rect.left) + 'px, ' + (-rect.top) + 'px, 0) ' +
-          'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
-        );
+            var rect = card.getBoundingClientRect();
+            var scale_x = window.innerWidth / rect.width;
+            var scale_y = window.innerHeight / rect.height;
 
-        card.classList.add('is-flipped');
-        setTimeout(function () {
-          if (card.classList.contains('is-flipped')) card.classList.add('is-expanded');
-        }, 150);
-      });
+            // Выравниваем точку трансформации в левый верхний угол
+            inner.style.transformOrigin = '0 0';
 
-      if (close) {
-        close.addEventListener('click', function (e) {
-          e.preventDefault(); e.stopPropagation();
-          card.classList.add('is-closing');
-          card.classList.remove('is-expanded', 'is-flipped');
-          setTimeout(function () {
-            card.classList.remove('is-closing');
-            card.style.removeProperty('--target-transform');
-          }, 350);
+            card.style.setProperty('--target-transform',
+                'translate3d(' + (-rect.left) + 'px, ' + (-rect.top) + 'px, 0) ' +
+                'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
+            );
+
+            card.classList.add('is-flipped');
+            
+            // Временно прячем шапку под раскрывающуюся карточку
+            if (headerElement) headerElement.classList.add('header-behind');
+
+            setTimeout(function () {
+                if (card.classList.contains('is-flipped')) card.classList.add('is-expanded');
+            }, 150);
         });
-      }
+
+        if (close) {
+            close.addEventListener('click', function (e) {
+                e.preventDefault(); e.stopPropagation();
+                card.classList.add('is-closing');
+                card.classList.remove('is-expanded', 'is-flipped');
+                
+                // Возвращаем шапку на передний план
+                if (headerElement) headerElement.classList.remove('header-behind');
+
+                setTimeout(function () {
+                    card.classList.remove('is-closing');
+                    card.style.removeProperty('--target-transform');
+                }, 350);
+            });
+        }
     });
-  }
+}
 
   // ТОЧКА ВХОДА
   document.addEventListener('DOMContentLoaded', function () {
