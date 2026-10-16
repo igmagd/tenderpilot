@@ -236,19 +236,15 @@ header {
         display: flex !important;
     }
 
-    /* 4. Полностью выжигаем черный ПК-фон через усиленный селектор пути */
+    /* 4. Полностью выжигаем черный ПК-фон и фиксируем ссылки */
     header .nav-links .menu-status-bar {
         width: 100% !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
-        margin-bottom: 16px !important;
-        padding-bottom: 12px !important;
-        background: transparent !important; /* Теперь гарантированно прозрачный */
-        background-color: transparent !important;
+        background: transparent !important; 
     }
 
+    header .nav-links .menu-item-link {
+        color: #c9d1d9 !important;
+    }
 
     .menu-status-text {
         color: #58a6ff !important;
