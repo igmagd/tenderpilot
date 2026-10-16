@@ -190,21 +190,27 @@ header {
 
 /* Базовый выезжающий слой мобильного меню со скроллом и защитой от тапов */
 @media (max-width: 768px) {
+    /* Фикс родительского контейнера: когда меню открыто, шапка не должна блокировать Bento и скролл */
+    header:has(.nav-links.active) {
+        display: block !important; /* Отменяем огромный ПК-флекс */
+        height: 65px !important;   /* Зажимаем шапку строго по высоте первого яруса */
+    }
+
     /* Настройка независимого слоя шторки меню */
     .nav-links {
         position: fixed !important;
         top: 65px !important; /* Начинается ровно под первым ярусом шапки */
         left: 0 !important;
         width: 100% !important;
-        height: calc(100vh - 65px) !important;
-        background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Наш космический фон хедера */
+        height: calc(100vh - 65px) !important; /* Занимает весь оставшийся экран */
+        background: linear-gradient(to bottom, #0d1117, #020617) !important; /* Родной темный космос */
         display: flex !important;
-        flex-direction: column !important; /* Выстраиваем контент в столбец */
+        flex-direction: column !important; /* Ссылки строго в столбец */
         padding: 24px !important;
-        z-index: 99 !important; /* Изолируем от Bento-сетки */
-        transform: translate3d(0, -120%, 0) !important; /* Плавный уезд наверх */
+        z-index: 99 !important; /* Изолировано от Bento-карточек */
+        transform: translate3d(0, -120%, 0) !important; /* Уезжает наверх */
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        overflow-y: auto !important; /* Возвращаем чистый нативный скролл */
+        overflow-y: auto !important; /* Нативный, бесконечный вертикальный скролл */
     }
 
     /* Активация шторки при клике на бургер */
@@ -217,18 +223,18 @@ header {
         display: none !important;
     }
 
-    /* Сброс горизонтального потока ПК-версии для контейнеров ссылок */
+    /* Разворачиваем контейнеры групп ссылок в вертикальный поток */
     .nav-links .menu-group-links {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
     }
 
-    /* Устранение наложения неактивных блоков меню */
+    /* Исключаем наложение скрытых режимов меню */
     .nav-links .menu-group-links[style*="display: none"] { display: none !important; }
     .nav-links .menu-group-links[style*="display: flex"] { display: flex !important; }
 
-    /* Очистка строки статуса от черного фона ПК-версии */
+    /* Строка статуса (Поставщик) */
     .menu-status-bar {
         width: 100% !important;
         display: flex !important;
@@ -237,7 +243,6 @@ header {
         border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
         margin-bottom: 16px !important;
         padding-bottom: 12px !important;
-        background: transparent !important; /* Вот здесь убираем черноту строки статуса */
     }
 
     .menu-status-text {
@@ -246,7 +251,7 @@ header {
         font-size: 19px !important;
     }
 
-    /* Контроль геометрии стрелочек */
+    /* Геометрия стрелочек */
     .menu-status-arrows {
         display: flex !important;
         align-items: center !important;
@@ -257,10 +262,10 @@ header {
         width: 24px !important;
         height: 24px !important;
         color: #768390 !important;
-        cursor: pointer !important;
+        cursor: pointer;
     }
 
-    /* Оформление ссылок мобильного меню списком */
+    /* Ссылки мобильного меню */
     .nav-links .menu-item-link {
         display: block !important;
         width: 100% !important;
@@ -271,6 +276,7 @@ header {
         border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
     }
 }
+
 
 /* Базовый bento-каркас */
 .bento-grid {
