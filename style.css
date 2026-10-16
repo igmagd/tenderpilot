@@ -361,6 +361,34 @@ header {
         color: #768390 !important;
         cursor: pointer;
     }
+       /* Системно убираем десктопные перекосы и возвращаем блок в поток под шапку */
+    .hero-section {
+        /* Высота шапки 103px + 24px для идеального воздуха на мобильном */
+        padding-top: 127px !important; 
+        
+        /* Сбрасываем любые десктопные левые/правые отступы, которые косили блок вправо */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        
+        /* Включаем вертикальный мобильный поток */
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; 
+        justify-content: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Монументально центрируем заголовок и параграф на мобильных экранах */
+    .hero-section h1, 
+    .hero-section p {
+        text-align: center !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+   }
 }
 
 /* Базовый bento-каркас */
