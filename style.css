@@ -227,18 +227,40 @@ header {
         flex-direction: column !important;
         padding: 95px 24px 24px 24px !important; 
         z-index: 101 !important; 
-        overflow: hidden !important; 
+        
+        /* Включаем горизонтальный скролл для свайпов, прячем вертикальный */
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
         touch-action: pan-x !important; 
-        opacity: 0 !important;
+        
+        /* Спрячем скроллбары для всех типов мобильных браузеров */
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        
         transform: translate3d(0, -105%, 0) !important;
-        transition: transform 0.38s ease-in-out, opacity 0.25s ease-in-out !important;
+        transition: transform 0.38s ease-in-out !important;
+    }
+    .nav-links::-webkit-scrollbar {
+        display: none !important; /* Прячет полосу в Chrome/Safari */
     }
     .nav-links.active {
-        opacity: 1 !important;
         transform: translate3d(0, 0, 0) !important;
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease !important;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
-
+    /* Ссылки внутри шторки скрыты, пока она летит */
+    .nav-links .menu-item-link,
+    .nav-links .menu-status-bar {
+        opacity: 0;
+        transition: opacity 0.2s ease !important;
+    }
+    /* Плавно проявляются только когда шторка полностью открыта */
+    .nav-links.active .menu-item-link,
+    .nav-links.active .menu-status-bar {
+        opacity: 1;
+        transition: opacity 0.25s ease 0.15s !important;
+   }
+   
     /* Кнопки шапки плавно растворяются, чтобы не просвечивали */
     .hero-actions {
         transition: opacity 0.2s ease !important;
