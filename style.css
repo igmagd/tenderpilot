@@ -262,24 +262,26 @@ header {
    }
    
     /* Кнопки шапки плавно растворяются, чтобы не просвечивали */
-    /* Базовое состояние кнопок (когда меню ЗАКРЫВАЕТСЯ и они возвращаются) */
+    /* Базовое состояние кнопок (когда они возвращаются на экран) */
     .hero-actions {
-        /* Добавляем задержку 0.1s, чтобы кнопки начали движение, когда шторка уже пролетела половину пути */
-        transition: opacity 0.3s ease 0.1s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s !important;
-        transform: translate3d(0, 0, 0) !important;
+        /* Убираем плавность opacity! Включаем их МГНОВЕННО (transition: none) */
+        /* Но делаем задержку 0.28s, чтобы они включились ровно в момент пролета шторки */
+        transition: none !important;
+        transition-delay: 0.28s !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
     }
 
-    /* Состояние кнопок, когда меню ОТКРЫТО */
+    /* Состояние кнопок, когда меню открыто */
     body.menu-open .hero-actions {
+        /* При открытии меню кнопки исчезают мгновенно без задержек */
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
-        
-        /* Приподнимаем кнопки чуть выше, пряча их в верхний ярус шапки */
-        transform: translate3d(0, -15px, 0) !important;
-        
-        /* При открытии меню убираем задержку, чтобы кнопки исчезали мгновенно */
-        transition: opacity 0.15s ease, transform 0.15s ease !important;
+        transform: none !important;
+        transition: none !important;
+        transition-delay: 0s !important;
     }
 
     body.menu-open .lk-btn {
