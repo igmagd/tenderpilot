@@ -236,8 +236,8 @@ header {
         display: flex !important;
     }
 
-    /* 4. Очищаем строку статуса от черного ПК-фона */
-    .menu-status-bar {
+    /* 4. Полностью выжигаем черный ПК-фон через усиленный селектор пути */
+    header .nav-links .menu-status-bar {
         width: 100% !important;
         display: flex !important;
         justify-content: space-between !important;
@@ -245,8 +245,10 @@ header {
         border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
         margin-bottom: 16px !important;
         padding-bottom: 12px !important;
-        background: transparent !important; /* Полная прозрачность */
+        background: transparent !important; /* Теперь гарантированно прозрачный */
+        background-color: transparent !important;
     }
+
 
     .menu-status-text {
         color: #58a6ff !important;
