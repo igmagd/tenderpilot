@@ -113,20 +113,20 @@ function init_bento() {
             if (card.classList.contains('is-expanded')) return;
 
             var rect = card.getBoundingClientRect();
-            var scale_x = window.innerWidth / rect.width;
-            var scale_y = window.innerHeight / rect.height;
+            
+            // Расчет сдвига строго от ЦЕНТРА карточки к ЦЕНТРА экрана
+            var move_x = (window.innerWidth / 2) - (rect.left + rect.width / 2);
+            var move_y = (window.innerHeight / 2) - (rect.top + rect.height / 2);
 
-            // Выравниваем точку трансформации в левый верхний угол
-            inner.style.transformOrigin = '0 0';
+            // Возвращаем стандартную точку отсчета анимации (центр)
+            inner.style.transformOrigin = 'center center';
 
             card.style.setProperty('--target-transform',
-                'translate3d(' + (-rect.left) + 'px, ' + (-rect.top) + 'px, 0) ' +
-                'scale3d(' + scale_x + ', ' + scale_y + ', 1)'
+                'translate3d(' + move_x + 'px, ' + move_y + 'px, 0)'
             );
 
             card.classList.add('is-flipped');
             
-            // Временно прячем шапку под раскрывающуюся карточку
             if (headerElement) headerElement.classList.add('header-behind');
 
             setTimeout(function () {
@@ -140,7 +140,6 @@ function init_bento() {
                 card.classList.add('is-closing');
                 card.classList.remove('is-expanded', 'is-flipped');
                 
-                // Возвращаем шапку на передний план
                 if (headerElement) headerElement.classList.remove('header-behind');
 
                 setTimeout(function () {
