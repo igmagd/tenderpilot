@@ -100,46 +100,37 @@
 
   // 3. АНИМАЦИЯ БЕНТО-КАРТОЧЕК (РАСЧЕТ МАТРИЦЫ GPU)
 function init_bento() {
-  var bentoGrid = document.querySelector('.bento-grid');
-  if (!bentoGrid) return;
+    var bentoGrid = document.querySelector('.bento-grid');
+    if (!bentoGrid) return;
+    var cards = bentoGrid.querySelectorAll('.bento-card');
+    var bodyElement = document.body;
 
-  var cards = bentoGrid.querySelectorAll('.bento-card');
-  var bodyElement = document.body;
+    cards.forEach(function (card) {
+        card.addEventListener('click', function (e) {
+            if (e.target.closest('.bento-card-close-icon')) return;
+            if (card.classList.contains('is-cloned')) return;
 
-  cards.forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      if (e.target.closest('.bento-card-close-icon')) return;
-      if (card.classList.contains('is-cloned')) return;
+            // Инициализация клонирования и фиксация базовых координат карточки
+            var rect = card.getBoundingClientRect();
+            var clone = card.cloneNode(true);
+            clone.id = card.id + '-clone';
+            clone.classList.add('bento-card-clone');
+            
+            clone.style.position = 'fixed';
+            clone.style.top = rect.top + 'px';
+            clone.style.left = rect.left + 'px';
+            clone.style.width = rect.width + 'px';
+            clone.style.height = rect.height + 'px';
+            clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-      // 1. Считаем ЧИСТЫЕ координаты относительно видимого окна экрана
-      var rect = card.getBoundingClientRect();
-
-      // 2. Создаем глубокий клон всей карточки целиком
-      var clone = card.cloneNode(true);
-      clone.id = card.id + '-clone';
-      clone.classList.add('bento-card-clone');
-
-      // 3. Задаем фиксированную стартовую позицию без учета скролла документа
-      clone.style.position = 'fixed';
-      clone.style.top = rect.top + 'px';
-      clone.style.left = rect.left + 'px';
-      clone.style.width = rect.width + 'px';
-      clone.style.height = rect.height + 'px';
-      
-      var computedStyle = window.getComputedStyle(card);
-      clone.style.borderRadius = computedStyle.borderRadius;
-
-bodyElement.appendChild(clone);
-
-      // Трюк Reflow для фиксации стартовой точки перед 3D-анимацией
-      window.getComputedStyle(clone).transform;
-
-      // 5. Включаем классы полета и переворота
-      card.classList.add('is-cloned');
+            bodyElement.appendChild(clone);
+            window.getComputedStyle(clone).transform;
+            // Включаем безопасный 3D-кувырок и блокируем фон лендинга
+            card.classList.add('is-cloned');
             clone.classList.add('is-flipped');
             bodyElement.classList.add('bento-active');
 
-            // Микропауза для фиксации старта, затем плавное расширение
+            // Даем браузеру 10мс зафиксировать старт, затем принудительно раскрываем во весь экран
             setTimeout(function() {
                 clone.classList.add('is-expanded');
                 clone.style.top = '0px';
@@ -147,16 +138,16 @@ bodyElement.appendChild(clone);
                 clone.style.width = '100vw';
                 clone.style.height = '100dvh';
             }, 10);
-
-
-            // 6. Логика закрытия (клик на крестик)
+                      // 6. Логика закрытия (клик на крестик)
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    // Возвращаем точные размеры оригинального места
+                    // Сбрасываем полноэкранные классы
                     clone.classList.remove('is-expanded', 'is-flipped');
+                    
+                    // Возвращаем точные инлайновые размеры оригинального места
                     clone.style.top = rect.top + 'px';
                     clone.style.left = rect.left + 'px';
                     clone.style.width = rect.width + 'px';
@@ -164,7 +155,7 @@ bodyElement.appendChild(clone);
                     
                     bodyElement.classList.remove('bento-active');
 
-                    // Удаляем строго ПОСЛЕ полной остановки CSS-анимации
+                    // Полностью удаляем клон строго ПОСЛЕ окончания обратного полета
                     clone.addEventListener('transitionend', function() {
                         if (!clone.classList.contains('is-expanded')) {
                             if (clone) clone.remove();
