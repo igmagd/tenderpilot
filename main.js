@@ -137,12 +137,13 @@ function init_bento() {
             // ТЕХНОЛОГИЯ ДВОЙНОГО КАДРА: Запускаем полет и 3D-кручение СТРОГО одновременно
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
-                    clone.classList.add('is-expanded');
-                    clone.classList.add('is-flipped'); // Кувырок летит синхронно с ростом карточки!
-                    clone.style.top = '';
-                    clone.style.left = '';
-                    clone.style.width = '';
-                    clone.style.height = '';
+clone.classList.add('is-expanded');
+clone.classList.add('is-flipped');
+clone.style.top = '0px';
+clone.style.left = '0px';
+clone.style.width = '100vw';
+clone.style.height = '100dvh';
+
                 });
             });
 
