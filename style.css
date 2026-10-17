@@ -473,10 +473,8 @@ header {
   perspective: 1200px !important;
 }
 
-/* Добавляем body перед классом, чтобы гарантированно убить инлайн-стили JS */
-/* Стало: */
+/* Добавляем гарантированйн-стили JS */
 .bento-card-clone.is-expanded {
-  position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
@@ -486,9 +484,12 @@ header {
   border-radius: 0px !important;
   border: none !important;
   margin: 0 !important;
-  padding: 50px 24px 24px 24px !important;
-  transform: none !important; 
+  padding: 50px 24px 24px 24px !important; 
+  
+  /* ЗАМЕНЯЕМ transform: none на сброс только 2D-сдвигов, сохраняя 3D-контекст */
+  transform: translate(0, 0) !important; 
 }
+
 
 /* Внутренний контейнер (отвечает ТОЛЬКО за чистый 3D-кувырок) */
 .bento-card-clone .bento-card-inner {
