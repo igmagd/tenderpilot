@@ -107,17 +107,17 @@ function init_bento() {
 
     cards.forEach(function (card) {
         card.addEventListener('click', function (e) {
-          e.stopPropagation();
-          
+            e.stopPropagation();
+
             if (e.target.closest('.bento-card-close-icon')) return;
             if (card.classList.contains('is-cloned')) return;
 
-            // Инициализация клонирования и фиксация базовых координат карточки
+            // Инициализация клонирования и фиксация размеров
             var rect = card.getBoundingClientRect();
             var clone = card.cloneNode(true);
             clone.id = card.id + '-clone';
             clone.classList.add('bento-card-clone');
-            
+
             clone.style.position = 'fixed';
             clone.style.top = rect.top + 'px';
             clone.style.left = rect.left + 'px';
@@ -125,51 +125,51 @@ function init_bento() {
             clone.style.height = rect.height + 'px';
             clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-document.body.appendChild(clone);
-                              
+            document.body.appendChild(clone);
+
+            // Форсируем перерисовку GPU
             window.getComputedStyle(clone).transform;
- 
-            // Даем браузеру 10мс зафиксировать старт, затем принудительно раскрываем во весь экран
-            // Включаем безопасный 3D-кувырок и блокируем фон лендинга
+
+            // Блокируем оригинальную карту в сетке и фон сайта
             card.classList.add('is-cloned');
-            clone.classList.add('is-flipped');
             bodyElement.classList.add('bento-active');
 
-            // ТЕХНОЛОГИЯ ДВОЙНОГО КАДРА: Железно заставляем GPU мобильного телефона
-            // увидеть клон в body до того, как применить полноэкранные стили
-            requestAnimationFrame(function() {
-                requestAnimationFrame(function() {
-clone.classList.add('is-expanded');
-        clone.style.top = '';
-        clone.style.left = '';
-        clone.style.width = '';
-        clone.style.height = '';
-
-
+            // ТЕХНОЛОГИЯ ДВОЙНОГО КАДРА: Запускаем полет и 3D-кручение СТРОГО одновременно
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    clone.classList.add('is-expanded');
+                    clone.classList.add('is-flipped'); // Кувырок летит синхронно с ростом карточки!
+                    clone.style.top = '';
+                    clone.style.left = '';
+                    clone.style.width = '';
+                    clone.style.height = '';
                 });
             });
- 
-                      // 6. Логика закрытия (клик на крестик)
+
+            // Логика закрытия окна (Крестик)
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
-                    
-                    // Сбрасываем полноэкранные классы
-                    clone.classList.remove('is-expanded', 'is-flipped');
-                    
-                    // Возвращаем точные инлайновые размеры оригинального места
+
+                    // Сбрасываем полноэкранный класс (активирует плавный возврат назад в CSS)
+                    clone.classList.remove('is-expanded');
+                    clone.classList.remove('is-flipped');
+
+                    // Возвращаем точные инлайновые координаты сетки для обратного полета
                     clone.style.top = rect.top + 'px';
                     clone.style.left = rect.left + 'px';
                     clone.style.width = rect.width + 'px';
                     clone.style.height = rect.height + 'px';
-                    
+
                     bodyElement.classList.remove('bento-active');
 
-                    // Полностью удаляем клон строго ПОСЛЕ окончания обратного полета
-                    clone.addEventListener('transitionend', function() {
+                    // Полностью удаляем клон из HTML, когда обратная анимация завершится
+                    clone.addEventListener('transitionend', function (el) {
                         if (!clone.classList.contains('is-expanded')) {
-                            if (clone) clone.remove();
+                            if (clone.parentNode) {
+                                clone.parentNode.removeChild(clone);
+                            }
                             card.classList.remove('is-cloned');
                         }
                     }, { once: true });
@@ -178,6 +178,7 @@ clone.classList.add('is-expanded');
         });
     });
 }
+
 
 // ТОЧКА ВХОДА (Оставляем без изменений)
 document.addEventListener('DOMContentLoaded', function () {
