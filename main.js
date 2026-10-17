@@ -134,14 +134,23 @@ document.body.appendChild(clone);
             bodyElement.classList.add('bento-active');
 
             // Даем браузеру 10мс зафиксировать старт, затем принудительно раскрываем во весь экран
-            setTimeout(function() {
-                clone.classList.add('is-expanded');
-                clone.style.top = '0px';
-                clone.style.left = '0px';
-                clone.style.width = '100vw';
-                clone.style.height = '100dvh';
-            }, 20);
+            // Включаем безопасный 3D-кувырок и блокируем фон лендинга
+            card.classList.add('is-cloned');
+            clone.classList.add('is-flipped');
+            bodyElement.classList.add('bento-active');
 
+            // ТЕХНОЛОГИЯ ДВОЙНОГО КАДРА: Железно заставляем GPU мобильного телефона
+            // увидеть клон в body до того, как применить полноэкранные стили
+            requestAnimationFrame(function() {
+                requestAnimationFrame(function() {
+                    clone.classList.add('is-expanded');
+                    clone.style.top = '0px';
+                    clone.style.left = '0px';
+                    clone.style.width = '100vw';
+                    clone.style.height = '100dvh';
+                });
+            });
+ 
                       // 6. Логика закрытия (клик на крестик)
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
