@@ -571,20 +571,16 @@ pointer-events: none !important;
 
 /* Блокируем свайпы и скролл фона, пока открыта карточка */
 body.bento-active {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
   touch-action: none !important;
-  position: relative !important;
-  overflow: hidden !important; /* Прячем полосу прокрутки */
-}
-
-/* Полностью отключаем отображение скроллбара в Chrome, Safari и Яндексе */
-body.bento-active::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
 }
 
 /* Отодвигаем внутренний контент раскрытой карточки от краев экрана */
 .bento-card-clone.is-expanded .bento-card-back {
   padding: 24px !important;
 }
-
