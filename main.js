@@ -140,10 +140,11 @@ document.body.appendChild(clone);
             requestAnimationFrame(function() {
                 requestAnimationFrame(function() {
 clone.classList.add('is-expanded');
-        clone.style.top = '0px';
-        clone.style.left = '0px';
-        clone.style.width = '100vw';
-        clone.style.height = '100dvh';
+        clone.style.top = '';
+        clone.style.left = '';
+        clone.style.width = '';
+        clone.style.height = '';
+
 
                 });
             });
