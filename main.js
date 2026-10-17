@@ -138,7 +138,9 @@ bodyElement.appendChild(clone);
       card.classList.add('is-cloned');
       clone.classList.add('is-expanded', 'is-flipped');
       bodyElement.classList.add('bento-active');
-
+clone.style.top = '0px';
+clone.style.left = '0px';
+      
       // 6. Логика закрытия (клик на крестик)
       var closeIcon = clone.querySelector('.bento-card-close-icon');
       if (closeIcon) {
