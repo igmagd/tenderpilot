@@ -505,31 +505,24 @@ header {
     padding: 40px 24px 24px 24px !important;
 }
 
-/* Переключаем видимость сторон внутри летящего клона */
+/* Строки 508 - 519 оставляем как есть */
 .bento-card-clone .bento-card-front,
 .bento-card-clone .bento-card-back {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-    padding: inherit !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  padding: inherit !important;
+  /* Добавляем сохранение 3D-контекста для внутренних элементов сторон */
+  transform-style: preserve-3d !important; 
 }
 
+/* Строки 521 - 525: Оставляем только базовый разворот подложки */
 .bento-card-clone .bento-card-back {
-    transform: rotateY(180deg) !important;
-    opacity: 0;
-    transition: opacity 0.15s ease !important;
-}
-
-/* Проявляем рубашку ровно в середине кувырка */
-.bento-card-clone.is-flipped .bento-card-back {
-    opacity: 1 !important;
-}
-.bento-card-clone.is-flipped .bento-card-front {
-    opacity: 0 !important;
+  transform: rotateY(180deg) !important;
 }
 
 /* 4. ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ СИСТЕМЫ */
