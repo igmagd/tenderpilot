@@ -129,10 +129,8 @@ function init_bento() {
       var computedStyle = window.getComputedStyle(card);
       clone.style.borderRadius = computedStyle.borderRadius;
 
-      // 4. Прикрепляем клон в самый конец body (вне главного контейнера .page-container)
-      if (bodyElement) {
-        bodyElement.appendChild(clone);
-      }
+document.documentElement.appendChild(clone);
+
 
       // Трюк Reflow для фиксации стартовой точки перед 3D-анимацией
       window.getComputedStyle(clone).transform;
@@ -159,6 +157,7 @@ function init_bento() {
               card.classList.remove('is-cloned');
             }
           }, { once: true });
+
         });
       }
     });
