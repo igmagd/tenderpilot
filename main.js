@@ -129,8 +129,7 @@ function init_bento() {
       var computedStyle = window.getComputedStyle(card);
       clone.style.borderRadius = computedStyle.borderRadius;
 
-document.documentElement.appendChild(clone);
-
+bodyElement.appendChild(clone);
 
       // Трюк Reflow для фиксации стартовой точки перед 3D-анимацией
       window.getComputedStyle(clone).transform;
