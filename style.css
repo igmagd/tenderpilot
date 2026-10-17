@@ -520,9 +520,10 @@ header {
   transform-style: preserve-3d !important; 
 }
 
-/* Строки 521 - 525: Оставляем только базовый разворот подложки */
+/* Стало: */
 .bento-card-clone .bento-card-back {
   transform: rotateY(180deg) !important;
+  opacity: 1 !important; /* ОБЯЗАТЕЛЬНО возвращаем видимость подложке! */
 }
 
 /* 4. ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ СИСТЕМЫ */
@@ -561,13 +562,16 @@ body.modal-open {
 
 /* Кнопка закрытия — фиксируем на экране поверх всего */
 .bento-card-close-icon {
-  position: fixed !important; /* Всегда на одном месте при скролле */
-  top: 25px !important; /* Удобный отступ от верхнего края экрана */
-  right: 25px !important; /* Удобный отступ от правого края */
-  width: 28px !important; /* Оптимальный размер для тапа пальцем */
+  position: absolute !important; /* Привязываем к углу карточки, а не экрана */
+  top: 24px !important;
+  right: 24px !important;
+  width: 28px !important;
   height: 28px !important;
   cursor: pointer !important;
-  z-index: 2000000 !important; /* Самый высокий z-index на платформе */
+  z-index: 2000000 !important;
+  
+  /* Магия 3D: компенсируем разворот карточки, чтобы крестик смотрел на нас */
+  transform: rotateY(180deg) !important; 
 }
 
 .bento-card-arrow svg {
@@ -585,3 +589,9 @@ body.modal-open {
   stroke-width: 2.5px !important; /* Делаем линии чуть четче */
   fill: none !important;
     }
+
+.bento-card-clone.is-flipped .bento-card-back {
+  transform: rotateY(180deg) !important;
+  opacity: 1 !important; /* Проверяем, что подложка точно стала видимой */
+  transform-style: preserve-3d !important; /* Разрешаем вложенным элементам вроде крестика жить в 3D */
+   }
