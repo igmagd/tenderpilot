@@ -123,7 +123,8 @@ function init_bento() {
             clone.style.height = rect.height + 'px';
             clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-            bodyElement.appendChild(clone);
+document.body.insertAdjacentElement('afterbegin', clone);
+
             window.getComputedStyle(clone).transform;
             // Включаем безопасный 3D-кувырок и блокируем фон лендинга
             card.classList.add('is-cloned');
