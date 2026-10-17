@@ -96,35 +96,41 @@
 <!-- Контейнеры Bento-сеток для трех миров Tenderpilot -->
 
 <div id="grid-supplier" class="bento-grid active">
-  <!-- КАРТОЧКА 1: Поиск тендеров -->
-  <div class="bento-card" id="card-supplier-find">
-    <div class="bento-card-inner">
-      <div class="bento-card-front">
-        <div class="bento-card-front-content">
-          <h3>Поиск тендеров</h3>
-          <p>Сквозной парсинг, умная фильтрация и мониторинг всех торговых площадок РФ.</p>
+        <!-- КАРТОЧКА 1: Поиск тендеров -->
+        <div class="bento-card" id="card-supplier-tenders">
+            <div class="bento-card-inner">
+                
+                <!-- Лицевая сторона -->
+                <div class="bento-card-front">
+                    <div class="bento-card-front-content">
+                        <h3>Поиск тендеров</h3>
+                        <p>Сквозной парсинг, умная фильтрация</p>
+                    </div>
+                    <div class="bento-card-arrow">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Изнаночная сторона (Рубашка) -->
+                <div class="bento-card-back">
+                    <div class="bento-card-back-header">
+                        <h3>Поиск тендеров</h3>
+                        <div class="bento-card-close-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Теперь зона виджетов строго внутри bento-card-back -->
+                    <div class="bento-card-widget-zone"></div>
+                </div>
+
+            </div>
         </div>
-        <div class="bento-card-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="17" x2="17" y2="7"></line>
-            <polyline points="7 7 17 7 17 17"></polyline>
-          </svg>
-        </div>
-      </div>
-      <div class="bento-card-back">
-        <div class="bento-card-back-header">
-          <h3>Поиск тендеров</h3>
-          <div class="bento-card-close-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-        </div>
-        <div class="bento-card-widget-zone"></div>
-      </div>
-    </div>
-  </div>
 
   <!-- КАРТОЧКА 2: Анализ документов -->
   <div class="bento-card" id="card-supplier-analyser">
