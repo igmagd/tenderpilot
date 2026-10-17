@@ -517,6 +517,7 @@ border: none !important;
 border-radius: 0px !important;
 backface-visibility: hidden !important;
 -webkit-backface-visibility: hidden !important;
+pointer-events: none !important; 
 }
 
 /* Подложка изначально развернута на изнанку */
@@ -527,15 +528,18 @@ backface-visibility: hidden !important;
 
 /* Крестик закрытия — фиксируем в углу развернутой подложки */
 .bento-card-clone .bento-card-close-icon {
-    position: absolute !important;
-    top: 24px !important;
-    right: 24px !important;
-    width: 28px !important;
-    height: 28px !important;
-    cursor: pointer !important;
-    z-index: 2000000 !important;
-    transform: rotateY(180deg) !important;
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+  width: 28px !important;
+  height: 28px !important;
+  cursor: pointer !important;
+  z-index: 2000000 !important;
+  transform: translateZ(100px) !important; 
+  /* Принудительно заставляем крестик ловить любые нажатия */
+  pointer-events: auto !important; 
 }
+
 /* 5. Иконки, шрифты и системные цвета контента */
 .bento-card-clone .bento-card-back h3 {
     color: #ffffff !important;
