@@ -116,10 +116,10 @@ function init_bento() {
             var rect = card.getBoundingClientRect();
             var currentScrollY = window.scrollY;
 
-            // 2. Создаем элемент-клон в корне страницы
-            var clone = document.createElement('div');
-            clone.className = 'bento-card-clone';
-            clone.innerHTML = card.innerHTML;
+// 2. Создаем глубокий клон всей карточки целиком со структурой inner
+var clone = card.cloneNode(true);
+clone.id = card.id + '-clone'; 
+clone.classList.add('bento-card-clone');
 
             // 3. Выставляем стартовые пиксельные размеры ровно над оригиналом
             clone.style.top = (rect.top + currentScrollY) + 'px';
