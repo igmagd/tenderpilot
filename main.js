@@ -143,11 +143,12 @@ document.body.appendChild(clone);
             // увидеть клон в body до того, как применить полноэкранные стили
             requestAnimationFrame(function() {
                 requestAnimationFrame(function() {
-                    clone.classList.add('is-expanded');
-                    clone.style.top = '0px';
-                    clone.style.left = '0px';
-                    clone.style.width = '100vw';
-                    clone.style.height = '100dvh';
+clone.classList.add('is-expanded');
+clone.style.top = '';
+clone.style.left = '';
+clone.style.width = '';
+clone.style.height = '';
+
                 });
             });
  
