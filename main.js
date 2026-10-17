@@ -108,21 +108,20 @@ function init_bento() {
 
   cards.forEach(function (card) {
     card.addEventListener('click', function (e) {
-      // Если кликнули на крестик закрытия внутри уже открытой карточки, игнорируем открытие
       if (e.target.closest('.bento-card-close-icon')) return;
       if (card.classList.contains('is-cloned')) return;
 
-      // 1. Считаем точные стартовые координаты карточки в сетке
+      // 1. Считаем ЧИСТЫЕ координаты относительно видимого окна экрана
       var rect = card.getBoundingClientRect();
-      var currentScrollY = window.scrollY;
 
-      // 2. Создаем глубокий клон всей карточки целиком со структурой inner
+      // 2. Создаем глубокий клон всей карточки целиком
       var clone = card.cloneNode(true);
       clone.id = card.id + '-clone';
       clone.classList.add('bento-card-clone');
 
-      // 3. Задаем стартовую позицию пиксель-в-пиксель над оригиналом
-      clone.style.top = (rect.top + currentScrollY) + 'px';
+      // 3. Задаем фиксированную стартовую позицию без учета скролла документа
+      clone.style.position = 'fixed';
+      clone.style.top = rect.top + 'px';
       clone.style.left = rect.left + 'px';
       clone.style.width = rect.width + 'px';
       clone.style.height = rect.height + 'px';
@@ -130,30 +129,30 @@ function init_bento() {
       var computedStyle = window.getComputedStyle(card);
       clone.style.borderRadius = computedStyle.borderRadius;
 
-      // 4. Добавляем клон на страницу
+      // 4. Прикрепляем клон в самый конец body (вне главного контейнера .page-container)
       if (bodyElement) {
         bodyElement.appendChild(clone);
       }
 
-      // Трюк Reflow: заставляем браузер зафиксировать стартовую точку перед анимацией
+      // Трюк Reflow для фиксации стартовой точки перед 3D-анимацией
       window.getComputedStyle(clone).transform;
 
-      // 5. Запускаем полет и 3D-переворот
+      // 5. Включаем классы полета и переворота
       card.classList.add('is-cloned');
       clone.classList.add('is-expanded', 'is-flipped');
       bodyElement.classList.add('bento-active');
 
-      // 6. Обработчик закрытия карточки (клик на крестик)
+      // 6. Логика закрытия (клик на крестик)
       var closeIcon = clone.querySelector('.bento-card-close-icon');
       if (closeIcon) {
         closeIcon.addEventListener('click', function (event) {
           event.stopPropagation();
 
-          // Возвращаем клон в исходную маленькую точку ячейки
+          // Возвращаем клон точно в стартовые фиксированные координаты окна
           clone.classList.remove('is-expanded', 'is-flipped');
           bodyElement.classList.remove('bento-active');
 
-          // Ждем, пока CSS-анимация закрытия ПОЛНОСТЬЮ завершится (без таймеров наугад)
+          // Удаляем строго ПОСЛЕ полной остановки CSS-анимации
           clone.addEventListener('transitionend', function() {
             if (!clone.classList.contains('is-expanded')) {
               if (clone) clone.remove();
