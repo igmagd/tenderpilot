@@ -169,7 +169,7 @@ clone.classList.add('bento-card-clone');
                     setTimeout(function () {
                         if (clone.parentNode) clone.parentNode.removeChild(clone);
                         card.classList.remove('is-cloned');
-                    }, 400);
+                    }, 350);
                 });
             }
         });
