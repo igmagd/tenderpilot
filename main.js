@@ -127,7 +127,8 @@ clone.classList.add('bento-card-clone');
             clone.style.width = rect.width + 'px';
             clone.style.height = rect.height + 'px';
 
-            bodyElement.appendChild(clone);
+document.documentElement.appendChild(clone);
+
             card.classList.add('is-cloned');
 
             // ТРЮК REFLOW: заставляем браузер зафиксировать стартовую маленькую точку
@@ -163,13 +164,13 @@ clone.classList.add('bento-card-clone');
                     clone.style.borderRadius = '12px';
 
                     if (headerElement) headerElement.classList.remove('header-hidden');
-                    if (bodyElement) bodyElement.classList.remove('modal-open');
+                    if (bodyElement) document.documentElement.appendChild(clone);
 
-                    // Ждем окончания transition (0.4с) и полностью удаляем клон из DOM
-                    setTimeout(function () {
-                        if (clone.parentNode) clone.parentNode.removeChild(clone);
-                        card.classList.remove('is-cloned');
-                    }, 350);
+setTimeout( function () {
+  if ( clone) clone.remove(); // Просто и чисто удаляем клон из корня
+  card. classList. remove('is-cloned');
+}, 350);
+
                 });
             }
         });
