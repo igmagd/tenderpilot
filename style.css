@@ -485,11 +485,8 @@ header {
   border: none !important;
   margin: 0 !important;
   padding: 50px 24px 24px 24px !important; 
-  
-  /* ЗАМЕНЯЕМ transform: none на сброс только 2D-сдвигов, сохраняя 3D-контекст */
-  transform: translate(0, 0) !important; 
+  transform: translate(0, 0) !important; /* Убирает черный текст и сохраняет 3D */
 }
-
 
 /* Внутренний контейнер (отвечает ТОЛЬКО за чистый 3D-кувырок) */
 .bento-card-clone .bento-card-inner {
