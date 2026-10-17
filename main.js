@@ -128,11 +128,7 @@ function init_bento() {
 document.body.appendChild(clone);
                               
             window.getComputedStyle(clone).transform;
-            // Включаем безопасный 3D-кувырок и блокируем фон лендинга
-            card.classList.add('is-cloned');
-            clone.classList.add('is-flipped');
-            bodyElement.classList.add('bento-active');
-
+ 
             // Даем браузеру 10мс зафиксировать старт, затем принудительно раскрываем во весь экран
             // Включаем безопасный 3D-кувырок и блокируем фон лендинга
             card.classList.add('is-cloned');
@@ -144,10 +140,10 @@ document.body.appendChild(clone);
             requestAnimationFrame(function() {
                 requestAnimationFrame(function() {
 clone.classList.add('is-expanded');
-clone.style.top = '';
-clone.style.left = '';
-clone.style.width = '';
-clone.style.height = '';
+        clone.style.top = '0px';
+        clone.style.left = '0px';
+        clone.style.width = '100vw';
+        clone.style.height = '100dvh';
 
                 });
             });
