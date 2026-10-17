@@ -107,6 +107,8 @@ function init_bento() {
 
     cards.forEach(function (card) {
         card.addEventListener('click', function (e) {
+          e.stopPropagation();
+          
             if (e.target.closest('.bento-card-close-icon')) return;
             if (card.classList.contains('is-cloned')) return;
 
@@ -123,8 +125,8 @@ function init_bento() {
             clone.style.height = rect.height + 'px';
             clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-document.body.insertAdjacentElement('afterbegin', clone);
-
+document.body.appendChild(clone);
+                              
             window.getComputedStyle(clone).transform;
             // Включаем безопасный 3D-кувырок и блокируем фон лендинга
             card.classList.add('is-cloned');
