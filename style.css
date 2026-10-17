@@ -592,11 +592,10 @@ body.modal-open {
     }
 
 /* Добавьте в самый конец style.css, если еще не добавлено: */
-.bento-card.is-cloned *,
-body .bento-card-clone:not(.is-expanded) * {
-  transition: none !important;
-  transform: none !important;
-  animation: none !important;
+.bento-card.is-cloned * {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
 }
 
 /* Блокируем свайпы фона, пока открыта карточка */
