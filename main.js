@@ -164,7 +164,7 @@ document.documentElement.appendChild(clone);
                     clone.style.borderRadius = '12px';
 
                     if (headerElement) headerElement.classList.remove('header-hidden');
-                    if (bodyElement) document.documentElement.appendChild(clone);
+if (bodyElement) bodyElement.appendChild(clone);
 
 setTimeout( function () {
   if ( clone) clone.remove(); // Просто и чисто удаляем клон из корня
