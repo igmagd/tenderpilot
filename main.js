@@ -140,6 +140,8 @@ bodyElement.appendChild(clone);
       bodyElement.classList.add('bento-active');
 clone.style.top = '0px';
 clone.style.left = '0px';
+clone.style.width = '100vw';
+clone.style.height = '100dvh';
       
       // 6. Логика закрытия (клик на крестик)
       var closeIcon = clone.querySelector('.bento-card-close-icon');
