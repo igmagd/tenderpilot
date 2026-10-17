@@ -136,35 +136,45 @@ bodyElement.appendChild(clone);
 
       // 5. Включаем классы полета и переворота
       card.classList.add('is-cloned');
-      clone.classList.add('is-expanded', 'is-flipped');
-      bodyElement.classList.add('bento-active');
-clone.style.top = '0px';
-clone.style.left = '0px';
-clone.style.width = '100vw';
-clone.style.height = '100dvh';
-      
-      // 6. Логика закрытия (клик на крестик)
-      var closeIcon = clone.querySelector('.bento-card-close-icon');
-      if (closeIcon) {
-        closeIcon.addEventListener('click', function (event) {
-          event.stopPropagation();
+            clone.classList.add('is-flipped');
+            bodyElement.classList.add('bento-active');
 
-          // Возвращаем клон точно в стартовые фиксированные координаты окна
-          clone.classList.remove('is-expanded', 'is-flipped');
-          bodyElement.classList.remove('bento-active');
+            // Микропауза для фиксации старта, затем плавное расширение
+            setTimeout(function() {
+                clone.classList.add('is-expanded');
+                clone.style.top = '0px';
+                clone.style.left = '0px';
+                clone.style.width = '100vw';
+                clone.style.height = '100dvh';
+            }, 10);
 
-          // Удаляем строго ПОСЛЕ полной остановки CSS-анимации
-          clone.addEventListener('transitionend', function() {
-            if (!clone.classList.contains('is-expanded')) {
-              if (clone) clone.remove();
-              card.classList.remove('is-cloned');
+
+            // 6. Логика закрытия (клик на крестик)
+            var closeIcon = clone.querySelector('.bento-card-close-icon');
+            if (closeIcon) {
+                closeIcon.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    
+                    // Возвращаем точные размеры оригинального места
+                    clone.classList.remove('is-expanded', 'is-flipped');
+                    clone.style.top = rect.top + 'px';
+                    clone.style.left = rect.left + 'px';
+                    clone.style.width = rect.width + 'px';
+                    clone.style.height = rect.height + 'px';
+                    
+                    bodyElement.classList.remove('bento-active');
+
+                    // Удаляем строго ПОСЛЕ полной остановки CSS-анимации
+                    clone.addEventListener('transitionend', function() {
+                        if (!clone.classList.contains('is-expanded')) {
+                            if (clone) clone.remove();
+                            card.classList.remove('is-cloned');
+                        }
+                    }, { once: true });
+                });
             }
-          }, { once: true });
-
         });
-      }
     });
-  });
 }
 
 // ТОЧКА ВХОДА (Оставляем без изменений)
