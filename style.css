@@ -475,7 +475,6 @@ header {
 
 /* Добавляем гарантированйн-стили JS */
 body .bento-card-clone.is-expanded {
-  /* Жесткий распор по координатам окна */
   position: fixed !important;
   top: 0 !important;
   bottom: 0 !important;
