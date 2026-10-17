@@ -100,81 +100,70 @@
 
   // 3. АНИМАЦИЯ БЕНТО-КАРТОЧЕК (РАСЧЕТ МАТРИЦЫ GPU)
 function init_bento() {
-    var headerElement = document.querySelector('header');
-    var bodyElement = document.body;
+  var bentoGrid = document.querySelector('.bento-grid');
+  if (!bentoGrid) return;
 
-    document.querySelectorAll('.bento-card').forEach(function (card) {
-        var front = card.querySelector('.bento-card-front');
-        var inner = card.querySelector('.bento-card-inner');
-        if (!front || !inner) return;
+  var cards = bentoGrid.querySelectorAll('.bento-card');
+  var bodyElement = document.body;
 
-        front.addEventListener('click', function (e) {
-            e.stopPropagation();
-            if (card.classList.contains('is-cloned')) return;
+  cards.forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      // Если кликнули на крестик закрытия внутри уже открытой карточки, игнорируем открытие
+      if (e.target.closest('.bento-card-close-icon')) return;
+      if (card.classList.contains('is-cloned')) return;
 
-            // 1. Снимаем точный слепок координат оригинала
-            var rect = card.getBoundingClientRect();
-            var currentScrollY = window.scrollY;
+      // 1. Считаем точные стартовые координаты карточки в сетке
+      var rect = card.getBoundingClientRect();
+      var currentScrollY = window.scrollY;
 
-// 2. Создаем глубокий клон всей карточки целиком со структурой inner
-var clone = card.cloneNode(true);
-clone.id = card.id + '-clone'; 
-clone.classList.add('bento-card-clone');
+      // 2. Создаем глубокий клон всей карточки целиком со структурой inner
+      var clone = card.cloneNode(true);
+      clone.id = card.id + '-clone';
+      clone.classList.add('bento-card-clone');
 
-            // 3. Выставляем стартовые пиксельные размеры ровно над оригиналом
-            clone.style.top = (rect.top + currentScrollY) + 'px';
-            clone.style.left = rect.left + 'px';
-            clone.style.width = rect.width + 'px';
-            clone.style.height = rect.height + 'px';
+      // 3. Задаем стартовую позицию пиксель-в-пиксель над оригиналом
+      clone.style.top = (rect.top + currentScrollY) + 'px';
+      clone.style.left = rect.left + 'px';
+      clone.style.width = rect.width + 'px';
+      clone.style.height = rect.height + 'px';
+      
+      var computedStyle = window.getComputedStyle(card);
+      clone.style.borderRadius = computedStyle.borderRadius;
 
-document.documentElement.appendChild(clone);
+      // 4. Добавляем клон на страницу
+      if (bodyElement) {
+        bodyElement.appendChild(clone);
+      }
 
-            card.classList.add('is-cloned');
+      // Трюк Reflow: заставляем браузер зафиксировать стартовую точку перед анимацией
+      window.getComputedStyle(clone).transform;
 
-            // ТРЮК REFLOW: заставляем браузер зафиксировать стартовую маленькую точку
-            var forceReflow = clone.offsetHeight;
+      // 5. Запускаем полет и 3D-переворот
+      card.classList.add('is-cloned');
+      clone.classList.add('is-expanded', 'is-flipped');
+      bodyElement.classList.add('bento-active');
 
-            // 4. Плавно переводим ПИКСЕЛИ В ПИКСЕЛИ размеров экрана (включаем transition)
-            clone.classList.add('is-flipped');
-            clone.classList.add('is-expanded');
-            
-            clone.style.top = currentScrollY + 'px';
-            clone.style.left = '0px';
-            clone.style.width = window.innerWidth + 'px';
-            clone.style.height = window.innerHeight + 'px';
-            clone.style.borderRadius = '0px';
+      // 6. Обработчик закрытия карточки (клик на крестик)
+      var closeIcon = clone.querySelector('.bento-card-close-icon');
+      if (closeIcon) {
+        closeIcon.addEventListener('click', function (event) {
+          event.stopPropagation();
 
-            if (headerElement) headerElement.classList.add('header-hidden');
-            if (bodyElement) bodyElement.classList.add('modal-open');
+          // Возвращаем клон в исходную маленькую точку ячейки
+          clone.classList.remove('is-expanded', 'is-flipped');
+          bodyElement.classList.remove('bento-active');
 
-            // 5. Вешаем обработчик на КРЕСТИК внутри созданного клона
-            var closeIcon = clone.querySelector('.bento-card-close-icon');
-            if (closeIcon) {
-                closeIcon.addEventListener('click', function (ev) {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-
-                    // ЛЕТИМ ОБРАТНО: сжимаем клон обратно в пиксельные габариты ячейки
-                    clone.classList.remove('is-expanded', 'is-flipped');
-                    
-                    clone.style.top = (rect.top + currentScrollY) + 'px';
-                    clone.style.left = rect.left + 'px';
-                    clone.style.width = rect.width + 'px';
-                    clone.style.height = rect.height + 'px';
-                    clone.style.borderRadius = '12px';
-
-                    if (headerElement) headerElement.classList.remove('header-hidden');
-if (bodyElement) bodyElement.appendChild(clone);
-
-setTimeout( function () {
-  if ( clone) clone.remove(); // Просто и чисто удаляем клон из корня
-  card. classList. remove('is-cloned');
-}, 350);
-
-                });
+          // Ждем, пока CSS-анимация закрытия ПОЛНОСТЬЮ завершится (без таймеров наугад)
+          clone.addEventListener('transitionend', function() {
+            if (!clone.classList.contains('is-expanded')) {
+              if (clone) clone.remove();
+              card.classList.remove('is-cloned');
             }
+          }, { once: true });
         });
+      }
     });
+  });
 }
 
 // ТОЧКА ВХОДА (Оставляем без изменений)
