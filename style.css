@@ -551,8 +551,19 @@ header {
 }
 
 /* Блокируем свайпы и скролл фона, пока открыта карточка */
+/* Блокируем свайпы, скролл фона и сносим 3D-ограничения родителя, пока открыта карточка */
 body.bento-active {
     overflow: hidden !important;
     touch-action: none !important;
     height: 100dvh !important;
+    
+    /* Снимаем блокировку фиксированного позиционирования с тегов body/html */
+    perspective: none !important;
+    transform: none !important;
+    transform-style: flat !important;
+}
+
+html:has(body.bento-active) {
+    perspective: none !important;
+    transform: none !important;
 }
