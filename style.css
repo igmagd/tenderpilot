@@ -474,7 +474,7 @@ header {
 }
 
 /* Добавляем гарантированйн-стили JS */
-html .bento-card-clone.is-expanded {
+.bento-card-clone.is-expanded {
   position: fixed !important;
   top: 0 !important;
   bottom: 0 !important;
@@ -599,4 +599,7 @@ body.bento-active {
   overflow: hidden !important;
   touch-action: none !important;
   height: 100vh !important;
+}
+.bento-card-clone .bento-card-back h3 {
+    color: #ffffff !important;
 }
