@@ -562,6 +562,14 @@ pointer-events: none !important;
 body.bento-active {
   touch-action: none !important;
   position: relative !important;
+  overflow: hidden !important; /* Прячем полосу прокрутки */
+}
+
+/* Полностью отключаем отображение скроллбара в Chrome, Safari и Яндексе */
+body.bento-active::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Отодвигаем внутренний контент раскрытой карточки от краев экрана */
