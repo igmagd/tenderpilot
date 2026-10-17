@@ -153,19 +153,18 @@ clone.style.height = '100dvh';
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
 
-                    // Сбрасываем полноэкранный класс (активирует плавный возврат назад в CSS)
                     clone.classList.remove('is-expanded');
                     clone.classList.remove('is-flipped');
-
-                    // Возвращаем точные инлайновые координаты сетки для обратного полета
-                    clone.style.top = rect.top + 'px';
-                    clone.style.left = rect.left + 'px';
-                    clone.style.width = rect.width + 'px';
-                    clone.style.height = rect.height + 'px';
-
                     bodyElement.classList.remove('bento-active');
 
-                    // Полностью удаляем клон из HTML, когда обратная анимация завершится
+                    // Плавный возврат: возвращаем карточку в сетку с микро-задержкой
+                    setTimeout(function() {
+                        clone.style.top = rect.top + 'px';
+                        clone.style.left = rect.left + 'px';
+                        clone.style.width = rect.width + 'px';
+                        clone.style.height = rect.height + 'px';
+                    }, 10);
+
                     clone.addEventListener('transitionend', function (el) {
                         if (!clone.classList.contains('is-expanded')) {
                             if (clone.parentNode) {
@@ -176,10 +175,6 @@ clone.style.height = '100dvh';
                     }, { once: true });
                 });
             }
-        });
-    });
-}
-
 
 // ТОЧКА ВХОДА (Оставляем без изменений)
 document.addEventListener('DOMContentLoaded', function () {
