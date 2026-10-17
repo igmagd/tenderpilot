@@ -139,18 +139,15 @@ document.body.appendChild(clone);
             clone.classList.add('is-flipped');
             bodyElement.classList.add('bento-active');
 
-            // ТЕХНОЛОГИЯ ДВОЙНОГО КАДРА: Железно заставляем GPU мобильного телефона
-            // увидеть клон в body до того, как применить полноэкранные стили
-            requestAnimationFrame(function() {
-                requestAnimationFrame(function() {
-                    clone.classList.add('is-expanded');
-                    clone.style.top = '0px';
-                    clone.style.left = '0px';
-                    clone.style.width = '100vw';
-                    clone.style.height = '100dvh';
-                });
-            });
- 
+// Даем мобильному GPU гарантированное время (20мс), чтобы зафиксировать клон на месте
+setTimeout(function() {
+    clone.classList.add('is-expanded');
+    clone.style.top = '0px';
+    clone.style.left = '0px';
+    clone.style.width = '100vw';
+    clone.style.height = '100dvh';
+}, 20);
+
                       // 6. Логика закрытия (клик на крестик)
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
