@@ -458,152 +458,101 @@ header {
 ========================================================================== */
 
 /* 1. Исходное состояние Клона (в момент появления в body) */
-/* Внешний контейнер (отвечает ТОЛЬКО за габариты и полет) */
 .bento-card-clone {
-  position: fixed !important;
-  z-index: 999999 !important;
-  margin: 0 !important;
-  /* Плавный полет внешних границ: 350мс */
-  transition: top 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-              left 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-              width 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-              height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-              border-radius 0.35s ease !important;
-  /* Включаем жесткую 3D-перспективу для сцены полета */
-  perspective: 1200px !important;
+    position: fixed !important;
+    z-index: 999999 !important;
+    margin: 0 !important;
+    perspective: 1200px !important;
+    /* Ультра-плавный полет внешних границ во все стороны */
+    transition: top 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                left 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                border-radius 0.38s ease !important;
 }
-
-/* Добавляем гарантированйн-стили JS */
+/* 2. Состояние раскрытого клона во весь экран */
 .bento-card-clone.is-expanded {
     position: fixed !important;
     top: 0 !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    
-    /* Принудительно сбрасываем пиксельные инлайны из JS */
     width: 100vw !important;
     height: 100dvh !important;
     max-width: 100vw !important;
     max-height: 100dvh !important;
-    
     border-radius: 0px !important;
     border: none !important;
     margin: 0 !important;
     padding: 60px 24px 24px 24px !important;
-    
-    /* Сбрасываем 2D-сдвиги, сохраняя чистое 3D-пространство вращения */
     transform: translate(0, 0) !important;
-}
-
-/* Внутренний контейнер (отвечает ТОЛЬКО за чистый 3D-кувырок) */
+                                          }
+/* 3. Внутренний контейнер: чистый 3D-кувырок */
 .bento-card-clone .bento-card-inner {
-  width: 100% !important;
-  height: 100% !important;
-  position: relative !important;
-  transform-style: preserve-3d !important;
-  /* Быстрый кувырок: 320мс */
-  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    transform-style: preserve-3d !important;
+    /* Быстрый и четкий переворот за 320 миллисекунд */
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Команда на кувырок для внутреннего слоя */
+/* Команда на кувырок по оси Y */
 .bento-card-clone.is-flipped .bento-card-inner {
-  transform: rotateY(180deg) !important;
+    transform: rotateY(180deg) !important;
 }
-
-/* Позиционирование сторон внутри клона */
+/* 4. Позиционирование сторон внутри клона */
 .bento-card-clone .bento-card-front,
 .bento-card-clone .bento-card-back {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  backface-visibility: hidden !important;
-  -webkit-backface-visibility: hidden !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
 }
 
-/* Подложка изначально развернута на изнанку и видима в своем 3D-пространстве */
+/* Подложка изначально развернута на изнанку */
 .bento-card-clone .bento-card-back {
-  transform: rotateY(180deg) !important;
-  opacity: 1 !important; /* Обязательно держим видимой, backface-visibility сама ее скроет */
+    transform: rotateY(180deg) !important;
+    opacity: 1 !important;
 }
 
 /* Крестик закрытия — фиксируем в углу развернутой подложки */
 .bento-card-clone .bento-card-close-icon {
-  position: absolute !important;
-  top: 24px !important;
-  right: 24px !important;
-  width: 28px !important;
-  height: 28px !important;
-  cursor: pointer !important;
-  z-index: 2000000 !important; /* Поднимаем в самый верх */
-  transform: rotateY(180deg) !important; /* Разворачиваем к лицу */
+    position: absolute !important;
+    top: 24px !important;
+    right: 24px !important;
+    width: 28px !important;
+    height: 28px !important;
+    cursor: pointer !important;
+    z-index: 2000000 !important;
+    transform: rotateY(180deg) !important;
 }
-
-/* 4. ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ СИСТЕМЫ */
-
-/* Плавное исчезновение шапки, чтобы не мешала читать */
-header {
-    transition: opacity 0.25s ease, transform 0.25s ease !important;
-}
-header.header-hidden {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform: translateY(-10px) !important;
-}
-
-/* Запрет скролла самого лендинга на фоне открытого окна */
-body.modal-open {
-    overflow: hidden !important;
-    height: 100vh !important;
-}
-
-/* Делаем оригинальную карточку полупрозрачной заглушкой в момент полета клона */
-.bento-card.is-cloned {
-    opacity: 0.1 !important;
-    pointer-events: none !important;
-}
-
-/* Иконки управления внутри карточек */
-.bento-card-arrow {
-  position: absolute !important;
-  bottom: 24px !important;
-  right: 24px !important;
-  width: 22px !important;
-  height: 22px !important;
-  pointer-events: none !important;
-}
-
-.bento-card-arrow svg {
-  width: 100% !important;
-  height: 100% !important;
-  stroke: rgba(240, 246, 252, 0.6) !important;
-  stroke-width: 1.5px !important;
-  fill: none !important;
+/* 5. Иконки, шрифты и системные цвета контента */
+.bento-card-clone .bento-card-back h3 {
+    color: #ffffff !important;
 }
 
 .bento-card-close-icon svg {
-  width: 100% !important;
-  height: 100% !important;
-  stroke: #ffffff !important; /* Контрастный белый цвет крестика */
-  stroke-width: 2.5px !important; /* Делаем линии чуть четче */
-  fill: none !important;
-    }
+    width: 100% !important;
+    height: 100% !important;
+    stroke: #ffffff !important;
+    stroke-width: 2.5px !important;
+    fill: none !important;
+}
 
-/* Добавьте в самый конец style.css, если еще не добавлено: */
+/* Отключаем переходы только для оригинальной карточки-заглушки */
 .bento-card.is-cloned * {
     transition: none !important;
     transform: none !important;
     animation: none !important;
 }
 
-/* Блокируем свайпы фона, пока открыта карточка */
+/* Блокируем свайпы и скролл фона, пока открыта карточка */
 body.bento-active {
     overflow: hidden !important;
     touch-action: none !important;
     height: 100dvh !important;
-}
-.bento-card-clone .bento-card-back h3 {
-    color: #ffffff !important;
 }
