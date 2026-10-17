@@ -448,9 +448,9 @@ header {
 }
 
 /* Рубашка карты изначально развернута по оси Y и полностью скрыта */
-.bento-card-back {
+.bento-grid .bento-card-back {
   transform: rotateY(180deg) !important;
-  opacity: 0 !important; 
+  opacity: 0 !important;
 }
 
 /* ==========================================================================
@@ -458,54 +458,47 @@ header {
 ========================================================================== */
 
 /* 1. Исходное состояние Клона (в момент появления в body) */
+/* Внешний контейнер (отвечает ТОЛЬКО за габариты и полет) */
 .bento-card-clone {
-    position: fixed !important;
-    z-index: 999999 !important; /* Гарантированно выше шапки и всего сайта */
-    background: linear-gradient(to bottom, #0b1528, #020617) !important;
-    border: 1px solid #30363d !important;
-    border-radius: 12px !important;
-    padding: 24px !important;
-    box-sizing: border-box !important;
-    
-    /* Включаем 3D-сцену для клона */
-    perspective: 1500px !important;
-    
-    /* Плавность перехода: размеры летят по твоей кубической безье */
-    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                border-radius 0.3s ease !important;
+  position: fixed !important;
+  z-index: 999999 !important;
+  margin: 0 !important;
+  /* Плавный полет внешних границ: 350мс */
+  transition: top 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              left 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              width 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              border-radius 0.35s ease !important;
+  /* Включаем жесткую 3D-перспективу для сцены полета */
+  perspective: 1200px !important;
 }
 
-/* Внутренний контейнер клона, который будет крутиться */
-.bento-card-clone .bento-card-inner {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    transform-style: preserve-3d !important;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* 2. АНИМАЦИЯ: Запускаем переворот в воздухе */
-.bento-card-clone.is-flipped .bento-card-inner {
-    transform: rotateY(180deg) !important;
-}
-
-/* 3. ФИНАЛ: Клон плавно расширился на весь экран */
+/* Финальное полноэкранное состояние клона с защитой от "челки" */
 .bento-card-clone.is-expanded {
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    border-radius: 0 !important;
-    border: none !important;
-    padding: 40px 24px 24px 24px !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0px !important;
+  padding: 50px 24px 24px 24px !important; /* Роскошный отступ сверху */
 }
 
-/* Строки 508 - 519 оставляем как есть */
+/* Внутренний контейнер (отвечает ТОЛЬКО за чистый 3D-кувырок) */
+.bento-card-clone .bento-card-inner {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  transform-style: preserve-3d !important;
+  /* Быстрый кувырок: 320мс */
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Команда на кувырок для внутреннего слоя */
+.bento-card-clone.is-flipped .bento-card-inner {
+  transform: rotateY(180deg) !important;
+}
+
+/* Позиционирование сторон внутри клона */
 .bento-card-clone .bento-card-front,
 .bento-card-clone .bento-card-back {
   position: absolute !important;
@@ -515,15 +508,24 @@ header {
   height: 100% !important;
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
-  padding: inherit !important;
-  /* Добавляем сохранение 3D-контекста для внутренних элементов сторон */
-  transform-style: preserve-3d !important; 
 }
 
-/* Стало: */
+/* Подложка изначально развернута на изнанку и видима в своем 3D-пространстве */
 .bento-card-clone .bento-card-back {
   transform: rotateY(180deg) !important;
-  opacity: 1 !important; /* ОБЯЗАТЕЛЬНО возвращаем видимость подложке! */
+  opacity: 1 !important; /* Обязательно держим видимой, backface-visibility сама ее скроет */
+}
+
+/* Крестик закрытия — фиксируем в углу развернутой подложки */
+.bento-card-clone .bento-card-close-icon {
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+  width: 28px !important;
+  height: 28px !important;
+  cursor: pointer !important;
+  z-index: 2000000 !important; /* Поднимаем в самый верх */
+  transform: rotateY(180deg) !important; /* Разворачиваем к лицу */
 }
 
 /* 4. ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ СИСТЕМЫ */
@@ -560,20 +562,6 @@ body.modal-open {
   pointer-events: none !important;
 }
 
-/* Кнопка закрытия — фиксируем на экране поверх всего */
-.bento-card-close-icon {
-  position: absolute !important; /* Привязываем к углу карточки, а не экрана */
-  top: 24px !important;
-  right: 24px !important;
-  width: 28px !important;
-  height: 28px !important;
-  cursor: pointer !important;
-  z-index: 2000000 !important;
-  
-  /* Магия 3D: компенсируем разворот карточки, чтобы крестик смотрел на нас */
-  transform: rotateY(180deg) !important; 
-}
-
 .bento-card-arrow svg {
   width: 100% !important;
   height: 100% !important;
@@ -589,9 +577,3 @@ body.modal-open {
   stroke-width: 2.5px !important; /* Делаем линии чуть четче */
   fill: none !important;
     }
-
-.bento-card-clone.is-flipped .bento-card-back {
-  transform: rotateY(180deg) !important;
-  opacity: 1 !important; /* Проверяем, что подложка точно стала видимой */
-  transform-style: preserve-3d !important; /* Разрешаем вложенным элементам вроде крестика жить в 3D */
-   }
