@@ -138,7 +138,8 @@ document.body.insertAdjacentElement('afterbegin', clone);
                 clone.style.left = '0px';
                 clone.style.width = '100vw';
                 clone.style.height = '100dvh';
-            }, 10);
+            }, 20);
+
                       // 6. Логика закрытия (клик на крестик)
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
