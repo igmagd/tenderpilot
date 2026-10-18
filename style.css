@@ -546,7 +546,6 @@ pointer-events: none !important;
   cursor: pointer !important;
   z-index: 2000000 !important;
   transform: translateZ(100px) !important; 
-  /* Принудительно заставляем крестик ловить любые нажатия */
   pointer-events: auto !important; 
 }
 
@@ -574,13 +573,11 @@ pointer-events: none !important;
 body.bento-active {
     overflow: hidden !important;
     touch-action: none !important;
-    
-    /* Если на Windows/Linux полоса все равно исчезает, 
-       этот хантинг заставит ее остаться прозрачной плашкой: */
-    scrollbar-gutter: stable !important; 
+    scrollbar-gutter: stable !important;
 }
 
-/* Отодвигаем внутренний контент раскрытой карточки от краев экрана */
+/* Отодвигаем внутренний контент раскрытой карточки от краев */
 .bento-card-clone.is-expanded .bento-card-back {
-  padding: 24px !important;
+    padding: 24px !important;
 }
+
