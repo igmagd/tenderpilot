@@ -137,29 +137,26 @@ function init_bento() {
             // ТЕХНОЛОГИЯ ДВОЙНОГО КАДРА: Запускаем полет и 3D-кручение СТРОГО одновременно
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
-clone.classList.add('is-expanded');
-clone.classList.add('is-flipped');
-clone.style.top = '0px';
-clone.style.left = '0px';
-clone.style.width = '100vw';
-clone.style.height = '100dvh';
+                clone.classList.add('is-expanded');
+                clone.classList.add('is-flipped');
+                clone.style.top = '0px';
+                clone.style.left = '0px';
+                clone.style.width = '100vw';
+                clone.style.height = '100dvh';
 
-                });
             });
+        });
 
-        // Логика закрытия окна (Крестик)
+        // ====== ВОТ СЮДА ВСТАВЛЯЕТСЯ КОД ДЛЯ КРЕСТИКА (ВНУТРЬ CLONE) ======
         var closeIcon = clone.querySelector('.bento-card-close-icon');
         if (closeIcon) {
-            // Единая функция закрытия для тача и клика
             function handleClose(event) {
                 event.stopPropagation();
-                event.preventDefault(); // Защита от фантомных тапов на смартфонах
+                event.preventDefault(); 
 
-                // Сбрасываем полноэкранный режим клона
                 clone.classList.remove('is-expanded');
                 clone.classList.remove('is-flipped');
 
-                // Возвращаем точные исходные размеры карточки на место в сетке
                 clone.style.top = rect.top + 'px';
                 clone.style.left = rect.left + 'px';
                 clone.style.width = rect.width + 'px';
@@ -167,7 +164,6 @@ clone.style.height = '100dvh';
 
                 bodyElement.classList.remove('bento-active');
 
-                // Полностью удаляем клон из DOM после завершения CSS-transition
                 clone.addEventListener('transitionend', function() {
                     if (!clone.classList.contains('is-expanded')) {
                         if (clone.parentNode) {
@@ -178,22 +174,17 @@ clone.style.height = '100dvh';
                 }, { once: true });
             }
 
-            // Слушаем touchstart для моментального отклика на смартфонах
             closeIcon.addEventListener('touchstart', handleClose, { passive: false });
-            
-            // Оставляем обычный click для ПК и мышки
             closeIcon.addEventListener('click', handleClose);
         }
-        });
+        // ================================================================
+
     });
 }
 
-
-// ТОЧКА ВХОДА (Оставляем без изменений)
-document.addEventListener('DOMContentLoaded', function () {
+// // ТОЧКА ВХОДА (Оставляем без изменений)
+document.addEventListener('DOMContentLoaded', function() {
     init_core_events();
     init_bento();
     switch_app_mode('supplier');
 });
-
-})();
