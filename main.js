@@ -109,7 +109,12 @@
                 var clone = card.cloneNode(true);
                 clone.id = card.id + '-clone';
                 clone.classList.add('bento-card-clone');
-                clone.style.cssText = `position:fixed;top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;border-radius:${window.getComputedStyle(card).borderRadius};`;
+                clone.style.setProperty('position', 'fixed');
+                clone.style.setProperty('top', rect.top + 'px');
+                clone.style.setProperty('left', rect.left + 'px');
+                clone.style.setProperty('width', rect.width + 'px');
+                clone.style.setProperty('height', rect.height + 'px');
+                clone.style.setProperty('border-radius', window.getComputedStyle(card).borderRadius);
 
                 document.body.appendChild(clone);
                 window.getComputedStyle(clone).transform;
@@ -120,7 +125,10 @@
                 requestAnimationFrame(function () {
                     requestAnimationFrame(function () {
                         clone.classList.add('is-expanded', 'is-flipped');
-                        clone.style.cssText += 'top:0px;left:0px;width:100vw;height:100dvh;';
+                        clone.style.setProperty('top', '0px');
+clone.style.setProperty('left', '0px');
+                clone.style.setProperty('width', '100vw');
+                clone.style.setProperty('height', '100dvh');
                     });
                 });
 
@@ -129,7 +137,10 @@
                     closeIcon.addEventListener('click', function (event) {
                         event.stopPropagation();
                         clone.classList.remove('is-expanded', 'is-flipped');
-                        clone.style.cssText += `top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
+                        clone.style.setProperty('top', rect.top + 'px');
+                clone.style.setProperty('left', rect.left + 'px');
+                clone.style.setProperty('width', rect.width + 'px');
+                clone.style.setProperty('height', rect.height + 'px');
 
                         clone.addEventListener('transitionend', function () {
                             if (!clone.classList.contains('is-expanded')) {
@@ -150,3 +161,4 @@
         switch_app_mode('supplier');
     });
 })();
+                    
