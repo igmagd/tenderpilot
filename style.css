@@ -17,6 +17,7 @@ html, body {
     overflow-x: hidden !important;
     width: 100% !important;
     max-width: 100% !important;
+    scrollbar-gutter: stable; 
 }
 
 /* Базовый каркас кнопок-контейнеров (Оставляем прозрачным) */
