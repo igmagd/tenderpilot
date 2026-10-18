@@ -1,191 +1,152 @@
 (function () {
-  'use strict';
-  // 1. ГЛОБАЛЬНЫЙ СТЭЙТ И РЕАКТИВНОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
-  window.tenderpilot = {
-    'current-mode-index': 0,
-    'modes-list': ['supplier', 'customer', 'transport'],
-    'touch-start-x': 0,
-    'modes-titles': { 'supplier': 'Поставщик', 'customer': 'Заказчик', 'transport': 'Грузоперевозки' }
-  };
+    'use strict';
 
-  function switch_app_mode(target_mode) {
-    var state = window.tenderpilot;
-    if (!state['modes-list'].includes(target_mode)) return;
+    // 1. ГЛОБАЛЬНЫЙ СТЭЙТ И РЕАКТИВНОЕ ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ
+    window.tenderpilot = {
+        'current-mode-index': 0,
+        'modes-list': ['supplier', 'customer', 'transport'],
+        'touch-start-x': 0,
+        'modes-titles': { 'supplier': 'Поставщик', 'customer': 'Заказчик', 'transport': 'Грузоперевозки' }
+    };
 
-    state['modes-list'].forEach(function (mode) {
-      var groups = document.querySelectorAll('.group-' + mode);
-      groups.forEach(function (el) { el.style.display = (mode === target_mode) ? 'flex' : 'none'; });
-      var grid = document.getElementById('grid-' + mode);
-      if (grid) { grid.style.display = (mode === target_mode) ? 'grid' : 'none'; }
-    });
+    function switch_app_mode(target_mode) {
+        var state = window.tenderpilot;
+        if (!state['modes-list'].includes(target_mode)) return;
 
-    var status_text = document.querySelector('.menu-status-text');
-    if (status_text) status_text.textContent = state['modes-titles'][target_mode];
-    state['current-mode-index'] = state['modes-list'].indexOf(target_mode);
+        state['modes-list'].forEach(function (mode) {
+            var groups = document.querySelectorAll('.group-' + mode);
+            groups.forEach(function (el) { el.style.display = (mode === target_mode) ? 'flex' : 'none'; });
 
-    document.querySelectorAll('.mode-btn').forEach(function (btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-mode') === target_mode);
-    });
-  }
+            var grid = document.getElementById('grid-' + mode);
+            if (grid) { grid.style.display = (mode === target_mode) ? 'grid' : 'none'; }
+        });
 
-  // 2. НАВИГАЦИЯ, МЕНЮ И СВАЙПЫ
-  function init_core_events() {
-    document.querySelectorAll('.mode-btn').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        switch_app_mode(btn.getAttribute('data-mode'));
-      });
-    });
+        var status_text = document.querySelector('.menu-status-text');
+        if (status_text) status_text.textContent = state['modes-titles'][target_mode];
 
-    var toggle = document.getElementById('menu-toggle');
-    var nav = document.querySelector('.nav-links');
+        state['current-mode-index'] = state['modes-list'].indexOf(target_mode);
 
-    if (toggle && nav) {
-        // Функция плавного закрытия шторки
-        function closeMenu() {
-            toggle.classList.remove('active');
-            nav.classList.remove('active');
-            
-            // Ждём 350мс (пока улетает шторка) и только потом возвращаем кнопки и скролл!
-            setTimeout(function () {
-                document.body.classList.remove('menu-open');
-                document.body.style.overflow = '';
-            }, 250);
+        document.querySelectorAll('.mode-btn').forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-mode') === target_mode);
+        });
+    }
+
+    // 2. НАВИГАЦИЯ, МЕНЮ И СВАЙПЫ
+    function init_core_events() {
+        document.querySelectorAll('.mode-btn').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                switch_app_mode(btn.getAttribute('data-mode'));
+            });
+        });
+
+        var toggle = document.getElementById('menu-toggle');
+        var nav = document.querySelector('.nav-links');
+
+        if (toggle && nav) {
+            function closeMenu() {
+                toggle.classList.remove('active');
+                nav.classList.remove('active');
+                setTimeout(function () {
+                    document.body.classList.remove('menu-open');
+                }, 250);
+            }
+
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (toggle.classList.contains('active')) {
+                    closeMenu();
+                } else {
+                    toggle.classList.add('active');
+                    nav.classList.add('active');
+                    document.body.classList.add('menu-open');
+                }
+            });
+
+            nav.querySelectorAll('.menu-item-link').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    closeMenu();
+                });
+            });
         }
 
-        // Клик по бургеру / крестику
-        toggle.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (toggle.classList.contains('active')) {
-                closeMenu();
-            } else {
-                toggle.classList.add('active');
-                nav.classList.add('active');
-                document.body.classList.add('menu-open'); // Фиксируем чистоту шапки
-                document.body.style.overflow = 'hidden';  // Блокируем скролл основного сайта
-            }
-        });
+        function shift(dir) {
+            var state = window.tenderpilot;
+            var max = state['modes-list'].length;
+            var next = (state['current-mode-index'] + dir + max) % max;
+            switch_app_mode(state['modes-list'][next]);
+        }
 
-        // Плавное закрытие при клике на ссылки внутри меню
-        nav.querySelectorAll('.menu-item-link').forEach(function (link) {
-            link.addEventListener('click', function () {
-                closeMenu();
-            });
-        });
+        var prev = document.querySelector('.btn-menu-prev');
+        var next = document.querySelector('.btn-menu-next');
+
+        if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); shift(-1); });
+        if (next) next.addEventListener('click', function (e) { e.preventDefault(); shift(1); });
+
+        document.body.addEventListener('touchstart', function (e) {
+            if (e.target.closest('.bento-card-back') || e.target.closest('.is-flipped')) return;
+            window.tenderpilot['touch-start-x'] = e.touches.clientX;
+        }, { passive: true });
+
+        document.body.addEventListener('touchend', function (e) {
+            if (e.target.closest('.bento-card-back') || e.target.closest('.is-flipped')) return;
+            var diff = window.tenderpilot['touch-start-x'] - e.changedTouches.clientX;
+            if (Math.abs(diff) > 70) shift(diff > 0 ? 1 : -1);
+        }, { passive: true });
     }
 
-    function shift(dir) {
-      var state = window.tenderpilot;
-      var max = state['modes-list'].length;
-      var next = (state['current-mode-index'] + dir + max) % max;
-      switch_app_mode(state['modes-list'][next]);
-    }
+    // 3. АНИМАЦИЯ БЕНТО-КАРТОЧЕК
+    function init_bento() {
+        var bentoGrid = document.querySelector('.bento-grid');
+        if (!bentoGrid) return;
 
-    var prev = document.querySelector('.btn-menu-prev');
-    var next = document.querySelector('.btn-menu-next');
-    if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); shift(-1); });
-    if (next) next.addEventListener('click', function (e) { e.preventDefault(); shift(1); });
+        bentoGrid.querySelectorAll('.bento-card').forEach(function (card) {
+            card.addEventListener('click', function (e) {
+                e.stopPropagation();
+                if (e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
-    document.body.addEventListener('touchstart', function (e) {
-      if (e.target.closest('.bento-card-back') || e.target.closest('.is-flipped')) return;
-      window.tenderpilot['touch-start-x'] = e.touches.clientX;
-    }, { passive: true });
+                var rect = card.getBoundingClientRect();
+                var clone = card.cloneNode(true);
+                clone.id = card.id + '-clone';
+                clone.classList.add('bento-card-clone');
+                clone.style.cssText = `position:fixed;top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;border-radius:${window.getComputedStyle(card).borderRadius};`;
 
-    document.body.addEventListener('touchend', function (e) {
-      if (e.target.closest('.bento-card-back') || e.target.closest('.is-flipped')) return;
-      var diff = window.tenderpilot['touch-start-x'] - e.changedTouches.clientX;
-      if (Math.abs(diff) > 70) shift(diff > 0 ? 1 : -1);
-    }, { passive: true });
-  }
+                document.body.appendChild(clone);
+                window.getComputedStyle(clone).transform;
 
-  // 3. АНИМАЦИЯ БЕНТО-КАРТОЧЕК (РАСЧЕТ МАТРИЦЫ GPU)
-function init_bento() {
-    var bentoGrid = document.querySelector('.bento-grid');
-    if (!bentoGrid) return;
-    var cards = bentoGrid.querySelectorAll('.bento-card');
-    var bodyElement = document.body;
+                card.classList.add('is-cloned');
+                document.body.classList.add('bento-active');
 
-    cards.forEach(function (card) {
-        card.addEventListener('click', function (e) {
-            e.stopPropagation();
-
-            if (e.target.closest('.bento-card-close-icon')) return;
-            if (card.classList.contains('is-cloned')) return;
-
-            // Инициализация клонирования и фиксация размеров
-            var rect = card.getBoundingClientRect();
-            var clone = card.cloneNode(true);
-            clone.id = card.id + '-clone';
-            clone.classList.add('bento-card-clone');
-
-            clone.style.position = 'fixed';
-            clone.style.top = rect.top + 'px';
-            clone.style.left = rect.left + 'px';
-            clone.style.width = rect.width + 'px';
-            clone.style.height = rect.height + 'px';
-            clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
-
-            document.body.appendChild(clone);
-
-            // Форсируем перерисовку GPU
-            window.getComputedStyle(clone).transform;
-
-            // Блокируем оригинальную карту в сетке и фон сайта
-            card.classList.add('is-cloned');
-            bodyElement.classList.add('bento-active');
-
-            // ТЕХНОЛОГИЯ ДВОЙНОГО КАДРА: Запускаем полет и 3D-кручение СТРОГО одновременно
-            requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
-clone.classList.add('is-expanded');
-clone.classList.add('is-flipped');
-clone.style.top = '0px';
-clone.style.left = '0px';
-clone.style.width = '100vw';
-clone.style.height = '100dvh';
-
+                    requestAnimationFrame(function () {
+                        clone.classList.add('is-expanded', 'is-flipped');
+                        clone.style.cssText += 'top:0px;left:0px;width:100vw;height:100dvh;';
+                    });
                 });
-            });
 
-            // Логика закрытия окна (Крестик)
-            var closeIcon = clone.querySelector('.bento-card-close-icon');
-            if (closeIcon) {
-                closeIcon.addEventListener('click', function (event) {
-                    event.stopPropagation();
+                var closeIcon = clone.querySelector('.bento-card-close-icon');
+                if (closeIcon) {
+                    closeIcon.addEventListener('click', function (event) {
+                        event.stopPropagation();
+                        clone.classList.remove('is-expanded', 'is-flipped');
+                        clone.style.cssText += `top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
 
-                    // Сбрасываем полноэкранный класс (активирует плавный возврат назад в CSS)
-                    clone.classList.remove('is-expanded');
-                    clone.classList.remove('is-flipped');
-
-                    // Возвращаем точные инлайновые координаты сетки для обратного полета
-                    clone.style.top = rect.top + 'px';
-                    clone.style.left = rect.left + 'px';
-                    clone.style.width = rect.width + 'px';
-                    clone.style.height = rect.height + 'px';
-
-                    bodyElement.classList.remove('bento-active');
-
-                    // Полностью удаляем клон из HTML, когда обратная анимация завершится
-                    clone.addEventListener('transitionend', function (el) {
-                        if (!clone.classList.contains('is-expanded')) {
-                            if (clone.parentNode) {
-                                clone.parentNode.removeChild(clone);
+                        clone.addEventListener('transitionend', function () {
+                            if (!clone.classList.contains('is-expanded')) {
+                                document.body.classList.remove('bento-active');
+                                if (clone.parentNode) clone.parentNode.removeChild(clone);
+                                card.classList.remove('is-cloned');
                             }
-                            card.classList.remove('is-cloned');
-                        }
-                    }, { once: true });
-                });
-            }
+                        }, { once: true });
+                    });
+                }
+            });
         });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        init_core_events();
+        init_bento();
+        switch_app_mode('supplier');
     });
-}
-
-
-// ТОЧКА ВХОДА (Оставляем без изменений)
-document.addEventListener('DOMContentLoaded', function () {
-    init_core_events();
-    init_bento();
-    switch_app_mode('supplier');
-});
-
 })();
