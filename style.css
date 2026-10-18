@@ -570,15 +570,14 @@ pointer-events: none !important;
     animation: none !important;
 }
 
-/* Блокируем свайпы и скролл фона, пока открыта карточка */
+/* Блокируем скролл фона, пока открыта карточка — БЕЗ position: fixed */
 body.bento-active {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: hidden !important;
-  touch-action: none !important;
+    overflow: hidden !important;
+    touch-action: none !important;
+    
+    /* Если на Windows/Linux полоса все равно исчезает, 
+       этот хантинг заставит ее остаться прозрачной плашкой: */
+    scrollbar-gutter: stable !important; 
 }
 
 /* Отодвигаем внутренний контент раскрытой карточки от краев экрана */
