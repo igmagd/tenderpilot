@@ -147,35 +147,43 @@ clone.style.height = '100dvh';
                 });
             });
 
-            // Логика закрытия окна (Крестик)
-            var closeIcon = clone.querySelector('.bento-card-close-icon');
-            if (closeIcon) {
-                closeIcon.addEventListener('click', function (event) {
-                    event.stopPropagation();
+        // Логика закрытия окна (Крестик)
+        var closeIcon = clone.querySelector('.bento-card-close-icon');
+        if (closeIcon) {
+            // Единая функция закрытия для тача и клика
+            function handleClose(event) {
+                event.stopPropagation();
+                event.preventDefault(); // Защита от фантомных тапов на смартфонах
 
-                    // Сбрасываем полноэкранный класс (активирует плавный возврат назад в CSS)
-                    clone.classList.remove('is-expanded');
-                    clone.classList.remove('is-flipped');
+                // Сбрасываем полноэкранный режим клона
+                clone.classList.remove('is-expanded');
+                clone.classList.remove('is-flipped');
 
-                    // Возвращаем точные инлайновые координаты сетки для обратного полета
-                    clone.style.top = rect.top + 'px';
-                    clone.style.left = rect.left + 'px';
-                    clone.style.width = rect.width + 'px';
-                    clone.style.height = rect.height + 'px';
+                // Возвращаем точные исходные размеры карточки на место в сетке
+                clone.style.top = rect.top + 'px';
+                clone.style.left = rect.left + 'px';
+                clone.style.width = rect.width + 'px';
+                clone.style.height = rect.height + 'px';
 
-                    bodyElement.classList.remove('bento-active');
+                bodyElement.classList.remove('bento-active');
 
-                    // Полностью удаляем клон из HTML, когда обратная анимация завершится
-                    clone.addEventListener('transitionend', function (el) {
-                        if (!clone.classList.contains('is-expanded')) {
-                            if (clone.parentNode) {
-                                clone.parentNode.removeChild(clone);
-                            }
-                            card.classList.remove('is-cloned');
+                // Полностью удаляем клон из DOM после завершения CSS-transition
+                clone.addEventListener('transitionend', function() {
+                    if (!clone.classList.contains('is-expanded')) {
+                        if (clone.parentNode) {
+                            clone.parentNode.removeChild(clone);
                         }
-                    }, { once: true });
-                });
+                        card.classList.remove('is-cloned');
+                    }
+                }, { once: true });
             }
+
+            // Слушаем touchstart для моментального отклика на смартфонах
+            closeIcon.addEventListener('touchstart', handleClose, { passive: false });
+            
+            // Оставляем обычный click для ПК и мышки
+            closeIcon.addEventListener('click', handleClose);
+        }
         });
     });
 }
