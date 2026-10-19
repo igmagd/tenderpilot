@@ -161,4 +161,3 @@ clone.style.setProperty('left', '0px');
         switch_app_mode('supplier');
     });
 })();
-                    
