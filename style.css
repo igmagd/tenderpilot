@@ -231,11 +231,11 @@ header {
         padding: 95px 24px 24px 24px !important; 
         z-index: 101 !important; 
         
-        /* Включаем горизонтальный скролл для свайпов, прячем вертикальный */
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
+        /* Позволяем вертикальный скролл, прячем горизонтальный */
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
-        touch-action: pan-x !important; 
+        touch-action: pan-y !important; 
         
         /* Спрячем скроллбары для всех типов мобильных браузеров */
         scrollbar-width: none !important;
@@ -267,8 +267,8 @@ header {
     /* Кнопки шапки плавно растворяются, чтобы не просвечивали */
     /* Базовое состояние кнопок (когда они возвращаются на экран) */
     .hero-actions {
-        /* Убираем плавность opacity! Включаем их МГНОВЕННО (transition: none) */
-        /* Но делаем задержку 0.28s, чтобы они включились ровно в момент пролета шторки */
+        
+        /* делаем задержку 0.28s, чтобы они включились ровно в момент пролета шторки */
         transition: none !important;
         transition-delay: 0.28s !important;
         opacity: 1 !important;
@@ -302,7 +302,7 @@ header {
 
     /* ВОЗВРАЩАЕМ БИРЮЗОВЫЙ ЦВЕТ СЛОВУ PILOT */
     .logo span {
-        color: #00f2fe !important; /* Твой фирменный бирюзовый акцент */
+        color: #00f2fe !important;
     }
    
     /* Ссылки мобильного меню и эффект подсветки при ТАПЕ */
@@ -314,8 +314,6 @@ header {
         color: #c9d1d9 !important;
         text-decoration: none !important;
         border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-        
-        /* Плавный возврат цвета полосы после отпускания пальца */
         transition: border-bottom-color 0.2s ease !important; 
     }
 
@@ -405,16 +403,19 @@ header {
 }
 
 @media (max-width: 1024px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .bento-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    overflow-x: hidden;
+  }
 }
 
 @media (max-width: 768px) {
-  .bento-grid { 
+    overflow-x: hidden;
     grid-template-columns: 1fr !important; 
     gap: 16px !important;
     padding: 0 16px !important;
   }
-     }
+  
 /* 3D-контекст Bento-карточек */
 .bento-card {
 background: transparent !important;
@@ -480,19 +481,26 @@ position: relative !important;
 
 /* 2. Состояние раскрытого клона во весь экран */
 .bento-card-clone.is-expanded {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100dvh;
-  max-width: 100vw;
-  max-height: 100dvh;
-  border-radius: 0;
-  border: none;
-  margin: 0;
-  padding: 0;
-  transform: translate(0, 0);
-  transition: top, left, width, height, transform;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-width: 100vw !important;
+  max-height: 100dvh !important;
+  border-radius: 0px !important;
+  border: none !important;
+  margin: 0 !important;
+  transform: translate(0, 0) !important;
+  /* Полная синхронизация всех изменяемых JS параметров плавности */
+  transition: 
+    transform 350ms cubic-bezier(0.25, 1, 0.5, 1) !important,
+    top 350ms cubic-bezier(0.25, 1, 0.5, 1) !important,
+    left 350ms cubic-bezier(0.25, 1, 0.5, 1) !important,
+    width 350ms cubic-bezier(0.25, 1, 0.5, 1) !important,
+    height 350ms cubic-bezier(0.25, 1, 0.5, 1) !important,
+    padding 350ms cubic-bezier(0.25, 1, 0.5, 1) !important,
+    opacity 200ms ease !important;
 }
 
 /* 3. Внутренний контейнер: чистый 3D-кувырок */
@@ -501,7 +509,6 @@ position: relative !important;
   height: 100% !important;
   position: relative !important;
   transform-style: preserve-3d !important;
-  /* Синхронизируем кувырок по времени с расширением всей карточки */
   transition: transform 350ms cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
@@ -574,5 +581,3 @@ body.bento-active {
 .bento-card-clone.is-expanded .bento-card-back {
     padding: 24px !important;
 }
-
-       
