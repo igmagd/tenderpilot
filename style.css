@@ -290,23 +290,99 @@ header {
   .bento-grid { grid-template-columns: repeat(2, 1fr); overflow-x: hidden; }
 }
 
-/* ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ МЕДИА-ЗАПРОС (Строго по 1 карточке в строку) */
+/* ==========================================================================
+   АДАПТИВ СЕКЦИЙ И СЕТКИ BENTO (УБРАНА БОКОВАЯ ПОЛОСА)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hero-section {
+        padding-top: 127px !important; 
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; 
+        justify-content: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .hero-section h1, 
+    .hero-section p {
+        text-align: center !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* Базовый bento-каркас */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 1024px) {
+  .bento-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    overflow: visible !important; /* ИСПРАВЛЕНО: Убрано hidden, порождавшее скроллбар */
+  }
+}
+
+/* Мобильная сетка: строго в 1 колонку */
 @media (max-width: 768px) {
   .bento-grid {
-    overflow-x: hidden;
     grid-template-columns: 1fr !important; 
     gap: 16px !important;
     padding: 0 16px !important;
+    
+    /* ИСПРАВЛЕНО: Полностью уничтожаем генерацию системной полосы прокрутки внутри сетки */
+    overflow: visible !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
-       }
-   /* 3D-контекст Bento-карточек */
+  .bento-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+  
+/* Базовое состояние Bento-карточек */
 .bento-card {
   background: transparent !important;
   perspective: 1500px !important;
   width: 100% !important;
   height: 220px;
   position: relative !important;
-  cursor: pointer;
+}
+
+/* КЛАСС ДЛЯ ГЛАВНОЙ КАРТОЧКИ (В две высоты обычных карт + отступ) */
+.bento-card.main-hero {
+  height: 456px !important; 
+  cursor: default !important; /* Убираем курсор-палец, если она не должна открываться */
+}
+
+/* ИСПРАВЛЕНО: Защита текста от посинения при случайных тапах пальцем */
+.bento-card.main-hero h1,
+.bento-card.main-hero p,
+.bento-card.main-hero .bento-card-front,
+.bento-card.main-hero .bento-card-back {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Поведение главной карточки на ПК (Растягиваем на 2 колонки из 4-х) */
+@media (min-width: 1025px) {
+  .bento-card.main-hero {
+    grid-column: span 2 !important;
+    grid-row: span 2 !important;
+  }
 }
 
 .bento-card-inner {
@@ -340,7 +416,9 @@ header {
   opacity: 0 !important;
 }
 
-/* МЕХАНИЗМ КЛОНИРОВАНИЯ И ПРЕМИАЛЬНОГО ВЗЛЕТА */
+/* ==========================================================================
+   МЕХАНИЗМ КЛОНИРОВАНИЯ И ПРЕМИАЛЬНОГО 3D-ВЗЛЕТА
+   ========================================================================== */
 .bento-card-clone {
   position: fixed !important;
   z-index: 9999 !important;
@@ -354,22 +432,6 @@ header {
     border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1);
   transform-style: preserve-3d !important;
 }
-
-/important;
-}
-
-.bento-card.is-cloned { opacity: 0.3 !important; }
-.bento-card.is-cloned * { transition: none !important; transform: none !important; animation: none !important; }
-
-/* ИСПРАВЛЕНО: overflow-y больше не прячется, шапка не прыгает по ширине */
-body.bento-active {
-    touch-action: none !important; 
-}
-
-.bento-card-clone.is-expanded .bento-card-back {
-    padding: 24px !important;
-    overflow-y: auto !important; 
-   }
 
 .bento-card-clone.is-expanded {
   top: 0 !important;
@@ -400,14 +462,12 @@ body.bento-active {
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  border: none !important;
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
-  
-  /* ИСПРАВЛЕНО: Вместо border: none пишем внутреннюю рамку для идеального слияния */
   box-shadow: inset 0 0 0 1px #30363d !important;
 }
 
-/* Углы карточки при расширении на весь экран становятся прямыми (Оригинальный блок) */
 .bento-card-clone.is-expanded .bento-card-front,
 .bento-card-clone.is-expanded .bento-card-back {
   border-radius: 0px !important;
@@ -426,8 +486,8 @@ body.bento-active {
   height: 28px !important;
   cursor: pointer !important;
   z-index: 2000000 !important;
-  transform: translateZ(100px) !important;
-  pointer-events: auto !important;
+  transform: translateZ(100px) !important; 
+  pointer-events: auto !important; 
 }
 
 .bento-card-clone .bento-card-back h3 {
@@ -446,18 +506,11 @@ body.bento-active {
   opacity: 0.3 !important;
 }
 
-.bento-card.is-cloned * {
-  transition: none !important;
-  transform: none !important;
-  animation: none !important;
-}
-
-/* ИСПРАВЛЕНО: Убираем скрытие overflow на body, чтобы шапка не прыгала */
 body.bento-active {
-  touch-action: none !important;
+  touch-action: none !important; 
 }
 
 .bento-card-clone.is-expanded .bento-card-back {
   padding: 24px !important;
-  overflow-y: auto !important;
-}
+  overflow-y: auto !important; 
+   }
