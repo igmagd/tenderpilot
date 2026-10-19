@@ -14,11 +14,17 @@
         if (!state['modes-list'].includes(target_mode)) return;
 
         state['modes-list'].forEach(function (mode) {
+            // Переключение видимости групп
             var groups = document.querySelectorAll('.group-' + mode);
-            groups.forEach(function (el) { el.style.display = (mode === target_mode) ? 'flex' : 'none'; });
+            groups.forEach(function (el) { 
+                el.style.setProperty('display', (mode === target_mode) ? 'flex' : 'none', 'important'); 
+            });
 
+            // Переключение видимости гридов
             var grid = document.getElementById('grid-' + mode);
-            if (grid) { grid.style.display = (mode === target_mode) ? 'grid' : 'none'; }
+            if (grid) { 
+                grid.style.setProperty('display', (mode === target_mode) ? 'grid' : 'none', 'important'); 
+            }
         });
 
         var status_text = document.querySelector('.menu-status-text');
@@ -44,13 +50,13 @@
         var nav = document.querySelector('.nav-links');
 
         if (toggle && nav) {
-            function closeMenu() {
+            var closeMenu = function() {
                 toggle.classList.remove('active');
                 nav.classList.remove('active');
                 setTimeout(function () {
                     document.body.classList.remove('menu-open');
                 }, 250);
-            }
+            };
 
             toggle.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -95,7 +101,7 @@
         }, { passive: true });
     }
 
-    // 3. АНИМАЦИЯ БЕНТО-КАРТОЧЕК
+    // 3. СТАБИЛИЗИРОВАННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
     function init_bento() {
         var bentoGrid = document.querySelector('.bento-grid');
         if (!bentoGrid) return;
@@ -109,26 +115,31 @@
                 var clone = card.cloneNode(true);
                 clone.id = card.id + '-clone';
                 clone.classList.add('bento-card-clone');
-                clone.style.setProperty('position', 'fixed');
-                clone.style.setProperty('top', rect.top + 'px');
-                clone.style.setProperty('left', rect.left + 'px');
-                clone.style.setProperty('width', rect.width + 'px');
-                clone.style.setProperty('height', rect.height + 'px');
-                clone.style.setProperty('border-radius', window.getComputedStyle(card).borderRadius);
+                
+                // Фиксируем стартовую геометрию клона через !important, перебивая жесткий CSS
+                clone.style.setProperty('position', 'fixed', 'important');
+                clone.style.setProperty('top', rect.top + 'px', 'important');
+                clone.style.setProperty('left', rect.left + 'px', 'important');
+                clone.style.setProperty('width', rect.width + 'px', 'important');
+                clone.style.setProperty('height', rect.height + 'px', 'important');
+                clone.style.setProperty('border-radius', window.getComputedStyle(card).borderRadius, 'important');
 
                 document.body.appendChild(clone);
+                
+                // Принудительный reflow для регистрации стартовой точки анимации
                 window.getComputedStyle(clone).transform;
 
                 card.classList.add('is-cloned');
                 document.body.classList.add('bento-active');
 
+                // Двойной фрейм для обеспечения бесшовного старта анимации расширения
                 requestAnimationFrame(function () {
                     requestAnimationFrame(function () {
                         clone.classList.add('is-expanded', 'is-flipped');
-                        clone.style.setProperty('top', '0px');
-clone.style.setProperty('left', '0px');
-                clone.style.setProperty('width', '100vw');
-                clone.style.setProperty('height', '100dvh');
+                        clone.style.setProperty('top', '0px', 'important');
+                        clone.style.setProperty('left', '0px', 'important');
+                        clone.style.setProperty('width', '100vw', 'important');
+                        clone.style.setProperty('height', '100dvh', 'important');
                     });
                 });
 
@@ -136,19 +147,22 @@ clone.style.setProperty('left', '0px');
                 if (closeIcon) {
                     closeIcon.addEventListener('click', function (event) {
                         event.stopPropagation();
+                        
+                        // Возвращаем в исходный размер
                         clone.classList.remove('is-expanded', 'is-flipped');
-                        clone.style.setProperty('top', rect.top + 'px');
-                clone.style.setProperty('left', rect.left + 'px');
-                clone.style.setProperty('width', rect.width + 'px');
-                clone.style.setProperty('height', rect.height + 'px');
+                        clone.style.setProperty('top', rect.top + 'px', 'important');
+                        clone.style.setProperty('left', rect.left + 'px', 'important');
+                        clone.style.setProperty('width', rect.width + 'px', 'important');
+                        clone.style.setProperty('height', rect.height + 'px', 'important');
 
-                        clone.addEventListener('transitionend', function () {
+                        var onTransitionEnd = function () {
                             if (!clone.classList.contains('is-expanded')) {
                                 document.body.classList.remove('bento-active');
                                 if (clone.parentNode) clone.parentNode.removeChild(clone);
                                 card.classList.remove('is-cloned');
                             }
-                        }, { once: true });
+                        };
+                        clone.addEventListener('transitionend', onTransitionEnd, { once: true });
                     });
                 }
             });
@@ -161,3 +175,4 @@ clone.style.setProperty('left', '0px');
         switch_app_mode('supplier');
     });
 })();
+
