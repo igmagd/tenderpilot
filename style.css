@@ -319,7 +319,8 @@ header {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.bento-card-front, .bento-card-back {
+.bento-card-front, 
+.bento-card-back {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -327,11 +328,11 @@ header {
   height: 100% !important;
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
-  border: 1px solid #30363d !important;
   border-radius: 12px !important;
   background: linear-gradient(to bottom, #0b1528, #020617) !important;
   padding: 24px !important;
   transition: opacity 0.2s ease !important;
+  box-shadow: inset 0 0 0 1px #30363d !important; 
 }
 
 .bento-grid .bento-card-back {
@@ -354,71 +355,7 @@ header {
   transform-style: preserve-3d !important;
 }
 
-/* ИСПРАВЛЕНО: Убран конфликтный !important, ширина теперь 100% (без двойных скроллбаров) */
-.bento-card-clone.is-expanded {
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100vh !important;
-  height: 100dvh !important;
-  border-radius: 0px !important;
-}
-
-.bento-card-clone .bento-card-inner {
-  width: 100% !important;
-  height: 100% !important;
-  position: relative !important;
-  transform-style: preserve-3d !important;
-  transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1) !important;
-}
-
-.bento-card-clone.is-flipped .bento-card-inner {
-    transform: rotateY(180deg) !important;
-}
-
-.bento-card-clone .bento-card-front,
-.bento-card-clone .bento-card-back {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  border: none !important;
-  backface-visibility: hidden !important;
-  -webkit-backface-visibility: hidden !important;
-}
-
-/* ИСПРАВЛЕНО: Углы карточки при расширении на весь экран становятся прямыми */
-.bento-card-clone.is-expanded .bento-card-front,
-.bento-card-clone.is-expanded .bento-card-back {
-  border-radius: 0px !important;
-}
-
-.bento-card-clone .bento-card-back {
-    transform: rotateY(180deg) !important;
-    opacity: 1 !important;
-}
-
-.bento-card-clone .bento-card-close-icon {
-  position: absolute !important;
-  top: 24px !important;
-  right: 24px !important;
-  width: 28px !important;
-  height: 28px !important;
-  cursor: pointer !important;
-  z-index: 2000000 !important;
-  transform: translateZ(100px) !important; 
-  pointer-events: auto !important; 
-}
-
-.bento-card-clone .bento-card-back h3 { color: #ffffff !important; }
-
-.bento-card-close-icon svg {
-    width: 100% !important;
-    height: 100% !important;
-    stroke: #ffffff !important;
-    stroke-width: 2.5px !important;
-    fill: none !important;
+/important;
 }
 
 .bento-card.is-cloned { opacity: 0.3 !important; }
@@ -433,3 +370,94 @@ body.bento-active {
     padding: 24px !important;
     overflow-y: auto !important; 
    }
+
+.bento-card-clone.is-expanded {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+}
+
+.bento-card-clone .bento-card-inner {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  transform-style: preserve-3d !important;
+  transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.bento-card-clone.is-flipped .bento-card-inner {
+  transform: rotateY(180deg) !important;
+}
+
+.bento-card-clone .bento-card-front,
+.bento-card-clone .bento-card-back {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  
+  /* ИСПРАВЛЕНО: Вместо border: none пишем внутреннюю рамку для идеального слияния */
+  box-shadow: inset 0 0 0 1px #30363d !important;
+}
+
+/* Углы карточки при расширении на весь экран становятся прямыми (Оригинальный блок) */
+.bento-card-clone.is-expanded .bento-card-front,
+.bento-card-clone.is-expanded .bento-card-back {
+  border-radius: 0px !important;
+}
+
+.bento-card-clone .bento-card-back {
+  transform: rotateY(180deg) !important;
+  opacity: 1 !important;
+}
+
+.bento-card-clone .bento-card-close-icon {
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+  width: 28px !important;
+  height: 28px !important;
+  cursor: pointer !important;
+  z-index: 2000000 !important;
+  transform: translateZ(100px) !important;
+  pointer-events: auto !important;
+}
+
+.bento-card-clone .bento-card-back h3 {
+  color: #ffffff !important;
+}
+
+.bento-card-close-icon svg {
+  width: 100% !important;
+  height: 100% !important;
+  stroke: #ffffff !important;
+  stroke-width: 2.5px !important;
+  fill: none !important;
+}
+
+.bento-card.is-cloned {
+  opacity: 0.3 !important;
+}
+
+.bento-card.is-cloned * {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* ИСПРАВЛЕНО: Убираем скрытие overflow на body, чтобы шапка не прыгала */
+body.bento-active {
+  touch-action: none !important;
+}
+
+.bento-card-clone.is-expanded .bento-card-back {
+  padding: 24px !important;
+  overflow-y: auto !important;
+}
