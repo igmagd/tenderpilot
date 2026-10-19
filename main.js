@@ -95,11 +95,16 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
+    // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК С ПРЕДОХРАНИТЕЛЕМ
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
+            
+            // Если кликнули не по карте, или по крестику, или карта уже клонирована — игнорируем
             if (!card || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
+
+            // ПРОФЕССИОНАЛЬНЫЙ ПРЕДОХРАНИТЕЛЬ: Главная карточка-баннер не должна открываться
+            if (card.classList.contains('main-hero')) return;
 
             e.stopPropagation();
 
@@ -140,14 +145,11 @@
 
                     clone.addEventListener('transitionend', function () {
                         if (!clone.classList.contains('is-expanded')) {
-                            // 1. Возвращаем оригинальной карточке в сетке 100% видимость
                             card.classList.remove('is-cloned');
                             
-                            // 2. Включаем мягкое растворение самого клона
                             clone.style.transition = 'opacity 150ms ease';
                             clone.style.opacity = '0';
                             
-                            // 3. Удаляем клон окончательно только после его полного растворения
                             setTimeout(function () {
                                 document.body.classList.remove('bento-active');
                                 if (clone.parentNode) clone.parentNode.removeChild(clone);
