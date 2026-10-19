@@ -140,9 +140,18 @@
 
                     clone.addEventListener('transitionend', function () {
                         if (!clone.classList.contains('is-expanded')) {
-                            document.body.classList.remove('bento-active');
-                            if (clone.parentNode) clone.parentNode.removeChild(clone);
+                            // 1. Возвращаем оригинальной карточке в сетке 100% видимость
                             card.classList.remove('is-cloned');
+                            
+                            // 2. Включаем мягкое растворение самого клона
+                            clone.style.transition = 'opacity 150ms ease';
+                            clone.style.opacity = '0';
+                            
+                            // 3. Удаляем клон окончательно только после его полного растворения
+                            setTimeout(function () {
+                                document.body.classList.remove('bento-active');
+                                if (clone.parentNode) clone.parentNode.removeChild(clone);
+                            }, 150);
                         }
                     }, { once: true });
                 });
@@ -156,4 +165,3 @@
         switch_app_mode('supplier');
     });
 })();
-                
