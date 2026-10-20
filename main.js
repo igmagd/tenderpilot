@@ -95,7 +95,7 @@
         }, { passive: true });
     }
 
-    // 3. АППАРАТНАЯ FLIP-АНИМАЦИЯ БЕНТО-КАРТОЧЕК НА GPU (БЕЗ ОТСКОКОВ)
+    // 3. АППАРАТНАЯ FLIP-АНИМАЦИЯ БЕНТО-КАРТОЧЕК НА GPU (400ms + БЕСШОВНЫЙ СЛИВ)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -143,25 +143,30 @@
                     var actTranslateX = actualRect.left - (window.innerWidth - actualRect.width) / 2;
                     var actTranslateY = actualRect.top - (window.innerHeight - actualRect.height) / 2;
 
-                    // ОБРАТНЫЙ ПОЛЕТ: Сжимаем обратно в ячейку и раскручиваем в 0 градусов на GPU
+                    // ОБРАТНЫЙ ПОЛЕТ: Сжимаем обратно в ячейку и раскручиваем в 0 градусов на GPU (400ms)
                     clone.style.transform = 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1) rotateY(0deg)';
                     clone.classList.remove('is-expanded');
 
-                    // Ждем окончания полета (ровно 500ms, как прописано в новом CSS для transition)
-                    setTimeout(function () {
+                    // Начинаем мягко проявлять оригинал за 150ms ДО окончания полета, чтобы убрать толчок текста
+                    setTimeout(function() {
                         card.classList.remove('is-cloned');
-                        clone.style.setProperty('transition', 'opacity 200ms ease', 'important');
+                    }, 250);
+
+                    // Ждем окончания полета (ровно 400ms, как прописано в новом CSS для transition)
+                    setTimeout(function () {
+                        clone.style.setProperty('transition', 'opacity 150ms ease', 'important');
                         clone.style.opacity = '0';
                         
                         setTimeout(function () {
                             document.body.classList.remove('bento-active');
                             if (clone.parentNode) clone.parentNode.removeChild(clone);
-                        }, 200);
-                    }, 500); // Этот таймер строго синхронизирован с CSS
+                        }, 150);
+                    }, 400); // Этот таймер строго синхронизирован с CSS на 400мс
                 });
             }
         });
     }
+
 
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
