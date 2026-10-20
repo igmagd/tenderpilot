@@ -430,25 +430,38 @@ header {
 .bento-card-clone {
   position: fixed !important;
   z-index: 9999 !important;
-  background: transparent !important;
+  background: #161b22 !important; /* Родной темный цвет карточки TenderPilot */
+  border-radius: 24px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
   pointer-events: auto !important;
-  transition: 
-    top 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    left 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    width 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    height 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden !important;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
   transform-style: preserve-3d !important;
 }
 
-.bento-card-clone.is-expanded {
+.bento-card-clone.active-fullscreen {
   top: 0 !important;
   left: 0 !important;
-  width: 100% !important;
+  width: 100vw !important;
   height: 100vh !important;
-  height: 100dvh !important;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
+}
+
+.bento-card-clone .bento-card-close {
+  display: block !important;
+  position: absolute !important;
+  top: 24px !important;
+  right: 24px !important;
+  z-index: 10000 !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+  .bento-card-clone .bento-card-close {
+    top: 16px !important;
+    right: 16px !important;
+  }
 }
 
 .bento-card-clone .bento-card-inner {
