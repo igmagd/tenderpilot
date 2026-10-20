@@ -387,18 +387,20 @@ header {
 
 /* КЛАСС ДЛЯ ГЛАВНОЙ КАРТОЧКИ — АДАПТИРОВАННЫЙ */
 .bento-card.main-hero {
-  height: 265px !important;
+  height: 265px !important; /* Утверждено: 1.2 от высоты обычной карточки */
   cursor: default !important;
 }
 
+/* Стилизация текста большой карточки и отступа контента на мобильных (до 768px) */
 @media (max-width: 768px) {
-  .bento-grid {
-    margin-top: 24px !important; 
+  /* Сдвигаем всю страницу ниже фиксированной шапки на высоту шапки + 24px */
+  body, .container {
+    padding-top: 127px !important; 
   }
 
   .bento-card.main-hero .bento-card-front,
   .bento-card.main-hero .bento-card-back {
-    padding: 20px !important;
+    padding: 20px !important; /* Аккуратные внутренние отступы */
   }
   .bento-card.main-hero h1 {
     font-size: 1.4rem !important; 
@@ -413,7 +415,7 @@ header {
   }
 }
 
-/* ПОЛНОСТЬЮ СОХРАНЕНО: Защита текста от посинения при кликах */
+/*Защита текста от посинения при кликах */
 .bento-card.main-hero h1,
 .bento-card.main-hero p,
 .bento-card.main-hero .bento-card-front,
