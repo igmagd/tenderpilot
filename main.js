@@ -95,7 +95,7 @@
         }, { passive: true });
     }
 
-    // 3. АППАРАТНЫЙ БЕСШОВНЫЙ ВЗЛЕТ НА GPU НА СВОЙСТВЕ TRANSFORM (БЕЗ ШЛЕЙФОВ И РАССИНХРОНА)
+    // 3. ПРЕМИАЛЬНЫЙ ДВУХСЛОЙНЫЙ FLIP НА ЧИСТОМ GPU (ЖЕЛЕЗНЫЙ ВАРИАНТ)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -104,71 +104,87 @@
             e.stopPropagation();
 
             var rect = card.getBoundingClientRect();
-            var clone = document.createElement('div');
-            clone.classList.add('bento-card-clone');
-            
-            // Затаскиваем только контент изнанки — без лишних оберток и лицевых пустышек
-            var backContent = card.querySelector('.bento-card-back') ? card.querySelector('.bento-card-back').innerHTML : '';
-            clone.innerHTML = backContent;
-            
-            // Изначально клон создается сразу в координатах фуллскрина
-            clone.style.top = '0px';
-            clone.style.left = '0px';
-            clone.style.width = '100vw';
-            clone.style.height = '100dvh';
-            clone.style.borderRadius = '0px';
+            var bRadius = window.getComputedStyle(card).borderRadius;
 
-            // Но через transform мы мгновенно сжимаем его до размеров ячейки
+            // 1. Создаем клон ЛИЦЕВОЙ стороны
+            var frontClone = document.createElement('div');
+            frontClone.classList.add('bento-flip-front');
+            var frontContent = card.querySelector('.bento-card-front') ? card.querySelector('.bento-card-front').innerHTML : '';
+            frontClone.innerHTML = frontContent;
+
+            // 2. Создаем клон ЗАДНЕЙ стороны
+            var backClone = document.createElement('div');
+            backClone.classList.add('bento-flip-back');
+            var backContent = card.querySelector('.bento-card-back') ? card.querySelector('.bento-card-back').innerHTML : '';
+            backClone.innerHTML = backContent;
+
+            // Считаем геометрию для GPU
             var scaleX = rect.width / window.innerWidth;
             var scaleY = rect.height / window.innerHeight;
             var translateX = rect.left - (window.innerWidth - rect.width) / 2;
             var translateY = rect.top - (window.innerHeight - rect.height) / 2;
 
-            // Стартовая точка на GPU: сжата на месте ячейки, повернута в 0
-            clone.style.transform = 'translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale3d(' + scaleX + ', ' + scaleY + ', 1) rotateY(0deg)';
+            // Задаем базовые стили (оба клона встают точно поверх оригинальной ячейки)
+            var baseStyle = `
+                position: fixed !important; top: 0 !important; left: 0 !important;
+                width: 100vw !important; height: 100dvh !important;
+                border-radius: ${bRadius} !important;
+                transform: translate3d(${translateX}px, ${translateY}px, 0) scale3d(${scaleX}, ${scaleY}, 1);
+            `;
+            frontClone.style.cssText = baseStyle + "z-index: 9998 !important; opacity: 1 !important;";
+            backClone.style.cssText = baseStyle + "z-index: 9999 !important; opacity: 0 !important; pointer-events: none !important;";
 
-            document.body.appendChild(clone);
-            window.getComputedStyle(clone).transform; // Силовой рендер GPU
+            document.body.appendChild(frontClone);
+            document.body.appendChild(backClone);
+            
+            // Форсируем рендер
+            window.getComputedStyle(frontClone).transform;
 
             card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
 
-            // ВЗЛЕТ: Возвращаем масштаб в 1 и крутим на 180 градусов в одной команде
+            // ВЗЛЕТ: Лицо растворяется и расширяется, задник проявляется и встает на весь экран
             requestAnimationFrame(function () {
-                clone.style.transform = 'translate3d(0, 0, 0) scale3d(1, 1, 1) rotateY(180deg)';
-                clone.classList.add('is-expanded');
+                var activeStyle = "translate3d(0,0,0) scale3d(1,1,1); border-radius: 0px !important;";
+                frontClone.style.transform = activeStyle;
+                frontClone.style.opacity = "0";
+                
+                backClone.style.transform = activeStyle;
+                backClone.style.opacity = "1";
+                backClone.style.pointerEvents = "auto";
             });
 
-            var closeIcon = clone.querySelector('.bento-card-close-icon');
+            var closeIcon = backClone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
-                    clone.style.pointerEvents = 'none';
-                    
+                    backClone.style.pointerEvents = 'none';
+
                     var actualRect = card.getBoundingClientRect();
                     var actScaleX = actualRect.width / window.innerWidth;
                     var actScaleY = actualRect.height / window.innerHeight;
                     var actTranslateX = actualRect.left - (window.innerWidth - actualRect.width) / 2;
                     var actTranslateY = actualRect.top - (window.innerHeight - actualRect.height) / 2;
 
-                    // ПОСАДКА: Сжатие, перемещение и разворот идут строго в одном свойстве transform!
-                    clone.style.transform = 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1) rotateY(0deg)';
-                    clone.classList.remove('is-expanded');
+                    var returnStyle = `translate3d(${actTranslateX}px, ${actTranslateY}px, 0) scale3d(${actScaleX}, ${actScaleY}, 1); border-radius: ${bRadius} !important;`;
 
-                    // За 100мс до падения мягко проявляем оригинальную карточку в фоне
+                    // ПОСАДКА: Одновременное сжатие в ячейку. Задник тухнет, лицо проявляется
+                    frontClone.style.transform = returnStyle;
+                    frontClone.style.opacity = "1";
+
+                    backClone.style.transform = returnStyle;
+                    backClone.style.opacity = "0";
+
+                    // За 100мс до полной посадки мягко подкладываем оригинальный грид
                     setTimeout(function() {
                         card.classList.remove('is-cloned');
                     }, 280);
 
-                    // Убиваем клон ровно по финишу анимации (380ms)
+                    // Чистим DOM по финишу анимации
                     setTimeout(function () {
-                        clone.style.setProperty('transition', 'opacity 100ms ease', 'important');
-                        clone.style.opacity = '0';
-                        
-                        setTimeout(function () {
-                            document.body.classList.remove('bento-active');
-                            if (clone.parentNode) clone.parentNode.removeChild(clone);
-                        }, 100);
+                        document.body.classList.remove('bento-active');
+                        if (frontClone.parentNode) frontClone.parentNode.removeChild(frontClone);
+                        if (backClone.parentNode) backClone.parentNode.removeChild(backClone);
                     }, 380);
                 });
             }
