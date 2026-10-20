@@ -95,12 +95,11 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
             
-            // Защита: игнорируем клики, если это главная карточка, иконка закрытия или клон
+            // Игнорируем главную карточку, крестик и повторные клики
             if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
             e.stopPropagation();
@@ -110,12 +109,14 @@
             clone.id = card.id + '-clone';
             clone.classList.add('bento-card-clone');
             
-            // Фиксируем стартовую позицию точно на месте оригинальной карточки
-            clone.style.top = rect.top + 'px';
-            clone.style.left = rect.left + 'px';
-            clone.style.width = rect.width + 'px';
-            clone.style.height = rect.height + 'px';
-            clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+            // Расчеты масштаба и смещения для GPU
+            var scaleX = rect.width / window.innerWidth;
+            var scaleY = rect.height / window.innerHeight;
+            var translateX = rect.left - (window.innerWidth - rect.width) / 2;
+            var translateY = rect.top - (window.innerHeight - rect.height) / 2;
+
+            // Мгновенно сжимаем полноэкранный клон до размеров маленькой карточки
+            clone.style.transform = 'translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale3d(' + scaleX + ', ' + scaleY + ', 1) rotateY(0deg)';
 
             document.body.appendChild(clone);
             window.getComputedStyle(clone).transform; // Принудительный рендер
@@ -123,38 +124,37 @@
             card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
 
-            // Запускаем взлет и переворот одновременно
+            // ЭФФЕКТ ВЗЛЕТА: Резко сбрасываем масштаб в 1 и крутим на 180 градусов
             requestAnimationFrame(function () {
-                clone.classList.add('is-expanded', 'is-flipped');
+                clone.style.transform = 'translate3d(0, 0, 0) scale3d(1, 1, 1) rotateY(180deg)';
             });
 
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
+                    clone.style.pointerEvents = 'none'; // Блокируем спам-клики
                     
-                    clone.style.pointerEvents = 'none'; // Блокируем лишние тапы при закрытии
                     var actualRect = card.getBoundingClientRect();
-                    
-                    // Одновременно запускаем обратный полет и обратный поворот
-                    clone.classList.remove('is-expanded', 'is-flipped');
-                    clone.style.top = actualRect.top + 'px';
-                    clone.style.left = actualRect.left + 'px';
-                    clone.style.width = actualRect.width + 'px';
-                    clone.style.height = actualRect.height + 'px';
-                    clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+                    var actScaleX = actualRect.width / window.innerWidth;
+                    var actScaleY = actualRect.height / window.innerHeight;
+                    var actTranslateX = actualRect.left - (window.innerWidth - actualRect.width) / 2;
+                    var actTranslateY = actualRect.top - (window.innerHeight - actualRect.height) / 2;
 
-                    // Ждем ровно 450ms (время полета), плавно тушим и удаляем
+                    // ОБРАТНЫЙ ПОЛЕТ: Возвращаем в ячейку (крутим обратно в 0 и сжимаем)
+                    clone.style.transform = 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1) rotateY(0deg)';
+
+                    // Таймер на удаление клона после завершения полета (550ms)
                     setTimeout(function () {
                         card.classList.remove('is-cloned');
-                        clone.style.setProperty('transition', 'opacity 150ms ease', 'important');
+                        clone.style.setProperty('transition', 'opacity 200ms ease', 'important');
                         clone.style.opacity = '0';
                         
                         setTimeout(function () {
                             document.body.classList.remove('bento-active');
                             if (clone.parentNode) clone.parentNode.removeChild(clone);
-                        }, 150);
-                    }, 450); 
+                        }, 200);
+                    }, 550); // Должно строго совпадать с CSS transition ниже
                 });
             }
         });
