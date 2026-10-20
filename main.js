@@ -31,7 +31,6 @@
         });
     }
 
-    // 2. НАВИГАЦИЯ, МЕНЮ И СВАЙПЫ
     function init_core_events() {
         document.querySelectorAll('.mode-btn').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
@@ -64,9 +63,7 @@
             });
 
             nav.querySelectorAll('.menu-item-link').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    closeMenu();
-                });
+                link.addEventListener('click', function () { closeMenu(); });
             });
         }
 
@@ -83,61 +80,39 @@
         if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); shift(-1); });
         if (next) next.addEventListener('click', function (e) { e.preventDefault(); shift(1); });
 
-        // ИСПРАВЛЕННАЯ ЗАЩИТА СВАЙПОВ: Добавили исключение для нового оверлея
         document.body.addEventListener('touchstart', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-overlay-modal')) return;
+            if (e.target.closest('.bento-card-back') || e.target.closest('.active-expand')) return;
             window.tenderpilot['touch-start-x'] = e.touches.clientX;
         }, { passive: true });
 
         document.body.addEventListener('touchend', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-overlay-modal')) return;
+            if (e.target.closest('.bento-card-back') || e.target.closest('.active-expand')) return;
             var diff = window.tenderpilot['touch-start-x'] - e.changedTouches.clientX;
             if (Math.abs(diff) > 70) shift(diff > 0 ? 1 : -1);
         }, { passive: true });
     }
 
-    // 3. БЫСТРОЕ ВСПЛЫТИЕ (ФИНАЛЬНАЯ ОПТИМИЗИРОВАННАЯ ВЕРСИЯ)
+    // 3. СЕО-БЕЗОПАСНОЕ РАСКРЫТИЕ КАРТОЧЕК
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
-            
-            // Если кликнули по крестику закрытия внутри уже открытого оверлея
+            if (!card || card.classList.contains('main-hero')) return;
+
+            // Клик по крестику — плавно закрываем карточку
             if (e.target.closest('.bento-card-close-icon')) {
                 e.stopPropagation();
-                e.preventDefault();
-                var overlay = document.querySelector('.bento-overlay-modal');
-                if (overlay) {
-                    overlay.classList.remove('active');
+                var activeCard = document.querySelector('.bento-card.active-expand');
+                if (activeCard) {
+                    activeCard.classList.remove('active-expand');
                     document.body.classList.remove('bento-active');
-                    setTimeout(function() {
-                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                    }, 250);
                 }
                 return;
             }
 
-            // Исключения: если нет карточки, это главная hero-карточка или кликнули внутри открытого оверлея
-            if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-overlay-modal')) return;
-
+            // Клик по самой карточке — открываем ее
+            if (card.classList.contains('active-expand')) return;
             e.stopPropagation();
-            e.preventDefault();
-            
-            var backCard = card.querySelector('.bento-card-back');
-            var backContent = backCard ? backCard.innerHTML : '';
-            
-            var overlay = document.createElement('div');
-            overlay.classList.add('bento-overlay-modal');
-            overlay.innerHTML = backContent;
-            
-            document.body.appendChild(overlay);
-            
-            // Принудительно сбрасываем старые стили невидимости контента изнанки в окне
-            overlay.style.setProperty('opacity', '1', 'important');
-            
-            // Заставляем шторку модалки плавно выехать на GPU за 250мс
-            window.getComputedStyle(overlay).opacity; // Force reflow
-            
-            overlay.classList.add('active');
+            card.classList.add('active-expand');
             document.body.classList.add('bento-active');
         });
     }
@@ -148,4 +123,3 @@
         switch_app_mode('supplier');
     });
 })();
-                        
