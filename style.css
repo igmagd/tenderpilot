@@ -382,14 +382,13 @@ body.bento-active {
   margin: 0 !important;
   padding: 0 !important;
   
-  /* Жестко задаем центр 3D вращения для видеокарты телефона */
   transform-origin: center center !important;
   transform-style: preserve-3d !important;
   perspective: 2000px !important;
   
   opacity: 1 !important;
-  /* «Взрывная» кривая Безье: резкий старт, подкрутка в воздухе, плавная посадка */
-  transition: transform 550ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  /* МЯГКАЯ ПРЕМИАЛЬНАЯ КРИВАЯ: Быстрый старт, переворот в воздухе и плавное замедление без отскоков */
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Восстанавливаем 3D-связку для вложенных элементов клона */
