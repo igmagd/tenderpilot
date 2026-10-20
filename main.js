@@ -95,78 +95,84 @@
         }, { passive: true });
     }
 
-    // 3. АППАРАТНАЯ FLIP-АНИМАЦИЯ БЕНТО-КАРТОЧЕК НА GPU (400ms + БЕСШОВНЫЙ СЛИВ)
+    // 3. ФИНАЛЬНЫЙ БЕСШОВНЫЙ 3D-ВЗЛЕТ НА GPU (БЕЗ ТОЛЧКОВ КОНТЕНТА)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
             
-            // Жесткий блок: игнорируем главную карточку, крестик и повторные тапы
             if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
             e.stopPropagation();
 
             var rect = card.getBoundingClientRect();
-            var clone = card.cloneNode(true);
-            clone.id = card.id + '-clone';
+            
+            // Создаем чистый, изолированный 3D-контейнер для разворота
+            var clone = document.createElement('div');
             clone.classList.add('bento-card-clone');
             
-            // Магический расчет масштаба под экран смартфона (магия GPU)
-            var scaleX = rect.width / window.innerWidth;
-            var scaleY = rect.height / window.innerHeight;
-            var translateX = rect.left - (window.innerWidth - rect.width) / 2;
-            var translateY = rect.top - (window.innerHeight - rect.height) / 2;
-
-            // Мгновенно ужимаем полноэкранный клон в размеры маленькой ячейки
-            clone.style.transform = 'translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale3d(' + scaleX + ', ' + scaleY + ', 1) rotateY(0deg)';
+            // Копируем только заднюю структуру (контент разворота), чтобы не тащить кашу стилей лица
+            var backContent = card.querySelector('.bento-card-back') ? card.querySelector('.bento-card-back').innerHTML : '';
+            
+            clone.innerHTML = `
+                <div class="bento-card-inner">
+                    <div class="bento-card-front"></div>
+                    <div class="bento-card-back">${backContent}</div>
+                </div>
+            `;
+            
+            // Фиксируем стартовую геометрию строго поверх оригинальной карточки
+            clone.style.top = rect.top + 'px';
+            clone.style.left = rect.left + 'px';
+            clone.style.width = rect.width + 'px';
+            clone.style.height = rect.height + 'px';
+            clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
             document.body.appendChild(clone);
-            window.getComputedStyle(clone).transform; // Принудительный рендер браузера
+            window.getComputedStyle(clone).transform; // Force reflow
 
             card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
 
-            // ВЗЛЕТ: Возвращаем масштаб в 1 и крутим на 180 градусов в одном слитном движении
+            // Запускаем взлет на весь экран и 3D поворот на GPU
             requestAnimationFrame(function () {
-                clone.style.transform = 'translate3d(0, 0, 0) scale3d(1, 1, 1) rotateY(180deg)';
-                clone.classList.add('is-expanded');
+                clone.classList.add('is-expanded', 'is-flipped');
             });
 
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
-                    clone.style.pointerEvents = 'none'; // Защита от лишних тапов при закрытии
+                    clone.style.pointerEvents = 'none';
                     
                     var actualRect = card.getBoundingClientRect();
-                    var actScaleX = actualRect.width / window.innerWidth;
-                    var actScaleY = actualRect.height / window.innerHeight;
-                    var actTranslateX = actualRect.left - (window.innerWidth - actualRect.width) / 2;
-                    var actTranslateY = actualRect.top - (window.innerHeight - actualRect.height) / 2;
+                    
+                    // ОБРАТНЫЙ ПОЛЕТ: Возвращаем клон ровно в границы оригинальной рамки
+                    clone.classList.remove('is-expanded', 'is-flipped');
+                    clone.style.top = actualRect.top + 'px';
+                    clone.style.left = actualRect.left + 'px';
+                    clone.style.width = actualRect.width + 'px';
+                    clone.style.height = actualRect.height + 'px';
+                    clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-                    // ОБРАТНЫЙ ПОЛЕТ: Сжимаем обратно в ячейку и раскручиваем в 0 градусов на GPU (400ms)
-                    clone.style.transform = 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1) rotateY(0deg)';
-                    clone.classList.remove('is-expanded');
-
-                    // Начинаем мягко проявлять оригинал за 150ms ДО окончания полета, чтобы убрать толчок текста
+                    // За 100мс до посадки плавно включаем видимость оригинальной карточки в сетке
                     setTimeout(function() {
                         card.classList.remove('is-cloned');
-                    }, 250);
+                    }, 300);
 
-                    // Ждем окончания полета (ровно 400ms, как прописано в новом CSS для transition)
+                    // Полное удаление структуры по окончании анимации (400мс)
                     setTimeout(function () {
-                        clone.style.setProperty('transition', 'opacity 150ms ease', 'important');
+                        clone.style.setProperty('transition', 'opacity 100ms ease', 'important');
                         clone.style.opacity = '0';
                         
                         setTimeout(function () {
                             document.body.classList.remove('bento-active');
                             if (clone.parentNode) clone.parentNode.removeChild(clone);
-                        }, 150);
-                    }, 400); // Этот таймер строго синхронизирован с CSS на 400мс
+                        }, 100);
+                    }, 400);
                 });
             }
         });
     }
-
 
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
