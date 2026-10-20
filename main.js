@@ -31,6 +31,7 @@
         });
     }
 
+    // 2. НАВИГАЦИЯ, МЕНЮ И СВАЙПЫ
     function init_core_events() {
         document.querySelectorAll('.mode-btn').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
@@ -63,7 +64,9 @@
             });
 
             nav.querySelectorAll('.menu-item-link').forEach(function (link) {
-                link.addEventListener('click', function () { closeMenu(); });
+                link.addEventListener('click', function () {
+                    closeMenu();
+                });
             });
         }
 
@@ -81,39 +84,78 @@
         if (next) next.addEventListener('click', function (e) { e.preventDefault(); shift(1); });
 
         document.body.addEventListener('touchstart', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.active-expand')) return;
+            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-clone')) return;
             window.tenderpilot['touch-start-x'] = e.touches.clientX;
         }, { passive: true });
 
         document.body.addEventListener('touchend', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.active-expand')) return;
+            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-clone')) return;
             var diff = window.tenderpilot['touch-start-x'] - e.changedTouches.clientX;
             if (Math.abs(diff) > 70) shift(diff > 0 ? 1 : -1);
         }, { passive: true });
     }
 
-    // 3. СЕО-БЕЗОПАСНОЕ РАСКРЫТИЕ КАРТОЧЕК
+    // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
-            if (!card || card.classList.contains('main-hero')) return;
+            if (!card || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
-            // Клик по крестику — плавно закрываем карточку
-            if (e.target.closest('.bento-card-close-icon')) {
-                e.stopPropagation();
-                var activeCard = document.querySelector('.bento-card.active-expand');
-                if (activeCard) {
-                    activeCard.classList.remove('active-expand');
-                    document.body.classList.remove('bento-active');
-                }
-                return;
-            }
-
-            // Клик по самой карточке — открываем ее
-            if (card.classList.contains('active-expand')) return;
             e.stopPropagation();
-            card.classList.add('active-expand');
+
+            var rect = card.getBoundingClientRect();
+            var clone = card.cloneNode(true);
+            clone.id = card.id + '-clone';
+            clone.classList.add('bento-card-clone');
+            
+            clone.style.top = rect.top + 'px';
+            clone.style.left = rect.left + 'px';
+            clone.style.width = rect.width + 'px';
+            clone.style.height = rect.height + 'px';
+            clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+
+            document.body.appendChild(clone);
+            window.getComputedStyle(clone).transform;
+
+            card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
+
+            requestAnimationFrame(function () {
+                clone.classList.add('is-expanded', 'is-flipped');
+            });
+
+            var closeIcon = clone.querySelector('.bento-card-close-icon');
+            if (closeIcon) {
+                closeIcon.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    
+                    var actualRect = card.getBoundingClientRect();
+                    
+                    clone.classList.remove('is-expanded', 'is-flipped');
+                    clone.style.top = actualRect.top + 'px';
+                    clone.style.left = actualRect.left + 'px';
+                    clone.style.width = actualRect.width + 'px';
+                    clone.style.height = actualRect.height + 'px';
+                    clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+
+                    clone.addEventListener('transitionend', function () {
+                        if (!clone.classList.contains('is-expanded')) {
+                            // 1. Возвращаем оригинальной карточке в сетке 100% видимость
+                            card.classList.remove('is-cloned');
+                            
+                            // 2. Включаем мягкое растворение самого клона
+                            clone.style.transition = 'opacity 150ms ease';
+                            clone.style.opacity = '0';
+                            
+                            // 3. Удаляем клон окончательно только после его полного растворения
+                            setTimeout(function () {
+                                document.body.classList.remove('bento-active');
+                                if (clone.parentNode) clone.parentNode.removeChild(clone);
+                            }, 150);
+                        }
+                    }, { once: true });
+                });
+            }
         });
     }
 
