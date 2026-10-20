@@ -105,7 +105,7 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
+    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК С ФИКСАЦИЕЙ КООРДИНАТ
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -115,16 +115,23 @@
 
             e.stopPropagation();
 
-            var rect = card.getBoundingClientRect();
+            // ЗАПОМИНАЕМ ИСХОДНЫЕ КООРДИНАТЫ ДО СДВИГОВ СЕТКИ
+            var startRect = card.getBoundingClientRect();
+            var startTop = startRect.top;
+            var startLeft = startRect.left;
+            var startWidth = startRect.width;
+            var startHeight = startRect.height;
+            var startBorderRadius = window.getComputedStyle(card).borderRadius;
+
             var clone = card.cloneNode(true);
             clone.id = card.id + '-clone';
             clone.classList.add('bento-card-clone');
             
-            clone.style.top = rect.top + 'px';
-            clone.style.left = rect.left + 'px';
-            clone.style.width = rect.width + 'px';
-            clone.style.height = rect.height + 'px';
-            clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+            clone.style.top = startTop + 'px';
+            clone.style.left = startLeft + 'px';
+            clone.style.width = startWidth + 'px';
+            clone.style.height = startHeight + 'px';
+            clone.style.borderRadius = startBorderRadius;
 
             document.body.appendChild(clone);
             window.getComputedStyle(clone).transform;
@@ -141,26 +148,23 @@
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    var actualRect = card.getBoundingClientRect();
-                    
-                    // 1. Возвращаем геометрию назад на место карточки
+                    // ВОЗВРАЩАЕМ КЛОН СТРОГО В ТЕ КООРДИНАТЫ, ОТКУДА ОН СТАРТОВАЛ
                     clone.classList.remove('is-expanded', 'is-flipped');
-                    clone.style.top = actualRect.top + 'px';
-                    clone.style.left = actualRect.left + 'px';
-                    clone.style.width = actualRect.width + 'px';
-                    clone.style.height = actualRect.height + 'px';
-                    clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+                    clone.style.top = startTop + 'px';
+                    clone.style.left = startLeft + 'px';
+                    clone.style.width = startWidth + 'px';
+                    clone.style.height = startHeight + 'px';
+                    clone.style.borderRadius = startBorderRadius;
 
-                    // 2. Ждем окончания движения, перед тем как скрыть клон
+                    // Ждем окончания движения
                     clone.addEventListener('transitionend', function handleClose(e) {
-                        // Реагируем только на завершение изменения размеров/позиции
                         if (e.propertyName === 'top' || e.propertyName === 'left' || e.propertyName === 'width') {
                             clone.removeEventListener('transitionend', handleClose);
                             
-                            // Показываем оригинальную карту в сетке
+                            // Показываем оригинальную карту
                             card.classList.remove('is-cloned');
                             
-                            // Плавно растворяем клон на месте без прыжков в сторону
+                            // Плавно растворяем на месте
                             clone.style.opacity = '0';
                             
                             setTimeout(function () {
@@ -173,6 +177,7 @@
             }
         });
     }
+
 
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
