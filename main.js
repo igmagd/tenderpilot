@@ -105,7 +105,7 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (ФИКСАЦИЯ РАЗМЕРОВ ПРИ ЗАКРЫТИИ)
+    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (РАЗДЕЛЬНЫЙ ПОВОРОТ И СЖАТИЕ)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -147,37 +147,35 @@
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    // 1. Принудительно фиксируем текущую полноэкранную ширину перед полетом,
-                    // чтобы правый бок физически не мог сжаться внутрь
-                    var currentRect = clone.getBoundingClientRect();
-                    clone.style.width = currentRect.width + 'px';
-                    clone.style.height = currentRect.height + 'px';
-                    
-                    // 2. Включаем плавность возврата
-                    clone.style.transition = 'top 400ms cubic-bezier(0.25, 1, 0.5, 1), left 400ms cubic-bezier(0.25, 1, 0.5, 1), width 400ms cubic-bezier(0.25, 1, 0.5, 1), height 400ms cubic-bezier(0.25, 1, 0.5, 1), border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1)';
-                    
-                    // 3. Переворачиваем 3D карту обратно, но класс is-expanded НЕ удаляем!
+                    // Шаг 1: Сначала плавно переворачиваем карточку обратно на лицевую сторону (за 200мс)
+                    // При этом она остается большой на весь экран, что исключает деформацию краев
+                    clone.style.transition = 'transform 200ms cubic-bezier(0.25, 1, 0.5, 1)';
                     clone.classList.remove('is-flipped');
                     
-                    // 4. Сжимаем клон ровно до исходных размеров карточки в сетке
-                    clone.style.top = startTop + 'px';
-                    clone.style.left = startLeft + 'px';
-                    clone.style.width = startWidth + 'px';
-                    clone.style.height = startHeight + 'px';
-                    clone.style.borderRadius = startBorderRadius;
-
-                    // 5. Ждем окончания полета назад
+                    // Шаг 2: Ровно через 200мс, когда разворот завершен, плавно уменьшаем ее в сетку
                     setTimeout(function () {
-                        card.classList.remove('is-cloned');
+                        clone.style.transition = 'top 300ms cubic-bezier(0.25, 1, 0.5, 1), left 300ms cubic-bezier(0.25, 1, 0.5, 1), width 300ms cubic-bezier(0.25, 1, 0.5, 1), height 300ms cubic-bezier(0.25, 1, 0.5, 1), border-radius 300ms cubic-bezier(0.25, 1, 0.5, 1)';
                         
-                        clone.style.transition = 'opacity 150ms ease';
-                        clone.style.opacity = '0';
+                        clone.classList.remove('is-expanded');
+                        clone.style.top = startTop + 'px';
+                        clone.style.left = startLeft + 'px';
+                        clone.style.width = startWidth + 'px';
+                        clone.style.height = startHeight + 'px';
+                        clone.style.borderRadius = startBorderRadius;
                         
+                        // Шаг 3: Когда карточка прилетела на место, гасим ее и удаляем клон
                         setTimeout(function () {
-                            document.body.classList.remove('bento-active');
-                            if (clone.parentNode) clone.parentNode.removeChild(clone);
-                        }, 150);
-                    }, 400); 
+                            card.classList.remove('is-cloned');
+                            
+                            clone.style.transition = 'opacity 150ms ease';
+                            clone.style.opacity = '0';
+                            
+                            setTimeout(function () {
+                                document.body.classList.remove('bento-active');
+                                if (clone.parentNode) clone.parentNode.removeChild(clone);
+                            }, 150);
+                        }, 300); // Время полета назад
+                    }, 200); // Время разворота 3D
                 });
             }
         });
