@@ -385,13 +385,32 @@ header {
   position: relative !important;
 }
 
-/* КЛАСС ДЛЯ ГЛАВНОЙ КАРТОЧКИ (В две высоты обычных карт + отступ) */
+/* КЛАСС ДЛЯ ГЛАВНОЙ КАРТОЧКИ — АДАПТИРОВАННЫЙ */
 .bento-card.main-hero {
-  height: 456px !important; 
-  cursor: default !important; /* Убираем курсор-палец, если она не должна открываться */
+  height: 330px !important; /* Базовая высота для мобильных (1.5 от 220px) */
+  cursor: default !important;
 }
 
-/* ИСПРАВЛЕНО: Защита текста от посинения при случайных тапах пальцем */
+/* Стилизация текста большой карточки на мобильных (до 768px) */
+@media (max-width: 768px) {
+  .bento-card.main-hero .bento-card-front,
+  .bento-card.main-hero .bento-card-back {
+    padding: 20px !important;
+  }
+  .bento-card.main-hero h1 {
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    margin-bottom: 10px !important;
+  }
+  .bento-card.main-hero p {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+    color: #8b949e !important;
+  }
+}
+
+/* ПОЛНОСТЬЮ СОХРАНЕНО: Защита текста от посинения при кликах */
 .bento-card.main-hero h1,
 .bento-card.main-hero p,
 .bento-card.main-hero .bento-card-front,
@@ -402,11 +421,30 @@ header {
   user-select: none !important;
 }
 
-/* Поведение главной карточки на ПК (Растягиваем на 2 колонки из 4-х) */
+/* Поведение главной карточки на планшетах (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bento-card.main-hero {
+    grid-column: span 2 !important;
+    grid-row: span 2 !important;
+    height: 464px !important; /* Идеал для 2-колоночной bento-сетки */
+  }
+}
+
+/* Поведение главной карточки на ПК (от 1025px) */
 @media (min-width: 1025px) {
   .bento-card.main-hero {
     grid-column: span 2 !important;
     grid-row: span 2 !important;
+    height: 464px !important; /* Идеал для 4-колоночной bento-сетки */
+  }
+  .bento-card.main-hero h1 {
+    font-size: 2.5rem !important; /* Возвращаем крупный шрифт на ПК */
+    font-weight: 800 !important;
+    margin-bottom: 15px !important;
+  }
+  .bento-card.main-hero p {
+    font-size: 1.2rem !important;
+    margin-bottom: 20px !important;
   }
 }
 
