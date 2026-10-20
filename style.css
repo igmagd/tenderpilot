@@ -288,7 +288,6 @@ header {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 40px;
-  margin-top: 120px !important; 
   padding: 0 20px;
 }
 
@@ -387,31 +386,30 @@ header {
 
 /* КЛАСС ДЛЯ ГЛАВНОЙ КАРТОЧКИ — АДАПТИРОВАННЫЙ */
 .bento-card.main-hero {
-  height: 265px !important; /* Утверждено: 1.2 от высоты обычной карточки */
+  height: 265px !important; /* Базовая высота для мобильных (1.2 от 220px) */
   cursor: default !important;
 }
 
 /* Стилизация текста большой карточки и отступа контента на мобильных (до 768px) */
 @media (max-width: 768px) {
-  /* Сдвигаем всю страницу ниже фиксированной шапки на высоту шапки + 24px */
   body, .container {
-    padding-top: 127px !important; 
+    padding-top: 127px; /* Спокойно сдвигаем страницу ниже шапки на высоту шапки + 24px зазора */
   }
 
   .bento-card.main-hero .bento-card-front,
   .bento-card.main-hero .bento-card-back {
-    padding: 20px !important; /* Аккуратные внутренние отступы */
+    padding: 20px; /* Уменьшили внутренний отступ для свободного дыхания текста */
   }
   .bento-card.main-hero h1 {
-    font-size: 1.4rem !important; 
-    font-weight: 700 !important;
-    line-height: 1.3 !important;
-    margin-bottom: 8px !important;
+    font-size: 1.4rem; /* Утвержденный аккуратный размер заголовка */
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
   }
   .bento-card.main-hero p {
-    font-size: 0.95rem !important;
-    line-height: 1.4 !important;
-    color: #8b949e !important;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #8b949e;
   }
 }
 
