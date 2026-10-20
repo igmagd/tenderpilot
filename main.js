@@ -100,7 +100,7 @@
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
             
-            // ЖЕСТКАЯ ПРОВЕРКА: Если карточки нет, или это ГЛАВНАЯ карточка (main-hero) — ИГНОРИРУЕМ КЛИК полностью!
+            // Защита: игнорируем клики, если это главная карточка, иконка закрытия или клон
             if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
             e.stopPropagation();
@@ -110,6 +110,7 @@
             clone.id = card.id + '-clone';
             clone.classList.add('bento-card-clone');
             
+            // Фиксируем стартовую позицию точно на месте оригинальной карточки
             clone.style.top = rect.top + 'px';
             clone.style.left = rect.left + 'px';
             clone.style.width = rect.width + 'px';
@@ -117,11 +118,12 @@
             clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
             document.body.appendChild(clone);
-            window.getComputedStyle(clone).transform;
+            window.getComputedStyle(clone).transform; // Принудительный рендер
 
             card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
 
+            // Запускаем взлет и переворот одновременно
             requestAnimationFrame(function () {
                 clone.classList.add('is-expanded', 'is-flipped');
             });
@@ -131,10 +133,10 @@
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    clone.style.pointerEvents = 'none';
+                    clone.style.pointerEvents = 'none'; // Блокируем лишние тапы при закрытии
                     var actualRect = card.getBoundingClientRect();
                     
-                    // Плавно возвращаем размеры и крутим обратно на 180 градусов
+                    // Одновременно запускаем обратный полет и обратный поворот
                     clone.classList.remove('is-expanded', 'is-flipped');
                     clone.style.top = actualRect.top + 'px';
                     clone.style.left = actualRect.left + 'px';
@@ -142,7 +144,7 @@
                     clone.style.height = actualRect.height + 'px';
                     clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-                    // Четкий таймер на 400мс (время вашей CSS анимации), чтобы избежать багов с transitionend
+                    // Ждем ровно 450ms (время полета), плавно тушим и удаляем
                     setTimeout(function () {
                         card.classList.remove('is-cloned');
                         clone.style.setProperty('transition', 'opacity 150ms ease', 'important');
@@ -152,7 +154,7 @@
                             document.body.classList.remove('bento-active');
                             if (clone.parentNode) clone.parentNode.removeChild(clone);
                         }, 150);
-                    }, 400); 
+                    }, 450); 
                 });
             }
         });
