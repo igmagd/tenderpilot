@@ -70,30 +70,6 @@
             });
         }
 
-        function shift(dir) {
-            var state = window.tenderpilot;
-            var max = state['modes-list'].length;
-            var next = (state['current-mode-index'] + dir + max) % max;
-            switch_app_mode(state['modes-list'][next]);
-        }
-
-        var prev = document.querySelector('.btn-menu-prev');
-        var next = document.querySelector('.btn-menu-next');
-
-        if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); shift(-1); });
-        if (next) next.addEventListener('click', function (e) { e.preventDefault(); shift(1); });
-
-        document.body.addEventListener('touchstart', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-clone')) return;
-            window.tenderpilot['touch-start-x'] = e.touches.clientX;
-        }, { passive: true });
-
-        document.body.addEventListener('touchend', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-clone')) return;
-            var diff = window.tenderpilot['touch-start-x'] - e.changedTouches.clientX;
-            if (Math.abs(diff) > 70) shift(diff > 0 ? 1 : -1);
-        }, { passive: true });
-    }
 
     // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК С ПРЕДОХРАНИТЕЛЕМ
     function init_bento() {
