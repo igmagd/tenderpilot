@@ -360,25 +360,30 @@ header {
   z-index: 9999 !important;
   background: transparent !important;
   pointer-events: auto !important;
+  
+  /* ЖЕСТКО ЗАДАЕМ ТОЧКУ ЦЕНТРА, ЧТОБЫ ИЗБЕЖАТЬ УЛЕТА ВПРАВО НА ТЕЛЕФОНАХ */
+  transform-origin: center center !important;
   transform-style: preserve-3d !important;
+  
   opacity: 1;
-  /* УБРАЛИ !important ИЗ КОНЦА СТРОКИ, чтобы разрешить обратную анимацию */
+  /* Синхронизируем время всех анимаций до 450ms с правильным сглаживанием */
   transition: 
-    top 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    left 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    width 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    height 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1);
+    top 450ms cubic-bezier(0.4, 0, 0.2, 1),
+    left 450ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 450ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 450ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 450ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 450ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
+/* СОСТОЯНИЕ РАЗВЕРНУТОЙ КАРТОЧКИ (Должно перекрывать дефолтный transition) */
 .bento-card-clone.is-expanded {
   top: 0 !important;
   left: 0 !important;
-  width: 100% !important;
-  height: 100vh !important;
-  height: 100dvh !important;
+  width: 100vw !important;
+  /* Использование dynamic vh для идеального отображения на мобильных */
+  height: 100dvh !important; 
   border-radius: 0px !important;
-  box-shadow: none !important;
 }
 
 .bento-card-clone .bento-card-inner {
