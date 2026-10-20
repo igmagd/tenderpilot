@@ -362,13 +362,13 @@ header {
   pointer-events: auto !important;
   transform-style: preserve-3d !important;
   opacity: 1;
+  /* УБРАЛИ !important ИЗ КОНЦА СТРОКИ, чтобы разрешить обратную анимацию */
   transition: 
     top 400ms cubic-bezier(0.25, 1, 0.5, 1),
     left 400ms cubic-bezier(0.25, 1, 0.5, 1),
     width 400ms cubic-bezier(0.25, 1, 0.5, 1),
     height 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    opacity 150ms ease !important; /* Безопасное растворение карточки */
+    border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .bento-card-clone.is-expanded {
