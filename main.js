@@ -99,7 +99,9 @@
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
-            if (!card || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
+            
+            // ЖЕСТКАЯ ПРОВЕРКА: Если карточки нет, или это ГЛАВНАЯ карточка (main-hero) — ИГНОРИРУЕМ КЛИК полностью!
+            if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
             e.stopPropagation();
 
@@ -129,12 +131,10 @@
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    // Блокируем клики на время обратной анимации, чтобы пользователь ничего не сломал
                     clone.style.pointerEvents = 'none';
-                    
                     var actualRect = card.getBoundingClientRect();
                     
-                    // 1. Запускаем одновременный разворот обратно и уменьшение до исходных координат
+                    // Плавно возвращаем размеры и крутим обратно на 180 градусов
                     clone.classList.remove('is-expanded', 'is-flipped');
                     clone.style.top = actualRect.top + 'px';
                     clone.style.left = actualRect.left + 'px';
@@ -142,26 +142,17 @@
                     clone.style.height = actualRect.height + 'px';
                     clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-                    // Ждем завершения основной анимации возвращения (400ms как в CSS)
-                    function handleTransitionEnd(e) {
-                        // Проверяем, что завершилась именно анимация перемещения (например, изменение top)
-                        if (e.propertyName === 'top' || e.propertyName === 'width') {
-                            clone.removeEventListener('transitionend', handleTransitionEnd);
-                            
-                            // 2. Только когда карточка прилетела на место, плавно проявляем оригинал и гасим клон
-                            card.classList.remove('is-cloned');
-                            
-                            clone.style.transition = 'opacity 200ms ease';
-                            clone.style.opacity = '0';
-                            
-                            setTimeout(function () {
-                                document.body.classList.remove('bento-active');
-                                if (clone.parentNode) clone.parentNode.removeChild(clone);
-                            }, 200);
-                        }
-                    }
-                    
-                    clone.addEventListener('transitionend', handleTransitionEnd);
+                    // Четкий таймер на 400мс (время вашей CSS анимации), чтобы избежать багов с transitionend
+                    setTimeout(function () {
+                        card.classList.remove('is-cloned');
+                        clone.style.setProperty('transition', 'opacity 150ms ease', 'important');
+                        clone.style.opacity = '0';
+                        
+                        setTimeout(function () {
+                            document.body.classList.remove('bento-active');
+                            if (clone.parentNode) clone.parentNode.removeChild(clone);
+                        }, 150);
+                    }, 400); 
                 });
             }
         });
