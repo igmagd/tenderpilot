@@ -85,6 +85,7 @@ header {
     justify-content: flex-start !important;
     transition: all 0.3s ease;
 }
+
 .header-container {
     display: flex !important;
     align-items: center !important;
@@ -156,57 +157,156 @@ header {
     color: #ffffff !important;
     border-color: transparent !important;
     font-weight: 600 !important;
-                                  }
-/* ==========================================================================
-   2. СЕКЦИЯ HERO И СТРУКТУРА СЕТКИ BENTO (ОБЩИЕ СТИЛИ ДЛЯ ПК)
-   ========================================================================== */
-.hero-section {
-    padding-top: 127px !important; 
-    margin: 0 auto !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important; 
-    justify-content: center !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
 }
 
-.hero-section h1 { font-size: 2.5rem !important; color: #f0f6fc !important; margin-bottom: 15px !important; font-weight: 800 !important; text-align: center !important; width: 100% !important; margin-left: auto !important; margin-right: auto !important; }
-.hero-section p { font-size: 1.2rem !important; color: #8b949e !important; margin-bottom: 20px !important; text-align: center !important; width: 100% !important; margin-left: auto !important; margin-right: auto !important;}
+.hero-section h1 { font-size: 2.5rem !important; color: #f0f6fc !important; margin-bottom: 15px !important; font-weight: 800 !important; }
+.hero-section p { font-size: 1.2rem !important; color: #8b949e !important; margin-bottom: 20px !important; }
 
+@media (max-width: 768px) {
+    header {
+        height: 103px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 100 !important; 
+    }
+    header .header-container {
+        background: #0b1321 !important;
+        position: relative !important;
+        z-index: 102 !important;
+    }
+    .logo, #menu-toggle { position: relative !important; z-index: 102 !important; }
+    .logo span { color: #00f2fe !important; }
+
+    .nav-links {
+        position: fixed !important;
+        top: 0 !important; 
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        background: linear-gradient(to bottom, #0b1321, #070b12) !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 95px 24px 24px 24px !important; 
+        z-index: 101 !important; 
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important; 
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        transform: translate3d(0, -105%, 0) !important;
+        transition: transform 0.38s ease-in-out !important;
+    }
+    .nav-links::-webkit-scrollbar { display: none !important; }
+    .nav-links.active {
+        transform: translate3d(0, 0, 0) !important;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .nav-links .menu-item-link, .nav-links .menu-status-bar {
+        opacity: 0;
+        transition: opacity 0.2s ease !important;
+    }
+    .nav-links.active .menu-item-link, .nav-links.active .menu-status-bar {
+        opacity: 1;
+        transition: opacity 0.25s ease 0.15s !important;
+    }
+   
+    .hero-actions {
+        transition: none !important;
+        transition-delay: 0.28s !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    body.menu-open .hero-actions {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transition-delay: 0s !important;
+    }
+    body.menu-open .lk-btn { display: none !important; }
+
+    .nav-links .menu-item-link {
+        display: block !important;
+        width: 100% !important;
+        padding: 16px 0 !important;
+        font-size: 18px !important;
+        color: #c9d1d9 !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+    }
+    .nav-links .menu-item-link:active {
+        border-bottom-color: rgba(240, 246, 252, 0.4) !important;
+        color: #fff !important;
+    }
+
+    .nav-links .menu-group-links { display: flex !important; flex-direction: column !important; width: 100% !important; }
+    .nav-links .menu-group-links[style*="display: none"] { display: none !important; }
+    .nav-links .menu-group-links[style*="display: flex"] { display: flex !important; }
+
+    .menu-status-bar {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
+        margin-bottom: 16px !important;
+        padding-bottom: 12px !important;
+    }
+    .menu-status-text { color: #58a6ff !important; font-weight: 500 !important; font-size: 19px !important; }
+    .menu-status-arrows { display: flex !important; align-items: center !important; gap: 20px !important; }
+    .menu-status-arrows .menu-arrow-icon { width: 24px !important; height: 24px !important; color: #768390 !important; }
+       
+    .hero-section {
+        padding-top: 127px !important; 
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; 
+        justify-content: center !important;
+        width: 100% !important;
+    }
+    .hero-section h1, .hero-section p { text-align: center !important; width: 100% !important; }
+}
+
+/* СЕТКА BENTO */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   max-width: 1200px;
-  margin: 120px auto 40px auto !important; 
+  margin: 40px auto;
   padding: 0 20px;
 }
 
-/* Базовое состояние Bento-карточек */
+@media (max-width: 1024px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); overflow-x: hidden; }
+}
+
+/* ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ МЕДИА-ЗАПРОС (Строго по 1 карточке в строку) */
+@media (max-width: 768px) {
+  .bento-grid {
+    overflow-x: hidden;
+    grid-template-columns: 1fr !important; 
+    gap: 16px !important;
+    padding: 0 16px !important;
+  }
+       }
+   /* 3D-контекст Bento-карточек */
 .bento-card {
   background: transparent !important;
   perspective: 1500px !important;
   width: 100% !important;
   height: 220px;
   position: relative !important;
-}
-
-.bento-card.main-hero {
-  height: 456px !important; 
-  cursor: default !important; 
-}
-
-.bento-card.main-hero h1,
-.bento-card.main-hero p,
-.bento-card.main-hero .bento-card-front,
-.bento-card.main-hero .bento-card-back {
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
+  cursor: pointer;
 }
 
 .bento-card-inner {
@@ -240,146 +340,85 @@ header {
   opacity: 0 !important;
 }
 
-.bento-card.is-cloned {
-  opacity: 0.3 !important;
+/* МЕХАНИЗМ КЛОНИРОВАНИЯ И ПРЕМИАЛЬНОГО ВЗЛЕТА */
+.bento-card-clone {
+  position: fixed !important;
+  z-index: 9999 !important;
+  background: transparent !important;
+  pointer-events: auto !important;
+  transition: 
+    top 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    left 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    width 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    height 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1);
+  transform-style: preserve-3d !important;
 }
 
+/important;
+}
+
+.bento-card.is-cloned { opacity: 0.3 !important; }
+.bento-card.is-cloned * { transition: none !important; transform: none !important; animation: none !important; }
+
+/* ИСПРАВЛЕНО: overflow-y больше не прячется, шапка не прыгает по ширине */
 body.bento-active {
-  touch-action: none !important; 
+    touch-action: none !important; 
+}
+
+.bento-card-clone.is-expanded .bento-card-back {
+    padding: 24px !important;
+    overflow-y: auto !important; 
    }
 
-/* ==========================================================================
-   3. ВЫЧИЩЕННОЕ И ОПТИМИЗИРОВАННОЕ СОСТОЯНИЕ BENTO-КАРТОЧЕК
-   ========================================================================== */
-.bento-card {
-  background: transparent !important;
-  width: 100% !important;
-  height: 220px;
-  position: relative !important;
-  cursor: pointer;
-}
-
-.bento-card.main-hero {
-  height: 456px !important; 
-  cursor: default !important; 
-}
-
-.bento-card.main-hero h1,
-.bento-card.main-hero p,
-.bento-card.main-hero .bento-card-front {
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-}
-
-/* Внутренняя обертка карточки в сетке (статичная, без 3D-глюков) */
-.bento-card-inner {
-  position: absolute !important;
+.bento-card-clone.is-expanded {
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  height: 100% !important;
-}
-
-/* Лицевая сторона карточки в сетке */
-.bento-card-front {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 12px !important;
-  background: linear-gradient(to bottom, #0b1528, #020617) !important;
-  padding: 24px !important;
-  box-shadow: inset 0 0 0 1px #30363d !important; 
-}
-
-/* Изнанка внутри сетки — скрыта, её контент JS забирает во всплывающее окно */
-.bento-card-back {
-  display: none !important;
-}
-
-.bento-card.is-cloned {
-  opacity: 0.4 !important;
-}
-
-/* ==========================================================================
-   4. ЧИСТОЕ СЕО-БЕЗОПАСНОЕ РАСКРЫТИЕ (БЕЗ 3D И МОДАЛОК)
-   ========================================================================== */
-
-/* Базовые стили карточек в сетке */
-.bento-card {
-  width: 100% !important;
-  height: 220px;
-  position: relative !important;
-  cursor: pointer;
-}
-
-.bento-card.main-hero {
-  height: 456px !important; 
-  cursor: default !important; 
-}
-
-/* Внутренний контейнер карточки плавно меняет размеры за 350ms (быстро и мягко) */
-.bento-card .bento-card-inner {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: 10;
-  transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* СОСТОЯНИЕ РАСКРЫТИЯ: контейнер занимает весь экран */
-.bento-card.active-expand {
-  z-index: 99999 !important;
-}
-.bento-card.active-expand .bento-card-inner {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
+  height: 100vh !important;
   height: 100dvh !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
 }
 
-/* Стороны контента: они ВСЕГДА видимы для поисковых роботов (Идеально для SEO!) */
-.bento-card-front, 
-.bento-card-back {
+.bento-card-clone .bento-card-inner {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  transform-style: preserve-3d !important;
+  transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.bento-card-clone.is-flipped .bento-card-inner {
+  transform: rotateY(180deg) !important;
+}
+
+.bento-card-clone .bento-card-front,
+.bento-card-clone .bento-card-back {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  border-radius: 12px !important;
-  background: linear-gradient(to bottom, #0b1528, #020617) !important;
-  padding: 24px !important;
-  box-shadow: inset 0 0 0 1px #30363d !important; 
-  transition: opacity 250ms ease, border-radius 350ms ease !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  
+  /* ИСПРАВЛЕНО: Вместо border: none пишем внутреннюю рамку для идеального слияния */
+  box-shadow: inset 0 0 0 1px #30363d !important;
 }
 
-/* Изнанка изначально прозрачна, но текст в ней прописан в HTML — роботы его видят */
-.bento-card-back {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  overflow-y: auto !important;
-}
-
-/* Переключение видимости сторон при раскрытии без рывков */
-.bento-card.active-expand .bento-card-front {
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-.bento-card.active-expand .bento-card-back {
-  opacity: 1 !important;
-  pointer-events: auto !important;
+/* Углы карточки при расширении на весь экран становятся прямыми (Оригинальный блок) */
+.bento-card-clone.is-expanded .bento-card-front,
+.bento-card-clone.is-expanded .bento-card-back {
   border-radius: 0px !important;
 }
 
-/* Управление крестиком */
-.bento-card .bento-card-close-icon {
+.bento-card-clone .bento-card-back {
+  transform: rotateY(180deg) !important;
+  opacity: 1 !important;
+}
+
+.bento-card-clone .bento-card-close-icon {
   position: absolute !important;
   top: 24px !important;
   right: 24px !important;
@@ -387,9 +426,15 @@ body.bento-active {
   height: 28px !important;
   cursor: pointer !important;
   z-index: 2000000 !important;
+  transform: translateZ(100px) !important;
+  pointer-events: auto !important;
 }
 
-.bento-card .bento-card-close-icon svg {
+.bento-card-clone .bento-card-back h3 {
+  color: #ffffff !important;
+}
+
+.bento-card-close-icon svg {
   width: 100% !important;
   height: 100% !important;
   stroke: #ffffff !important;
@@ -397,7 +442,22 @@ body.bento-active {
   fill: none !important;
 }
 
+.bento-card.is-cloned {
+  opacity: 0.3 !important;
+}
+
+.bento-card.is-cloned * {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* ИСПРАВЛЕНО: Убираем скрытие overflow на body, чтобы шапка не прыгала */
 body.bento-active {
-  overflow: hidden !important;
   touch-action: none !important;
+}
+
+.bento-card-clone.is-expanded .bento-card-back {
+  padding: 24px !important;
+  overflow-y: auto !important;
 }
