@@ -305,47 +305,81 @@ body.bento-active {
 }
 
 /* ==========================================================================
-   4. ЭЛЕГАНТНОЕ И БЫСТРОЕ ВСПЛЫТИЕ ОКНА (FADE-IN НА GPU ДЛЯ МОБИЛЫ И ПК)
+   4. ЧИСТОЕ СЕО-БЕЗОПАСНОЕ РАСКРЫТИЕ (БЕЗ 3D И МОДАЛОК)
    ========================================================================== */
 
-/* Оверлей изначально полностью прозрачен и слегка смещен вниз на 10px для мягкого вылета */
-.bento-overlay-modal {
+/* Базовые стили карточек в сетке */
+.bento-card {
+  width: 100% !important;
+  height: 220px;
+  position: relative !important;
+  cursor: pointer;
+}
+
+.bento-card.main-hero {
+  height: 456px !important; 
+  cursor: default !important; 
+}
+
+/* Внутренний контейнер карточки плавно меняет размеры за 350ms (быстро и мягко) */
+.bento-card .bento-card-inner {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 10;
+  transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* СОСТОЯНИЕ РАСКРЫТИЯ: контейнер занимает весь экран */
+.bento-card.active-expand {
+  z-index: 99999 !important;
+}
+.bento-card.active-expand .bento-card-inner {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100dvh !important;
-  z-index: 99999 !important;
+}
+
+/* Стороны контента: они ВСЕГДА видимы для поисковых роботов (Идеально для SEO!) */
+.bento-card-front, 
+.bento-card-back {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 12px !important;
   background: linear-gradient(to bottom, #0b1528, #020617) !important;
-  box-shadow: inset 0 0 0 1px #30363d !important;
   padding: 24px !important;
+  box-shadow: inset 0 0 0 1px #30363d !important; 
+  transition: opacity 250ms ease, border-radius 350ms ease !important;
+}
+
+/* Изнанка изначально прозрачна, но текст в ней прописан в HTML — роботы его видят */
+.bento-card-back {
+  opacity: 0 !important;
+  pointer-events: none !important;
   overflow-y: auto !important;
-  opacity: 0;
-  transform: translate3d(0, 10px, 0);
-  border-radius: 0px !important;
-  
-  /* Быстрая скорость 250ms — отзывчиво, премиально и без «киселя» */
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
-              transform 250ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Состояние при активации: оверлей встает на место и проявляется */
-.bento-overlay-modal.active {
+/* Переключение видимости сторон при раскрытии без рывков */
+.bento-card.active-expand .bento-card-front {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.bento-card.active-expand .bento-card-back {
   opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
+  pointer-events: auto !important;
+  border-radius: 0px !important;
 }
 
-/* Стили заголовков и крестика внутри оверлея */
-.bento-overlay-modal h3 {
-  color: #ffffff !important;
-  margin-bottom: 12px;
-}
-
-.bento-overlay-modal p {
-  color: #c9d1d9 !important;
-}
-
-.bento-overlay-modal .bento-card-close-icon {
+/* Управление крестиком */
+.bento-card .bento-card-close-icon {
   position: absolute !important;
   top: 24px !important;
   right: 24px !important;
@@ -355,7 +389,7 @@ body.bento-active {
   z-index: 2000000 !important;
 }
 
-.bento-overlay-modal .bento-card-close-icon svg {
+.bento-card .bento-card-close-icon svg {
   width: 100% !important;
   height: 100% !important;
   stroke: #ffffff !important;
@@ -363,7 +397,6 @@ body.bento-active {
   fill: none !important;
 }
 
-/* Блокируем скролл основного сайта, пока открыто модальное окно */
 body.bento-active {
   overflow: hidden !important;
   touch-action: none !important;
