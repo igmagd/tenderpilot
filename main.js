@@ -95,7 +95,7 @@
         }, { passive: true });
     }
 
-    // 3. ПРЕМИАЛЬНЫЙ ДВУХСЛОЙНЫЙ FLIP НА ЧИСТОМ GPU (ИСПРАВЛЕННЫЙ СТАРТ)
+    // 3. ЧИСТАЯ АППАРАТНАЯ FLIP-АНИМАЦИЯ НА GPU (БЕЗ СИНТАКСИЧЕСКИХ ОШИБОК С PROPERTY)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -118,13 +118,13 @@
             var backContent = card.querySelector('.bento-card-back') ? card.querySelector('.bento-card-back').innerHTML : '';
             backClone.innerHTML = backContent;
 
-            // Счет геометрии для GPU
+            // Расчет геометрии для видеокарты смартфона
             var scaleX = rect.width / window.innerWidth;
             var scaleY = rect.height / window.innerHeight;
             var translateX = rect.left - (window.innerWidth - rect.width) / 2;
             var translateY = rect.top - (window.innerHeight - rect.height) / 2;
 
-            // Фиксируем стартовую позицию точно на месте маленькой ячейки
+            // Стартовая точка: жестко ужимаем оба слоя прямо на место ячейки
             var baseStyle = 'position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100dvh !important; margin: 0 !important;';
             
             frontClone.style.cssText = baseStyle + 'z-index: 9998 !important; opacity: 1 !important; border-radius: ' + bRadius + ' !important; transform: translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale3d(' + scaleX + ', ' + scaleY + ', 1) !important;';
@@ -133,18 +133,16 @@
             document.body.appendChild(frontClone);
             document.body.appendChild(backClone);
             
-            // Заставляем браузер жестко прочитать стартовую позицию клонов
+            // Заставляем мобильный браузер железно зафиксировать стартовую точку
             window.getComputedStyle(frontClone).transform;
             window.getComputedStyle(backClone).transform;
 
             card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
 
-            // ДВОЙНОЙ КАДР: Гарантирует, что анимация взлета начнется плавно из ячейки, а не мгновенно
+            // ВЗЛЕТ: Возвращаем масштаб в 1 и меняем прозрачность слоев
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
-                    var activeTransform = 'translate3d(0, 0, 0) scale3d(1, 1, 1) !important;';
-                    
                     frontClone.style.setProperty('transform', 'translate3d(0, 0, 0) scale3d(1, 1, 1)', 'important');
                     frontClone.style.setProperty('opacity', '0', 'important');
                     frontClone.style.setProperty('border-radius', '0px', 'important');
@@ -168,7 +166,7 @@
                     var actTranslateX = actualRect.left - (window.innerWidth - actualRect.width) / 2;
                     var actTranslateY = actualRect.top - (window.innerHeight - actualRect.height) / 2;
 
-                    // ПОСАДКА НА GPU: Сжимаем обратно в точные пиксели
+                    // ПОСАДКА НА GPU: Сжимаем слои обратно в ячейку с восстановлением скруглений
                     frontClone.style.setProperty('transform', 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1)', 'important');
                     frontClone.style.setProperty('opacity', '1', 'important');
                     frontClone.style.setProperty('border-radius', bRadius, 'important');
@@ -177,12 +175,12 @@
                     backClone.style.setProperty('opacity', '0', 'important');
                     backClone.style.setProperty('border-radius', bRadius, 'important');
 
-                    // За 100мс до приземления плавно возвращаем оригинальный грид
+                    // За 100мс до полной посадки мягко включаем оригинальную ячейку
                     setTimeout(function() {
                         card.classList.remove('is-cloned');
                     }, 280);
 
-                    // Полная очистка DOM после завершения анимации
+                    // Чистим DOM после завершения полета
                     setTimeout(function () {
                         document.body.classList.remove('bento-active');
                         if (frontClone.parentNode) frontClone.parentNode.removeChild(frontClone);
@@ -192,6 +190,7 @@
             }
         });
     }
+
 
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
