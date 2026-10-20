@@ -95,15 +95,15 @@
         }, { passive: true });
     }
 
-    // 3. БЫСТРОЕ И ПЛАВНОЕ ВСПЛЫТИЕ (БЕЗ 3D И РЫВКОВ)
+    // 3. БЫСТРОЕ ВСПЛЫТИЕ (ИСПРАВЛЕНА ВИДИМОСТЬ КОНТЕНТА)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
             
-            // Жесткое исключение для главной карточки
+            // Исключения: если нет карточки или это главная hero-карточка
             if (!card || card.classList.contains('main-hero')) return;
 
-            // Клик по крестику — быстро тушим оверлей
+            // Клик по крестику — закрываем оверлей
             if (e.target.closest('.bento-card-close-icon')) {
                 e.stopPropagation();
                 var overlay = document.querySelector('.bento-overlay-modal');
@@ -112,22 +112,32 @@
                     document.body.classList.remove('bento-active');
                     setTimeout(function() {
                         if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-                    }, 250); // Удаляем из DOM сразу после исчезновения
+                    }, 250);
                 }
                 return;
             }
 
-            // Клик по карточке — берем контент изнанки и мгновенно показываем в оверлее
+            // Клик по карточке — открываем оверлей
             e.stopPropagation();
             
-            var backContent = card.querySelector('.bento-card-back') ? card.querySelector('.bento-card-back').innerHTML : '';
+            var backCard = card.querySelector('.bento-card-back');
+            var backContent = backCard ? backCard.innerHTML : '';
             
             var overlay = document.createElement('div');
             overlay.classList.add('bento-overlay-modal');
             overlay.innerHTML = backContent;
             
             document.body.appendChild(overlay);
-            window.getComputedStyle(overlay).opacity; // Force reflow для анимации
+            
+            // ЖЕСТКОЕ ЛЕЧЕНИЕ: Находим внутренний back-блок, который скопировался, 
+            // и принудительно делаем его видимым внутри модального окна
+            var innerBack = overlay.closest('.bento-overlay-modal');
+            if (innerBack) {
+                innerBack.style.setProperty('opacity', '1', 'important');
+                innerBack.style.setProperty('transform', 'none', 'important');
+            }
+            
+            window.getComputedStyle(overlay).opacity; // Force reflow
             
             overlay.classList.add('active');
             document.body.classList.add('bento-active');
