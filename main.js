@@ -103,7 +103,7 @@
             // Если кликнули не по карте, или по крестику, или карта уже клонирована — игнорируем
             if (!card || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
-            // ПРОФЕССИОНАЛЬНЫЙ ПРЕДОХРАНИТЕЛЬ: Главная карточка-баннер не должна открываться
+            // ПРЕДОХРАНИТЕЛЬ: Главная карточка-баннер не должна открываться
             if (card.classList.contains('main-hero')) return;
 
             e.stopPropagation();
@@ -136,10 +136,10 @@
                     
                     var actualRect = card.getBoundingClientRect();
                     
-                    // ФИКС: Замораживаем текущую ширину перед закрытием, чтобы правый край не дергался
+                    // ГРАМОТНЫЙ ФИКС: Явно фиксируем ширину клона в пикселях перед уменьшением
                     clone.style.width = clone.offsetWidth + 'px';
                     
-                    // ФИКС: Переносим перерасчет на следующий кадр анимации
+                    // Переносим анимацию сжатия на следующий кадр, чтобы сработал transition: width
                     requestAnimationFrame(function () {
                         clone.classList.remove('is-expanded', 'is-flipped');
                         clone.style.top = actualRect.top + 'px';
