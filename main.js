@@ -14,11 +14,21 @@
         if (!state['modes-list'].includes(target_mode)) return;
 
         state['modes-list'].forEach(function (mode) {
+            // Переключаем группы ссылок в меню
             var groups = document.querySelectorAll('.group-' + mode);
-            groups.forEach(function (el) { el.style.display = (mode === target_mode) ? 'flex' : 'none'; });
+            groups.forEach(function (el) { 
+                if (mode === target_mode) {
+                    el.classList.add('mode-visible');
+                } else {
+                    el.classList.remove('mode-visible');
+                }
+            });
 
+            // Переключаем сетки бенто
             var grid = document.getElementById('grid-' + mode);
-            if (grid) { grid.style.display = (mode === target_mode) ? 'grid' : 'none'; }
+            if (grid) { 
+                grid.style.display = (mode === target_mode) ? 'grid' : 'none'; 
+            }
         });
 
         var status_text = document.querySelector('.menu-status-text');
@@ -95,15 +105,12 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК С ПРЕДОХРАНИТЕЛЕМ
+    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
             
-            // Если кликнули не по карте, или по крестику, или карта уже клонирована — игнорируем
             if (!card || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
-
-            // ПРОФЕССИОНАЛЬНЫЙ ПРЕДОХРАНИТЕЛЬ: Главная карточка-баннер не должна открываться
             if (card.classList.contains('main-hero')) return;
 
             e.stopPropagation();
@@ -136,6 +143,7 @@
                     
                     var actualRect = card.getBoundingClientRect();
                     
+                    // 1. Возвращаем геометрию назад на место карточки
                     clone.classList.remove('is-expanded', 'is-flipped');
                     clone.style.top = actualRect.top + 'px';
                     clone.style.left = actualRect.left + 'px';
@@ -143,11 +151,16 @@
                     clone.style.height = actualRect.height + 'px';
                     clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
-                    clone.addEventListener('transitionend', function () {
-                        if (!clone.classList.contains('is-expanded')) {
+                    // 2. Ждем окончания движения, перед тем как скрыть клон
+                    clone.addEventListener('transitionend', function handleClose(e) {
+                        // Реагируем только на завершение изменения размеров/позиции
+                        if (e.propertyName === 'top' || e.propertyName === 'left' || e.propertyName === 'width') {
+                            clone.removeEventListener('transitionend', handleClose);
+                            
+                            // Показываем оригинальную карту в сетке
                             card.classList.remove('is-cloned');
                             
-                            clone.style.transition = 'opacity 150ms ease';
+                            // Плавно растворяем клон на месте без прыжков в сторону
                             clone.style.opacity = '0';
                             
                             setTimeout(function () {
@@ -155,7 +168,7 @@
                                 if (clone.parentNode) clone.parentNode.removeChild(clone);
                             }, 150);
                         }
-                    }, { once: true });
+                    });
                 });
             }
         });
