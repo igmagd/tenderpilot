@@ -105,7 +105,7 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (ТАЙМИНГ-КОНТРОЛЬ)
+    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (БЕЗ ДЕФОРМАЦИИ ПРАВОГО БОКА)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -115,7 +115,7 @@
 
             e.stopPropagation();
 
-            // 1. Точно фиксируем стартовые координаты до любых изменений
+            // Точно фиксируем стартовые координаты
             var startRect = card.getBoundingClientRect();
             var startTop = startRect.top;
             var startLeft = startRect.left;
@@ -148,32 +148,31 @@
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    // 2. Включаем форсированную обратную плавность в инлайновом стиле
+                    // Задаем жесткую анимацию полета назад
                     clone.style.transition = 'top 400ms cubic-bezier(0.25, 1, 0.5, 1), left 400ms cubic-bezier(0.25, 1, 0.5, 1), width 400ms cubic-bezier(0.25, 1, 0.5, 1), height 400ms cubic-bezier(0.25, 1, 0.5, 1), border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1)';
                     
-                    // 3. Отправляем карточку строго в её домашнюю позицию
+                    // Закрываем 3D переворот
                     clone.classList.remove('is-expanded', 'is-flipped');
+                    
+                    // Возвращаем физические размеры
                     clone.style.top = startTop + 'px';
                     clone.style.left = startLeft + 'px';
                     clone.style.width = startWidth + 'px';
                     clone.style.height = startHeight + 'px';
                     clone.style.borderRadius = startBorderRadius;
 
-                    // 4. Ждем ровно 400ms, пока карточка плавно летит на свое место в сетке
+                    // Ждем 400мс, пока карточка плавно встанет на место
                     setTimeout(function () {
-                        // Возвращаем видимость оригинальной карточке
                         card.classList.remove('is-cloned');
                         
-                        // Мягко гасим прозрачность клона прямо на месте
                         clone.style.transition = 'opacity 150ms ease';
                         clone.style.opacity = '0';
                         
-                        // Удаляем элемент после полного исчезновения
                         setTimeout(function () {
                             document.body.classList.remove('bento-active');
                             if (clone.parentNode) clone.parentNode.removeChild(clone);
                         }, 150);
-                    }, 400); // Тайминг совпадает со скоростью полета карточки
+                    }, 400); 
                 });
             }
         });
