@@ -14,21 +14,11 @@
         if (!state['modes-list'].includes(target_mode)) return;
 
         state['modes-list'].forEach(function (mode) {
-            // Переключаем группы ссылок в меню
             var groups = document.querySelectorAll('.group-' + mode);
-            groups.forEach(function (el) { 
-                if (mode === target_mode) {
-                    el.classList.add('mode-visible');
-                } else {
-                    el.classList.remove('mode-visible');
-                }
-            });
+            groups.forEach(function (el) { el.style.display = (mode === target_mode) ? 'flex' : 'none'; });
 
-            // Переключаем сетки бенто
             var grid = document.getElementById('grid-' + mode);
-            if (grid) { 
-                grid.style.display = (mode === target_mode) ? 'grid' : 'none'; 
-            }
+            if (grid) { grid.style.display = (mode === target_mode) ? 'grid' : 'none'; }
         });
 
         var status_text = document.querySelector('.menu-status-text');
@@ -105,32 +95,24 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (РАЗДЕЛЬНЫЙ ПОВОРОТ И СЖАТИЕ)
+    // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
-            
             if (!card || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
-            if (card.classList.contains('main-hero')) return;
 
             e.stopPropagation();
 
-            var startRect = card.getBoundingClientRect();
-            var startTop = startRect.top;
-            var startLeft = startRect.left;
-            var startWidth = startRect.width;
-            var startHeight = startRect.height;
-            var startBorderRadius = window.getComputedStyle(card).borderRadius;
-
+            var rect = card.getBoundingClientRect();
             var clone = card.cloneNode(true);
             clone.id = card.id + '-clone';
             clone.classList.add('bento-card-clone');
             
-            clone.style.top = startTop + 'px';
-            clone.style.left = startLeft + 'px';
-            clone.style.width = startWidth + 'px';
-            clone.style.height = startHeight + 'px';
-            clone.style.borderRadius = startBorderRadius;
+            clone.style.top = rect.top + 'px';
+            clone.style.left = rect.left + 'px';
+            clone.style.width = rect.width + 'px';
+            clone.style.height = rect.height + 'px';
+            clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
             document.body.appendChild(clone);
             window.getComputedStyle(clone).transform;
@@ -147,35 +129,31 @@
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    // Шаг 1: Сначала плавно переворачиваем карточку обратно на лицевую сторону (за 200мс)
-                    // При этом она остается большой на весь экран, что исключает деформацию краев
-                    clone.style.transition = 'transform 200ms cubic-bezier(0.25, 1, 0.5, 1)';
-                    clone.classList.remove('is-flipped');
+                    var actualRect = card.getBoundingClientRect();
                     
-                    // Шаг 2: Ровно через 200мс, когда разворот завершен, плавно уменьшаем ее в сетку
-                    setTimeout(function () {
-                        clone.style.transition = 'top 300ms cubic-bezier(0.25, 1, 0.5, 1), left 300ms cubic-bezier(0.25, 1, 0.5, 1), width 300ms cubic-bezier(0.25, 1, 0.5, 1), height 300ms cubic-bezier(0.25, 1, 0.5, 1), border-radius 300ms cubic-bezier(0.25, 1, 0.5, 1)';
-                        
-                        clone.classList.remove('is-expanded');
-                        clone.style.top = startTop + 'px';
-                        clone.style.left = startLeft + 'px';
-                        clone.style.width = startWidth + 'px';
-                        clone.style.height = startHeight + 'px';
-                        clone.style.borderRadius = startBorderRadius;
-                        
-                        // Шаг 3: Когда карточка прилетела на место, гасим ее и удаляем клон
-                        setTimeout(function () {
+                    clone.classList.remove('is-expanded', 'is-flipped');
+                    clone.style.top = actualRect.top + 'px';
+                    clone.style.left = actualRect.left + 'px';
+                    clone.style.width = actualRect.width + 'px';
+                    clone.style.height = actualRect.height + 'px';
+                    clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+
+                    clone.addEventListener('transitionend', function () {
+                        if (!clone.classList.contains('is-expanded')) {
+                            // 1. Возвращаем оригинальной карточке в сетке 100% видимость
                             card.classList.remove('is-cloned');
                             
+                            // 2. Включаем мягкое растворение самого клона
                             clone.style.transition = 'opacity 150ms ease';
                             clone.style.opacity = '0';
                             
+                            // 3. Удаляем клон окончательно только после его полного растворения
                             setTimeout(function () {
                                 document.body.classList.remove('bento-active');
                                 if (clone.parentNode) clone.parentNode.removeChild(clone);
                             }, 150);
-                        }, 300); // Время полета назад
-                    }, 200); // Время разворота 3D
+                        }
+                    }, { once: true });
                 });
             }
         });
