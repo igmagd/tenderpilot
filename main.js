@@ -95,102 +95,44 @@
         }, { passive: true });
     }
 
-    // 3. ЧИСТАЯ АППАРАТНАЯ FLIP-АНИМАЦИЯ НА GPU (БЕЗ СИНТАКСИЧЕСКИХ ОШИБОК С PROPERTY)
+    // 3. БЫСТРОЕ И ПЛАВНОЕ ВСПЛЫТИЕ (БЕЗ 3D И РЫВКОВ)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
-            if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
-
-            e.stopPropagation();
-
-            var rect = card.getBoundingClientRect();
-            var bRadius = window.getComputedStyle(card).borderRadius;
-
-            // 1. Создаем клон ЛИЦЕВОЙ стороны
-            var frontClone = document.createElement('div');
-            frontClone.classList.add('bento-flip-front');
-            var frontContent = card.querySelector('.bento-card-front') ? card.querySelector('.bento-card-front').innerHTML : '';
-            frontClone.innerHTML = frontContent;
-
-            // 2. Создаем клон ЗАДНЕЙ стороны
-            var backClone = document.createElement('div');
-            backClone.classList.add('bento-flip-back');
-            var backContent = card.querySelector('.bento-card-back') ? card.querySelector('.bento-card-back').innerHTML : '';
-            backClone.innerHTML = backContent;
-
-            // Расчет геометрии для видеокарты смартфона
-            var scaleX = rect.width / window.innerWidth;
-            var scaleY = rect.height / window.innerHeight;
-            var translateX = rect.left - (window.innerWidth - rect.width) / 2;
-            var translateY = rect.top - (window.innerHeight - rect.height) / 2;
-
-            // Стартовая точка: жестко ужимаем оба слоя прямо на место ячейки
-            var baseStyle = 'position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100dvh !important; margin: 0 !important;';
             
-            frontClone.style.cssText = baseStyle + 'z-index: 9998 !important; opacity: 1 !important; border-radius: ' + bRadius + ' !important; transform: translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale3d(' + scaleX + ', ' + scaleY + ', 1) !important;';
-            backClone.style.cssText = baseStyle + 'z-index: 9999 !important; opacity: 0 !important; pointer-events: none !important; border-radius: ' + bRadius + ' !important; transform: translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale3d(' + scaleX + ', ' + scaleY + ', 1) !important;';
+            // Жесткое исключение для главной карточки
+            if (!card || card.classList.contains('main-hero')) return;
 
-            document.body.appendChild(frontClone);
-            document.body.appendChild(backClone);
-            
-            // Заставляем мобильный браузер железно зафиксировать стартовую точку
-            window.getComputedStyle(frontClone).transform;
-            window.getComputedStyle(backClone).transform;
-
-            card.classList.add('is-cloned');
-            document.body.classList.add('bento-active');
-
-            // ВЗЛЕТ: Возвращаем масштаб в 1 и меняем прозрачность слоев
-            requestAnimationFrame(function () {
-                requestAnimationFrame(function () {
-                    frontClone.style.setProperty('transform', 'translate3d(0, 0, 0) scale3d(1, 1, 1)', 'important');
-                    frontClone.style.setProperty('opacity', '0', 'important');
-                    frontClone.style.setProperty('border-radius', '0px', 'important');
-                    
-                    backClone.style.setProperty('transform', 'translate3d(0, 0, 0) scale3d(1, 1, 1)', 'important');
-                    backClone.style.setProperty('opacity', '1', 'important');
-                    backClone.style.setProperty('border-radius', '0px', 'important');
-                    backClone.style.pointerEvents = "auto";
-                });
-            });
-
-            var closeIcon = backClone.querySelector('.bento-card-close-icon');
-            if (closeIcon) {
-                closeIcon.addEventListener('click', function (event) {
-                    event.stopPropagation();
-                    backClone.style.pointerEvents = 'none';
-
-                    var actualRect = card.getBoundingClientRect();
-                    var actScaleX = actualRect.width / window.innerWidth;
-                    var actScaleY = actualRect.height / window.innerHeight;
-                    var actTranslateX = actualRect.left - (window.innerWidth - actualRect.width) / 2;
-                    var actTranslateY = actualRect.top - (window.innerHeight - actualRect.height) / 2;
-
-                    // ПОСАДКА НА GPU: Сжимаем слои обратно в ячейку с восстановлением скруглений
-                    frontClone.style.setProperty('transform', 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1)', 'important');
-                    frontClone.style.setProperty('opacity', '1', 'important');
-                    frontClone.style.setProperty('border-radius', bRadius, 'important');
-
-                    backClone.style.setProperty('transform', 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1)', 'important');
-                    backClone.style.setProperty('opacity', '0', 'important');
-                    backClone.style.setProperty('border-radius', bRadius, 'important');
-
-                    // За 100мс до полной посадки мягко включаем оригинальную ячейку
+            // Клик по крестику — быстро тушим оверлей
+            if (e.target.closest('.bento-card-close-icon')) {
+                e.stopPropagation();
+                var overlay = document.querySelector('.bento-overlay-modal');
+                if (overlay) {
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('bento-active');
                     setTimeout(function() {
-                        card.classList.remove('is-cloned');
-                    }, 280);
-
-                    // Чистим DOM после завершения полета
-                    setTimeout(function () {
-                        document.body.classList.remove('bento-active');
-                        if (frontClone.parentNode) frontClone.parentNode.removeChild(frontClone);
-                        if (backClone.parentNode) backClone.parentNode.removeChild(backClone);
-                    }, 380);
-                });
+                        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                    }, 250); // Удаляем из DOM сразу после исчезновения
+                }
+                return;
             }
+
+            // Клик по карточке — берем контент изнанки и мгновенно показываем в оверлее
+            e.stopPropagation();
+            
+            var backContent = card.querySelector('.bento-card-back') ? card.querySelector('.bento-card-back').innerHTML : '';
+            
+            var overlay = document.createElement('div');
+            overlay.classList.add('bento-overlay-modal');
+            overlay.innerHTML = backContent;
+            
+            document.body.appendChild(overlay);
+            window.getComputedStyle(overlay).opacity; // Force reflow для анимации
+            
+            overlay.classList.add('active');
+            document.body.classList.add('bento-active');
         });
     }
-
 
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
