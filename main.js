@@ -95,11 +95,12 @@
         }, { passive: true });
     }
 
+    // 3. АППАРАТНАЯ FLIP-АНИМАЦИЯ БЕНТО-КАРТОЧЕК НА GPU (БЕЗ ОТСКОКОВ)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
             
-            // Игнорируем главную карточку, крестик и повторные клики
+            // Жесткий блок: игнорируем главную карточку, крестик и повторные тапы
             if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
             e.stopPropagation();
@@ -109,31 +110,32 @@
             clone.id = card.id + '-clone';
             clone.classList.add('bento-card-clone');
             
-            // Расчеты масштаба и смещения для GPU
+            // Магический расчет масштаба под экран смартфона (магия GPU)
             var scaleX = rect.width / window.innerWidth;
             var scaleY = rect.height / window.innerHeight;
             var translateX = rect.left - (window.innerWidth - rect.width) / 2;
             var translateY = rect.top - (window.innerHeight - rect.height) / 2;
 
-            // Мгновенно сжимаем полноэкранный клон до размеров маленькой карточки
+            // Мгновенно ужимаем полноэкранный клон в размеры маленькой ячейки
             clone.style.transform = 'translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale3d(' + scaleX + ', ' + scaleY + ', 1) rotateY(0deg)';
 
             document.body.appendChild(clone);
-            window.getComputedStyle(clone).transform; // Принудительный рендер
+            window.getComputedStyle(clone).transform; // Принудительный рендер браузера
 
             card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
 
-            // ЭФФЕКТ ВЗЛЕТА: Резко сбрасываем масштаб в 1 и крутим на 180 градусов
+            // ВЗЛЕТ: Возвращаем масштаб в 1 и крутим на 180 градусов в одном слитном движении
             requestAnimationFrame(function () {
                 clone.style.transform = 'translate3d(0, 0, 0) scale3d(1, 1, 1) rotateY(180deg)';
+                clone.classList.add('is-expanded');
             });
 
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
-                    clone.style.pointerEvents = 'none'; // Блокируем спам-клики
+                    clone.style.pointerEvents = 'none'; // Защита от лишних тапов при закрытии
                     
                     var actualRect = card.getBoundingClientRect();
                     var actScaleX = actualRect.width / window.innerWidth;
@@ -141,10 +143,11 @@
                     var actTranslateX = actualRect.left - (window.innerWidth - actualRect.width) / 2;
                     var actTranslateY = actualRect.top - (window.innerHeight - actualRect.height) / 2;
 
-                    // ОБРАТНЫЙ ПОЛЕТ: Возвращаем в ячейку (крутим обратно в 0 и сжимаем)
+                    // ОБРАТНЫЙ ПОЛЕТ: Сжимаем обратно в ячейку и раскручиваем в 0 градусов на GPU
                     clone.style.transform = 'translate3d(' + actTranslateX + 'px, ' + actTranslateY + 'px, 0) scale3d(' + actScaleX + ', ' + actScaleY + ', 1) rotateY(0deg)';
+                    clone.classList.remove('is-expanded');
 
-                    // Таймер на удаление клона после завершения полета (550ms)
+                    // Ждем окончания полета (ровно 500ms, как прописано в новом CSS для transition)
                     setTimeout(function () {
                         card.classList.remove('is-cloned');
                         clone.style.setProperty('transition', 'opacity 200ms ease', 'important');
@@ -154,7 +157,7 @@
                             document.body.classList.remove('bento-active');
                             if (clone.parentNode) clone.parentNode.removeChild(clone);
                         }, 200);
-                    }, 550); // Должно строго совпадать с CSS transition ниже
+                    }, 500); // Этот таймер строго синхронизирован с CSS
                 });
             }
         });
