@@ -387,8 +387,8 @@ body.bento-active {
   perspective: 2000px !important;
   
   opacity: 1 !important;
-  /* МЯГКАЯ ПРЕМИАЛЬНАЯ КРИВАЯ: Быстрый старт, переворот в воздухе и плавное замедление без отскоков */
-  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  /* Установили скорость на 400ms для идеальной динамики */
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Восстанавливаем 3D-связку для вложенных элементов клона */
