@@ -105,7 +105,7 @@
         }, { passive: true });
     }
 
-    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (БЕЗ ДЕФОРМАЦИИ ПРАВОГО БОКА)
+    // 3. ИСПРАВЛЕННАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (ФИКСАЦИЯ РАЗМЕРОВ ПРИ ЗАКРЫТИИ)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -115,7 +115,6 @@
 
             e.stopPropagation();
 
-            // Точно фиксируем стартовые координаты
             var startRect = card.getBoundingClientRect();
             var startTop = startRect.top;
             var startLeft = startRect.left;
@@ -148,20 +147,26 @@
                 closeIcon.addEventListener('click', function (event) {
                     event.stopPropagation();
                     
-                    // Задаем жесткую анимацию полета назад
+                    // 1. Принудительно фиксируем текущую полноэкранную ширину перед полетом,
+                    // чтобы правый бок физически не мог сжаться внутрь
+                    var currentRect = clone.getBoundingClientRect();
+                    clone.style.width = currentRect.width + 'px';
+                    clone.style.height = currentRect.height + 'px';
+                    
+                    // 2. Включаем плавность возврата
                     clone.style.transition = 'top 400ms cubic-bezier(0.25, 1, 0.5, 1), left 400ms cubic-bezier(0.25, 1, 0.5, 1), width 400ms cubic-bezier(0.25, 1, 0.5, 1), height 400ms cubic-bezier(0.25, 1, 0.5, 1), border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1)';
                     
-                    // Закрываем 3D переворот
-                    clone.classList.remove('is-expanded', 'is-flipped');
+                    // 3. Переворачиваем 3D карту обратно, но класс is-expanded НЕ удаляем!
+                    clone.classList.remove('is-flipped');
                     
-                    // Возвращаем физические размеры
+                    // 4. Сжимаем клон ровно до исходных размеров карточки в сетке
                     clone.style.top = startTop + 'px';
                     clone.style.left = startLeft + 'px';
                     clone.style.width = startWidth + 'px';
                     clone.style.height = startHeight + 'px';
                     clone.style.borderRadius = startBorderRadius;
 
-                    // Ждем 400мс, пока карточка плавно встанет на место
+                    // 5. Ждем окончания полета назад
                     setTimeout(function () {
                         card.classList.remove('is-cloned');
                         
