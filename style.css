@@ -371,27 +371,35 @@ body.bento-active {
    ========================================================================== */
 .bento-card-clone {
   position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
   z-index: 9999 !important;
   background: transparent !important;
   pointer-events: auto !important;
-  border-radius: 0px !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  opacity: 1 !important;
   
+  /* Жестко задаем центр 3D вращения для видеокарты телефона */
   transform-origin: center center !important;
   transform-style: preserve-3d !important;
   perspective: 2000px !important;
   
-  opacity: 1 !important;
-  /* Установили скорость на 400ms для идеальной динамики */
-  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  /* Идеально плавный и синхронный полет всех рамок и границ строго за 400ms */
+  transition: 
+    top 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    left 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 400ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Восстанавливаем 3D-связку для вложенных элементов клона */
+/* Состояние развернутой на весь экран карточки */
+.bento-card-clone.is-expanded {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  border-radius: 0px !important;
+}
+
+/* 3D-цепочка для вращения */
 .bento-card-clone .bento-card-inner {
   position: absolute !important;
   top: 0 !important;
@@ -399,11 +407,16 @@ body.bento-active {
   width: 100% !important;
   height: 100% !important;
   transform-style: preserve-3d !important;
-  transform: none !important; /* Отключаем базовое скрытие вращения */
-  transition: none !important;  /* Вся анимация контролируется только родителем */
+  /* Вращение идет строго в такт с полетом рамок */
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Лицевая и задняя стороны внутри клона */
+/* Поворот на 180 градусов */
+.bento-card-clone.is-flipped .bento-card-inner {
+  transform: rotateY(180deg) !important;
+}
+
+/* Стороны внутри клона */
 .bento-card-clone .bento-card-front,
 .bento-card-clone .bento-card-back {
   position: absolute !important;
@@ -418,13 +431,17 @@ body.bento-active {
   border-radius: 12px !important;
 }
 
-/* При раскрытии убираем скругление углов */
+/* Убираем скругление рамок при фуллскрине */
 .bento-card-clone.is-expanded .bento-card-front,
 .bento-card-clone.is-expanded .bento-card-back {
   border-radius: 0px !important;
 }
 
-/* ГАРАНТИЯ ВИДИМОСТИ ИЗНАНКИ: Перебиваем базовый opacity: 0 */
+.bento-card-clone .bento-card-front {
+  background: linear-gradient(to bottom, #0b1528, #020617) !important;
+}
+
+/* Изнанка клонированной карточки */
 .bento-card-clone .bento-card-back {
   transform: rotateY(180deg) !important;
   opacity: 1 !important; 
@@ -433,7 +450,7 @@ body.bento-active {
   overflow-y: auto !important;
 }
 
-/* КНОПКА ЗАКРЫТИЯ С ИЗОЛЯЦИЕЙ В 3D */
+/* Кнопка закрытия */
 .bento-card-clone .bento-card-close-icon {
   position: absolute !important;
   top: 24px !important;
@@ -456,4 +473,4 @@ body.bento-active {
 
 .bento-card-clone .bento-card-back h3 {
   color: #ffffff !important;
-     }
+}
