@@ -247,130 +247,68 @@ header {
 body.bento-active {
   touch-action: none !important; 
    }
+
 /* ==========================================================================
-   3. МЕДИА-ЗАПРОСЫ (ПЛАНШЕТЫ И МОБИЛЬНЫЕ СМАРТФОНЫ)
+   3. ВЫЧИЩЕННОЕ И ОПТИМИЗИРОВАННОЕ СОСТОЯНИЕ BENTO-КАРТОЧЕК
    ========================================================================== */
-@media (min-width: 1025px) {
-  .bento-card.main-hero {
-    grid-column: span 2 !important;
-    grid-row: span 2 !important;
-  }
+.bento-card {
+  background: transparent !important;
+  width: 100% !important;
+  height: 220px;
+  position: relative !important;
+  cursor: pointer;
 }
 
-@media (max-width: 1024px) {
-  .bento-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-    overflow: visible !important;
-  }
+.bento-card.main-hero {
+  height: 456px !important; 
+  cursor: default !important; 
 }
 
-@media (max-width: 768px) {
-    header .header-container {
-        background: #0b1321 !important;
-        position: relative !important;
-        z-index: 102 !important;
-    }
-    .logo, #menu-toggle { position: relative !important; z-index: 102 !important; }
-    .logo span { color: #00f2fe !important; }
+.bento-card.main-hero h1,
+.bento-card.main-hero p,
+.bento-card.main-hero .bento-card-front {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
 
-    .nav-links {
-        position: fixed !important;
-        top: 0 !important; 
-        left: 0 !important;
-        width: 100% !important;
-        height: 100vh !important;
-        background: linear-gradient(to bottom, #0b1321, #070b12) !important; 
-        display: flex !important;
-        flex-direction: column !important;
-        padding: 95px 24px 24px 24px !important; 
-        z-index: 101 !important; 
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        touch-action: pan-y !important; 
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        transform: translate3d(0, -105%, 0) !important;
-        transition: transform 0.38s ease-in-out !important;
-    }
-    .nav-links::-webkit-scrollbar { display: none !important; }
-    .nav-links.active {
-        transform: translate3d(0, 0, 0) !important;
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
-    .nav-links .menu-item-link, .nav-links .menu-status-bar {
-        opacity: 0;
-        transition: opacity 0.2s ease !important;
-    }
-    .nav-links.active .menu-item-link, .nav-links.active .menu-status-bar {
-        opacity: 1;
-        transition: opacity 0.25s ease 0.15s !important;
-    }
-   
-    .hero-actions {
-        transition: none !important;
-        transition-delay: 0.28s !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
+/* Внутренняя обертка карточки в сетке (статичная, без 3D-глюков) */
+.bento-card-inner {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
 
-    body.menu-open .hero-actions {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        transition-delay: 0s !important;
-    }
-    body.menu-open .lk-btn { display: none !important; }
+/* Лицевая сторона карточки в сетке */
+.bento-card-front {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 12px !important;
+  background: linear-gradient(to bottom, #0b1528, #020617) !important;
+  padding: 24px !important;
+  box-shadow: inset 0 0 0 1px #30363d !important; 
+}
 
-    .nav-links .menu-item-link {
-        display: block !important;
-        width: 100% !important;
-        padding: 16px 0 !important;
-        font-size: 18px !important;
-        color: #c9d1d9 !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-    }
-    .nav-links .menu-item-link:active {
-        border-bottom-color: rgba(240, 246, 252, 0.4) !important;
-        color: #fff !important;
-    }
+/* Изнанка внутри сетки — скрыта, её контент JS забирает во всплывающее окно */
+.bento-card-back {
+  display: none !important;
+}
 
-    .nav-links .menu-group-links { display: none; flex-direction: column !important; width: 100% !important; }
-    .nav-links .menu-group-links.mode-visible { display: flex !important; }
+.bento-card.is-cloned {
+  opacity: 0.4 !important;
+}
 
-    .menu-status-bar {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
-        margin-bottom: 16px !important;
-        padding-bottom: 12px !important;
-    }
-    .menu-status-text { color: #58a6ff !important; font-weight: 500 !important; font-size: 19px !important; }
-    .menu-status-arrows { display: flex !important; align-items: center !important; gap: 20px !important; }
-    .menu-status-arrows .menu-arrow-icon { width: 24px !important; height: 24px !important; color: #768390 !important; }
-       
-    /* Вычищенный и изолированный адаптив Bento-сетки без дублирования */
-    .bento-grid {
-        grid-template-columns: 1fr !important; 
-        gap: 16px !important;
-        padding: 0 16px !important;
-        overflow: visible !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        margin: 120px auto 40px auto !important;
-    }
-    .bento-grid::-webkit-scrollbar {
-        display: none !important;
-    }
-       }
 /* ==========================================================================
-   4. ЭЛЕГАНТНОЕ И БЫСТРОЕ ВСПЛЫТИЕ (FADE-IN НА GPU)
+   4. ЭЛЕГАНТНОЕ И БЫСТРОЕ ВСПЛЫТИЕ ОКНА (FADE-IN НА GPU ДЛЯ МОБИЛЫ И ПК)
    ========================================================================== */
 
-/* Оверлей изначально полностью прозрачен и слегка опущен вниз на 10px для динамики */
+/* Оверлей изначально полностью прозрачен и слегка смещен вниз на 10px для мягкого вылета */
 .bento-overlay-modal {
   position: fixed !important;
   top: 0 !important;
@@ -384,8 +322,9 @@ body.bento-active {
   overflow-y: auto !important;
   opacity: 0;
   transform: translate3d(0, 10px, 0);
+  border-radius: 0px !important;
   
-  /* Быстрая скорость 250ms — отзывчиво и без «киселя» */
+  /* Быстрая скорость 250ms — отзывчиво, премиально и без «киселя» */
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
               transform 250ms cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -399,6 +338,11 @@ body.bento-active {
 /* Стили заголовков и крестика внутри оверлея */
 .bento-overlay-modal h3 {
   color: #ffffff !important;
+  margin-bottom: 12px;
+}
+
+.bento-overlay-modal p {
+  color: #c9d1d9 !important;
 }
 
 .bento-overlay-modal .bento-card-close-icon {
@@ -419,9 +363,8 @@ body.bento-active {
   fill: none !important;
 }
 
-/* Блокируем скролл основного сайта, пока открыто окно */
+/* Блокируем скролл основного сайта, пока открыто модальное окно */
 body.bento-active {
   overflow: hidden !important;
   touch-action: none !important;
 }
-
