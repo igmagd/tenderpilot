@@ -83,29 +83,28 @@
         if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); shift(-1); });
         if (next) next.addEventListener('click', function (e) { e.preventDefault(); shift(1); });
 
+        // ИСПРАВЛЕННАЯ ЗАЩИТА СВАЙПОВ: Добавили исключение для нового оверлея
         document.body.addEventListener('touchstart', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-clone')) return;
+            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-overlay-modal')) return;
             window.tenderpilot['touch-start-x'] = e.touches.clientX;
         }, { passive: true });
 
         document.body.addEventListener('touchend', function (e) {
-            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-card-clone')) return;
+            if (e.target.closest('.bento-card-back') || e.target.closest('.bento-overlay-modal')) return;
             var diff = window.tenderpilot['touch-start-x'] - e.changedTouches.clientX;
             if (Math.abs(diff) > 70) shift(diff > 0 ? 1 : -1);
         }, { passive: true });
     }
 
-    // 3. БЫСТРОЕ ВСПЛЫТИЕ (ИСПРАВЛЕНА ВИДИМОСТЬ КОНТЕНТА)
+    // 3. БЫСТРОЕ ВСПЛЫТИЕ (ФИНАЛЬНАЯ ОПТИМИЗИРОВАННАЯ ВЕРСИЯ)
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
             
-            // Исключения: если нет карточки или это главная hero-карточка
-            if (!card || card.classList.contains('main-hero')) return;
-
-            // Клик по крестику — закрываем оверлей
+            // Если кликнули по крестику закрытия внутри уже открытого оверлея
             if (e.target.closest('.bento-card-close-icon')) {
                 e.stopPropagation();
+                e.preventDefault();
                 var overlay = document.querySelector('.bento-overlay-modal');
                 if (overlay) {
                     overlay.classList.remove('active');
@@ -117,8 +116,11 @@
                 return;
             }
 
-            // Клик по карточке — открываем оверлей
+            // Исключения: если нет карточки, это главная hero-карточка или кликнули внутри открытого оверлея
+            if (!card || card.classList.contains('main-hero') || e.target.closest('.bento-overlay-modal')) return;
+
             e.stopPropagation();
+            e.preventDefault();
             
             var backCard = card.querySelector('.bento-card-back');
             var backContent = backCard ? backCard.innerHTML : '';
@@ -129,14 +131,10 @@
             
             document.body.appendChild(overlay);
             
-            // ЖЕСТКОЕ ЛЕЧЕНИЕ: Находим внутренний back-блок, который скопировался, 
-            // и принудительно делаем его видимым внутри модального окна
-            var innerBack = overlay.closest('.bento-overlay-modal');
-            if (innerBack) {
-                innerBack.style.setProperty('opacity', '1', 'important');
-                innerBack.style.setProperty('transform', 'none', 'important');
-            }
+            // Принудительно сбрасываем старые стили невидимости контента изнанки в окне
+            overlay.style.setProperty('opacity', '1', 'important');
             
+            // Заставляем шторку модалки плавно выехать на GPU за 250мс
             window.getComputedStyle(overlay).opacity; // Force reflow
             
             overlay.classList.add('active');
@@ -150,3 +148,4 @@
         switch_app_mode('supplier');
     });
 })();
+                        
