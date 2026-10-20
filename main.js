@@ -103,7 +103,7 @@
             // Если кликнули не по карте, или по крестику, или карта уже клонирована — игнорируем
             if (!card || e.target.closest('.bento-card-close-icon') || card.classList.contains('is-cloned')) return;
 
-            // ПРЕДОХРАНИТЕЛЬ: Главная карточка-баннер не должна открываться
+            // ПРОФЕССИОНАЛЬНЫЙ ПРЕДОХРАНИТЕЛЬ: Главная карточка-баннер не должна открываться
             if (card.classList.contains('main-hero')) return;
 
             e.stopPropagation();
@@ -136,18 +136,12 @@
                     
                     var actualRect = card.getBoundingClientRect();
                     
-                    // ГРАМОТНЫЙ ФИКС: Явно фиксируем ширину клона в пикселях перед уменьшением
-                    clone.style.width = clone.offsetWidth + 'px';
-                    
-                    // Переносим анимацию сжатия на следующий кадр, чтобы сработал transition: width
-                    requestAnimationFrame(function () {
-                        clone.classList.remove('is-expanded', 'is-flipped');
-                        clone.style.top = actualRect.top + 'px';
-                        clone.style.left = actualRect.left + 'px';
-                        clone.style.width = actualRect.width + 'px';
-                        clone.style.height = actualRect.height + 'px';
-                        clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
-                    });
+                    clone.classList.remove('is-expanded', 'is-flipped');
+                    clone.style.top = actualRect.top + 'px';
+                    clone.style.left = actualRect.left + 'px';
+                    clone.style.width = actualRect.width + 'px';
+                    clone.style.height = actualRect.height + 'px';
+                    clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
                     clone.addEventListener('transitionend', function () {
                         if (!clone.classList.contains('is-expanded')) {
