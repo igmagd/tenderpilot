@@ -136,12 +136,18 @@
                     
                     var actualRect = card.getBoundingClientRect();
                     
-                    clone.classList.remove('is-expanded', 'is-flipped');
-                    clone.style.top = actualRect.top + 'px';
-                    clone.style.left = actualRect.left + 'px';
-                    clone.style.width = actualRect.width + 'px';
-                    clone.style.height = actualRect.height + 'px';
-                    clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+                    // ФИКС: Замораживаем текущую ширину перед закрытием, чтобы правый край не дергался
+                    clone.style.width = clone.offsetWidth + 'px';
+                    
+                    // ФИКС: Переносим перерасчет на следующий кадр анимации
+                    requestAnimationFrame(function () {
+                        clone.classList.remove('is-expanded', 'is-flipped');
+                        clone.style.top = actualRect.top + 'px';
+                        clone.style.left = actualRect.left + 'px';
+                        clone.style.width = actualRect.width + 'px';
+                        clone.style.height = actualRect.height + 'px';
+                        clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
+                    });
 
                     clone.addEventListener('transitionend', function () {
                         if (!clone.classList.contains('is-expanded')) {
