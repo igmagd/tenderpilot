@@ -276,9 +276,7 @@ header {
     .hero-section h1, .hero-section p { text-align: center !important; width: 100% !important; }
 }
 
-/* ==========================================================================
-   279: СЕТКА BENTO И СТАБИЛЬНЫЕ 3D-КАРТОЧКИ (БЕЗ ДЁРГАНИЯ И СДВИГОВ)
-   ========================================================================== */
+/* СЕТКА BENTO */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -289,20 +287,19 @@ header {
 }
 
 @media (max-width: 1024px) {
-  .bento-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-  }
+  .bento-grid { grid-template-columns: repeat(2, 1fr); overflow-x: hidden; }
 }
 
+/* ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ МЕДИА-ЗАПРОС (Строго по 1 карточке в строку) */
 @media (max-width: 768px) {
-  .bento-grid { 
+  .bento-grid {
     overflow-x: hidden;
     grid-template-columns: 1fr !important; 
-    gap: 16px !important; 
-    padding: 0 16px !important; 
+    gap: 16px !important;
+    padding: 0 16px !important;
   }
-}
-
+       }
+   /* 3D-контекст Bento-карточек */
 .bento-card {
   background: transparent !important;
   perspective: 1500px !important;
@@ -319,10 +316,10 @@ header {
   width: 100% !important;
   height: 100% !important;
   transform-style: preserve-3d !important;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.bento-card-front,
+.bento-card-front, 
 .bento-card-back {
   position: absolute !important;
   top: 0 !important;
@@ -334,8 +331,8 @@ header {
   border-radius: 12px !important;
   background: linear-gradient(to bottom, #0b1528, #020617) !important;
   padding: 24px !important;
-  box-shadow: inset 0 0 0 1px #30363d !important;
   transition: opacity 0.2s ease !important;
+  box-shadow: inset 0 0 0 1px #30363d !important; 
 }
 
 .bento-grid .bento-card-back {
@@ -343,45 +340,43 @@ header {
   opacity: 0 !important;
 }
 
-/* ==========================================================================
-   МЕХАНИЗМ КЛОНИРОВАНИЯ И ПЛАВНОГО РАСШИРЕНИЯ (БЕЗ ИЗМЕНЕНИЯ ШИРИНЫ КЛОНА)
-   ========================================================================== */
+/* МЕХАНИЗМ КЛОНИРОВАНИЯ И ПРЕМИАЛЬНОГО ВЗЛЕТА */
 .bento-card-clone {
   position: fixed !important;
   z-index: 9999 !important;
   background: transparent !important;
   pointer-events: auto !important;
+  transition: 
+    top 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    left 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    width 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    height 400ms cubic-bezier(0.25, 1, 0.5, 1),
+    border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1);
   transform-style: preserve-3d !important;
-  /* Анимируем СТРОГО через transform, убираем деструктивные top/left/width/height */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
-  will-change: transform;
 }
 
-.bento-card.is-cloned { 
-  opacity: 0.3 !important; 
-}
-.bento-card.is-cloned * { 
-  transition: none !important;
-  transform: none !important;
-  animation: none !important;
+/important;
 }
 
-/* Защита глобального скролла body от прыжков сетки */
+.bento-card.is-cloned { opacity: 0.3 !important; }
+.bento-card.is-cloned * { transition: none !important; transform: none !important; animation: none !important; }
+
+/* ИСПРАВЛЕНО: overflow-y больше не прячется, шапка не прыгает по ширине */
 body.bento-active {
-  touch-action: none !important;
-  overflow: hidden !important;
+    touch-action: none !important; 
 }
 
-/* Когда карточка раскрыта на максимум */
+.bento-card-clone.is-expanded .bento-card-back {
+    padding: 24px !important;
+    overflow-y: auto !important; 
+   }
+
 .bento-card-clone.is-expanded {
-  /* Жестко фиксируем физическое положение в 100vw, чтобы правая рамка никогда не дёргалась */
-  width: 100vw !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
   height: 100vh !important;
   height: 100dvh !important;
-}
-
-.bento-card-clone.is-expanded .bento-card-front,
-.bento-card-clone.is-expanded .bento-card-back {
   border-radius: 0px !important;
   box-shadow: none !important;
 }
@@ -391,7 +386,7 @@ body.bento-active {
   height: 100% !important;
   position: relative !important;
   transform-style: preserve-3d !important;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 .bento-card-clone.is-flipped .bento-card-inner {
@@ -407,32 +402,22 @@ body.bento-active {
   height: 100% !important;
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
+  
+  /* ИСПРАВЛЕНО: Вместо border: none пишем внутреннюю рамку для идеального слияния */
   box-shadow: inset 0 0 0 1px #30363d !important;
 }
 
-/* Очистка внутренней изнанки для скролла длинных текстов и будущих форм */
-.bento-card-clone-back-content {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto !important;
-  padding: 24px !important;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
+/* Углы карточки при расширении на весь экран становятся прямыми (Оригинальный блок) */
+.bento-card-clone.is-expanded .bento-card-front,
+.bento-card-clone.is-expanded .bento-card-back {
+  border-radius: 0px !important;
 }
 
 .bento-card-clone .bento-card-back {
   transform: rotateY(180deg) !important;
   opacity: 1 !important;
-  padding: 0 !important; /* Отступы перенесены во внутренний скролл-контейнер */
 }
 
-.bento-card-clone .bento-card-back h3 {
-  color: #ffffff !important;
-}
-
-/* ==========================================================================
-   ИКОНКА ЗАКРЫТИЯ (ФИКСИРОВАННАЯ ПОЗИЦИЯ В 3D)
-   ========================================================================== */
 .bento-card-clone .bento-card-close-icon {
   position: absolute !important;
   top: 24px !important;
@@ -441,9 +426,12 @@ body.bento-active {
   height: 28px !important;
   cursor: pointer !important;
   z-index: 2000000 !important;
-  /* Выносим иконку на уровень вперед по оси Z, чтобы клик по ней работал на изнанке */
-  transform: translateZ(100px) !important; 
+  transform: translateZ(100px) !important;
   pointer-events: auto !important;
+}
+
+.bento-card-clone .bento-card-back h3 {
+  color: #ffffff !important;
 }
 
 .bento-card-close-icon svg {
@@ -452,5 +440,24 @@ body.bento-active {
   stroke: #ffffff !important;
   stroke-width: 2.5px !important;
   fill: none !important;
+}
+
+.bento-card.is-cloned {
+  opacity: 0.3 !important;
+}
+
+.bento-card.is-cloned * {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* ИСПРАВЛЕНО: Убираем скрытие overflow на body, чтобы шапка не прыгала */
+body.bento-active {
+  touch-action: none !important;
+}
+
+.bento-card-clone.is-expanded .bento-card-back {
+  padding: 24px !important;
+  overflow-y: auto !important;
    }
-   
