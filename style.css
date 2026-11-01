@@ -374,7 +374,7 @@ body.bento-active {
 .bento-card-clone.is-expanded {
   top: 0 !important;
   left: 0 !important;
-  width: 100% !important;
+  width: 100vw !important; /* <--- Теперь рамка жестко привязана к экрану */
   height: 100vh !important;
   height: 100dvh !important;
   border-radius: 0px !important;
@@ -461,3 +461,8 @@ body.bento-active {
   padding: 24px !important;
   overflow-y: auto !important;
    }
+/* Фиксируем контент изнанки в момент закрытия, чтобы текст не прыгал */
+.bento-card-clone:not(.is-expanded) .bento-card-back {
+  width: 100vw !important;
+  overflow: hidden !important;
+}
