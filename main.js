@@ -95,6 +95,7 @@
         }, { passive: true });
     }
 
+    // 3. ИСПРАВЛЕННАЯ ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК
     function init_bento() {
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
@@ -107,7 +108,6 @@
             clone.id = card.id + '-clone';
             clone.classList.add('bento-card-clone');
             
-            // Задаем клону фиксированные размеры оригинальной карточки
             clone.style.top = rect.top + 'px';
             clone.style.left = rect.left + 'px';
             clone.style.width = rect.width + 'px';
@@ -115,57 +115,14 @@
             clone.style.borderRadius = window.getComputedStyle(card).borderRadius;
 
             document.body.appendChild(clone);
-            
-            // Форсируем чтение стилей
             window.getComputedStyle(clone).transform;
 
             card.classList.add('is-cloned');
             document.body.classList.add('bento-active');
 
-            // Вычисляем параметры для полноэкранного расширения через transform
-            var scaleX = window.innerWidth / rect.width;
-            var scaleY = window.innerHeight / rect.height;
-            var translateX = (window.innerWidth / 2) - (rect.left + rect.width / 2);
-            var translateY = (window.innerHeight / 2) - (rect.top + rect.height / 2);
-
             requestAnimationFrame(function () {
-                // Вместо изменения width/height двигаем и масштабируем сам контейнер
-                clone.style.transform = 'translate3d(' + translateX + 'px, ' + translateY + 'px, 0) scale(' + scaleX + ', ' + scaleY + ')';
-                clone.classList.add('is-expanded');
-                
-                // Переворачиваем внутреннюю часть
-                var inner = clone.querySelector('.bento-card-inner');
-                if (inner) inner.style.transform = 'rotateY(180deg)';
+                clone.classList.add('is-expanded', 'is-flipped');
             });
-
-            var closeIcon = clone.querySelector('.bento-card-close-icon');
-            if (closeIcon) {
-                closeIcon.addEventListener('click', function (event) {
-                    event.stopPropagation();
-                    
-                    // Возвращаем в исходную точку
-                    clone.style.transform = 'none';
-                    clone.classList.remove('is-expanded');
-                    
-                    var inner = clone.querySelector('.bento-card-inner');
-                    if (inner) inner.style.transform = 'none';
-
-                    clone.addEventListener('transitionend', function () {
-                        if (!clone.classList.contains('is-expanded')) {
-                            card.classList.remove('is-cloned');
-                            clone.style.transition = 'opacity 150ms ease';
-                            clone.style.opacity = '0';
-                            
-                            setTimeout(function () {
-                                document.body.classList.remove('bento-active');
-                                if (clone.parentNode) clone.parentNode.removeChild(clone);
-                            }, 150);
-                        }
-                    }, { once: true });
-                });
-            }
-        });
-    }
 
             var closeIcon = clone.querySelector('.bento-card-close-icon');
             if (closeIcon) {
