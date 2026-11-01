@@ -19,57 +19,13 @@ html, body {
     max-width: 100% !important;
 }
 
-/* СКРЫТИЕ СКРОЛЛБАРА ДЛЯ МОБИЛЬНЫХ ДЕВАЙСОВ */
-@media (max-width: 768px) {
-    html, body {
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-    }
-    html::-webkit-scrollbar, body::-webkit-scrollbar {
-        display: none !important;
-    }
+/* Фикс для предотвращения прыжков при открытии модалки */
+body.bento-active {
+    overflow: hidden !important;
+    padding-right: 0 !important; /* Убираем компенсацию скроллбара, если она есть */
 }
 
-/* Базовый каркас кнопок-контейнеров */
-.lk-btn, .menu-toggle {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 42px !important;
-    height: 42px !important;
-    border-radius: 50% !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-    outline: none !important;
-    transition: transform 0.1s ease !important;
-}
-
-.lk-btn svg, .menu-toggle svg {
-    color: rgba(240, 246, 252, 0.6) !important;
-    stroke: rgba(240, 246, 252, 0.6) !important;
-    stroke-width: 1.5px !important;
-    fill: none !important;
-    width: 22px !important;
-    height: 22px !important;
-    transition: color 0.1s ease, stroke 0.1s ease, filter 0.1s ease !important;
-}
-
-.lk-btn:active, .menu-toggle:active {
-    transform: scale(0.92) !important;
-}
-
-.lk-btn:active svg, .menu-toggle:active svg {
-    color: #ffffff !important;
-    stroke: #ffffff !important;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) !important;
-}
-
-.menu-toggle .icon-burger { display: block !important; }
-.menu-toggle .icon-close { display: none !important; }
-.menu-toggle.active .icon-burger { display: none !important; }
-.menu-toggle.active .icon-close { display: block !important; stroke: #ffffff !important; }
-
+/* ШАПКА */
 header {
     background-color: rgba(11, 19, 33, 0.92) !important;
     backdrop-filter: blur(8px) !important;
@@ -78,393 +34,465 @@ header {
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
-    height: 103px !important;
+    height: 70px !important;
     z-index: 100 !important;
     display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    transition: all 0.3s ease;
+    align-items: center !important;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
 }
 
 .header-container {
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-start !important; 
+    justify-content: space-between !important; 
     width: 100% !important;
-    max-width: 1200px !important;
-    height: 65px !important; 
-    padding: 0 12px !important;
+    max-width: 1300px !important;
+    padding: 0 24px !important;
     margin: 0 auto !important;
-    position: relative !important;
 }
 
-.menu-toggle { order: 1 !important; }
-
 .logo {
-    order: 2 !important;
-    margin-left: 24px !important;
-    font-size: 1.20rem !important;
+    font-size: 1.4rem !important;
     font-weight: 700 !important;
     color: #f0f6fc !important;
     letter-spacing: 0.5px !important;
-    white-space: nowrap !important;
     text-decoration: none !important;
-    display: flex !important;
-    align-items: center !important;
-    height: 100% !important;
 }
 
-.logo span { color: #0066cc !important; }
-.lk-btn { order: 3 !important; margin-left: auto !important; }
+.logo span { color: #58a6ff !important; }
 
-.hero-actions {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    width: 100% !important;
-    max-width: 600px !important;
-    margin: 0 auto !important;
-    padding: 0 20px !important;
-    box-sizing: border-box !important;
-    height: 38px !important;
-}
-
-.mode-btn, .toggle-btn {
-    flex: 1 !important;
+.lk-btn {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    height: 38px !important;
-    background: transparent !important; 
-    border: 1px solid #0066cc !important;
-    color: #8b949e !important; 
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    border-radius: 20px !important;
-    cursor: pointer !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    outline: none !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    transition: transform 0.1s ease !important;
+    text-decoration: none !important;
 }
 
-.mode-btn:hover, .toggle-btn:hover {
-    color: #ffffff !important;
-    border-color: #388bfd !important;
-    background: rgba(0, 102, 204, 0.1) !important; 
+.lk-btn svg {
+    stroke: #8b949e !important;
+    width: 22px !important;
+    height: 22px !important;
 }
 
-.mode-btn.active, .toggle-btn.active {
-    background: #0066cc !important;
-    color: #ffffff !important;
-    border-color: transparent !important;
-    font-weight: 600 !important;
+/* ГЛАВНАЯ СЕТКА ХАБА (HUB GRID) */
+.hub-main {
+    padding: 110px 24px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-.hero-section h1 { font-size: 2.5rem !important; color: #f0f6fc !important; margin-bottom: 15px !important; font-weight: 800 !important; }
-.hero-section p { font-size: 1.2rem !important; color: #8b949e !important; margin-bottom: 20px !important; }
-
-@media (max-width: 768px) {
-    header {
-        height: 103px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        z-index: 100 !important; 
-    }
-    header .header-container {
-        background: #0b1321 !important;
-        position: relative !important;
-        z-index: 102 !important;
-    }
-    .logo, #menu-toggle { position: relative !important; z-index: 102 !important; }
-    .logo span { color: #00f2fe !important; }
-
-    .nav-links {
-        position: fixed !important;
-        top: 0 !important; 
-        left: 0 !important;
-        width: 100% !important;
-        height: 100vh !important;
-        background: linear-gradient(to bottom, #0b1321, #070b12) !important; 
-        display: flex !important;
-        flex-direction: column !important;
-        padding: 95px 24px 24px 24px !important; 
-        z-index: 101 !important; 
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        touch-action: pan-y !important; 
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        transform: translate3d(0, -105%, 0) !important;
-        transition: transform 0.38s ease-in-out !important;
-    }
-    .nav-links::-webkit-scrollbar { display: none !important; }
-    .nav-links.active {
-        transform: translate3d(0, 0, 0) !important;
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
-    .nav-links .menu-item-link, .nav-links .menu-status-bar {
-        opacity: 0;
-        transition: opacity 0.2s ease !important;
-    }
-    .nav-links.active .menu-item-link, .nav-links.active .menu-status-bar {
-        opacity: 1;
-        transition: opacity 0.25s ease 0.15s !important;
-    }
-   
-    .hero-actions {
-        transition: none !important;
-        transition-delay: 0.28s !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-
-    body.menu-open .hero-actions {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        transition-delay: 0s !important;
-    }
-    body.menu-open .lk-btn { display: none !important; }
-
-    .nav-links .menu-item-link {
-        display: block !important;
-        width: 100% !important;
-        padding: 16px 0 !important;
-        font-size: 18px !important;
-        color: #c9d1d9 !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
-    }
-    .nav-links .menu-item-link:active {
-        border-bottom-color: rgba(240, 246, 252, 0.4) !important;
-        color: #fff !important;
-    }
-
-    .nav-links .menu-group-links { display: flex !important; flex-direction: column !important; width: 100% !important; }
-    .nav-links .menu-group-links[style*="display: none"] { display: none !important; }
-    .nav-links .menu-group-links[style*="display: flex"] { display: flex !important; }
-
-    .menu-status-bar {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        border-bottom: 1px solid rgba(48, 54, 61, 0.4) !important;
-        margin-bottom: 16px !important;
-        padding-bottom: 12px !important;
-    }
-    .menu-status-text { color: #58a6ff !important; font-weight: 500 !important; font-size: 19px !important; }
-    .menu-status-arrows { display: flex !important; align-items: center !important; gap: 20px !important; }
-    .menu-status-arrows .menu-arrow-icon { width: 24px !important; height: 24px !important; color: #768390 !important; }
-       
-    .hero-section {
-        padding-top: 127px !important; 
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important; 
-        justify-content: center !important;
-        width: 100% !important;
-    }
-    .hero-section h1, .hero-section p { text-align: center !important; width: 100% !important; }
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 240px;
+    gap: 20px;
 }
 
-/* СЕТКА BENTO */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
+/* Карточка навигации на главной */
+.hub-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    padding: 30px;
+    text-decoration: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: 
+        transform 0.25s cubic-bezier(0.2, 0, 0.2, 1),
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+.hub-card:hover {
+    transform: scale(1.02);
+    border-color: rgba(88, 166, 255, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Размеры карточек на главной */
+.supplier-card { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg, #161b22 0%, #0d1117 100%); }
+.customer-card { grid-column: span 2; grid-row: span 1; }
+.finance-card, .transport-card, .legal-card, .training-card { grid-column: span 1; }
+
+/* Настройки для внутренней страницы (в точном соответствии с логикой главной) */
+.bento-card.main-hero { 
+    grid-column: span 2 !important; /* Карточка занимает 2 колонки как на главной */
+    pointer-events: none !important; /* Запрет кликов */
+    user-select: none !important; /* Запрет выделения текста */
+    transform: none !important; /* Фикс: отменяем увеличение для главной карточки */
+}
+
+/* Фикс: заставляем рамку главной карточки светиться всегда */
+.bento-card.main-hero .bento-card-front {
+    box-shadow: inset 0 0 0 1px rgba(88, 166, 255, 0.4) !important;
 }
 
 @media (max-width: 1024px) {
-  .bento-grid { grid-template-columns: repeat(2, 1fr); overflow-x: hidden; }
+    .hub-grid { grid-template-columns: repeat(2, 1fr); }
+    .supplier-card { grid-column: span 2; }
 }
 
-/* ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ МЕДИА-ЗАПРОС (Строго по 1 карточке в строку) */
-@media (max-width: 768px) {
-  .bento-grid {
-    overflow-x: hidden;
-    grid-template-columns: 1fr !important; 
-    gap: 16px !important;
-    padding: 0 16px !important;
-  }
-       }
-   /* 3D-контекст Bento-карточек */
+@media (max-width: 600px) {
+    .hub-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    .hub-card { grid-column: span 1 !important; aspect-ratio: 1.5; }
+}
+
+/* Тексты для хаба */
+.hub-card h2 { font-size: 2rem; color: #fff; margin-bottom: 12px; font-weight: 700; }
+.hub-card h3 { font-size: 1.4rem; color: #fff; margin-bottom: 8px; font-weight: 600; }
+.hub-card p { color: #8b949e; font-size: 0.95rem; line-height: 1.5; margin: 0; }
+.hub-tag { position: absolute; top: 30px; left: 30px; background: #58a6ff; color: #fff; padding: 4px 12px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
+
+/* BENTO GRID (Для внутренних страниц) */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1300px;
+    margin: 110px auto 40px;
+    padding: 0 24px;
+}
+
 .bento-card {
-  background: transparent !important;
-  perspective: 1500px !important;
-  width: 100% !important;
-  height: 220px;
-  position: relative !important;
-  cursor: pointer;
+    background: transparent !important;
+    perspective: 2000px !important;
+    width: 100%;
+    height: 240px;
+    position: relative !important;
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0.2, 1), opacity 0.15s ease !important;
+    will-change: transform, opacity;
 }
 
+/* Фикс: запрещаем любые ховеры и клики на hero-карточке */
+.bento-card.main-hero {
+    grid-column: span 2;
+    cursor: default !important;
+    transform: none !important;
+}
+.bento-card.main-hero:hover {
+    transform: none !important;
+}
+.bento-card.main-hero .bento-card-front {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+
+/* Фикс для того, чтобы контент не дергался при анимации */
 .bento-card-inner {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  transform-style: preserve-3d !important;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform-style: preserve-3d !important;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    will-change: transform;
 }
 
-.bento-card-front, 
-.bento-card-back {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  backface-visibility: hidden !important;
-  -webkit-backface-visibility: hidden !important;
-  border-radius: 12px !important;
-  background: linear-gradient(to bottom, #0b1528, #020617) !important;
-  padding: 24px !important;
-  transition: opacity 0.2s ease !important;
-  box-shadow: inset 0 0 0 1px #30363d !important; 
+.bento-card-front, .bento-card-back {
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    border-radius: 24px !important;
+    background: #161b22 !important;
+    padding: 30px !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Чтобы контент не вылезал при развороте */
+}
+/* Маленькие карточки при наведении увеличиваются и подсвечивают рамку */
+.bento-card:hover {
+    transform: scale(1.02) !important;
 }
 
-.bento-grid .bento-card-back {
-  transform: rotateY(180deg) !important;
-  opacity: 0 !important;
+.bento-card:hover .bento-card-front,
+.bento-card:hover .bento-card-back {
+    box-shadow: inset 0 0 0 1px rgba(88, 166, 255, 0.4) !important;
 }
 
-/* МЕХАНИЗМ КЛОНИРОВАНИЯ И ПРЕМИАЛЬНОГО ВЗЛЕТА */
+.bento-card-back { 
+    transform: rotateY(180deg) !important; 
+    overflow-y: auto !important; /* Чтобы форма могла скроллиться */
+}
+
+/* СТИЛИ КЛОНА (МОРФИНГ-АНИМАЦИЯ) */
 .bento-card-clone {
-  position: fixed !important;
-  z-index: 9999 !important;
-  background: transparent !important;
-  pointer-events: auto !important;
-  transition: 
-    top 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    left 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    width 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    height 400ms cubic-bezier(0.25, 1, 0.5, 1),
-    border-radius 400ms cubic-bezier(0.25, 1, 0.5, 1);
-  transform-style: preserve-3d !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    pointer-events: none;
+    background: #161b22;
+    transition: 
+        top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.5s ease;
+    will-change: transform;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
 }
-
-/important;
-}
-
-.bento-card.is-cloned { opacity: 0.3 !important; }
-.bento-card.is-cloned * { transition: none !important; transform: none !important; animation: none !important; }
-
-/* ИСПРАВЛЕНО: overflow-y больше не прячется, шапка не прыгает по ширине */
-body.bento-active {
-    touch-action: none !important; 
-}
-
-.bento-card-clone.is-expanded .bento-card-back {
-    padding: 24px !important;
-    overflow-y: auto !important; 
-   }
 
 .bento-card-clone.is-expanded {
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important; /* <--- Теперь рамка жестко привязана к экрану */
-  height: 100vh !important;
-  height: 100dvh !important;
-  border-radius: 0px !important;
-  box-shadow: none !important;
+    pointer-events: all;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-.bento-card-clone .bento-card-inner {
-  width: 100% !important;
-  height: 100% !important;
-  position: relative !important;
-  transform-style: preserve-3d !important;
-  transition: transform 400ms cubic-bezier(0.25, 1, 0.5, 1) !important;
+.bento-card-close-icon {
+    position: absolute !important;
+    top: 30px !important; 
+    right: 30px !important;
+    width: 44px !important; 
+    height: 44px !important;
+    cursor: pointer !important;
+    z-index: 100 !important;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.bento-card-clone.is-flipped .bento-card-inner {
-  transform: rotateY(180deg) !important;
-}
-
-.bento-card-clone .bento-card-front,
-.bento-card-clone .bento-card-back {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  backface-visibility: hidden !important;
-  -webkit-backface-visibility: hidden !important;
-  
-  /* ИСПРАВЛЕНО: Вместо border: none пишем внутреннюю рамку для идеального слияния */
-  box-shadow: inset 0 0 0 1px #30363d !important;
-}
-
-/* Углы карточки при расширении на весь экран становятся прямыми (Оригинальный блок) */
-.bento-card-clone.is-expanded .bento-card-front,
-.bento-card-clone.is-expanded .bento-card-back {
-  border-radius: 0px !important;
-}
-
-.bento-card-clone .bento-card-back {
-  transform: rotateY(180deg) !important;
-  opacity: 1 !important;
--webkit-font-smoothing: antialiased;
-  backface-visibility: hidden !important;
-}
-
-.bento-card-clone .bento-card-close-icon {
-  position: absolute !important;
-  top: 24px !important;
-  right: 24px !important;
-  width: 28px !important;
-  height: 28px !important;
-  cursor: pointer !important;
-  z-index: 2000000 !important;
-  transform: translateZ(100px) !important;
-  pointer-events: auto !important;
-}
-
-.bento-card-clone .bento-card-back h3 {
-  color: #ffffff !important;
+.bento-card-close-icon:hover {
+    background: rgba(255,255,255,0.2);
 }
 
 .bento-card-close-icon svg {
-  width: 100% !important;
-  height: 100% !important;
-  stroke: #ffffff !important;
-  stroke-width: 2.5px !important;
-  fill: none !important;
+    width: 24px;
+    height: 24px;
+    stroke: #fff;
+    stroke-width: 2.5px;
 }
 
-.bento-card.is-cloned {
-  opacity: 0.3 !important;
+@media (max-width: 768px) {
+    .bento-card-clone.is-expanded {
+        border-radius: 0 !important;
+    }
 }
 
-.bento-card.is-cloned * {
-  transition: none !important;
-  transform: none !important;
-  animation: none !important;
+/* Внутреннее устройство при морфинге - ТОЛЬКО ДЛЯ КЛОНА */
+.bento-card-clone .bento-card-inner {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform-style: flat !important; /* Убираем 3D для морфинга */
+    transition: none !important;
 }
 
-/* ИСПРАВЛЕНО: Убираем скрытие overflow на body, чтобы шапка не прыгала */
-body.bento-active {
-  touch-action: none !important;
+.bento-card-clone .bento-card-front, 
+.bento-card-clone .bento-card-back {
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    transition: opacity 0.2s ease-out; /* Мягкое переключение */
+    -webkit-font-smoothing: antialiased;
+    will-change: opacity;
 }
 
-.bento-card-clone.is-expanded .bento-card-back {
-  padding: 24px !important;
-  overflow-y: auto !important;
-   }
-/* Фиксируем контент изнанки в момент закрытия, чтобы текст не прыгал */
-.bento-card-clone:not(.is-expanded) .bento-card-back {
-  width: 100vw !important;
-  overflow: hidden !important;
+.bento-card-clone .bento-card-back {
+    opacity: 0;
+    visibility: hidden;
+    transform: none !important; /* Убираем поворот */
+    background: #1c2128 !important; 
+    display: flex;
+    flex-direction: column;
 }
+
+.bento-card-clone.show-back .bento-card-back {
+    opacity: 1;
+    visibility: visible;
+}
+
+.bento-card-clone.show-back .bento-card-front {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Скролл внутри формы */
+.bento-card-widget-zone {
+    padding: 20px 0;
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-gutter: stable; /* Фикс прыжка текста */
+}
+
+.bento-card.is-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.bento-card-back-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bento-card-widget-zone {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+   ЖИРНЫЙ ПОДВАЛ САЙТА (FAT FOOTER)
+
+.hub-fat-footer {
+    padding: 60px 0 30px;
+    border-top: 1px solid rgba(48, 54, 61, 0.15);
+    width: 100%;
+}
+
+.fat-footer-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 30px;
+    width: 100%;
+}
+
+.fat-footer-column h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #86868b !important; 
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.fat-footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fat-footer-column ul li {
+    margin-bottom: 10px;
+}
+
+/* Ссылки ровно 12px и базовый цвет */
+.fat-footer-column ul li a {
+    font-size: 12px;
+    color: #86868b; /* Спокойный серый цвет ссылок */
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+    line-height: 1.4;
+}
+
+/* Цвет при наведении мышки — благородный темно-серый вместо синего */
+.fat-footer-column ul li a:hover {
+    color: #1d1d1f; 
+}
+
+/* Нижняя служебная строчка */
+.fat-footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(48, 54, 61, 0.1);
+    display: flex;
+    gap: 25px;
+}
+
+.fat-footer-bottom a {
+    font-size: 12px;
+    color: #86868b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.fat-footer-bottom a:hover {
+    color: #1d1d1f; /* Тоже темно-серый при наведении */
+}
+
+/* Адаптивность для планшетов и мобилок */
+@media (max-width: 992px) {
+    .fat-footer-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 колонки на планшетах */
+        gap: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .fat-footer-container {
+        grid-template-columns: repeat(1, 1fr); /* 1 колонка на смартфонах */
+        gap: 20px;
+    }
+    .fat-footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* НИЖНИЙ МИНИМАЛИСТИЧНЫЙ ФУТЕР */
+.legal-footer {
+    padding: 24px;
+    background-color: transparent !important;
+    border-top: none !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Контейнер выстраивает всё в одну линию строго по центру */
+.legal-footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Аккуратный шаг между текстом, разделителями и ссылками */
+    flex-wrap: wrap; /* Чтобы красиво переносилось на мобильных экранах */
+}
+
+/* Копирайт, разделители и ссылки — один в один как в 6 столбцах */
+.legal-footer-container .copyright-text,
+.legal-footer-container .footer-divider,
+.legal-footer-container a {
+    font-size: 12px;
+    color: #86868b; /* Спокойный серый цвет ссылок */
+    line-height: 1.4;
+    font-family: inherit; /* Наследует ваш основной шрифт сайта */
+}
+
+/* Ссылки без подчеркивания с плавным эффектом */
+.legal-footer-container a {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+/* Цвет при наведении мышки — благородный темно-серый, как у вас в fat-footer */
+.legal-footer-container a:hover {
+    color: #1d1d1f; 
+}
+
+/* Бледность для разделителей, чтобы они не бросались в глаза */
+.legal-footer-container .footer-divider {
+    opacity: 0.4;
+}
+
+/* Адаптивность под смартфоны */
+@media (max-width: 768px) {
+    .legal-footer-container {
+        gap: 10px; /* Сужаем отступы на небольших экранах */
+    }
+    /* Скрываем вертикальные разделители на мобилках, чтобы текст аккуратно переносился строками */
+    .legal-footer-container .footer-divider {
+        display: none;
+    }
+}
+
