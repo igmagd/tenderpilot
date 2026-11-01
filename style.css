@@ -416,6 +416,8 @@ body.bento-active {
 .bento-card-clone .bento-card-back {
   transform: rotateY(180deg) !important;
   opacity: 1 !important;
+-webkit-font-smoothing: antialiased;
+  backface-visibility: hidden !important;
 }
 
 .bento-card-clone .bento-card-close-icon {
