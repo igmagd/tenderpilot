@@ -59,24 +59,59 @@ header {
     text-decoration: none !important;
 }
 
-.logo span { color: #58a6ff !important; }
+.logo span { color: #00cccc !important; }
+
+/* Бургер меню */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #8b949e;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-toggle svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5; /* Одинаковая толщина с иконкой ЛК */
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .header-container {
+        padding: 0 16px !important; /* Уменьшаем отступ контейнера на мобилках */
+        gap: 16px !important; /* Одинаковое расстояние между элементами */
+        justify-content: flex-start !important; /* Выравниваем по левому краю */
+    }
+
+    .lk-btn {
+        margin-left: auto; /* ЛК улетает вправо */
+    }
+}
 
 .lk-btn {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 42px !important;
-    height: 42px !important;
-    border-radius: 50% !important;
-    background: rgba(255, 255, 255, 0.05) !important;
+    width: 24px !important; /* Уменьшаем до размера иконки */
+    height: 24px !important;
+    border-radius: 0 !important; /* Убираем круг */
+    background: none !important; /* Убираем фон */
     transition: transform 0.1s ease !important;
     text-decoration: none !important;
 }
 
 .lk-btn svg {
     stroke: #8b949e !important;
-    width: 22px !important;
-    height: 22px !important;
+    width: 24px !important;
+    height: 24px !important;
+    stroke-width: 2.5 !important;
 }
 
 /* ГЛАВНАЯ СЕТКА ХАБА (HUB GRID) */
@@ -432,14 +467,318 @@ header {
 
 @media (max-width: 576px) {
     .fat-footer-container {
-        grid-template-columns: repeat(1, 1fr); /* 1 колонка на смартфонах */
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на смартфонах */
+        gap: 20px 20px;
     }
     .fat-footer-bottom {
         flex-direction: column;
         gap: 12px;
     }
 }
+
+/* ==========================================================================
+   ИНТЕРАКТИВНЫЕ ШТОРКИ ДЛЯ ВНУТРЕННИХ СТРАНИЦ (ПРОФЕССИОНАЛЬНАЯ ВЕРСИЯ V5)
+   ========================================================================== */
+
+/* Глобальная обертка секции */
+.premium-shutter-section {
+    width: 100%;
+    background-color: #0d1117;
+    padding: 20px 0 40px 0; /* Открытие идет вниз, поэтому верхний паддинг меньше */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+}
+
+/* Ограничитель ширины по пазам сайта */
+.premium-shutter-section .shutter-layout-container {
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 24px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- СТРОЧКА УПРАВЛЕНИЯ (КНОПКИ ТЕПЕРЬ НАВЕРХУ) --- */
+.premium-shutter-section .shutter-control-bar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 35px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.premium-shutter-section .shutter-trigger-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13px;
+    color: #86868b;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.2s ease;
+}
+
+/* Мягкий, едва заметный отклик кнопок при наведении и в активном состоянии */
+.premium-shutter-section .shutter-trigger-btn:hover, 
+.premium-shutter-section .shutter-trigger-btn.is-active {
+    color: #c9d1d9; /* Благородный приглушенный белый вместо едкого яркого */
+}
+
+/* Главный бокс для выезжающих панелей */
+.premium-shutter-section .shutter-dynamic-box {
+    width: 100%;
+    display: block;
+}
+
+/* Базовое скрытие шторки */
+.premium-shutter-section .shutter-panel-item {
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Состояние шторки при активации */
+.premium-shutter-section .shutter-panel-item.is-active {
+    opacity: 1;
+    visibility: visible;
+    padding-top: 20px; /* Отступ сверху от кнопок */
+}
+
+/* --- БЛОК 1: ТАРИФЫ (МОНОХРОМНАЯ BENTO-СЕТКА) --- */
+.premium-shutter-section .shutter-tariffs-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.premium-shutter-section .shutter-tariff-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 260px;
+    box-sizing: border-box;
+}
+
+.premium-shutter-section .shutter-tariff-card.shutter-featured {
+    border-color: rgba(56, 139, 253, 0.3);
+}
+
+.premium-shutter-section .shutter-card-head h3 {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    font-weight: 400;
+    color: #86868b;
+}
+
+.premium-shutter-section .shutter-price-val {
+    font-size: 20px;
+    font-weight: 500;
+    color: #c9d1d9;
+}
+
+.premium-shutter-section .shutter-price-val span {
+    font-size: 13px;
+    color: #86868b;
+}
+
+.premium-shutter-section .shutter-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 24px 0;
+}
+
+.premium-shutter-section .shutter-card-list li {
+    font-size: 13px;
+    color: #86868b;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 14px;
+    line-height: 1.4;
+}
+
+.premium-shutter-section .shutter-card-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #30363d; /* Приглушенные маркеры */
+}
+
+.premium-shutter-section .shutter-btn-action {
+    background: transparent;
+    border: 1px solid #30363d;
+    color: #86868b;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.premium-shutter-section .shutter-btn-action:hover {
+    background: #21262d;
+    color: #c9d1d9;
+    border-color: #8b949e;
+}
+
+/* --- БЛОК 2: FAQ АККОРДЕОНЫ (ШИРОКИЕ, СДВИГ ВЛЕВО) --- */
+.premium-shutter-section .shutter-faq-accordion-box {
+    max-width: 1000px; /* Пошире, чтобы строчки вопросов дышали */
+    margin: 0; /* Строгий левый край */
+}
+
+.premium-shutter-section .shutter-accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.premium-shutter-section .shutter-accordion-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+}
+
+.premium-shutter-section .shutter-accordion-trigger span:first-child {
+    font-size: 13px; /* Монолитный сквозной размер */
+    font-weight: 400;
+    color: #86868b; /* Приглушенный цвет */
+    padding-right: 20px;
+    transition: color 0.2s ease;
+}
+
+/* Спокойная подсветка вопроса при наведении или в открытом состоянии */
+.premium-shutter-section .shutter-accordion-trigger:hover span:first-child,
+.premium-shutter-section .shutter-accordion-item.is-open .shutter-accordion-trigger span:first-child {
+    color: #c9d1d9;
+}
+
+/* Компактная тонкая стрелочка Apple */
+.premium-shutter-section .shutter-arrow-icon {
+    width: 8px;
+    height: 8px;
+    border-right: 1px solid #30363d;
+    border-bottom: 1px solid #30363d;
+    transform: rotate(45deg);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    flex-shrink: 0;
+}
+
+.premium-shutter-section .shutter-accordion-item.is-open .shutter-arrow-icon {
+    transform: rotate(-135deg);
+    border-color: #8b949e;
+}
+
+/* Выдвижной ответ */
+.premium-shutter-section .shutter-accordion-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+
+.premium-shutter-section .shutter-accordion-content p {
+    margin: 0;
+    padding-bottom: 16px;
+    font-size: 13px; /* Монолитный размер */
+    color: #86868b;
+    line-height: 1.5;
+}
+
+/* --- БЛОК 3: КОНТАКТЫ (МОНОХРОМНЫЙ ОДНОСТРОЧНЫЙ ПОТОК) --- */
+.premium-shutter-section .shutter-contacts-single-flow {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 0;
+    text-align: left;
+}
+
+.premium-shutter-section .shutter-flow-line {
+    font-size: 13px; /* Монолитный размер */
+    color: #86868b;
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+.premium-shutter-section .shutter-flow-link {
+    color: #86868b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.premium-shutter-section .shutter-flow-link:hover {
+    color: #c9d1d9; /* Мягкий отклик ссылок */
+}
+
+/* Юридический блок, бережно отделенный воздухом */
+.premium-shutter-section .shutter-flow-legal-group {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* ==========================================================================
+   МУЛЬТИПЛАТФОРМЕННЫЙ АДАПТИВ (ПОД ОДИНАКОВЫЙ МОНОЛИТ)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .premium-shutter-section .shutter-tariffs-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .premium-shutter-section .shutter-layout-container {
+        padding: 0 16px;
+    }
+    
+    /* Свайпер тарифов на телефонах */
+    .premium-shutter-section .shutter-tariffs-row {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 15px;
+        gap: 16px;
+    }
+    
+    .premium-shutter-section .shutter-tariffs-row::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .premium-shutter-section .shutter-tariffs-row::-webkit-scrollbar-thumb {
+        background: #30363d;
+        border-radius: 10px;
+    }
+
+    .premium-shutter-section .shutter-tariff-card {
+        min-width: 260px;
+        scroll-snap-align: start;
+    }
+    
+    .premium-shutter-section .shutter-control-bar {
+        gap: 25px;
+    }
+
+    .premium-shutter-section .shutter-flow-line {
+        margin-bottom: 18px; /* Немного больше воздуха под пальцы на смартфонах */
+    }
+}
+
 
 /* НИЖНИЙ МИНИМАЛИСТИЧНЫЙ ФУТЕР */
 .legal-footer {
