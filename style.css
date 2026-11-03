@@ -54,33 +54,24 @@ header {
 .logo {
     display: inline-flex !important;
     align-items: center !important;
-    /* Полностью возвращаем твои исходные размеры и шрифт */
+    /* Твои оригинальные настройки шрифта и размера */
     font-size: 1.4rem !important;
     font-weight: 700 !important;
+    color: #f0f6fc !important; /* Исходный чистый цвет для Tender */
     letter-spacing: 0.5px !important;
     text-decoration: none !important;
     user-select: none !important;
 
-    /* Плавный металлический градиент, адаптированный под тонкий шрифт */
-    background: linear-gradient(to bottom, 
-        #ffffff 0%, 
-        #a2a8b3 35%, 
-        #505661 65%, 
-        #232933 100%
-    ) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-
-    /* Тонкий, аккуратный бирюзовый контур-отсвет строго по нижней грани */
-    filter: drop-shadow(0px 1px 0.5px rgba(0, 204, 204, 0.8)) !important;
+    /* Тонкий аккуратный отблеск по нижней грани всего логотипа */
+    filter: drop-shadow(0px 1px 0.5px rgba(0, 204, 204, 0.5)) !important;
 }
 
 .logo span { 
-    /* Pilot наследует металл, но отблеск под ним делаем чуть глубже */
-    background: inherit !important; 
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    filter: drop-shadow(0px 1.5px 1px rgba(0, 204, 204, 0.95)) !important;
+    color: #00cccc !important; /* Возвращаем исходный бирюзовый для Pilot */
+    
+    /* Делаем подсветку под словом Pilot чуть более выразительной, */
+    /* чтобы она создавала объем даже на небольших экранах */
+    filter: drop-shadow(0px 1px 1px rgba(0, 204, 204, 0.9)) !important;
 }
 
 /* Бургер меню */
