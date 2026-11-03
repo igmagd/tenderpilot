@@ -22,7 +22,7 @@ html, body {
 /* Фикс для предотвращения прыжков при открытии модалки */
 body.bento-active {
     overflow: hidden !important;
-    padding-right: 0 !important; /* Убираем компенсацию скроллбара, если она есть */
+    padding-right: 0 !important; 
 }
 
 /* ШАПКА */
@@ -76,7 +76,7 @@ header {
 .menu-toggle svg {
     width: 24px;
     height: 24px;
-    stroke-width: 2.5; /* Одинаковая толщина с иконкой ЛК */
+    stroke-width: 2.5; 
 }
 
 @media (max-width: 768px) {
@@ -85,13 +85,13 @@ header {
     }
     
     .header-container {
-        padding: 0 16px !important; /* Уменьшаем отступ контейнера на мобилках */
-        gap: 16px !important; /* Одинаковое расстояние между элементами */
-        justify-content: flex-start !important; /* Выравниваем по левому краю */
+        padding: 0 16px !important; 
+        gap: 16px !important; 
+        justify-content: flex-start !important; 
     }
 
     .lk-btn {
-        margin-left: auto; /* ЛК улетает вправо */
+        margin-left: auto; 
     }
 }
 
@@ -99,10 +99,10 @@ header {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 24px !important; /* Уменьшаем до размера иконки */
+    width: 24px !important; 
     height: 24px !important;
-    border-radius: 0 !important; /* Убираем круг */
-    background: none !important; /* Убираем фон */
+    border-radius: 0 !important; 
+    background: none !important; 
     transition: transform 0.1s ease !important;
     text-decoration: none !important;
 }
@@ -157,12 +157,12 @@ header {
 .customer-card { grid-column: span 2; grid-row: span 1; }
 .finance-card, .transport-card, .legal-card, .training-card { grid-column: span 1; }
 
-/* Настройки для внутренней страницы (в точном соответствии с логикой главной) */
+/* Настройки для внутренней страницы */
 .bento-card.main-hero { 
-    grid-column: span 2 !important; /* Карточка занимает 2 колонки как на главной */
-    pointer-events: none !important; /* Запрет кликов */
-    user-select: none !important; /* Запрет выделения текста */
-    transform: none !important; /* Фикс: отменяем увеличение для главной карточки */
+    grid-column: span 2 !important; 
+    pointer-events: none !important; 
+    user-select: none !important; 
+    transform: none !important; 
 }
 
 /* Фикс: заставляем рамку главной карточки светиться всегда */
@@ -194,6 +194,7 @@ header {
     max-width: 1300px;
     margin: 110px auto 40px;
     padding: 0 24px;
+    min-height: calc(100vh - 70px - 450px) !important; 
 }
 
 .bento-card {
@@ -219,7 +220,6 @@ header {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
 }
 
-
 /* Фикс для того, чтобы контент не дергался при анимации */
 .bento-card-inner {
     position: absolute !important;
@@ -243,8 +243,9 @@ header {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Чтобы контент не вылезал при развороте */
+    overflow: hidden; 
 }
+
 /* Маленькие карточки при наведении увеличиваются и подсвечивают рамку */
 .bento-card:hover {
     transform: scale(1.02) !important;
@@ -257,7 +258,7 @@ header {
 
 .bento-card-back { 
     transform: rotateY(180deg) !important; 
-    overflow-y: auto !important; /* Чтобы форма могла скроллиться */
+    overflow-y: auto !important; 
 }
 
 /* СТИЛИ КЛОНА (МОРФИНГ-АНИМАЦИЯ) */
@@ -323,7 +324,7 @@ header {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
-    transform-style: flat !important; /* Убираем 3D для морфинга */
+    transform-style: flat !important; 
     transition: none !important;
 }
 
@@ -335,7 +336,7 @@ header {
     height: 100% !important;
     backface-visibility: hidden !important;
     -webkit-backface-visibility: hidden !important;
-    transition: opacity 0.2s ease-out; /* Мягкое переключение */
+    transition: opacity 0.2s ease-out; 
     -webkit-font-smoothing: antialiased;
     will-change: opacity;
 }
@@ -343,7 +344,7 @@ header {
 .bento-card-clone .bento-card-back {
     opacity: 0;
     visibility: hidden;
-    transform: none !important; /* Убираем поворот */
+    transform: none !important; 
     background: #1c2128 !important; 
     display: flex;
     flex-direction: column;
@@ -365,7 +366,7 @@ header {
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-gutter: stable; /* Фикс прыжка текста */
+    scrollbar-gutter: stable; 
 }
 
 .bento-card.is-hidden {
@@ -374,118 +375,24 @@ header {
 }
 
 .bento-card-back-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.bento-card-widget-zone {
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
-   ЖИРНЫЙ ПОДВАЛ САЙТА (FAT FOOTER)
-
-.hub-fat-footer {
-    padding: 60px 0 30px;
-    border-top: 1px solid rgba(48, 54, 61, 0.15);
-    width: 100%;
-}
-
-.fat-footer-container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 30px;
-    width: 100%;
-}
-
-.fat-footer-column h4 {
-    font-size: 13px;
-    font-weight: 600;
-    color: #86868b !important; 
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.fat-footer-column ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.fat-footer-column ul li {
-    margin-bottom: 10px;
-}
-
-/* Ссылки ровно 12px и базовый цвет */
-.fat-footer-column ul li a {
-    font-size: 12px;
-    color: #86868b; /* Спокойный серый цвет ссылок */
-    text-decoration: none;
-    transition: color 0.2s ease;
-    display: inline-block;
-    line-height: 1.4;
-}
-
-/* Цвет при наведении мышки — благородный темно-серый вместо синего */
-.fat-footer-column ul li a:hover {
-    color: #1d1d1f; 
-}
-
-/* Нижняя служебная строчка */
-.fat-footer-bottom {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(48, 54, 61, 0.1);
-    display: flex;
-    gap: 25px;
-}
-
-.fat-footer-bottom a {
-    font-size: 12px;
-    color: #86868b;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-.fat-footer-bottom a:hover {
-    color: #1d1d1f; /* Тоже темно-серый при наведении */
-}
-
-/* Адаптивность для планшетов и мобилок */
-@media (max-width: 992px) {
-    .fat-footer-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 колонки на планшетах */
-        gap: 25px;
-    }
-}
-
-@media (max-width: 576px) {
-    .fat-footer-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 колонки на смартфонах */
-        gap: 20px 20px;
-    }
-    .fat-footer-bottom {
-        flex-direction: column;
-        gap: 12px;
-    }
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+padding-bottom: 15px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================================
-   ИНТЕРАКТИВНЫЕ ШТОРКИ ДЛЯ ВНУТРЕННИХ СТРАНИЦ (ПРОФЕССИОНАЛЬНАЯ ВЕРСИЯ V5)
+   ИНТЕРАКТИВНЫЕ ШТОРКИ ДЛЯ ВНУТРЕННИХ СТРАНИЦ (ПРОФЕССИОНАЛЬНАЯ ВЕРСИЯ V5) - ПОКРАСКА APPLE
    ========================================================================== */
 
 /* Глобальная обертка секции */
 .premium-shutter-section {
     width: 100%;
-    background-color: #0d1117;
-    padding: 20px 0 40px 0; /* Открытие идет вниз, поэтому верхний паддинг меньше */
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #f5f5f7; /* Покрасили фон всей зоны шторки */
+    padding: 30px 0; 
+    border-top: 1px solid rgba(0, 0, 0, 0.08); /* Линия стыка с черным верхом */
     box-sizing: border-box;
 }
 
@@ -512,17 +419,19 @@ header {
     background: none;
     border: none;
     padding: 0;
-    font-size: 13px;
-    color: #86868b;
+    font-size: 14px; 
+    color: #6e6e73; 
     cursor: pointer;
     font-family: inherit;
+    font-weight: 600;
     transition: color 0.2s ease;
 }
 
-/* Мягкий, едва заметный отклик кнопок при наведении и в активном состоянии */
+/* Отклик кнопок при наведении и в активном состоянии */
 .premium-shutter-section .shutter-trigger-btn:hover, 
 .premium-shutter-section .shutter-trigger-btn.is-active {
-    color: #c9d1d9; /* Благородный приглушенный белый вместо едкого яркого */
+    color: #1d1d1f; 
+    text-decoration: underline; 
 }
 
 /* Главный бокс для выезжающих панелей */
@@ -541,14 +450,18 @@ header {
     transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Состояние шторки при активации */
+/* ФИКС: Состояние шторки при активации — выстраиваем контент в столбец сверху вниз */
 .premium-shutter-section .shutter-panel-item.is-active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
     opacity: 1;
     visibility: visible;
-    padding-top: 20px; /* Отступ сверху от кнопок */
+    padding-top: 20px; 
 }
 
-/* --- БЛОК 1: ТАРИФЫ (МОНОХРОМНАЯ BENTO-СЕТКА) --- */
+/* --- БЛОК 1: ТАРИФЫ (МОНОХРОМНАЯ BENTO-СЕТКА НА СВЕТЛОМ) --- */
 .premium-shutter-section .shutter-tariffs-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -557,8 +470,8 @@ header {
 }
 
 .premium-shutter-section .shutter-tariff-card {
-    background: #161b22;
-    border: 1px solid #30363d;
+    background: #ffffff; 
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 16px;
     padding: 24px;
     display: flex;
@@ -566,28 +479,29 @@ header {
     justify-content: space-between;
     min-height: 260px;
     box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
 }
 
 .premium-shutter-section .shutter-tariff-card.shutter-featured {
-    border-color: rgba(56, 139, 253, 0.3);
+    border-color: rgba(0, 102, 204, 0.3); 
 }
 
 .premium-shutter-section .shutter-card-head h3 {
     margin: 0 0 8px 0;
     font-size: 15px;
-    font-weight: 400;
-    color: #86868b;
+    font-weight: 600;
+    color: #6e6e73;
 }
 
 .premium-shutter-section .shutter-price-val {
-    font-size: 20px;
-    font-weight: 500;
-    color: #c9d1d9;
+    font-size: 22px;
+    font-weight: 600;
+    color: #1d1d1f; 
 }
 
 .premium-shutter-section .shutter-price-val span {
-    font-size: 13px;
-    color: #86868b;
+    font-size: 14px;
+    color: #6e6e73;
 }
 
 .premium-shutter-section .shutter-card-list {
@@ -597,8 +511,8 @@ header {
 }
 
 .premium-shutter-section .shutter-card-list li {
-    font-size: 13px;
-    color: #86868b;
+    font-size: 14px;
+    color: #6e6e73;
     margin-bottom: 8px;
     position: relative;
     padding-left: 14px;
@@ -609,35 +523,37 @@ header {
     content: "•";
     position: absolute;
     left: 0;
-    color: #30363d; /* Приглушенные маркеры */
+    color: rgba(0, 0, 0, 0.2); 
 }
 
 .premium-shutter-section .shutter-btn-action {
     background: transparent;
-    border: 1px solid #30363d;
-    color: #86868b;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #1d1d1f;
     padding: 10px;
     border-radius: 8px;
     font-size: 13px;
+    font-weight: 600;
     cursor: pointer;
     width: 100%;
     transition: all 0.2s ease;
 }
 
 .premium-shutter-section .shutter-btn-action:hover {
-    background: #21262d;
-    color: #c9d1d9;
-    border-color: #8b949e;
+    background: #1d1d1f;
+    color: #ffffff;
+    border-color: #1d1d1f;
 }
 
-/* --- БЛОК 2: FAQ АККОРДЕОНЫ (ШИРОКИЕ, СДВИГ ВЛЕВО) --- */
+/* --- БЛОК 2: FAQ АККОРДЕОНЫ (СВЕТЛЫЙ СТИЛЬ) --- */
 .premium-shutter-section .shutter-faq-accordion-box {
-    max-width: 1000px; /* Пошире, чтобы строчки вопросов дышали */
-    margin: 0; /* Строгий левый край */
+    width: 100%;
+    max-width: 650px; 
+    margin: 0;
 }
 
 .premium-shutter-section .shutter-accordion-item {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08); 
 }
 
 .premium-shutter-section .shutter-accordion-trigger {
@@ -653,26 +569,28 @@ header {
     font-family: inherit;
 }
 
+/* ФИКС: Убрали жирность вопросов (font-weight: 400) */
 .premium-shutter-section .shutter-accordion-trigger span:first-child {
-    font-size: 13px; /* Монолитный сквозной размер */
-    font-weight: 400;
-    color: #86868b; /* Приглушенный цвет */
+    font-size: 14px; 
+    font-weight: 400 !important; 
+    color: #1d1d1f; 
     padding-right: 20px;
     transition: color 0.2s ease;
 }
 
-/* Спокойная подсветка вопроса при наведении или в открытом состоянии */
+/* ФИКС: При ховере только строгое черное подчеркивание, без синего цвета */
 .premium-shutter-section .shutter-accordion-trigger:hover span:first-child,
 .premium-shutter-section .shutter-accordion-item.is-open .shutter-accordion-trigger span:first-child {
-    color: #c9d1d9;
+    color: #1d1d1f !important; 
+    text-decoration: underline !important;
 }
 
-/* Компактная тонкая стрелочка Apple */
+/* Компактная тонкая стрелочка */
 .premium-shutter-section .shutter-arrow-icon {
     width: 8px;
     height: 8px;
-    border-right: 1px solid #30363d;
-    border-bottom: 1px solid #30363d;
+    border-right: 2px solid rgba(0, 0, 0, 0.4); 
+    border-bottom: 2px solid rgba(0, 0, 0, 0.4);
     transform: rotate(45deg);
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     flex-shrink: 0;
@@ -680,7 +598,7 @@ header {
 
 .premium-shutter-section .shutter-accordion-item.is-open .shutter-arrow-icon {
     transform: rotate(-135deg);
-    border-color: #8b949e;
+    border-color: #1d1d1f;
 }
 
 /* Выдвижной ответ */
@@ -694,12 +612,12 @@ header {
 .premium-shutter-section .shutter-accordion-content p {
     margin: 0;
     padding-bottom: 16px;
-    font-size: 13px; /* Монолитный размер */
-    color: #86868b;
+    font-size: 14px; 
+    color: #6e6e73; 
     line-height: 1.5;
 }
 
-/* --- БЛОК 3: КОНТАКТЫ (МОНОХРОМНЫЙ ОДНОСТРОЧНЫЙ ПОТОК) --- */
+/* --- БЛОК 3: КОНТАКТЫ (МОНОХРОМНЫЙ ПОТОК В СТОЛБИК) --- */
 .premium-shutter-section .shutter-contacts-single-flow {
     display: flex;
     flex-direction: column;
@@ -709,129 +627,131 @@ header {
 }
 
 .premium-shutter-section .shutter-flow-line {
-    font-size: 13px; /* Монолитный размер */
-    color: #86868b;
+    font-size: 14px; 
+    color: #1d1d1f;
+    font-weight: 400; /* Привели к стандартной яблочной плотности */
     margin-bottom: 14px;
     line-height: 1.4;
 }
 
 .premium-shutter-section .shutter-flow-link {
-    color: #86868b;
+    color: #0066cc; /* Оставляем синий линк для кликабельности контактов */
     text-decoration: none;
-    transition: color 0.2s ease;
+    font-weight: 500;
 }
 
 .premium-shutter-section .shutter-flow-link:hover {
-    color: #c9d1d9; /* Мягкий отклик ссылок */
+    text-decoration: underline;
 }
 
-/* Юридический блок, бережно отделенный воздухом */
+/* Юридический блок */
 .premium-shutter-section .shutter-flow-legal-group {
     margin-top: 14px;
     padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
+
+/* Адаптив шторок */
+@media (max-width: 992px) {
+    .premium-shutter-section .shutter-tariffs-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+    .premium-shutter-section .shutter-layout-container { padding: 0 16px; }
+    .premium-shutter-section .shutter-tariffs-row {
+        display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch; padding-bottom: 15px; gap: 16px;
+    }
+    .premium-shutter-section .shutter-tariff-card { min-width: 260px; scroll-snap-align: start; }
+    .premium-shutter-section .shutter-control-bar { gap: 25px; }
+    .premium-shutter-section .shutter-flow-line { margin-bottom: 18px; }
+}
+
 
 /* ==========================================================================
-   МУЛЬТИПЛАТФОРМЕННЫЙ АДАПТИВ (ПОД ОДИНАКОВЫЙ МОНОЛИТ)
+   ЖИРНЫЙ ПОДВАЛ САЙТА (FAT FOOTER) - СВЕТЛЫЙ СТИЛЬ APPLE
    ========================================================================== */
-@media (max-width: 992px) {
-    .premium-shutter-section .shutter-tariffs-row {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
-@media (max-width: 768px) {
-    .premium-shutter-section .shutter-layout-container {
-        padding: 0 16px;
-    }
-    
-    /* Свайпер тарифов на телефонах */
-    .premium-shutter-section .shutter-tariffs-row {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 15px;
-        gap: 16px;
-    }
-    
-    .premium-shutter-section .shutter-tariffs-row::-webkit-scrollbar {
-        height: 4px;
-    }
-    
-    .premium-shutter-section .shutter-tariffs-row::-webkit-scrollbar-thumb {
-        background: #30363d;
-        border-radius: 10px;
-    }
-
-    .premium-shutter-section .shutter-tariff-card {
-        min-width: 260px;
-        scroll-snap-align: start;
-    }
-    
-    .premium-shutter-section .shutter-control-bar {
-        gap: 25px;
-    }
-
-    .premium-shutter-section .shutter-flow-line {
-        margin-bottom: 18px; /* Немного больше воздуха под пальцы на смартфонах */
-    }
-}
-
-
-/* НИЖНИЙ МИНИМАЛИСТИЧНЫЙ ФУТЕР */
-.legal-footer {
-    padding: 24px;
-    background-color: transparent !important;
-    border-top: none !important;
+.hub-fat-footer {
+    background-color: #f5f5f7 !important; 
+    padding: 40px 0 20px; /* Ужали вертикальные отступы для компактности */
+    border-top: 1px solid rgba(0, 0, 0, 0.08); 
     width: 100%;
-    box-sizing: border-box;
+    padding-bottom: 5px !important;
 }
 
-/* Контейнер выстраивает всё в одну линию строго по центру */
-.legal-footer-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px; /* Аккуратный шаг между текстом, разделителями и ссылками */
-    flex-wrap: wrap; /* Чтобы красиво переносилось на мобильных экранах */
+.fat-footer-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 24px;
 }
 
-/* Копирайт, разделители и ссылки — один в один как в 6 столбцах */
-.legal-footer-container .copyright-text,
-.legal-footer-container .footer-divider,
-.legal-footer-container a {
+/* Заголовки колонок */
+.fat-footer-column h4 {
     font-size: 12px;
-    color: #86868b; /* Спокойный серый цвет ссылок */
-    line-height: 1.4;
-    font-family: inherit; /* Наследует ваш основной шрифт сайта */
+    font-weight: 700;
+    color: #1d1d1f !important; 
+    margin-bottom: 14px;
+    text-transform: none !important; 
+    letter-spacing: 0.2px;
 }
 
-/* Ссылки без подчеркивания с плавным эффектом */
-.legal-footer-container a {
+.fat-footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fat-footer-column ul li {
+    margin-bottom: 10px;
+}
+
+/* Ссылки в меню */
+.fat-footer-column ul li a {
+    font-size: 12px;
+    color: #6e6e73 !important; 
     text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+    line-height: 1.5;
+}
+
+.fat-footer-column ul li a:hover {
+    color: #1d1d1f !important; 
+    text-decoration: underline !important; 
+}
+
+/* Нижняя служебная строчка предфутера */
+.fat-footer-bottom {
+    max-width: 1300px;
+    margin: 30px auto 0;
+    padding: 15px 24px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    gap: 25px;
+    margin-top: 15px !important; 
+}
+
+.fat-footer-bottom a {
+    font-size: 12px;
+    color: #6e6e73 !important;
+    text-decoration: none;
+    font-weight: 500;
     transition: color 0.2s ease;
 }
 
-/* Цвет при наведении мышки — благородный темно-серый, как у вас в fat-footer */
-.legal-footer-container a:hover {
-    color: #1d1d1f; 
+.fat-footer-bottom a:hover {
+    color: #1d1d1f !important; 
+    text-decoration: underline !important;
 }
 
-/* Бледность для разделителей, чтобы они не бросались в глаза */
-.legal-footer-container .footer-divider {
-    opacity: 0.4;
+@media (max-width: 992px) {
+    .fat-footer-container { grid-template-columns: repeat(3, 1fr); gap: 25px; }
 }
-
-/* Адаптивность под смартфоны */
-@media (max-width: 768px) {
-    .legal-footer-container {
-        gap: 10px; /* Сужаем отступы на небольших экранах */
-    }
-    /* Скрываем вертикальные разделители на мобилках, чтобы текст аккуратно переносился строками */
-    .legal-footer-container .footer-divider {
-        display: none;
-    }
+@media (max-width: 576px) {
+    .fat-footer-container { grid-template-columns: repeat(2, 1fr); gap: 20px 20px; }
+    .fat-footer-bottom { flex-direction: column; gap: 12px; }
 }
-
