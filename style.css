@@ -52,14 +52,42 @@ header {
 }
 
 .logo {
-    font-size: 1.4rem !important;
-    font-weight: 700 !important;
-    color: #f0f6fc !important;
-    letter-spacing: 0.5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 1.45rem !important; /* Чуть увеличили, чтобы металл читалcя четче */
+    font-weight: 900 !important; /* Сделали буквы максимально массивными */
+    letter-spacing: -0.3px !important; /* Сблизили буквы для эффекта литого логотипа */
     text-decoration: none !important;
+    text-transform: uppercase !important; /* Перевели в верхний регистр как RUB */
+    user-select: none !important;
+
+    /* Строгий градиент титана с жестким бликом по центру */
+    background: linear-gradient(to bottom, 
+        #9aa0aa 0%, 
+        #505661 47%, 
+        #1a1e24 49%, 
+        #292f38 52%, 
+        #616975 100%
+    ) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+
+    /* Микродетали: тонкая фаска сверху, аккуратная бирюзовая грань снизу и глубокая тень */
+    filter: 
+        drop-shadow(0px -0.5px 0.5px rgba(255, 255, 255, 0.35))
+        drop-shadow(0px 1px 0.5px rgba(0, 221, 235, 0.5))
+        drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.95)) !important;
 }
 
-.logo span { color: #00cccc !important; }
+.logo span { 
+    /* Наследуем сложный градиент металла от родителя */
+    background: inherit !important; 
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    
+    /* Делаем нижний бирюзовый контур под словом Pilot капельку отчетливее */
+    filter: drop-shadow(0px 1px 0.5px rgba(0, 221, 235, 0.8)) !important;
+}
 
 /* Бургер меню */
 .menu-toggle {
