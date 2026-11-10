@@ -1,215 +1,607 @@
-(function () {
-    'use strict';
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поставщикам — TenderPilot | Поиск и аналитика тендеров</title>
+    <meta name="description" content="Инструменты для поставщиков: умный поиск тендеров, автоматический анализ документации и расчет банковских гарантий.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    // 1. НАВИГАЦИЯ И МЕНЮ
-    function init_core_events() {
-        var toggle = document.getElementById('menu-toggle');
-        var nav = document.querySelector('.nav-links');
+    <header>
+        <div class="header-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Меню">
+                <svg class="icon-burger" viewBox="0 0 24 24" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg class="icon-close" viewBox="0 0 24 24" stroke="currentColor" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
 
-        if (toggle && nav) {
-            function closeMenu() {
-                toggle.classList.remove('active');
-                nav.classList.remove('active');
-                setTimeout(function () {
-                    document.body.classList.remove('menu-open');
-                }, 250);
-            }
+            <a class="logo" href="index.html">Tender<span>Pilot</span></a>
 
-            toggle.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (toggle.classList.contains('active')) {
-                    closeMenu();
-                } else {
-                    toggle.classList.add('active');
-                    nav.classList.add('active');
-                    document.body.classList.add('menu-open');
-                }
-            });
+            <nav class="nav-links" id="main-nav">
+                <a href="#card-supplier-tenders" class="menu-item-link">Поиск тендеров</a>
+                <a href="#card-supplier-analyser" class="menu-item-link">Анализ документов</a>
+                <a href="#card-supplier-robot" class="menu-item-link">Создание заявки</a>
+                <a href="finance.html" class="menu-item-link">Гарантии</a>
+                <a href="legal.html" class="menu-item-link">Юрист</a>
+            </nav>
 
-            nav.querySelectorAll('.menu-item-link').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    closeMenu();
-                });
-            });
-        }
-    }
+            <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </a>
+        </div>
+    </header>
 
-    // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
-    function init_bento() {
-        var isAnimating = false;
-        var SPEED = 300;
-        var MID = SPEED / 2;
-
-        document.body.addEventListener('click', function (e) {
-            var card = e.target.closest('.bento-card');
+    <main>
+        <div id="grid-supplier" class="bento-grid">
+          <div class="bento-card main-hero">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <h1>Поставщикам</h1>
+                        <p>Увеличивайте продажи и находите крупных заказчиков. Все инструменты для победы в тендерах в одном окне</p>
+                    </div>
+                </div>
+            </div>
             
-            if (!card || isAnimating || card.classList.contains('main-hero') || card.classList.contains('is-hidden')) return;
-            if (e.target.closest('.bento-card-close-icon')) return;
-            if (e.target.closest('a')) return;
+            <!-- Поиск тендеров -->
+            <div class="bento-card" id="card-supplier-tenders">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Поиск тендеров</h3>
+                            <p>Быстрый поиск по всем площадкам, умная фильтрация и уведомления</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Онлайн поиск тендеров</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone">
+                            <!-- Тут будет виджет поиска -->
+                            <p>Загрузка поискового модуля...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            e.stopPropagation();
-            isAnimating = true;
+            <!-- Анализ документов -->
+            <div class="bento-card" id="card-supplier-analyser">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Анализ документов</h3>
+                            <p>Мгновенное сканирование ТЗ и контрактов на скрытые риски и пени</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Анализ документов</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone">
+                            <p>Загрузите файл для нейро-анализа...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            var rect = card.getBoundingClientRect();
-            var clone = card.cloneNode(true);
-            clone.classList.add('bento-card-clone');
+            <!-- Подбор поставщиков -->
+            <div class="bento-card" id="card-supplier-match">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Анализ конкурентов</h3>
+                            <p>Умный скоринг участников по ИНН/ОКВЭД и оценка шансов на победу</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Анализ конкурентов</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Расчет доставки -->
+            <div class="bento-card" id="card-supplier-delivery">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Логистика</h3>
+                            <p>Расчет плеча доставки от склада до заказчика с учетом веса и габаритов</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Калькулятор доставки</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Создание заявки -->
+            <div class="bento-card" id="card-supplier-robot">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Создание заявки</h3>
+                            <p>Автогенерация первой и второй частей заявки строго по регламенту площадки</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Робот-заявка</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Чек-лист доков -->
+            <div class="bento-card" id="card-supplier-checklist">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Чек-лист документов</h3>
+                            <p>Интерактивный контроль готовности документов для исключения отклонений</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Проверка готовности</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Банковская гарантия -->
+            <div class="bento-card" id="card-supplier-finance">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Финансы</h3>
+                            <p>Моментальный расчет стоимости БГ и тендерного займа без визита в банк</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Банковская гарантия</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Тендерный юрист -->
+            <div class="bento-card" id="card-supplier-legal">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Юр. помощь</h3>
+                            <p>Защита интересов в ФАС, составление протоколов разногласий</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Тендерный юрист</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<!-- ==================== ИНТЕРАКТИВНЫЙ ПРЕДФУТЕР V5 (МОНОЛИТ) ==================== -->
+<section class="premium-shutter-section">
+    <div class="shutter-layout-container">
+        
+        <!-- Управляющая строчка кнопок меню -->
+<!-- Управляющая строчка кнопок меню -->
+<div class="shutter-control-bar">
+    <button class="shutter-trigger-btn" data-panel="panel-features">Возможности для поставщиков</button>
+    <button class="shutter-trigger-btn" data-panel="panel-payment">Оплата грузоперевозок</button>
+    <button class="shutter-trigger-btn" data-panel="panel-faq">Вопросы-ответы</button>
+    <button class="shutter-trigger-btn" data-panel="panel-tariffs">Тарифы для поставщиков</button>
+    <button class="shutter-trigger-btn" data-panel="panel-contacts">Контакты</button>
+</div>
+
+        <!-- Главный контейнер для выезжающих панелей -->
+        <div class="shutter-dynamic-box">
+        
+<!-- ВОЗМОЖНОСТИ ДЛЯ ПОСТАВЩИКОВ -->
+<div id="panel-features" class="shutter-panel-item">
+    <div class="shutter-features-showcase">
+        
+        <!-- Левая половина: Аккордеон (650px) -->
+        <div class="shutter-faq-accordion-box">
             
-            clone.style.cssText += 'position: fixed !important; background: #161b22 !important; ' +
-                                  'top: ' + rect.top + 'px !important; left: ' + rect.left + 'px !important; ' +
-                                  'width: ' + rect.width + 'px !important; height: ' + rect.height + 'px !important; ' +
-                                  'border-radius: 24px !important; margin: 0 !important; z-index: 10000 !important; transform: none !important; ' +
-                                  'transition: top 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.3s ease !important;';
+            <!-- Пункт 1 -->
+            <div class="shutter-accordion-item" data-image="1">
+                <button class="shutter-accordion-trigger">
+                    <span>Интеллектуальный онлайн-мониторинг и агрегация торгов со всех площадок</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Умный модуль поиска TenderPilot осуществляет мгновенный сбор информации о закупках в рамках 44-ФЗ, 223-ФЗ, коммерческих тендеров и торгов по банкротству со всех федеральных и коммерческих ЭТП России. Система использует алгоритмы нейросетевого анализа, исключая пропуск целевых лотов из ЕИС. Настраивайте гибкие фильтры по ИНН заказчика, ОКВЭД, региону, ключевым словам и сумме контракта. Получайте мгновенные уведомления о новых релевантных закупках в Telegram-бот в режиме реального времени, опережайте конкурентов и первыми подавайте заявки на участие.</p>
+                </div>
+            </div>
 
-            var inner = clone.querySelector('.bento-card-inner');
-            if (inner) {
-                inner.style.cssText += 'width: 100% !important; height: 100% !important; position: relative !important;';
-            }
+            <!-- Пункт 2 -->
+            <div class="shutter-accordion-item" data-image="2">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматический нейро-анализ технического задания и контрактов на скрытые риски</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Модель искусственного интеллекта TenderPilot за 5 минут проводит глубокий правовой и комплаенс-аудит тендерной документации любой сложности. Забудьте о ручном чтении сотен страниц ТЗ и проектов контрактов. Алгоритм сканирует файлы, сравнивает их с актуальной арбитражной практикой и подсвечивает скрытые ловушки заказчиков: завышенные пени, невыполнимые сроки поставки, завуалированные требования к материалам и риски попадания в РНП. Вы получаете готовый интерактивный отчет с оценкой юридической безопасности закупки до подачи заявки.</p>
+                </div>
+            </div>
 
-            document.body.appendChild(clone);
-            card.classList.add('is-hidden');
+            <!-- Пункт 3 -->
+            <div class="shutter-accordion-item" data-image="3">
+                <button class="shutter-accordion-trigger">
+                    <span>Экспресс-скоринг участников и автоматическая оценка шансов на победу</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Аналитический сервис TenderPilot предоставляет полную картину конкурентной среды по любому направление госзакупок. Достаточно ввести ИНН или ОКВЭД, чтобы система вывела подробный скоринг ваших главных соперников: историю их побед и снижений цены, опыт исполнения аналогичных контрактов, наличие жалоб в ФАС и связи с заказчиками. Нейросеть рассчитывает математическую вероятность вашей победы в конкретном тендере, помогая эффективно распределять оборотные средства и отсеивать заведомо проигрышные или «заточенные» торги.</p>
+                </div>
+            </div>
 
-            requestAnimationFrame(function () {
-                requestAnimationFrame(function () {
-                    clone.style.cssText += 'top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; border-radius: 0 !important;';
-                    clone.classList.add('is-expanded');
+            <!-- Пункт 4 -->
+            <div class="shutter-accordion-item" data-image="4">
+                <button class="shutter-accordion-trigger">
+                    <span>Расчет плеча доставки и калькулятор транспортных расходов по контракту</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Встроенный логистический калькулятор TenderPilot позволяет точно рассчитать себестоимость доставки товаров от вашего склада до конечной точки приема заказчика. Система автоматически учитывает вес, объем, температурный режим и габариты груза. Интеграция по API с крупнейшими транспортными компаниями России позволяет в один клик сравнить тарифы, узнать точные сроки транспортировки и заложить реальные накладные расходы в цену тендерного предложения. Защитите маржинальность своего бизнеса и застрахуйтесь от штрафов за срыв сроков поставки.</p>
+                </div>
+            </div>
 
-                    setTimeout(function() {
-                        clone.classList.add('show-back');
-                    }, MID);
+            <!-- Пункт 5 -->
+            <div class="shutter-accordion-item" data-image="5">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматическая генерация первой и второй частей заявки строго по регламенту ЭТП</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Робот-заявка TenderPilot исключает человеческий фактор при подготовке документов для участия в электронных аукционах, конкурса и запросах котировок. Платформа автоматически формирует пакет документов для первой и второй частей заявки в строгом соответствии с требованиями регламентов площадок и актуальной позицией ФАС. Система самостоятельно заполняет конкретные показатели товаров, согласия и анкетные данные. На старших тарифах готовый пакет проходит финальный комплаенс-контроль ведущих экспертов в течение 2 часов, что гарантирует 100% защиту от необоснованного отклонения заявки.</p>
+                </div>
+            </div>
 
-                    setTimeout(function() {
-                        document.body.classList.add('bento-active');
-                        isAnimating = false;
-                    }, SPEED);
-                });
-            });
+            <!-- Пункт 6 -->
+            <div class="shutter-accordion-item" data-image="6">
+                <button class="shutter-accordion-trigger">
+                    <span>Интерактивная проверка готовности и комплаенс-контроль документов</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Цифровой чек-лист TenderPilot — это ваш персональный ассистент, страхующий от досадных технических ошибок перед отправкой документов на площадку. Платформа сверяет ваш итоговый пакет с требованиями конкретного извещения о закупке: проверяет актуальность выписки из ЕГРЮЛ, наличие одобрения крупных сделок, деклараций СМП, лицензий СРО и действительность электронной цифровой подписи (ЭЦП). Интуитивный интерфейс подсветит недостающие или некорректные файлы, гарантируя полную готовность к успешной подаче.</p>
+                </div>
+            </div>
 
-            var closeIcon = clone.querySelector('.bento-card-close-icon');
-            if (closeIcon) {
-                closeIcon.addEventListener('click', function (event) {
-                    event.stopPropagation();
-                    if (isAnimating) return;
-                    isAnimating = true;
+            <!-- Пункт 7 -->
+            <div class="shutter-accordion-item" data-image="7">
+                <button class="shutter-accordion-trigger">
+                    <span>Моментальный онлайн-расчет стоимости банковских гарантий и тендерных займов</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Финансовый агрегатор TenderPilot интегрирован по API с топ-20 ведущих банков и аккредитованных МФО, утвержденных Министерством финансов РФ для работы по 44-ФЗ и 223-ФЗ. Оформляйте банковские гарантии на обеспечение заявок, исполнение контрактов и гарантийные обязательства, а также тендерные займы без визита в банк и без открытия расчетного счета. Единая мультизаявка автоматически улетает во все скоринг-системы партнеров, позволяя вам сравнить предложения и выбрать минимальную процентную ставку и агентскую комиссию за 2 часа.</p>
+                </div>
+            </div>
+
+            <!-- Пункт 8 -->
+            <div class="shutter-accordion-item" data-image="8">
+                <button class="shutter-accordion-trigger">
+                    <span>Защита интересов в ФАС, обжалование закупок и составление протоколов разногласий</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Команда квалифицированных тендерных юристов TenderPilot обеспечивает комплексную правовую поддержку на всех этапах участия в торгах. Мы помогаем составить юридически грамотные запросы на разъяснение положений документации, готовим обоснованные протоколы разногласий к проектам контрактов и осуществляем защиту от включения компании в Реестр недобросовестных поставщиков (РНП). Эффективность обжалования незаконных действий заказчиков и защиты интересов поставщиков в УФАС и арбитражных судах составляет более 87%.</p>
+                </div>
+            </div>
+
+            <!-- Пункт 9 -->
+            <div class="shutter-accordion-item" data-image="9">
+                <button class="shutter-accordion-trigger">
+                    <span>Профессиональное обучение, курсы и переподготовка тендерных специалистов</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Раздел образования TenderPilot предоставляет доступ к актуальным программам повышения квалификации и профессиональной переподготовки для тендерных специалистов и руководителей отделов продаж со стороны поставщика. Обучение проводится полностью онлайн в ведущих аккредитованных учебных центрах-партнерах с обязательным занесением дипломов и удостоверений в государственный реестр ФИС ФРДО. Освойте практику работы на федеральных площадках, разберите последние изменения законодательства, научитесь выявлять риски в закупках и повысьте конверсию побед вашей компании.</p>
+                </div>
+            </div>
+
+        </div> <!-- /shutter-faq-accordion-box -->
+
+   
+    <!-- Правая половина: Чистое пространство для картинок (650px) -->
+               <!-- Правая половина: Сюда подставил реальные картинки для тестов -->
+        <div class="shutter-features-visual">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="1" alt="Мониторинг">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="2" alt="Анализ ТЗ">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="3" alt="Скоринг">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="4" alt="Логистика">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="5" alt="Генерация заявки">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="6" alt="Чек-лист">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="7" alt="Финансы">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="8" alt="ФАС">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="9" alt="Обучение">
+        </div>
+
+    </div> <!-- /shutter-features-showcase -->
+</div> <!-- /panel-features -->
+
+</div>
+            <!-- ПАНЕЛЬ 1: ТАРИФЫ (Монохромная лента) -->
+            <div id="panel-tariffs" class="shutter-panel-item">
+                <div class="shutter-tariffs-row">
                     
-                    clone.classList.remove('show-back');
-                    document.body.classList.remove('bento-active');
+                    <!-- Плашка 1 -->
+                    <div class="shutter-tariff-card">
+                        <div class="shutter-card-head">
+                            <h3>Старт</h3>
+                            <div class="shutter-price-val">9 900 ₽<span>/мес</span></div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Базовый поиск тендеров по ИНН и ключевым словам</li>
+                            <li>До 10 автоматических заявок в месяц</li>
+                            <li>Уведомления in Telegram-бот в реальном времени</li>
+                            <li>Техническая поддержка в рабочие дни</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
+                    </div>
+
+                    <!-- Плашка 2 -->
+                    <div class="shutter-tariff-card">
+                        <div class="shutter-card-head">
+                            <h3>Бизнес</h3>
+                            <div class="shutter-price-val">19 900 ₽<span>/мес</span></div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Нейро-анализ документов на скрытые риски</li>
+                            <li>До 50 автоматических заявок в месяц</li>
+                            <li>Приоритетная генерация пакета документов</li>
+                            <li>Персональный онлайн-консультант</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
+                    </div>
+
+                    <!-- Плашка 3 (Акцентная) -->
+                    <div class="shutter-tariff-card shutter-featured">
+                        <div class="shutter-card-head">
+                            <h3>Про</h3>
+                            <div class="shutter-price-val">34 900 ₽<span>/мес</span></div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Глубокая аналитика конкурентов и заказчиков</li>
+                            <li>Безлимитные автоматические заявки</li>
+                            <li>Сопровождение в ФАС и комплаенс-контроль</li>
+                            <li>Выделенный эксперт на связи 24/7</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
+                    </div>
+
+                    <!-- Плашка 4 -->
+                    <div class="shutter-tariff-card">
+                        <div class="shutter-card-head">
+                            <h3>Кастом</h3>
+                            <div class="shutter-price-val">Индивидуально</div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Интеграция по API в вашу CRM-систему</li>
+                            <li>Обучение вашей команды работе с платформой</li>
+                            <li>Выделенный сервер под ваши задачи</li>
+                            <li>Индивидуальный NDA и гибкие условия оплаты</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Связаться</button>
+                    </div>
+
+                </div>
+            </div>
+<!-- --- БЛОК ОПЛАТЫ (ПОСЛЕДОВАТЕЛЬНЫЙ ПОТОК В СТИЛЕ FAQ) --- -->
+<div id="panel-payment" class="shutter-panel-item">
+    <div class="shutter-payment-flow">
+        
+        <!-- Способ 1 -->
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">1. Моментальная онлайн-оплата на платформе</h4>
+            <p class="shutter-payment-text">
+                Удобный и самый быстрый способ активировать транспортные услуги. Оплата осуществляется непосредственно на сайте TenderPilot с помощью банковских карт (Visa, Mastercard, МИР) или через Систему быстрых платежей (QR-код СБП).
+            </p>
+            <ul class="shutter-payment-sublist">
+                <li><strong>Безопасность транзакций:</strong> Все операции проходят через сертифицированный платежный шлюз с поддержкой протокола 3D-Secure. Сервис TenderPilot не сохраняет и не передает третьим лицам платежные данные вашей карты.</li>
+                <li><strong>Скорость обработки:</strong> Зачисление средств происходит мгновенно, а официальный фискальный чек автоматически отправляется на ваш email.</li>
+            </ul>
+        </div>
+
+        <!-- Тонкая горизонтальная разделительная черта -->
+        <div class="shutter-payment-divider"></div>
+
+        <!-- Способ 2 -->
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">2. Безналичный расчет по счету от транспортной компании</h4>
+            <p class="shutter-payment-text">
+                Оптимальный вариант для юридических лиц и индивидуальных предпринимателей, которым необходим полный пакет закрывающих документов для бухгалтерии.
+            </p>
+            <ul class="shutter-payment-sublist">
+                <li><strong>Как это работает:</strong> Если доставка груза организуется через партнерские транспортные компании, официальный счет на оплату логистических услуг формируется и отправляется на вашу электронную почту напрямую от ТК.</li>
+                <li><strong>Удобство и отчетность:</strong> Оплата производится стандартным банковским переводом на расчетный счет. По завершении грузоперевозки вам предоставляются оригиналы закрывающих актов и товарно-транспортных накладных (УПД) через системы ЭДО или курьерской почтой.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+            <!-- ПАНЕЛЬ 2: FAQ (8 Вопросов, монолитный размер) -->
+            <div id="panel-faq" class="shutter-panel-item">
+                <div class="shutter-faq-accordion-box">
                     
-                    setTimeout(function() {
-                        var targetRect = card.getBoundingClientRect();
-                        
-                        clone.style.cssText += 'top: ' + targetRect.top + 'px !important; left: ' + targetRect.left + 'px !important; width: ' + targetRect.width + 'px !important; height: ' + targetRect.height + 'px !important; border-radius: 24px !important;';
-                        clone.classList.remove('is-expanded');
+                    <!-- Вопрос 1 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как рассчитывается стоимость интеграции?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Стоимость фиксирована в рамках выбранного тарифа. Никаких скрытых платежей за объем обработанных документов или количество поисковых запросов в экосистеме.</p>
+                        </div>
+                    </div>
 
-                        setTimeout(function() {
-                            card.classList.remove('is-hidden');
-                        }, SPEED - 50);
+                    <!-- Вопрос 2 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Каковы сроки подготовки тендерной документации?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Нейросеть генерирует базовый пакет документов за 5 минут, финальный комплаенс-контроль эксперта на старших тарифах занимает до 2 часов.</p>
+                        </div>
+                    </div>
 
-                        setTimeout(function() {
-                            clone.remove();
-                            isAnimating = false;
-                        }, SPEED);
-                        
-                    }, 30); 
-                });
-            }
-        });
-    }
+                    <!-- Вопрос 3 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Какие гарантии предоставляются при защите в ФАС?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Мы проводим досудебный экспресс-анализ рисков. Успешность защиты и обжалования в антимонопольной службе составляет более 87%.</p>
+                        </div>
+                    </div>
 
-    // 3. ИНТЕРАКТИВНЫЙ ПРЕДФУТЕР V3 (ОТКРЫТИЕ ВНИЗ + ПОШТУЧНЫЙ FAQ)
-    function init_interactive_panels() {
-        var buttons = document.querySelectorAll(".shutter-trigger-btn");
-        var panels = document.querySelectorAll(".shutter-panel-item");
+                    <!-- Вопрос 4 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Можно ли протестировать платформу бесплатно?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Да, после верификации компании по ИНН вам предоставляется 3 дня полного доступа к базовым функциям экосистемы.</p>
+                        </div>
+                    </div>
 
-        if (!buttons.length || !panels.length) return;
+                    <!-- Вопрос 5 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как обеспечивается конфиденциальность данных?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Все загружаемые документы проходят шифрование на уровне базы данных. Информация не используется для обучения публичных моделей.</p>
+                        </div>
+                    </div>
 
-        // Функция обновления высоты родительской панели (нужна при раскрытии вложенных аккордеонов)
-        function refreshPanelHeight(panel) {
-            if (panel.classList.contains("is-active")) {
-                // Сбрасываем ограничение, чтобы замерить реальный scrollHeight со всеми открытыми под-блоками
-                panel.style.maxHeight = "none";
-                var newHeight = panel.scrollHeight + 40;
-                panel.style.maxHeight = newHeight + "px";
-            }
-        }
+                    <!-- Вопрос 6 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Каковы условия досрочного расторжения договора?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Вы можете перевести подписку на базовый бесплатный тариф в любой момент в личном кабинете без штрафных санкций.</p>
+                        </div>
+                    </div>
 
-        buttons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                var targetId = button.getAttribute("data-panel");
-                var targetPanel = document.getElementById(targetId);
-                
-                if (!targetPanel) return;
-                
-                var isAlreadyActive = targetPanel.classList.contains("is-active");
+                    <!-- Вопрос 7 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как нейросеть выявляет скрытые риски в ТЗ заказчика?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Алгоритм сравнивает текст ТЗ с базой из реальных арбитражных споров и подсвечивает пункты с потенциальными ловушками.</p>
+                        </div>
+                    </div>
 
-                // Сворачиваем шторки
-                panels.forEach(function (panel) {
-                    panel.classList.remove("is-active");
-                    panel.style.maxHeight = "0px";
-                });
-                buttons.forEach(function (btn) {
-                    btn.classList.remove("is-active");
-                });
+                    <!-- Вопрос 8 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Доступна ли персональная поддержка для тарифа Про?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Да, за вашей компанией закрепляется выделенный тендерный специалист и ведущий аккаунт-менеджер, доступные в рабочее время экосистемы.</p>
+                        </div>
+                    </div>
 
-                // Раскрываем нужную вниз
-                if (!isAlreadyActive) {
-                    button.classList.add("is-active");
-                    targetPanel.classList.add("is-active");
-                    targetPanel.style.maxHeight = (targetPanel.scrollHeight + 40) + "px";
-                }
-            });
-        });
+                </div>
+            </div>
 
-        // ЛОГИКА ДЛЯ ВЛОЖЕННЫХ АККОРДЕОНОВ FAQ
-        var faqTriggers = document.querySelectorAll(".shutter-accordion-trigger");
-        faqTriggers.forEach(function (trigger) {
-            trigger.addEventListener("click", function () {
-                var item = trigger.parentNode;
-                const content = item.querySelector(".shutter-accordion-content");
-                const parentPanel = item.closest(".shutter-panel-item");
-                
-                var isOpen = item.classList.contains("is-open");
+<!-- ПАНЕЛЬ 3: КОНТАКТЫ -->
+<div id="panel-contacts" class="shutter-panel-item">
+    <div class="shutter-contacts-single-flow">
+        
+        <div class="shutter-flow-line">
+            <span>Связаться в мессенджере: </span>
+            <a href="https://t.me" target="_blank" class="shutter-flow-link">Telegram</a>, 
+            <a href="https://wa.me" target="_blank" class="shutter-flow-link">WhatsApp</a>
+        </div>
+        
+        <div class="shutter-flow-line">
+            <span>Электронная почта: </span>
+            <a href="mailto:info@tenderpilot.ru" class="shutter-flow-link">info@tenderpilot.ru</a>
+        </div>
+        
+        <div class="shutter-flow-line">
+            <span>Тел: </span>
+            <a href="tel:+78000000000" class="shutter-flow-link">8 800 000-00-00</a>
+        </div>
+        
+        <div class="shutter-flow-legal-group">
+            <div class="shutter-flow-line">
+                <span>ИП Ромашка Александр Владимирович</span>
+            </div>
+            <div class="shutter-flow-line">
+                <span>ИНН: 77XXXXXXXXXX, ОГРНИП: XXXXXXXXXXXXXXX</span>
+            </div>
+        </div>
 
-                // Закрываем другие вопросы в этой панели, чтобы было аккуратно
-                var siblings = parentPanel.querySelectorAll(".shutter-accordion-item");
-                siblings.forEach(function (sib) {
-                    sib.classList.remove("is-open");
-                    var sibContent = sib.querySelector(".shutter-accordion-content");
-                    if (sibContent) sibContent.style.maxHeight = "0px";
-                    if (sibContent) sibContent.style.opacity = "0";
-                });
+    </div>
+</div>
 
-                // Открываем/закрываем текущий
-                if (!isOpen) {
-                    item.classList.add("is-open");
-                    content.style.opacity = "1";
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } else {
-                    item.classList.remove("is-open");
-                    content.style.maxHeight = "0px";
-                    content.style.opacity = "0";
-                }
 
-                // Пересчитываем высоту главной шторки с задержкой под анимацию
-                setTimeout(function() {
-                    refreshPanelHeight(parentPanel);
-                }, 310);
-            });
-        });
+<footer class="legal-footer">
+    <div class="legal-footer-container">
+        <span class="copyright-text">&copy; 2026 TenderPilot. Все права защищены.</span>
+        <span class="footer-divider">|</span>
+        <a href="/privacy/" target="_blank">Политика конфиденциальности</a>
+        <span class="footer-divider">|</span>
+        <a href="/terms/" target="_blank">Публичная оферта</a>
+        <span class="footer-divider">|</span>
+        <a href="/consent/" target="_blank">Согласие на обработку персональных данных</a>
+    </div>
+</footer>
 
-        // Кнопка выбор -> контакты
-        document.querySelectorAll(".js-open-contacts").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                var contactBtn = document.querySelector('[data-panel="panel-contacts"]');
-                if (contactBtn) contactBtn.click();
-            });
-        });
-    }
-
-    // Инициализация
-    document.addEventListener('DOMContentLoaded', function () {
-        init_core_events();
-        init_bento();
-        init_interactive_panels(); 
-    });
-})();
-
+    <script src="main.js"></script>
+</body>
+</html>
