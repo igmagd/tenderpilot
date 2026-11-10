@@ -223,146 +223,96 @@
     <div class="shutter-layout-container">
         
         <!-- Управляющая строчка кнопок меню -->
-        <div class="shutter-control-bar">
-            <button class="shutter-trigger-btn" data-panel="panel-tariffs">Тарифы</button>
-            <button class="shutter-trigger-btn" data-panel="panel-faq">Вопросы-ответы</button>
-            <button class="shutter-trigger-btn" data-panel="panel-contacts">Контакты</button>
-        </div>
+<!-- Управляющая строчка кнопок меню -->
+<div class="shutter-control-bar">
+    <button class="shutter-trigger-btn" data-panel="panel-features">Возможности для поставщиков</button>
+    <button class="shutter-trigger-btn" data-panel="panel-payment">Оплата грузоперевозок</button>
+    <button class="shutter-trigger-btn" data-panel="panel-faq">Вопросы-ответы</button>
+    <button class="shutter-trigger-btn" data-panel="panel-tariffs">Тарифы для поставщиков</button>
+    <button class="shutter-trigger-btn" data-panel="panel-contacts">Контакты</button>
+</div>
 
         <!-- Главный контейнер для выезжающих панелей -->
         <div class="shutter-dynamic-box">
+        
+<!-- ВОЗМОЖНОСТИ ДЛЯ ПОСТАВЩИКОВ -->
+<div id="panel-features" class="shutter-panel-item">
+    <div class="shutter-features-showcase">
+        
+        <!-- Левая половина: Аккордеон (650px) -->
+        <div class="shutter-faq-accordion-box">
             
-            <!-- ПАНЕЛЬ 1: ТАРИФЫ (Монохромная лента) -->
-            <div id="panel-tariffs" class="shutter-panel-item">
-                <div class="shutter-tariffs-row">
-                    
-                    <!-- Плашка 1 -->
-                    <div class="shutter-tariff-card">
-                        <div class="shutter-card-head">
-                            <h3>Старт</h3>
-                            <div class="shutter-price-val">9 900 ₽<span>/мес</span></div>
-                        </div>
-                        <ul class="shutter-card-list">
-                            <li>Базовый поиск тендеров по ИНН и ключевым словам</li>
-                            <li>До 10 автоматических заявок в месяц</li>
-                            <li>Уведомления in Telegram-бот в реальном времени</li>
-                            <li>Техническая поддержка в рабочие дни</li>
-                        </ul>
-                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
-                    </div>
-
-                    <!-- Плашка 2 -->
-                    <div class="shutter-tariff-card">
-                        <div class="shutter-card-head">
-                            <h3>Бизнес</h3>
-                            <div class="shutter-price-val">19 900 ₽<span>/мес</span></div>
-                        </div>
-                        <ul class="shutter-card-list">
-                            <li>Нейро-анализ документов на скрытые риски</li>
-                            <li>До 50 автоматических заявок в месяц</li>
-                            <li>Приоритетная генерация пакета документов</li>
-                            <li>Персональный онлайн-консультант</li>
-                        </ul>
-                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
-                    </div>
-
-                    <!-- Плашка 3 (Акцентная) -->
-                    <div class="shutter-tariff-card shutter-featured">
-                        <div class="shutter-card-head">
-                            <h3>Про</h3>
-                            <div class="shutter-price-val">34 900 ₽<span>/мес</span></div>
-                        </div>
-                        <ul class="shutter-card-list">
-                            <li>Глубокая аналитика конкурентов и заказчиков</li>
-                            <li>Безлимитные автоматические заявки</li>
-                            <li>Сопровождение в ФАС и комплаенс-контроль</li>
-                            <li>Выделенный эксперт на связи 24/7</li>
-                        </ul>
-                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
-                    </div>
-
-                    <!-- Плашка 4 -->
-                    <div class="shutter-tariff-card">
-                        <div class="shutter-card-head">
-                            <h3>Кастом</h3>
-                            <div class="shutter-price-val">Индивидуально</div>
-                        </div>
-                        <ul class="shutter-card-list">
-                            <li>Интеграция по API в вашу CRM-систему</li>
-                            <li>Обучение вашей команды работе с платформой</li>
-                            <li>Выделенный сервер под ваши задачи</li>
-                            <li>Индивидуальный NDA и гибкие условия оплаты</li>
-                        </ul>
-                        <button class="shutter-btn-action js-open-contacts">Связаться</button>
-                    </div>
-
+            <!-- Пункт 1 -->
+            <div class="shutter-accordion-item" data-image="1">
+                <button class="shutter-accordion-trigger">
+                    <span>Интеллектуальный онлайн-мониторинг и агрегация торгов со всех площадок</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Умный модуль поиска TenderPilot осуществляет мгновенный сбор информации о закупках в рамках 44-ФЗ, 223-ФЗ, коммерческих тендеров и торгов по банкротству со всех федеральных и коммерческих ЭТП России. Система использует алгоритмы нейросетевого анализа, исключая пропуск целевых лотов из ЕИС. Настраивайте гибкие фильтры по ИНН заказчика, ОКВЭД, региону, ключевым словам и сумме контракта. Получайте мгновенные уведомления о новых релевантных закупках в Telegram-бот в режиме реального времени, опережайте конкурентов и первыми подавайте заявки на участие.</p>
                 </div>
             </div>
 
-            <!-- ПАНЕЛЬ 2: FAQ (8 Вопросов, монолитный размер) -->
-            <div id="panel-faq" class="shutter-panel-item">
-                <div class="shutter-faq-accordion-box">
-                    
-                    <!-- Вопрос 1 -->
-                    <div class="shutter-accordion-item">
-                        <button class="shutter-accordion-trigger">
-                            <span>1. Как рассчитывается стоимость интеграции?</span>
-                            <span class="shutter-arrow-icon"></span>
-                        </button>
-                        <div class="shutter-accordion-content">
-                            <p>Стоимость фиксирована в рамках выбранного тарифа. Никаких скрытых платежей за объем обработанных документов или количество поисковых запросов в экосистеме.</p>
-                        </div>
-                    </div>
+            <!-- Пункт 2 -->
+            <div class="shutter-accordion-item" data-image="2">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматический нейро-анализ технического задания и контрактов на скрытые риски</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Модель искусственного интеллекта TenderPilot за 5 минут проводит глубокий правовой и комплаенс-аудит тендерной документации любой сложности. Забудьте о ручном чтении сотен страниц ТЗ и проектов контрактов. Алгоритм сканирует файлы, сравнивает их с актуальной арбитражной практикой и подсвечивает скрытые ловушки заказчиков: завышенные пени, невыполнимые сроки поставки, завуалированные требования к материалам и риски попадания в РНП. Вы получаете готовый интерактивный отчет с оценкой юридической безопасности закупки до подачи заявки.</p>
+                </div>
+            </div>
 
-                    <!-- Вопрос 2 -->
-                    <div class="shutter-accordion-item">
-                        <button class="shutter-accordion-trigger">
-                            <span>2. Каковы сроки подготовки тендерной документации?</span>
-                            <span class="shutter-arrow-icon"></span>
-                        </button>
-                        <div class="shutter-accordion-content">
-                            <p>Нейросеть генерирует базовый пакет документов за 5 минут, финальный комплаенс-контроль эксперта на старших тарифах занимает до 2 часов.</p>
-                        </div>
-                    </div>
+            <!-- Пункт 3 -->
+            <div class="shutter-accordion-item" data-image="3">
+                <button class="shutter-accordion-trigger">
+                    <span>Экспресс-скоринг участников и автоматическая оценка шансов на победу</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Аналитический сервис TenderPilot предоставляет полную картину конкурентной среды по любому направление госзакупок. Достаточно ввести ИНН или ОКВЭД, чтобы система вывела подробный скоринг ваших главных соперников: историю их побед и снижений цены, опыт исполнения аналогичных контрактов, наличие жалоб в ФАС и связи с заказчиками. Нейросеть рассчитывает математическую вероятность вашей победы в конкретном тендере, помогая эффективно распределять оборотные средства и отсеивать заведомо проигрышные или «заточенные» торги.</p>
+                </div>
+            </div>
 
-                    <!-- Вопрос 3 -->
-                    <div class="shutter-accordion-item">
-                        <button class="shutter-accordion-trigger">
-                            <span>3. Какие гарантии предоставляются при защите в ФАС?</span>
-                            <span class="shutter-arrow-icon"></span>
-                        </button>
-                        <div class="shutter-accordion-content">
-                            <p>Мы проводим досудебный экспресс-анализ рисков. Успешность защиты и обжалования в антимонопольной службе составляет более 87%.</p>
-                        </div>
-                    </div>
+            <!-- Пункт 4 -->
+            <div class="shutter-accordion-item" data-image="4">
+                <button class="shutter-accordion-trigger">
+                    <span>Расчет плеча доставки и калькулятор транспортных расходов по контракту</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Встроенный логистический калькулятор TenderPilot позволяет точно рассчитать себестоимость доставки товаров от вашего склада до конечной точки приема заказчика. Система автоматически учитывает вес, объем, температурный режим и габариты груза. Интеграция по API с крупнейшими транспортными компаниями России позволяет в один клик сравнить тарифы, узнать точные сроки транспортировки и заложить реальные накладные расходы в цену тендерного предложения. Защитите маржинальность своего бизнеса и застрахуйтесь от штрафов за срыв сроков поставки.</p>
+                </div>
+            </div>
 
-                    <!-- Вопрос 4 -->
-                    <div class="shutter-accordion-item">
-                        <button class="shutter-accordion-trigger">
-                            <span>4. Можно ли протестировать платформу бесплатно?</span>
-                            <span class="shutter-arrow-icon"></span>
-                        </button>
-                        <div class="shutter-accordion-content">
-                            <p>Да, после верификации компании по ИНН вам предоставляется 3 дня полного доступа к базовым функциям экосистемы.</p>
-                        </div>
-                    </div>
+            <!-- Пункт 5 -->
+            <div class="shutter-accordion-item" data-image="5">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматическая генерация первой и второй частей заявки строго по регламенту ЭТП</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Робот-заявка TenderPilot исключает человеческий фактор при подготовке документов для участия в электронных аукционах, конкурса и запросах котировок. Платформа автоматически формирует пакет документов для первой и второй частей заявки в строгом соответствии с требованиями регламентов площадок и актуальной позицией ФАС. Система самостоятельно заполняет конкретные показатели товаров, согласия и анкетные данные. На старших тарифах готовый пакет проходит финальный комплаенс-контроль ведущих экспертов в течение 2 часов, что гарантирует 100% защиту от необоснованного отклонения заявки.</p>
+                </div>
+            </div>
 
-                    <!-- Вопрос 5 -->
-                    <div class="shutter-accordion-item">
-                        <button class="shutter-accordion-trigger">
-                            <span>5. Как обеспечивается конфиденциальность данных?</span>
-                            <span class="shutter-arrow-icon"></span>
-                        </button>
-                        <div class="shutter-accordion-content">
-                            <p>Все загружаемые документы проходят шифрование на уровне базы данных. Информация не используется для обучения публичных моделей.</p>
-                        </div>
-                    </div>
+            <!-- Пункт 6 -->
+            <div class="shutter-accordion-item" data-image="6">
+                <button class="shutter-accordion-trigger">
+                    <span>Интерактивная проверка готовности и комплаенс-контроль документов</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Цифровой чек-лист TenderPilot — это ваш персональный ассистент, страхующий от досадных технических ошибок перед отправкой документов на площадку. Платформа сверяет ваш итоговый пакет с требованиями конкретного извещения о закупке: проверяет актуальность выписки из ЕГРЮЛ, наличие одобрения крупных сделок, деклараций СМП, лицензий СРО и действительность электронной цифровой подписи (ЭЦП). Интуитивный интерфейс подсветит недостающие или некорректные файлы, гарантируя полную готовность к успешной подаче.</p>
+                </div>
+            </div>
 
-                    <!-- Вопрос 6 -->
-                    <div class="shutter-accordion-item">
-                        <button class="shutter-accordion-trigger">
-                            <span>6. Каковы условия досрочного расторжения договора?</span>
-                            <span class="shutter-arrow-icon"></span>
-                        </button>
-                        <div class="shutter-accordion-content">
-                            <p>Вы можете перевести подписку на баз
+            <!-- Пункт 7 -->
+            <div class="shutter-accordion-item" data-image="7">
+                <button class="shutter-accordion-trigger">
+                    <span>Моментальный онлайн-расчет стоимости банковских гарантий и тендерных займов</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Финансовый агрегатор TenderPilot интегрирован по API с топ-20 ведущих банков и аккредитованных МФО, утвержденных Министерством финансов РФ для работы по 44-ФЗ и 223-ФЗ. Оформляйте банковские гарантии на обеспечение заявок, исполнение контрактов и гарантийные обязательства, а также тендерные займы без визита в банк и без открытия расчетного счета. Единая мультизаявка автоматически улетает во все скоринг-системы партнеров, позволяя вам сравнить предложения и выбрать минимальную процентну
