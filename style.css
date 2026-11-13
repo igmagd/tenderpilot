@@ -227,16 +227,23 @@ body.menu-open {
     transform: none !important; 
 }
 
-
 @media (max-width: 1024px) {
     .hub-grid { grid-template-columns: repeat(2, 1fr); }
     .supplier-card { grid-column: span 2; }
+}
+
+@media (max-width: 768px) {
+    .hub-main {
+        width: 100%;
+        padding: 76px 16px 40px;
+    }
 }
 
 @media (max-width: 600px) {
     .hub-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
     .hub-card { grid-column: span 1 !important; aspect-ratio: 1.5; }
 }
+
 
 /* Тексты для хаба на главной странице */
 .hub-card h2, .hub-card h3 { 
@@ -282,6 +289,31 @@ body.menu-open {
     margin: 84px auto 40px;
     padding: 0 24px;
     flex: 1 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bento-grid {
+        width: 100%;
+        padding: 0 16px;
+        margin: 76px auto 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .bento-card.main-hero {
+        grid-column: span 1 !important;
+    }
 }
 
 .bento-card {
