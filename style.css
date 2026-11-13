@@ -1085,10 +1085,14 @@ border-bottom: none !important;
 @media (max-width: 992px) {
     .fat-footer-container { grid-template-columns: repeat(4, 1fr); gap: 25px; }
 }
-@media (max-width: 576px) {
-    .fat-footer-container { grid-template-columns: repeat(3, 1fr); gap: 20px 20px; }
-    .fat-footer-bottom { flex-direction: column; gap: 12px; }
+@media (max-width: 768px) {
+    .fat-footer-container { padding: 0 16px; }
 }
+@media (max-width: 576px) {
+    .fat-footer-container { grid-template-columns: repeat(3, 1fr); gap: 20px 16px; }
+    .fat-footer-bottom { flex-direction: column; gap: 12px; padding: 15px 16px 0; }
+}
+
 
 /* ==========================================================================
    НИЖНИЙ МИНИМАЛИСТИЧНЫЙ ФУТЕР (LEGAL FOOTER) — СТРОГО ПО ЦЕНТРУ
