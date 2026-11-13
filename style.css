@@ -1165,6 +1165,13 @@ border-bottom: none !important;
         padding-right: 16px !important;
     }
 
+    /* Убираем двойной отступ внутри обёртки header-container в футере */
+    .hub-fat-footer .header-container .fat-footer-container,
+    .hub-fat-footer .header-container .fat-footer-bottom {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
     .fat-footer-bottom {
         padding-top: 15px !important;
     }
@@ -1178,4 +1185,5 @@ border-bottom: none !important;
         display: none;
     }
 }
+
 
