@@ -8,91 +8,439 @@
 </head>
 <body class="hub-page">
 
-    <header>
-        <div class="header-container">
-            <button class="menu-toggle" id="menu-toggle" aria-label="Меню">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
-            <a class="logo" href="index.html">Tender<span>Pilot</span></a>
-            <a class="lk-btn" href="#login" aria-label="Личный кабинет">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                </svg>              
-            </a>
-        </div>
-    </header>
+<header>
+    <div class="header-container">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Меню">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <a class="logo" href="index.html">Tender<span>Pilot</span></a>
 
-    <main class="hub-main">
-        <div class="hub-grid">
+        <nav class="nav-links">
+            <a href="suppliers.html" class="menu-item-link">Поставщикам</a>
+            <a href="customers.html" class="menu-item-link">Заказчикам</a>
+            <a href="finance.html" class="menu-item-link">Финансы</a>
+            <a href="transport.html" class="menu-item-link">Логистика</a>
+            <a href="support.html" class="menu-item-link">Сопровождение</a>
+            <a href="legal.html" class="menu-item-link">Юрист</a>
+            <a href="training.html" class="menu-item-link">Обучение</a>
+        </nav>
+
+        <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>              
+        </a>
+    </div>
+</header>
+
+
+<main class="hub-main">
+    <div class="hub-grid">
+
+        <!-- 1. О платформе (Длинная 2x1, использует размер класса customer-card, НЕ ссылка) -->
+        <div class="hub-card customer-card">
+            <div class="hub-card-content">
+                <h2>О платформе</h2>
+                <p>TenderPilot — единая цифровая экосистема для автоматизации тендеров, умного поиска коммерческих и госзакупок, а также нейро-анализа документации</p>
+            </div>
+        </div>
+
+        <!-- 2. Поставщикам (Маленькая 1x1, ведет на supplier.html) -->
+        <a href="supplier.html" class="hub-card finance-card">
+            <div class="hub-card-content">
+                <h3>Поставщикам</h3>
+                <p>Поиск тендеров и автоматическая подготовка заявок</p>
+            </div>
+        </a>
+
+        <!-- 3. Заказчикам (Маленькая 1x1, ведет on customer.html) -->
+        <a href="customer.html" class="hub-card transport-card">
+            <div class="hub-card-content">
+                <h3>Заказчикам</h3>
+                <p>Создание идеальных ТЗ, расчет НМЦК онлайн, поиск исполнителей в один клик</p>
+            </div>
+        </a>
+
+        <!-- 4. Логистика -->
+        <a href="transport.html" class="hub-card legal-card">
+            <div class="hub-card-content">
+                <h3>Логистика и транспорт</h3>
+                <p>Расчет доставки и поиск попутных грузов</p>
+            </div>
+        </a>
+
+        <!-- 5. Финансы -->
+        <a href="finance.html" class="hub-card training-card">
+            <div class="hub-card-content">
+                <h3>Финансы</h3>
+                <p>Банковские гарантии и займы за 2 часа</p>
+            </div>
+        </a>
+        
+        <!-- 6. Сопровождение -->
+        <a href="tender-care.html" class="hub-card tender-care-card">
+            <h3>Тендерное сопровождение</h3>
+            <p>Поиск проверенных специалистов и брокеров. Подготовка заявок, аудит рисков и ведение торгов.</p>
+        </a>
+
+        <!-- 7. Юрист  -->
+        <a href="legal.html" class="hub-card">
+            <div class="hub-card-content">
+                <h3>Юрист</h3>
+                <p>Защита в ФАС и поиск экспертов по 44/223-ФЗ</p>
+            </div>
+        </a>
+
+        <!-- 8. Обучение -->
+        <a href="training.html" class="hub-card">
+            <div class="hub-card-content">
+                <h3>Обучение</h3>
+                <p>Первоначальное обучение, курсы повышения квалификации, вебинары</p>
+            </div>
+        </a>
+
+    </div>
+</main>
+
+<!-- ==================== ИНТЕРАКТИВНЫЙ ПРЕДФУТЕР V5 (МОНОЛИТ) ==================== -->
+<section class="premium-shutter-section">
+    <div class="shutter-layout-container">
+        
+        <!-- Управляющая строчка кнопок меню -->
+        <div class="shutter-control-bar home-control-bar">
+            <button class="shutter-trigger-btn" data-panel="panel-features">Возможности</button>
+            <button class="shutter-trigger-btn" data-panel="panel-benefits">Экономия и выгода</button>
+            <button class="shutter-trigger-btn" data-panel="panel-security">Безопасность пользователя</button>
+            <button class="shutter-trigger-btn" data-panel="panel-faq">Вопросы-ответы</button>
+            <button class="shutter-trigger-btn" data-panel="panel-payment">Оплата</button>
+            <button class="shutter-trigger-btn" data-panel="panel-contacts">Контакты</button>
+        </div>
+
+        <!-- Главный контейнер для выезжающих панелей -->
+        <div class="shutter-dynamic-box">
+
+        
+<!-- ВОЗМОЖНОСТИ -->
+<div id="panel-features" class="shutter-panel-item">
+    <div class="shutter-features-showcase">
+        
+        <!-- Левая половина: Аккордеон (650px) -->
+        <div class="shutter-faq-accordion-box">
             
-            <!-- СТРОКА 1: О ПЛАТФОРМЕ (2х1) + ПОСТАВЩИКАМ (1х1) + ЗАКАЗЧИКАМ (1х1) -->
-            
-            <!-- 1. О платформе (Длинная 2x1, использует размер класса customer-card, НЕ ссылка) -->
-            <div class="hub-card customer-card">
-                <div class="hub-card-content">
-                    <h2>О платформе</h2>
-                    <p>TenderPilot — единая цифровая экосистема для автоматизации тендеров, умного поиска коммерческих и госзакупок, а также нейро-анализа документации</p>
+            <!-- Пункт 1: Единый поиск тендеров -->
+            <div class="shutter-accordion-item" data-image="1">
+                <button class="shutter-accordion-trigger">
+                    <span>Единый поиск тендеров и госзакупок со всех ЭТП, ЕИС и Портала поставщиков</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Интеллектуальный поисковый модуль TenderPilot объединяет в одном окне государственные закупки по 44-ФЗ и 223-ФЗ из ЕИС, закрытые процедуры АСТ ГОЗ, коммерческие тендеры, торги по банкротству, а также закупки малого объема с Портала поставщиков Москвы и ЕАТ «Берёзка». Умная фильтрация по ИНН, ОКВЭД, региону и ключевым словам мгновенно находит релевантные лоты и отправляет уведомления в Telegram в режиме реального времени.</p>
                 </div>
             </div>
 
-            <!-- 2. Поставщикам (Маленькая 1x1, ведет на supplier.html) -->
-            <a href="supplier.html" class="hub-card finance-card">
-                <div class="hub-card-content">
-                    <h3>Поставщикам</h3>
-                    <p>Поиск тендеров и автоматическая подготовка заявок</p>
+            <!-- Пункт 2: ИИ-аналитика и авто-заявки для поставщиков -->
+            <div class="shutter-accordion-item" data-image="2">
+                <button class="shutter-accordion-trigger">
+                    <span>Нейро-анализ документации, скоринг конкурентов и авто-заявки для поставщиков</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Искусственный интеллект за 5 минут проводит комплаенс-аудит многостраничных технических заданий и проектов контрактов, подсвечивая скрытые риски, завышенные пени и ловушки заказчиков. Платформа оценивает вероятность победы через скоринг конкурентов по ИНН, автоматически генерирует первую и вторую части заявки строго по регламенту ЭТП и проверяет пакет документов по интерактивному чек-листу перед подачей.</p>
                 </div>
-            </a>
+            </div>
 
-            <!-- 3. Заказчикам (Маленькая 1x1, ведет on customer.html) -->
-            <a href="customer.html" class="hub-card transport-card">
-                <div class="hub-card-content">
-                    <h3>Заказчикам</h3>
-                    <p>Создание идеальных ТЗ, расчет НМЦК онлайн, поиск исполнителей в один клик</p>
+            <!-- Пункт 3: Инструменты для заказчиков -->
+            <div class="shutter-accordion-item" data-image="3">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматическая генерация ТЗ по ГОСТ и КТРУ, расчет НМЦК и проверка в РНП для заказчиков</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Цифровое рабочее место контрактного управляющего позволяет за считанные минуты сформировать техническое задание по актуальным стандартам ГОСТ, каталогу КТРУ и правилам национального режима 2026 года без риска жалоб в ФАС. Система автоматически обосновывает НМЦК на базе исполненных контрактов, подбирает проверенных производителей и проверяет участников на сговор, аффилированность и наличие в реестре недобросовестных поставщиков (РНП).</p>
                 </div>
-            </a>
+            </div>
 
-     
-
-            <!-- 4. Логистика -->
-            <a href="transport.html" class="hub-card legal-card">
-                <div class="hub-card-content">
-                    <h3>Логистика и транспорт</h3>
-                    <p>Расчет доставки и поиск попутных грузов</p>
+            <!-- Пункт 4: Финансы и банковские гарантии -->
+            <div class="shutter-accordion-item" data-image="4">
+                <button class="shutter-accordion-trigger">
+                    <span>Банковские гарантии по 44-ФЗ и 223-ФЗ, тендерные займы и проверка лимитов по ИНН</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Финансовый агрегатор TenderPilot интегрирован по API с топ-20 банками из перечня Минфина РФ для моментального подбора финансирования под контракты. По одному ИНН вы за минуту узнаете доступные лимиты и сможете дистанционно оформить банковскую гарантию на обеспечение заявки, исполнение контракта, гарантийные обязательства или возврат аванса, а также получить тендерный заем, отсрочку платежа или таможенную гарантию.</p>
                 </div>
-            </a>
+            </div>
 
-            <!-- 5. Финансы -->
-            <a href="finance.html" class="hub-card training-card">
-                <div class="hub-card-content">
-                    <h3>Финансы</h3>
-                    <p>Банковские гарантии и займы за 2 часа</p>
+            <!-- Пункт 5: Логистика и транспорт -->
+            <div class="shutter-accordion-item" data-image="5">
+                <button class="shutter-accordion-trigger">
+                    <span>Онлайн-калькулятор доставки грузов, поиск попутного транспорта и страхование перевозок</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Встроенный логистический сервис помогает поставщикам и заказчикам точно рассчитать стоимость и сроки доставки товаров до склада получателя еще до подачи заявки на тендер. Платформа сравнивает тарифы проверенных транспортных компаний, позволяет найти выделенный транспорт или попутный догруз по всей России и оформить онлайн-страхование груза, защищая маржинальность контракта от транспортных издержек и просрочек.</p>
                 </div>
-            </a>
+            </div>
 
-            <!-- 6. Юрист  -->
-            <a href="legal.html" class="hub-card">
-                <div class="hub-card-content">
-                    <h3>Юрист</h3>
-                    <p>Защита в ФАС и поиск экспертов по 44/223-ФЗ</p>
+            <!-- Пункт 6: Тендерное сопровождение и юристы -->
+            <div class="shutter-accordion-item" data-image="6">
+                <button class="shutter-accordion-trigger">
+                    <span>Тендерное сопровождение под ключ и юридическая защита в ФАС и арбитраже</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>На платформе собраны аккредитованные тендерные специалисты, брокеры и профильные юристы по закупочному праву. Вы можете передать на аутсорсинг подготовку Формы 2, участие в аукционах и закрытых торгах, а в спорных ситуациях — оперативно заказать составление запроса на разъяснение, протокола разногласий, жалобы в УФАС или защиту компании от включения в РНП и арбитражные споры.</p>
                 </div>
-            </a>
+            </div>
 
-            <!-- 7. Обучение -->
-            <a href="training.html" class="hub-card">
-                <div class="hub-card-content">
-                    <h3>Обучение</h3>
-                    <p>Первоначальное обучение, курсы повышения квалификации, вебинары</p>
+            <!-- Пункт 7: Обучение закупкам -->
+            <div class="shutter-accordion-item" data-image="7">
+                <button class="shutter-accordion-trigger">
+                    <span>Обучение госзакупкам 2026: курсы по 44-ФЗ, 223-ФЗ, ГОЗ и дипломы с внесением в ФИС ФРДО</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Образовательный хаб TenderPilot проводит дистанционное обучение для новичков, опытных тендерных специалистов и контрактных управляющих. В каталоге представлены практикумы по изменениям законодательства 2026 года, курсы по 44-ФЗ, 223-ФЗ, гособоронзаказу (275-ФЗ), работе на АСТ ГОЗ и коммерческим торгам с выдачей официальных удостоверений о повышении квалификации и дипломов о профпереподготовке в реестре ФИС ФРДО.</p>
                 </div>
-            </a>
+            </div>
 
         </div>
-    </main>
-    
+
+        <div class="shutter-features-visual">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="1" alt="Единый поиск тендеров и госзакупок по 44-ФЗ, 223-ФЗ, ЕИС и Порталу поставщиков">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="2" alt="Нейро-анализ тендерной документации, скоринг конкурентов и авто-заявки">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="3" alt="Создание ТЗ по ГОСТ и КТРУ, расчет НМЦК и проверка участников в РНП для заказчиков">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="4" alt="Банковские гарантии по 44-ФЗ и 223-ФЗ, тендерные займы и лимиты по ИНН">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="5" alt="Онлайн-калькулятор доставки грузов, попутный транспорт и страхование перевозок">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="6" alt="Тендерное сопровождение под ключ и юридическая защита в ФАС и РНП">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="7" alt="Обучение госзакупкам 2026, курсы по 44-ФЗ и 223-ФЗ с дипломом ФИС ФРДО">
+        </div>
+
+    </div>
+</div>
+
+<!-- ПАНЕЛЬ: ЭКОНОМИЯ И ВЫГОДА -->
+<div id="panel-benefits" class="shutter-panel-item">
+    <div class="shutter-payment-flow">
+        
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Экономия до 80% времени на рутинных процессах в закупках</h4>
+            <p class="shutter-payment-text">Интеллектуальные алгоритмы TenderPilot за считанные минуты выполняют задачи, на которые у специалистов уходят часы: от поиска тендеров, нейро-анализа документации и авто-заявок для поставщиков до генерации ТЗ по ГОСТ/КТРУ, расчета НМЦК и проверки контрагентов для заказчиков.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Прямой доступ к банкам, логистике и экспертам без переплат посредникам</h4>
+            <p class="shutter-payment-text">Все ключевые сервисы экосистемы объединены в одном окне. Вы оформляете банковские гарантии и тендерные займы напрямую через топ-20 банков Минфина, рассчитываете доставку по прямым тарифам транспортных компаний, подключаете юристов или обучаете сотрудников без скрытых комиссий брокеров.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Масштабирование закупок и защита от финансовых и правовых рисков</h4>
+            <p class="shutter-payment-text">Сквозной контроль каждого этапа по 44-ФЗ, 223-ФЗ и коммерческим торгам страхует поставщиков от убыточных контрактов и попадания в РНП, а заказчиков — от жалоб и штрафов ФАС. Команды кратно увеличивают объем обработанных закупок и закрытых сделок без расширения штата.</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ПАНЕЛЬ: БЕЗОПАСНОСТЬ ПОЛЬЗОВАТЕЛЯ -->
+<div id="panel-security" class="shutter-panel-item">
+    <div class="shutter-payment-flow">
+        
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Полная конфиденциальность коммерческих данных и черновиков закупок</h4>
+            <p class="shutter-payment-text">Загруженные вами проекты технических заданий, сметы, расчеты НМЦК, ценовые предложения и поисковые фильтры строго изолированы в вашем рабочем пространстве. Информация поставщиков и заказчиков не используется для дообучения общих моделей ИИ и гарантированно не передается третьим лицам.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Правовая точность, официальные реестры и аккредитованные партнеры</h4>
+            <p class="shutter-payment-text">Алгоритмы TenderPilot работают исключительно на основе актуальной редакции 44-ФЗ, 223-ФЗ, 275-ФЗ (ГОЗ), стандартов ГОСТ, каталога КТРУ и государственных реестров ЕИС, ФНС и ФАС. Все финансовые, логистические, юридические и образовательные сервисы экосистемы предоставляются проверенными банками из перечня Минфина, лицензированными учебными центрами и профильными экспертами.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Защищённый российский контур и соответствие требованиям 152-ФЗ</h4>
+            <p class="shutter-payment-text">Обмен данными между браузером и платформой защищен современным криптографическим шифрованием, а хранение и обработка персональных данных, документов и реквизитов осуществляются исключительно на серверах на территории Российской Федерации в полном соответствии с 152-ФЗ и стандартами информационной безопасности.</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- --- БЛОК ОПЛАТЫ (ПОСЛЕДОВАТЕЛЬНЫЙ ПОТОК В СТИЛЕ FAQ) --- -->
+<div id="panel-payment" class="shutter-panel-item">
+    <div class="shutter-payment-flow">
+        
+        <!-- Способ 1 -->
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">1. Моментальная онлайн-оплата на платформе</h4>
+            <p class="shutter-payment-text">
+                Быстрый способ подключить ИИ-инструменты TenderPilot, доступ к базе знаний или образовательные курсы для физических лиц и предпринимателей. Оплата принимается непосредственно на сайте с помощью банковских карт (Visa, Mastercard, МИР) или через Систему быстрых платежей (QR-код СБП).
+            </p>
+            <ul class="shutter-payment-sublist">
+                <li><strong>Безопасность транзакций:</strong> Все операции проходят через сертифицированный платежный шлюз с поддержкой протокола 3D-Secure. Платформа TenderPilot не сохраняет и не передает третьим лицам платежные данные вашей карты.</li>
+                <li><strong>Мгновенная активация:</strong> Зачисление средств происходит сразу, доступ к выбранному модулю или личному кабинету открывается автоматически, а официальный фискальный чек отправляется на ваш email.</li>
+            </ul>
+        </div>
+
+        <!-- Тонкая горизонтальная разделительная черта -->
+        <div class="shutter-payment-divider"></div>
+
+        <!-- Способ 2 -->
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">2. Безналичный расчет по счету для юридических лиц, ИП и госзаказчиков</h4>
+            <p class="shutter-payment-text">
+                Единый стандарт расчетов для коммерческих организаций, государственных и муниципальных учреждений по всем направлениям экосистемы: от подписки на софт до банковских гарантий, логистики, сопровождения торгов, юридических услуг и обучения.
+            </p>
+            <ul class="shutter-payment-sublist">
+                <li><strong>Прямые счета и прозрачность:</strong> Счет формируется по реквизитам вашей компании. Услуги банков-партнеров (БГ и займы) и транспортных компаний оплачиваются напрямую по их официальным счетам без скрытых наценок платформы.</li>
+                <li><strong>Полный пакет документов и ЭДО:</strong> Работаем по 44-ФЗ и 223-ФЗ, предоставляем договоры, счета и закрывающие акты (УПД) через системы электронного документооборота (Контур.Диадок, СБИС) или курьерской доставкой.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- ПАНЕЛЬ 2: FAQ (8 Вопросов, монолитный размер) -->
+            <div id="panel-faq" class="shutter-panel-item">
+                <div class="shutter-faq-accordion-box">
+                    
+                    <!-- Вопрос 1 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Какие задачи решает экосистема TenderPilot для поставщиков и заказчиков?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Платформа объединяет в одном окне поиск тендеров по 44-ФЗ, 223-ФЗ, ГОЗ и коммерческим ЭТП, ИИ-анализ документации, авто-заявки, генератор ТЗ по ГОСТ/КТРУ, расчет НМЦК, банковские гарантии, грузоперевозки, сопровождение торгов, защиту в ФАС и обучение закупкам.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 2 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Можно ли протестировать ИИ-инструменты платформы бесплатно?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Да, после регистрации и верификации организации по ИНН вы получаете 3 дня бесплатного тестового доступа к ключевым модулям: поиску закупок, нейро-аудиту ТЗ, генерации заявок, расчету НМЦК, проверке контрагентов в РНП и калькулятору банковских гарантий.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 3 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как быстро искусственный интеллект проверяет или создает тендерную документацию?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Нейросеть TenderPilot проводит аудит многостраничного ТЗ поставщика или формирует техническое задание по ГОСТ и каталогу КТРУ для заказчика за 3–5 минут, сверяя требования с актуальными нормами 44-ФЗ и 223-ФЗ 2026 года.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 4 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как оформляются банковские гарантии, тендерные займы и доставка грузов?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Платформа подключена по API к топ-20 банкам Минфина и ведущим транспортным компаниям. Вы узнаете лимит по ИНН за 1 минуту, выпускаете БГ онлайн за 2 часа без визита в банк и рассчитываете стоимость перевозки по прямым тарифам ТК без посредников.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 5 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Можно ли подключить тендерное сопровождение или юриста для защиты в ФАС?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Да, на платформе работают аккредитованные брокеры и профильные юристы по закупочному праву. Вы можете передать торги на полное сопровождение (включая закрытые закупки АСТ ГОЗ), заказать жалобу в УФАС или защиту от включения в РНП.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 6 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Выдаются ли официальные дипломы после прохождения курсов на платформе?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Да, программы обучения по 44-ФЗ, 223-ФЗ, 275-ФЗ (ГОЗ) и коммерческим торгам соответствуют профстандартам и 273-ФЗ. Выпускники получают удостоверения о повышении квалификации или дипломы о профпереподготовке с внесением в реестр ФИС ФРДО.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 7 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как обеспечивается конфиденциальность загруженных смет, ТЗ и реквизитов?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Все файлы и расчеты изолированы в защищенном рабочем пространстве, передаются по зашифрованным каналам и хранятся на серверах в РФ в строгом соответствии с 152-ФЗ. Ваши данные не используются для обучения публичных моделей ИИ.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 8 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как происходит оплата и закрывающий документооборот для компаний и госзаказчиков?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Мы работаем по безналичному расчету с юрлицами, ИП и бюджетными учреждениями по 44-ФЗ и 223-ФЗ, а также принимаем онлайн-оплату картой и через СБП. Договоры, счета и акты (УПД) передаются через ЭДО (Контур.Диадок, СБИС) или курьером.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+<!-- ПАНЕЛЬ 3: КОНТАКТЫ -->
+<div id="panel-contacts" class="shutter-panel-item">
+    <div class="shutter-contacts-single-flow">
+        
+        <div class="shutter-flow-line">
+            <span>Связаться в мессенджере: </span>
+            <a href="https://t.me" target="_blank" class="shutter-flow-link">Telegram</a>, 
+            <a href="https://wa.me" target="_blank" class="shutter-flow-link">WhatsApp</a>
+        </div>
+        
+        <div class="shutter-flow-line">
+            <span>Электронная почта: </span>
+            <a href="mailto:info@tenderpilot.ru" class="shutter-flow-link">info@tenderpilot.ru</a>
+        </div>
+        
+        <div class="shutter-flow-line">
+            <span>Тел: </span>
+            <a href="tel:+78000000000" class="shutter-flow-link">8 800 000-00-00</a>
+        </div>
+        
+        <div class="shutter-flow-legal-group">
+            <div class="shutter-flow-line">
+                <span>ИП Ромашка Александр Владимирович</span>
+            </div>
+            <div class="shutter-flow-line">
+                <span>ИНН: 77XXXXXXXXXX, ОГРНИП: XXXXXXXXXXXXXXX</span>
+            </div>
+        </div>
+
+   </div> <!-- закрывает .shutter-contacts-single-flow -->
+</div> <!-- закрывает #panel-contacts -->
+</div> <!-- закрывает .shutter-dynamic-box -->
+</div> <!-- закрывает .shutter-layout-container -->
+</section> <!-- закрывает .premium-shutter-section -->
+
+
 <section class="hub-fat-footer">
     <div class="header-container"> <!-- Добавили обертку как в шапке -->
         <div class="fat-footer-container">
@@ -147,7 +495,18 @@
                 </ul>
             </div>
 
-            <!-- Столбец 5 -->
+    <!-- Столбец 5 -->
+            <div class="fat-footer-column">
+                <h4>Сопровождение</h4>
+                <ul>
+                  <li><a href="tender-care.html">Сопровождение по 44, 223-ФЗ</a></li>
+                 <li><a href="tender-care.html">Участие в коммерческих и закрытых торгах</a></li>
+                 <li><a href="tender-care.html">Подготовка ТЗ, Формы 2</a></li>
+                    
+                </ul>
+            </div>
+
+<!-- Столбец 6 -->
             <div class="fat-footer-column">
                 <h4>Юристы</h4>
                 <ul>
@@ -159,7 +518,7 @@
                 </ul>
             </div>
 
-            <!-- Столбец 6 -->
+            <!-- Столбец 7 -->
             <div class="fat-footer-column">
                 <h4>Обучение</h4>
                 <ul>
@@ -174,24 +533,13 @@
             </div>
         </div>
     </div> <!-- Закрыли обертку -->
-
-    <!-- Нижнюю строчку тоже заворачиваем в контейнер, чтобы не прилипала -->
-    <div class="header-container">
-        <div class="fat-footer-bottom">
-            <a href="#faq">Вопросы-ответы</a>
-            <a href="#contacts">Контакты</a>
-        </div>
-    </div>
 </section>
 
 <footer class="legal-footer">
     <div class="legal-footer-container">
         <span class="copyright-text">&copy; 2026 TenderPilot. Все права защищены.</span>
-        <span class="footer-divider">|</span>
         <a href="/privacy/" target="_blank">Политика конфиденциальности</a>
-        <span class="footer-divider">|</span>
         <a href="/terms/" target="_blank">Публичная оферта</a>
-        <span class="footer-divider">|</span>
         <a href="/consent/" target="_blank">Согласие на обработку персональных данных</a>
     </div>
 </footer>
@@ -200,4 +548,3 @@
 </body>
 </html>
 
-                    
