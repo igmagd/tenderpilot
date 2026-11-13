@@ -300,11 +300,10 @@ body.menu-open {
 
 @media (max-width: 768px) {
     .bento-grid {
-        width: 100%;
-        padding: 0 16px;
         margin: 76px auto 32px;
     }
 }
+
 
 @media (max-width: 600px) {
     .bento-grid {
@@ -1085,14 +1084,10 @@ border-bottom: none !important;
 @media (max-width: 992px) {
     .fat-footer-container { grid-template-columns: repeat(4, 1fr); gap: 25px; }
 }
-@media (max-width: 768px) {
-    .fat-footer-container { padding: 0 16px; }
-}
 @media (max-width: 576px) {
     .fat-footer-container { grid-template-columns: repeat(3, 1fr); gap: 20px 16px; }
-    .fat-footer-bottom { flex-direction: column; gap: 12px; padding: 15px 16px 0; }
+    .fat-footer-bottom { flex-direction: column; gap: 12px; }
 }
-
 
 /* ==========================================================================
    НИЖНИЙ МИНИМАЛИСТИЧНЫЙ ФУТЕР (LEGAL FOOTER) — СТРОГО ПО ЦЕНТРУ
@@ -1151,22 +1146,13 @@ border-bottom: none !important;
     text-decoration: underline !important;
 }
 
-@media (max-width: 768px) {
-    .legal-footer-container {
-        gap: 10px 16px;
-        justify-content: center;
-    }
-    .legal-footer-container a::before {
-        display: none;
-    }
-}
-
-/* Единое выравнивание всех блоков по шапке на мобильных (16px) */
+/* Единое выравнивание и мобильный футер (до 768px) */
 @media (max-width: 768px) {
     .hub-fat-footer {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
+
     .header-container,
     .hub-main,
     .bento-grid,
@@ -1178,4 +1164,18 @@ border-bottom: none !important;
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
-   }
+
+    .fat-footer-bottom {
+        padding-top: 15px !important;
+    }
+
+    .legal-footer-container {
+        gap: 10px 16px;
+        justify-content: center;
+    }
+
+    .legal-footer-container a::before {
+        display: none;
+    }
+}
+
