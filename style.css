@@ -561,22 +561,27 @@ border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     text-underline-offset: 2px;
 }
 
-/* Базовое скрытие шторки */
+/* Базовое скрытие шторки — сразу делаем flex, чтобы не было скачка при смене display */
 .premium-shutter-section .shutter-panel-item {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     visibility: hidden;
-    transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease, visibility 0.3s ease;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: 
+        max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+        padding 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+        opacity 0.3s ease, 
+        visibility 0.3s ease;
 }
 
-/* Состояние шторки при активации: строго симметричные 24px от меню сверху и 24px (4px + 20px) до футера снизу */
+/* Состояние шторки при активации */
 .premium-shutter-section .shutter-panel-item.is-active {
-    display: flex !important; 
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    text-align: left !important;
     opacity: 1;
     visibility: visible;
     padding-top: 24px;
@@ -820,6 +825,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 0;
 }
 
+/* Плавный переход отступа для заголовка аккордеона */
 .premium-shutter-section .shutter-accordion-trigger {
     width: 100%;
     padding: 10px 0;
@@ -837,6 +843,7 @@ border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
     cursor: pointer;
     -webkit-font-smoothing: antialiased;
+    transition: padding 0.3s ease, color 0.2s ease;
 }
 
 .premium-shutter-section .shutter-accordion-trigger span:first-child {
