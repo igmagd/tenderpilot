@@ -238,10 +238,9 @@ body:has(.hub-main) header .nav-links {
     display: none;
 }
 
-/* Блокировка двойного скролла страницы при открытой шторке */
-html:has(body.menu-open),
+/* Блокировка скролла страницы без скачка ширины экрана */
 body.menu-open {
-    overflow: hidden !important;
+    overflow: hidden;
     overscroll-behavior: none;
 }
 
@@ -255,6 +254,7 @@ body.menu-open {
         position: fixed;
         top: 49px;
         left: 0;
+        right: 0;
         width: 100%;
         height: calc(100dvh - 49px);
         background-color: #0b1321;
@@ -263,10 +263,12 @@ body.menu-open {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transform: translateY(-10px);
+        transform: translate3d(0, -14px, 0);
+        will-change: transform, opacity;
+        backface-visibility: hidden;
         transition:
-            opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1),
-            transform 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+            opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+            transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
             visibility 0s linear 0.38s;
         overflow: hidden;
     }
@@ -276,26 +278,46 @@ body.menu-open {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
         transition:
-            opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1),
-            transform 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+            opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+            transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
             visibility 0s linear 0s;
     }
 
+    /* Шрифт один в один как у логотипа TenderPilot */
     header .nav-links .menu-item-link {
         width: 100%;
         text-align: left;
         color: rgba(240, 246, 252, 0.78);
         text-decoration: none;
-        font-size: 1.05rem;
-        font-weight: 600;
+        font-size: 1.2rem;
+        font-weight: 700;
         letter-spacing: 0.5px;
         padding: 5px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        transition: border-bottom-color 0.2s ease;
+        opacity: 0;
+        transform: translate3d(0, -8px, 0);
+        transition:
+            opacity 0.32s ease,
+            transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+            border-bottom-color 0.2s ease;
         -webkit-tap-highlight-color: transparent;
     }
+
+    header .nav-links.active .menu-item-link {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+
+    /* Каскадное появление пунктов в стиле Apple при открытии */
+    header .nav-links.active .menu-item-link:nth-child(1) { transition-delay: 0.03s; }
+    header .nav-links.active .menu-item-link:nth-child(2) { transition-delay: 0.05s; }
+    header .nav-links.active .menu-item-link:nth-child(3) { transition-delay: 0.07s; }
+    header .nav-links.active .menu-item-link:nth-child(4) { transition-delay: 0.09s; }
+    header .nav-links.active .menu-item-link:nth-child(5) { transition-delay: 0.11s; }
+    header .nav-links.active .menu-item-link:nth-child(6) { transition-delay: 0.13s; }
+    header .nav-links.active .menu-item-link:nth-child(7) { transition-delay: 0.15s; }
 
     header .nav-links .menu-item-link:last-child {
         border-bottom: none;
