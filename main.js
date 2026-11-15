@@ -13,11 +13,11 @@
             function closeMenu() {
                 if (isClosing) return;
                 isClosing = true;
+                toggle.classList.remove('active');
                 nav.classList.remove('active');
+                document.body.classList.remove('menu-is-open');
                 clearTimeout(closeTimer);
                 closeTimer = setTimeout(function () {
-                    toggle.classList.remove('active');
-                    document.body.classList.remove('menu-is-open');
                     document.documentElement.classList.remove('menu-open');
                     document.body.classList.remove('menu-open');
                     isClosing = false;

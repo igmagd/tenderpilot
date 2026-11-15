@@ -102,26 +102,35 @@ header {
     pointer-events: none;
 }
 
-/* Мгновенная смена бургера на компактную «х» */
+/* Плавная перекрёстная смена бургера и компактной «х» без резкого щелчка */
 .menu-toggle .icon-burger,
 .menu-toggle .icon-close {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: none;
+}
+
+/* При закрытии: «х» мягко тает в финале пути шторки, а бургер плавно проступает */
+.menu-toggle .icon-burger {
+    opacity: 1;
+    transition: opacity 0.24s ease 0.26s;
 }
 
 .menu-toggle .icon-close {
     opacity: 0;
+    transition: opacity 0.2s ease 0.2s;
 }
 
+/* При открытии: мгновенная смена на «х» */
 .menu-toggle.active .icon-burger {
     opacity: 0;
+    transition: opacity 0.12s ease 0s;
 }
 
 .menu-toggle.active .icon-close {
     opacity: 1;
+    transition: opacity 0.18s ease 0.04s;
 }
 
 /* Концентрированный чисто белый световой блик при тапе */
@@ -203,13 +212,15 @@ header {
     outline: none;
     overflow: visible;
     -webkit-tap-highlight-color: transparent;
-    transition: opacity 0.22s ease;
+    opacity: 1;
+    transition: opacity 0.32s ease 0.24s;
 }
 
-/* Плавное скрытие и возвращение иконки ЛК без :has() (не обрывает анимацию шторки) */
+/* Плавное исчезновение ЛК при открытии меню */
 body.menu-is-open .lk-btn {
     opacity: 0 !important;
     pointer-events: none !important;
+    transition: opacity 0.2s ease 0s;
 }
 
 /* Навигация в шапке на десктопе: видна на внутренних страницах и скрыта на главной */
