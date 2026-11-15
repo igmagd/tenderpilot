@@ -233,31 +233,32 @@ header .nav-links a.active {
     color: #f0f6fc;
 }
 
-/* На главной странице (где есть .hub-main) скрываем ссылки на десктопе */
-body:has(.hub-main) header .nav-links {
-    display: none;
+/* На главной странице скрываем десктопное меню (только на экранах шире 768px) */
+@media (min-width: 769px) {
+    body:has(.hub-main) header .nav-links {
+        display: none;
+    }
 }
 
-/* Блокировка скролла страницы без скачка ширины экрана */
+/* Блокировка скролла страницы при открытой шторке */
 body.menu-open {
     overflow: hidden;
     overscroll-behavior: none;
 }
 
+/* Мобильная шторка меню (простая и надёжная конструкция без скачков) */
 @media (max-width: 768px) {
-    header .nav-links,
-    body:has(.hub-main) header .nav-links {
+    header .nav-links {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
         position: fixed;
         top: 49px;
+        bottom: 0;
         left: 0;
         right: 0;
-        width: 100%;
-        height: calc(100dvh - 49px);
-        background-color: #0b1321;
+        background-color: #080e18;
         padding: 48px 20px 24px 56px;
         z-index: 95;
         opacity: 0;
@@ -273,8 +274,7 @@ body.menu-open {
         overflow: hidden;
     }
 
-    header .nav-links.active,
-    body:has(.hub-main) header .nav-links.active {
+    header .nav-links.active {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
