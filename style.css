@@ -257,20 +257,21 @@ body.menu-open {
         left: 0;
         width: 100%;
         height: 100dvh;
-        background-color: #05050a;
-        background-image:
-            radial-gradient(circle at 20% 20%, rgba(0, 242, 254, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 40%, rgba(0, 149, 255, 0.12) 0%, transparent 60%),
-            linear-gradient(to top, #020617 0%, #09090b 70%, #020208 100%);
-        padding: 72px 20px 24px;
+        background-color: rgba(11, 19, 33, 0.96);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 58px 20px 24px;
         z-index: 95;
+        clip-path: inset(44px 0 0 0);
+        -webkit-clip-path: inset(44px 0 0 0);
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
         transform: translateY(-100%);
         transition:
-            transform 0.35s cubic-bezier(0.32, 0.72, 0, 1),
-            opacity 0.35s ease,
-            visibility 0.35s ease;
+            transform 0.38s cubic-bezier(0.25, 0.8, 0.25, 1),
+            opacity 0.32s ease,
+            visibility 0s linear 0.38s;
         overflow: hidden;
     }
 
@@ -278,7 +279,12 @@ body.menu-open {
     body:has(.hub-main) header .nav-links.active {
         opacity: 1;
         visibility: visible;
+        pointer-events: auto;
         transform: translateY(0);
+        transition:
+            transform 0.38s cubic-bezier(0.25, 0.8, 0.25, 1),
+            opacity 0.32s ease,
+            visibility 0s linear 0s;
     }
 
     header .nav-links .menu-item-link {
@@ -286,9 +292,10 @@ body.menu-open {
         text-align: left;
         color: rgba(240, 246, 252, 0.78);
         text-decoration: none;
-        font-size: 18px;
-        font-weight: 600;
-        padding: 13px 0;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+        padding: 10px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         transition: border-bottom-color 0.2s ease;
         -webkit-tap-highlight-color: transparent;
@@ -305,7 +312,6 @@ body.menu-open {
         border-bottom-color: rgba(255, 255, 255, 0.55);
     }
 }
-
 
     header .nav-links.active,
     body:has(.hub-main) header .nav-links.active {
