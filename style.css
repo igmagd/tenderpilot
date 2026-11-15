@@ -253,7 +253,7 @@ body.menu-open header {
     border-bottom-color: transparent;
 }
 
-/* Мобильная шторка меню (выезжает строго из-под глухой шапки вниз и уезжает обратно) */
+/* Мобильная шторка меню (строго под шапкой, с плавным каскадом ссылок Apple и без заезда на логотип) */
 @media (max-width: 768px) {
     header .nav-links {
         display: flex;
@@ -261,25 +261,26 @@ body.menu-open header {
         align-items: flex-start;
         justify-content: flex-start;
         position: fixed;
-        top: 0;
+        top: 48px;
         left: 0;
         right: 0;
         height: 120vh;
         background-color: #080e18;
-        padding: 97px 20px 120px 56px;
+        padding: 49px 20px 120px 56px;
         z-index: 90;
+        opacity: 0;
         pointer-events: none;
         touch-action: none;
-        transform: translate3d(0, -100%, 0);
-        transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+        transition: opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1);
         overflow: hidden;
     }
 
     header .nav-links.active {
+        opacity: 1;
         pointer-events: auto;
-        transform: translate3d(0, 0, 0);
     }
 
+    /* Шрифт один в один как у логотипа TenderPilot + плавный выезд каждой ссылки */
     header .nav-links .menu-item-link {
         width: 100%;
         text-align: left;
@@ -290,14 +291,34 @@ body.menu-open header {
         letter-spacing: 0.5px;
         padding: 5px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        transition: border-bottom-color 0.2s ease;
+        opacity: 0;
+        transform: translate3d(0, -12px, 0);
+        transition:
+            opacity 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+            transform 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+            border-bottom-color 0.2s ease;
         -webkit-tap-highlight-color: transparent;
     }
+
+    header .nav-links.active .menu-item-link {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+
+    /* Красивое последовательное раскрытие строк сверху вниз при открытии */
+    header .nav-links.active .menu-item-link:nth-child(1) { transition-delay: 0.04s; }
+    header .nav-links.active .menu-item-link:nth-child(2) { transition-delay: 0.07s; }
+    header .nav-links.active .menu-item-link:nth-child(3) { transition-delay: 0.10s; }
+    header .nav-links.active .menu-item-link:nth-child(4) { transition-delay: 0.13s; }
+    header .nav-links.active .menu-item-link:nth-child(5) { transition-delay: 0.16s; }
+    header .nav-links.active .menu-item-link:nth-child(6) { transition-delay: 0.19s; }
+    header .nav-links.active .menu-item-link:nth-child(7) { transition-delay: 0.22s; }
 
     header .nav-links .menu-item-link:last-child {
         border-bottom: none;
     }
 
+    /* При тапе подсвечивается только белая полоска снизу, текст не меняет цвет */
     header .nav-links .menu-item-link:hover,
     header .nav-links .menu-item-link:active {
         color: rgba(240, 246, 252, 0.78);
