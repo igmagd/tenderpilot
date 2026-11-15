@@ -47,6 +47,7 @@
             btn.addEventListener('touchstart', triggerTap, { passive: true });
             btn.addEventListener('pointerdown', triggerTap);
         });
+    }
 
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
     function init_bento() {
@@ -111,7 +112,7 @@
                     setTimeout(function() {
                         var targetRect = card.getBoundingClientRect();
                         
-                        clone.style.cssText += 'top: ' + targetRect.top + 'px !important; left: ' + targetRect.left + 'px !important; width: ' + targetRect.width + 'px !important; height: ' + targetRect.height + 'px !important; border-radius: 24px !important;';
+                        clone.style.cssText += 'top: ' + targetRect.top + 'px !important; left: ' + targetRect.left + 'px !important; width: ' + targetRect.width + 'px !important; height: targetRect.height + 'px !important; border-radius: 24px !important;';
                         clone.classList.remove('is-expanded');
 
                         setTimeout(function() {
@@ -215,5 +216,4 @@
         init_interactive_panels(); 
     });
 })();
-
 

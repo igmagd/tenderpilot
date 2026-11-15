@@ -202,8 +202,29 @@ body.menu-open .lk-btn {
     pointer-events: none !important;
 }
 
-/* Навигация в шапке главной: скрыта на десктопе */
+/* Навигация в шапке на десктопе: видна на внутренних страницах и скрыта на главной */
 header .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+header .nav-links a {
+    color: #8b949e;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+header .nav-links a:hover,
+header .nav-links a.active {
+    color: #f0f6fc;
+}
+
+/* На главной странице (где есть .hub-main) скрываем ссылки на десктопе */
+body:has(.hub-main) header .nav-links {
     display: none;
 }
 
@@ -212,7 +233,8 @@ body.menu-open {
 }
 
 @media (max-width: 768px) {
-    header .nav-links {
+    header .nav-links,
+    body:has(.hub-main) header .nav-links {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -234,7 +256,8 @@ body.menu-open {
         overflow-y: auto;
     }
 
-    header .nav-links.active {
+    header .nav-links.active,
+    body:has(.hub-main) header .nav-links.active {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
