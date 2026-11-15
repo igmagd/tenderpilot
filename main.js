@@ -7,10 +7,16 @@
         var nav = document.querySelector('.nav-links');
 
         if (toggle && nav) {
+            var closeTimer = null;
+
             function closeMenu() {
                 toggle.classList.remove('active');
                 nav.classList.remove('active');
-                document.body.classList.remove('menu-open');
+                clearTimeout(closeTimer);
+                closeTimer = setTimeout(function () {
+                    document.documentElement.classList.remove('menu-open');
+                    document.body.classList.remove('menu-open');
+                }, 380);
             }
 
             toggle.addEventListener('click', function (e) {
@@ -18,8 +24,10 @@
                 if (toggle.classList.contains('active')) {
                     closeMenu();
                 } else {
+                    clearTimeout(closeTimer);
                     toggle.classList.add('active');
                     nav.classList.add('active');
+                    document.documentElement.classList.add('menu-open');
                     document.body.classList.add('menu-open');
                 }
             });

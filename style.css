@@ -218,8 +218,8 @@ header::before {
     transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Плавное скрытие и возвращение иконки ЛК только через opacity (без скачка visibility) */
-body.menu-open .lk-btn {
+/* Плавное скрытие и возвращение иконки ЛК синхронно со шторкой */
+header:has(.menu-toggle.active) .lk-btn {
     opacity: 0 !important;
     pointer-events: none !important;
 }
@@ -252,13 +252,15 @@ header .nav-links a.active {
     }
 }
 
-/* Блокировка скролла страницы при открытой шторке */
+/* Жёсткая блокировка скролла страницы при открытой шторке на iOS и Android */
+html.menu-open,
 body.menu-open {
-    overflow: hidden;
-    overscroll-behavior: none;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
 }
 
-/* Мобильная шторка меню (чистая аппаратная анимация без сброса слоёв при закрытии) */
+/* Мобильная шторка меню (без щели сверху, без просвечивания футера, плавно туда и обратно) */
 @media (max-width: 768px) {
     header .nav-links {
         display: flex;
@@ -266,15 +268,16 @@ body.menu-open {
         align-items: flex-start;
         justify-content: flex-start;
         position: fixed;
-        top: 49px;
+        top: 48px;
         left: 0;
         right: 0;
-        height: calc(100vh - 49px);
+        height: 120vh;
         background-color: #080e18;
-        padding: 48px 20px 24px 56px;
+        padding: 49px 20px 120px 56px;
         z-index: 95;
         opacity: 0;
         pointer-events: none;
+        touch-action: none;
         transform: translateY(-16px);
         transition:
             opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1),
