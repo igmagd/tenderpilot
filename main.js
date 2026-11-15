@@ -10,9 +10,7 @@
             function closeMenu() {
                 toggle.classList.remove('active');
                 nav.classList.remove('active');
-                setTimeout(function () {
-                    document.body.classList.remove('menu-open');
-                }, 250);
+                document.body.classList.remove('menu-open');
             }
 
             toggle.addEventListener('click', function (e) {
