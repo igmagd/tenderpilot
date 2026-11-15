@@ -1333,7 +1333,7 @@ border-bottom: none !important;
     }
 
     .fat-footer-column {
-        margin-bottom: 16px;
+        margin-bottom: 6px;
     }
 
     .fat-footer-column:last-child {
@@ -1341,13 +1341,25 @@ border-bottom: none !important;
     }
 
     .fat-footer-column h4 {
+        margin-bottom: 6px;
+        line-height: 1.35;
         break-after: avoid;
         page-break-after: avoid;
     }
 
     .fat-footer-column ul li {
+        margin-bottom: 6px;
+        line-height: 1.35;
         break-inside: avoid;
         page-break-inside: avoid;
+    }
+
+    .fat-footer-column ul li:last-child {
+        margin-bottom: 0;
+    }
+
+    .fat-footer-column ul li a {
+        line-height: 1.35;
     }
 }
 
