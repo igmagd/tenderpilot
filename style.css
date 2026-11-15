@@ -206,8 +206,8 @@ header {
     transition: opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* Плавное скрытие и возвращение иконки ЛК */
-header:has(.menu-toggle.active) .lk-btn {
+/* Плавное скрытие и возвращение иконки ЛК без :has() (не обрывает анимацию шторки) */
+body.menu-is-open .lk-btn {
     opacity: 0 !important;
     pointer-events: none !important;
 }
@@ -247,13 +247,13 @@ body.menu-open {
     touch-action: none !important;
 }
 
-/* Убираем нижнюю границу шапки при открытой шторке для полного слияния в единый монолит */
-html.menu-open header,
-body.menu-open header {
+/* Слияние шапки и шторки в единое полотно */
+html.menu-is-open header,
+body.menu-is-open header {
     border-bottom-color: transparent;
 }
 
-/* Мобильная шторка меню (строго под шапкой, с плавным каскадом ссылок Apple и без заезда на логотип) */
+/* Мобильная шторка меню в стиле Apple (плавный выезд полотна + каскад ссылок в обе стороны) */
 @media (max-width: 768px) {
     header .nav-links {
         display: flex;
@@ -265,23 +265,38 @@ body.menu-open header {
         left: 0;
         right: 0;
         height: 120vh;
-        background-color: #080e18;
         padding: 49px 20px 120px 56px;
         z-index: 90;
-        opacity: 0;
         pointer-events: none;
         touch-action: none;
-        transition: opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1);
         overflow: hidden;
+        background: transparent;
+    }
+
+    /* Само тёмное полотно шторки (ездит строго внутри окна ниже шапки) */
+    header .nav-links::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: #080e18;
+        transform: translate3d(0, -100%, 0);
+        transition: transform 0.42s cubic-bezier(0.32, 0.72, 0, 1);
+        z-index: 1;
+        pointer-events: none;
     }
 
     header .nav-links.active {
-        opacity: 1;
         pointer-events: auto;
     }
 
-    /* Шрифт один в один как у логотипа TenderPilot + плавный выезд каждой ссылки */
+    header .nav-links.active::before {
+        transform: translate3d(0, 0, 0);
+    }
+
+    /* Ссылки поверх полотна: при закрытии уходят снизу вверх, при открытии — сверху вниз */
     header .nav-links .menu-item-link {
+        position: relative;
+        z-index: 2;
         width: 100%;
         text-align: left;
         color: rgba(240, 246, 252, 0.78);
@@ -294,25 +309,38 @@ body.menu-open header {
         opacity: 0;
         transform: translate3d(0, -12px, 0);
         transition:
-            opacity 0.32s cubic-bezier(0.32, 0.72, 0, 1),
-            transform 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+            opacity 0.22s ease,
+            transform 0.26s cubic-bezier(0.4, 0, 0.2, 1),
             border-bottom-color 0.2s ease;
         -webkit-tap-highlight-color: transparent;
     }
 
+    /* Обратный каскад при закрытии (снизу вверх, пока тёмное полотно ещё на месте) */
+    header .nav-links .menu-item-link:nth-child(7) { transition-delay: 0.00s; }
+    header .nav-links .menu-item-link:nth-child(6) { transition-delay: 0.02s; }
+    header .nav-links .menu-item-link:nth-child(5) { transition-delay: 0.04s; }
+    header .nav-links .menu-item-link:nth-child(4) { transition-delay: 0.06s; }
+    header .nav-links .menu-item-link:nth-child(3) { transition-delay: 0.08s; }
+    header .nav-links .menu-item-link:nth-child(2) { transition-delay: 0.10s; }
+    header .nav-links .menu-item-link:nth-child(1) { transition-delay: 0.12s; }
+
     header .nav-links.active .menu-item-link {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+        transition:
+            opacity 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+            transform 0.34s cubic-bezier(0.32, 0.72, 0, 1),
+            border-bottom-color 0.2s ease;
     }
 
-    /* Красивое последовательное раскрытие строк сверху вниз при открытии */
-    header .nav-links.active .menu-item-link:nth-child(1) { transition-delay: 0.04s; }
-    header .nav-links.active .menu-item-link:nth-child(2) { transition-delay: 0.07s; }
-    header .nav-links.active .menu-item-link:nth-child(3) { transition-delay: 0.10s; }
-    header .nav-links.active .menu-item-link:nth-child(4) { transition-delay: 0.13s; }
-    header .nav-links.active .menu-item-link:nth-child(5) { transition-delay: 0.16s; }
-    header .nav-links.active .menu-item-link:nth-child(6) { transition-delay: 0.19s; }
-    header .nav-links.active .menu-item-link:nth-child(7) { transition-delay: 0.22s; }
+    /* Прямой каскад при открытии (сверху вниз вслед за шторкой) */
+    header .nav-links.active .menu-item-link:nth-child(1) { transition-delay: 0.06s; }
+    header .nav-links.active .menu-item-link:nth-child(2) { transition-delay: 0.09s; }
+    header .nav-links.active .menu-item-link:nth-child(3) { transition-delay: 0.12s; }
+    header .nav-links.active .menu-item-link:nth-child(4) { transition-delay: 0.15s; }
+    header .nav-links.active .menu-item-link:nth-child(5) { transition-delay: 0.18s; }
+    header .nav-links.active .menu-item-link:nth-child(6) { transition-delay: 0.21s; }
+    header .nav-links.active .menu-item-link:nth-child(7) { transition-delay: 0.24s; }
 
     header .nav-links .menu-item-link:last-child {
         border-bottom: none;

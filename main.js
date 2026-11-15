@@ -12,11 +12,12 @@
             function closeMenu() {
                 toggle.classList.remove('active');
                 nav.classList.remove('active');
+                document.body.classList.remove('menu-is-open');
                 clearTimeout(closeTimer);
                 closeTimer = setTimeout(function () {
                     document.documentElement.classList.remove('menu-open');
                     document.body.classList.remove('menu-open');
-                }, 380);
+                }, 420);
             }
 
             toggle.addEventListener('click', function (e) {
@@ -27,6 +28,7 @@
                     clearTimeout(closeTimer);
                     toggle.classList.add('active');
                     nav.classList.add('active');
+                    document.body.classList.add('menu-is-open');
                     document.documentElement.classList.add('menu-open');
                     document.body.classList.add('menu-open');
                 }
