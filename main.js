@@ -35,15 +35,18 @@
 
         // Тактильная световая вспышка иконок в шапке при тапе
         document.querySelectorAll('#menu-toggle, .lk-btn').forEach(function (btn) {
-            btn.addEventListener('pointerdown', function () {
+            var triggerTap = function () {
+                btn.classList.remove('is-tapped');
+                void btn.offsetWidth;
                 btn.classList.add('is-tapped');
                 clearTimeout(btn._tapTimer);
                 btn._tapTimer = setTimeout(function () {
                     btn.classList.remove('is-tapped');
-                }, 180);
-            });
+                }, 350);
+            };
+            btn.addEventListener('touchstart', triggerTap, { passive: true });
+            btn.addEventListener('pointerdown', triggerTap);
         });
-    }
 
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
     function init_bento() {

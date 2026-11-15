@@ -31,44 +31,52 @@ body.bento-active {
 
 /* ШАПКА */
 header {
-    background-color: rgba(11, 19, 33, 0.92) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    padding: 10px 0 !important; 
-    z-index: 100 !important;
-    display: flex !important;
-    align-items: center !important;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2) !important;
+    background-color: rgba(11, 19, 33, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.2);
+    overflow: visible;
 }
 
 .header-container {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important; 
-    width: 100% !important;
-    max-width: 1300px !important;
-    padding: 0 24px !important;
-    margin: 0 auto !important;
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 24px;
+    margin: 0 auto;
+    overflow: visible;
 }
 
 .logo {
-    font-size: 1.2rem !important;
-    font-weight: 700 !important;
-    color: #f0f6fc !important;
-    letter-spacing: 0.5px !important;
-    text-decoration: none !important;
+    position: relative;
+    z-index: 100;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #f0f6fc;
+    letter-spacing: 0.5px;
+    text-decoration: none;
 }
 
-.logo span { 
-    color: #00f2fe !important; 
+.logo span {
+    color: #00f2fe;
 }
 
 /* Бургер меню и кнопка ЛК (близнецы) */
 .menu-toggle {
+    position: relative;
+    z-index: 100;
     display: none;
     background: none;
     border: none;
@@ -80,16 +88,19 @@ header {
     align-items: center;
     justify-content: center;
     outline: none;
+    overflow: visible;
     -webkit-tap-highlight-color: transparent;
 }
 
 .menu-toggle svg,
 .lk-btn svg {
+    position: relative;
+    z-index: 2;
     width: 20px;
     height: 20px;
     stroke: #f0f6fc;
     stroke-width: 1.5;
-    transition: stroke 0.22s ease, filter 0.22s ease;
+    transition: stroke 0.25s ease;
     pointer-events: none;
 }
 
@@ -106,33 +117,69 @@ header {
     display: block;
 }
 
-/* Вспышка чисто белым и мягкий ореол при тапе (на бургер, на «х» и на ЛК) */
-.menu-toggle:active svg,
+/* Мягкое чисто белое радиальное свечение без края за пределами пальца */
+.menu-toggle::after,
+.lk-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    transform: translate(-50%, -50%) scale(0.4);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.14) 45%, rgba(255, 255, 255, 0) 72%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Короткая вспышка самой иконки и радиального ореола при тапе */
 .menu-toggle.is-tapped svg,
-.lk-btn:active svg,
 .lk-btn.is-tapped svg {
     stroke: #ffffff;
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.65));
     transition: none;
+}
+
+.menu-toggle.is-tapped::after,
+.lk-btn.is-tapped::after {
+    animation: iconTapGlow 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes iconTapGlow {
+    0% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scale(0.45);
+    }
+    55% {
+        opacity: 0.75;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.18);
+    }
 }
 
 @media (max-width: 768px) {
     .menu-toggle {
         display: flex;
     }
-    
+
     .header-container {
-        padding: 0 16px !important; 
-        gap: 16px !important; 
-        justify-content: flex-start !important; 
+        padding: 0 16px;
+        gap: 16px;
+        justify-content: flex-start;
     }
 
     .lk-btn {
-        margin-left: auto; 
+        margin-left: auto;
     }
 }
 
 .lk-btn {
+    position: relative;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,6 +189,7 @@ header {
     background: none;
     text-decoration: none;
     outline: none;
+    overflow: visible;
     -webkit-tap-highlight-color: transparent;
     transition: opacity 0.2s ease, visibility 0.2s ease;
 }
