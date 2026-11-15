@@ -42,7 +42,7 @@
                 clearTimeout(btn._tapTimer);
                 btn._tapTimer = setTimeout(function () {
                     btn.classList.remove('is-tapped');
-                }, 350);
+                }, 220);
             };
             btn.addEventListener('touchstart', triggerTap, { passive: true });
             btn.addEventListener('pointerdown', triggerTap);

@@ -99,8 +99,8 @@ header {
     width: 20px;
     height: 20px;
     stroke: #f0f6fc;
-    stroke-width: 1.5;
-    transition: stroke 0.25s ease;
+    stroke-width: 1.25;
+    transition: stroke 0.2s ease, filter 0.2s ease;
     pointer-events: none;
 }
 
@@ -117,47 +117,53 @@ header {
     display: block;
 }
 
-/* Мягкое чисто белое радиальное свечение без края за пределами пальца */
+/* Концентрированный чисто белый световой блик во все стороны без края */
 .menu-toggle::after,
 .lk-btn::after {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 48px;
-    height: 48px;
-    transform: translate(-50%, -50%) scale(0.4);
+    width: 38px;
+    height: 38px;
+    transform: translate(-50%, -50%) scale(0.35);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.14) 45%, rgba(255, 255, 255, 0) 72%);
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.78) 0%,
+        rgba(255, 255, 255, 0.38) 38%,
+        rgba(255, 255, 255, 0) 70%
+    );
     opacity: 0;
     pointer-events: none;
     z-index: 1;
 }
 
-/* Короткая вспышка самой иконки и радиального ореола при тапе */
+/* Быстрая вспышка самой иконки + отброс световой тени при тапе */
 .menu-toggle.is-tapped svg,
 .lk-btn.is-tapped svg {
     stroke: #ffffff;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.95));
     transition: none;
 }
 
 .menu-toggle.is-tapped::after,
 .lk-btn.is-tapped::after {
-    animation: iconTapGlow 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: iconTapGlow 0.21s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes iconTapGlow {
     0% {
-        opacity: 0.95;
+        opacity: 1;
         transform: translate(-50%, -50%) scale(0.45);
     }
-    55% {
-        opacity: 0.75;
+    50% {
+        opacity: 0.9;
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(1.18);
+        transform: translate(-50%, -50%) scale(1.15);
     }
 }
 
