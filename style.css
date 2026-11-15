@@ -1364,12 +1364,54 @@ border-bottom: none !important;
 }
 
 @media (max-width: 600px) {
+    /* Чёткая разделительная черта под блоком «Возможности / Вопросы...» */
+    .hub-fat-footer {
+        border-top-color: rgba(0, 0, 0, 0.24) !important;
+    }
+
+    /* Кнопки «Возможности», «Вопросы», «Тарифы», «Оплата», «Контакты» */
     .premium-shutter-section .shutter-trigger-btn,
     .premium-shutter-section .shutter-trigger-btn:hover,
     .premium-shutter-section .shutter-trigger-btn.active {
         color: #1d1d1f !important;
     }
+    /* Выравнивание строки кнопок по левому краю на мобилке */
+    .premium-shutter-section .shutter-control-bar {
+        justify-content: flex-start !important;
+    }
 
+ 
+    /* Заголовки, вопросы аккордеонов и акценты внутри шторок */
+    .premium-shutter-section .shutter-accordion-trigger,
+    .premium-shutter-section .shutter-payment-title,
+    .premium-shutter-section .shutter-card-head h3,
+    .premium-shutter-section .shutter-contacts-single-flow > .shutter-flow-line > span {
+        color: #1d1d1f !important;
+    }
+
+    /* Стрелочки аккордеонов и разделительные линии внутри шторок */
+    .premium-shutter-section .shutter-arrow-icon {
+        border-color: rgba(0, 0, 0, 0.65) !important;
+    }
+
+    .premium-shutter-section .shutter-accordion-item,
+    .premium-shutter-section .shutter-payment-divider,
+    .premium-shutter-section .shutter-flow-legal-group {
+        border-color: rgba(0, 0, 0, 0.16) !important;
+    }
+
+    /* Основной текст, ответы, списки и ссылки внутри шторок */
+    .premium-shutter-section .shutter-accordion-content > p,
+    .premium-shutter-section .shutter-payment-text,
+    .premium-shutter-section .shutter-payment-sublist li,
+    .premium-shutter-section .shutter-card-list li,
+    .premium-shutter-section .shutter-price-val span,
+    .premium-shutter-section .shutter-flow-line,
+    .premium-shutter-section .shutter-flow-link {
+        color: #424245 !important;
+    }
+
+    /* Колонки предфутера */
     .fat-footer-container {
         column-count: 2;
         column-gap: 20px;
@@ -1390,7 +1432,7 @@ border-bottom: none !important;
     .fat-footer-bottom {
         flex-direction: column;
         gap: 12px;
-        border-top-color: rgba(0, 0, 0, 0.22) !important;
+        border-top-color: rgba(0, 0, 0, 0.24) !important;
     }
 
     .fat-footer-bottom a {
