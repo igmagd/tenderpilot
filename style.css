@@ -112,30 +112,38 @@ header {
     will-change: opacity, transform;
 }
 
-/* Состояние по умолчанию (закрыто): крестик плавно тает, бургер проявляетcя синхронно с .lk-btn */
+/* При закрытии: крестик держится, пока шторка едет, а бургер проявляется в финале вместе с ЛК */
 .menu-toggle .icon-burger {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    transition: opacity 0.32s ease 0.24s, transform 0.32s ease 0.24s;
+    transition: opacity 0.32s ease 0.24s, transform 0.32s ease 0.24s, stroke 0.2s ease, filter 0.2s ease;
 }
 
 .menu-toggle .icon-close {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.85);
-    transition: opacity 0.22s ease 0.08s, transform 0.22s ease 0.08s;
+    transition: opacity 0.22s ease 0.14s, transform 0.22s ease 0.14s, stroke 0.2s ease, filter 0.2s ease;
 }
 
-/* Состояние при открытии: бургер плавно уходит, крестик проявляется */
+/* При открытии: бургер уходит, крестик проявляется */
 .menu-toggle.active .icon-burger {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.85);
-    transition: opacity 0.18s ease 0s, transform 0.18s ease 0s;
+    transition: opacity 0.16s ease 0s, transform 0.16s ease 0s, stroke 0.2s ease, filter 0.2s ease;
 }
 
 .menu-toggle.active .icon-close {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    transition: opacity 0.28s ease 0.14s, transform 0.28s ease 0.14s;
+    transition: opacity 0.26s ease 0.12s, transform 0.26s ease 0.12s, stroke 0.2s ease, filter 0.2s ease;
+}
+
+/* Световой блик при тапе: убираем transition только у stroke и filter, но НЕ трогаем opacity */
+.menu-toggle.is-tapped svg,
+.lk-btn.is-tapped svg {
+    stroke: #ffffff;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.95));
+    transition-property: opacity, transform !important;
 }
 
 /* Концентрированный чисто белый световой блик при тапе */
@@ -158,13 +166,6 @@ header {
     opacity: 0;
     pointer-events: none;
     z-index: 1;
-}
-
-.menu-toggle.is-tapped svg,
-.lk-btn.is-tapped svg {
-    stroke: #ffffff;
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.95));
-    transition: none;
 }
 
 .menu-toggle.is-tapped::after,
