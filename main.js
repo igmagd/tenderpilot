@@ -32,6 +32,17 @@
                 });
             });
         }
+
+        // Тактильная световая вспышка иконок в шапке при тапе
+        document.querySelectorAll('#menu-toggle, .lk-btn').forEach(function (btn) {
+            btn.addEventListener('pointerdown', function () {
+                btn.classList.add('is-tapped');
+                clearTimeout(btn._tapTimer);
+                btn._tapTimer = setTimeout(function () {
+                    btn.classList.remove('is-tapped');
+                }, 180);
+            });
+        });
     }
 
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
@@ -115,22 +126,12 @@
         });
     }
 
-    // 3. ИНТЕРАКТИВНЫЙ ПРЕДФУТЕР V3 (ОТКРЫТИЕ ВНИЗ + ПОШТУЧНЫЙ FAQ)
+    // 3. ИНТЕРАКТИВНЫЙ ПРЕДФУТЕР V4 (НАТИВНЫЙ CSS GRID — 120 FPS БЕЗ РАСЧЕТОВ ВЫСОТЫ)
     function init_interactive_panels() {
         var buttons = document.querySelectorAll(".shutter-trigger-btn");
         var panels = document.querySelectorAll(".shutter-panel-item");
 
         if (!buttons.length || !panels.length) return;
-
-        // Функция обновления высоты родительской панели (нужна при раскрытии вложенных аккордеонов)
-        function refreshPanelHeight(panel) {
-            if (panel.classList.contains("is-active")) {
-
-                panel.style.maxHeight = "none";
-                var newHeight = panel.scrollHeight + 40;
-                panel.style.maxHeight = newHeight + "px";
-            }
-        }
 
         buttons.forEach(function (button) {
             button.addEventListener("click", function () {
@@ -141,44 +142,37 @@
                 
                 var isAlreadyActive = targetPanel.classList.contains("is-active");
 
-                // Сворачиваем шторки
                 panels.forEach(function (panel) {
                     panel.classList.remove("is-active");
-                    panel.style.maxHeight = "0px";
                 });
                 buttons.forEach(function (btn) {
                     btn.classList.remove("is-active");
                 });
 
-                // Раскрываем нужную вниз (оригинальный плавный расчет высоты)
                 if (!isAlreadyActive) {
                     button.classList.add("is-active");
                     targetPanel.classList.add("is-active");
-                    targetPanel.style.maxHeight = (targetPanel.scrollHeight + 40) + "px";
                 }
             });
         });
 
-        // ЛОГИКА ДЛЯ ВЛОЖЕННЫХ АККОРДЕОНОВ FAQ И ВОЗМОЖНОСТЕЙ
+        // ВЛОЖЕННЫЕ АККОРДЕОНЫ FAQ И ВОЗМОЖНОСТЕЙ
         var faqTriggers = document.querySelectorAll(".shutter-accordion-trigger");
         faqTriggers.forEach(function (trigger) {
             trigger.addEventListener("click", function () {
                 var item = trigger.parentNode;
-                var content = item.querySelector(".shutter-accordion-content");
                 var parentPanel = item.closest(".shutter-panel-item");
-                
                 var isOpen = item.classList.contains("is-open");
 
-                // Закрываем другие вопросы в этой панели, чтобы было аккуратно
+                // Закрываем соседние пункты
                 var siblings = parentPanel.querySelectorAll(".shutter-accordion-item");
                 siblings.forEach(function (sib) {
-                    sib.classList.remove("is-open");
-                    var sibContent = sib.querySelector(".shutter-accordion-content");
-                    if (sibContent) sibContent.style.maxHeight = "0px";
-                    if (sibContent) sibContent.style.opacity = "0";
+                    if (sib !== item) {
+                        sib.classList.remove("is-open");
+                    }
                 });
 
-                // УПРАВЛЕНИЕ КАРТИНКАМИ: Гасим абсолютно все кадры в правой зоне
+                // Гасим картинки в правой зоне
                 var visualContainer = parentPanel.querySelector(".shutter-features-visual");
                 if (visualContainer) {
                     visualContainer.querySelectorAll(".feat-showcase-img").forEach(function (img) {
@@ -186,13 +180,10 @@
                     });
                 }
 
-                // Открываем/закрываем текущий
+                // Переключаем текущий класс — всю анимацию делает CSS Grid
                 if (!isOpen) {
                     item.classList.add("is-open");
-                    content.style.opacity = "1";
-                    content.style.maxHeight = content.scrollHeight + "px";
 
-                    // ПРОЯВЛЕНИЕ КАРТИНКИ: зажигаем нужный кадр на сером фоне
                     var imgIndex = item.getAttribute("data-image");
                     if (imgIndex && visualContainer) {
                         var targetImg = visualContainer.querySelector('.feat-showcase-img[data-img="' + imgIndex + '"]');
@@ -200,14 +191,7 @@
                     }
                 } else {
                     item.classList.remove("is-open");
-                    content.style.maxHeight = "0px";
-                    content.style.opacity = "0";
                 }
-
-                // Пересчитываем высоту главной шторки с задержкой под анимацию
-                setTimeout(function() {
-                    refreshPanelHeight(parentPanel);
-                }, 310);
             });
         });
 
@@ -219,6 +203,7 @@
             });
         });
     }
+
 
     // Инициализация всех систем хаба без конфликтов
     document.addEventListener('DOMContentLoaded', function () {
