@@ -102,35 +102,40 @@ header {
     pointer-events: none;
 }
 
-/* Плавная перекрёстная смена бургера и компактной «х» без резкого щелчка */
+/* Плавная перекрёстная смена бургера и компактной «х» в такт с иконкой ЛК */
 .menu-toggle .icon-burger,
 .menu-toggle .icon-close {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    will-change: opacity, transform;
 }
 
-/* При закрытии: «х» мягко тает в финале пути шторки, а бургер плавно проступает */
+/* Состояние по умолчанию (закрыто): крестик плавно тает, бургер проявляетcя синхронно с .lk-btn */
 .menu-toggle .icon-burger {
     opacity: 1;
-    transition: opacity 0.24s ease 0.26s;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 0.32s ease 0.24s, transform 0.32s ease 0.24s;
 }
 
 .menu-toggle .icon-close {
     opacity: 0;
-    transition: opacity 0.2s ease 0.2s;
+    transform: translate(-50%, -50%) scale(0.85);
+    transition: opacity 0.22s ease 0.08s, transform 0.22s ease 0.08s;
 }
 
-/* При открытии: мгновенная смена на «х» */
+/* Состояние при открытии: бургер плавно уходит, крестик проявляется */
 .menu-toggle.active .icon-burger {
     opacity: 0;
-    transition: opacity 0.12s ease 0s;
+    transform: translate(-50%, -50%) scale(0.85);
+    transition: opacity 0.18s ease 0s, transform 0.18s ease 0s;
 }
 
 .menu-toggle.active .icon-close {
     opacity: 1;
-    transition: opacity 0.18s ease 0.04s;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 0.28s ease 0.14s, transform 0.28s ease 0.14s;
 }
 
 /* Концентрированный чисто белый световой блик при тапе */
@@ -264,7 +269,7 @@ body.menu-is-open header {
     border-bottom-color: transparent;
 }
 
-/* Мобильная шторка меню в стиле Apple (плавный выезд полотна + каскад ссылок в обе стороны) */
+/* Мобильная шторка меню (плавный выезд полотна + каскад ссылок в обе стороны) */
 @media (max-width: 768px) {
     header .nav-links {
         display: flex;
@@ -353,9 +358,6 @@ body.menu-is-open header {
     header .nav-links.active .menu-item-link:nth-child(6) { transition-delay: 0.21s; }
     header .nav-links.active .menu-item-link:nth-child(7) { transition-delay: 0.24s; }
 
-    header .nav-links .menu-item-link:last-child {
-        border-bottom: none;
-    }
 
     /* При тапе подсвечивается только белая полоска снизу, текст не меняет цвет */
     header .nav-links .menu-item-link:hover,
@@ -1301,7 +1303,7 @@ border-bottom: none !important;
     max-width: 1300px;
     margin: 16px auto 0 !important; /* Сжали дыру с 45px до аккуратных 16px */
     padding: 12px 24px 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.08); /* Тонкая разделительная линия как у Apple */
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
     display: flex;
     gap: 24px;
 }
