@@ -29,30 +29,19 @@ body.bento-active {
     padding-right: 0 !important; 
 }
 
-/* ШАПКА */
-/* ШАПКА (backdrop-filter вынесен на ::before, чтобы не обрывать анимации внутри шапки) */
+/* ШАПКА (глухая монолитная плита поверх шторки — как Калашников) */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: 10px 0;
+    background-color: #080e18;
     z-index: 100;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(48, 54, 61, 0.2);
+    border-bottom: 1px solid rgba(48, 54, 61, 0.25);
     overflow: visible;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(11, 19, 33, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: -1;
-    pointer-events: none;
 }
 
 .header-container {
@@ -113,7 +102,7 @@ header::before {
     pointer-events: none;
 }
 
-/* Мгновенная смена бургера на компактную «х» без пересчёта геометрии шапки */
+/* Мгновенная смена бургера на компактную «х» */
 .menu-toggle .icon-burger,
 .menu-toggle .icon-close {
     position: absolute;
@@ -135,7 +124,7 @@ header::before {
     opacity: 1;
 }
 
-/* Концентрированный чисто белый световой блик во все стороны без края */
+/* Концентрированный чисто белый световой блик при тапе */
 .menu-toggle::after,
 .lk-btn::after {
     content: "";
@@ -157,7 +146,6 @@ header::before {
     z-index: 1;
 }
 
-/* Быстрая вспышка самой иконки + отброс световой тени при тапе */
 .menu-toggle.is-tapped svg,
 .lk-btn.is-tapped svg {
     stroke: #ffffff;
@@ -215,10 +203,10 @@ header::before {
     outline: none;
     overflow: visible;
     -webkit-tap-highlight-color: transparent;
-    transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* Плавное скрытие и возвращение иконки ЛК синхронно со шторкой */
+/* Плавное скрытие и возвращение иконки ЛК */
 header:has(.menu-toggle.active) .lk-btn {
     opacity: 0 !important;
     pointer-events: none !important;
@@ -245,14 +233,13 @@ header .nav-links a.active {
     color: #f0f6fc;
 }
 
-/* На главной странице скрываем десктопное меню (только на экранах шире 768px) */
 @media (min-width: 769px) {
     body:has(.hub-main) header .nav-links {
         display: none;
     }
 }
 
-/* Жёсткая блокировка скролла страницы при открытой шторке на iOS и Android */
+/* Блокировка скролла страницы при открытой шторке */
 html.menu-open,
 body.menu-open {
     overflow: hidden !important;
@@ -260,7 +247,13 @@ body.menu-open {
     touch-action: none !important;
 }
 
-/* Мобильная шторка меню (без щели сверху, без просвечивания футера, плавно туда и обратно) */
+/* Убираем нижнюю границу шапки при открытой шторке для полного слияния в единый монолит */
+html.menu-open header,
+body.menu-open header {
+    border-bottom-color: transparent;
+}
+
+/* Мобильная шторка меню (выезжает строго из-под глухой шапки вниз и уезжает обратно) */
 @media (max-width: 768px) {
     header .nav-links {
         display: flex;
@@ -268,33 +261,25 @@ body.menu-open {
         align-items: flex-start;
         justify-content: flex-start;
         position: fixed;
-        top: 48px;
+        top: 0;
         left: 0;
         right: 0;
         height: 120vh;
         background-color: #080e18;
-        padding: 49px 20px 120px 56px;
-        z-index: 95;
-        opacity: 0;
+        padding: 97px 20px 120px 56px;
+        z-index: 90;
         pointer-events: none;
         touch-action: none;
-        transform: translateY(-16px);
-        transition:
-            transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
-            opacity 0.14s ease 0.24s;
+        transform: translate3d(0, -100%, 0);
+        transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
         overflow: hidden;
     }
 
     header .nav-links.active {
-        opacity: 1;
         pointer-events: auto;
-        transform: translateY(0);
-        transition:
-            opacity 0.22s ease,
-            transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translate3d(0, 0, 0);
     }
 
-    /* Шрифт один в один как у логотипа TenderPilot */
     header .nav-links .menu-item-link {
         width: 100%;
         text-align: left;
@@ -313,7 +298,6 @@ body.menu-open {
         border-bottom: none;
     }
 
-    /* При тапе подсвечивается только белая полоска снизу, текст не меняет цвет */
     header .nav-links .menu-item-link:hover,
     header .nav-links .menu-item-link:active {
         color: rgba(240, 246, 252, 0.78);
