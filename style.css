@@ -30,10 +30,8 @@ body.bento-active {
 }
 
 /* ШАПКА */
+/* ШАПКА (backdrop-filter вынесен на ::before, чтобы не обрывать анимации внутри шапки) */
 header {
-    background-color: rgba(11, 19, 33, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     position: fixed;
     top: 0;
     left: 0;
@@ -44,6 +42,17 @@ header {
     align-items: center;
     border-bottom: 1px solid rgba(48, 54, 61, 0.2);
     overflow: visible;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(11, 19, 33, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: -1;
+    pointer-events: none;
 }
 
 .header-container {
@@ -104,17 +113,26 @@ header {
     pointer-events: none;
 }
 
-/* Мгновенная смена бургера на компактную «х» без анимации */
+/* Мгновенная смена бургера на компактную «х» без пересчёта геометрии шапки */
+.menu-toggle .icon-burger,
 .menu-toggle .icon-close {
-    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: none;
+}
+
+.menu-toggle .icon-close {
+    opacity: 0;
 }
 
 .menu-toggle.active .icon-burger {
-    display: none;
+    opacity: 0;
 }
 
 .menu-toggle.active .icon-close {
-    display: block;
+    opacity: 1;
 }
 
 /* Концентрированный чисто белый световой блик во все стороны без края */
