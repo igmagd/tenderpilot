@@ -203,7 +203,7 @@ header {
     outline: none;
     overflow: visible;
     -webkit-tap-highlight-color: transparent;
-    transition: opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+    transition: opacity 0.22s ease;
 }
 
 /* Плавное скрытие и возвращение иконки ЛК без :has() (не обрывает анимацию шторки) */

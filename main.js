@@ -8,15 +8,19 @@
 
         if (toggle && nav) {
             var closeTimer = null;
+            var isClosing = false;
 
             function closeMenu() {
-                toggle.classList.remove('active');
+                if (isClosing) return;
+                isClosing = true;
                 nav.classList.remove('active');
-                document.body.classList.remove('menu-is-open');
                 clearTimeout(closeTimer);
                 closeTimer = setTimeout(function () {
+                    toggle.classList.remove('active');
+                    document.body.classList.remove('menu-is-open');
                     document.documentElement.classList.remove('menu-open');
                     document.body.classList.remove('menu-open');
+                    isClosing = false;
                 }, 420);
             }
 
@@ -26,6 +30,7 @@
                     closeMenu();
                 } else {
                     clearTimeout(closeTimer);
+                    isClosing = false;
                     toggle.classList.add('active');
                     nav.classList.add('active');
                     document.body.classList.add('menu-is-open');
