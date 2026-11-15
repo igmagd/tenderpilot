@@ -57,7 +57,7 @@
 
         document.body.addEventListener('click', function (e) {
             var card = e.target.closest('.bento-card');
-            
+
             if (!card || isAnimating || card.classList.contains('main-hero') || card.classList.contains('is-hidden')) return;
             if (e.target.closest('.bento-card-close-icon')) return;
             if (e.target.closest('a')) return;
@@ -68,12 +68,23 @@
             var rect = card.getBoundingClientRect();
             var clone = card.cloneNode(true);
             clone.classList.add('bento-card-clone');
-            
-            clone.style.cssText += 'position: fixed !important; background: #161b22 !important; ' +
-                                  'top: ' + rect.top + 'px !important; left: ' + rect.left + 'px !important; ' +
-                                  'width: ' + rect.width + 'px !important; height: ' + rect.height + 'px !important; ' +
-                                  'border-radius: 24px !important; margin: 0 !important; z-index: 10000 !important; transform: none !important; ' +
-                                  'transition: top 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.3s ease !important;';
+
+            clone.style.cssText +=
+                'position: fixed !important;' +
+                'background: #161b22 !important;' +
+                'top: ' + rect.top + 'px !important;' +
+                'left: ' + rect.left + 'px !important;' +
+                'width: ' + rect.width + 'px !important;' +
+                'height: ' + rect.height + 'px !important;' +
+                'border-radius: 24px !important;' +
+                'margin: 0 !important;' +
+                'z-index: 10000 !important;' +
+                'transform: none !important;' +
+                'transition: top 0.3s cubic-bezier(0.16, 1, 0.3, 1), ' +
+                'left 0.3s cubic-bezier(0.16, 1, 0.3, 1), ' +
+                'width 0.3s cubic-bezier(0.16, 1, 0.3, 1), ' +
+                'height 0.3s cubic-bezier(0.16, 1, 0.3, 1), ' +
+                'border-radius 0.3s ease !important;';
 
             var inner = clone.querySelector('.bento-card-inner');
             if (inner) {
@@ -85,14 +96,19 @@
 
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
-                    clone.style.cssText += 'top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; border-radius: 0 !important;';
+                    clone.style.cssText +=
+                        'top: 0 !important;' +
+                        'left: 0 !important;' +
+                        'width: 100vw !important;' +
+                        'height: 100vh !important;' +
+                        'border-radius: 0 !important;';
                     clone.classList.add('is-expanded');
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         clone.classList.add('show-back');
                     }, MID);
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         document.body.classList.add('bento-active');
                         isAnimating = false;
                     }, SPEED);
@@ -105,26 +121,30 @@
                     event.stopPropagation();
                     if (isAnimating) return;
                     isAnimating = true;
-                    
+
                     clone.classList.remove('show-back');
                     document.body.classList.remove('bento-active');
-                    
-                    setTimeout(function() {
+
+                    setTimeout(function () {
                         var targetRect = card.getBoundingClientRect();
-                        
-                        clone.style.cssText += 'top: ' + targetRect.top + 'px !important; left: ' + targetRect.left + 'px !important; width: ' + targetRect.width + 'px !important; height: targetRect.height + 'px !important; border-radius: 24px !important;';
+
+                        clone.style.cssText +=
+                            'top: ' + targetRect.top + 'px !important;' +
+                            'left: ' + targetRect.left + 'px !important;' +
+                            'width: ' + targetRect.width + 'px !important;' +
+                            'height: ' + targetRect.height + 'px !important;' +
+                            'border-radius: 24px !important;';
                         clone.classList.remove('is-expanded');
 
-                        setTimeout(function() {
+                        setTimeout(function () {
                             card.classList.remove('is-hidden');
                         }, SPEED - 50);
 
-                        setTimeout(function() {
+                        setTimeout(function () {
                             clone.remove();
                             isAnimating = false;
                         }, SPEED);
-                        
-                    }, 30); 
+                    }, 30);
                 });
             }
         });
@@ -132,88 +152,87 @@
 
     // 3. ИНТЕРАКТИВНЫЙ ПРЕДФУТЕР V4 (НАТИВНЫЙ CSS GRID — 120 FPS БЕЗ РАСЧЕТОВ ВЫСОТЫ)
     function init_interactive_panels() {
-        var buttons = document.querySelectorAll(".shutter-trigger-btn");
-        var panels = document.querySelectorAll(".shutter-panel-item");
+        var buttons = document.querySelectorAll('.shutter-trigger-btn');
+        var panels = document.querySelectorAll('.shutter-panel-item');
 
         if (!buttons.length || !panels.length) return;
 
         buttons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                var targetId = button.getAttribute("data-panel");
+            button.addEventListener('click', function () {
+                var targetId = button.getAttribute('data-panel');
                 var targetPanel = document.getElementById(targetId);
-                
+
                 if (!targetPanel) return;
-                
-                var isAlreadyActive = targetPanel.classList.contains("is-active");
+
+                var isAlreadyActive = targetPanel.classList.contains('is-active');
 
                 panels.forEach(function (panel) {
-                    panel.classList.remove("is-active");
+                    panel.classList.remove('is-active');
                 });
                 buttons.forEach(function (btn) {
-                    btn.classList.remove("is-active");
+                    btn.classList.remove('is-active');
                 });
 
                 if (!isAlreadyActive) {
-                    button.classList.add("is-active");
-                    targetPanel.classList.add("is-active");
+                    button.classList.add('is-active');
+                    targetPanel.classList.add('is-active');
                 }
             });
         });
 
         // ВЛОЖЕННЫЕ АККОРДЕОНЫ FAQ И ВОЗМОЖНОСТЕЙ
-        var faqTriggers = document.querySelectorAll(".shutter-accordion-trigger");
+        var faqTriggers = document.querySelectorAll('.shutter-accordion-trigger');
         faqTriggers.forEach(function (trigger) {
-            trigger.addEventListener("click", function () {
+            trigger.addEventListener('click', function () {
                 var item = trigger.parentNode;
-                var parentPanel = item.closest(".shutter-panel-item");
-                var isOpen = item.classList.contains("is-open");
+                var parentPanel = item.closest('.shutter-panel-item');
+                var isOpen = item.classList.contains('is-open');
 
                 // Закрываем соседние пункты
-                var siblings = parentPanel.querySelectorAll(".shutter-accordion-item");
+                var siblings = parentPanel.querySelectorAll('.shutter-accordion-item');
                 siblings.forEach(function (sib) {
                     if (sib !== item) {
-                        sib.classList.remove("is-open");
+                        sib.classList.remove('is-open');
                     }
                 });
 
                 // Гасим картинки в правой зоне
-                var visualContainer = parentPanel.querySelector(".shutter-features-visual");
+                var visualContainer = parentPanel.querySelector('.shutter-features-visual');
                 if (visualContainer) {
-                    visualContainer.querySelectorAll(".feat-showcase-img").forEach(function (img) {
-                        img.classList.remove("active");
+                    visualContainer.querySelectorAll('.feat-showcase-img').forEach(function (img) {
+                        img.classList.remove('active');
                     });
                 }
 
                 // Переключаем текущий класс — всю анимацию делает CSS Grid
                 if (!isOpen) {
-                    item.classList.add("is-open");
+                    item.classList.add('is-open');
 
-                    var imgIndex = item.getAttribute("data-image");
+                    var imgIndex = item.getAttribute('data-image');
                     if (imgIndex && visualContainer) {
                         var targetImg = visualContainer.querySelector('.feat-showcase-img[data-img="' + imgIndex + '"]');
-                        if (targetImg) targetImg.classList.add("active");
+                        if (targetImg) targetImg.classList.add('active');
                     }
                 } else {
-                    item.classList.remove("is-open");
+                    item.classList.remove('is-open');
                 }
             });
         });
 
         // Кнопка выбор -> контакты
-        document.querySelectorAll(".js-open-contacts").forEach(function (btn) {
-            btn.addEventListener("click", function () {
+        document.querySelectorAll('.js-open-contacts').forEach(function (btn) {
+            btn.addEventListener('click', function () {
                 var contactBtn = document.querySelector('[data-panel="panel-contacts"]');
                 if (contactBtn) contactBtn.click();
             });
         });
     }
 
-
     // Инициализация всех систем хаба без конфликтов
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
         init_bento();
-        init_interactive_panels(); 
+        init_interactive_panels();
     });
 })();
 
