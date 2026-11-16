@@ -369,11 +369,11 @@ body.menu-open {
     header .nav-links.active .menu-item-link:nth-child(7) { transition-delay: 0.24s; }
 
 
-    /* При тапе подсвечивается только белая полоска снизу, текст не меняет цвет */
-    header .nav-links .menu-item-link:hover,
     header .nav-links .menu-item-link:active {
         color: rgba(240, 246, 252, 0.78);
-        border-bottom-color: rgba(255, 255, 255, 0.55);
+        border-bottom-width: 0.5px;
+        border-bottom-color: rgba(255, 255, 255, 0.25);
+        transition: none;
     }
 }
 
