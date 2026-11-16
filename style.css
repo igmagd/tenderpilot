@@ -295,10 +295,7 @@ body.menu-is-open header {
         content: "";
         position: absolute;
         inset: 0;
-        background-color: #090912;
-        background-image: 
-            radial-gradient(circle at 75% 45%, rgba(99, 102, 241, 0.14) 0%, transparent 55%),
-            linear-gradient(180deg, #090912 0%, #0b0a18 50%, #05050a 100%);
+        background-color: #060b19;
         transform: translate3d(0, -100%, 0);
         transition: transform 0.42s cubic-bezier(0.32, 0.72, 0, 1);
         z-index: 1;
