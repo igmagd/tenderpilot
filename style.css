@@ -362,7 +362,9 @@ body.menu-open {
     }
 }
 
-/* ГЛАВНАЯ СЕТКА ХАБА (HUB GRID) */
+/* ==========================================================================
+   ГЛАВНАЯ СЕТКА ХАБА (HUB GRID)
+   ========================================================================== */
 .hub-main {
     width: 100%;
     padding: 84px 24px 60px;
@@ -370,7 +372,6 @@ body.menu-open {
     margin: 0 auto;
     flex: 1 0 auto;
 }
-
 
 .hub-grid {
     display: grid;
@@ -383,6 +384,7 @@ body.menu-open {
     position: relative;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.14);
     border-radius: 32px;
     padding: 30px;
     text-decoration: none;
@@ -390,34 +392,76 @@ body.menu-open {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    transition: 
+    transition:
         transform 0.25s cubic-bezier(0.2, 0, 0.2, 1),
         border-color 0.25s ease,
         background 0.25s ease;
 }
 
-.hub-card:hover {
+a.hub-card:hover {
     transform: scale(1.02);
     border-color: rgba(88, 166, 255, 0.4);
     background: rgba(255, 255, 255, 0.06);
 }
 
-/* Размеры карточек на главной (Исходные) */
-.supplier-card { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg, #161b22 0%, #0d1117 100%); }
-.customer-card { grid-column: span 2; grid-row: span 1; }
-.finance-card, .tender-care-card, .transport-card, .legal-card, .training-card { grid-column: span 1; }
-
-/* Настройки для внутренней страницы */
-.bento-card.main-hero { 
-    grid-column: span 2 !important; 
-    pointer-events: none !important; 
-    user-select: none !important; 
-    transform: none !important; 
+/* Размеры карточек на ПК (как в оригинале, но с честными классами) */
+/* 1. О платформе — большая 2x2 */
+.card-about {
+    grid-column: span 2;
+    grid-row: span 2;
+    background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
 }
 
+/* 2. Поставщикам — широкая 2x1 */
+.card-suppliers {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+/* 3–8. Остальные карточки — 1x1 */
+.card-customers,
+.card-logistics,
+.card-finance,
+.card-support,
+.card-legal,
+.card-training {
+    grid-column: span 1;
+}
+
+/* Настройки для внутренней страницы (не трогаем) */
+.bento-card.main-hero {
+    grid-column: span 2 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    transform: none !important;
+}
+
+/* Тексты для хаба на главной странице (без !important) */
+.hub-card h2,
+.hub-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+}
+
+.hub-card p {
+    color: #8b949e;
+    font-size: 14px;
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* Планшеты */
 @media (max-width: 1024px) {
-    .hub-grid { grid-template-columns: repeat(2, 1fr); }
-    .supplier-card { grid-column: span 2; }
+    .hub-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-about {
+        grid-column: span 2;
+    }
 }
 
 @media (max-width: 768px) {
@@ -427,25 +471,78 @@ body.menu-open {
     }
 }
 
+/* Мобильные устройства: безрамочный Hero + ритм 2 -> 1 -> 2 -> 2 */
 @media (max-width: 600px) {
-    .hub-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-    .hub-card { grid-column: span 1 !important; aspect-ratio: 1.5; }
+    .hub-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: auto;
+        gap: 12px;
+    }
+
+    /* 1. О платформе — чистый безрамочный блок на всю ширину */
+    .card-about {
+        grid-column: span 2;
+        grid-row: span 1;
+        background: none;
+        border: none;
+        border-radius: 0;
+        padding: 4px 2px 14px;
+    }
+
+    .card-about h2 {
+        font-size: 26px;
+        margin-bottom: 10px;
+        letter-spacing: -0.02em;
+    }
+
+    .card-about p {
+        font-size: 15px;
+        line-height: 1.48;
+        color: #9ba3ae;
+    }
+
+    /* Компактные плитки на мобилке */
+    .hub-card:not(.card-about) {
+        padding: 18px 16px;
+        border-radius: 20px;
+        min-height: 148px;
+    }
+
+    .hub-card:not(.card-about) h3 {
+        font-size: 17px;
+        line-height: 1.25;
+        margin-bottom: 8px;
+        overflow-wrap: break-word;
+    }
+
+    .hub-card:not(.card-about) p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    /* 2. Поставщикам и 3. Заказчикам — 2 в ряд */
+    .card-suppliers,
+    .card-customers {
+        grid-column: span 1;
+        min-height: 162px;
+    }
+
+    /* 4. Логистика — широкая невысокая плашка */
+    .card-logistics {
+        grid-column: span 2;
+        min-height: 96px;
+        padding: 18px 20px;
+    }
+
+    /* 5–8. Остальные 4 сервиса — сеткой 2x2 */
+    .card-finance,
+    .card-support,
+    .card-legal,
+    .card-training {
+        grid-column: span 1;
+    }
 }
 
-
-/* Тексты для хаба на главной странице */
-.hub-card h2, .hub-card h3 { 
-    font-size: 22px !important;
-    font-weight: 600 !important;
-    color: #fff !important; 
-    margin-bottom: 8px !important; 
-}
-.hub-card p { 
-    color: #8b949e !important; 
-    font-size: 14px !important;
-    line-height: 1.45 !important; 
-    margin: 0 !important; 
-}
 /* 
    Внутренние бенто-карточки (Калибровка под оптический вес главной)
 */
@@ -468,6 +565,7 @@ body.menu-open {
     line-height: 1.45 !important;
     margin: 0 0 12px 0;
 }
+
 /* BENTO GRID (Для внутренних страниц) */
 .bento-grid {
     display: grid;
