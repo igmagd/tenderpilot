@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказчикам — TenderPilot | Инструменты для эффективных закупок</title>
+    <meta name="description" content="Автоматизация закупок: генерация ТЗ, расчет НМЦК, поиск надежных поставщиков и контроль этапов исполнения.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Меню">
+                <svg class="icon-burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="17" y1="7" x2="7" y2="17"></line>
+                    <line x1="7" y1="7" x2="17" y2="17"></line>
+                </svg>
+            </button>
+
+            <a class="logo" href="index.html">Tender<span>Pilot</span></a>
+
+            <nav class="nav-links" id="main-nav">
+                <a href="#card-tz" class="menu-item-link">Создание ТЗ</a>
+                <a href="#card-nmck" class="menu-item-link">Расчет НМЦК</a>
+                <a href="#card-natregime" class="menu-item-link">Нацрежим и ОКПД2</a>
+                <a href="#card-search" class="menu-item-link">Поиск исполнителей</a>
+                <a href="#card-rnp" class="menu-item-link">Проверка в РНП</a>
+            </nav>
+
+            <a class="lk-btn" href="#login" aria-label="Личный кабинет">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div id="grid-customer" class="bento-grid">
+            <!-- Hero блок -->
+            <div class="bento-card main-hero">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <h1>Заказчикам</h1>
+                        <p>Интеллектуальная поддержка на каждом этапе закупочного цикла. Сокращайте ошибки и находите лучших исполнителей</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1. Создание ТЗ (маленькая) -->
+            <div class="bento-card" id="card-tz">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Создание ТЗ</h3>
+                            <p>Формирование технического задания по КТРУ и ГОСТу без ограничений конкуренции</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Генератор ТЗ</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone">
+                            <p>Опишите предмет закупки в свободной форме...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Расчет НМЦК (маленькая) -->
+            <div class="bento-card" id="card-nmck">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Расчет НМЦК</h3>
+                            <p>Автоматический сбор коммерческих предложений и расчет рыночной стоимости</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Обоснование НМЦК</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Нацрежим и ОКПД2 (широкая на всю ширину на мобилке) -->
+            <div class="bento-card bento-wide" id="card-natregime">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Нацрежим и ОКПД2</h3>
+                            <p>Проверка товара на запреты, ограничения и реестр Минпромторга по Постановлению № 1875</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Проверка нацрежима</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone">
+                            <p>Введите код ОКПД2 или наименование товара...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Поиск исполнителей (маленькая) -->
+            <div class="bento-card" id="card-search">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Поиск исполнителей</h3>
+                            <p>Умный подбор надежных компаний и заводов с опытом выполнения аналогичных контрактов</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Подбор поставщиков</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Проверка в РНП (маленькая) -->
+            <div class="bento-card" id="card-rnp">
+                <div class="bento-card-inner">
+                    <div class="bento-card-front">
+                        <div class="bento-card-front-content">
+                            <h3>Проверка в РНП</h3>
+                            <p>Мгновенный мониторинг контрагентов по реестрам недобросовестных поставщиков и ФНС</p>
+                        </div>
+                    </div>
+                    <div class="bento-card-back">
+                        <div class="bento-card-back-header">
+                            <h3>Скоринг контрагента</h3>
+                            <div class="bento-card-close-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </div>
+                        </div>
+                        <div class="bento-card-widget-zone"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<!-- ==================== ИНТЕРАКТИВНЫЙ ПРЕДФУТЕР V5 (МОНОЛИТ) ==================== -->
+<section class="premium-shutter-section">
+    <div class="shutter-layout-container">
+        
+        <!-- Управляющая строчка кнопок меню -->
+<!-- Управляющая строчка кнопок меню -->
+<div class="shutter-control-bar">
+    <button class="shutter-trigger-btn" data-panel="panel-features">Возможности для заказчиков</button>
+    <button class="shutter-trigger-btn" data-panel="panel-benefits">Экономия и выгода</button>
+    <button class="shutter-trigger-btn" data-panel="panel-security">Безопасность пользователя</button>
+    <button class="shutter-trigger-btn" data-panel="panel-faq">Вопросы-ответы</button>
+    <button class="shutter-trigger-btn" data-panel="panel-tariffs">Тарифы для заказчика</button>
+    <button class="shutter-trigger-btn" data-panel="panel-payment">Оплата грузоперевозок</button>
+    <button class="shutter-trigger-btn" data-panel="panel-contacts">Контакты</button>
+</div>
+
+        <!-- Главный контейнер для выезжающих панелей -->
+        <div class="shutter-dynamic-box">
+        
+<!-- ВОЗМОЖНОСТИ ДЛЯ Заказчиков -->
+<div id="panel-features" class="shutter-panel-item">
+    <div class="shutter-features-showcase">
+        
+        <!-- Левая половина: Аккордеон (650px) -->
+        <div class="shutter-faq-accordion-box">
+            
+            <!-- Пункт 1: Создание ТЗ -->
+            <div class="shutter-accordion-item" data-image="1">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматическая генерация технических заданий по ГОСТ и КТРУ без риска жалоб в ФАС</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Интеллектуальный генератор ТЗ TenderPilot за считанные минуты формирует юридически безупречное описание объекта закупки по 44-ФЗ и 223-ФЗ на основе краткого запроса в свободной форме. Нейросеть автоматически подбирает актуальные коды ОКПД2, обязательные характеристики из каталога товаров, работ и услуг (КТРУ) и действующие стандарты ГОСТ. Алгоритм проверяет текст на признаки ограничения конкуренции и упоминание конкретных брендов без обоснования, защищая контрактного управляющего от предписаний и штрафов ФАС, а также исключая поставку некачественных аналогов.</p>
+                </div>
+            </div>
+
+
+            <!-- Пункт 2: Расчет НМЦК -->
+            <div class="shutter-accordion-item" data-image="2">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматический сбор коммерческих предложений и безошибочный расчет НМЦК</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Сервис обоснования цены TenderPilot избавляет контрактную службу от рутинного обзвона поставщиков и ручного свода таблиц. Система автоматически анализирует исполненные контракты из реестра ЕИС, актуальные рыночные предложения и прайс-листы проверенных компаний, формируя релевантную выборку цен без аномальных отклонений. Алгоритм мгновенно рассчитывает начальную максимальную цену контракта методом сопоставимых рыночных цен с учетом коэффициента вариации и готовит готовый протокол обоснования НМЦК, защищенный от претензий Казначейства и органов финансового контроля.</p>
+                </div>
+            </div>
+
+            <!-- Пункт 3: Поиск исполнителя -->
+            <div class="shutter-accordion-item" data-image="3">
+                <button class="shutter-accordion-trigger">
+                    <span>Интеллектуальный подбор надежных поставщиков и подрядчиков с подтвержденным опытом</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Алгоритм подбора исполнителей TenderPilot решает проблему несостоявшихся закупок и слабой конкуренции на торгах. Система анализирует базу исполненных контрактов из ЕИС, реестры субъектов МСП, производственные мощности и региональное присутствие компаний, формируя список целевых поставщиков с подтвержденным опытом работы по вашему ОКПД2. Вы можете в один клик отправить адресные приглашения на участие в тендере или закупке малого объема проверенным производителям, обеспечив высокую конкуренцию, реальное снижение начальной цены и своевременное закрытие потребности.</p>
+                </div>
+            </div>
+
+            <!-- Пункт 4: Анализ рисков -->
+            <div class="shutter-accordion-item" data-image="4">
+                <button class="shutter-accordion-trigger">
+                    <span>Автоматическая проверка заявок на аффилированность, сговор и коррупционные риски</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Модуль комплаенс-контроля TenderPilot защищает заказчика от картельных сговоров, конфликта интересов и заключения контрактов с фирмами-однодневками. Система за секунды проводит глубокий скоринг участников по базам ФНС, арбитражных судов и исполнительных производств, выявляя скрытую аффилированность через общих учредителей, директоров, адреса, IP и телефоны. Алгоритм подсвечивает признаки ценового демпинга, массовой смены руководства и налоговых блокировок, помогая закупочной комиссии принимать обоснованные решения и проходить любые проверки контролирующих органов без замечаний.</p>
+                </div>
+            </div>
+
+
+            <!-- Пункт 5: Проверка в РНП -->
+            <div class="shutter-accordion-item" data-image="5">
+                <button class="shutter-accordion-trigger">
+                    <span>Мгновенный мониторинг участников по реестрам недобросовестных поставщиков (РНП)</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Система автоматической проверки контрагентов TenderPilot избавляет закупочную комиссию от ручного поиска сведений в реестрах ФАС и исключает ошибки при рассмотрении заявок. Платформа в режиме реального времени сверяет каждого участника по официальным базам РНП по 44-ФЗ, 223-ФЗ и 615-ПП, а также проверяет наличие записей в чёрном списке у его учредителей и генерального директора. При обнаружении нарушений или фактов уклонения от контрактов алгоритм мгновенно формирует аргументированное заключение для протокола отклонения, защищая заказчика от срыва поставок и административных штрафов.</p>
+                </div>
+            </div>
+
+
+            <!-- Пункт 6: Контроль этапов -->
+            <div class="shutter-accordion-item" data-image="6">
+                <button class="shutter-accordion-trigger">
+                    <span>Сквозной контроль сроков закупочного цикла, исполнения контрактов и документооборота</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Система управления закупочным циклом TenderPilot избавляет контрактную службу от ручного ведения таблиц и страхует от просрочки процессуальных регламентов. Платформа автоматически формирует календарь ключевых контрольных точек по каждой процедуре: от ответов на запросы разъяснений и публикации протоколов в ЕИС до графиков поставки, электронной приёмки и оплаты по контракту. Умные уведомления заранее напоминают о приближающихся дедлайнах и формируют шаблоны претензий при нарушении сроков подрядчиком, обеспечивая полный порядок в ЭДО и защиту специалистов от штрафов за нарушение сроков.</p>
+                </div>
+            </div>
+
+
+            <!-- Пункт 7: Обучение -->
+            <div class="shutter-accordion-item" data-image="7">
+                <button class="shutter-accordion-trigger">
+                    <span>База знаний, разбор изменений 44-ФЗ и 223-ФЗ и практика решений ФАС для заказчиков</span>
+                    <span class="shutter-arrow-icon"></span>
+                </button>
+                <div class="shutter-accordion-content">
+                    <p>Образовательный модуль TenderPilot помогает контрактным управляющим и членам закупочных комиссий всегда работать по актуальным нормам законодательства без риска допустить ошибку из-за очередных поправок. Платформа предоставляет доступ к структурированным курсам по 44-ФЗ и 223-ФЗ, пошаговым инструкциям по применению национального режима, правилам электронной приёмки и претензионной работе. Встроенная база актуальных разъяснений Минфина, решений ФАС и проверенных шаблонов документов позволяет быстро находить законное решение в сложных рабочих ситуациях и оперативно вводить в работу новых сотрудников отдела закупок.</p>
+                </div>
+            </div>
+
+        </div> <!-- /shutter-faq-accordion-box -->
+
+   
+    <!-- Правая половина: Чистое пространство для картинок (650px) -->
+               <!-- Правая половина: Сюда подставил реальные картинки для тестов -->
+        <div class="shutter-features-visual">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="1" alt="Создание ТЗ по ГОСТ и КТРУ для заказчиков">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="2" alt="Автоматический сбор КП и расчет НМЦК">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="3" alt="Поиск надежных исполнителей и поставщиков">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="4" alt="Анализ рисков, сговора и аффилированности заявок">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="5" alt="Проверка участников по реестру недобросовестных поставщиков РНП">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="6" alt="Сквозной контроль этапов закупки и документооборота">
+            <img src="https://unsplash.com" class="feat-showcase-img" data-img="7" alt="Обучение и база знаний по 44-ФЗ и 223-ФЗ для заказчиков">
+        </div>
+
+    </div> <!-- /shutter-features-showcase -->
+</div> <!-- /panel-features -->
+
+<!-- ПАНЕЛЬ: ЭКОНОМИЯ И ВЫГОДА -->
+<div id="panel-benefits" class="shutter-panel-item">
+    <div class="shutter-payment-flow">
+        
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Экономия до 80% времени на подготовке закупки и расчете НМЦК</h4>
+            <p class="shutter-payment-text">Ручное составление технического задания по ГОСТ, подбор кодов КТРУ и сбор коммерческих предложений занимают у специалиста от нескольких часов до пары дней. Интеллектуальные алгоритмы TenderPilot формируют документацию и обосновывают начальную цену контракта за 5–10 минут, кратно повышая скорость работы отдела закупок.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Защита от штрафов ФАС, претензий КРУ и срыва поставок</h4>
+            <p class="shutter-payment-text">Стоимость подписки окупается с первой предотвращённой ошибки в извещении или при проверке заявок. Система заранее выявляет признаки ограничения конкуренции, сговор и аффилированность участников, а также отсеивает фирмы-однодневки из РНП, страхуя заказчика от административных штрафов и неисполненных контрактов.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Реальная экономия бюджета и рост объема закупок без расширения штата</h4>
+            <p class="shutter-payment-text">Адресное приглашение проверенных производителей повышает конкуренцию на торгах и обеспечивает максимальное снижение цены от НМЦК. При этом один контрактный управляющий с помощью TenderPilot успевает вести в 3–4 раза больше процедур по 44-ФЗ и 223-ФЗ без переработок и раздувания штата.</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ПАНЕЛЬ: БЕЗОПАСНОСТЬ ДЛЯ ПОЛЬЗОВАТЕЛЯ -->
+<div id="panel-security" class="shutter-panel-item">
+    <div class="shutter-payment-flow">
+        
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Полная конфиденциальность черновиков закупок и расчетов НМЦК</h4>
+            <p class="shutter-payment-text">Загруженные вами проекты технических заданий, расчеты начальной максимальной цены, коммерческие предложения и заявки участников строго изолированы в вашем рабочем пространстве. Информация заказчика не используется для дообучения общих моделей ИИ и гарантированно не попадает к третьим лицам до публикации закупки.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Правовая точность и опоры на нормы закона без выдумок ИИ</h4>
+            <p class="shutter-payment-text">Алгоритмы TenderPilot работают исключительно на основе актуальной редакции 44-ФЗ, 223-ФЗ, действующих стандартов ГОСТ, каталога КТРУ и официальных реестров ФНС и ФАС. Каждый вывод при генерации ТЗ или проверке контрагента подкрепляется точной ссылкой на нормативный акт или реестровую запись.</p>
+        </div>
+
+        <div class="shutter-payment-divider"></div>
+
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Защищённый российский контур и соответствие 152-ФЗ</h4>
+            <p class="shutter-payment-text">Передача данных между браузером и платформой защищена современным криптографическим шифрованием, а хранение и обработка информации осуществляются на серверах на территории РФ в полном соответствии с требованиями 152-ФЗ и корпоративными регламентами информационной безопасности.</p>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ПАНЕЛЬ 1: ТАРИФЫ (Монохромная лента) -->
+            <div id="panel-tariffs" class="shutter-panel-item">
+                <div class="shutter-tariffs-row">
+                    
+                    <!-- Плашка 1 -->
+                    <div class="shutter-tariff-card">
+                        <div class="shutter-card-head">
+                            <h3>Старт</h3>
+                            <div class="shutter-price-val">9 900 ₽<span>/мес</span></div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Генератор ТЗ по ГОСТ и каталогу КТРУ (до 15 закупок)</li>
+                            <li>Автоматический сбор КП и расчет НМЦК</li>
+                            <li>Мгновенная проверка участников по реестру РНП</li>
+                            <li>Доступ к базе знаний и шаблонам по 44-ФЗ и 223-ФЗ</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
+                    </div>
+
+                    <!-- Плашка 2 -->
+                    <div class="shutter-tariff-card">
+                        <div class="shutter-card-head">
+                            <h3>Бизнес</h3>
+                            <div class="shutter-price-val">19 900 ₽<span>/мес</span></div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Безлимитная генерация ТЗ и обоснование НМЦК</li>
+                            <li>Умный поиск надежных поставщиков с опытом в ЕИС</li>
+                            <li>Трекинг сроков контракта и контроль документооборота</li>
+                            <li>Персональный онлайн-консультант по закупкам</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
+                    </div>
+
+                    <!-- Плашка 3 (Акцентная) -->
+                    <div class="shutter-tariff-card shutter-featured">
+                        <div class="shutter-card-head">
+                            <h3>Про</h3>
+                            <div class="shutter-price-val">34 900 ₽<span>/мес</span></div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Глубокий анализ заявок на сговор и аффилированность</li>
+                            <li>Антикоррупционный скоринг и защита от жалоб в ФАС</li>
+                            <li>Полный безлимит на все инструменты для отдела закупок</li>
+                            <li>Выделенный эксперт и аудит документации 24/7</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Выбрать</button>
+                    </div>
+
+                    <!-- Плашка 4 -->
+                    <div class="shutter-tariff-card">
+                        <div class="shutter-card-head">
+                            <h3>Кастом</h3>
+                            <div class="shutter-price-val">Индивидуально</div>
+                        </div>
+                        <ul class="shutter-card-list">
+                            <li>Интеграция по API с 1С, ERP и корпоративными ЭТП</li>
+                            <li>Обучение контрактной службы и закупочной комиссии</li>
+                            <li>Выделенный защищенный сервер под требования ИБ</li>
+                            <li>Работа по 44-ФЗ / 223-ФЗ, индивидуальный договор и ЭДО</li>
+                        </ul>
+                        <button class="shutter-btn-action js-open-contacts">Связаться</button>
+                    </div>
+
+                </div>
+            </div>
+
+<!-- --- БЛОК ОПЛАТЫ (ПОСЛЕДОВАТЕЛЬНЫЙ ПОТОК В СТИЛЕ FAQ) --- -->
+<div id="panel-payment" class="shutter-panel-item">
+    <div class="shutter-payment-flow">
+        
+        <!-- Способ 1 -->
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Моментальная онлайн-оплата на платформе</h4>
+            <p class="shutter-payment-text">
+                Удобный и самый быстрый способ активировать транспортные услуги. Оплата осуществляется непосредственно на сайте TenderPilot с помощью банковских карт (Visa, Mastercard, МИР) или через Систему быстрых платежей (QR-код СБП).
+            </p>
+            <ul class="shutter-payment-sublist">
+                <li><strong>Безопасность транзакций:</strong> Все операции проходят через сертифицированный платежный шлюз с поддержкой протокола 3D-Secure. Сервис TenderPilot не сохраняет и не передает третьим лицам платежные данные вашей карты.</li>
+                <li><strong>Скорость обработки:</strong> Зачисление средств происходит мгновенно, а официальный фискальный чек автоматически отправляется на ваш email.</li>
+            </ul>
+        </div>
+
+        <!-- Тонкая горизонтальная разделительная черта -->
+        <div class="shutter-payment-divider"></div>
+
+        <!-- Способ 2 -->
+        <div class="shutter-payment-block">
+            <h4 class="shutter-payment-title">Безналичный расчет по счету от транспортной компании</h4>
+            <p class="shutter-payment-text">
+                Оптимальный вариант для юридических лиц и индивидуальных предпринимателей, которым необходим полный пакет закрывающих документов для бухгалтерии.
+            </p>
+            <ul class="shutter-payment-sublist">
+                <li><strong>Как это работает:</strong> Если доставка груза организуется через партнерские транспортные компании, официальный счет на оплату логистических услуг формируется и отправляется на вашу электронную почту напрямую от ТК.</li>
+                <li><strong>Удобство и отчетность:</strong> Оплата производится стандартным банковским переводом на расчетный счет. По завершении грузоперевозки вам предоставляются оригиналы закрывающих актов и товарно-транспортных накладных (УПД) через системы ЭДО или курьерской почтой.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- ПАНЕЛЬ 2: FAQ (7 Вопросов для заказчиков) -->
+            <div id="panel-faq" class="shutter-panel-item">
+                <div class="shutter-faq-accordion-box">
+                    
+                    <!-- Вопрос 1 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Гарантирует ли генератор ТЗ отсутствие жалоб в ФАС и штрафов?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Нейросеть формирует техническое задание строго на основе актуальных позиций каталога КТРУ, действующих ГОСТов и требований национального режима. Алгоритм автоматически исключает избыточные требования и упоминания товарных знаков без обоснования эквивалентности, защищая контрактного управляющего от предписаний и штрафов антимонопольной службы.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 2 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Подходит ли автоматический расчет НМЦК для проверок Казначейства и КРУ?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Да, система использует метод сопоставимых рыночных цен в строгом соответствии со статьей 22 44-ФЗ и методическими рекомендациями Минэкономразвития. Платформа подбирает идентичные исполненные контракты из реестра ЕИС, очищает выборку от аномальных выбросов и формирует готовый протокол обоснования НМЦК с расчетом коэффициента вариации.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 3 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как система помогает привлекать надежных исполнителей на закупки?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Алгоритм анализирует базу исполненных контрактов в ЕИС по вашему коду ОКПД2, отбирает реальных производителей и поставщиков с подтвержденным опытом работы в вашем регионе без срывов и неустоек. Вы можете в один клик направить им адресные приглашения на торги, обеспечив высокую конкуренцию и реальное снижение начальной цены.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 4 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>По каким признакам нейросеть выявляет сговор и аффилированность участников?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Модуль антикоррупционного анализа сопоставляет данные ЕГРЮЛ, ФНС, арбитражных дел и историю совместного участия компаний в прошлых торгах. Система подсвечивает общих учредителей, руководителей, совпадение контактов, адресов и признаки ценового «тарана», помогая комиссии обоснованно оценивать риски и проходить проверки без замечаний.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 5 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Проверяет ли сервис бывших учредителей и директоров при поиске в РНП?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Да, мониторинг ведется одновременно по реестрам недобросовестных поставщиков по 44-ФЗ, 223-ФЗ и 615-ПП в режиме реального времени. Система проверяет не только ИНН самой организации-участника, но и наличие записей в черном списке ФАС у ее генерального директора и учредителей, исключая допуск недобросовестных подрядчиков через новые юрлица.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 6 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как быстро обновляется база знаний и курсы при поправках в 44-ФЗ и 223-ФЗ?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Методическая база, шаблоны документов и обучающие модули для специалистов контрактной службы обновляются в течение 48 часов после вступления в силу новых постановлений Правительства, разъяснений Минфина или знаковых решений ФАС. Вся информация подается в формате пошаговых инструкций для ежедневной работы.</p>
+                        </div>
+                    </div>
+
+                    <!-- Вопрос 7 -->
+                    <div class="shutter-accordion-item">
+                        <button class="shutter-accordion-trigger">
+                            <span>Как оформляется оплата для бюджетных и корпоративных заказчиков?</span>
+                            <span class="shutter-arrow-icon"></span>
+                        </button>
+                        <div class="shutter-accordion-content">
+                            <p>Мы работаем по безналичному расчету с государственными, муниципальными учреждениями и коммерческими компаниями по 44-ФЗ и 223-ФЗ. Предоставляем полный комплект документов для бухгалтерии, выставляем счета и закрывающие УПД через системы электронного документооборота Контур.Диадок и СБИС, а также открываем бесплатный тестовый доступ на 3 дня по ИНН.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+<!-- ПАНЕЛЬ 3: КОНТАКТЫ -->
+<div id="panel-contacts" class="shutter-panel-item">
+    <div class="shutter-contacts-single-flow">
+        
+        <div class="shutter-flow-line">
+            <span>Связаться в мессенджере: </span>
+            <a href="https://t.me" target="_blank" class="shutter-flow-link">Telegram</a>, 
+            <a href="https://wa.me" target="_blank" class="shutter-flow-link">WhatsApp</a>
+        </div>
+        
+        <div class="shutter-flow-line">
+            <span>Электронная почта: </span>
+            <a href="mailto:info@tenderpilot.ru" class="shutter-flow-link">info@tenderpilot.ru</a>
+        </div>
+        
+        <div class="shutter-flow-line">
+            <span>Тел: </span>
+            <a href="tel:+78000000000" class="shutter-flow-link">8 800 000-00-00</a>
+        </div>
+        
+        <div class="shutter-flow-legal-group">
+            <div class="shutter-flow-line">
+                <span>ИП Ромашка Александр Владимирович</span>
+            </div>
+            <div class="shutter-flow-line">
+                <span>ИНН: 77XXXXXXXXXX, ОГРНИП: XXXXXXXXXXXXXXX</span>
+            </div>
+        </div>
+
+   </div> <!-- закрывает .shutter-contacts-single-flow -->
+</div> <!-- закрывает #panel-contacts -->
+</div> <!-- закрывает .shutter-dynamic-box -->
+</div> <!-- закрывает .shutter-layout-container -->
+</section> <!-- закрывает .premium-shutter-section -->
+
+
+<footer class="legal-footer">
+    <div class="legal-footer-container">
+        <span class="copyright-text">&copy; 2026 TenderPilot. Все права защищены.</span>
+        <a href="/privacy/" target="_blank">Политика конфиденциальности</a>
+        <a href="/terms/" target="_blank">Публичная оферта</a>
+        <a href="/consent/" target="_blank">Согласие на обработку персональных данных</a>
+    </div>
+</footer>
+    <script src="main.js"></script>
+</body>
+</html>

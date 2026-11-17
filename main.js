@@ -40,7 +40,19 @@
             });
 
             nav.querySelectorAll('.menu-item-link').forEach(function (link) {
-                link.addEventListener('click', function () {
+                link.addEventListener('click', function (e) {
+                    var href = link.getAttribute('href');
+                    if (href && href.charAt(0) === '#') {
+                        var target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            document.documentElement.classList.remove('menu-open');
+                            document.body.classList.remove('menu-open');
+                            closeMenu();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            return;
+                        }
+                    }
                     closeMenu();
                 });
             });
