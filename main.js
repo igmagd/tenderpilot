@@ -261,6 +261,16 @@
 
         if (!toggleBtn || !fatFooter || !footerContainer || !columns.length) return;
 
+        // Определяем текущую страницу для автоподсветки нужного раздела
+        var currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        var initialIndex = 0;
+
+        columns.forEach(function (col, idx) {
+            if (col.getAttribute('data-page') === currentPath) {
+                initialIndex = idx;
+            }
+        });
+
         // Внутренняя обертка для плавного CSS Grid 0fr -> 1fr
         var collapseInner = document.createElement('div');
         collapseInner.className = 'mobile-footer-collapse-inner';
@@ -280,10 +290,10 @@
 
             var tabBtn = document.createElement('button');
             tabBtn.type = 'button';
-            tabBtn.className = 'mobile-footer-tab' + (index === 0 ? ' is-active' : '');
+            tabBtn.className = 'mobile-footer-tab' + (index === initialIndex ? ' is-active' : '');
             tabBtn.textContent = tabTitle;
 
-            if (index === 0) {
+            if (index === initialIndex) {
                 col.classList.add('is-tab-active');
             }
 
@@ -342,10 +352,17 @@
             toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
             if (isOpen) {
-                requestAnimationFrame(updateNextArrowState);
+                requestAnimationFrame(function () {
+                    var activeTab = tabsTrack.querySelector('.mobile-footer-tab.is-active');
+                    if (activeTab && initialIndex > 0) {
+                        activeTab.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'center' });
+                    }
+                    updateNextArrowState();
+                });
             }
         });
     }
+
 
     // Инициализация всех систем хаба без конфликтов
     document.addEventListener('DOMContentLoaded', function () {
