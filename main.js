@@ -228,7 +228,6 @@
                         img.classList.remove('active');
                     });
                 }
-
                 // Переключаем текущий класс — всю анимацию делает CSS Grid
                 if (!isOpen) {
                     item.classList.add('is-open');
@@ -253,11 +252,107 @@
         });
     }
 
+    // 4. ОТДЕЛЬНАЯ МОБИЛЬНАЯ СТРОКА «ВСЕ РАЗДЕЛЫ» + ГОРИЗОНТАЛЬНЫЕ ТАБЫ В ФУТЕРЕ
+    function init_mobile_footer_tabs() {
+        var toggleBtn = document.getElementById('mobile-sections-toggle');
+        var fatFooter = document.querySelector('.hub-fat-footer');
+        var footerContainer = document.querySelector('.fat-footer-container');
+        var columns = document.querySelectorAll('.fat-footer-column');
+
+        if (!toggleBtn || !fatFooter || !footerContainer || !columns.length) return;
+
+        // Внутренняя обертка для плавного CSS Grid 0fr -> 1fr
+        var collapseInner = document.createElement('div');
+        collapseInner.className = 'mobile-footer-collapse-inner';
+        footerContainer.parentNode.insertBefore(collapseInner, footerContainer);
+        collapseInner.appendChild(footerContainer);
+
+        // Горизонтальная лента табов на основе заголовков h4
+        var tabsWrap = document.createElement('div');
+        tabsWrap.className = 'mobile-footer-tabs-wrap';
+
+        var tabsTrack = document.createElement('div');
+        tabsTrack.className = 'mobile-footer-tabs-track';
+
+        columns.forEach(function (col, index) {
+            var heading = col.querySelector('h4');
+            var tabTitle = heading ? heading.textContent.trim() : 'Раздел ' + (index + 1);
+
+            var tabBtn = document.createElement('button');
+            tabBtn.type = 'button';
+            tabBtn.className = 'mobile-footer-tab' + (index === 0 ? ' is-active' : '');
+            tabBtn.textContent = tabTitle;
+
+            if (index === 0) {
+                col.classList.add('is-tab-active');
+            }
+
+            tabBtn.addEventListener('click', function () {
+                tabsTrack.querySelectorAll('.mobile-footer-tab').forEach(function (t) {
+                    t.classList.remove('is-active');
+                });
+                columns.forEach(function (c) {
+                    c.classList.remove('is-tab-active');
+                });
+
+                tabBtn.classList.add('is-active');
+                col.classList.add('is-tab-active');
+
+                tabBtn.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            });
+
+            tabsTrack.appendChild(tabBtn);
+        });
+
+        // Тонкая стрелка справа как индикатор и кнопка прокрутки вбок
+        var nextBtn = document.createElement('button');
+        nextBtn.type = 'button';
+        nextBtn.className = 'mobile-footer-tabs-next';
+        nextBtn.setAttribute('aria-label', 'Прокрутить разделы вправо');
+        nextBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>';
+
+        nextBtn.addEventListener('click', function () {
+            tabsTrack.scrollBy({ left: 160, behavior: 'smooth' });
+        });
+
+        function updateNextArrowState() {
+            var maxScroll = tabsTrack.scrollWidth - tabsTrack.clientWidth;
+            if (maxScroll <= 4 || tabsTrack.scrollLeft >= maxScroll - 6) {
+                nextBtn.classList.add('is-hidden');
+            } else {
+                nextBtn.classList.remove('is-hidden');
+            }
+        }
+
+        tabsTrack.addEventListener('scroll', updateNextArrowState, { passive: true });
+        window.addEventListener('resize', updateNextArrowState);
+
+        tabsWrap.appendChild(tabsTrack);
+        tabsWrap.appendChild(nextBtn);
+        collapseInner.insertBefore(tabsWrap, footerContainer);
+
+        // Открытие/закрытие по клику на полосу «Все разделы»
+        toggleBtn.addEventListener('click', function () {
+            var isOpen = fatFooter.classList.toggle('is-mobile-open');
+            toggleBtn.classList.toggle('active', isOpen);
+            toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+            if (isOpen) {
+                requestAnimationFrame(updateNextArrowState);
+            }
+        });
+    }
+
     // Инициализация всех систем хаба без конфликтов
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
         init_bento();
         init_interactive_panels();
+        init_mobile_footer_tabs();
     });
 })();
 
