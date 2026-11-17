@@ -1683,18 +1683,20 @@ border-bottom: none !important;
         border-color: #1d1d1f;
     }
 
-    /* Плавное выдвижение списка разделов через CSS Grid */
+    /* Выдвижная область со списком разделов внутри футера */
     .hub-fat-footer > .header-container {
         display: grid;
         grid-template-rows: 0fr;
+        grid-template-columns: 1fr;
+        overflow: hidden;
         opacity: 0;
         visibility: hidden;
         padding-bottom: 0;
         transition:
-            grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-            padding-bottom 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-            opacity 0.22s ease,
-            visibility 0.22s ease;
+            grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            padding-bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.18s ease,
+            visibility 0.28s ease;
     }
 
     .hub-fat-footer.is-mobile-open > .header-container {
@@ -1702,11 +1704,17 @@ border-bottom: none !important;
         opacity: 1;
         visibility: visible;
         padding-bottom: 16px;
+        transition:
+            grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            padding-bottom 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.25s ease 0.05s,
+            visibility 0s ease;
     }
 
     .mobile-footer-collapse-inner {
         overflow: hidden;
         min-height: 0;
+        width: 100%;
     }
 
     /* Горизонтальная лента табов со стрелкой прокрутки справа */
