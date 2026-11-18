@@ -1705,6 +1705,12 @@ border-bottom: none !important;
         line-height: 1.35;
         cursor: pointer;
         -webkit-font-smoothing: antialiased;
+        transition: padding-bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Когда меню открыто, оставляем снизу ровно 8px до табов */
+    .mobile-sections-btn.active {
+        padding-bottom: 8px;
     }
 
     .mobile-sections-btn .shutter-arrow-icon {
@@ -1758,13 +1764,13 @@ border-bottom: none !important;
         width: 100%;
     }
 
-    /* Горизонтальная лента Все разделы со стрелкой прокрутки справа */
+    /* Горизонтальная лента табов со стрелкой прокрутки справа */
     .mobile-footer-tabs-wrap {
         position: relative;
         display: flex;
         align-items: center;
-        padding-top: 12px;
-        margin-bottom: 14px;
+        padding-top: 0;
+        margin-bottom: 8px;
     }
 
     .mobile-footer-tabs-track {
@@ -1804,12 +1810,11 @@ border-bottom: none !important;
         color: #ffffff;
     }
 
-    /* Правый индикатор прокрутки: мягкое затухание + тонкая стрелка вправо */
     .mobile-footer-tabs-next {
         position: absolute;
         right: 0;
-        top: 12px;
-        bottom: 10px;
+        top: 0;
+        bottom: 0;
         width: 38px;
         border: none;
         padding: 0 2px 0 12px;
