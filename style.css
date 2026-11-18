@@ -1806,16 +1806,6 @@ border-bottom: none !important;
         color: #ffffff;
     }
 
-    .mobile-footer-tab.is-active::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 1.5px;
-        background-color: #1d1d1f;
-    }
-
     /* Правый индикатор прокрутки: мягкое затухание + тонкая стрелка вправо */
     .mobile-footer-tabs-next {
         position: absolute;
