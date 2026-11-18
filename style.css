@@ -2041,6 +2041,11 @@ border-bottom: none !important;
    СЦЕНА «ЛОГИСТИКА» ДЛЯ ГЛАВНОЙ (.card-logistics)
    ========================================================= */
 
+.hub-card.card-logistics {
+    position: relative;
+    overflow: hidden;
+}
+
 .card-logistics .hub-card-content {
     position: relative;
     z-index: 2;
@@ -2072,69 +2077,8 @@ border-bottom: none !important;
     width: 100%;
     height: 76%;
     display: block;
-}
-
-/* Бегущая дорожная разметка */
-.road-markings-group {
-    animation: roadScrollLoop 1.6s linear infinite;
-    will-change: transform;
-}
-
-@keyframes roadScrollLoop {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-64px, 0, 0); }
-}
-
-/* Плавный крейсерский ход автопоезда */
-.truck-rig-group {
-    animation: truckCruiseDrift 9s ease-in-out infinite;
-    will-change: transform;
-}
-
-@keyframes truckCruiseDrift {
-    0%, 100% { transform: translate3d(-18px, 0, 0); }
-    50% { transform: translate3d(22px, 0, 0); }
-}
-
-/* Микро-ход пневмоподвески */
-.truck-chassis-bounce {
-    animation: chassisSuspension 1.4s ease-in-out infinite;
-    will-change: transform;
-}
-
-@keyframes chassisSuspension {
-    0%, 100% { transform: translate3d(0, 0, 0); }
-    50% { transform: translate3d(0, -0.8px, 0); }
-}
-
-/* Построение маршрута между точками А и Б */
-.route-active-path {
-    stroke-dasharray: 440;
-    stroke-dashoffset: 440;
-    animation: drawRouteArc 7s cubic-bezier(0.35, 0, 0.25, 1) infinite;
-}
-
-@keyframes drawRouteArc {
-    0% { stroke-dashoffset: 440; opacity: 0.2; }
-    25% { stroke-dashoffset: 0; opacity: 1; }
-    78% { stroke-dashoffset: 0; opacity: 0.9; }
-    95%, 100% { stroke-dashoffset: -440; opacity: 0; }
-}
-
-/* Пульсация маяков в точках А и Б */
-.route-ping-a {
-    transform-origin: 95px 142px;
-    animation: beaconPulse 3.5s ease-out infinite;
-}
-
-.route-ping-b {
-    transform-origin: 505px 132px;
-    animation: beaconPulse 3.5s ease-out 1.75s infinite;
-}
-
-@keyframes beaconPulse {
-    0% { transform: scale(0.5); opacity: 0.85; }
-    70%, 100% { transform: scale(2.1); opacity: 0; }
+    object-fit: cover;
+    object-position: center bottom;
 }
 
 /* Адаптив на мобильном: крупный блок на пол-экрана без рамок */
@@ -2151,13 +2095,4 @@ border-bottom: none !important;
         height: 74%;
     }
 }
-/* Проплывающие мачты освещения вдоль трассы */
-.highway-lights-group {
-    animation: highwayLightsLoop 6s linear infinite;
-    will-change: transform;
-}
 
-@keyframes highwayLightsLoop {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-180px, 0, 0); }
-}
