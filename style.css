@@ -1708,9 +1708,9 @@ border-bottom: none !important;
         transition: padding-bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Когда меню открыто, оставляем снизу ровно 8px до табов */
+    /* Когда меню открыто, оставляем снизу 12 */
     .mobile-sections-btn.active {
-        padding-bottom: 8px;
+        padding-bottom: 12px;
     }
 
     .mobile-sections-btn .shutter-arrow-icon {
@@ -1770,7 +1770,7 @@ border-bottom: none !important;
         display: flex;
         align-items: center;
         padding-top: 0;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
 
     .mobile-footer-tabs-track {
