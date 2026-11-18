@@ -446,11 +446,87 @@ a.hub-card:hover {
     background: rgba(255, 255, 255, 0.06);
 }
 
-/* Размеры карточек на ПК: 1 большая Hero (2x2), все остальные стандартные (1x1) */
-.card-about {
+/* =========================================================
+   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: СТИЛЬ APPLE + КИНЕТИЧЕСКАЯ ТУРБИНА
+   ========================================================= */
+.hub-card.card-about {
     grid-column: span 2;
     grid-row: span 1;
-    background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #FFFFFF 0%, #F5F5F7 55%, #E8EBEF 100%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.45),
+                inset 0 1px 1px rgba(255, 255, 255, 1),
+                inset 0 -1px 1px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.35s ease;
+}
+
+/* Общие параметры механизма */
+.hub-card.card-about::before,
+.hub-card.card-about::after {
+    content: "";
+    position: absolute;
+    right: -55px;
+    bottom: -55px;
+    width: 260px;
+    height: 260px;
+    pointer-events: none;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-play-state: var(--turbine-state, running);
+}
+
+/* Слой 1 (Центр): титановая «запятая» (по часовой стрелке, цикл 7 сек) */
+.hub-card.card-about::before {
+    opacity: 0.78;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQwIDI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIwIDEyMCBDMTIzIDExNiAxMjggMTE4IDEyOCAxMjMgQzEyOCAxMzEgMTE3IDEzNCAxMTEgMTI4IEMxMDMgMTIwIDEwNyAxMDQgMTIwIDEwMSBDMTM4IDk3IDE1MSAxMTQgMTQ2IDEzMiBDMTQyIDE0NiAxMjggMTUzIDExNiAxNTEgQzEyOCAxNDggMTM2IDEzNyAxMzcgMTI1IEMxMzggMTEyIDEyOCAxMDQgMTE4IDEwNyBDMTEwIDExMCAxMDggMTIwIDExNCAxMjYgQzExOCAxMjkgMTIzIDEyNyAxMjMgMTIzIEMxMjMgMTIxIDEyMSAxMjAgMTIwIDEyMCBaIiBmaWxsPSIjMUQxRDFGIi8+PC9zdmc+");
+    animation: turbineCoreSpin 7s linear infinite;
+}
+
+/* Слой 2 (Вокруг центра): алюминиевые дуги (навстречу, цикл 28 сек) */
+.hub-card.card-about::after {
+    opacity: 0.42;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQwIDI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiM4QzkyOUIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTIwIiByPSIzNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1kYXNoYXJyYXk9IjQwIDE0IDYgMTQiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjQ2IiBzdHJva2Utd2lkdGg9IjAuOSIgc3Ryb2tlLWRhc2hhcnJheT0iODUgMjUiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjYxIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjI4IDE4IDQgMTgiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjgwIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWRhc2hhcnJheT0iMTEwIDMwIDE1IDMwIi8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTIwIiByPSIxMDQiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSI3MCAyMiA0MCAyMiIvPjwvZz48L3N2Zz4=");
+    animation: turbineRingsSpin 28s linear infinite;
+}
+
+
+
+/* Фирменный черный текст Apple строго поверх механизма */
+.hub-card.card-about .hub-card-content {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes turbineCoreSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes turbineRingsSpin {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+/* Отклик при наведении курсора на ПК */
+@media (hover: hover) {
+    .hub-card.card-about:hover {
+        box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.55),
+                    inset 0 1px 1px rgba(255, 255, 255, 1),
+                    inset 0 -1px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .hub-card.card-about:hover::before {
+        animation-duration: 4.5s;
+    }
+
+    .hub-card.card-about:hover::after {
+        opacity: 0.58;
+        animation-duration: 18s;
+    }
 }
 
 .card-suppliers,
@@ -489,13 +565,22 @@ a.hub-card:hover {
     margin: 0;
 }
 
+/* Чёрный текст конкретно для светлой карточки «О платформе» */
+.hub-card.card-about h2 {
+    color: #1D1D1F;
+}
+
+.hub-card.card-about p {
+    color: #424245;
+}
+
 /* Планшеты */
 @media (max-width: 1024px) {
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .card-about {
+    .hub-card.card-about {
         grid-column: span 2;
     }
 }
@@ -505,9 +590,22 @@ a.hub-card:hover {
         width: 100%;
         padding: 76px 16px 40px;
     }
+
+    .hub-card.card-about {
+        grid-column: 1 / -1;
+        min-height: 230px;
+    }
+
+    .hub-card.card-about::before,
+    .hub-card.card-about::after {
+        right: -60px;
+        bottom: -70px;
+        width: 240px;
+        height: 240px;
+    }
 }
 
-/* Мобильные устройства: безрамочный Hero + ритм 2 -> 1 -> 2 -> 2 */
+/* Мобильные устройства: ритм 1 (Apple Hero) -> 2 -> 1 -> 2 -> 2 */
 @media (max-width: 600px) {
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -515,26 +613,17 @@ a.hub-card:hover {
         gap: 12px;
     }
 
-    /* 1. О платформе — чистый безрамочный блок на всю ширину */
-    .card-about {
-        grid-column: span 2;
-        grid-row: span 1;
-        background: none;
-        border: none;
-        border-radius: 0;
-        padding: 4px 2px 14px;
-    }
-
-    .card-about h2 {
+    .hub-card.card-about h2 {
         font-size: 26px;
         margin-bottom: 10px;
         letter-spacing: -0.02em;
+        color: #1D1D1F;
     }
 
-    .card-about p {
+    .hub-card.card-about p {
         font-size: 15px;
         line-height: 1.48;
-        color: #9ba3ae;
+        color: #424245;
     }
 
     /* Компактные плитки на мобилке */
@@ -2203,4 +2292,102 @@ border-bottom: none !important;
     font-weight: 500;
 }
 
+/* =========================================================
+   КОСМИЧЕСКИЙ ФОН С 3D-ГЛУБИНОЙ (NASA / APPLE STYLE)
+   ========================================================= */
+
+.hub-card.bento-cosmos-card {
+    position: relative;
+    overflow: hidden;
+    background: #0d1117;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(147, 197, 253, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
+}
+
+.bento-cosmos-card .hub-card-content {
+    position: relative;
+    z-index: 3;
+}
+
+/* Сцена с фотографией космоса */
+.cosmos-depth-stage {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+/* Сама фотография с мягким растворением к верхнему левому углу (под текст) */
+.cosmos-bg-img {
+    position: absolute;
+    right: -8%;
+    bottom: -12%;
+    width: 115%;
+    height: 115%;
+    object-fit: cover;
+    object-position: center bottom;
+    opacity: 0.78;
+    filter: contrast(1.08) saturate(1.1);
+    -webkit-mask-image: radial-gradient(ellipse 85% 80% at 72% 72%, #000 28%, rgba(0, 0, 0, 0.45) 58%, transparent 88%);
+    mask-image: radial-gradient(ellipse 85% 80% at 72% 72%, #000 28%, rgba(0, 0, 0, 0.45) 58%, transparent 88%);
+    animation: cosmosSlowFloat 22s ease-in-out infinite;
+    will-change: transform;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+/* Медленное космическое дыхание и дрейф */
+@keyframes cosmosSlowFloat {
+    0%, 100% {
+        transform: scale(1.04) translate3d(0, 0, 0);
+    }
+    50% {
+        transform: scale(1.12) translate3d(-10px, -6px, 0);
+    }
+}
+
+/* Приближение при наведении курсора на ПК */
+.hub-card.bento-cosmos-card:hover .cosmos-bg-img {
+    opacity: 0.92;
+}
+
+.hub-card.bento-cosmos-card:hover {
+    border-color: rgba(147, 197, 253, 0.32);
+}
+
+/* Затемняющая виньетка под заголовком, чтобы белый текст читался на 100% */
+.cosmos-vignette-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+        155deg,
+        rgba(13, 17, 23, 0.94) 0%,
+        rgba(13, 17, 23, 0.65) 42%,
+        rgba(13, 17, 23, 0.1) 100%
+    );
+}
+
+/* Атмосферное свечение горизонта планеты в правом нижнем углу */
+.cosmos-rim-glow {
+    position: absolute;
+    right: -20px;
+    bottom: -30px;
+    width: 180px;
+    height: 180px;
+    z-index: 2;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0) 70%);
+    pointer-events: none;
+}
+
+/* На мобильном делаем блок чуть выше, чтобы космос раскрылся во всей глубине */
+@media (max-width: 768px) {
+    .hub-card.bento-cosmos-card {
+        grid-column: span 2;
+        min-height: 260px;
+    }
+}
 

@@ -364,12 +364,32 @@
     }
 
 
+    // 5. ОПТИМИЗАЦИЯ АНИМАЦИИ ТУРБИНЫ В КАРТОЧКЕ «О ПЛАТФОРМЕ»
+    function init_about_turbine() {
+        var aboutCards = document.querySelectorAll('.card-about');
+        if (!aboutCards.length || !('IntersectionObserver' in window)) return;
+
+        var visibilityObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                entry.target.style.setProperty(
+                    '--turbine-state',
+                    entry.isIntersecting ? 'running' : 'paused'
+                );
+            });
+        }, { threshold: 0.05 });
+
+        aboutCards.forEach(function (card) {
+            visibilityObserver.observe(card);
+        });
+    }
+
     // Инициализация всех систем хаба без конфликтов
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
         init_bento();
         init_interactive_panels();
         init_mobile_footer_tabs();
+        init_about_turbine();
     });
 })();
 
