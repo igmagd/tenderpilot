@@ -1,45 +1,129 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" preserveAspectRatio="xMidYMax slice">
     <style>
-        .road-markings-group { animation: roadScrollLoop 1.6s linear infinite; will-change: transform; }
-        @keyframes roadScrollLoop { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-64px, 0, 0); } }
-        .truck-rig-group { animation: truckCruiseDrift 9s ease-in-out infinite; will-change: transform; }
-        @keyframes truckCruiseDrift { 0%, 100% { transform: translate3d(-18px, 0, 0); } 50% { transform: translate3d(22px, 0, 0); } }
-        .truck-chassis-bounce { animation: chassisSuspension 1.4s ease-in-out infinite; will-change: transform; }
-        @keyframes chassisSuspension { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -0.8px, 0); } }
-        .highway-lights-group { animation: highwayLightsLoop 6s linear infinite; will-change: transform; }
-        @keyframes highwayLightsLoop { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-180px, 0, 0); } }
+
+        /* Бегущая дорожная разметка */
+        .road-markings-group {
+            animation: roadScrollLoop 1.5s linear infinite;
+            will-change: transform;
+        }
+        @keyframes roadScrollLoop {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-64px, 0, 0); }
+        }
+
+        /* Бегущие сигнальные столбики вдоль обочины (в темпе с дорогой) */
+        .delineator-posts-loop {
+            animation: postsScrollLoop 3s linear infinite;
+            will-change: transform;
+        }
+        @keyframes postsScrollLoop {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-160px, 0, 0); }
+        }
+
+        /* Проплывающие высокие фонари на дальнем плане (параллакс) */
+        .highway-lamps-loop {
+            animation: lampsParallaxLoop 7.5s linear infinite;
+            will-change: transform;
+        }
+        @keyframes lampsParallaxLoop {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-220px, 0, 0); }
+        }
+
+        /* Плавный крейсерский ход автопоезда */
+        .truck-cruise-group {
+            animation: truckSmoothDrift 9s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes truckSmoothDrift {
+            0%, 100% { transform: translate3d(-16px, 0, 0); }
+            50% { transform: translate3d(20px, 0, 0); }
+        }
+
+        /* Деликатная работа пневмоподвески */
+        .truck-body-susp {
+            animation: bodySuspMicro 1.3s ease-in-out infinite;
+            will-change: transform;
+        }
+        @keyframes bodySuspMicro {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -0.7px, 0); }
+        }
+
+        /* Мягкая игра матричного света фар */
+        .led-beam-pulse {
+            animation: beamSoftBreath 4.5s ease-in-out infinite;
+            will-change: opacity;
+        }
+        @keyframes beamSoftBreath {
+            0%, 100% { opacity: 0.78; }
+            50% { opacity: 1; }
+        }
     </style>
+
     <defs>
-        <linearGradient id="roadSurface" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#141923" stop-opacity="0.3" />
-            <stop offset="30%" stop-color="#171d29" stop-opacity="0.96" />
-            <stop offset="100%" stop-color="#0a0d12" stop-opacity="1" />
+        <!-- Влажный ночной асфальт -->
+        <linearGradient id="wetRoadGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#141a26" stop-opacity="0.4" />
+            <stop offset="22%" stop-color="#171f2e" stop-opacity="0.96" />
+            <stop offset="65%" stop-color="#0f141e" stop-opacity="1" />
+            <stop offset="100%" stop-color="#07090e" stop-opacity="1" />
         </linearGradient>
-        <linearGradient id="headlightCone" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
-            <stop offset="30%" stop-color="#e2e8f0" stop-opacity="0.16" />
-            <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0" />
+
+        <!-- Тусклый конус света дорожных фонарей -->
+        <radialGradient id="dimLampCone" cx="50%" cy="0%" r="100%">
+            <stop offset="0%" stop-color="#cbd5e1" stop-opacity="0.16" />
+            <stop offset="55%" stop-color="#94a3b8" stop-opacity="0.05" />
+            <stop offset="100%" stop-color="#94a3b8" stop-opacity="0" />
+        </radialGradient>
+
+        <!-- Конус матричных LED-фар тягача -->
+        <linearGradient id="truckHeadlight" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.52" />
+            <stop offset="35%" stop-color="#e0f2fe" stop-opacity="0.18" />
+            <stop offset="100%" stop-color="#e0f2fe" stop-opacity="0" />
         </linearGradient>
-        <linearGradient id="trailerWhite" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="18%" stop-color="#f1f5f9" />
-            <stop offset="75%" stop-color="#cbd5e1" />
+
+        <!-- Отражение фар на мокром асфальте -->
+        <linearGradient id="wetBeamReflect" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.28" />
+            <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+        </linearGradient>
+
+        <!-- Объёмный белый полуприцеп (борт и крыша) -->
+        <linearGradient id="trailerSideGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#f8fafc" />
+            <stop offset="25%" stop-color="#e2e8f0" />
+            <stop offset="80%" stop-color="#cbd5e1" />
             <stop offset="100%" stop-color="#94a3b8" />
         </linearGradient>
-        <linearGradient id="cabRed" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ef4444" />
-            <stop offset="45%" stop-color="#dc2626" />
-            <stop offset="100%" stop-color="#7f1d1d" />
+        <linearGradient id="trailerRoofGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#e2e8f0" />
         </linearGradient>
-        <linearGradient id="spoilerRed" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#dc2626" />
-            <stop offset="100%" stop-color="#991b1b" />
+
+        <!-- Небесно-голубой металлик кабины (как стрелка чата) -->
+        <linearGradient id="cabBlueSide" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" />
+            <stop offset="45%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#1d4ed8" />
         </linearGradient>
-        <linearGradient id="chromeMetal" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#cbd5e1" />
-            <stop offset="50%" stop-color="#64748b" />
-            <stop offset="100%" stop-color="#334155" />
+        <linearGradient id="cabBlueFront" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#60a5fa" />
+            <stop offset="50%" stop-color="#2563eb" />
+            <stop offset="100%" stop-color="#1e3a8a" />
         </linearGradient>
+
+        <!-- Хром для выхлопной трубы -->
+        <linearGradient id="chromePipe" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#94a3b8" />
+            <stop offset="50%" stop-color="#f1f5f9" />
+            <stop offset="100%" stop-color="#475569" />
+        </linearGradient>
+
+        <!-- Мягкое затухание по краям -->
         <linearGradient id="edgeFadeMask" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="black" />
             <stop offset="8%" stop-color="white" />
@@ -51,96 +135,190 @@
         </mask>
     </defs>
     <g mask="url(#sceneHorizontalMask)">
-        <path d="M0 166 Q 110 144, 210 160 T 420 150 T 600 164 L 600 260 L 0 260 Z" fill="#111622" opacity="0.75" />
-        <path d="M0 175 Q 150 162, 290 173 T 600 168 L 600 260 L 0 260 Z" fill="#161c28" opacity="0.9" />
-        <g class="highway-lights-group">
-            <g transform="translate(80, 146)">
-                <line x1="0" y1="0" x2="0" y2="36" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-                <path d="M 0 0 L 7 0" stroke="rgba(255,255,255,0.28)" stroke-width="1.2" />
-                <ellipse cx="6" cy="2" rx="8" ry="2.5" fill="#ffffff" opacity="0.22" />
+        <!-- Многослойный силуэт ночного горизонта -->
+        <path d="M 0 162 Q 110 138, 225 156 T 445 144 T 600 160 L 600 260 L 0 260 Z" fill="#0e131d" />
+        <path d="M 0 172 Q 160 158, 310 170 T 600 164 L 600 260 L 0 260 Z" fill="#131926" opacity="0.9" />
+
+        <!-- Дальние дорожные фонари с тусклым светом (параллакс) -->
+        <g class="highway-lamps-loop">
+            <g transform="translate(60, 114)">
+                <line x1="0" y1="0" x2="0" y2="62" stroke="#2c3545" stroke-width="1.5" />
+                <path d="M 0 0 L 12 2" stroke="#475569" stroke-width="1.5" />
+                <ellipse cx="11" cy="3" rx="3.5" ry="1.2" fill="#e2e8f0" opacity="0.75" />
+                <polygon points="11,3 -18,68 42,68" fill="url(#dimLampCone)" />
             </g>
-            <g transform="translate(260, 146)">
-                <line x1="0" y1="0" x2="0" y2="36" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-                <path d="M 0 0 L 7 0" stroke="rgba(255,255,255,0.28)" stroke-width="1.2" />
-                <ellipse cx="6" cy="2" rx="8" ry="2.5" fill="#ffffff" opacity="0.22" />
+            <g transform="translate(280, 114)">
+                <line x1="0" y1="0" x2="0" y2="62" stroke="#2c3545" stroke-width="1.5" />
+                <path d="M 0 0 L 12 2" stroke="#475569" stroke-width="1.5" />
+                <ellipse cx="11" cy="3" rx="3.5" ry="1.2" fill="#e2e8f0" opacity="0.75" />
+                <polygon points="11,3 -18,68 42,68" fill="url(#dimLampCone)" />
             </g>
-            <g transform="translate(440, 146)">
-                <line x1="0" y1="0" x2="0" y2="36" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-                <path d="M 0 0 L 7 0" stroke="rgba(255,255,255,0.28)" stroke-width="1.2" />
-                <ellipse cx="6" cy="2" rx="8" ry="2.5" fill="#ffffff" opacity="0.22" />
+            <g transform="translate(500, 114)">
+                <line x1="0" y1="0" x2="0" y2="62" stroke="#2c3545" stroke-width="1.5" />
+                <path d="M 0 0 L 12 2" stroke="#475569" stroke-width="1.5" />
+                <ellipse cx="11" cy="3" rx="3.5" ry="1.2" fill="#e2e8f0" opacity="0.75" />
+                <polygon points="11,3 -18,68 42,68" fill="url(#dimLampCone)" />
             </g>
-            <g transform="translate(620, 146)">
-                <line x1="0" y1="0" x2="0" y2="36" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
-                <path d="M 0 0 L 7 0" stroke="rgba(255,255,255,0.28)" stroke-width="1.2" />
-                <ellipse cx="6" cy="2" rx="8" ry="2.5" fill="#ffffff" opacity="0.22" />
+            <g transform="translate(720, 114)">
+                <line x1="0" y1="0" x2="0" y2="62" stroke="#2c3545" stroke-width="1.5" />
+                <path d="M 0 0 L 12 2" stroke="#475569" stroke-width="1.5" />
+                <ellipse cx="11" cy="3" rx="3.5" ry="1.2" fill="#e2e8f0" opacity="0.75" />
+                <polygon points="11,3 -18,68 42,68" fill="url(#dimLampCone)" />
             </g>
         </g>
-        <rect x="0" y="182" width="600" height="78" fill="url(#roadSurface)" />
-        <line x1="0" y1="181.5" x2="600" y2="181.5" stroke="rgba(255,255,255,0.24)" stroke-width="1.2" />
-        <line x1="0" y1="184" x2="600" y2="184" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+        <!-- Металлический барьерный отбойник вдоль дальнего края трассы -->
+        <line x1="0" y1="175" x2="600" y2="175" stroke="#334155" stroke-width="2" />
+        <line x1="0" y1="174.5" x2="600" y2="174.5" stroke="rgba(255,255,255,0.2)" stroke-width="0.7" />
+
+        <!-- МОКРЫЙ НОЧНОЙ АСФАЛЬТ -->
+        <rect x="0" y="176" width="600" height="84" fill="url(#wetRoadGrad)" />
+
+        <!-- Дальняя сплошная линия разметки -->
+        <line x1="0" y1="181" x2="600" y2="181" stroke="rgba(255,255,255,0.22)" stroke-width="1" />
+
+        <!-- Бегущая осевая разметка -->
         <g class="road-markings-group">
-            <line x1="-120" y1="215" x2="780" y2="215" stroke="rgba(255,255,255,0.28)" stroke-width="1.8" stroke-dasharray="28 36" />
-            <line x1="-120" y1="244" x2="780" y2="244" stroke="rgba(255,255,255,0.11)" stroke-width="1.2" stroke-dasharray="20 44" />
+            <line x1="-120" y1="216" x2="780" y2="216" stroke="rgba(255,255,255,0.32)" stroke-width="2" stroke-dasharray="28 36" />
+            <line x1="-120" y1="246" x2="780" y2="246" stroke="rgba(255,255,255,0.12)" stroke-width="1.4" stroke-dasharray="22 42" />
         </g>
-        <g class="truck-rig-group">
-            <ellipse cx="274" cy="209" rx="90" ry="5" fill="#030508" opacity="0.95" />
-            <polygon points="356,195 535,172 535,214 356,202" fill="url(#headlightCone)" />
-            <polygon points="356,198 460,192 460,209 356,203" fill="url(#headlightCone)" opacity="0.9" />
-            <g class="truck-chassis-bounce">
-                <rect x="188" y="164" width="120" height="35" rx="2" fill="url(#trailerWhite)" stroke="rgba(255,255,255,0.6)" stroke-width="0.7" />
-                <rect x="188" y="164" width="120" height="2.2" rx="1" fill="#ffffff" />
-                <rect x="188" y="196.5" width="120" height="2.5" fill="#1e293b" />
-                <line x1="191" y1="195.6" x2="305" y2="195.6" stroke="#64748b" stroke-width="0.8" stroke-dasharray="6 2" />
-                <rect x="307.5" y="166.5" width="3.5" height="14" rx="1" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.5" />
-                <line x1="308.5" y1="169" x2="310" y2="169" stroke="#334155" stroke-width="0.8" />
-                <line x1="308.5" y1="172" x2="310" y2="172" stroke="#334155" stroke-width="0.8" />
-                <line x1="308.5" y1="175" x2="310" y2="175" stroke="#334155" stroke-width="0.8" />
-                <g stroke="rgba(15, 23, 42, 0.14)" stroke-width="0.8">
-                    <line x1="192" y1="167" x2="192" y2="195" />
-                    <line x1="208" y1="167" x2="208" y2="195" />
-                    <line x1="224" y1="167" x2="224" y2="195" />
-                    <line x1="240" y1="167" x2="240" y2="195" />
-                    <line x1="256" y1="167" x2="256" y2="195" />
-                    <line x1="272" y1="167" x2="272" y2="195" />
-                    <line x1="288" y1="167" x2="288" y2="195" />
-                    <line x1="303" y1="167" x2="303" y2="195" />
-                </g>
-                <rect x="234" y="199" width="46" height="5" rx="1" fill="#1e293b" stroke="rgba(255,255,255,0.18)" stroke-width="0.5" />
-                <line x1="257" y1="199" x2="257" y2="204" stroke="rgba(255,255,255,0.15)" stroke-width="0.6" />
-                <rect x="288" y="199" width="3" height="6.5" fill="#334155" />
-                <circle cx="198" cy="198" r="1.1" fill="#fbbf24" />
-                <circle cx="246" cy="198" r="1.1" fill="#fbbf24" />
-                <circle cx="296" cy="198" r="1.1" fill="#fbbf24" />
-                <rect x="186.8" y="193" width="1.8" height="4.5" rx="0.6" fill="#ef4444" />
-                <ellipse cx="185" cy="195" rx="4" ry="2.5" fill="#ef4444" opacity="0.4" />
-                <rect x="307" y="196" width="14" height="4" fill="#0f172a" />
-                <rect x="312.2" y="159" width="1.8" height="36" rx="0.8" fill="url(#chromeMetal)" />
-                <path d="M 315 199 L 315 168 Q 315 164 319 164 L 343 164 Q 350 164 353 173 L 357 188 L 357 199 Z" fill="url(#cabRed)" stroke="rgba(255,255,255,0.28)" stroke-width="0.8" />
-                <path d="M 315 164 L 339 164 Q 328 158.5 315 158.5 Z" fill="url(#spoilerRed)" stroke="rgba(255,255,255,0.25)" stroke-width="0.6" />
-                <path d="M 343 165 L 350 167 L 348 169 L 343 167 Z" fill="#1e293b" />
-                <circle cx="347" cy="166.5" r="0.8" fill="#ffffff" />
-                <path d="M 332 169 L 347 169 L 351.5 182 L 332 182 Z" fill="#090d16" stroke="rgba(255,255,255,0.25)" stroke-width="0.6" />
-                <line x1="341" y1="169" x2="341" y2="182" stroke="#991b1b" stroke-width="1.2" />
-                <line x1="335" y1="171" x2="339" y2="180" stroke="rgba(255,255,255,0.22)" stroke-width="1" />
-                <line x1="344" y1="171" x2="348" y2="180" stroke="rgba(255,255,255,0.25)" stroke-width="1" />
-                <path d="M 330 168 L 330 194 L 345 194" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="0.7" />
-                <rect x="332" y="186" width="3" height="1" rx="0.5" fill="#1e293b" />
-                <g stroke="#1e293b" stroke-width="0.8">
-                    <line x1="352.5" y1="185" x2="356.2" y2="185" />
-                    <line x1="353" y1="187.5" x2="356.5" y2="187.5" />
-                    <line x1="353.5" y1="190" x2="356.8" y2="190" />
-                    <line x1="354" y1="192.5" x2="356.8" y2="192.5" />
-                </g>
-                <rect x="354.5" y="194.5" width="2.5" height="3.8" rx="0.8" fill="#ffffff" />
-                <circle cx="355.5" cy="199.5" r="0.9" fill="#e2e8f0" />
-                <rect x="193" y="199" width="1.5" height="7" fill="#0f172a" />
-                <rect x="309" y="199" width="1.5" height="7" fill="#0f172a" />
+
+        <!-- Светоотражающие дорожные столбики вдоль дальнего отбойника -->
+        <g class="delineator-posts-loop">
+            <g transform="translate(40, 176)"><rect x="-1.5" y="-9" width="3" height="9" rx="0.5" fill="#cbd5e1" /><rect x="-1.5" y="-7" width="3" height="2" fill="#0f172a" /><rect x="-1.2" y="-6.5" width="2.4" height="1.2" fill="#38bdf8" /></g>
+            <g transform="translate(200, 176)"><rect x="-1.5" y="-9" width="3" height="9" rx="0.5" fill="#cbd5e1" /><rect x="-1.5" y="-7" width="3" height="2" fill="#0f172a" /><rect x="-1.2" y="-6.5" width="2.4" height="1.2" fill="#38bdf8" /></g>
+            <g transform="translate(360, 176)"><rect x="-1.5" y="-9" width="3" height="9" rx="0.5" fill="#cbd5e1" /><rect x="-1.5" y="-7" width="3" height="2" fill="#0f172a" /><rect x="-1.2" y="-6.5" width="2.4" height="1.2" fill="#38bdf8" /></g>
+            <g transform="translate(520, 176)"><rect x="-1.5" y="-9" width="3" height="9" rx="0.5" fill="#cbd5e1" /><rect x="-1.5" y="-7" width="3" height="2" fill="#0f172a" /><rect x="-1.2" y="-6.5" width="2.4" height="1.2" fill="#38bdf8" /></g>
+            <g transform="translate(680, 176)"><rect x="-1.5" y="-9" width="3" height="9" rx="0.5" fill="#cbd5e1" /><rect x="-1.5" y="-7" width="3" height="2" fill="#0f172a" /><rect x="-1.2" y="-6.5" width="2.4" height="1.2" fill="#38bdf8" /></g>
+        </g>
+        <!-- ОБЪЁМНЫЙ МАГИСТРАЛЬНЫЙ АВТОПОЕЗД (ВЫСОКИЙ БЕЛЫЙ ПРИЦЕП + ГОЛУБОЙ ТЯГАЧ) -->
+        <g class="truck-cruise-group">
+            <!-- 1. ЗЕРКАЛЬНОЕ ОТРАЖЕНИЕ НА МОКРОМ АСФАЛЬТЕ -->
+            <g opacity="0.34">
+                <!-- Отражение света фар на мокром покрытии -->
+                <polygon points="362,212 545,224 545,244 362,218" fill="url(#wetBeamReflect)" />
+                <!-- Размытое зеркальное отражение белого прицепа и голубой кабины -->
+                <rect x="186" y="211" width="124" height="15" rx="3" fill="#cbd5e1" opacity="0.22" />
+                <rect x="315" y="211" width="46" height="15" rx="3" fill="#38bdf8" opacity="0.35" />
+                <!-- Отражение красного заднего габарита -->
+                <ellipse cx="185" cy="214" rx="8" ry="2.5" fill="#ef4444" opacity="0.45" />
             </g>
-            <g transform="translate(199, 203.5)"><circle r="5.2" fill="#090c10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.2" fill="#111622" /></g>
-            <g transform="translate(211, 203.5)"><circle r="5.2" fill="#090c10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.2" fill="#111622" /></g>
-            <g transform="translate(223, 203.5)"><circle r="5.2" fill="#090c10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.2" fill="#111622" /></g>
-            <g transform="translate(316, 203.5)"><circle r="5.4" fill="#090c10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.4" fill="#111622" /></g>
-            <g transform="translate(348, 203.5)"><circle r="5.4" fill="#090c10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.4" fill="#111622" /></g>
+
+            <!-- Плотная тень под шасси на асфальте -->
+            <ellipse cx="274" cy="210" rx="94" ry="5" fill="#020408" opacity="0.95" />
+
+            <!-- 2. ЕДИНЫЙ СВЕТ МАТРИЧНЫХ LED-ФАР (едет строго вместе с тягачом) -->
+            <g class="led-beam-pulse">
+                <polygon points="360,194 555,170 555,216 360,202" fill="url(#truckHeadlight)" />
+                <polygon points="360,197 475,190 475,210 360,203" fill="url(#truckHeadlight)" />
+            </g>
+
+            <!-- 3. КУЗОВ И КАБИНА В ПСЕВДО-3D (ПРИЦЕП ВЫШЕ КАБИНЫ) -->
+            <g class="truck-body-susp">
+                <!-- ВЫСОКИЙ БЕЛЫЙ ПОЛУПРИЦЕП (боковая стена + перспективная верхняя крыша) -->
+                <!-- Перспективная крыша прицепа (создаёт 3D-объём) -->
+                <polygon points="186,158 196,153 316,153 308,158" fill="url(#trailerRoofGrad)" stroke="#ffffff" stroke-width="0.5" />
+                <!-- Правая передняя грань прицепа в 3/4 -->
+                <polygon points="308,158 316,153 316,193 308,198" fill="#cbd5e1" />
+                <!-- Основной белый борт полуприцепа -->
+                <rect x="186" y="158" width="122" height="40" rx="1.5" fill="url(#trailerSideGrad)" stroke="rgba(255,255,255,0.65)" stroke-width="0.7" />
+
+                <!-- Рефрижераторная установка на передней стенке прицепа -->
+                <rect x="309" y="160" width="5.5" height="15" rx="1" fill="#475569" stroke="#94a3b8" stroke-width="0.5" />
+                <line x1="310.5" y1="163" x2="313" y2="163" stroke="#0f172a" stroke-width="0.9" />
+                <line x1="310.5" y1="166" x2="313" y2="166" stroke="#0f172a" stroke-width="0.9" />
+                <line x1="310.5" y1="169" x2="313" y2="169" stroke="#0f172a" stroke-width="0.9" />
+
+                <!-- Вертикальные рёбра жёсткости еврофуры -->
+                <g stroke="rgba(15, 23, 42, 0.13)" stroke-width="0.8">
+                    <line x1="202" y1="160" x2="202" y2="195" />
+                    <line x1="219" y1="160" x2="219" y2="195" />
+                    <line x1="236" y1="160" x2="236" y2="195" />
+                    <line x1="253" y1="160" x2="253" y2="195" />
+                    <line x1="270" y1="160" x2="270" y2="195" />
+                    <line x1="287" y1="160" x2="287" y2="195" />
+                    <line x1="303" y1="160" x2="303" y2="195" />
+                </g>
+
+                <!-- Нижняя силовая рама и светоотражающая полоса -->
+                <rect x="186" y="195.5" width="122" height="2.8" fill="#1e293b" />
+                <line x1="189" y1="194.6" x2="305" y2="194.6" stroke="#64748b" stroke-width="0.8" stroke-dasharray="6 2" />
+                <!-- Паллетный ящик и противоподкатная защита -->
+                <rect x="234" y="198.5" width="46" height="5.5" rx="1" fill="#1e293b" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                <line x1="257" y1="198.5" x2="257" y2="204" stroke="rgba(255,255,255,0.15)" stroke-width="0.6" />
+                <!-- Янтарные габаритные огни и задний красный фонарь -->
+                <circle cx="196" cy="197" r="1.1" fill="#fbbf24" />
+                <circle cx="246" cy="197" r="1.1" fill="#fbbf24" />
+                <circle cx="296" cy="197" r="1.1" fill="#fbbf24" />
+                <rect x="184.8" y="192" width="1.8" height="5" rx="0.6" fill="#ef4444" />
+                <ellipse cx="183" cy="194.5" rx="4.5" ry="2.8" fill="#ef4444" opacity="0.45" />
+
+                <!-- Сцепка и хромированная выхлопная труба -->
+                <rect x="308" y="196" width="12" height="4" fill="#0f172a" />
+                <rect x="312.5" y="156" width="2" height="39" rx="0.8" fill="url(#chromePipe)" />
+
+                <!-- ГОЛУБАЯ КАБИНА ТЯГАЧА В 3/4 (пропорционально чуть ниже прицепа) -->
+                <!-- Перспективная крыша кабины + верхний аэродинамический обтекатель -->
+                <polygon points="315,163 323,158 348,158 344,163" fill="#38bdf8" stroke="rgba(255,255,255,0.4)" stroke-width="0.5" />
+                <polygon points="315,163 336,163 326,158 315,158" fill="#2563eb" />
+
+                <!-- Боковой профиль кабины -->
+                <path d="M 315 198.5 L 315 166 Q 315 163 319 163 L 344 163 L 352 174 L 352 198.5 Z"
+                      fill="url(#cabBlueSide)" stroke="rgba(255,255,255,0.3)" stroke-width="0.75" />
+
+                <!-- Передняя маска кабины в лёгком повороте 3/4 -->
+                <polygon points="344,163 354,161 361,173 361,198.5 352,198.5 352,174"
+                         fill="url(#cabBlueFront)" stroke="rgba(255,255,255,0.35)" stroke-width="0.75" />
+
+                <!-- Панорамное лобовое стекло в 3/4 с дворниками и бликом -->
+                <polygon points="346,166 354,164.5 358.5,175 348.5,176.5" fill="#070b12" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" />
+                <line x1="348" y1="167" x2="352" y2="175" stroke="rgba(255,255,255,0.22)" stroke-width="1" />
+                <line x1="351" y1="175.5" x2="355" y2="172" stroke="#475569" stroke-width="0.8" />
+
+                <!-- Боковое стекло двери и зеркало заднего вида -->
+                <polygon points="331,167 343,167 346.5,178 331,178" fill="#070b12" stroke="rgba(255,255,255,0.25)" stroke-width="0.5" />
+                <line x1="334" y1="169" x2="338" y2="177" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                <rect x="344.5" y="167.5" width="2" height="8.5" rx="0.8" fill="#0f172a" stroke="rgba(255,255,255,0.3)" stroke-width="0.4" />
+
+                <!-- Расшивка двери и ручка -->
+                <path d="M 329 166 L 329 193 L 344 193" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="0.7" />
+                <rect x="331" y="185" width="3" height="1" rx="0.5" fill="#0f172a" />
+
+                <!-- Передняя решётка радиатора в 3/4 с серебристой планкой -->
+                <polygon points="353.5,180 360,179 360,192 353.5,193" fill="#0b0f17" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                <line x1="354" y1="183" x2="359.5" y2="182" stroke="#334155" stroke-width="0.8" />
+                <line x1="354" y1="186" x2="359.5" y2="185" stroke="#334155" stroke-width="0.8" />
+                <line x1="354" y1="189" x2="359.5" y2="188" stroke="#334155" stroke-width="0.8" />
+                <line x1="354" y1="181.5" x2="359.5" y2="180.5" stroke="#e2e8f0" stroke-width="1" />
+
+                <!-- Матричные LED-фары (ближняя и дальняя на переднем бампере) -->
+                <rect x="351.5" y="194" width="3.2" height="3.5" rx="0.7" fill="#ffffff" />
+                <rect x="358.5" y="193" width="2.5" height="3.2" rx="0.6" fill="#ffffff" />
+                <!-- Верхние габаритные огни на козырьке -->
+                <circle cx="347" cy="164" r="0.8" fill="#ffffff" />
+                <circle cx="352" cy="163" r="0.8" fill="#ffffff" />
+
+                <!-- Брызговики -->
+                <rect x="192" y="198.5" width="1.5" height="7" fill="#0f172a" />
+                <rect x="309" y="198.5" width="1.5" height="7" fill="#0f172a" />
+            </g>
+
+            <!-- ПОЛНОСТЬЮ ЧЁРНЫЕ КОЛЁСА (3 оси прицепа + 2 оси тягача, без бака между ними) -->
+            <g transform="translate(198, 203.5)"><circle r="5.2" fill="#080b10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.2" fill="#0f141e" /></g>
+            <g transform="translate(210, 203.5)"><circle r="5.2" fill="#080b10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.2" fill="#0f141e" /></g>
+            <g transform="translate(222, 203.5)"><circle r="5.2" fill="#080b10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.2" fill="#0f141e" /></g>
+
+            <g transform="translate(317, 203.5)"><circle r="5.4" fill="#080b10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.4" fill="#0f141e" /></g>
+            <g transform="translate(348, 203.5)"><circle r="5.4" fill="#080b10" stroke="#1e293b" stroke-width="1.2" /><circle r="2.4" fill="#0f141e" /></g>
+        </g>
+
+        <!-- БЛИЖНИЙ РЯД ДОРОЖНЫХ СТОЛБИКОВ С КАТАФОТАМИ (на переднем плане обочины) -->
+        <g class="delineator-posts-loop">
+            <g transform="translate(95, 258)"><rect x="-2.2" y="-15" width="4.4" height="15" rx="0.8" fill="#e2e8f0" /><rect x="-2.2" y="-11" width="4.4" height="3.2" fill="#0f172a" /><rect x="-1.7" y="-10.2" width="3.4" height="2" fill="#f59e0b" /></g>
+            <g transform="translate(255, 258)"><rect x="-2.2" y="-15" width="4.4" height="15" rx="0.8" fill="#e2e8f0" /><rect x="-2.2" y="-11" width="4.4" height="3.2" fill="#0f172a" /><rect x="-1.7" y="-10.2" width="3.4" height="2" fill="#f59e0b" /></g>
+            <g transform="translate(415, 258)"><rect x="-2.2" y="-15" width="4.4" height="15" rx="0.8" fill="#e2e8f0" /><rect x="-2.2" y="-11" width="4.4" height="3.2" fill="#0f172a" /><rect x="-1.7" y="-10.2" width="3.4" height="2" fill="#f59e0b" /></g>
+            <g transform="translate(575, 258)"><rect x="-2.2" y="-15" width="4.4" height="15" rx="0.8" fill="#e2e8f0" /><rect x="-2.2" y="-11" width="4.4" height="3.2" fill="#0f172a" /><rect x="-1.7" y="-10.2" width="3.4" height="2" fill="#f59e0b" /></g>
+            <g transform="translate(735, 258)"><rect x="-2.2" y="-15" width="4.4" height="15" rx="0.8" fill="#e2e8f0" /><rect x="-2.2" y="-11" width="4.4" height="3.2" fill="#0f172a" /><rect x="-1.7" y="-10.2" width="3.4" height="2" fill="#f59e0b" /></g>
         </g>
     </g>
 </svg>
