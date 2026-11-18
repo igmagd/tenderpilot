@@ -2151,4 +2151,13 @@ border-bottom: none !important;
         height: 74%;
     }
 }
+/* Проплывающие мачты освещения вдоль трассы */
+.highway-lights-group {
+    animation: highwayLightsLoop 6s linear infinite;
+    will-change: transform;
+}
 
+@keyframes highwayLightsLoop {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-180px, 0, 0); }
+}
