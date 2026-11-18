@@ -1772,13 +1772,15 @@ border-bottom: none !important;
     .mobile-footer-tabs-track {
         display: flex;
         align-items: center;
-        gap: 18px;
+        gap: 8px;
         overflow-x: auto;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        padding-left: 13px;
+        margin-left: -13px;
         padding-right: 36px;
-        padding-bottom: 10px;
+        padding-bottom: 12px;
     }
 
     .mobile-footer-tabs-track::-webkit-scrollbar {
@@ -1787,22 +1789,21 @@ border-bottom: none !important;
 
     .mobile-footer-tab {
         flex: 0 0 auto;
-        background: none;
+        background: rgba(0, 0, 0, 0.045);
         border: none;
-        border-radius: 0;
-        padding: 4px 0;
+        border-radius: 999px;
+        padding: 6px 13px;
         font-size: 13px;
         font-weight: 500;
-        color: #6e6e73;
+        color: #1d1d1f;
         white-space: nowrap;
         cursor: pointer;
-        position: relative;
-        transition: color 0.2s ease;
+        transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     .mobile-footer-tab.is-active {
-        background: none;
-        color: #1d1d1f;
+        background: #1d1d1f;
+        color: #ffffff;
     }
 
     .mobile-footer-tab.is-active::after {
@@ -1954,11 +1955,10 @@ border-bottom: none !important;
 
 /* Единое выравнивание и мобильный футер (до 768px) */
 @media (max-width: 768px) {
-    /* Все главные секции-контейнеры имеют единый отступ 16px по краям */
     .header-container,
     .hub-main,
     .bento-grid,
-    .shutter-layout-container,
+    .premium-shutter-section .shutter-layout-container,
     .mobile-footer-bar,
     .legal-footer {
         width: 100%;
