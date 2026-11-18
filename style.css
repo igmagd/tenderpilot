@@ -1960,6 +1960,7 @@ border-bottom: none !important;
     .hub-main,
     .bento-grid,
     .shutter-layout-container,
+    .mobile-footer-bar,
     .fat-footer-container,
     .fat-footer-bottom,
     .legal-footer {
@@ -1967,7 +1968,6 @@ border-bottom: none !important;
         padding-left: 16px;
         padding-right: 16px;
     }
-
     /* Убираем двойной отступ внутри обёртки header-container в футере */
     .hub-fat-footer .header-container .fat-footer-container,
     .hub-fat-footer .header-container .fat-footer-bottom {
