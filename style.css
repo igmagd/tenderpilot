@@ -437,6 +437,7 @@ body.menu-open {
         transform 0.25s cubic-bezier(0.2, 0, 0.2, 1),
         border-color 0.25s ease,
         background 0.25s ease;
+    transform: translateZ(0);
 }
 
 a.hub-card:hover {
@@ -992,12 +993,13 @@ a.hub-card:hover {
     padding-top: 0;
     padding-bottom: 0;
     transition: 
-        grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-        padding-top 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.2s ease,
-        visibility 0.2s ease;
+        grid-template-rows 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+        padding-top 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.22s ease,
+        visibility 0.26s ease;
     will-change: grid-template-rows, opacity;
 }
+
 /* Внутренний прямой потомок шторки (tariffs, faq, contacts, showcase) */
 .premium-shutter-section .shutter-panel-item > * {
     overflow: hidden;
@@ -1292,7 +1294,7 @@ a.hub-card:hover {
     border-right: 2px solid rgba(0, 0, 0, 0.4); 
     border-bottom: 2px solid rgba(0, 0, 0, 0.4);
     transform: rotate(45deg);
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
     flex-shrink: 0;
 }
 
@@ -1529,7 +1531,7 @@ border-bottom: none !important;
 /* Нижняя служебная строчка предфутера */
 .fat-footer-bottom {
     max-width: 1300px;
-    margin: 16px auto 0 !important; /* Сжали дыру с 45px до аккуратных 16px */
+    margin: 16px auto 0 !important;
     padding: 12px 24px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
     display: flex;
@@ -1591,7 +1593,6 @@ border-bottom: none !important;
 }
 
 @media (max-width: 600px) {
-    /* Чёткая разделительная черта под блоком «Возможности / Вопросы...» */
     .hub-fat-footer {
         border-top-color: rgba(0, 0, 0, 0.24) !important;
     }
@@ -1682,6 +1683,8 @@ border-bottom: none !important;
         padding-top: 0;
         padding-bottom: 0;
         border-top: 1px solid rgba(0, 0, 0, 0.16);
+        contain: layout style;
+        overflow-anchor: none;
     }
 
     .mobile-footer-bar {
@@ -1705,9 +1708,8 @@ border-bottom: none !important;
         line-height: 1.35;
         cursor: pointer;
         -webkit-font-smoothing: antialiased;
-        transition: padding-bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: padding-bottom 0.26s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
     /* Когда меню открыто, оставляем снизу 12 */
     .mobile-sections-btn.active {
         padding-bottom: 12px;
@@ -1720,7 +1722,7 @@ border-bottom: none !important;
         border-bottom: 2px solid rgba(0, 0, 0, 0.55);
         transform: rotate(45deg);
         margin-top: -3px;
-        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s ease;
+        transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
         flex-shrink: 0;
     }
 
@@ -1739,11 +1741,12 @@ border-bottom: none !important;
         opacity: 0;
         visibility: hidden;
         padding-bottom: 0;
+        will-change: grid-template-rows, opacity;
         transition:
-            grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-            padding-bottom 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-            opacity 0.18s ease,
-            visibility 0.28s ease;
+            grid-template-rows 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+            padding-bottom 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.22s ease,
+            visibility 0.26s ease;
     }
 
     .hub-fat-footer.is-mobile-open > .header-container {
@@ -1752,9 +1755,9 @@ border-bottom: none !important;
         visibility: visible;
         padding-bottom: 16px;
         transition:
-            grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-            padding-bottom 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-            opacity 0.25s ease 0.05s,
+            grid-template-rows 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+            padding-bottom 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 0.22s ease 0.04s,
             visibility 0s ease;
     }
 
@@ -1864,7 +1867,7 @@ border-bottom: none !important;
     .fat-footer-column ul {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px 16px;
+        gap: 10px 16px;
     }
 
     .fat-footer-column ul li {
