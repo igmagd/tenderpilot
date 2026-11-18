@@ -1758,14 +1758,13 @@ border-bottom: none !important;
         width: 100%;
     }
 
-    /* Горизонтальная лента табов со стрелкой прокрутки справа */
+    /* Горизонтальная лента Все разделы со стрелкой прокрутки справа */
     .mobile-footer-tabs-wrap {
         position: relative;
         display: flex;
         align-items: center;
         padding-top: 12px;
         margin-bottom: 14px;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
     }
 
     .mobile-footer-tabs-track {
@@ -1779,7 +1778,7 @@ border-bottom: none !important;
         padding-left: 13px;
         margin-left: -13px;
         padding-right: 36px;
-        padding-bottom: 12px;
+        padding-bottom: 0;
     }
 
     .mobile-footer-tabs-track::-webkit-scrollbar {
