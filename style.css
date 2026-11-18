@@ -1772,7 +1772,7 @@ border-bottom: none !important;
     .mobile-footer-tabs-track {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 18px;
         overflow-x: auto;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
@@ -1787,21 +1787,32 @@ border-bottom: none !important;
 
     .mobile-footer-tab {
         flex: 0 0 auto;
-        background: rgba(0, 0, 0, 0.045);
+        background: none;
         border: none;
-        border-radius: 999px;
-        padding: 6px 13px;
+        border-radius: 0;
+        padding: 4px 0;
         font-size: 13px;
         font-weight: 500;
-        color: #424245;
+        color: #6e6e73;
         white-space: nowrap;
         cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease;
+        position: relative;
+        transition: color 0.2s ease;
     }
 
     .mobile-footer-tab.is-active {
-        background: #1d1d1f;
-        color: #ffffff;
+        background: none;
+        color: #1d1d1f;
+    }
+
+    .mobile-footer-tab.is-active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1.5px;
+        background-color: #1d1d1f;
     }
 
     /* Правый индикатор прокрутки: мягкое затухание + тонкая стрелка вправо */
