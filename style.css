@@ -447,58 +447,97 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: СТИЛЬ APPLE + КИНЕТИЧЕСКАЯ ТУРБИНА
+   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: СТИЛЬ APPLE + 3D-КОК ТУРБИНЫ
    ========================================================= */
 .hub-card.card-about {
     grid-column: span 2;
     grid-row: span 1;
     position: relative;
     overflow: hidden;
-    border-radius: 22px;
-    background: linear-gradient(145deg, #FFFFFF 0%, #F5F5F7 55%, #E8EBEF 100%);
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.45),
-                inset 0 1px 1px rgba(255, 255, 255, 1),
-                inset 0 -1px 1px rgba(0, 0, 0, 0.04);
-    transition: box-shadow 0.35s ease;
+    border-radius: 28px;
+    padding: 32px 34px;
+    background:
+        radial-gradient(circle 48px at calc(100% - 88px) calc(100% - 84px),
+            #555961 0%,
+            #26282D 42%,
+            #0F1013 84%,
+            #060709 96%,
+            rgba(0, 0, 0, 0.28) 98%,
+            transparent 100%),
+        radial-gradient(120% 90% at 15% 0%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 58%),
+        linear-gradient(135deg, #FFFFFF 0%, #F4F5F8 48%, #E4E7ED 100%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+        0 20px 44px -16px rgba(0, 0, 0, 0.65),
+        0 4px 12px -2px rgba(0, 0, 0, 0.25),
+        inset 0 1.5px 1px rgba(255, 255, 255, 1),
+        inset 1px 0 1px rgba(255, 255, 255, 0.75),
+        inset 0 -1.5px 2px rgba(0, 0, 0, 0.06);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
 }
 
-/* Общие параметры механизма */
-.hub-card.card-about::before,
+/* ВНЕШНИЙ СЛОЙ: плотные воздушные кольца, растворяющиеся перед текстом */
 .hub-card.card-about::after {
     content: "";
     position: absolute;
-    right: -55px;
-    bottom: -55px;
-    width: 260px;
-    height: 260px;
+    right: -32px;
+    bottom: -36px;
+    width: 240px;
+    height: 240px;
     pointer-events: none;
     z-index: 1;
+    opacity: 0.58;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMjQwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiM2RTZFNzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTIwIiByPSI1MiIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1kYXNoYXJyYXk9IjU1IDE4IDggMTgiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjU5IiBzdHJva2Utd2lkdGg9IjAuOSIgc3Ryb2tlLWRhc2hhcnJheT0iOTAgMjgiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjY2IiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWRhc2hhcnJheT0iNDAgMjIgNiAyMiIvPjxjaXJjbGUgY3g9IjEyMCIgY3k9IjEyMCIgcj0iNzMiIHN0cm9rZS13aWR0aD0iMC44IiBzdHJva2UtZGFzaGFycmF5PSIxMTUgMzUiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjgxIiBzdHJva2Utd2lkdGg9IjEuMCIgc3Ryb2tlLWRhc2hhcnJheT0iNjUgMjYgMTQgMjYiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjkwIiBzdHJva2Utd2lkdGg9IjAuNyIgc3Ryb2tlLWRhc2hhcnJheT0iMTAwIDQwIi8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTIwIiByPSIxMDAiIHN0cm9rZS13aWR0aD0iMC42IiBzdHJva2UtZGFzaGFycmF5PSI3NSA0NSIvPjwvZz48L3N2Zz4=");
     background-repeat: no-repeat;
     background-size: contain;
+    -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 36%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0) 73%);
+    mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 36%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0) 73%);
+    will-change: transform;
+    animation: turbineRingsSpin 16s linear infinite !important;
     animation-play-state: var(--turbine-state, running);
 }
 
-/* Слой 1 (Центр): титановая «запятая» (по часовой стрелке, цикл 7 сек) */
+/* ВНУТРЕННИЙ СЛОЙ: точная математическая белая спираль авиадвигателя (Base64) */
 .hub-card.card-about::before {
-    opacity: 0.78;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQwIDI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIwIDEyMCBDMTIzIDExNiAxMjggMTE4IDEyOCAxMjMgQzEyOCAxMzEgMTE3IDEzNCAxMTEgMTI4IEMxMDMgMTIwIDEwNyAxMDQgMTIwIDEwMSBDMTM4IDk3IDE1MSAxMTQgMTQ2IDEzMiBDMTQyIDE0NiAxMjggMTUzIDExNiAxNTEgQzEyOCAxNDggMTM2IDEzNyAxMzcgMTI1IEMxMzggMTEyIDEyOCAxMDQgMTE4IDEwNyBDMTEwIDExMCAxMDggMTIwIDExNCAxMjYgQzExOCAxMjkgMTIzIDEyNyAxMjMgMTIzIEMxMjMgMTIxIDEyMSAxMjAgMTIwIDEyMCBaIiBmaWxsPSIjMUQxRDFGIi8+PC9zdmc+");
-    animation: turbineCoreSpin 7s linear infinite;
+    content: "";
+    position: absolute;
+    right: 42px;
+    bottom: 38px;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48cG9seWdvbiBwb2ludHM9IjYyLjgwLDYwLjAwIDYzLjExLDYwLjI5IDYzLjM5LDYwLjYzIDYzLjY0LDYxLjAzIDYzLjgzLDYxLjQ4IDYzLjk4LDYxLjk4IDY0LjA2LDYyLjUxIDY0LjA3LDYzLjA3IDY0LjAyLDYzLjY2IDYzLjg5LDY0LjI2IDYzLjY4LDY0Ljg2IDYzLjM5LDY1LjQ2IDYzLjAyLDY2LjA1IDYyLjU3LDY2LjYxIDYyLjA0LDY3LjE0IDYxLjQ0LDY3LjYzIDYwLjc2LDY4LjA2IDYwLjAyLDY4LjQzIDU5LjIxLDY4LjczIDU4LjM1LDY4Ljk1IDU3LjQ0LDY5LjA4IDU2LjQ5LDY5LjEyIDU1LjUyLDY5LjA2IDU0LjUzLDY4Ljg5IDUzLjUzLDY4LjYyIDUyLjU0LDY4LjIzIDUxLjU3LDY3Ljc0IDUwLjYyLDY3LjEzIDQ5LjcyLDY2LjQxIDQ4Ljg3LDY1LjU5IDQ4LjA5LDY0LjY2IDQ3LjM5LDYzLjY0IDQ2Ljc4LDYyLjUyIDQ2LjI3LDYxLjMzIDQ1Ljg3LDYwLjA2IDQ1LjU5LDU4LjcyIDQ1LjQ0LDU3LjM0IDQ1LjQyLDU1LjkyIDQ1LjU0LDU0LjQ3IDQ1LjgxLDUzLjAxIDQ2LjIzLDUxLjU2IDQ2Ljc5LDUwLjEzIDQ3LjUxLDQ4LjcyIDQ4LjM3LDQ3LjM3IDQ5LjM4LDQ2LjA5IDUwLjUzLDQ0Ljg4IDUxLjgxLDQzLjc3IDUzLjIyLDQyLjc3IDU0Ljc0LDQxLjkwIDU2LjM3LDQxLjE2IDU4LjA5LDQwLjU3IDU5Ljg4LDQwLjE0IDYxLjc0LDM5Ljg3IDYzLjY1LDM5Ljc5IDY1LjU5LDM5Ljg4IDY3LjU0LDQwLjE3IDY5LjQ4LDQwLjY0IDcxLjQwLDQxLjMxIDczLjI4LDQyLjE3IDc1LjA5LDQzLjIyIDc2LjgyLDQ0LjQ1IDc4LjQ1LDQ1Ljg2IDc5Ljk2LDQ3LjQ0IDgxLjM0LDQ5LjE4IDgyLjU2LDUxLjA3IDgzLjYxLDUzLjA5IDg0LjQ4LDU1LjIzIDg1LjE1LDU3LjQ3IDg1LjYyLDU5LjgwIDg1Ljg3LDYyLjE5IDg1Ljg5LDY0LjYyIDg1LjY4LDY3LjA4IDg1LjI0LDY5LjU0IDg0LjU1LDcxLjk3IDgzLjY0LDc0LjM2IDgyLjQ5LDc2LjY4IDgxLjExLDc4LjkwIDc5LjUxLDgxLjAyIDc3LjY5LDgyLjk5IDc1LjY4LDg0LjgxIDczLjQ4LDg2LjQ2IDcxLjExLDg3LjkwIDY4LjU5LDg5LjEzIDY1LjkzLDkwLjEzIDYzLjE2LDkwLjg5IDYwLjMxLDkxLjM5IDU3LjM5LDkxLjYyIDU0LjQyLDkxLjU4IDUxLjQ1LDkxLjI2IDQ4LjQ4LDkwLjY2IDQ1LjU2LDg5Ljc3IDQyLjcwLDg4LjYxIDM5LjkzLDg3LjE3IDM3LjI5LDg1LjQ2IDM0Ljc5LDgzLjQ5IDMyLjQ3LDgxLjI3IDMwLjM0LDc4LjgzIDI4LjQyLDc2LjE3IDI2Ljc1LDczLjMyIDI1LjM0LDcwLjI5IDI0LjIwLDY3LjEyIDIzLjM2LDYzLjgzIDIyLjgyLDYwLjQ0IDIyLjYwLDU2Ljk4IDIyLjcwLDUzLjQ5IDIzLjEzLDQ5Ljk5IDIzLjg5LDQ2LjUyIDI0Ljk4LDQzLjEwIDI2LjQwLDM5Ljc3IDI4LjEzLDM2LjU2IDMwLjE3LDMzLjQ5IDMyLjUxLDMwLjYxIDM1LjEyLDI3LjkzIDM4LjAwLDI1LjQ5IDQxLjEyLDIzLjMwIDQ0LjQ1LDIxLjQwIDQ3Ljk4LDE5LjgxIDUxLjY3LDE4LjU0IDU1LjQ5LDE3LjYxIDU5LjQxLDE3LjAzIDYzLjQwLDE2LjgyIDY3LjQyLDE2Ljk4IDcxLjQ0LDE3LjUxIDc1LjQzLDE4LjQzIDc5LjM0LDE5LjcyIDgzLjE1LDIxLjM4IDg2LjgxLDIzLjQwIDkwLjI5LDI1Ljc3IDkzLjU3LDI4LjQ4IDk2LjYwLDMxLjQ5IDk5LjM2LDM0LjgwIDEwMS44MiwzOC4zOCAxMDMuOTUsNDIuMjAgMTA1LjczLDQ2LjIzIDEwNy4xNCw1MC40MyAxMDguMTYsNTQuNzggMTA4Ljc4LDU5LjIzIDEwOC45OCw2My43NiAxMDguNzYsNjguMzEgMTA4LjEyLDcyLjg2IDEwNy4wNSw3Ny4zNiAxMDUuNTYsODEuNzcgMTAzLjY2LDg2LjA1IDEwMS4zNSw5MC4xNiA5OC42NSw5NC4wNyA5NS41OCw5Ny43NCA5Mi4xNiwxMDEuMTIgODguNDIsMTA0LjIwIDg0LjM4LDEwNi45NCA4MC4wOCwxMDkuMzAgNzUuNTUsMTExLjI3IDcwLjgzLDExMi44MiA2NS45NSwxMTMuOTMgNjAuOTYsMTE0LjU5IDU1LjkwLDExNC43OSA1MC44MiwxMTQuNTIgNDUuNzQsMTEzLjc3IDQwLjczLDExMi41NSAzNS44MiwxMTAuODYgMzEuMDYsMTA4LjcxIDI2LjUwLDEwNi4xMSAzMi4zNyw5OC4wMiAzNi4xNCwxMDAuMTcgNDAuMDYsMTAxLjk0IDQ0LjExLDEwMy4zMyA0OC4yNCwxMDQuMzQgNTIuNDMsMTA0Ljk1IDU2LjYyLDEwNS4xOCA2MC44MCwxMDUuMDIgNjQuOTEsMTA0LjQ3IDY4LjkzLDEwMy41NSA3Mi44MiwxMDIuMjcgNzYuNTYsMTAwLjY1IDgwLjEwLDk4LjcwIDgzLjQzLDk2LjQ1IDg2LjUyLDkzLjkxIDg5LjMzLDkxLjExIDkxLjg2LDg4LjA5IDk0LjA5LDg0Ljg3IDk1Ljk5LDgxLjQ4IDk3LjU2LDc3Ljk1IDk4Ljc5LDc0LjMxIDk5LjY3LDcwLjYwIDEwMC4yMCw2Ni44NSAxMDAuMzgsNjMuMTAgMTAwLjIxLDU5LjM3IDk5LjcwLDU1LjcwIDk4Ljg2LDUyLjExIDk3LjY5LDQ4LjY1IDk2LjIyLDQ1LjMzIDk0LjQ3LDQyLjE4IDkyLjQ0LDM5LjIzIDkwLjE2LDM2LjUxIDg3LjY2LDM0LjAyIDg0Ljk3LDMxLjc5IDgyLjA5LDI5Ljg0IDc5LjA3LDI4LjE4IDc1Ljk0LDI2LjgxIDcyLjcxLDI1Ljc1IDY5LjQzLDI1LjAwIDY2LjExLDI0LjU2IDYyLjgwLDI0LjQzIDU5LjUxLDI0LjYwIDU2LjI4LDI1LjA4IDUzLjE0LDI1Ljg1IDUwLjEwLDI2LjkwIDQ3LjIwLDI4LjIyIDQ0LjQ1LDI5Ljc4IDQxLjg5LDMxLjU4IDM5LjUyLDMzLjYwIDM3LjM3LDM1LjgxIDM1LjQ1LDM4LjE4IDMzLjc3LDQwLjcxIDMyLjM1LDQzLjM1IDMxLjE5LDQ2LjA5IDMwLjI5LDQ4LjkxIDI5LjY3LDUxLjc3IDI5LjMyLDU0LjY1IDI5LjI0LDU3LjUyIDI5LjQzLDYwLjM2IDI5Ljg4LDYzLjE1IDMwLjU3LDY1Ljg1IDMxLjUxLDY4LjQ2IDMyLjY3LDcwLjk0IDM0LjA1LDczLjI4IDM1LjYzLDc1LjQ3IDM3LjM4LDc3LjQ3IDM5LjMwLDc5LjI5IDQxLjM1LDgwLjkwIDQzLjUzLDgyLjMwIDQ1LjgwLDgzLjQ4IDQ4LjE1LDg0LjQ0IDUwLjU1LDg1LjE2IDUyLjk4LDg1LjY1IDU1LjQzLDg1LjkwIDU3Ljg2LDg1LjkzIDYwLjI1LDg1LjczIDYyLjU5LDg1LjMyIDY0Ljg2LDg0LjY5IDY3LjAzLDgzLjg2IDY5LjEwLDgyLjg1IDcxLjA0LDgxLjY2IDcyLjgzLDgwLjMxIDc0LjQ3LDc4LjgxIDc1Ljk1LDc3LjE5IDc3LjI2LDc1LjQ2IDc4LjM4LDczLjYzIDc5LjMxLDcxLjczIDgwLjA1LDY5Ljc4IDgwLjYwLDY3Ljc4IDgwLjk2LDY1Ljc4IDgxLjEyLDYzLjc3IDgxLjA5LDYxLjc4IDgwLjg4LDU5Ljg0IDgwLjQ5LDU3Ljk0IDc5LjkzLDU2LjEyIDc5LjIyLDU0LjM4IDc4LjM1LDUyLjczIDc3LjM1LDUxLjIwIDc2LjIyLDQ5LjgwIDc0Ljk4LDQ4LjUyIDczLjY1LDQ3LjM4IDcyLjI0LDQ2LjM5IDcwLjc2LDQ1LjU1IDY5LjIzLDQ0Ljg2IDY3LjY3LDQ0LjMzIDY2LjEwLDQzLjk2IDY0LjUyLDQzLjc0IDYyLjk1LDQzLjc2IDYxLjQxLDQzLjc2IDU5LjkxLDQzLjk5IDU4LjQ2LDQ0LjM1IDU3LjA4LDQ0Ljg0IDU1Ljc3LDQ1LjQ1IDU0LjU2LDQ2LjE3IDUzLjQzLDQ2Ljk5IDUyLjQyLDQ3Ljg5IDUxLjUxLDQ4Ljg3IDUwLjcxLDQ5LjkxIDUwLjA0LDUxLjAxIDQ5LjQ4LDUyLjEzIDQ5LjA1LDUzLjI5IDQ4LjczLDU0LjQ1IDQ4LjU0LDU1LjYyIDQ4LjQ2LDU2Ljc3IDQ4LjUwLDU3LjkwIDQ4LjY0LDU4Ljk5IDQ4Ljg4LDYwLjA0IDQ5LjIyLDYxLjA0IDQ5LjY1LDYxLjk4IDUwLjE1LDYyLjg0IDUwLjcyLDYzLjYzIDUxLjM2LDY0LjM0IDUyLjA0LDY0Ljk3IDUyLjc2LDY1LjUwIDUzLjUxLDY1Ljk1IDU0LjI4LDY2LjMxIDU1LjA2LDY2LjU4IDU1Ljg0LDY2Ljc2IDU2LjYxLDY2Ljg1IDU3LjM2LDY2Ljg3IDU4LjA4LDY2LjgwIDU4Ljc3LDY2LjY2IDU5LjQyLDY2LjQ2IDYwLjAxLDY2LjE5IDYwLjU2LDY1Ljg4IDYxLjA0LDY1LjUxIDYxLjQ2LDY1LjExIDYxLjgyLDY0LjY5IDYyLjEyLDY0LjI0IDYyLjM0LDYzLjc4IDYyLjUxLDYzLjMxIDYyLjYwLDYyLjg1IDYyLjY0LDYyLjQwIDYyLjYxLDYxLjk3IDYyLjUzLDYxLjU3IDYyLjQwLDYxLjIwIDYyLjIzLDYwLjg2IDYyLjAxLDYwLjU3IDYxLjc3LDYwLjMzIDYxLjQ5LDYwLjE0IDYxLjIwLDYwLjAwIiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuOTUiLz48L3N2Zz4=");
+    background-repeat: no-repeat;
+    background-size: 90% 90%;
+    background-position: center;
+    will-change: transform;
+    animation: turbineCoreSpin 1.25s linear infinite !important;
+    animation-play-state: var(--turbine-state, running);
 }
 
-/* Слой 2 (Вокруг центра): алюминиевые дуги (навстречу, цикл 28 сек) */
-.hub-card.card-about::after {
-    opacity: 0.42;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQwIDI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBzdHJva2U9IiM4QzkyOUIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTIwIiByPSIzNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1kYXNoYXJyYXk9IjQwIDE0IDYgMTQiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjQ2IiBzdHJva2Utd2lkdGg9IjAuOSIgc3Ryb2tlLWRhc2hhcnJheT0iODUgMjUiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjYxIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjI4IDE4IDQgMTgiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxMjAiIHI9IjgwIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWRhc2hhcnJheT0iMTEwIDMwIDE1IDMwIi8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTIwIiByPSIxMDQiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSI3MCAyMiA0MCAyMiIvPjwvZz48L3N2Zz4=");
-    animation: turbineRingsSpin 28s linear infinite;
-}
-
-
-
-/* Фирменный черный текст Apple строго поверх механизма */
+/* Фирменный черный текст Apple строго поверх глянца и механизма */
 .hub-card.card-about .hub-card-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
+    max-width: 76%;
+}
+
+.hub-card.card-about h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #1D1D1F;
+    margin: 0 0 10px 0;
+}
+
+.hub-card.card-about p {
+    font-size: 15px;
+    line-height: 1.48;
+    letter-spacing: -0.01em;
+    color: #424245;
+    margin: 0;
 }
 
 @keyframes turbineCoreSpin {
@@ -511,21 +550,94 @@ a.hub-card:hover {
     to { transform: rotate(0deg); }
 }
 
-/* Отклик при наведении курсора на ПК */
+/* Отклик при наведении курсора на ПК — форсаж турбины */
 @media (hover: hover) {
     .hub-card.card-about:hover {
-        box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.55),
-                    inset 0 1px 1px rgba(255, 255, 255, 1),
-                    inset 0 -1px 1px rgba(0, 0, 0, 0.04);
+        box-shadow:
+            0 24px 50px -16px rgba(0, 0, 0, 0.72),
+            0 6px 16px -2px rgba(0, 0, 0, 0.3),
+            inset 0 1.5px 1px rgba(255, 255, 255, 1),
+            inset 0 -1.5px 2px rgba(0, 0, 0, 0.06);
     }
 
     .hub-card.card-about:hover::before {
-        animation-duration: 4.5s;
+        animation-duration: 0.75s !important;
     }
 
     .hub-card.card-about:hover::after {
-        opacity: 0.58;
-        animation-duration: 18s;
+        opacity: 0.78;
+        animation-duration: 9s !important;
+    }
+}
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ В ФОРМАТЕ APP STORE HERO (НА ПОЛ-ЭКРАНА)
+   ========================================================= */
+@media (max-width: 768px) {
+    .hub-card.card-about {
+        grid-column: 1 / -1;
+        min-height: 450px;
+        height: 60svh;
+        max-height: 520px;
+        border-radius: 30px;
+        padding: 32px 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background:
+            radial-gradient(circle 48px at 50% calc(100% - 132px),
+                #555961 0%,
+                #26282D 42%,
+                #0F1013 84%,
+                #060709 96%,
+                rgba(0, 0, 0, 0.28) 98%,
+                transparent 100%),
+            radial-gradient(120% 90% at 15% 0%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 58%),
+            linear-gradient(135deg, #FFFFFF 0%, #F4F5F8 48%, #E4E7ED 100%);
+    }
+
+    .hub-card.card-about .hub-card-content {
+        max-width: 100%;
+    }
+
+    .hub-card.card-about::after {
+        right: 50%;
+        bottom: 12px;
+        width: 240px;
+        height: 240px;
+    }
+
+    .hub-card.card-about::before {
+        right: 50%;
+        bottom: 86px;
+        width: 92px;
+        height: 92px;
+    }
+
+    @keyframes turbineCoreSpin {
+        from { transform: translateX(50%) rotate(0deg); }
+        to { transform: translateX(50%) rotate(360deg); }
+    }
+
+    @keyframes turbineRingsSpin {
+        from { transform: translateX(50%) rotate(360deg); }
+        to { transform: translateX(50%) rotate(0deg); }
+    }
+}
+
+@media (max-width: 600px) {
+    .hub-card.card-about h2 {
+        font-size: 32px;
+        line-height: 1.12;
+        margin-bottom: 14px;
+        letter-spacing: -0.03em;
+        color: #1D1D1F;
+    }
+
+    .hub-card.card-about p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #424245;
     }
 }
 
