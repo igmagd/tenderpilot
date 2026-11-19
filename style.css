@@ -447,7 +447,7 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: СТИЛЬ APPLE + 3D-КОК ТУРБИНЫ
+   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: ЧИСТЫЙ СТИЛЬ APPLE
    ========================================================= */
 .hub-card.card-about {
     grid-column: span 2;
@@ -456,15 +456,7 @@ a.hub-card:hover {
     overflow: hidden;
     border-radius: 28px;
     padding: 32px 34px;
-    /* ПК: благородный серебристый алюминий кока + глянцевый блик Apple */
     background:
-        radial-gradient(circle 48px at calc(100% - 88px) calc(100% - 84px),
-            #FFFFFF 0%,
-            #EFF1F5 36%,
-            #D6DBE4 76%,
-            #BFC6D2 94%,
-            rgba(0, 0, 0, 0.08) 98%,
-            transparent 100%),
         radial-gradient(120% 90% at 15% 0%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0) 58%),
         linear-gradient(135deg, #FFFFFF 0%, #F4F5F8 48%, #E4E7ED 100%);
     border: 1px solid rgba(255, 255, 255, 0.92);
@@ -474,55 +466,12 @@ a.hub-card:hover {
         inset 0 1.5px 1px rgba(255, 255, 255, 1),
         inset 1px 0 1px rgba(255, 255, 255, 0.75),
         inset 0 -1.5px 2px rgba(0, 0, 0, 0.06);
-    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
 }
-
-/* ВНЕШНИЙ СЛОЙ: легкие светло-серебристые воздушные кольца */
-.hub-card.card-about::after {
-    content: "";
-    position: absolute;
-    right: -32px;
-    bottom: -36px;
-    width: 240px;
-    height: 240px;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.34;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><g fill='none' stroke='%238C93A0' stroke-linecap='round'><circle cx='120' cy='120' r='53' stroke-width='1.1' stroke-dasharray='55 20 8 20'/><circle cx='120' cy='120' r='61' stroke-width='0.8' stroke-dasharray='90 30'/><circle cx='120' cy='120' r='69' stroke-width='1.1' stroke-dasharray='40 24 6 24'/><circle cx='120' cy='120' r='78' stroke-width='0.75' stroke-dasharray='115 38'/><circle cx='120' cy='120' r='88' stroke-width='0.9' stroke-dasharray='65 28 14 28'/><circle cx='120' cy='120' r='99' stroke-width='0.6' stroke-dasharray='100 45'/></g></svg>");
-    background-repeat: no-repeat;
-    background-size: contain;
-    -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 34%, rgba(0,0,0,0.35) 54%, rgba(0,0,0,0) 72%);
-    mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 34%, rgba(0,0,0,0.35) 54%, rgba(0,0,0,0) 72%);
-    will-change: transform;
-    animation: turbineRingsSpin 52s linear infinite !important;
-    animation-play-state: var(--turbine-state, running);
-}
-
-/* ВНУТРЕННИЙ СЛОЙ: компактная авиационная спираль (1.25 витка) */
-.hub-card.card-about::before {
-    content: "";
-    position: absolute;
-    right: 42px;
-    bottom: 38px;
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 2;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><path d='M60 60 C65 57, 69 62, 65 68 C60 76, 48 74, 44 65 C39 52, 49 38, 63 39 C79 40, 90 55, 86 72 C84 79, 79 84, 74 87' fill='none' stroke='%236E7582' stroke-width='6.5' stroke-linecap='round' opacity='0.52'/></svg>");
-    background-repeat: no-repeat;
-    background-size: 72% 72%;
-    background-position: center;
-    will-change: transform;
-    animation: turbineCoreSpin 8.5s linear infinite !important;
-    animation-play-state: var(--turbine-state, running);
-}
-
 
 .hub-card.card-about .hub-card-content {
     position: relative;
-    z-index: 3;
-    max-width: 76%;
+    z-index: 2;
+    max-width: 82%;
 }
 
 .hub-card.card-about h2 {
@@ -540,36 +489,6 @@ a.hub-card:hover {
     color: #424245;
     margin: 0;
 }
-
-@keyframes turbineCoreSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes turbineRingsSpin {
-    from { transform: rotate(360deg); }
-    to { transform: rotate(0deg); }
-}
-
-@media (hover: hover) {
-    .hub-card.card-about:hover {
-        box-shadow:
-            0 24px 50px -16px rgba(0, 0, 0, 0.72),
-            0 6px 16px -2px rgba(0, 0, 0, 0.3),
-            inset 0 1.5px 1px rgba(255, 255, 255, 1),
-            inset 0 -1.5px 2px rgba(0, 0, 0, 0.06);
-    }
-
-    .hub-card.card-about:hover::before {
-        animation-duration: 5.5s !important;
-    }
-
-    .hub-card.card-about:hover::after {
-        opacity: 0.4;
-        animation-duration: 34s !important;
-    }
-}
-
 
 .card-suppliers,
 .card-customers,
@@ -638,13 +557,6 @@ a.hub-card:hover {
         flex-direction: column;
         justify-content: flex-start;
         background:
-            radial-gradient(circle 44px at calc(100% - 76px) calc(100% - 74px),
-                #FFFFFF 0%,
-                #EFF1F5 36%,
-                #D6DBE4 76%,
-                #BFC6D2 94%,
-                rgba(0, 0, 0, 0.08) 98%,
-                transparent 100%),
             radial-gradient(150% 68% at 22% 0%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.45) 45%, rgba(255, 255, 255, 0) 80%),
             linear-gradient(155deg, #FFFFFF 0%, #F4F5F8 52%, #E4E7ED 100%);
     }
@@ -652,24 +564,7 @@ a.hub-card:hover {
     .hub-card.card-about .hub-card-content {
         max-width: 100%;
     }
-
-    .hub-card.card-about::after {
-        right: -34px;
-        bottom: -36px;
-        width: 220px;
-        height: 220px;
-        opacity: 0.34;
-    }
-
-    /* Спираль наследует SVG и цвет от ПК, меняем только позицию и размер под 44px шарик */
-    .hub-card.card-about::before {
-        right: 34px;
-        bottom: 32px;
-        width: 84px;
-        height: 84px;
-    }
 }
-
 
 /* Мобильные устройства: ритм 1 (Apple Hero) -> 2 -> 1 -> 2 -> 2 */
 @media (max-width: 600px) {

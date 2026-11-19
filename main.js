@@ -389,7 +389,6 @@
         init_bento();
         init_interactive_panels();
         init_mobile_footer_tabs();
-        init_about_turbine();
     });
 })();
 
