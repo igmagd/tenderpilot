@@ -556,15 +556,17 @@ a.hub-card:hover {
         padding: 76px 16px 40px;
     }
 
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: светлый металл Apple на всю ширину от шапки до белой полосы */
     .hub-card.card-about {
         grid-column: 1 / -1;
-        min-height: 310px;
+        min-height: auto;
         height: auto;
-        border-radius: 28px;
-        padding: 28px 24px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1.5px solid #ffffff;
+        box-shadow:
+            0 2px 12px rgba(255, 255, 255, 0.25),
+            inset 0 -1px 2px rgba(15, 23, 42, 0.06);
         background:
             radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
             linear-gradient(132deg,
@@ -574,12 +576,31 @@ a.hub-card:hover {
                 rgba(255, 255, 255, 0.42) 85%,
                 rgba(255, 255, 255, 0.05) 100%),
             linear-gradient(160deg, #F3F5F9 0%, #E4E8F0 50%, #D3DAE6 100%);
+        /* Симметричный воздух: 36px от шапки до заголовка и 36px от текста до белой полосы */
+        padding: 36px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .hub-card.card-about .hub-card-content {
         max-width: 100%;
     }
-}
+
+    .hub-card.card-about h2 {
+        font-size: 28px;
+        line-height: 1.15;
+        margin: 0 0 12px 0;
+        letter-spacing: -0.025em;
+        color: #1D1D1F;
+    }
+
+    .hub-card.card-about p {
+        font-size: 15px;
+        line-height: 1.5;
+        color: #3A3A3E;
+        margin: 0;
+    }
 
 /* Мобильные устройства: ритм 1 (Apple Hero) -> 2 -> 1 -> 2 -> 2 */
 @media (max-width: 600px) {
