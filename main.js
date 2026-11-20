@@ -83,19 +83,22 @@
         }
 
         hubCards.forEach(function (card) {
-            card.addEventListener('touchstart', function () {
+            var triggerPress = function () {
                 clearAllHubCards();
                 card.classList.add('is-pressed');
                 clearTimeout(card._pressTimer);
                 card._pressTimer = setTimeout(function () {
                     card.classList.remove('is-pressed');
-                }, 260);
-            }, { passive: true });
+                }, 240);
+            };
+
+            card.addEventListener('pointerdown', triggerPress);
+            card.addEventListener('touchstart', triggerPress, { passive: true });
 
             card.addEventListener('touchend', function () {
                 setTimeout(function () {
                     card.classList.remove('is-pressed');
-                }, 120);
+                }, 140);
             }, { passive: true });
 
             card.addEventListener('touchcancel', clearAllHubCards, { passive: true });
@@ -106,7 +109,6 @@
         document.addEventListener('visibilitychange', function () {
             if (document.hidden) clearAllHubCards();
         });
-
 
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
     function init_bento() {
