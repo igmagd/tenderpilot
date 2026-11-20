@@ -553,33 +553,25 @@ a.hub-card:hover {
         padding: 0 !important;
     }
 
-    /* Единый монолит во всю ширину экрана со световыми швами 1px */
+    /* Единый монолит во всю ширину экрана со строго одинаковыми швами 1px */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1px;
         width: 100%;
         padding: 0;
-        background: linear-gradient(
-            180deg,
-            rgba(0, 242, 254, 0.32) 0%,
-            rgba(56, 189, 248, 0.24) 50%,
-            rgba(0, 242, 254, 0.35) 100%
-        );
+        background-color: rgba(0, 242, 254, 0.28);
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: пока оставляем пропорции как есть */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: сбалансированная высота */
     .hub-card.card-about {
         grid-column: 1 / -1;
         margin: 0;
-        min-height: auto;
+        min-height: 310px;
         height: auto;
         border-radius: 0;
         border: none;
-        border-bottom: 1px solid rgba(0, 242, 254, 0.55);
-        box-shadow:
-            0 4px 18px rgba(0, 242, 254, 0.18),
-            inset 0 -1px 2px rgba(15, 23, 42, 0.06);
+        box-shadow: inset 0 -1px 2px rgba(15, 23, 42, 0.06);
         background:
             radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
             linear-gradient(132deg,
@@ -589,7 +581,7 @@ a.hub-card:hover {
                 rgba(255, 255, 255, 0.42) 85%,
                 rgba(255, 255, 255, 0.05) 100%),
             linear-gradient(160deg, #F3F5F9 0%, #E4E8F0 50%, #D3DAE6 100%);
-        padding: 76px 20px 36px;
+        padding: 84px 20px 44px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -614,44 +606,33 @@ a.hub-card:hover {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ ПЛАШКИ: единая сенсорная панель без скруглений с неоновой подсветкой снизу */
+    /* 2. НИЖНИЕ ПЛАШКИ: чистый матовый монолит, только тонкие линии 1px без теней */
     .hub-card:not(.card-about) {
+        position: relative;
         padding: 18px 16px;
         border-radius: 0;
         border: none;
         min-height: 148px;
-        background:
-            linear-gradient(
-                180deg,
-                rgba(13, 17, 23, 0.98) 0%,
-                rgba(11, 18, 30, 0.98) 72%,
-                rgba(0, 242, 254, 0.11) 100%
-            ),
-            #0d1117;
-        box-shadow:
-            inset 0 -1px 0 rgba(0, 242, 254, 0.38),
-            inset 0 -16px 24px -16px rgba(0, 242, 254, 0.35);
-        transition: background 0.15s ease, box-shadow 0.15s ease;
+        background: #0d1117;
+        box-shadow: inset 0 0 0 1px rgba(0, 242, 254, 0);
+        transition: box-shadow 0.32s ease-out;
     }
 
-    /* Отключаем десктопный scale при ховере на мобилке и делаем тактильную вспышку при тапе */
+    /* Отключаем десктопный ховер */
     a.hub-card:not(.card-about):hover {
         transform: none;
         border-color: transparent;
+        background: #0d1117;
     }
 
+    /* Короткая вспышка только контура кнопки при нажатии */
     a.hub-card:not(.card-about):active {
-        background:
-            linear-gradient(
-                180deg,
-                rgba(16, 26, 42, 0.98) 0%,
-                rgba(12, 34, 56, 0.98) 65%,
-                rgba(0, 242, 254, 0.22) 100%
-            ),
-            #0d1117;
+        z-index: 2;
+        background: #0d1117;
         box-shadow:
-            inset 0 -1.5px 0 rgba(0, 242, 254, 0.75),
-            inset 0 -22px 30px -14px rgba(0, 242, 254, 0.55);
+            inset 0 0 0 1px rgba(0, 242, 254, 0.95),
+            0 0 10px rgba(0, 242, 254, 0.45);
+        transition: none;
     }
 
     .hub-card:not(.card-about) h3 {
@@ -688,7 +669,6 @@ a.hub-card:hover {
         grid-column: span 1;
     }
 }
-
 
 /* ==========================================================================
    ВНУТРЕННИЕ БЕНТО-КАРТОЧКИ (BENTO GRID & МОРФИНГ-РАЗВОРОТ)
