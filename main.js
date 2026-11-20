@@ -72,6 +72,13 @@
             btn.addEventListener('touchstart', triggerTap, { passive: true });
             btn.addEventListener('pointerdown', triggerTap);
         });
+
+        // Сброс залипающего фокуса на карточках при возврате «Назад» (bfcache)
+        window.addEventListener('pageshow', function () {
+            if (document.activeElement && document.activeElement.classList.contains('hub-card')) {
+                document.activeElement.blur();
+            }
+        });
     }
 
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
@@ -360,26 +367,6 @@
                     updateNextArrowState();
                 });
             }
-        });
-    }
-
-
-    // 5. ОПТИМИЗАЦИЯ АНИМАЦИИ ТУРБИНЫ В КАРТОЧКЕ «О ПЛАТФОРМЕ»
-    function init_about_turbine() {
-        var aboutCards = document.querySelectorAll('.card-about');
-        if (!aboutCards.length || !('IntersectionObserver' in window)) return;
-
-        var visibilityObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                entry.target.style.setProperty(
-                    '--turbine-state',
-                    entry.isIntersecting ? 'running' : 'paused'
-                );
-            });
-        }, { threshold: 0.05 });
-
-        aboutCards.forEach(function (card) {
-            visibilityObserver.observe(card);
         });
     }
 

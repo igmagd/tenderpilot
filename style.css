@@ -553,34 +553,46 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ ВЕРХ APPLE + СТЕКЛЯННЫЕ СЕГМЕНТЫ
-   Чёткая огранка без размытия (blur: 0)
+   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ ВЕРХ APPLE + ЗАМКНУТАЯ 3D-ПАНЕЛЬ
+   Световод по всему периметру (сверху, снизу, слева, справа и внутри)
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
         width: 100%;
-        padding: 0 !important;
+        padding: 0 0 24px 0 !important;
     }
 
-    /* Тонкий световод строго в 1px между сегментами */
+    /* Световод 1px внутри И по внешнему контуру всей сенсорной панели */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1px;
         width: 100%;
         padding: 0;
-        background-color: rgba(56, 189, 248, 0.42);
+        /* Более сочный электрический сине-голубой световод */
+        background: linear-gradient(
+            180deg,
+            rgba(56, 189, 248, 0.72) 0%,
+            rgba(14, 165, 233, 0.60) 50%,
+            rgba(56, 189, 248, 0.72) 100%
+        );
+        /* Замыкаем контур слева, справа и снизу панели */
+        border-left: 1px solid rgba(56, 189, 248, 0.55);
+        border-right: 1px solid rgba(56, 189, 248, 0.55);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.68);
+        box-shadow: 0 8px 24px -10px rgba(14, 165, 233, 0.35);
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» (выходит в края экрана поверх боковых линий) */
     .hub-card.card-about {
         grid-column: 1 / -1;
-        margin: 0;
+        margin: 0 -1px;
         min-height: 310px;
         height: auto;
         border-radius: 0;
         border: none;
-        box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.25);
+        /* Чёткая тень от металлической плиты на верхнюю световую линию */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
         background:
             radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
             linear-gradient(132deg,
@@ -615,7 +627,7 @@ a.hub-card:hover {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: чёткая стеклянная фаска без размытия */
+    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: чёткая стеклянная фаска по всем 4 сторонам */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
@@ -626,40 +638,40 @@ a.hub-card:hover {
         user-select: none;
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
-        /* Благородное тёмно-графитовое стекло (чуть светлее чёрного, чтобы играла фаска) */
+        outline: none;
         background: linear-gradient(165deg, #161d29 0%, #101620 100%);
-        /* Жёсткие грани с blur = 0: никакого мыла */
+        /* Жёсткие 3D-фаски без мыла со всех 4 сторон */
         box-shadow:
-            /* Светлый шлифованный торец сверху и слева */
-            inset 0 1px 0 rgba(186, 230, 253, 0.24),
-            inset 1px 0 0 rgba(186, 230, 253, 0.14),
-            /* Тёмная ступенька снизу и справа (создаёт чёткую приподнятость) */
-            inset 0 -2px 0 #05070b,
-            inset -2px 0 0 #05070b;
+            inset 0 1px 0 rgba(186, 230, 253, 0.28),
+            inset 1px 0 0 rgba(186, 230, 253, 0.18),
+            inset 0 -2px 0 #04060a,
+            inset -2px 0 0 #04060a;
         transition:
-            box-shadow 0.22s ease-out,
-            background 0.22s ease-out;
+            box-shadow 0.2s ease-out,
+            background 0.2s ease-out;
     }
 
     .hub-card:not(.card-about) .hub-card-content {
-        transition: transform 0.16s ease-out;
+        transition: transform 0.15s ease-out;
     }
 
-    a.hub-card:not(.card-about):hover {
+    a.hub-card:not(.card-about):hover,
+    a.hub-card:not(.card-about):focus {
         transform: none;
         border-color: transparent;
+        outline: none;
     }
 
-    /* Нажатие: сегмент утопает (инверсия фасок) */
+    /* Нажатие: сегмент утопает */
     a.hub-card:not(.card-about):active {
         z-index: 2;
         background: #0b0f17;
         box-shadow:
             inset 0 2px 0 #040609,
             inset 2px 0 0 #040609,
-            inset 0 -1px 0 rgba(186, 230, 253, 0.25),
-            inset -1px 0 0 rgba(186, 230, 253, 0.20),
-            inset 0 0 0 1px rgba(125, 211, 252, 0.65);
+            inset 0 -1px 0 rgba(125, 211, 252, 0.35),
+            inset -1px 0 0 rgba(125, 211, 252, 0.30),
+            inset 0 0 0 1px rgba(56, 189, 248, 0.85);
         transition: none;
     }
 
