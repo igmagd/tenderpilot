@@ -547,7 +547,7 @@ body.menu-open {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ SPACE BLACK (ТАКТИЛЬНЫЙ ТЁМНЫЙ МЕТАЛЛ)
+   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ SPACE BLACK (ЕДИНАЯ ЛИНИЯ ОТ КРАЯ ДО КРАЯ)
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
@@ -556,13 +556,13 @@ body.menu-open {
         background-color: #05080f;
     }
 
-    /* Узкие «лазерные» швы на глубокой чёрной подложке */
+    /* Узкие «лазерные» швы 5px, строго от края до края в одну линию с Hero и футером */
     .hub-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-auto-rows: auto;
         gap: 5px;
         width: 100%;
-        padding: 5px 3px 6px;
+        padding: 5px 0 6px;
         background-color: #05080f;
         border: none;
     }
@@ -570,7 +570,7 @@ body.menu-open {
     /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
     .hub-card.card-about {
         grid-column: 1 / -1;
-        margin: -5px -3px 0;
+        margin: -5px 0 0;
         min-height: 310px;
         height: auto;
         border-radius: 0;
@@ -612,11 +612,11 @@ body.menu-open {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ КАРТОЧКИ: МОНОЛИТНЫЙ SPACE BLACK */
+    /* 2. НИЖНИЕ КАРТОЧКИ: МОНОЛИТНЫЙ SPACE BLACK С ВИДИМОЙ БОКОВОЙ ФАСКОЙ */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
-        border-radius: 6px;
+        border-radius: 3px;
         border: none;
         min-height: 148px;
         -webkit-user-select: none;
@@ -624,14 +624,16 @@ body.menu-open {
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         outline: none;
-        /* Анодированный тёмный металл с тонким диагональным переливом */
+        /* Анодированный тёмный металл */
         background:
-            linear-gradient(145deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 100%),
+            linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.16) 100%),
             #0d121d;
-        /* Естественная физическая фаска: светлая микро-грань сверху, глубина снизу */
+        /* Объёмная металлическая фаска: верхний блик + чёткие боковые рёбра + нижняя тень */
         box-shadow:
-            inset 0 1px 0 0 rgba(255, 255, 255, 0.09),
-            inset 0 -1px 0 0 rgba(0, 0, 0, 0.65),
+            inset 0 1px 0 0 rgba(255, 255, 255, 0.11),
+            inset 1px 0 0 0 rgba(255, 255, 255, 0.06),
+            inset -1px 0 0 0 rgba(255, 255, 255, 0.06),
+            inset 0 -1px 0 0 rgba(0, 0, 0, 0.7),
             0 2px 6px rgba(0, 0, 0, 0.5);
         transition:
             transform 0.14s ease-out,
@@ -651,7 +653,7 @@ body.menu-open {
         border-color: transparent;
         outline: none;
         background:
-            linear-gradient(145deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.15) 100%),
+            linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 45%, rgba(0, 0, 0, 0.16) 100%),
             #0d121d;
     }
 
@@ -659,12 +661,12 @@ body.menu-open {
     a.hub-card:not(.card-about).is-pressed {
         transform: scale(0.986);
         background:
-            linear-gradient(145deg, rgba(56, 189, 248, 0.08) 0%, rgba(14, 165, 233, 0.02) 60%, rgba(0, 0, 0, 0.2) 100%),
+            linear-gradient(145deg, rgba(56, 189, 248, 0.09) 0%, rgba(14, 165, 233, 0.02) 60%, rgba(0, 0, 0, 0.2) 100%),
             #101827;
         box-shadow:
-            inset 0 1px 0 0 rgba(125, 211, 252, 0.35),
-            inset 0 0 0 1px rgba(56, 189, 248, 0.25),
-            0 0 10px rgba(56, 189, 248, 0.18);
+            inset 0 1px 0 0 rgba(125, 211, 252, 0.42),
+            inset 0 0 0 1px rgba(56, 189, 248, 0.3),
+            0 0 10px rgba(56, 189, 248, 0.2);
         transition: none;
     }
 
@@ -702,7 +704,6 @@ body.menu-open {
         grid-column: span 1;
     }
 }
-
 
 /* ==========================================================================
    ВНУТРЕННИЕ БЕНТО-КАРТОЧКИ (BENTO GRID & МОРФИНГ-РАЗВОРОТ)
