@@ -73,13 +73,19 @@
             btn.addEventListener('pointerdown', triggerTap);
         });
 
-        // Сброс залипающего фокуса на карточках при возврате «Назад» (bfcache)
+        // Жёсткий сброс залипающего состояния кнопок при возврате «Назад» (bfcache)
         window.addEventListener('pageshow', function () {
             if (document.activeElement && document.activeElement.classList.contains('hub-card')) {
                 document.activeElement.blur();
             }
+            var grid = document.querySelector('.hub-grid');
+            if (grid) {
+                grid.style.pointerEvents = 'none';
+                requestAnimationFrame(function () {
+                    grid.style.pointerEvents = '';
+                });
+            }
         });
-    }
 
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
     function init_bento() {
