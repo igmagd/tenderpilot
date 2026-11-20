@@ -457,16 +457,13 @@ a.hub-card:hover {
     border-radius: 28px;
     padding: 32px 34px;
     background:
-        /* Верхнее рассеянное свечение */
         radial-gradient(90% 80% at 12% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 60%),
-        /* Диагональный световой луч на металле */
         linear-gradient(118deg,
             rgba(255, 255, 255, 0.15) 0%,
             rgba(255, 255, 255, 0.85) 36%,
             rgba(255, 255, 255, 0.12) 54%,
             rgba(255, 255, 255, 0.45) 82%,
             rgba(255, 255, 255, 0.05) 100%),
-        /* Базовый платиново-серебристый корпус */
         linear-gradient(145deg, #F4F6FA 0%, #E6EAF2 52%, #D7DDE8 100%);
     border: 1px solid rgba(255, 255, 255, 0.95);
     box-shadow:
@@ -498,7 +495,6 @@ a.hub-card:hover {
     color: #3A3A3E;
     margin: 0;
 }
-
 
 .card-suppliers,
 .card-customers,
@@ -549,6 +545,7 @@ a.hub-card:hover {
 
 /* =========================================================
    МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ ВЕРХ APPLE + СЕНСОРНАЯ ПАНЕЛЬ
+   Ритм: 1 (Hero) -> 2 -> 1 (Логистика) -> 2 -> 2
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
@@ -561,11 +558,13 @@ a.hub-card:hover {
         grid-auto-rows: auto;
         gap: 12px;
         width: 100%;
+        padding: 0 16px;
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: монолитно под шапкой + белая полоса снизу */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: монолитно под шапкой на всю ширину экрана */
     .hub-card.card-about {
         grid-column: 1 / -1;
+        margin: 0 -16px 4px;
         min-height: auto;
         height: auto;
         border-radius: 0;
@@ -584,7 +583,6 @@ a.hub-card:hover {
                 rgba(255, 255, 255, 0.05) 100%),
             linear-gradient(160deg, #F3F5F9 0%, #E4E8F0 50%, #D3DAE6 100%);
         padding: 76px 20px 36px;
-        margin-bottom: 4px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -595,8 +593,8 @@ a.hub-card:hover {
     }
 
     .hub-card.card-about h2 {
-        font-size: 28px;
-        line-height: 1.15;
+        font-size: 30px;
+        line-height: 1.14;
         margin: 0 0 12px 0;
         letter-spacing: -0.025em;
         color: #1D1D1F;
@@ -609,79 +607,7 @@ a.hub-card:hover {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ ПЛАШКИ: исходный вид карточки с отступами по бокам */
-    .hub-card:not(.card-about) {
-        padding: 18px 16px;
-        border-radius: 20px;
-        min-height: 148px;
-    }
-
-    /* Возвращаем боковые отступы 16px для сетки нижних карточек */
-    .hub-card:not(.card-about):nth-child(even) {
-        margin-left: 16px;
-    }
-
-    .hub-card:not(.card-about):nth-child(odd) {
-        margin-right: 16px;
-    }
-
-    .hub-card:not(.card-about) h3 {
-        font-size: 17px;
-        line-height: 1.25;
-        margin-bottom: 8px;
-        overflow-wrap: break-word;
-    }
-
-    .hub-card:not(.card-about) p {
-        font-size: 13px;
-        line-height: 1.4;
-    }
-
-    .card-suppliers,
-    .card-customers {
-        grid-column: span 1;
-        min-height: 162px;
-    }
-
-    .card-logistics {
-        grid-column: span 2;
-        min-height: 96px;
-        padding: 18px 20px;
-        margin-left: 16px !important;
-        margin-right: 16px !important;
-    }
-
-    .card-finance,
-    .card-support,
-    .card-legal,
-    .card-training {
-        grid-column: span 1;
-    }
-}
-
-/* Мобильные устройства: ритм 1 (Apple Hero) -> 2 -> 1 -> 2 -> 2 */
-@media (max-width: 600px) {
-    .hub-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: auto;
-        gap: 12px;
-    }
-
-    .hub-card.card-about h2 {
-        font-size: 32px;
-        line-height: 1.12;
-        margin-bottom: 14px;
-        letter-spacing: -0.03em;
-        color: #1D1D1F;
-    }
-
-    .hub-card.card-about p {
-        font-size: 16px;
-        line-height: 1.5;
-        color: #424245;
-    }
-
-    /* Компактные плитки на мобилке */
+    /* 2. НИЖНИЕ ПЛАШКИ: единый стиль без костылей */
     .hub-card:not(.card-about) {
         padding: 18px 16px;
         border-radius: 20px;
@@ -700,21 +626,21 @@ a.hub-card:hover {
         line-height: 1.4;
     }
 
-    /* 2. Поставщикам и 3. Заказчикам — 2 в ряд */
+    /* Поставщикам и Заказчикам — 2 в ряд */
     .card-suppliers,
     .card-customers {
         grid-column: span 1;
         min-height: 162px;
     }
 
-    /* 4. Логистика — широкая невысокая плашка */
+    /* Логистика — широкая центральная плашка */
     .card-logistics {
         grid-column: span 2;
         min-height: 96px;
         padding: 18px 20px;
     }
 
-    /* 5–8. Остальные 4 сервиса — сеткой 2x2 */
+    /* Финансы, Сопровождение, Юрист, Обучение — сеткой 2x2 */
     .card-finance,
     .card-support,
     .card-legal,
@@ -2178,271 +2104,6 @@ border-bottom: none !important;
     .legal-footer .legal-footer-container a:first-of-type::before,
     .legal-footer .legal-footer-container a:nth-of-type(3)::before {
         display: none;
-    }
-}
-
-/* =========================================================
-   BENTO-ОФОРМЛЕНИЕ: ВАРИАНТ 2 (PRODUCT UI) И ВАРИАНТ 3 (APPLE KINETICS)
-   ========================================================= */
-
-.hub-card.bento-ui-card,
-.hub-card.bento-kinetic-card {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.bento-ui-card .hub-card-content,
-.bento-kinetic-card .hub-card-content {
-    position: relative;
-    z-index: 2;
-}
-
-/* --- ВАРИАНТ 2: СТЕКЛЯННЫЙ PRODUCT UI (LINEAR / STRIPE) --- */
-.bento-ui-stage {
-    position: relative;
-    z-index: 1;
-    margin-top: 20px;
-    padding-top: 4px;
-}
-
-.ui-glass-panel {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top-color: rgba(255, 255, 255, 0.22);
-    border-radius: 16px;
-    padding: 14px 16px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
-}
-
-.hub-card.bento-ui-card:hover .ui-glass-panel {
-    transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.18);
-}
-
-.ui-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 11px;
-}
-
-.ui-status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #e2e8f0;
-    background: rgba(255, 255, 255, 0.06);
-    padding: 3px 8px;
-    border-radius: 999px;
-    font-weight: 500;
-}
-
-.ui-live-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #34d399;
-    box-shadow: 0 0 8px #34d399;
-    animation: liveDotPulse 2.4s ease-in-out infinite;
-}
-
-@keyframes liveDotPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.45; transform: scale(0.8); }
-}
-
-.ui-route-code {
-    color: rgba(255, 255, 255, 0.4);
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 11px;
-}
-
-.ui-route-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 10px;
-}
-
-.ui-city {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.ui-city--right {
-    text-align: right;
-}
-
-.ui-city-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: #f8fafc;
-    letter-spacing: -0.01em;
-}
-
-.ui-city-sub {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.45);
-}
-
-/* Полоса прогресса с бегущим световым импульсом */
-.ui-progress-track {
-    position: relative;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 999px;
-    margin-bottom: 10px;
-}
-
-.ui-progress-fill {
-    position: relative;
-    width: 68%;
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0%, #ffffff 100%);
-    overflow: hidden;
-}
-
-.ui-progress-shimmer {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 50%, transparent 100%);
-    animation: progressShimmerLoop 2.8s ease-in-out infinite;
-}
-
-@keyframes progressShimmerLoop {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(150%); }
-}
-
-.ui-progress-node {
-    position: absolute;
-    top: 50%;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 2px solid #0d1117;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.85);
-    transform: translate(-50%, -50%);
-}
-
-.ui-panel-footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.45);
-}
-
-.ui-eta {
-    color: #cbd5e1;
-    font-weight: 500;
-}
-
-/* =========================================================
-   КОСМИЧЕСКИЙ ФОН С 3D-ГЛУБИНОЙ (NASA / APPLE STYLE)
-   ========================================================= */
-
-.hub-card.bento-cosmos-card {
-    position: relative;
-    overflow: hidden;
-    background: #0d1117;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top-color: rgba(147, 197, 253, 0.28);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
-}
-
-.bento-cosmos-card .hub-card-content {
-    position: relative;
-    z-index: 3;
-}
-
-/* Сцена с фотографией космоса */
-.cosmos-depth-stage {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    overflow: hidden;
-    border-radius: inherit;
-}
-
-/* Сама фотография с мягким растворением к верхнему левому углу (под текст) */
-.cosmos-bg-img {
-    position: absolute;
-    right: -8%;
-    bottom: -12%;
-    width: 115%;
-    height: 115%;
-    object-fit: cover;
-    object-position: center bottom;
-    opacity: 0.78;
-    filter: contrast(1.08) saturate(1.1);
-    -webkit-mask-image: radial-gradient(ellipse 85% 80% at 72% 72%, #000 28%, rgba(0, 0, 0, 0.45) 58%, transparent 88%);
-    mask-image: radial-gradient(ellipse 85% 80% at 72% 72%, #000 28%, rgba(0, 0, 0, 0.45) 58%, transparent 88%);
-    animation: cosmosSlowFloat 22s ease-in-out infinite;
-    will-change: transform;
-    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
-}
-
-/* Медленное космическое дыхание и дрейф */
-@keyframes cosmosSlowFloat {
-    0%, 100% {
-        transform: scale(1.04) translate3d(0, 0, 0);
-    }
-    50% {
-        transform: scale(1.12) translate3d(-10px, -6px, 0);
-    }
-}
-
-/* Приближение при наведении курсора на ПК */
-.hub-card.bento-cosmos-card:hover .cosmos-bg-img {
-    opacity: 0.92;
-}
-
-.hub-card.bento-cosmos-card:hover {
-    border-color: rgba(147, 197, 253, 0.32);
-}
-
-/* Затемняющая виньетка под заголовком, чтобы белый текст читался на 100% */
-.cosmos-vignette-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: linear-gradient(
-        155deg,
-        rgba(13, 17, 23, 0.94) 0%,
-        rgba(13, 17, 23, 0.65) 42%,
-        rgba(13, 17, 23, 0.1) 100%
-    );
-}
-
-/* Атмосферное свечение горизонта планеты в правом нижнем углу */
-.cosmos-rim-glow {
-    position: absolute;
-    right: -20px;
-    bottom: -30px;
-    width: 180px;
-    height: 180px;
-    z-index: 2;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0) 70%);
-    pointer-events: none;
-}
-
-/* На мобильном делаем блок чуть выше, чтобы космос раскрылся во всей глубине */
-@media (max-width: 768px) {
-    .hub-card.bento-cosmos-card {
-        grid-column: span 2;
-        min-height: 260px;
     }
 }
 
