@@ -553,43 +553,42 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: ЕДИНЫЙ МОНОЛИТ В СТИЛЕ APPLE
-   Ровные 1px серебристые разделители: после Hero, внутри сетки и над футером
+   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТ APPLE + ГЛУБОКИЙ СИНИЙ СВЕТ ПО КРАЯМ
+   Лёгкие тонкие сенсорные сегменты (2px микро-уголок) + свет как на референсе
    ========================================================= */
 @media (max-width: 768px) {
-    /* Убираем чёрную полосу перед футером — панель стыкуется с подвалом через 1px линию */
     .hub-main {
         width: 100%;
         padding: 0 !important;
     }
 
-    /* Равномерный серебристо-стальной шов 1px везде */
+    /* Тонкий 1px электрический синий световод по всему контуру и между карточками */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1px;
         width: 100%;
         padding: 0;
-        background-color: rgba(215, 222, 232, 0.28);
+        background-color: rgba(14, 116, 244, 0.65);
         border-top: none;
-        border-left: 1px solid rgba(215, 222, 232, 0.28);
-        border-right: 1px solid rgba(215, 222, 232, 0.28);
-        border-bottom: 1px solid rgba(215, 222, 232, 0.28);
-        box-shadow: none;
+        border-left: 1px solid rgba(14, 116, 244, 0.55);
+        border-right: 1px solid rgba(14, 116, 244, 0.55);
+        border-bottom: 1px solid rgba(14, 116, 244, 0.68);
+        box-shadow: 0 6px 20px -8px rgba(0, 119, 255, 0.45);
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: чистый срез снизу, чтобы 1px линия после Hero читалась ровно */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: лёгкий срез + синий световой шов снизу */
     .hub-card.card-about {
         grid-column: 1 / -1;
         margin: 0;
         min-height: 310px;
         height: auto;
-        border-radius: 0;
+        border-radius: 2px;
         border: none;
         box-shadow:
             inset 0 1px 0 #ffffff,
             inset 1px 0 0 rgba(255, 255, 255, 0.85),
-            inset -2px 0 0 rgba(15, 23, 42, 0.16);
+            inset -1px 0 0 rgba(15, 23, 42, 0.14);
         background:
             radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
             linear-gradient(132deg,
@@ -624,11 +623,11 @@ a.hub-card:hover {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: единый 3D-объём + серебристые фаски */
+    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: лёгкий 3D-рельеф + деликатный синий ореол по краю */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
-        border-radius: 0;
+        border-radius: 2px;
         border: none;
         min-height: 148px;
         -webkit-user-select: none;
@@ -636,12 +635,17 @@ a.hub-card:hover {
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         outline: none;
-        background: linear-gradient(165deg, #161b24 0%, #10141c 100%);
+        /* Тот же лёгкий тёмно-графитовый тон, чтобы кнопки не казались массивными */
+        background: linear-gradient(165deg, #131924 0%, #0d121b 100%);
         box-shadow:
-            inset 0 1px 0 rgba(226, 232, 240, 0.22),
-            inset 1px 0 0 rgba(226, 232, 240, 0.14),
-            inset 0 -2px 0 #04060a,
-            inset -2px 0 0 #04060a;
+            /* Тонкая ледяная фаска сверху и слева */
+            inset 0 1px 0 rgba(147, 197, 253, 0.24),
+            inset 1px 0 0 rgba(147, 197, 253, 0.14),
+            /* Деликатная нижняя/правая кромка без массивности */
+            inset 0 -1.5px 0 #05080f,
+            inset -1.5px 0 0 #05080f,
+            /* Узкий глубокий синий ореол по периметру (как крайние соты на референсе) */
+            inset 0 0 9px rgba(0, 102, 255, 0.26);
         transition:
             box-shadow 0.2s ease-out,
             background 0.2s ease-out;
@@ -658,16 +662,17 @@ a.hub-card:hover {
         outline: none;
     }
 
-    /* Нажатие: сегмент утопает + мягкий серебристо-белый контур */
+    /* НАЖАТИЕ: эффект центральных сот с фото (ледяной контур + насыщенный синий ореол) */
     a.hub-card:not(.card-about):active {
         z-index: 2;
-        background: #0b0e14;
+        background: #0b1019;
         box-shadow:
-            inset 0 2px 0 #040609,
-            inset 2px 0 0 #040609,
-            inset 0 -1px 0 rgba(226, 232, 240, 0.35),
-            inset -1px 0 0 rgba(226, 232, 240, 0.30),
-            inset 0 0 0 1px rgba(226, 232, 240, 0.65);
+            inset 0 1.5px 0 #04070d,
+            inset 1.5px 0 0 #04070d,
+            /* Тонкая яркая ледяная нить по контуру нажатой кнопки */
+            inset 0 0 0 1px rgba(56, 189, 248, 0.92),
+            /* Насыщенный синий ореол внутрь краёв */
+            inset 0 0 14px rgba(0, 119, 255, 0.55);
         transition: none;
     }
 
