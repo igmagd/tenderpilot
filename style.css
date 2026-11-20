@@ -553,8 +553,8 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТ + БИРЮЗОВЫЙ СВЕТ ЛОГОТИПА (#00f2fe)
-   Скругление 10px + оптическое затемнение перекрёстков
+   МОБИЛЬНАЯ ВЕРСИЯ: ЕДИНЫЙ МОНОЛИТ В СТИЛЕ APPLE
+   Строгие углы (0px) + ровные серебристые швы 1px в тон Hero-плите
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
@@ -562,32 +562,25 @@ a.hub-card:hover {
         padding: 0 0 24px 0 !important;
     }
 
-    /* Монолитная сетка 1px с оптическим затуханием света в узлах пересечений */
+    /* Равномерный серебристо-стальной световод 1px: все линии одинаковые */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1px;
         width: 100%;
         padding: 0;
-        /* Перекрёстки и внешние углы затенены (#05080d), прямые линии светятся бирюзой логотипа */
-        background:
-            radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.52) 0%, rgba(0, 242, 254, 0.06) 75%),
-            radial-gradient(circle at 0% 50%, rgba(0, 242, 254, 0.45) 0%, rgba(0, 242, 254, 0.05) 70%),
-            radial-gradient(circle at 100% 50%, rgba(0, 242, 254, 0.45) 0%, rgba(0, 242, 254, 0.05) 70%),
-            #05080d;
-        border-top: 1px solid rgba(0, 242, 254, 0.35);
-        border-bottom: 1px solid rgba(0, 242, 254, 0.35);
-        border-left: 1px solid rgba(0, 242, 254, 0.25);
-        border-right: 1px solid rgba(0, 242, 254, 0.25);
+        background-color: rgba(215, 222, 232, 0.28);
+        border: 1px solid rgba(215, 222, 232, 0.28);
+        box-shadow: none;
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: скругление 10px + тёмная фаска в уголках */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
     .hub-card.card-about {
         grid-column: 1 / -1;
         margin: 0;
         min-height: 310px;
         height: auto;
-        border-radius: 10px;
+        border-radius: 0;
         border: none;
         box-shadow:
             inset 0 1px 0 #ffffff,
@@ -628,11 +621,11 @@ a.hub-card:hover {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: скругление 10px + бирюзовый отсвет только по прямым граням */
+    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: единый 3D-объём + серебристые фаски */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
-        border-radius: 10px;
+        border-radius: 0;
         border: none;
         min-height: 148px;
         -webkit-user-select: none;
@@ -640,12 +633,10 @@ a.hub-card:hover {
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         outline: none;
-        /* Углы чуть глубже в тень, центр плашки — благородный тёмный графит */
-        background:
-            radial-gradient(125% 125% at 50% 50%, #161d29 45%, #0a0e15 100%);
+        background: linear-gradient(165deg, #161b24 0%, #10141c 100%);
         box-shadow:
-            inset 0 1px 0 rgba(0, 242, 254, 0.24),
-            inset 1px 0 0 rgba(0, 242, 254, 0.14),
+            inset 0 1px 0 rgba(226, 232, 240, 0.22),
+            inset 1px 0 0 rgba(226, 232, 240, 0.14),
             inset 0 -2px 0 #04060a,
             inset -2px 0 0 #04060a;
         transition:
@@ -664,16 +655,16 @@ a.hub-card:hover {
         outline: none;
     }
 
-    /* Нажатие: сегмент утопает + мягкий бирюзовый контур в тон логотипа */
+    /* Нажатие: сегмент утопает + мягкий серебристо-белый контур */
     a.hub-card:not(.card-about):active {
         z-index: 2;
-        background: #0a0e15;
+        background: #0b0e14;
         box-shadow:
             inset 0 2px 0 #040609,
             inset 2px 0 0 #040609,
-            inset 0 -1px 0 rgba(0, 242, 254, 0.45),
-            inset -1px 0 0 rgba(0, 242, 254, 0.40),
-            inset 0 0 0 1px rgba(0, 242, 254, 0.75);
+            inset 0 -1px 0 rgba(226, 232, 240, 0.35),
+            inset -1px 0 0 rgba(226, 232, 240, 0.30),
+            inset 0 0 0 1px rgba(226, 232, 240, 0.65);
         transition: none;
     }
 
