@@ -73,19 +73,40 @@
             btn.addEventListener('pointerdown', triggerTap);
         });
 
-        // Жёсткий сброс залипающего состояния кнопок при возврате «Назад» (bfcache)
-        window.addEventListener('pageshow', function () {
-            if (document.activeElement && document.activeElement.classList.contains('hub-card')) {
-                document.activeElement.blur();
-            }
-            var grid = document.querySelector('.hub-grid');
-            if (grid) {
-                grid.style.pointerEvents = 'none';
-                requestAnimationFrame(function () {
-                    grid.style.pointerEvents = '';
-                });
-            }
+        // Управляемое тактильное нажатие карточек хаба без залипания в Android Chrome и iOS Safari
+        var hubCards = document.querySelectorAll('a.hub-card');
+        function clearAllHubCards() {
+            hubCards.forEach(function (c) {
+                c.classList.remove('is-pressed');
+                c.blur();
+            });
+        }
+
+        hubCards.forEach(function (card) {
+            card.addEventListener('touchstart', function () {
+                clearAllHubCards();
+                card.classList.add('is-pressed');
+                clearTimeout(card._pressTimer);
+                card._pressTimer = setTimeout(function () {
+                    card.classList.remove('is-pressed');
+                }, 260);
+            }, { passive: true });
+
+            card.addEventListener('touchend', function () {
+                setTimeout(function () {
+                    card.classList.remove('is-pressed');
+                }, 120);
+            }, { passive: true });
+
+            card.addEventListener('touchcancel', clearAllHubCards, { passive: true });
         });
+
+        window.addEventListener('pagehide', clearAllHubCards);
+        window.addEventListener('pageshow', clearAllHubCards);
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) clearAllHubCards();
+        });
+
 
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
     function init_bento() {
