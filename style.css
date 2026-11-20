@@ -553,8 +553,9 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТ APPLE + ГЛУБОКИЙ СИНИЙ СВЕТ ПО КРАЯМ
-   Лёгкие тонкие сенсорные сегменты (2px микро-уголок) + свет как на референсе
+   МОБИЛЬНАЯ ВЕРСИЯ: ИНВЕРТИРОВАННАЯ ФИЗИКА СВЕТА
+   В покое: благородный синий свет и объём по краям (как на референсе)
+   При тапе: клавиша утопает вниз, перекрывая свет
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
@@ -562,22 +563,21 @@ a.hub-card:hover {
         padding: 0 !important;
     }
 
-    /* Тонкий 1px электрический синий световод по всему контуру и между карточками */
+    /* Светящийся синий световод 1px по периметру и внутри */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1px;
         width: 100%;
         padding: 0;
-        background-color: rgba(14, 116, 244, 0.65);
+        background-color: #0077ff;
         border-top: none;
-        border-left: 1px solid rgba(14, 116, 244, 0.55);
-        border-right: 1px solid rgba(14, 116, 244, 0.55);
-        border-bottom: 1px solid rgba(14, 116, 244, 0.68);
-        box-shadow: 0 6px 20px -8px rgba(0, 119, 255, 0.45);
+        border-left: 1px solid #0077ff;
+        border-right: 1px solid #0077ff;
+        border-bottom: 1px solid #0077ff;
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: лёгкий срез + синий световой шов снизу */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
     .hub-card.card-about {
         grid-column: 1 / -1;
         margin: 0;
@@ -623,7 +623,7 @@ a.hub-card:hover {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: лёгкий 3D-рельеф + деликатный синий ореол по краю */
+    /* 2. В ПОКОЕ: тот самый эффект с ледяным кантом и глубоким синим светом по краям */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
@@ -635,17 +635,14 @@ a.hub-card:hover {
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         outline: none;
-        /* Тот же лёгкий тёмно-графитовый тон, чтобы кнопки не казались массивными */
-        background: linear-gradient(165deg, #131924 0%, #0d121b 100%);
+        background: radial-gradient(135% 135% at 50% 45%, #111827 0%, #070b12 100%);
         box-shadow:
-            /* Тонкая ледяная фаска сверху и слева */
-            inset 0 1px 0 rgba(147, 197, 253, 0.24),
-            inset 1px 0 0 rgba(147, 197, 253, 0.14),
-            /* Деликатная нижняя/правая кромка без массивности */
-            inset 0 -1.5px 0 #05080f,
-            inset -1.5px 0 0 #05080f,
-            /* Узкий глубокий синий ореол по периметру (как крайние соты на референсе) */
-            inset 0 0 9px rgba(0, 102, 255, 0.26);
+            /* Тонкий ледяной контур по краю кнопки */
+            inset 0 0 0 1px rgba(56, 189, 248, 0.65),
+            /* Лёгкий верхний блик приподнятой клавиши */
+            inset 0 1.5px 0 rgba(186, 230, 253, 0.45),
+            /* Глубокий синий ореол внутрь краёв (как на референсе) */
+            inset 0 0 16px rgba(0, 119, 255, 0.48);
         transition:
             box-shadow 0.2s ease-out,
             background 0.2s ease-out;
@@ -662,22 +659,21 @@ a.hub-card:hover {
         outline: none;
     }
 
-    /* НАЖАТИЕ: эффект центральных сот с фото (ледяной контур + насыщенный синий ореол) */
+    /* 3. ПРИ ТАПЕ: клавиша утопает вниз, свет притухает и уходит вглубь */
     a.hub-card:not(.card-about):active {
         z-index: 2;
-        background: #0b1019;
+        background: #05080e;
         box-shadow:
-            inset 0 1.5px 0 #04070d,
-            inset 1.5px 0 0 #04070d,
-            /* Тонкая яркая ледяная нить по контуру нажатой кнопки */
-            inset 0 0 0 1px rgba(56, 189, 248, 0.92),
-            /* Насыщенный синий ореол внутрь краёв */
-            inset 0 0 14px rgba(0, 119, 255, 0.55);
+            /* Тёмная фаска вдавливания */
+            inset 0 0 0 2px #030508,
+            inset 0 4px 10px rgba(0, 0, 0, 0.95),
+            /* Приглушённый остаточный отсвет */
+            inset 0 0 8px rgba(0, 102, 255, 0.20);
         transition: none;
     }
 
     a.hub-card:not(.card-about):active .hub-card-content {
-        transform: translate(1px, 1px);
+        transform: translateY(1.5px);
         transition: none;
     }
 
@@ -715,6 +711,7 @@ a.hub-card:hover {
         grid-column: span 1;
     }
 }
+
 
 /* ==========================================================================
    ВНУТРЕННИЕ БЕНТО-КАРТОЧКИ (BENTO GRID & МОРФИНГ-РАЗВОРОТ)
