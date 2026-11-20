@@ -109,7 +109,8 @@
         document.addEventListener('visibilitychange', function () {
             if (document.hidden) clearAllHubCards();
         });
-
+    }
+    
     // 2. ИДЕАЛЬНАЯ АНИМАЦИЯ БЕНТО-КАРТОЧЕК (УМНЫЙ МОРФИНГ)
     function init_bento() {
         var isAnimating = false;
