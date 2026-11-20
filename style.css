@@ -553,7 +553,8 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ ВЕРХ APPLE + ТОНКАЯ СЕНСОРНАЯ ПАНЕЛЬ
+   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ ВЕРХ APPLE + СТЕКЛЯННЫЕ СЕГМЕНТЫ
+   Чёткая огранка без размытия (blur: 0)
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
@@ -561,19 +562,14 @@ a.hub-card:hover {
         padding: 0 !important;
     }
 
-    /* Световод под сенсорными сегментами */
+    /* Тонкий световод строго в 1px между сегментами */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1px;
         width: 100%;
         padding: 0;
-        background: linear-gradient(
-            180deg,
-            rgba(125, 211, 252, 0.50) 0%,
-            rgba(56, 189, 248, 0.42) 50%,
-            rgba(56, 189, 248, 0.50) 100%
-        );
+        background-color: rgba(56, 189, 248, 0.42);
     }
 
     /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
@@ -584,7 +580,7 @@ a.hub-card:hover {
         height: auto;
         border-radius: 0;
         border: none;
-        box-shadow: inset 0 -2px 4px rgba(15, 23, 42, 0.12);
+        box-shadow: inset 0 -1px 0 rgba(15, 23, 42, 0.25);
         background:
             radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
             linear-gradient(132deg,
@@ -619,61 +615,56 @@ a.hub-card:hover {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: эффект еле приподнятого тёмного стекла */
+    /* 2. НИЖНИЕ СЕНСОРНЫЕ СЕГМЕНТЫ: чёткая стеклянная фаска без размытия */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
         border-radius: 0;
         border: none;
         min-height: 148px;
-        /* Убираем выделение текста и системную вспышку браузера при тапе */
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
-        /* Лёгкий выпуклый градиент тёмного стекла */
-        background:
-            radial-gradient(110% 90% at 50% 0%, rgba(30, 41, 59, 0.55) 0%, rgba(13, 17, 23, 0) 70%),
-            linear-gradient(180deg, #131924 0%, #0d1117 65%, #090d13 100%);
+        /* Благородное тёмно-графитовое стекло (чуть светлее чёрного, чтобы играла фаска) */
+        background: linear-gradient(165deg, #161d29 0%, #101620 100%);
+        /* Жёсткие грани с blur = 0: никакого мыла */
         box-shadow:
-            /* Тонкая шлифованная фаска сверху и по бокам */
-            inset 0 1px 0 rgba(186, 230, 253, 0.28),
-            inset 1px 0 0 rgba(186, 230, 253, 0.12),
-            inset -1px 0 0 rgba(186, 230, 253, 0.12),
-            /* Короткий контактный «подбой» снизу и по бокам (сегмент приподнят) */
-            inset 0 -3px 3px rgba(0, 0, 0, 0.95),
-            inset 2px 0 3px rgba(0, 0, 0, 0.65),
-            inset -2px 0 3px rgba(0, 0, 0, 0.65),
-            /* Деликатный неоновый отсвет из-под нижней кромки */
-            inset 0 -8px 14px -10px rgba(56, 189, 248, 0.42);
+            /* Светлый шлифованный торец сверху и слева */
+            inset 0 1px 0 rgba(186, 230, 253, 0.24),
+            inset 1px 0 0 rgba(186, 230, 253, 0.14),
+            /* Тёмная ступенька снизу и справа (создаёт чёткую приподнятость) */
+            inset 0 -2px 0 #05070b,
+            inset -2px 0 0 #05070b;
         transition:
-            box-shadow 0.25s ease-out,
-            background 0.25s ease-out;
+            box-shadow 0.22s ease-out,
+            background 0.22s ease-out;
     }
 
     .hub-card:not(.card-about) .hub-card-content {
-        transition: transform 0.18s ease-out;
+        transition: transform 0.16s ease-out;
     }
 
-    /* Гарантированно сбрасываем ховер на тачскринах */
     a.hub-card:not(.card-about):hover {
         transform: none;
         border-color: transparent;
     }
 
-    /* Тактильное нажатие (цвет вспышки докрутим следующим шагом) */
+    /* Нажатие: сегмент утопает (инверсия фасок) */
     a.hub-card:not(.card-about):active {
         z-index: 2;
-        background: #090c11;
+        background: #0b0f17;
         box-shadow:
-            inset 0 0 0 0.5px rgba(224, 242, 254, 0.95),
-            inset 0 3px 8px rgba(0, 0, 0, 0.92),
-            inset 0 0 14px rgba(56, 189, 248, 0.32);
+            inset 0 2px 0 #040609,
+            inset 2px 0 0 #040609,
+            inset 0 -1px 0 rgba(186, 230, 253, 0.25),
+            inset -1px 0 0 rgba(186, 230, 253, 0.20),
+            inset 0 0 0 1px rgba(125, 211, 252, 0.65);
         transition: none;
     }
 
     a.hub-card:not(.card-about):active .hub-card-content {
-        transform: translateY(1px);
+        transform: translate(1px, 1px);
         transition: none;
     }
 
