@@ -558,11 +558,11 @@ body.menu-open {
 
     /* Узкие «лазерные» швы на глубокой чёрной подложке */
     .hub-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-auto-rows: auto;
         gap: 5px;
         width: 100%;
-        padding: 5px 3px 6px;
+        padding: 5px 4px 6px;
         background-color: #05080f;
         border: none;
     }
@@ -570,8 +570,7 @@ body.menu-open {
     /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
     .hub-card.card-about {
         grid-column: 1 / -1;
-        margin: -5px -3px 0;
-
+        margin: -5px -4px 0;
         min-height: 310px;
         height: auto;
         border-radius: 0;
