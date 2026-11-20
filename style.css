@@ -553,8 +553,8 @@ a.hub-card:hover {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: МОНОЛИТНЫЙ ВЕРХ APPLE + ЗАМКНУТАЯ 3D-ПАНЕЛЬ
-   Световод по всему периметру (сверху, снизу, слева, справа и внутри)
+   МОБИЛЬНАЯ ВЕРСИЯ: ЕДИНЫЙ МОДУЛЬ APPLE BLUE (#2997ff)
+   Светящийся синий контур вокруг ВСЕХ карточек (включая Hero)
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
@@ -562,37 +562,35 @@ a.hub-card:hover {
         padding: 0 0 24px 0 !important;
     }
 
-    /* Световод 1px внутри И по внешнему контуру всей сенсорной панели */
+    /* Единый синий световод 1px по всему периметру и внутри сетки */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
         gap: 1px;
         width: 100%;
         padding: 0;
-        /* Более сочный электрический сине-голубой световод */
-        background: linear-gradient(
-            180deg,
-            rgba(56, 189, 248, 0.72) 0%,
-            rgba(14, 165, 233, 0.60) 50%,
-            rgba(56, 189, 248, 0.72) 100%
-        );
-        /* Замыкаем контур слева, справа и снизу панели */
-        border-left: 1px solid rgba(56, 189, 248, 0.55);
-        border-right: 1px solid rgba(56, 189, 248, 0.55);
-        border-bottom: 1px solid rgba(56, 189, 248, 0.68);
-        box-shadow: 0 8px 24px -10px rgba(14, 165, 233, 0.35);
+        background-color: #2997ff;
+        border-top: 1px solid #2997ff;
+        border-left: 1px solid #2997ff;
+        border-right: 1px solid #2997ff;
+        border-bottom: 1px solid #2997ff;
+        box-shadow: 0 10px 28px -12px rgba(41, 151, 255, 0.45);
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» (выходит в края экрана поверх боковых линий) */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ»: вписан в общую синюю рамку + свой 3D-объём */
     .hub-card.card-about {
         grid-column: 1 / -1;
-        margin: 0 -1px;
+        margin: 0;
         min-height: 310px;
         height: auto;
         border-radius: 0;
         border: none;
-        /* Чёткая тень от металлической плиты на верхнюю световую линию */
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+        /* Жёсткая металлическая фаска без наезда на нижний синий шов */
+        box-shadow:
+            inset 0 1px 0 #ffffff,
+            inset 1px 0 0 rgba(255, 255, 255, 0.85),
+            inset 0 -2px 0 rgba(15, 23, 42, 0.24),
+            inset -2px 0 0 rgba(15, 23, 42, 0.18);
         background:
             radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
             linear-gradient(132deg,
@@ -640,7 +638,6 @@ a.hub-card:hover {
         -webkit-tap-highlight-color: transparent;
         outline: none;
         background: linear-gradient(165deg, #161d29 0%, #101620 100%);
-        /* Жёсткие 3D-фаски без мыла со всех 4 сторон */
         box-shadow:
             inset 0 1px 0 rgba(186, 230, 253, 0.28),
             inset 1px 0 0 rgba(186, 230, 253, 0.18),
@@ -662,16 +659,16 @@ a.hub-card:hover {
         outline: none;
     }
 
-    /* Нажатие: сегмент утопает */
+    /* Нажатие: сегмент утопает + синий контур Apple */
     a.hub-card:not(.card-about):active {
         z-index: 2;
         background: #0b0f17;
         box-shadow:
             inset 0 2px 0 #040609,
             inset 2px 0 0 #040609,
-            inset 0 -1px 0 rgba(125, 211, 252, 0.35),
-            inset -1px 0 0 rgba(125, 211, 252, 0.30),
-            inset 0 0 0 1px rgba(56, 189, 248, 0.85);
+            inset 0 -1px 0 rgba(41, 151, 255, 0.45),
+            inset -1px 0 0 rgba(41, 151, 255, 0.40),
+            inset 0 0 0 1px #2997ff;
         transition: none;
     }
 
