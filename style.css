@@ -612,37 +612,71 @@ body.menu-open {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ КАРТОЧКИ: МОНОЛИТНЫЙ SPACE BLACK С ВИДИМОЙ БОКОВОЙ ФАСКОЙ */
+    /* 2. НИЖНИЕ КАРТОЧКИ: ПРИПОДНЯТЫЕ КЛАВИШИ С ПОДСВЕТКОЙ СНИЗУ И СПРАВА В ПОКОЕ */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
         border-radius: 3px;
         border: none;
-        min-height: 148px;
+        min-height: 176px;
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         outline: none;
-        /* Ровный анодированный тёмный металл без завала в темноту снизу */
         background:
             linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%),
             #0e1420;
-        /* Чёткая фаска сверху и снизу */
+        /* В покое клавиша приподнята: чёткая фаска + сапфировый свет снизу и справа в 6px швах */
         box-shadow:
-            inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+            inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
             inset 1px 0 0 0 rgba(255, 255, 255, 0.08),
             inset -1px 0 0 0 rgba(255, 255, 255, 0.08),
-            inset 0 -1px 0 0 rgba(255, 255, 255, 0.11),
-            0 2px 6px rgba(0, 0, 0, 0.55);
+            inset 0 -1px 0 0 rgba(255, 255, 255, 0.1),
+            /* Спокойный отблик по правому краю (для правого столбца у рамки экрана) */
+            inset -2px 0 5px -2px rgba(56, 189, 248, 0.25),
+            /* Сапфировый свет из-под приподнятой клавиши снизу и справа */
+            2px 2px 2.5px -0.5px rgba(56, 189, 248, 0.45),
+            3px 3px 4.5px -1px rgba(37, 99, 235, 0.38);
         transition:
-            transform 0.14s ease-out,
-            box-shadow 0.22s ease-out,
-            background 0.22s ease-out;
+            transform 0.12s ease-out,
+            box-shadow 0.16s ease-out,
+            background 0.16s ease-out;
     }
 
     .hub-card:not(.card-about) .hub-card-content {
-        transition: transform 0.14s ease-out;
+        transition: transform 0.12s ease-out;
+    }
+
+    /* Блокируем нативное залипание */
+    a.hub-card:not(.card-about):hover,
+    a.hub-card:not(.card-about):focus,
+    a.hub-card:not(.card-about):active {
+        transform: none;
+        border-color: transparent;
+        outline: none;
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%),
+            #0e1420;
+    }
+
+    /* При нажатии: кнопка садится вниз-вправо и ГАСИТ свет собой (уходит вглубь корпуса) */
+    a.hub-card:not(.card-about).is-pressed {
+        transform: translate(2px, 2px);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%),
+            #090d16;
+        /* Весь наружный свет гаснет, остаётся только глухая тень утопленной в паз кнопки */
+        box-shadow:
+            inset 1px 1px 4px rgba(0, 0, 0, 0.8),
+            inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+            inset 1px 0 0 0 rgba(255, 255, 255, 0.04);
+        transition: none;
+    }
+
+    a.hub-card:not(.card-about).is-pressed .hub-card-content {
+        transform: none;
+        transition: none;
     }
 
     /* Блокируем нативное залипание */
