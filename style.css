@@ -547,38 +547,37 @@ body.menu-open {
 }
 
 /* =========================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: СЕНСОРНАЯ ПАНЕЛЬ С СИММЕТРИЧНОЙ УГЛОВОЙ ПОДСВЕТКОЙ
+   МОБИЛЬНАЯ ВЕРСИЯ: СЕНСОРНАЯ ПАНЕЛЬ С РОВНЫМ КОНТУРОМ ПО ВСЕМУ ПЕРИМЕТРУ
    ========================================================= */
 @media (max-width: 768px) {
     .hub-main {
         width: 100%;
         padding: 0 !important;
-        background-color: #050811;
+        background-color: #060b19;
     }
 
-    /* Глубокая тёмная подложка без сплошных линий-рельсов */
+    /* Единая тёмная подложка с одинаковым зазором 4px везде */
     .hub-grid {
         grid-template-columns: repeat(2, 1fr);
         grid-auto-rows: auto;
-        gap: 6px;
+        gap: 4px;
         width: 100%;
-        padding: 0 6px 10px;
-        background-color: #050811;
+        padding: 0 4px 8px;
+        background-color: #060b19;
         border: none;
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» (выводим на всю ширину с аккуратным нижним скруглением) */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
     .hub-card.card-about {
         grid-column: 1 / -1;
-        margin: 0 -6px 2px;
+        margin: 0 -4px 2px;
         min-height: 310px;
         height: auto;
-        border-radius: 0 0 22px 22px;
+        border-radius: 0;
         border: none;
         box-shadow:
-            0 10px 28px rgba(0, 0, 0, 0.75),
             inset 0 1px 0 #ffffff,
-            inset 0 -1px 0 rgba(15, 23, 42, 0.12);
+            inset 0 -1px 0 rgba(15, 23, 42, 0.14);
         background:
             radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
             linear-gradient(132deg,
@@ -613,57 +612,30 @@ body.menu-open {
         margin: 0;
     }
 
-    /* 2. НИЖНИЕ КАРТОЧКИ: ПАРЯЩИЕ СЕНСОРНЫЕ МОДУЛИ */
+    /* 2. НИЖНИЕ КАРТОЧКИ: РОВНЫЙ СВЕТОВОЙ КОНТУР ПО ВСЕМУ ПЕРИМЕТРУ */
     .hub-card:not(.card-about) {
         position: relative;
         padding: 18px 16px;
-        border-radius: 14px;
-        border: none;
+        border-radius: 10px;
+        border: 1px solid rgba(56, 189, 248, 0.28);
         min-height: 148px;
-        overflow: visible;
         -webkit-user-select: none;
         user-select: none;
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color: transparent;
         outline: none;
-        /* Глубокий матовый корпус клавиши */
-        background: radial-gradient(110% 110% at 50% 50%, #0b111e 35%, #0e1729 100%);
-        /* Мягкий свет из-под клавиши в щели сетки */
+        background: #0b111d;
         box-shadow:
-            0 4px 12px -2px rgba(0, 0, 0, 0.85),
-            0 0 10px -3px rgba(56, 189, 248, 0.22),
-            inset 0 0 16px rgba(6, 11, 25, 0.9);
+            0 0 8px -2px rgba(56, 189, 248, 0.22),
+            inset 0 0 0 1px rgba(186, 230, 253, 0.06);
         transition:
-            transform 0.16s cubic-bezier(0.2, 0, 0.2, 1),
-            box-shadow 0.22s ease-out,
-            background 0.22s ease-out;
-    }
-
-    /* Симметричная угловая подсветка грани (растворяется к середине сторон, убирая эффект таблицы) */
-    .hub-card:not(.card-about)::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 14px;
-        padding: 1px;
-        background:
-            radial-gradient(55px circle at 0% 0%, rgba(125, 211, 252, 0.65), transparent 75%),
-            radial-gradient(55px circle at 100% 0%, rgba(56, 189, 248, 0.45), transparent 75%),
-            radial-gradient(55px circle at 0% 100%, rgba(56, 189, 248, 0.45), transparent 75%),
-            radial-gradient(55px circle at 100% 100%, rgba(0, 242, 254, 0.65), transparent 75%);
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-        opacity: 0.85;
-        transition: opacity 0.2s ease, background 0.2s ease;
+            transform 0.14s ease-out,
+            border-color 0.2s ease-out,
+            box-shadow 0.2s ease-out,
+            background-color 0.2s ease-out;
     }
 
     .hub-card:not(.card-about) .hub-card-content {
-        position: relative;
-        z-index: 2;
         transition: transform 0.14s ease-out;
     }
 
@@ -672,25 +644,19 @@ body.menu-open {
     a.hub-card:not(.card-about):focus,
     a.hub-card:not(.card-about):active {
         transform: none;
-        border-color: transparent;
+        border-color: rgba(56, 189, 248, 0.28);
         outline: none;
-        background: radial-gradient(110% 110% at 50% 50%, #0b111e 35%, #0e1729 100%);
+        background: #0b111d;
     }
 
-    /* Управляемое нажатие (.is-pressed): клавиша утапливается, свет из-под неё вспыхивает */
+    /* Управляемое нажатие (.is-pressed): вспышка контура и света из-под клавиши */
     a.hub-card:not(.card-about).is-pressed {
         transform: scale(0.985);
-        background: radial-gradient(110% 110% at 50% 50%, #0d1628 20%, #12233d 100%);
+        background: #0e1829;
+        border-color: #00f2fe;
         box-shadow:
-            0 1px 4px rgba(0, 0, 0, 0.9),
-            0 0 16px rgba(0, 242, 254, 0.48),
+            0 0 14px rgba(0, 242, 254, 0.45),
             inset 0 0 12px rgba(56, 189, 248, 0.22);
-        transition: none;
-    }
-
-    a.hub-card:not(.card-about).is-pressed::before {
-        opacity: 1;
-        background: linear-gradient(135deg, rgba(186, 230, 253, 0.95), rgba(0, 242, 254, 0.95));
         transition: none;
     }
 
@@ -728,6 +694,7 @@ body.menu-open {
         grid-column: span 1;
     }
 }
+
 
 /* ==========================================================================
    ВНУТРЕННИЕ БЕНТО-КАРТОЧКИ (BENTO GRID & МОРФИНГ-РАЗВОРОТ)
