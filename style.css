@@ -556,13 +556,13 @@ body.menu-open {
         background-color: #05080f;
     }
 
-    /* Чёткие «лазерные» швы 8px */
+    /* Возвращаем идеальный зазор 6px */
     .hub-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-auto-rows: auto;
-        gap: 8px;
+        gap: 6px;
         width: 100%;
-        padding: 0 0 14px;
+        padding: 0 0 12px;
         background-color: #04070d;
         border: none;
     }
@@ -678,33 +678,32 @@ body.menu-open {
     }
 
     .hub-card:not(.card-about) p {
-        font-size: 13px;
-        line-height: 1.4;
+        font-size: 14px;
+        line-height: 1.42;
     }
 
     /* Поставщикам и Заказчикам — 2 в ряд */
     .card-suppliers,
     .card-customers {
         grid-column: span 1;
-        min-height: 162px;
+        min-height: 176px;
     }
 
     /* Логистика — широкая центральная плашка */
     .card-logistics {
         grid-column: span 2;
-        min-height: 96px;
+        min-height: 100px;
         padding: 18px 20px;
     }
 
-    /* Финансы, Сопровождение, Юрист, Обучение — сеткой 2x2 строго той же высоты */
+    /* Финансы, Сопровождение, Юрист, Обучение — строго такой же высоты 176px */
     .card-finance,
     .card-support,
     .card-legal,
     .card-training {
         grid-column: span 1;
-        min-height: 162px;
+        min-height: 176px;
     }
-
 
 /* ==========================================================================
    ВНУТРЕННИЕ БЕНТО-КАРТОЧКИ (BENTO GRID & МОРФИНГ-РАЗВОРОТ)
