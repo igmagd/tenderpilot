@@ -2286,13 +2286,19 @@ border-bottom: none !important;
 @media (max-width: 768px) {
     .header-container,
     .hub-main,
-    .bento-grid,
     .premium-shutter-section .shutter-layout-container,
     .mobile-footer-bar,
     .legal-footer {
         width: 100%;
         padding-left: 16px;
         padding-right: 16px;
+    }
+    .bento-grid {
+        width: 100%;
+        margin: 0 0 12px 0;
+        padding: 0;
+        gap: 6px;
+        background-color: #04070d;
     }
 
     /* Вложенные блоки внутри контейнеров НЕ добавляют свой отступ */
