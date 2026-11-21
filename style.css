@@ -453,7 +453,7 @@ body.menu-open {
     overflow: hidden;
     cursor: default;
     border-radius: 28px;
-    padding: 28px 0 0;
+    padding: 24px 0 0;
     border: 1px solid rgba(255, 255, 255, 0.95);
     background:
         radial-gradient(120% 75% at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 70%),
@@ -480,16 +480,19 @@ body.menu-open {
 .hub-card.card-about .about-hero-body {
     position: relative;
     z-index: 2;
+    width: 100%;
     max-width: 100%;
-    padding: 0 32px;
+    padding: 0 32px 0 32px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
 }
 
-/* Синий акцентный бейдж Apple (не кнопка) */
+/* Синий акцентный бейдж Apple: на той же высоте, но прижат вправо (16px от правого края) */
 .apple-accent-badge {
+    align-self: flex-end;
+    margin-right: -16px; /* Компенсируем padding-right: 32px, чтобы отступ от края был ровно 16px */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -501,7 +504,7 @@ body.menu-open {
     letter-spacing: -0.01em;
     padding: 7px 16px;
     border-radius: 980px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     user-select: none;
 }
 
@@ -519,16 +522,16 @@ body.menu-open {
     line-height: 1.42;
     letter-spacing: -0.01em;
     color: #424245;
-    max-width: 520px;
+    max-width: 540px;
     margin: 0;
 }
 
-/* Нижняя витрина площадок (работает и на ПК, и на мобилке) */
+/* Нижняя витрина площадок (ПК) */
 .platforms-showcase {
     position: relative;
     width: 100%;
     height: 52px;
-    margin-top: 14px;
+    margin-top: 16px;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -537,7 +540,7 @@ body.menu-open {
     mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
 }
 
-/* SEO-список: доступен поисковикам, визуально вынесен за кадр сцены */
+/* SEO-список: открыт поисковикам, скрыт визуально */
 .platforms-seo-list {
     position: absolute;
     width: 1px;
@@ -550,7 +553,6 @@ body.menu-open {
     border: 0;
 }
 
-/* Анимированная сцена вытеснения */
 .platforms-stage {
     position: relative;
     width: 100%;
@@ -562,14 +564,9 @@ body.menu-open {
     inset: 0;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    padding: 0 24px;
-    gap: 36px;
-    will-change: transform, opacity, gap;
-    transition:
-        transform 0.85s cubic-bezier(0.32, 0.72, 0, 1),
-        opacity 0.75s cubic-bezier(0.32, 0.72, 0, 1),
-        gap 0.85s cubic-bezier(0.32, 0.72, 0, 1);
+    justify-content: flex-start; /* Левое слово служит упором ровно по оси заголовка */
+    padding: 0 32px;
+    will-change: transform, opacity;
 }
 
 .platform-word {
@@ -579,30 +576,88 @@ body.menu-open {
     letter-spacing: -0.02em;
     white-space: nowrap;
     user-select: none;
-    transition: transform 0.85s cubic-bezier(0.32, 0.72, 0, 1);
+    margin-right: 44px;
 }
 
-.platforms-group.is-entering {
-    transform: translate3d(100%, 0, 0);
-    opacity: 0;
-    gap: 44px;
-    transition: none;
+.platform-word:last-child {
+    margin-right: 0;
 }
 
-.platforms-group.is-active {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-    gap: 36px;
+/* APPLE SPRING: Двойной тактильный импульс сжатия + плавный вылет на третий */
+@keyframes platformsPushIn {
+    0%, 44% {
+        transform: translate3d(104%, 0, 0);
+        opacity: 0;
+    }
+    52% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
 }
 
-.platforms-group.is-exiting {
-    transform: translate3d(-105%, 0, 0);
-    opacity: 0;
-    gap: 6px;
+@keyframes platformsPushOut {
+    0%, 46% {
+        /* Во время 1-го и 2-го импульсов сжатия группа стоит на левом упоре */
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    82% {
+        opacity: 0;
+    }
+    100% {
+        /* 3-й импульс: плавный вылет за левый край */
+        transform: translate3d(-108%, 0, 0);
+        opacity: 0;
+    }
 }
 
-.platforms-group.is-exiting .platform-word {
-    transform: scaleX(0.9);
+@keyframes wordSqueezeIn {
+    0%, 46% {
+        margin-right: 52px;
+    }
+    100% {
+        margin-right: 44px;
+    }
+}
+
+@keyframes wordSqueezeOut {
+    0% {
+        margin-right: 44px;
+    }
+    18% {
+        /* Импульс 1: мягкое сжатие пробела наполовину */
+        margin-right: 22px;
+    }
+    32% {
+        /* Упругий возврат пружины Apple */
+        margin-right: 38px;
+    }
+    46% {
+        /* Импульс 2: повторное поджатие перед вылетом */
+        margin-right: 20px;
+    }
+    100% {
+        margin-right: 20px;
+    }
+}
+
+.platforms-group.is-entering-anim {
+    animation: platformsPushIn 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.platforms-group.is-entering-anim .platform-word:not(:last-child) {
+    animation: wordSqueezeIn 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.platforms-group.is-exiting-anim {
+    animation: platformsPushOut 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.platforms-group.is-exiting-anim .platform-word:not(:last-child) {
+    animation: wordSqueezeOut 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .card-suppliers,
@@ -690,7 +745,7 @@ body.menu-open {
         height: auto;
         border-radius: 0;
         border: none;
-        padding: 84px 0 0;
+        padding: 76px 0 0;
         box-shadow:
             inset 0 1px 0 0 #ffffff,
             inset 0 -1px 0 0 rgba(0, 0, 0, 0.06);
@@ -699,6 +754,15 @@ body.menu-open {
     .hub-card.card-about .hub-card-content,
     .hub-card.card-about .about-hero-body {
         padding: 0 20px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    /* Пилюля справа ровно с отступом 16px от правого края экрана */
+    .apple-accent-badge {
+        align-self: flex-end;
+        margin-right: -4px; /* Компенсируем padding-right: 20px -> итого ровно 16px от края */
+        margin-bottom: 14px;
     }
 
     .hub-card.card-about h2 {
@@ -711,25 +775,38 @@ body.menu-open {
         max-width: 340px;
     }
 
+    /* Витрина площадок приподнята от черных кнопок и обрамлена двумя тонкими линиями */
     .platforms-showcase {
-        height: 58px;
+        height: 54px;
+        margin-top: auto;
+        margin-bottom: 26px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
     .platforms-group {
-        padding: 0 18px;
-        gap: 32px;
-    }
-
-    .platforms-group.is-active {
-        gap: 32px;
-    }
-
-    .platforms-group.is-exiting {
-        gap: 4px;
+        padding: 0 20px;
     }
 
     .platform-word {
         font-size: 15px;
+        margin-right: 34px;
+    }
+
+    .platforms-group.is-entering-anim {
+        animation-duration: 1.25s;
+    }
+
+    .platforms-group.is-entering-anim .platform-word:not(:last-child) {
+        animation-duration: 1.25s;
+    }
+
+    .platforms-group.is-exiting-anim {
+        animation-duration: 1.25s;
+    }
+
+    .platforms-group.is-exiting-anim .platform-word:not(:last-child) {
+        animation-duration: 1.25s;
     }
 
     /* 2. НИЖНИЕ КАРТОЧКИ: ПРИПОДНЯТЫЕ ГЛЯНЦЕВЫЕ КЛАВИШИ */
@@ -832,7 +909,6 @@ body.menu-open {
         min-height: 176px;
     }
 }
-
 
 /* ==========================================================================
    ВНУТРЕННИЕ БЕНТО-КАРТОЧКИ (BENTO GRID & МОРФИНГ-РАЗВОРОТ)

@@ -414,11 +414,11 @@
 
         var currentIndex = 0;
         var activeGroupEl = null;
+        var loopTimer = null;
 
-        // Скрытый измеритель ширины слов, чтобы помещались только целые названия
         var measurer = document.createElement('span');
         measurer.className = 'platform-word';
-        measurer.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;left:-9999px;top:-9999px;';
+        measurer.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;left:-9999px;top:-9999px;margin:0;';
         document.body.appendChild(measurer);
 
         function getWordWidth(text) {
@@ -429,8 +429,8 @@
         function buildNextBatch() {
             var stageWidth = stage.clientWidth || window.innerWidth;
             var isMobile = window.innerWidth <= 768;
-            var sidePadding = isMobile ? 36 : 48;
-            var minGap = isMobile ? 28 : 48;
+            var sidePadding = isMobile ? 36 : 56;
+            var minGap = isMobile ? 34 : 44;
             var maxWords = isMobile ? 2 : 5;
             var availableWidth = stageWidth - sidePadding;
 
@@ -454,9 +454,9 @@
             return batch;
         }
 
-        function createGroupElement(words, stateClass) {
+        function createGroupElement(words, animClass) {
             var group = document.createElement('div');
-            group.className = 'platforms-group ' + stateClass;
+            group.className = 'platforms-group' + (animClass ? ' ' + animClass : '');
             words.forEach(function (word) {
                 var span = document.createElement('span');
                 span.className = 'platform-word';
@@ -466,45 +466,52 @@
             return group;
         }
 
-        function showInitial() {
-            stage.innerHTML = '';
-            var words = buildNextBatch();
-            activeGroupEl = createGroupElement(words, 'is-active');
-            stage.appendChild(activeGroupEl);
-        }
-
         function pushNext() {
             if (document.hidden) return;
 
-            var words = buildNextBatch();
-            var incomingGroup = createGroupElement(words, 'is-entering');
-            stage.appendChild(incomingGroup);
+            var isMobile = window.innerWidth <= 768;
+            var animDuration = isMobile ? 1300 : 1550;
 
-            void incomingGroup.offsetWidth;
+            var words = buildNextBatch();
+            var incomingGroup = createGroupElement(words, 'is-entering-anim');
+            stage.appendChild(incomingGroup);
 
             var outgoingGroup = activeGroupEl;
             if (outgoingGroup) {
-                outgoingGroup.classList.remove('is-active');
-                outgoingGroup.classList.add('is-exiting');
+                outgoingGroup.classList.remove('is-entering-anim');
+                void outgoingGroup.offsetWidth;
+                outgoingGroup.classList.add('is-exiting-anim');
                 setTimeout(function () {
                     outgoingGroup.remove();
-                }, 900);
+                }, animDuration);
             }
 
-            incomingGroup.classList.remove('is-entering');
-            incomingGroup.classList.add('is-active');
             activeGroupEl = incomingGroup;
         }
 
+        function startLoop() {
+            clearInterval(loopTimer);
+            var isMobile = window.innerWidth <= 768;
+            var intervalMs = isMobile ? 3600 : 4800;
+            loopTimer = setInterval(pushNext, intervalMs);
+        }
+
+        function showInitial() {
+            stage.innerHTML = '';
+            var words = buildNextBatch();
+            activeGroupEl = createGroupElement(words, '');
+            stage.appendChild(activeGroupEl);
+            startLoop();
+        }
+
         showInitial();
-        setInterval(pushNext, 3500);
 
         var resizeTimeout;
         window.addEventListener('resize', function () {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(function () {
                 showInitial();
-            }, 200);
+            }, 220);
         });
     }
 
