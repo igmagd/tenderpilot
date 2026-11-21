@@ -449,7 +449,7 @@ body.menu-open {
 }
 
 /* =========================================================
-   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: APPLE HERO + ВИТРИНА ПЛОЩАДОК
+   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: HERO + ВИТРИНА ПЛОЩАДОК
    ========================================================= */
 .hub-card.card-about {
     grid-column: span 2;
@@ -497,10 +497,10 @@ body.menu-open {
     text-align: left;
 }
 
-/* Синий акцентный бейдж Apple: на той же высоте, но прижат вправо (16px от правого края) */
+/* Синий акцентный бейдж: на той же высоте, но прижат вправо (16px от правого края) */
 .apple-accent-badge {
     align-self: flex-end;
-    margin-right: -16px; /* Компенсируем padding-right: 32px, чтобы отступ от края был ровно 16px */
+    margin-right: -16px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -544,8 +544,8 @@ body.menu-open {
     align-items: center;
     overflow: hidden;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
 }
 
 /* SEO-список: открыт поисковикам, скрыт визуально */
