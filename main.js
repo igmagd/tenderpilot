@@ -462,7 +462,6 @@
             var group = document.createElement('div');
             group.className = 'platforms-group' + (animClass ? ' ' + animClass : '');
 
-            // Вычисляем точный отступ слева, чтобы группа стояла по центру, а первое слово служило жёстким упором
             var centerLeft = Math.max(16, Math.round((batchData.stageWidth - batchData.totalWidth) / 2));
             group.style.paddingLeft = centerLeft + 'px';
 
@@ -522,6 +521,12 @@
                 showInitial();
             }, 220);
         });
+
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function () {
+                showInitial();
+            });
+        }
     }
 
     // Инициализация всех систем хаба без конфликтов
