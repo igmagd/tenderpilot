@@ -417,7 +417,7 @@ body.menu-open {
 .hub-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 240px;
+    grid-auto-rows: minmax(256px, auto);
     gap: 20px;
 }
 
@@ -441,53 +441,168 @@ body.menu-open {
 }
 
 /* =========================================================
-   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: ТАКТИЛЬНЫЙ МЕТАЛЛ APPLE
+   1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: APPLE HERO + ВИТРИНА ПЛОЩАДОК
    ========================================================= */
 .hub-card.card-about {
     grid-column: span 2;
     grid-row: span 1;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     overflow: hidden;
+    cursor: default;
     border-radius: 28px;
-    padding: 32px 34px;
-    background:
-        radial-gradient(90% 80% at 12% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 60%),
-        linear-gradient(118deg,
-            rgba(255, 255, 255, 0.15) 0%,
-            rgba(255, 255, 255, 0.85) 36%,
-            rgba(255, 255, 255, 0.12) 54%,
-            rgba(255, 255, 255, 0.45) 82%,
-            rgba(255, 255, 255, 0.05) 100%),
-        linear-gradient(145deg, #F4F6FA 0%, #E6EAF2 52%, #D7DDE8 100%);
+    padding: 28px 0 0;
     border: 1px solid rgba(255, 255, 255, 0.95);
+    background:
+        radial-gradient(120% 75% at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 70%),
+        linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 68%, #ededf2 100%);
     box-shadow:
         0 20px 44px -16px rgba(0, 0, 0, 0.65),
         0 4px 12px -2px rgba(0, 0, 0, 0.25),
-        inset 0 2px 1.5px rgba(255, 255, 255, 1),
-        inset 1.5px 0 1.5px rgba(255, 255, 255, 0.85),
-        inset 0 -2px 4px rgba(15, 23, 42, 0.08);
+        inset 0 1px 0 0 #ffffff,
+        inset 0 -1px 0 0 rgba(0, 0, 0, 0.06);
 }
 
-.hub-card.card-about .hub-card-content {
+.hub-card.card-about:hover,
+.hub-card.card-about:focus,
+.hub-card.card-about:active,
+.hub-card.card-about.is-pressed {
+    transform: none !important;
+    border-color: rgba(255, 255, 255, 0.95) !important;
+    background:
+        radial-gradient(120% 75% at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 70%),
+        linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 68%, #ededf2 100%) !important;
+}
+
+.hub-card.card-about .hub-card-content,
+.hub-card.card-about .about-hero-body {
     position: relative;
     z-index: 2;
-    max-width: 82%;
+    max-width: 100%;
+    padding: 0 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Синий акцентный бейдж Apple (не кнопка) */
+.apple-accent-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0071e3;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    padding: 7px 16px;
+    border-radius: 980px;
+    margin-bottom: 12px;
+    user-select: none;
 }
 
 .hub-card.card-about h2 {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 700;
+    line-height: 1.12;
     letter-spacing: -0.025em;
-    color: #1D1D1F;
-    margin: 0 0 10px 0;
+    color: #1d1d1f;
+    margin: 0 0 8px 0;
 }
 
 .hub-card.card-about p {
-    font-size: 15px;
-    line-height: 1.48;
+    font-size: 14.5px;
+    line-height: 1.42;
     letter-spacing: -0.01em;
-    color: #3A3A3E;
+    color: #424245;
+    max-width: 520px;
     margin: 0;
+}
+
+/* Нижняя витрина площадок (работает и на ПК, и на мобилке) */
+.platforms-showcase {
+    position: relative;
+    width: 100%;
+    height: 52px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+
+/* SEO-список: доступен поисковикам, визуально вынесен за кадр сцены */
+.platforms-seo-list {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Анимированная сцена вытеснения */
+.platforms-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.platforms-group {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 24px;
+    gap: 36px;
+    will-change: transform, opacity, gap;
+    transition:
+        transform 0.85s cubic-bezier(0.32, 0.72, 0, 1),
+        opacity 0.75s cubic-bezier(0.32, 0.72, 0, 1),
+        gap 0.85s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.platform-word {
+    color: #1d1d1f;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    user-select: none;
+    transition: transform 0.85s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.platforms-group.is-entering {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+    gap: 44px;
+    transition: none;
+}
+
+.platforms-group.is-active {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    gap: 36px;
+}
+
+.platforms-group.is-exiting {
+    transform: translate3d(-105%, 0, 0);
+    opacity: 0;
+    gap: 6px;
+}
+
+.platforms-group.is-exiting .platform-word {
+    transform: scaleX(0.9);
 }
 
 .card-suppliers,
@@ -567,49 +682,54 @@ body.menu-open {
         border: none;
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» */
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» (МОБИЛЬНЫЙ APPLE HERO 500PX) */
     .hub-card.card-about {
         grid-column: 1 / -1;
         margin: 0;
-        min-height: 310px;
+        min-height: 500px;
         height: auto;
         border-radius: 0;
         border: none;
+        padding: 84px 0 0;
         box-shadow:
-            inset 0 1px 0 #ffffff,
-            inset 0 -1px 0 rgba(15, 23, 42, 0.14);
-        background:
-            radial-gradient(120% 60% at 15% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 65%),
-            linear-gradient(132deg,
-                rgba(255, 255, 255, 0.1) 0%,
-                rgba(255, 255, 255, 0.88) 38%,
-                rgba(255, 255, 255, 0.08) 58%,
-                rgba(255, 255, 255, 0.42) 85%,
-                rgba(255, 255, 255, 0.05) 100%),
-            linear-gradient(160deg, #F3F5F9 0%, #E4E8F0 50%, #D3DAE6 100%);
-        padding: 84px 20px 44px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+            inset 0 1px 0 0 #ffffff,
+            inset 0 -1px 0 0 rgba(0, 0, 0, 0.06);
     }
 
-    .hub-card.card-about .hub-card-content {
-        max-width: 100%;
+    .hub-card.card-about .hub-card-content,
+    .hub-card.card-about .about-hero-body {
+        padding: 0 20px;
     }
 
     .hub-card.card-about h2 {
-        font-size: 30px;
-        line-height: 1.14;
-        margin: 0 0 12px 0;
-        letter-spacing: -0.025em;
-        color: #1D1D1F;
+        font-size: 32px;
+        margin-bottom: 12px;
     }
 
     .hub-card.card-about p {
+        font-size: 16px;
+        max-width: 340px;
+    }
+
+    .platforms-showcase {
+        height: 58px;
+    }
+
+    .platforms-group {
+        padding: 0 18px;
+        gap: 32px;
+    }
+
+    .platforms-group.is-active {
+        gap: 32px;
+    }
+
+    .platforms-group.is-exiting {
+        gap: 4px;
+    }
+
+    .platform-word {
         font-size: 15px;
-        line-height: 1.5;
-        color: #3A3A3E;
-        margin: 0;
     }
 
     /* 2. НИЖНИЕ КАРТОЧКИ: ПРИПОДНЯТЫЕ ГЛЯНЦЕВЫЕ КЛАВИШИ */

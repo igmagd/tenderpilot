@@ -400,12 +400,121 @@
         });
     }
 
+    // 5. ВИТРИНА ПЛОЩАДОК В ГЛАВНОЙ КАРТОЧКЕ (ЭФФЕКТ ВЫТЕСНЕНИЯ И СЖАТИЯ)
+    function init_platforms_showcase() {
+        var seoList = document.getElementById('platformsList');
+        var stage = document.getElementById('platformsStage');
+        if (!seoList || !stage) return;
+
+        var platforms = Array.from(seoList.querySelectorAll('li'))
+            .map(function (li) { return li.textContent.trim(); })
+            .filter(Boolean);
+
+        if (!platforms.length) return;
+
+        var currentIndex = 0;
+        var activeGroupEl = null;
+
+        // Скрытый измеритель ширины слов, чтобы помещались только целые названия
+        var measurer = document.createElement('span');
+        measurer.className = 'platform-word';
+        measurer.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;left:-9999px;top:-9999px;';
+        document.body.appendChild(measurer);
+
+        function getWordWidth(text) {
+            measurer.textContent = text;
+            return measurer.offsetWidth;
+        }
+
+        function buildNextBatch() {
+            var stageWidth = stage.clientWidth || window.innerWidth;
+            var isMobile = window.innerWidth <= 768;
+            var sidePadding = isMobile ? 36 : 48;
+            var minGap = isMobile ? 28 : 48;
+            var maxWords = isMobile ? 2 : 5;
+            var availableWidth = stageWidth - sidePadding;
+
+            var batch = [];
+            var usedWidth = 0;
+
+            for (var i = 0; i < maxWords; i++) {
+                var word = platforms[(currentIndex + i) % platforms.length];
+                var w = getWordWidth(word);
+                var needed = batch.length === 0 ? w : w + minGap;
+
+                if (batch.length === 0 || usedWidth + needed <= availableWidth) {
+                    batch.push(word);
+                    usedWidth += needed;
+                } else {
+                    break;
+                }
+            }
+
+            currentIndex = (currentIndex + batch.length) % platforms.length;
+            return batch;
+        }
+
+        function createGroupElement(words, stateClass) {
+            var group = document.createElement('div');
+            group.className = 'platforms-group ' + stateClass;
+            words.forEach(function (word) {
+                var span = document.createElement('span');
+                span.className = 'platform-word';
+                span.textContent = word;
+                group.appendChild(span);
+            });
+            return group;
+        }
+
+        function showInitial() {
+            stage.innerHTML = '';
+            var words = buildNextBatch();
+            activeGroupEl = createGroupElement(words, 'is-active');
+            stage.appendChild(activeGroupEl);
+        }
+
+        function pushNext() {
+            if (document.hidden) return;
+
+            var words = buildNextBatch();
+            var incomingGroup = createGroupElement(words, 'is-entering');
+            stage.appendChild(incomingGroup);
+
+            void incomingGroup.offsetWidth;
+
+            var outgoingGroup = activeGroupEl;
+            if (outgoingGroup) {
+                outgoingGroup.classList.remove('is-active');
+                outgoingGroup.classList.add('is-exiting');
+                setTimeout(function () {
+                    outgoingGroup.remove();
+                }, 900);
+            }
+
+            incomingGroup.classList.remove('is-entering');
+            incomingGroup.classList.add('is-active');
+            activeGroupEl = incomingGroup;
+        }
+
+        showInitial();
+        setInterval(pushNext, 3500);
+
+        var resizeTimeout;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function () {
+                showInitial();
+            }, 200);
+        });
+    }
+
     // Инициализация всех систем хаба без конфликтов
     document.addEventListener('DOMContentLoaded', function () {
         init_core_events();
         init_bento();
         init_interactive_panels();
         init_mobile_footer_tabs();
+        init_platforms_showcase();
     });
 })();
 
