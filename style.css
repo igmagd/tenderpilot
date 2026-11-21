@@ -451,7 +451,8 @@ body.menu-open {
 /* =========================================================
    1. ГЛАВНАЯ КАРТОЧКА О ПЛАТФОРМЕ: HERO + ВИТРИНА ПЛОЩАДОК
    ========================================================= */
-.hub-card.card-about {
+.hub-card.card-about,
+.bento-card.main-hero {
     grid-column: span 2;
     grid-row: span 1;
     position: relative;
@@ -460,6 +461,8 @@ body.menu-open {
     justify-content: space-between;
     overflow: hidden;
     cursor: default;
+    height: auto;
+    min-height: 256px;
     border-radius: 28px;
     padding: 24px 0 0;
     border: 1px solid rgba(255, 255, 255, 0.95);
@@ -476,7 +479,8 @@ body.menu-open {
 .hub-card.card-about:hover,
 .hub-card.card-about:focus,
 .hub-card.card-about:active,
-.hub-card.card-about.is-pressed {
+.hub-card.card-about.is-pressed,
+.bento-card.main-hero:hover {
     transform: none !important;
     border-color: rgba(255, 255, 255, 0.95) !important;
     background:
@@ -485,16 +489,28 @@ body.menu-open {
 }
 
 .hub-card.card-about .hub-card-content,
-.hub-card.card-about .about-hero-body {
+.hub-card.card-about .about-hero-body,
+.bento-card.main-hero .bento-card-inner,
+.bento-card.main-hero .bento-card-front {
     position: relative;
+    inset: auto;
     z-index: 2;
     width: 100%;
+    height: auto;
     max-width: 100%;
-    padding: 0 32px 0 32px;
+    padding: 0 32px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+}
+
+.bento-card.main-hero .bento-card-inner {
+    padding: 0;
 }
 
 /* Синий акцентный бейдж: на той же высоте, но прижат вправо (16px от правого края) */
@@ -516,7 +532,8 @@ body.menu-open {
     user-select: none;
 }
 
-.hub-card.card-about h2 {
+.hub-card.card-about h2,
+.bento-card.main-hero h1 {
     font-size: 28px;
     font-weight: 700;
     line-height: 1.12;
@@ -525,7 +542,9 @@ body.menu-open {
     margin: 0 0 8px 0;
 }
 
-.hub-card.card-about p {
+
+.hub-card.card-about p,
+.bento-card.main-hero p {
     font-size: 14.5px;
     line-height: 1.42;
     letter-spacing: -0.01em;
@@ -743,8 +762,9 @@ body.menu-open {
         border: none;
     }
 
-    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» (МОБИЛЬНЫЙ APPLE HERO 500PX) */
-    .hub-card.card-about {
+    /* 1. ГЛАВНЫЙ БЛОК «О ПЛАТФОРМЕ» И ВНУТРЕННИЙ HERO (МОБИЛЬНЫЙ 500PX) */
+    .hub-card.card-about,
+    .bento-card.main-hero {
         grid-column: 1 / -1;
         margin: 0;
         min-height: 500px;
@@ -758,25 +778,27 @@ body.menu-open {
     }
 
     .hub-card.card-about .hub-card-content,
-    .hub-card.card-about .about-hero-body {
+    .hub-card.card-about .about-hero-body,
+    .bento-card.main-hero .bento-card-front {
         padding: 0 20px;
         align-items: flex-start;
         text-align: left;
     }
 
-    /* Пилюля справа ровно с отступом 16px от правого края экрана */
     .apple-accent-badge {
         align-self: flex-end;
-        margin-right: -4px; /* Компенсируем padding-right: 20px -> итого ровно 16px от края */
+        margin-right: -4px;
         margin-bottom: 14px;
     }
 
-    .hub-card.card-about h2 {
+    .hub-card.card-about h2,
+    .bento-card.main-hero h1 {
         font-size: 32px;
         margin-bottom: 12px;
     }
 
-    .hub-card.card-about p {
+    .hub-card.card-about p,
+    .bento-card.main-hero p {
         font-size: 16px;
         max-width: 340px;
     }
@@ -1183,32 +1205,6 @@ body.menu-open {
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
-    }
-
-    /* Безрамочный Hero на всю ширину */
-    .bento-card.main-hero {
-        grid-column: span 2;
-        height: auto;
-    }
-
-    .bento-card.main-hero .bento-card-inner {
-        position: relative;
-        height: auto;
-    }
-
-    .bento-card.main-hero .bento-card-front {
-        position: relative;
-        height: auto;
-        background: none;
-        box-shadow: none;
-        border: none;
-        border-radius: 0;
-        padding: 4px 2px 14px;
-    }
-
-    .bento-card.main-hero h1 {
-        font-size: 26px;
-        margin-bottom: 10px;
     }
 
     .bento-card.main-hero p {
