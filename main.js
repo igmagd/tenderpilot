@@ -400,7 +400,7 @@
         });
     }
 
-    // 5. ВИТРИНА ПЛОЩАДОК В ГЛАВНОЙ КАРТОЧКЕ (ЭФФЕКТ ВЫТЕСНЕНИЯ И СЖАТИЯ)
+    // 5. ВИТРИНА ПЛОЩАДОК В ГЛАВНОЙ КАРТОЧКЕ (ЦЕНТРИРОВАНИЕ + СЖАТИЕ ВЛЕВО К ПЕРВОМУ СЛОВУ)
     function init_platforms_showcase() {
         var seoList = document.getElementById('platformsList');
         var stage = document.getElementById('platformsStage');
@@ -430,8 +430,8 @@
             var stageWidth = stage.clientWidth || window.innerWidth;
             var isMobile = window.innerWidth <= 768;
             var sidePadding = isMobile ? 36 : 56;
-            var minGap = isMobile ? 34 : 44;
-            var maxWords = isMobile ? 2 : 5;
+            var minGap = isMobile ? 24 : 44;
+            var maxWords = isMobile ? 3 : 5;
             var availableWidth = stageWidth - sidePadding;
 
             var batch = [];
@@ -451,13 +451,22 @@
             }
 
             currentIndex = (currentIndex + batch.length) % platforms.length;
-            return batch;
+            return {
+                words: batch,
+                totalWidth: usedWidth,
+                stageWidth: stageWidth
+            };
         }
 
-        function createGroupElement(words, animClass) {
+        function createGroupElement(batchData, animClass) {
             var group = document.createElement('div');
             group.className = 'platforms-group' + (animClass ? ' ' + animClass : '');
-            words.forEach(function (word) {
+
+            // Вычисляем точный отступ слева, чтобы группа стояла по центру, а первое слово служило жёстким упором
+            var centerLeft = Math.max(16, Math.round((batchData.stageWidth - batchData.totalWidth) / 2));
+            group.style.paddingLeft = centerLeft + 'px';
+
+            batchData.words.forEach(function (word) {
                 var span = document.createElement('span');
                 span.className = 'platform-word';
                 span.textContent = word;
@@ -470,10 +479,10 @@
             if (document.hidden) return;
 
             var isMobile = window.innerWidth <= 768;
-            var animDuration = isMobile ? 1300 : 1550;
+            var animDuration = isMobile ? 1650 : 1950;
 
-            var words = buildNextBatch();
-            var incomingGroup = createGroupElement(words, 'is-entering-anim');
+            var batchData = buildNextBatch();
+            var incomingGroup = createGroupElement(batchData, 'is-entering-anim');
             stage.appendChild(incomingGroup);
 
             var outgoingGroup = activeGroupEl;
@@ -492,14 +501,14 @@
         function startLoop() {
             clearInterval(loopTimer);
             var isMobile = window.innerWidth <= 768;
-            var intervalMs = isMobile ? 3600 : 4800;
+            var intervalMs = isMobile ? 4200 : 5200;
             loopTimer = setInterval(pushNext, intervalMs);
         }
 
         function showInitial() {
             stage.innerHTML = '';
-            var words = buildNextBatch();
-            activeGroupEl = createGroupElement(words, '');
+            var batchData = buildNextBatch();
+            activeGroupEl = createGroupElement(batchData, '');
             stage.appendChild(activeGroupEl);
             startLoop();
         }

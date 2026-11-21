@@ -564,8 +564,7 @@ body.menu-open {
     inset: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Левое слово служит упором ровно по оси заголовка */
-    padding: 0 32px;
+    justify-content: flex-start; /* Левое слово зафиксировано в рассчитанном JS центре, сжатие идёт строго влево */
     will-change: transform, opacity;
 }
 
@@ -583,13 +582,13 @@ body.menu-open {
     margin-right: 0;
 }
 
-/* APPLE SPRING: Двойной тактильный импульс сжатия + плавный вылет на третий */
+/* ПЛАВНАЯ APPLE SPRING: Двойной мягкий импульс сжатия влево + плавный вылет на третий */
 @keyframes platformsPushIn {
-    0%, 44% {
-        transform: translate3d(104%, 0, 0);
+    0%, 46% {
+        transform: translate3d(102%, 0, 0);
         opacity: 0;
     }
-    52% {
+    56% {
         opacity: 1;
     }
     100% {
@@ -599,23 +598,21 @@ body.menu-open {
 }
 
 @keyframes platformsPushOut {
-    0%, 46% {
-        /* Во время 1-го и 2-го импульсов сжатия группа стоит на левом упоре */
+    0%, 48% {
         transform: translate3d(0, 0, 0);
         opacity: 1;
     }
-    82% {
+    85% {
         opacity: 0;
     }
     100% {
-        /* 3-й импульс: плавный вылет за левый край */
-        transform: translate3d(-108%, 0, 0);
+        transform: translate3d(-105%, 0, 0);
         opacity: 0;
     }
 }
 
 @keyframes wordSqueezeIn {
-    0%, 46% {
+    0%, 48% {
         margin-right: 52px;
     }
     100% {
@@ -627,16 +624,16 @@ body.menu-open {
     0% {
         margin-right: 44px;
     }
-    18% {
-        /* Импульс 1: мягкое сжатие пробела наполовину */
+    20% {
+        /* Импульс 1: плавное поджатие к левому слову */
         margin-right: 22px;
     }
-    32% {
-        /* Упругий возврат пружины Apple */
-        margin-right: 38px;
+    34% {
+        /* Мягкий отскок пружины */
+        margin-right: 36px;
     }
-    46% {
-        /* Импульс 2: повторное поджатие перед вылетом */
+    48% {
+        /* Импульс 2: второе поджатие перед вылетом */
         margin-right: 20px;
     }
     100% {
@@ -645,19 +642,19 @@ body.menu-open {
 }
 
 .platforms-group.is-entering-anim {
-    animation: platformsPushIn 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: platformsPushIn 1.9s cubic-bezier(0.25, 0.85, 0.3, 1) forwards;
 }
 
 .platforms-group.is-entering-anim .platform-word:not(:last-child) {
-    animation: wordSqueezeIn 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: wordSqueezeIn 1.9s cubic-bezier(0.25, 0.85, 0.3, 1) forwards;
 }
 
 .platforms-group.is-exiting-anim {
-    animation: platformsPushOut 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: platformsPushOut 1.9s cubic-bezier(0.25, 0.85, 0.3, 1) forwards;
 }
 
 .platforms-group.is-exiting-anim .platform-word:not(:last-child) {
-    animation: wordSqueezeOut 1.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: wordSqueezeOut 1.9s cubic-bezier(0.25, 0.85, 0.3, 1) forwards;
 }
 
 .card-suppliers,
@@ -785,28 +782,28 @@ body.menu-open {
     }
 
     .platforms-group {
-        padding: 0 20px;
+        justify-content: flex-start;
     }
 
     .platform-word {
         font-size: 15px;
-        margin-right: 34px;
+        margin-right: 24px;
     }
 
     .platforms-group.is-entering-anim {
-        animation-duration: 1.25s;
+        animation-duration: 1.6s;
     }
 
     .platforms-group.is-entering-anim .platform-word:not(:last-child) {
-        animation-duration: 1.25s;
+        animation-duration: 1.6s;
     }
 
     .platforms-group.is-exiting-anim {
-        animation-duration: 1.25s;
+        animation-duration: 1.6s;
     }
 
     .platforms-group.is-exiting-anim .platform-word:not(:last-child) {
-        animation-duration: 1.25s;
+        animation-duration: 1.6s;
     }
 
     /* 2. НИЖНИЕ КАРТОЧКИ: ПРИПОДНЯТЫЕ ГЛЯНЦЕВЫЕ КЛАВИШИ */
